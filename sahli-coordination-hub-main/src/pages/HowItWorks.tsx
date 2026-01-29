@@ -396,16 +396,16 @@ export default function HowItWorks() {
               <Zap size={40} />
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-8 text-foreground leading-none">
-              {t('how.after.title')}
+              {t('how.rules.after.title')}
             </h2>
             <p className="text-xl md:text-2xl text-foreground/70 leading-relaxed font-medium tracking-tight mb-12">
-              {t('how.after.body')}
+              {t('how.rules.after.body')}
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6 text-start max-w-3xl mx-auto">
               {[
-                { title: t('how.after.rule1.title'), body: t('how.after.rule1.body'), icon: <Shield size={20} /> },
-                { title: t('how.after.rule2.title'), body: t('how.after.rule2.body'), icon: <Repeat size={20} /> }
+                { title: t('how.rules.inspection.title'), body: t('how.rules.inspection.body'), icon: <Shield size={20} /> },
+                { title: t('how.rules.replacement.title'), body: t('how.rules.replacement.body'), icon: <Repeat size={20} /> }
               ].map((rule, i) => (
                 <div key={i} className="flex gap-4 p-6 rounded-2xl bg-foreground/5 border border-border">
                   <div className="text-primary mt-1">{rule.icon}</div>
@@ -442,10 +442,10 @@ export default function HowItWorks() {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-10 text-foreground">
-              {t('how.final.title')}
+              {t('cta.final.title')}
             </h2>
             <p className="text-lg md:text-xl text-foreground/60 mb-12 font-medium">
-              {t('how.final.body')}
+              {t('cta.final.body')}
             </p>
             <motion.a
               href={WHATSAPP_LINK}
@@ -455,7 +455,7 @@ export default function HowItWorks() {
               whileHover={{ y: -5 }}
             >
               <MessageCircle size={24} />
-              {t('home.hero.cta')}
+              {t('cta.final.cta')}
             </motion.a>
           </motion.div>
         </div>

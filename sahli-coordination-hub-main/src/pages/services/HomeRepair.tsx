@@ -212,7 +212,7 @@ export default function HomeRepair() {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-4xl md:text-5xl font-black text-foreground tracking-tighter mb-6">
-              {t('home.final.title')}
+              {t('cta.final.title')}
             </h2>
             <p className="text-xl text-foreground/60 font-medium mb-12">
               {t('cta.final.body')}

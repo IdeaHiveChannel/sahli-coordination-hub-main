@@ -272,7 +272,7 @@ export default function About() {
                 className="cta-primary px-8 py-4 md:px-10 md:py-4 text-base md:text-base shadow-2xl shadow-primary/20 group flex items-center gap-3"
               >
                 <MessageCircle size={24} className="group-hover:rotate-12 transition-transform" />
-                {t('cta.whatsapp')}
+                {t('cta.final.cta')}
               </motion.a>
               <motion.div
                 initial={{ opacity: 0 }}

@@ -254,7 +254,7 @@ export default function Contact() {
               onClick={() => trackWhatsAppClick('Contact Page - Bottom CTA')}
               className="cta-primary px-8 py-4 md:px-10 md:py-4 text-base md:text-base"
             >
-              {t('cta.whatsapp')}
+              {t('cta.final.cta')}
             </motion.a>
           </motion.div>
         </div>

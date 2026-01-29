@@ -68,10 +68,6 @@ export const translations = {
     'home.flow.step4.title': '04 — Audit',
     'home.flow.step4.body': 'We follow up to ensure coordination standards were met.',
 
-    'home.final.title': 'Ready when you are.',
-    'home.final.body': 'One message is enough.',
-    'home.final.cta': 'Message SAHLI Now',
-
     'home.footer.clarity': 'SAHLI coordinates access to independent provider companies. We are not a party to the service contract.',
 
     // Services
@@ -262,8 +258,8 @@ export const translations = {
     'how.boundaries.dont.title': 'What we don’t',
     'how.boundaries.dont.body': 'Employ providers, supervise service delivery, or handle payments.',
     'how.boundaries.independent': 'Providers operate independently. You deal directly with the provider during service execution.',
-    'how.after.title': 'After service',
-    'how.after.body': 'SAHLI follows up to confirm that coordination and service standards were met. Feedback affects provider standing within the network.',
+    'how.rules.after.title': 'After service',
+    'how.rules.after.body': 'SAHLI follows up to confirm that coordination and service standards were met. Feedback affects provider standing within the network.',
     'how.footer.micro': 'SAHLI is a service coordination platform connecting customers with verified provider companies. SAHLI does not execute services or process payments.',
 
     // Trust & Standards
@@ -326,6 +322,7 @@ export const translations = {
     // CTA Final
     'cta.final.title': 'Ready When You Are',
     'cta.final.body': 'Tell us what you need. We’ll handle the coordination.',
+    'cta.final.cta': 'Message SAHLI Now',
 
     // FAQ
     'faq.micro.question': 'Do you provide the service?',
@@ -477,10 +474,6 @@ export const translations = {
     'home.flow.step3.body': 'يقوم المزود بتقييم العمل وتقديم عرض سعر لك مباشرة.',
     'home.flow.step4.title': '04 — التدقيق',
     'home.flow.step4.body': 'نحن نتابع لضمان تلبية معايير التنسيق.',
-
-    'home.final.title': 'جاهزون عندما تكون مستعداً.',
-    'home.final.body': 'رسالة واحدة تكفي.',
-    'home.final.cta': 'راسل "سهلي" الآن',
 
     'home.footer.clarity': '"سهلي" ينسق الوصول إلى شركات تزويد مستقلة. نحن لسنا طرفاً في عقد الخدمة.',
 
@@ -650,8 +643,8 @@ export const translations = {
     'how.boundaries.dont.title': 'ما لا نقوم به',
     'how.boundaries.dont.body': 'لا نوظف المزودين، لا نشرف على تقديم الخدمة، ولا نتعامل مع المدفوعات.',
     'how.boundaries.independent': 'يعمل المزودون بشكل مستقل. أنت تتعامل مباشرة مع المزود أثناء تنفيذ الخدمة.',
-    'how.after.title': 'بعد الخدمة',
-    'how.after.body': 'يتابع ساهلي للتأكد من استيفاء معايير التنسيق والخدمة. التقييم يؤثر على وضع المزود داخل الشبكة.',
+    'how.rules.after.title': 'بعد الخدمة',
+    'how.rules.after.body': 'يتابع ساهلي للتأكد من استيفاء معايير التنسيق والخدمة. التقييم يؤثر على وضع المزود داخل الشبكة.',
     'how.footer.micro': 'ساهلي هي منصة لتنسيق الخدمات تربط العملاء بشركات تزويد معتمدة. ساهلي لا ينفذ الخدمات ولا يعالج المدفوعات.',
 
     // Trust & Standards
@@ -714,6 +707,7 @@ export const translations = {
     // CTA Final
     'cta.final.title': 'جاهزون حين تكون جاهزاً.',
     'cta.final.body': 'أخبرنا بما تحتاجه، وسنتولى نحن عملية التنسيق.',
+    'cta.final.cta': 'راسل "سهلي" الآن',
 
     // FAQ
     'faq.micro.question': 'هل تقدمون الخدمة بأنفسكم؟',

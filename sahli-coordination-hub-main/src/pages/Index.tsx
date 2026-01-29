@@ -101,7 +101,6 @@ const Index = () => {
       description: t('services.cleaning.body'),
       imageUrl: "https://images.unsplash.com/photo-1528740561666-dc2479da08ad?q=80&w=2070&auto=format&fit=crop",
       path: "/services/cleaning",
-      crossOrigin: "anonymous",
       subcategories: [
         t('services.cleaning.deep.title'),
         t('services.cleaning.upholstery.title'),
@@ -555,7 +554,7 @@ const Index = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-12 md:mb-16 text-foreground leading-[0.85]">
-              {t('home.final.title').split(' ').map((word, i) => (
+              {t('cta.final.title').split(' ').map((word, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
@@ -568,7 +567,7 @@ const Index = () => {
               ))}
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-foreground/60 mb-12 md:mb-20 max-w-4xl mx-auto leading-relaxed font-medium tracking-tight">
-              {t('home.final.body')}
+              {t('cta.final.body')}
             </p>
 
             {/* Micro-FAQ Block */}
@@ -600,7 +599,7 @@ const Index = () => {
                 className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-primary text-primary-foreground rounded-[1.25rem] md:rounded-[1.5rem] font-black text-base md:text-lg flex items-center justify-center gap-4 shadow-3xl shadow-primary/40 group btn-shine"
               >
                 <MessageCircle size="24" className="md:w-8 md:h-8 group-hover:rotate-12 transition-transform" />
-                {t('home.final.cta')}
+                {t('cta.final.cta')}
               </motion.a>
             </div>
           </motion.div>
