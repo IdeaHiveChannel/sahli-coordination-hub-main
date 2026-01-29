@@ -357,9 +357,14 @@ export default function HowItWorks() {
                 <div className="text-foreground/20 font-black mb-6 flex items-center gap-4 text-[10px] tracking-[0.3em]">
                   <span className="w-8 h-px bg-foreground/10 group-hover:w-16 transition-all duration-700" /> {t('how.boundaries.dont.title')}
                 </div>
-                <p className="text-xl md:text-xl text-foreground/40 leading-tight font-black tracking-tight">
-                  {t('how.boundaries.dont.body')}
-                </p>
+                <div className="relative">
+                  <span className="absolute -top-8 -left-4 text-8xl font-serif text-foreground/5 select-none">"</span>
+                  <div className="relative">
+                    <p className="text-xl md:text-xl text-foreground/40 leading-tight font-black tracking-tight">
+                      {t('how.boundaries.dont.body')}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
@@ -387,85 +392,71 @@ export default function HowItWorks() {
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase mb-8">
-              <Heart size={14} className="animate-pulse" />
-              {t('how.after.title')}
+            <div className="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center text-primary mx-auto mb-10 shadow-2xl group-hover:scale-110 transition-transform duration-700">
+              <Zap size={40} />
             </div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground mb-8 leading-none">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-8 text-foreground leading-none">
               {t('how.after.title')}
             </h2>
-            <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-medium tracking-tight">
+            <p className="text-xl md:text-2xl text-foreground/70 leading-relaxed font-medium tracking-tight mb-12">
               {t('how.after.body')}
             </p>
+            
+            <div className="grid sm:grid-cols-2 gap-6 text-start max-w-3xl mx-auto">
+              {[
+                { title: t('how.after.rule1.title'), body: t('how.after.rule1.body'), icon: <Shield size={20} /> },
+                { title: t('how.after.rule2.title'), body: t('how.after.rule2.body'), icon: <Repeat size={20} /> }
+              ].map((rule, i) => (
+                <div key={i} className="flex gap-4 p-6 rounded-2xl bg-foreground/5 border border-border">
+                  <div className="text-primary mt-1">{rule.icon}</div>
+                  <div>
+                    <h4 className="font-black text-foreground mb-1">{rule.title}</h4>
+                    <p className="text-sm text-foreground/60 font-medium">{rule.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* CTA Section - Consistent with Index.tsx */}
-      <section className="relative section-spacing-lg bg-background overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[180px] mix-blend-screen animate-pulse-slow`} />
-        </div>
-        
-        <div className="container-sahli relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-5xl mx-auto"
+      {/* Final CTA - Contextual */}
+      <section className="section-spacing bg-background relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-[0.05] grayscale">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            crossOrigin="anonymous"
+            className="w-full h-full object-cover"
           >
-            <h2 className="text-foreground mb-10 text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black tracking-tighter leading-[0.85]">
-              {t('cta.final.title').split(' ').map((word, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * i, duration: 0.8 }}
-                  className="inline-block mr-[0.2em]"
-                >
-                  {word}
-                </motion.span>
-              ))}
+            <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="container-sahli text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-10 text-foreground">
+              {t('how.final.title')}
             </h2>
-            <p className="text-lg md:text-lg lg:text-lg text-foreground/60 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed font-medium tracking-tight">
-              {t('cta.final.body')}
+            <p className="text-lg md:text-xl text-foreground/60 mb-12 font-medium">
+              {t('how.final.body')}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-              <motion.a
-                whileHover={{ scale: 1.05, rotate: -1 }}
-                whileTap={{ scale: 0.95 }}
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-primary px-8 py-5 md:px-10 md:py-5 text-base md:text-lg shadow-2xl shadow-primary/20 group flex items-center gap-3"
-              >
-                <MessageCircle className="group-hover:rotate-12 transition-transform" />
-                {t('cta.whatsapp')}
-              </motion.a>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="flex items-center gap-3 text-foreground/40 text-sm font-bold tracking-widest uppercase"
-              >
-                <div className="w-12 h-px bg-foreground/10" />
-                {t('trust.audit.title')}
-                <div className="w-12 h-px bg-foreground/10" />
-              </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
-              className="max-w-4xl mx-auto pt-8 border-t border-border/50"
+            <motion.a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-4 px-10 py-5 bg-primary text-primary-foreground rounded-3xl font-black text-lg shadow-2xl shadow-primary/30 hover:scale-105 transition-transform"
+              whileHover={{ y: -5 }}
             >
-              <p className="text-[10px] md:text-xs font-medium text-foreground/30 leading-relaxed uppercase tracking-widest">
-                {t('how.footer.micro')}
-              </p>
-            </motion.div>
+              <MessageCircle size={24} />
+              {t('home.hero.cta')}
+            </motion.a>
           </motion.div>
         </div>
       </section>
