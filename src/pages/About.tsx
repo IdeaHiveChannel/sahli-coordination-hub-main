@@ -111,6 +111,7 @@ export default function About() {
             <img 
               src="/logos/Sahl Logo 8.png" 
               alt="" 
+              loading="lazy"
               className="w-full h-full object-contain filter brightness-0 invert" 
             />
           </div>

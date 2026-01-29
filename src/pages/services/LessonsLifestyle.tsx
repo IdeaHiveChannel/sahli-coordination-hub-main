@@ -34,9 +34,10 @@ export default function LessonsLifestyle() {
           >
             <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4" />
             <img 
-              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&fm=webp&fit=crop" 
               alt="Lessons and Lifestyle" 
               crossOrigin="anonymous"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </video>

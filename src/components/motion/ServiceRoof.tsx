@@ -65,6 +65,7 @@ export function ServiceRoof({
           <motion.img 
             src={imageUrl} 
             alt={title}
+            loading="lazy"
             crossOrigin="anonymous"
             className={`w-full h-full object-cover transition-all duration-1000 ${isComingSoon ? 'opacity-30 grayscale' : 'opacity-60 grayscale-[0.2]'}`}
             animate={{ 

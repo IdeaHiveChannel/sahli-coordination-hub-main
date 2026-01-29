@@ -63,6 +63,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                       <img 
                         src={imageUrl} 
                         alt={title}
+                        loading="lazy"
                         crossOrigin="anonymous"
                         className="w-full h-full object-cover"
                       />
@@ -72,6 +73,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                   <motion.img 
                     src={imageUrl} 
                     alt={title}
+                    loading="lazy"
                     crossOrigin="anonymous"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />

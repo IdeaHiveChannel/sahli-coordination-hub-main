@@ -50,9 +50,10 @@ export default function CareChildcare() {
           >
             <source src="https://videos.pexels.com/video-files/4549414/4549414-uhd_2560_1440_25fps.mp4" type="video/mp4" />
             <img 
-              src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2040&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&fm=webp&fit=crop" 
               alt="Care and Childcare" 
               crossOrigin="anonymous"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </video>

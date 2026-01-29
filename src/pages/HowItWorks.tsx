@@ -90,9 +90,10 @@ export default function HowItWorks() {
             >
               <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" />
               <img 
-                src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2070&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=1200&fm=webp&fit=crop" 
                 alt={t('how.hero.alt')} 
                 crossOrigin="anonymous"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </video>
@@ -200,10 +201,10 @@ export default function HowItWorks() {
               </h2>
               <div className="space-y-4 md:space-y-4">
                 {[
-                  { title: t('how.flow.step1.title'), text: t('how.flow.step1.body'), icon: <MessageCircle size={24} />, imageUrl: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2070&auto=format&fit=crop' },
-                  { title: t('how.flow.step2.title'), text: t('how.flow.step2.body'), icon: <Search size={24} />, imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop' },
-                  { title: t('how.flow.step3.title'), text: t('how.flow.step3.body'), icon: <ShieldCheck size={24} />, imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop' },
-                  { title: t('how.flow.step4.title'), text: t('how.flow.step4.body'), icon: <CheckCircle2 size={24} />, imageUrl: 'https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2070&auto=format&fit=crop' }
+                  { title: t('how.flow.step1.title'), text: t('how.flow.step1.body'), icon: <MessageCircle size={24} />, imageUrl: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=600&fm=webp&fit=crop' },
+                  { title: t('how.flow.step2.title'), text: t('how.flow.step2.body'), icon: <Search size={24} />, imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=600&fm=webp&fit=crop' },
+                  { title: t('how.flow.step3.title'), text: t('how.flow.step3.body'), icon: <ShieldCheck size={24} />, imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600&fm=webp&fit=crop' },
+                  { title: t('how.flow.step4.title'), text: t('how.flow.step4.body'), icon: <Heart size={24} />, imageUrl: 'https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=600&fm=webp&fit=crop' }
                 ].map((step, i) => (
                   <motion.div 
                     key={i} 
@@ -219,6 +220,7 @@ export default function HowItWorks() {
                         src={step.imageUrl} 
                         alt="" 
                         crossOrigin="anonymous"
+                        loading="lazy"
                         className="w-full h-full object-cover grayscale scale-110 group-hover:scale-100 transition-transform duration-1000" 
                       />
                       <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
@@ -244,9 +246,10 @@ export default function HowItWorks() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <img 
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&fm=webp&fit=crop" 
                 alt={t('how.flow.alt')} 
                 crossOrigin="anonymous"
+                loading="lazy"
                 className="w-full h-full object-cover grayscale opacity-40 group-hover:scale-105 transition-transform duration-extra-slow"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
@@ -272,8 +275,8 @@ export default function HowItWorks() {
           </div>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {[
-              { title: t('how.rules.inspection.title'), text: t('how.rules.inspection.body'), img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop', icon: <Zap size={28} /> },
-              { title: t('how.rules.replacement.title'), text: t('how.rules.replacement.body'), img: 'https://images.unsplash.com/photo-1521791136064-7986c2959213?q=80&w=2070&auto=format&fit=crop', icon: <Shield size={28} /> }
+              { title: t('how.rules.inspection.title'), text: t('how.rules.inspection.body'), img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000&fm=webp&fit=crop', icon: <Zap size={28} /> },
+              { title: t('how.rules.replacement.title'), text: t('how.rules.replacement.body'), img: 'https://images.unsplash.com/photo-1521791136064-7986c2959213?q=80&w=1000&fm=webp&fit=crop', icon: <Shield size={28} /> }
             ].map((box, i) => (
               <motion.div 
                 key={i}
@@ -288,6 +291,7 @@ export default function HowItWorks() {
                     src={box.img} 
                     alt={box.title} 
                     crossOrigin="anonymous"
+                    loading="lazy"
                     className="w-full h-full object-cover grayscale opacity-50 group-hover:scale-110 group-hover:opacity-70 transition-all duration-slow ease-out" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60" />

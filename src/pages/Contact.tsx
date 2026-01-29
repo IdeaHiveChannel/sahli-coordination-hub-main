@@ -77,9 +77,10 @@ export default function Contact() {
         >
           <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" />
           <img 
-            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&fm=webp&fit=crop" 
             alt="Contact Support" 
             crossOrigin="anonymous"
+            loading="lazy"
             className="w-full h-full object-cover"
           />
         </video>

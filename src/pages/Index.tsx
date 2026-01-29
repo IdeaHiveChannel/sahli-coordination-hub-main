@@ -85,7 +85,7 @@ const Index = () => {
     { 
       title: t('services.homeRepair.title'), 
       description: t('services.homeRepair.body'),
-      imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&fm=webp&fit=crop",
       path: "/services/home-repair",
       subcategories: [
         t('services.homeRepair.ac.title'),
@@ -99,7 +99,7 @@ const Index = () => {
     { 
       title: t('services.cleaning.title'), 
       description: t('services.cleaning.body'),
-      imageUrl: "https://images.unsplash.com/photo-1528740561666-dc2479da08ad?q=80&w=2070&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1528740561666-dc2479da08ad?q=80&w=800&fm=webp&fit=crop",
       path: "/services/cleaning",
       subcategories: [
         t('services.cleaning.deep.title'),
@@ -109,7 +109,7 @@ const Index = () => {
     { 
       title: t('services.moving.title'), 
       description: t('services.moving.body'),
-      imageUrl: "https://images.unsplash.com/photo-1520038410233-7141be7e6f97?q=80&w=2070&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1520038410233-7141be7e6f97?q=80&w=800&fm=webp&fit=crop",
       path: "/services/moving",
       subcategories: [
         t('services.moving.house.title'),
@@ -119,7 +119,7 @@ const Index = () => {
       title: t('services.care.title'), 
       description: t('services.care.body'),
       path: '/services#care-childcare',
-      imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop',
       icon: <Heart size={32} />,
       status: 'coming-soon' as const,
       subcategories: []
@@ -128,7 +128,7 @@ const Index = () => {
       title: t('services.lessons.title'), 
       description: t('services.lessons.body'),
       path: '/services#lessons-lifestyle',
-      imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&fm=webp&fit=crop',
       icon: <BookOpen size={32} />,
       status: 'coming-soon' as const,
       subcategories: []
@@ -145,7 +145,7 @@ const Index = () => {
   const trustPanels = [
     {
       title: t('trust.vetting.title'),
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1000&fm=webp&fit=crop',
       videoUrl: 'https://videos.pexels.com/video-files/4491451/4491451-uhd_2560_1440_24fps.mp4',
       items: [
         { title: t('trust.vetting.legal.title'), description: t('trust.vetting.legal.body') },
@@ -155,7 +155,7 @@ const Index = () => {
     },
     {
       title: t('trust.conduct.title'),
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&fm=webp&fit=crop',
       videoUrl: 'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4',
       items: [
         { title: t('trust.conduct.rule1.title'), description: t('trust.conduct.rule1.body') },

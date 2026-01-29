@@ -28,7 +28,7 @@ export function SystemDiagram() {
       icon: <MessageCircle size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
-      imageUrl: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2070&auto=format&fit=crop'
+      imageUrl: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=1200&fm=webp&fit=crop'
     },
     {
       title: t('home.flow.step2.title'),
@@ -36,7 +36,7 @@ export function SystemDiagram() {
       icon: <Search size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop'
+      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1200&fm=webp&fit=crop'
     },
     {
       title: t('home.flow.step3.title'),
@@ -44,7 +44,7 @@ export function SystemDiagram() {
       icon: <ShieldCheck size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
-      imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop'
+      imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&fm=webp&fit=crop'
     },
     {
       title: t('home.flow.step4.title'),
@@ -52,7 +52,7 @@ export function SystemDiagram() {
       icon: <CheckCircle2 size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
-      imageUrl: 'https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=2070&auto=format&fit=crop'
+      imageUrl: 'https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=1200&fm=webp&fit=crop'
     }
   ];
 
@@ -110,6 +110,7 @@ export function SystemDiagram() {
                       src={step.imageUrl} 
                       alt="" 
                       crossOrigin="anonymous"
+                      loading="lazy"
                       className="w-full h-full object-cover opacity-[0.03] grayscale transition-all duration-1000 group-hover:scale-110 group-hover:opacity-[0.07]" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/40 to-transparent" />

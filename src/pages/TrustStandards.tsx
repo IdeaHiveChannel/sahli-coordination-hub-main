@@ -47,9 +47,10 @@ export default function TrustStandards() {
             >
               <source src="https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4" type="video/mp4" />
               <img 
-                src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=2069&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1200&fm=webp&fit=crop" 
                 alt={t('trust.hero.alt')} 
                 crossOrigin="anonymous"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </video>
