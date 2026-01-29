@@ -2,12 +2,12 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, ShieldCheck, Clock, FileSearch } from 'lucide-react';
+import { CheckCircle2, Heart, ShieldCheck, UserCheck, Activity, MessageCircle } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 
-export default function HomeRepair() {
-  const { t, lang, dir } = useLanguage();
+export default function CareChildcare() {
+  const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -20,7 +20,13 @@ export default function HomeRepair() {
   const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0]), springConfig);
   const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.1]), springConfig);
 
-  const splitWords = (text: string) => text.split(' ');
+  const categories = [
+    { title: t('services.care.doctor.title'), desc: t('services.care.doctor.desc') },
+    { title: t('services.care.nursing.title'), desc: t('services.care.nursing.desc') },
+    { title: t('services.care.newborn.title'), desc: t('services.care.newborn.desc') },
+    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc') },
+    { title: t('services.care.childcare.title'), desc: t('services.care.childcare.desc') }
+  ];
 
   const coordinationSteps = [
     { title: t('home.flow.step1.title'), body: t('home.flow.step1.body') },
@@ -29,19 +35,28 @@ export default function HomeRepair() {
     { title: t('home.flow.step4.title'), body: t('home.flow.step4.body') }
   ];
 
-  const categories = [
-    { title: t('services.homeRepair.ac.title'), desc: t('services.homeRepair.ac.desc') },
-    { title: t('services.homeRepair.electrical.title'), desc: t('services.homeRepair.electrical.desc') },
-    { title: t('services.homeRepair.plumbing.title'), desc: t('services.homeRepair.plumbing.desc') },
-    { title: t('services.homeRepair.appliances.title'), desc: t('services.homeRepair.appliances.desc') },
-    { title: t('services.homeRepair.handyman.title'), desc: t('services.homeRepair.handyman.desc') },
-    { title: t('services.homeRepair.pest.title'), desc: t('services.homeRepair.pest.desc') }
-  ];
-
   return (
     <Layout>
       {/* 1️⃣ Page Header */}
       <section ref={containerRef} className="relative min-h-[70vh] flex flex-col justify-center overflow-hidden bg-background">
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            crossOrigin="anonymous"
+            className="w-full h-full object-cover opacity-[0.08] grayscale"
+          >
+            <source src="https://videos.pexels.com/video-files/4549414/4549414-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            <img 
+              src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2040&auto=format&fit=crop" 
+              alt="Care and Childcare" 
+              crossOrigin="anonymous"
+              className="w-full h-full object-cover"
+            />
+          </video>
+        </div>
         <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[600px] h-[600px] bg-primary/10 rounded-full blur-[160px] mix-blend-screen animate-pulse-slow`} />
         
         <div className="container-sahli relative z-10 pt-32 pb-12">
@@ -51,29 +66,30 @@ export default function HomeRepair() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black tracking-widest uppercase mb-8">
+              {t('services.status.soon')}
+            </div>
+
             <h1 className="text-foreground text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter mb-8">
-              {t('services.homeRepair.title')}
+              {t('services.care.title')}
             </h1>
             
             <p className="text-xl md:text-2xl text-foreground/80 font-medium mb-4 leading-tight">
-              {t('services.homeRepair.subtitle')}
+              {t('services.care.body')}
             </p>
             
             <p className="text-sm md:text-base text-foreground/40 font-medium mb-10">
               {t('services.role.clarification')}
             </p>
 
-            <motion.a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-primary inline-flex items-center gap-4"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              className="cta-primary inline-flex items-center gap-4 opacity-50 cursor-not-allowed"
             >
               <MessageCircle size={20} className="fill-primary-foreground" />
-              {t('cta.whatsapp')}
-            </motion.a>
+              {t('services.status.soon')} (Notify me)
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -92,7 +108,7 @@ export default function HomeRepair() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                t('services.rules.inspection'),
+                t('services.rules.care'),
                 t('services.rules.independent'),
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
@@ -171,7 +187,10 @@ export default function HomeRepair() {
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-4">
-                {t('services.boundaries.is.body').split('\n').map((item, i) => (
+                {[
+                  t('home.hero.label'),
+                  t('services.rules.care')
+                ].map((item, i) => (
                   <li key={i} className="flex gap-4 items-center text-foreground/70 font-bold">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {item}
@@ -190,7 +209,7 @@ export default function HomeRepair() {
                 {t('services.boundaries.title.isNot')}
               </h3>
               <ul className="space-y-4">
-                {t('services.boundaries.isNot.body').split('\n').map((item, i) => (
+                {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
                   <li key={i} className="flex gap-4 items-center text-foreground/40 font-bold">
                     <div className="w-1.5 h-1.5 rounded-full bg-foreground/20" />
                     {item}
@@ -215,18 +234,15 @@ export default function HomeRepair() {
               {t('cta.final.title')}
             </h2>
             <p className="text-xl text-foreground/60 font-medium mb-12">
-              {t('cta.final.body')}
+              Tell us what you need. We'll notify you when this service domain goes live.
             </p>
-            <motion.a
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-primary px-12 py-6 text-lg"
+              className="cta-primary px-12 py-6 text-lg opacity-50 cursor-not-allowed"
             >
-              {t('cta.whatsapp')}
-            </motion.a>
+              Notify me
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -240,6 +256,5 @@ export default function HomeRepair() {
         </div>
       </footer>
     </Layout>
-   );
- }
-
+  );
+}

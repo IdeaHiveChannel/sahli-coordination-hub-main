@@ -207,7 +207,7 @@ export default function Services() {
             </motion.div>
             
             <h1 className="mb-12 md:mb-8 text-foreground text-4xl sm:text-4xl md:text-4xl lg:text-4xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
-              {t('services.title').split(' ').map((word, i) => (
+              {t('services.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 60, rotateX: -60 }}

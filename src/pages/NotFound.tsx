@@ -62,7 +62,7 @@ const NotFound = () => {
               transition={{ duration: 1, delay: 0.4 }}
             >
               <h1 className="mb-6 text-foreground text-5xl md:text-7xl font-black tracking-tighter flex flex-wrap justify-center gap-x-4">
-                {t('notFound.title').split(' ').map((word, i) => (
+                {t('notFound.title').split(' ').map((word: string, i: number) => (
                   <motion.span
                     key={i}
                     initial={{ opacity: 0, rotateX: -90, y: 50 }}
