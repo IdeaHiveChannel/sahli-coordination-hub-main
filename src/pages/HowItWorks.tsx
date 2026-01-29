@@ -120,7 +120,7 @@ export default function HowItWorks() {
               transition={{ delay: 0.1, duration: 0.8 }}
               className="inline-flex items-center gap-3 px-5 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] md:text-xs font-black tracking-[0.25em] uppercase mb-8 mx-auto md:mx-0 shadow-lg shadow-primary/5"
             >
-              <img src="/logos/Sahl Logo.png" alt="" className="w-4 h-4 object-contain" />
+              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
               {t('nav.howItWorks')}
             </motion.div>
             
@@ -166,7 +166,7 @@ export default function HowItWorks() {
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase mb-8"
               >
-                <img src="/logos/Sahl Logo 7.png" alt="" className="w-4 h-4 object-contain" />
+                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('how.entry.title')}
               </motion.div>
               <h2 className="mb-8 text-3xl sm:text-4xl lg:text-4xl font-black tracking-tighter leading-[0.9] text-foreground">
@@ -318,7 +318,7 @@ export default function HowItWorks() {
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col items-center mb-16">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-foreground/5 rounded-full border border-border text-foreground/50 text-[10px] font-bold tracking-widest uppercase mb-8">
-                <img src="/logos/Sahl Logo 7.png" alt="" className="w-4 h-4 object-contain opacity-50 grayscale" />
+                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain opacity-50 grayscale" />
                 {t('how.boundaries.title')}
               </div>
               <motion.h2 

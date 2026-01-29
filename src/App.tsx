@@ -40,7 +40,7 @@ const PageTracker = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      <ThemeProvider defaultTheme="light" enableSystem={false} attribute="class">
+      <ThemeProvider defaultTheme="dark" enableSystem={false} attribute="class">
         <TooltipProvider>
           <Toaster />
           <Sonner />

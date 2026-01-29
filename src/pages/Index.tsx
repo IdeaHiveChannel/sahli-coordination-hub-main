@@ -228,9 +228,9 @@ const Index = () => {
               className="inline-flex items-center gap-4 px-5 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] md:text-xs font-black tracking-[0.25em] uppercase mb-8 mx-auto md:mx-0 shadow-lg shadow-primary/5 group overflow-hidden relative btn-shine"
             >
               <img 
-                src="/logos/Sahl Logo.png" 
-                alt="" 
-                className="w-5 h-5 object-contain" 
+                src="/logos/Sahl Logo 9.png" 
+                alt="SAHLI Logo" 
+                className="w-4 h-4 object-contain" 
               />
               {t('home.hero.label')}
             </motion.div>
@@ -338,7 +338,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
               >
-                <img src="/logos/Sahl Logo 7.png" alt="" className="w-4 h-4 object-contain" />
+                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('home.coordinate.title')}
               </motion.div>
               <motion.h2
@@ -406,7 +406,7 @@ const Index = () => {
             viewport={{ once: true }}
             className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
           >
-            <img src="/logos/Sahl Logo 7.png" alt="" className="w-4 h-4 object-contain" />
+            <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
             {t('home.hero.label')}
           </motion.div>
           <motion.h2
@@ -471,7 +471,7 @@ const Index = () => {
             viewport={{ once: true }}
             className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
           >
-            <img src="/logos/Sahl Logo 7.png" alt="" className="w-4 h-4 object-contain" />
+            <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
             {t('trust.label')}
           </motion.div>
           <motion.h2

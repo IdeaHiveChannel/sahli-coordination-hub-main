@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useTheme } from 'next-themes';
 import { LanguageToggle } from './LanguageToggle';
 import { MessageCircle, Instagram, Facebook } from 'lucide-react';
 import { TranslationKey } from '@/lib/i18n';
@@ -11,7 +10,6 @@ import { trackWhatsAppClick } from '@/lib/gtag';
 
 export function Footer() {
   const { t, dir } = useLanguage();
-  const { theme } = useTheme();
   
   const currentYear = new Date().getFullYear();
 

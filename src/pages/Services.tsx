@@ -81,7 +81,7 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
                   transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
                   className="flex items-center gap-3 text-foreground font-semibold text-sm group/item py-1"
                 >
-                  <img src="/logos/Sahl Logo 7.png" alt="" loading="lazy" className="w-3 h-3 object-contain opacity-40 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-300 shadow-sm shadow-primary/20" />
+                  <img src="/logos/Sahl Logo 9.png" alt="" loading="lazy" className="w-3 h-3 object-contain opacity-40 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-300 shadow-sm shadow-primary/20" />
                   <span className="group-hover/item:translate-x-1 transition-transform duration-300">
                     {item}
                   </span>
@@ -202,7 +202,7 @@ export default function Services() {
               transition={{ delay: 0.1, duration: 0.8 }}
               className="inline-flex items-center gap-3 px-5 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] md:text-xs font-black tracking-[0.25em] uppercase mb-8 btn-shine"
             >
-              <img src="/logos/Sahl Logo.png" alt="" className="w-4 h-4 object-contain" />
+              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
               {t('services.label')}
             </motion.div>
             
@@ -270,9 +270,9 @@ export default function Services() {
                 
                 <span className="relative z-10 flex items-center gap-4">
                   {activeRoof === roof.id ? (
-                    <img src="/logos/Sahl Logo 7.png" alt="" loading="lazy" className="w-4 h-4 object-contain brightness-0 invert" />
+                    <img src="/logos/Sahl Logo 9.png" alt="" loading="lazy" className="w-4 h-4 object-contain brightness-0 invert" />
                   ) : (
-                    <img src="/logos/Sahl Logo 7.png" alt="" loading="lazy" className="w-4 h-4 object-contain opacity-20 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500" />
+                    <img src="/logos/Sahl Logo 9.png" alt="" loading="lazy" className="w-4 h-4 object-contain opacity-20 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500" />
                   )}
                   {roof.label}
                 </span>
@@ -320,7 +320,7 @@ export default function Services() {
                   </motion.div>
                   <div className="flex flex-col gap-1 md:gap-1.5">
                     <span className="inline-flex items-center gap-2 px-3 py-1 md:px-3.5 md:py-1 rounded-full bg-primary/15 text-primary text-[9px] md:text-[10px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md w-fit">
-                      <img src="/logos/Sahl Logo 7.png" alt="" className="w-3 h-3 object-contain" />
+                      <img src="/logos/Sahl Logo 9.png" alt="" className="w-3 h-3 object-contain" />
                       {t('services.status.live')} — {t('services.roof.label')} 01
                     </span>
                   </div>
@@ -452,7 +452,7 @@ export default function Services() {
                   </motion.div>
                   <div className="flex flex-col gap-1 md:gap-1.5">
                     <span className="inline-flex items-center gap-2 px-3 py-1 md:px-3.5 md:py-1 rounded-full bg-primary/15 text-primary text-[9px] md:text-[10px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md w-fit">
-                      <img src="/logos/Sahl Logo 7.png" alt="" className="w-3 h-3 object-contain" />
+                      <img src="/logos/Sahl Logo 9.png" alt="" className="w-3 h-3 object-contain" />
                       {t('services.status.live')} — {t('services.roof.label')} 02
                     </span>
                   </div>
@@ -584,7 +584,7 @@ export default function Services() {
                   </motion.div>
                   <div className="flex flex-col gap-1 md:gap-1.5">
                     <span className="inline-flex items-center gap-2 px-3 py-1 md:px-3.5 md:py-1 rounded-full bg-primary/15 text-primary text-[9px] md:text-[10px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md w-fit">
-                      <img src="/logos/Sahl Logo 7.png" alt="" className="w-3 h-3 object-contain" />
+                      <img src="/logos/Sahl Logo 9.png" alt="" className="w-3 h-3 object-contain" />
                       {t('services.status.live')} — {t('services.roof.label')} 03
                     </span>
                   </div>

@@ -2,17 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageToggle } from './LanguageToggle';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from 'next-themes';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 
 export function Header() {
   const { t, dir } = useLanguage();
-  const { theme } = useTheme();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,10 +51,7 @@ export function Header() {
               className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center transition-all duration-500"
             >
               <img 
-                src={theme === 'dark' 
-                  ? (isScrolled || isMenuOpen ? "/logos/Sahl Logo 3.png" : "/logos/Sahl Logo 9.png")
-                  : (isScrolled || isMenuOpen ? "/logos/Sahl Logo.png" : "/logos/Sahl Logo 7.png")
-                } 
+                src={isScrolled || isMenuOpen ? "/logos/Sahl Logo 3.png" : "/logos/Sahl Logo 9.png"} 
                 alt="SAHLI Logo" 
                 className={`absolute w-32 h-32 md:w-40 md:h-40 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
                   dir === 'rtl' ? 'right-0' : 'left-0'
@@ -89,10 +83,8 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
-            <div className="flex items-center gap-2 md:gap-3 px-2 py-1 bg-foreground/5 rounded-2xl border border-border/50">
+            <div className="flex items-center gap-2 md:gap-3 px-3 py-1 bg-foreground/5 rounded-2xl border border-border/50">
               <LanguageToggle />
-              <div className="w-px h-4 bg-border/50 hidden md:block" />
-              <ThemeToggle />
             </div>
             
             <motion.a
