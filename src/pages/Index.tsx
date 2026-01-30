@@ -376,23 +376,137 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Framing Section - Statement - Dark */}
-      <div className="bg-background py-12 md:py-24 border-y border-border relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(var(--primary),0.05),transparent_70%)]" />
-        <TrustStatement 
-          index={0}
-          text={t('home.framing.title')}
-        />
-        <div className="container-sahli text-center relative z-10 mb-8">
-          <p className="text-primary font-black tracking-widest uppercase text-xs mb-4">
-            {t('home.framing.subtitle')}
-          </p>
+      {/* Framing Section - Statement - Enhanced */}
+      <section className="bg-background py-24 md:py-32 border-y border-border relative overflow-hidden">
+        {/* Decorative background */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(var(--primary),0.05),transparent_70%)] opacity-50" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        
+        <div className="container-sahli relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: dir === 'rtl' ? 30 : -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-8">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                {t('home.framing.subtitle')}
+              </div>
+              
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground mb-10 leading-[0.9]">
+                {t('home.framing.title')}
+              </h2>
+              
+              <div className="space-y-8">
+                <p className="text-xl md:text-2xl text-foreground/80 font-medium leading-relaxed tracking-tight max-w-xl">
+                  {t('home.framing.body')}
+                </p>
+                
+                <div className="flex flex-wrap gap-4 pt-4">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                      <Shield size={20} />
+                    </div>
+                    <span className="text-sm font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.vetted')}</span>
+                  </div>
+                  <div className="flex items-center gap-3 px-5 py-3 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                      <UserCheck size={20} />
+                    </div>
+                    <span className="text-sm font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.recorded')}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="relative aspect-square lg:h-[600px] flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Coordination Hub Visualizer */}
+              <div className="relative w-full max-w-md aspect-square">
+                {/* Orbital Paths */}
+                <div className="absolute inset-0 border border-primary/10 rounded-full animate-[spin_30s_linear_infinite] opacity-30" />
+                <div className="absolute inset-[12%] border border-primary/5 rounded-full animate-[spin_20s_linear_infinite_reverse] opacity-20" />
+                <div className="absolute inset-[25%] border border-primary/10 rounded-full animate-[spin_25s_linear_infinite] opacity-30" />
+                
+                {/* Connection Lines (SVG) */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="var(--primary)" stopOpacity="0" />
+                      <stop offset="50%" stopColor="var(--primary)" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                    <motion.line
+                      key={i}
+                      x1="50" y1="50"
+                      x2={`${50 + 40 * Math.cos(angle * Math.PI / 180)}`}
+                      y2={`${50 + 40 * Math.sin(angle * Math.PI / 180)}`}
+                      stroke="url(#lineGradient)"
+                      strokeWidth="0.5"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 0.5 + i * 0.1 }}
+                    />
+                  ))}
+                </svg>
+
+                {/* Central Hub Core */}
+                <div className="absolute inset-0 flex items-center justify-center z-20">
+                  <motion.div 
+                    className="w-40 h-40 md:w-56 md:h-56 rounded-[3rem] bg-background border border-border flex items-center justify-center shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)] relative group cursor-default"
+                    whileHover={{ scale: 1.02, borderColor: 'rgba(var(--primary-rgb), 0.4)' }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="absolute inset-0 bg-primary/5 rounded-[3rem] blur-3xl group-hover:bg-primary/10 transition-colors duration-700" />
+                    <img 
+                      src="/logos/Sahl Logo 9.png" 
+                      alt="SAHLI Hub" 
+                      className="w-24 md:w-36 h-24 md:h-36 object-contain relative z-10 filter drop-shadow-2xl" 
+                    />
+                    
+                    {/* Glowing Core Pulse */}
+                    <div className="absolute inset-0 rounded-[3rem] bg-primary/5 animate-pulse" />
+                  </motion.div>
+                </div>
+
+                {/* Satellite Specialist Nodes */}
+                {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-foreground/[0.02] backdrop-blur-md border border-border flex items-center justify-center text-primary shadow-xl z-30 group"
+                    style={{
+                      top: `${50 + 40 * Math.sin(angle * Math.PI / 180)}%`,
+                      left: `${50 + 40 * Math.cos(angle * Math.PI / 180)}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.8 + i * 0.1 }}
+                  >
+                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 rounded-2xl transition-colors duration-500" />
+                    {i % 3 === 0 ? <Zap size={24} className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
+                     i % 3 === 1 ? <Shield size={24} className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
+                     <UserCheck size={24} className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
-        <TrustStatement 
-          index={1}
-          text={t('home.framing.body')}
-        />
-      </div>
+      </section>
 
       {/* Why SAHLI - Operating Principles - Dark & Glassmorphic */}
       <section className="relative section-spacing bg-background overflow-hidden">
