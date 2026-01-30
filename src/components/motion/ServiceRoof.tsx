@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -153,7 +153,7 @@ export function ServiceRoof({
               }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              {subcategories.map((sub, i) => (
+              {subcategories.map((sub: string, i: number) => (
                 <span 
                   key={i} 
                   className={`px-3 py-1 rounded-full text-[9px] font-black tracking-widest uppercase border transition-colors duration-500 ${imageUrl ? 'bg-foreground/5 border-foreground/10 text-foreground/80' : 'bg-primary/5 border-primary/10 text-primary/80'}`}

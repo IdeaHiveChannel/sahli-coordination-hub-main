@@ -26,8 +26,8 @@ export default function Terms() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="mb-16 text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-4xl font-black leading-[0.85] tracking-tighter flex flex-wrap gap-x-6 gap-y-2">
-              {t('legal.terms.title').split(' ').map((word: string, i: number) => (
+            <h1 className="mb-16 text-foreground text-4xl md:text-6xl lg:text-7xl font-black leading-[0.85] tracking-tighter flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2">
+              {t('legal.terms.title').split(/\s+/).map((word: string, i: number) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, rotateX: -90, y: 50 }}

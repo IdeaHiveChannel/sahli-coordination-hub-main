@@ -27,7 +27,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-background border-t border-border pt-12 md:pt-24 pb-8 md:pb-12 relative overflow-hidden" dir={dir}>
+    <footer className="bg-background border-t border-border pt-10 md:pt-16 pb-6 md:pb-10 relative overflow-hidden" dir={dir}>
       {/* Decorative Background Elements */}
       <div className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-64 md:w-[24rem] h-64 md:h-[24rem] bg-primary/[0.03] rounded-full blur-[80px] md:blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none`} />
       <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-48 md:w-[16rem] h-48 md:h-[16rem] bg-primary/[0.02] rounded-full blur-[60px] md:blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none`} />
@@ -153,7 +153,7 @@ export function Footer() {
             {t('footer.intermediary')}
           </p>
         </div>
-        <div className="pt-12 md:pt-16 border-t border-border flex flex-col lg:flex-row justify-between items-center gap-8 md:gap-12">
+        <div className="pt-8 md:pt-12 border-t border-border flex flex-col lg:flex-row justify-between items-center gap-6 md:gap-10">
           <div className="flex items-center gap-6">
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
             <p className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 text-center lg:text-left">

@@ -25,8 +25,8 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
 
   return (
     <div className="relative border-b border-border bg-foreground/[0.02] last:border-0 overflow-hidden">
-      <div className="container-sahli py-10 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 md:gap-32 items-center">
+      <div className="container-sahli py-8 md:py-16">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: isMobile ? 0 : (dir === 'rtl' ? 30 : -30), y: isMobile ? 15 : 0 }}
             whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -34,16 +34,16 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <span className="text-primary font-bold tracking-[0.2em] text-[12px] uppercase mb-4 md:mb-6 block">
+            <span className="text-primary font-bold tracking-[0.2em] text-[11px] uppercase mb-3 md:mb-5 block">
               {index + 1 < 10 ? `0${index + 1}` : index + 1} / {dir === 'rtl' ? 'معيار' : 'Standard'}
             </span>
-            <h3 className="text-xl md:text-4xl font-black tracking-tighter text-balance leading-[1.1] md:leading-[1] mb-8 md:mb-12 text-foreground">
+            <h3 className="text-xl md:text-3xl font-black tracking-tighter text-balance leading-[1.1] md:leading-[1] mb-6 md:mb-8 text-foreground">
               {title}
             </h3>
 
             {(imageUrl || videoUrl) && (
               <motion.div 
-                className="relative aspect-[16/9] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl group border border-border btn-shine"
+                className="relative aspect-[16/9] rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl group border border-border btn-shine"
                 initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -83,8 +83,8 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
             )}
           </motion.div>
 
-          <div className="grid gap-6 md:gap-8">
-            {items.map((item, i) => (
+          <div className="grid gap-4 md:gap-6">
+            {items.map((item: { title: string; description: string }, i: number) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
@@ -92,16 +92,16 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                 whileTap={{ scale: 0.98 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="group flex gap-4 md:gap-8 p-6 md:p-8 rounded-[2rem] transition-all duration-500 hover:bg-foreground/[0.04] border border-border hover:border-primary/20 cursor-default glass-card btn-shine"
+                className="group flex gap-4 md:gap-6 p-5 md:p-6 rounded-[1.5rem] transition-all duration-500 hover:bg-foreground/[0.04] border border-border hover:border-primary/20 cursor-default glass-card btn-shine"
               >
                 <div className="mt-1">
-                  <div className="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:rotate-12 group-hover:scale-110 shadow-lg shadow-primary/5">
-                    <Check size={isMobile ? 20 : 24} strokeWidth={3} />
+                  <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:rotate-12 group-hover:scale-110 shadow-lg shadow-primary/5">
+                    <Check size={isMobile ? 16 : 20} strokeWidth={3} />
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-xl md:text-2xl font-black mb-2 md:mb-3 group-hover:text-primary transition-colors tracking-tight">{item.title}</h4>
-                  <p className="text-base md:text-lg text-foreground/85 leading-relaxed font-medium">{item.description}</p>
+                  <h4 className="text-lg md:text-xl font-black mb-1 md:mb-2 group-hover:text-primary transition-colors tracking-tight">{item.title}</h4>
+                  <p className="text-sm md:text-base text-foreground/85 leading-relaxed font-medium">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -145,7 +145,7 @@ export function TrustStatement({ text, index }: TrustStatementProps) {
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          {text.split(' ').map((word, i) => (
+          {text.split(' ').map((word: string, i: number) => (
             <motion.span
               key={i}
               initial={{ opacity: 0, y: 10 }}

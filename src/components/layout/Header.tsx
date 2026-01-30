@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageToggle } from './LanguageToggle';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
@@ -20,11 +20,11 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { key: 'nav.howItWorks' as const, path: '/how-it-works' },
-    { key: 'nav.services' as const, path: '/services' },
-    { key: 'nav.trustStandards' as const, path: '/trust-standards' },
-    { key: 'nav.about' as const, path: '/about' },
+  const navItems: Array<{ key: 'nav.howItWorks' | 'nav.services' | 'nav.trustStandards' | 'nav.about'; path: string }> = [
+    { key: 'nav.howItWorks', path: '/how-it-works' },
+    { key: 'nav.services', path: '/services' },
+    { key: 'nav.trustStandards', path: '/trust-standards' },
+    { key: 'nav.about', path: '/about' },
   ];
 
   return (
@@ -34,7 +34,7 @@ export function Header() {
       }`}
       dir={dir}
     >
-      <div className="container-sahli relative z-[100]">
+      <div className="container-sahli relative z-[110]">
         <motion.nav 
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -53,7 +53,7 @@ export function Header() {
               <img 
                 src={isScrolled || isMenuOpen ? "/logos/Sahl Logo 3.png" : "/logos/Sahl Logo 9.png"} 
                 alt="SAHLI Logo" 
-                className={`absolute w-32 h-32 md:w-40 md:h-40 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
+                className={`absolute w-24 h-24 md:w-28 md:h-28 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
                   dir === 'rtl' ? 'right-0' : 'left-0'
                 }`} 
               />
@@ -62,7 +62,7 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6">
-            {navItems.map((item) => {
+            {navItems.map((item: { key: string; path: string }) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
@@ -72,7 +72,7 @@ export function Header() {
                     isActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'
                   }`}
                 >
-                  {t(item.key)}
+                  {t(item.key as any)}
                   <span className={`absolute -bottom-2 left-0 h-0.5 bg-primary transition-all duration-500 ${
                     isActive ? 'w-full' : 'w-0 group-hover:w-full'
                   }`} />
@@ -105,7 +105,7 @@ export function Header() {
               whileTap={{ scale: 0.9 }}
               className={`xl:hidden w-12 h-12 flex flex-col items-center justify-center gap-1.5 rounded-xl transition-all duration-300 ${
                 isMenuOpen ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' : 'text-foreground hover:bg-secondary/50'
-              } z-[110] relative overflow-hidden group`}
+              } z-[120] relative overflow-hidden group`}
               onClick={(e) => {
                 e.preventDefault();
                 setIsMenuOpen(!isMenuOpen);
@@ -143,8 +143,20 @@ export function Header() {
               if (info.offset.x > 100) setIsMenuOpen(false);
             }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] xl:hidden bg-background overflow-y-auto overflow-x-hidden"
+            className="fixed inset-0 z-[105] xl:hidden bg-background overflow-y-auto overflow-x-hidden"
           >
+            {/* Close Button Inside Overlay */}
+            <div className={`absolute top-8 ${dir === 'rtl' ? 'left-6 md:left-12' : 'right-6 md:right-12'} z-[110]`}>
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMenuOpen(false)}
+                className="w-12 h-12 flex items-center justify-center rounded-xl bg-foreground/5 text-foreground hover:bg-foreground/10 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </motion.button>
+            </div>
+
             {/* Animated Background Decorative Elements */}
             <div className="absolute inset-0 z-0 opacity-20">
               <motion.div 
@@ -169,7 +181,7 @@ export function Header() {
 
             <div className="relative z-10 h-full flex flex-col pt-24 px-6 md:px-12">
               <div className="flex flex-col gap-4 md:gap-6">
-                {navItems.map((item, i) => (
+                {navItems.map((item: { key: string; path: string }, i: number) => (
                   <motion.div
                     key={item.path}
                     initial={{ x: -50, opacity: 0 }}
@@ -188,8 +200,8 @@ export function Header() {
                       className="group flex items-baseline gap-4 py-1 md:py-2"
                     >
                       <span className="text-[12px] font-black text-primary/50 tracking-widest">0{i + 1}</span>
-                      <span className="text-4xl md:text-6xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors duration-500">
-                        {t(item.key)}
+                      <span className="text-3xl md:text-5xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors duration-500">
+                        {t(item.key as any)}
                       </span>
                     </Link>
                   </motion.div>
@@ -224,6 +236,7 @@ export function Header() {
           </motion.div>
         )}
       </AnimatePresence>
+
     </header>
   );
 }

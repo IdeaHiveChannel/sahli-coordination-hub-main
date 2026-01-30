@@ -234,6 +234,9 @@ export const translations = {
     'services.footer.micro': 'SAHLI coordinates access to independent provider companies. Providers deliver services directly. SAHLI does not execute services or handle payments.',
 
     // How It Works - UPDATED DETAILED CONTENT
+    'how.hero.label': 'COORDINATION INFRASTRUCTURE',
+    'how.hero.title': 'How SAHLI Coordinates Help',
+    'how.hero.subtitle': 'A structured approach to service coordination. From request to audit — one point of contact.',
     'how.title': 'HOW SAHLI WORKS',
     'how.entry.title': 'One message entry',
     'how.entry.body': 'No forms. No browsing. No comparison.',
@@ -619,6 +622,9 @@ export const translations = {
     'services.lessons.lifestyle.desc': 'إدارة الخدمات اللوجستية والاحتياجات اليومية.',
 
     // How It Works - UPDATED DETAILED CONTENT
+    'how.hero.label': 'بنية تحتية للتنسيق',
+    'how.hero.title': 'كيف ينسق "سهلي" المساعدة',
+    'how.hero.subtitle': 'نهج منظم لتنسيق الخدمة. من الطلب إلى التدقيق - نقطة اتصال واحدة.',
     'how.title': 'كيف يعمل ساهلي',
     'how.entry.title': 'دخول برسالة واحدة',
     'how.entry.body': 'بدون نماذج. بدون تصفح. بدون مقارنة.',

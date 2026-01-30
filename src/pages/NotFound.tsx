@@ -62,18 +62,18 @@ const NotFound = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
             >
-              <h1 className="mb-6 text-foreground text-5xl md:text-7xl font-black tracking-tighter flex flex-wrap justify-center gap-x-4">
-                {t('notFound.title').split(' ').map((word: string, i: number) => (
+              <h1 className="mb-6 text-foreground text-4xl md:text-7xl font-black tracking-tighter flex flex-wrap justify-center gap-x-4">
+                {(t('notFound.title') as string).split(' ').map((word: string, i: number) => (
                   <motion.span
                     key={i}
-                    initial={{ opacity: 0, rotateX: -90, y: 50 }}
-                    animate={{ opacity: 1, rotateX: 0, y: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ 
                       duration: 0.8, 
-                      delay: 0.4 + (i * 0.1),
+                      delay: 0.5 + (i * 0.1),
                       ease: [0.215, 0.61, 0.355, 1]
                     }}
-                    className="inline-block origin-bottom"
+                    className="inline-block"
                   >
                     {word}
                   </motion.span>
@@ -94,7 +94,7 @@ const NotFound = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link to="/" className="cta-primary inline-block min-w-[200px]">
+                <Link to="/" className="cta-primary inline-block min-w-[200px] btn-shine">
                   {t('notFound.back')}
                 </Link>
               </motion.div>

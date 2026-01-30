@@ -31,7 +31,7 @@ export function InfiniteMarquee({ items, speed = 40, direction = 'left' }: Infin
           ease: "linear",
         }}
       >
-        {[...items, ...items].map((item, index) => (
+        {[...items, ...items].map((item: string, index: number) => (
           <div
             key={index}
             className="flex items-center gap-6"

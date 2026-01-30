@@ -130,7 +130,7 @@
 
   /* Typography hierarchy - Modern, Premium - Reduced for laptop screens */
   h1, .h1 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 0.95;
@@ -139,23 +139,23 @@
   }
 
   @media (max-width: 380px) {
-    h1, .h1 { font-size: 2.25rem; }
+    h1, .h1 { font-size: 2rem; }
   }
 
   @media (min-width: 768px) {
-    h1, .h1 { font-size: 4rem; }
+    h1, .h1 { font-size: 3.5rem; }
   }
 
   @media (min-width: 1024px) {
-    h1, .h1 { font-size: 4.5rem; }
+    h1, .h1 { font-size: 4rem; }
   }
 
   @media (min-width: 1536px) {
-    h1, .h1 { font-size: 5rem; }
+    h1, .h1 { font-size: 4.5rem; }
   }
 
   h2, .h2 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.1;
@@ -164,15 +164,15 @@
   }
 
   @media (max-width: 380px) {
-    h2, .h2 { font-size: 1.5rem; }
+    h2, .h2 { font-size: 1.35rem; }
   }
 
   @media (min-width: 1024px) {
-    h2, .h2 { font-size: 2.75rem; }
+    h2, .h2 { font-size: 2.5rem; }
   }
 
   @media (min-width: 1536px) {
-    h2, .h2 { font-size: 3.5rem; }
+    h2, .h2 { font-size: 3rem; }
   }
 
   h3, .h3 {
@@ -428,54 +428,54 @@
 
   /* Section spacing - optimized for mobile and laptop screens */
   .section-spacing {
-    padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
   }
 
   @media (min-width: 768px) {
     .section-spacing {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
     }
   }
 
   @media (min-width: 1024px) {
+    .section-spacing {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
     .section-spacing {
       padding-top: 5rem;
       padding-bottom: 5rem;
     }
   }
 
-  @media (min-width: 1536px) {
-    .section-spacing {
-      padding-top: 7rem;
-      padding-bottom: 7rem;
-    }
-  }
-
   .section-spacing-lg {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 
   @media (min-width: 768px) {
+    .section-spacing-lg {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
     .section-spacing-lg {
       padding-top: 6rem;
       padding-bottom: 6rem;
     }
   }
 
-  @media (min-width: 1024px) {
-    .section-spacing-lg {
-      padding-top: 7rem;
-      padding-bottom: 7rem;
-    }
-  }
-
   @media (min-width: 1536px) {
     .section-spacing-lg {
-      padding-top: 9rem;
-      padding-bottom: 9rem;
+      padding-top: 7.5rem;
+      padding-bottom: 7.5rem;
     }
   }
 

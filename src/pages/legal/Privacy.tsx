@@ -2,12 +2,18 @@ import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import { Shield, Lock, Eye, FileText, Scale, MapPin, Mail, MessageCircle, Globe, Gavel } from 'lucide-react';
+import { Shield, Lock, Eye, Scale, MessageCircle, Globe, Mail, Gavel, FileText } from 'lucide-react';
 
 export default function Privacy() {
   const { t, dir } = useLanguage();
 
-  const privacySections = [
+  interface PrivacySection {
+    icon: React.ReactNode;
+    title: string;
+    content: string;
+  }
+
+  const privacySections: PrivacySection[] = [
     {
       icon: <Lock className="w-6 h-6" />,
       title: t('legal.privacy.sections.collect.title'),
@@ -61,7 +67,21 @@ export default function Privacy() {
             </div>
 
             <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.85] tracking-tighter">
-              {t('legal.privacy.title')}
+              {t('legal.privacy.title').split(' ').map((word: string, i: number) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, rotateX: -90, y: 50 }}
+                  animate={{ opacity: 1, rotateX: 0, y: 0 }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: 0.2 + (i * 0.1),
+                    ease: [0.215, 0.61, 0.355, 1]
+                  }}
+                  className="inline-block origin-bottom"
+                >
+                  {word}
+                </motion.span>
+              ))}
             </h1>
             <p className="text-primary font-bold mb-16 tracking-wider uppercase text-xs">
               Last updated: 24/01/2026
@@ -80,13 +100,13 @@ export default function Privacy() {
                   </p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {privacySections.map((section, idx) => (
+                    {privacySections.map((section: PrivacySection, idx: number) => (
                       <div key={idx} className="space-y-4">
                         <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
                           {section.icon}
                         </div>
-                        <h3 className="text-lg font-black text-foreground uppercase tracking-tight">{section.title}</h3>
-                        <p className="text-foreground/60 leading-relaxed text-sm whitespace-pre-line">
+                        <h2 className="text-lg font-black text-foreground">{section.title}</h2>
+                        <p className="text-foreground/60 leading-relaxed font-medium">
                           {section.content}
                         </p>
                       </div>

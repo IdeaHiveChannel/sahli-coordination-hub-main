@@ -82,7 +82,7 @@ export function SystemDiagram() {
       </div>
       
       <div className="flex flex-col gap-12 md:gap-24 relative">
-        {steps.map((step, index) => {
+        {steps.map((step: { title: string; description: string; icon: React.ReactNode; color: string; accent: string; imageUrl: string }, index: number) => {
           // Adjust logic for RTL: even items are on the right in LTR, left in RTL
           const isEven = index % 2 === 0;
           const contentOnRight = isRtl ? !isEven : isEven;

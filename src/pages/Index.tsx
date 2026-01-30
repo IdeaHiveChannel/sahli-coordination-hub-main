@@ -216,7 +216,7 @@ const Index = () => {
           className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-gradient-to-${dir === 'rtl' ? 'r' : 'l'} from-primary/[0.08] to-transparent pointer-events-none`} 
         />
 
-        <div className="container-sahli relative z-10 pt-36 md:pt-40 pb-20 md:pb-16 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div 
             className="max-w-7xl xl:max-w-[90%] flex flex-col items-center md:items-start"
             style={{ y: yHero }}
@@ -236,7 +236,7 @@ const Index = () => {
             </motion.div>
             
             <h1 className="mb-10 text-foreground text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
-              {t('home.hero.title').split(' ').map((word, i) => (
+              {t('home.hero.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 30, rotateX: -45 }}
@@ -364,7 +364,7 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-10 xl:gap-12">
-            {services.map((service, index) => (
+            {services.map((service: any, index: number) => (
               <ServiceRoof 
                 key={index} 
                 {...service} 
@@ -377,21 +377,21 @@ const Index = () => {
       </section>
 
       {/* Framing Section - Statement - Enhanced */}
-      <section className="bg-background py-24 md:py-32 border-y border-border relative overflow-hidden">
+      <section className="bg-background py-16 md:py-20 border-y border-border relative overflow-hidden">
         {/* Decorative background */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(var(--primary),0.05),transparent_70%)] opacity-50" />
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         
         <div className="container-sahli relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 30 : -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-8">
+              <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -399,41 +399,41 @@ const Index = () => {
                 {t('home.framing.subtitle')}
               </div>
               
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground mb-10 leading-[0.9]">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-8 leading-[0.9]">
                 {t('home.framing.title')}
               </h2>
               
-              <div className="space-y-8">
-                <p className="text-xl md:text-2xl text-foreground/80 font-medium leading-relaxed tracking-tight max-w-xl">
+              <div className="space-y-6">
+                <p className="text-lg md:text-xl text-foreground/80 font-medium leading-relaxed tracking-tight max-w-xl">
                   {t('home.framing.body')}
                 </p>
                 
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <div className="flex items-center gap-3 px-5 py-3 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                      <Shield size={20} />
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <div className="flex items-center gap-3 px-4 py-2.5 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
+                    <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                      <Shield size={16} />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.vetted')}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.vetted')}</span>
                   </div>
-                  <div className="flex items-center gap-3 px-5 py-3 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                      <UserCheck size={20} />
+                  <div className="flex items-center gap-3 px-4 py-2.5 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
+                    <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                      <UserCheck size={16} />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.recorded')}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.recorded')}</span>
                   </div>
                 </div>
               </div>
             </motion.div>
 
             <motion.div
-              className="relative aspect-square lg:h-[600px] flex items-center justify-center"
+              className="relative aspect-square lg:h-[500px] flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Coordination Hub Visualizer */}
-              <div className="relative w-full max-w-md aspect-square">
+              <div className="relative w-full max-w-sm aspect-square">
                 {/* Orbital Paths */}
                 <div className="absolute inset-0 border border-primary/10 rounded-full animate-[spin_30s_linear_infinite] opacity-30" />
                 <div className="absolute inset-[12%] border border-primary/5 rounded-full animate-[spin_20s_linear_infinite_reverse] opacity-20" />
@@ -448,7 +448,7 @@ const Index = () => {
                       <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
                     </linearGradient>
                   </defs>
-                  {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                  {[0, 60, 120, 180, 240, 300].map((angle: number, i: number) => (
                     <motion.line
                       key={i}
                       x1="50" y1="50"
@@ -466,27 +466,27 @@ const Index = () => {
                 {/* Central Hub Core */}
                 <div className="absolute inset-0 flex items-center justify-center z-20">
                   <motion.div 
-                    className="w-40 h-40 md:w-56 md:h-56 rounded-[3rem] bg-background border border-border flex items-center justify-center shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)] relative group cursor-default"
+                    className="w-32 h-32 md:w-48 md:h-48 rounded-[2.5rem] bg-background border border-border flex items-center justify-center shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)] relative group cursor-default"
                     whileHover={{ scale: 1.02, borderColor: 'rgba(var(--primary-rgb), 0.4)' }}
                     transition={{ duration: 0.5 }}
                   >
-                    <div className="absolute inset-0 bg-primary/5 rounded-[3rem] blur-3xl group-hover:bg-primary/10 transition-colors duration-700" />
+                    <div className="absolute inset-0 bg-primary/5 rounded-[2.5rem] blur-3xl group-hover:bg-primary/10 transition-colors duration-700" />
                     <img 
                       src="/logos/Sahl Logo 9.png" 
                       alt="SAHLI Hub" 
-                      className="w-24 md:w-36 h-24 md:h-36 object-contain relative z-10 filter drop-shadow-2xl" 
+                      className="w-20 md:w-28 h-20 md:h-28 object-contain relative z-10 filter drop-shadow-2xl" 
                     />
                     
                     {/* Glowing Core Pulse */}
-                    <div className="absolute inset-0 rounded-[3rem] bg-primary/5 animate-pulse" />
+                    <div className="absolute inset-0 rounded-[2.5rem] bg-primary/5 animate-pulse" />
                   </motion.div>
                 </div>
 
                 {/* Satellite Specialist Nodes */}
-                {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                {[0, 60, 120, 180, 240, 300].map((angle: number, i: number) => (
                   <motion.div
                     key={i}
-                    className="absolute w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-foreground/[0.02] backdrop-blur-md border border-border flex items-center justify-center text-primary shadow-xl z-30 group"
+                    className="absolute w-12 h-12 md:w-16 md:h-16 rounded-xl bg-foreground/[0.02] backdrop-blur-md border border-border flex items-center justify-center text-primary shadow-xl z-30 group"
                     style={{
                       top: `${50 + 40 * Math.sin(angle * Math.PI / 180)}%`,
                       left: `${50 + 40 * Math.cos(angle * Math.PI / 180)}%`,
@@ -496,10 +496,10 @@ const Index = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.8 + i * 0.1 }}
                   >
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 rounded-2xl transition-colors duration-500" />
-                    {i % 3 === 0 ? <Zap size={24} className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
-                     i % 3 === 1 ? <Shield size={24} className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
-                     <UserCheck size={24} className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />}
+                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 rounded-xl transition-colors duration-500" />
+                    {i % 3 === 0 ? <Zap size="20" className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
+                     i % 3 === 1 ? <Shield size="20" className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
+                     <UserCheck size="20" className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />}
                   </motion.div>
                 ))}
               </div>
@@ -554,7 +554,7 @@ const Index = () => {
               body: t('home.why.control.body'),
               icon: <UserCheck className="text-primary" />
             }
-          ].map((principle, i) => (
+          ].map((principle: { title: string; body: string; icon: React.ReactNode }, i: number) => (
             <motion.div
               key={i}
               className="p-6 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-foreground/[0.02] border border-border group hover:bg-foreground/[0.04] hover:border-primary/30 transition-all duration-700 backdrop-blur-sm btn-shine"
@@ -608,7 +608,7 @@ const Index = () => {
         </div>
         
         <div className="space-y-4 md:space-y-6 pb-20 md:pb-24">
-          {trustPanels.map((panel, i) => (
+          {trustPanels.map((panel: any, i: number) => (
             <TrustPanel key={i} {...panel} index={i} />
           ))}
         </div>
@@ -668,7 +668,7 @@ const Index = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-12 md:mb-16 text-foreground leading-[0.85]">
-              {t('cta.final.title').split(' ').map((word, i) => (
+              {t('cta.final.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
