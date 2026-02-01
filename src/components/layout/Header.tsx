@@ -22,10 +22,7 @@ export function Header() {
 
   const navItems: Array<{ key: string; path: string }> = [
     { key: 'nav.home', path: '/' },
-    { key: 'nav.homeMaintenance', path: '/home-maintenance-qatar' },
-    { key: 'nav.cleaningServices', path: '/cleaning-services-qatar' },
-    { key: 'nav.movingServices', path: '/house-shifting-qatar' },
-    { key: 'nav.careLifestyle', path: '/care-lifestyle-qatar' },
+    { key: 'nav.services', path: '/services' },
     { key: 'nav.trustStandards', path: '/trust-standards' },
     { key: 'nav.howItWorks', path: '/how-it-works' },
   ];
@@ -48,15 +45,15 @@ export function Header() {
           }`}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group min-w-[100px] md:min-w-[140px] relative">
+          <Link to="/" className="flex items-center gap-3 group min-w-[80px] md:min-w-[120px] relative">
             <motion.div 
               whileHover={{ rotate: 5, scale: 1.05 }}
-              className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center transition-all duration-500"
+              className="relative w-7 h-7 md:w-9 md:h-9 flex items-center justify-center transition-all duration-500"
             >
               <img 
                 src={isScrolled || isMenuOpen ? "/logos/Sahl Logo 3.png" : "/logos/Sahl Logo 9.png"} 
                 alt="SAHLI Logo" 
-                className={`absolute w-24 h-24 md:w-28 md:h-28 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
+                className={`absolute w-20 h-20 md:w-24 md:h-24 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
                   dir === 'rtl' ? 'right-0' : 'left-0'
                 }`} 
               />
@@ -71,12 +68,12 @@ export function Header() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-500 relative group ${
+                  className={`text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-500 relative group ${
                     isActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'
                   }`}
                 >
                   {t(item.key as any)}
-                  <span className={`absolute -bottom-2 left-0 h-0.5 bg-primary transition-all duration-500 ${
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-500 ${
                     isActive ? 'w-full' : 'w-0 group-hover:w-full'
                   }`} />
                 </Link>
@@ -85,8 +82,8 @@ export function Header() {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
-            <div className="flex items-center gap-2 md:gap-3 px-3 py-1 bg-foreground/5 rounded-2xl border border-border/50">
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="flex items-center gap-2 px-2 py-0.5 bg-foreground/5 rounded-xl border border-border/50">
               <LanguageToggle />
             </div>
             
@@ -97,7 +94,7 @@ export function Header() {
               onClick={() => trackWhatsAppClick('Header')}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden sm:flex items-center gap-2 px-6 py-3 md:px-6 md:py-3 bg-primary text-primary-foreground rounded-xl md:rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] hover:shadow-2xl hover:shadow-primary/40 transition-all duration-500 btn-shine glow-red"
+              className="hidden sm:flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-primary text-primary-foreground rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-bold uppercase tracking-[0.1em] hover:shadow-2xl hover:shadow-primary/40 transition-all duration-500 btn-shine glow-red"
             >
               <MessageCircle size={14} className="fill-primary-foreground" />
               {t('cta.whatsapp')}
@@ -106,7 +103,7 @@ export function Header() {
             {/* Mobile Menu Toggle */}
             <motion.button 
               whileTap={{ scale: 0.9 }}
-              className={`xl:hidden w-12 h-12 flex flex-col items-center justify-center gap-1.5 rounded-xl transition-all duration-300 ${
+              className={`xl:hidden w-10 h-10 flex flex-col items-center justify-center gap-1 rounded-xl transition-all duration-300 ${
                 isMenuOpen ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' : 'text-foreground hover:bg-secondary/50'
               } z-[120] relative overflow-hidden group`}
               onClick={(e) => {
@@ -116,7 +113,7 @@ export function Header() {
               aria-label="Toggle menu"
             >
               <motion.span 
-                animate={isMenuOpen ? { rotate: 45, y: 7.5 } : { rotate: 0, y: 0 }}
+                animate={isMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
                 className={`w-6 h-0.5 rounded-full transition-colors ${isMenuOpen ? 'bg-primary-foreground' : 'bg-current'}`}
               />
               <motion.span 
@@ -124,7 +121,7 @@ export function Header() {
                 className={`w-6 h-0.5 rounded-full transition-colors ${isMenuOpen ? 'bg-primary-foreground' : 'bg-current'}`}
               />
               <motion.span 
-                animate={isMenuOpen ? { rotate: -45, y: -7.5 } : { rotate: 0, y: 0 }}
+                animate={isMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
                 className={`w-6 h-0.5 rounded-full transition-colors ${isMenuOpen ? 'bg-primary-foreground' : 'bg-current'}`}
               />
             </motion.button>
