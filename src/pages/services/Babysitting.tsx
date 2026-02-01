@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Heart, ShieldCheck, Clock, MapPin, AlertCircle } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Heart, ShieldCheck, Clock, MapPin, AlertCircle, Baby } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 

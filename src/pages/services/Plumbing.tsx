@@ -95,7 +95,7 @@ export default function Plumbing() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
+            initial={{ opacity: 0, scale: 0.9, x: 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-2xl"

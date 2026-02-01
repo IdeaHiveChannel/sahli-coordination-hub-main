@@ -58,7 +58,7 @@ export default function HouseShifting() {
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('service.moving.house.title')}
+              {t('service.moving.title.page')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -66,7 +66,7 @@ export default function HouseShifting() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('service.moving.house.title')}
+                  {t('service.moving.problem')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
                   {t('services.role.clarification')}
