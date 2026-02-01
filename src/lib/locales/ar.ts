@@ -95,6 +95,23 @@ export const ar = {
   'home.important.item4': 'أنت تدفع لمزود الخدمة مباشرة',
   'home.important.item5': 'ساهلي ليس جزءاً من عقد الخدمة',
 
+  'trust.standard': 'المعيار',
+  'trust.vetting.number': '01',
+  'trust.vetting.title': 'التدقيق',
+  'trust.vetting.item1': 'التحقق من التراخيص والتسجيل',
+  'trust.vetting.item2': 'التحقق من الهوية',
+  'trust.competency.number': '02',
+  'trust.competency.title': 'الكفاءة',
+  'trust.competency.item1': 'مطابقة الخدمات حسب الفئة',
+  'trust.behavioral.number': '03',
+  'trust.behavioral.title': 'السلوك',
+  'trust.behavioral.item1': 'مراقبة السلوك المهني',
+  'trust.rules.number': '04',
+  'trust.rules.title': 'قواعد المزود',
+  'trust.rules.item1': 'الفحص قبل التسعير (إلزامي)',
+  'trust.rules.item2': 'عدم طلب التعامل خارج المنصة',
+  'trust.rules.item3': 'الالتزام بالسلوك المهني',
+
   'home.trust.title': 'الثقة والمعايير',
   'home.trust.body': 'يفرض ساهلي معايير تشغيلية واضحة. يتم تسجيل كل عملية تنسيق، وكل مزود مسؤول أمام قواعد خدمة محددة.',
 
@@ -133,9 +150,85 @@ export const ar = {
   'services.microLegal': 'ينسق ساهلي الوصول إلى شركات تزويد مستقلة. يقدم المزودون الخدمات مباشرة. ساهلي لا يتعامل مع المدفوعات.',
   'services.status.live': 'مباشر',
   'services.status.soon': 'قريباً',
-  'services.explore': 'استكشف الخدمة',
-  'services.comingSoon.notify': 'أخبرنا بما تحتاجه. سنقوم بإبلاغك فور تفعيل هذا القسم من الخدمات.',
-  'services.comingSoon.btn': 'أبلغني',
+  'services.comingSoon.notify': 'نحن حالياً في مرحلة استقطاب وتدقيق مقدمي الخدمات لهذا المجال. راسلنا ليتم إخطارك عند إطلاق هذه الخدمة.',
+  'services.comingSoon.btn': 'الخدمة قادمة قريباً',
+
+  // Service Page V1 Template
+  'service.v1.humanProblem.title': 'هل لا تزال تنتظر وصول شخص ما؟',
+  'service.v1.humanProblem.body': 'في قطر، المشكلة الأكبر ليست في العثور على رقم - بل في العثور على شخص يأتي بالفعل.',
+  'service.v1.howItWorks.step1': 'راسل ساهلي',
+  'service.v1.howItWorks.step2': 'نحن نشارك متطلباتك',
+  'service.v1.howItWorks.step3': 'شركة جاهزة تؤكد',
+  'service.v1.howItWorks.step4': 'أنت تتعامل مباشرة معهم',
+  'service.v1.importantNote.title': 'ملاحظة مهمة',
+  'service.v1.importantNote.body1': 'ساهلي لا يقدم الخدمة.',
+  'service.v1.importantNote.body2': 'يتم التعامل مع الفحص والتسعير والدفع مباشرة من قبل شركة الخدمة.',
+  'service.v1.cta.whatsapp': 'هل تحتاج إلى خدمة الآن؟ راسل ساهلي على واتساب',
+
+  // AC Repair
+  'service.ac.title': 'خدمات إصلاح التكييف في الدوحة، قطر',
+  'service.ac.problem': 'المكيف لا يبرد ولا أحد يأتي؟',
+  'service.ac.sahliDoes': 'يساعدك ساهلي على التواصل مع شركات إصلاح التكييف المتاحة حتى لا تضيع وقتك في البحث أو الانتظار.',
+  'service.ac.includes.title': 'ما تشمله الخدمة',
+  'service.ac.includes.item1': 'الفحص والتشخيص',
+  'service.ac.includes.item2': 'صيانة وتنظيف المكيف',
+  'service.ac.includes.item3': 'تعبئة الغاز',
+  'service.ac.includes.item4': 'التركيب والاستبدال',
+  'service.ac.areas.title': 'المناطق المخدومة',
+  'service.ac.areas.item1': 'الدوحة والخليج الغربي',
+  'service.ac.areas.item2': 'اللؤلؤة ولوسيل',
+  'service.ac.areas.item3': 'الوعب والريان',
+
+  // Cleaning
+  'service.cleaning.title': 'خدمات التنظيف في الدوحة، قطر',
+  'service.cleaning.problem': 'هل تحتاج إلى عامل تنظيف موثوق يأتي بالفعل؟',
+  'service.cleaning.sahliDoes': 'يساعدك ساهلي على التواصل مع شركات تنظيف محترفة لمنزلك أو مكتبك.',
+  'service.cleaning.includes.title': 'ما تشمله الخدمة',
+  'service.cleaning.includes.item1': 'تنظيف عميق للمنزل',
+  'service.cleaning.includes.item2': 'تنظيف الكنب والسجاد',
+  'service.cleaning.includes.item3': 'تنظيف النوافذ',
+  'service.cleaning.includes.item4': 'تنظيف عند الانتقال',
+
+  // Plumbing
+  'service.plumbing.title': 'خدمات السباكة في الدوحة، قطر',
+  'service.plumbing.problem': 'أنابيب مسربة أو بالوعات مسدودة؟',
+  'service.plumbing.sahliDoes': 'يوصلك ساهلي بسباكين ذوي خبرة لإصلاح مشاكل المياه والصرف الصحي.',
+  'service.plumbing.includes.title': 'ما تشمله الخدمة',
+  'service.plumbing.includes.item1': 'كشف وإصلاح التسريبات',
+  'service.plumbing.includes.item2': 'فتح الانسدادات',
+  'service.plumbing.includes.item3': 'تركيب الأدوات الصحية',
+  'service.plumbing.includes.item4': 'إصلاح سخانات المياه',
+
+  // Electrical
+  'service.electrical.title': 'خدمات الكهرباء في الدوحة، قطر',
+  'service.electrical.problem': 'انقطاع كهربائي أو أسلاك تالفة؟',
+  'service.electrical.sahliDoes': 'يساعدك ساهلي في العثور على كهربائيين مرخصين لأعمال كهربائية آمنة وموثوقة.',
+  'service.electrical.includes.title': 'ما تشمله الخدمة',
+  'service.electrical.includes.item1': 'إصلاح التماس الكهربائي',
+  'service.electrical.includes.item2': 'تمديد وإعادة الأسلاك',
+  'service.electrical.includes.item3': 'تركيب الإضاءة',
+  'service.electrical.includes.item4': 'صيانة لوحة الكهرباء والقواطع',
+
+  // House Shifting
+  'service.moving.title.page': 'خدمات نقل المنزل في الدوحة، قطر',
+  'service.moving.problem': 'تنتقل لمنزل جديد وقلق بشأن اللوجستيات؟',
+  'service.moving.sahliDoes': 'يوصلك ساهلي بناقلين محترفين يتعاملون مع ممتلكاتك بعناية.',
+  'service.moving.includes.title': 'ما تشمله الخدمة',
+  'service.moving.includes.item1': 'التغليف والتفريغ',
+  'service.moving.includes.item2': 'التحميل والتنزيل',
+  'service.moving.includes.item3': 'فك وتركيب الأثاث',
+  'service.moving.includes.item4': 'نقل آمن',
+
+  // Babysitting
+  'service.babysitting.title': 'خدمات مجالسة الأطفال في الدوحة، قطر (قريباً)',
+  'service.babysitting.problem': 'تبحث عن جالسة أطفال موثوقة يمكنك الاعتماد عليها؟',
+  'service.babysitting.sahliDoes': 'يعمل ساهلي على توصيلك بمهنيين متخصصين في رعاية الأطفال تم التحقق منهم.',
+  'service.babysitting.includes.title': 'ما ستشمله الخدمة',
+  'service.babysitting.includes.item1': 'مجالسة الأطفال في المنزل',
+  'service.babysitting.includes.item2': 'رعاية الأطفال في حالات الطوارئ',
+  'service.babysitting.includes.item3': 'مربيات لفترات طويلة',
+  'service.babysitting.includes.item4': 'رعاية الأطفال في المناسبات',
+
   'services.status.expanding': 'توسيع البنية التحتية',
   'services.roof.label': 'القطاع',
 
@@ -216,6 +309,8 @@ export const ar = {
   
   'services.cleaning.sofa.title': 'تنظيف الكنب',
   'services.cleaning.upholstery.title': 'تنظيف المفروشات',
+  'services.cleaning.upholstery.desc': 'تنظيف الكنب والمفروشات.',
+  'services.cleaning.upholstery.items': 'كنب\nكراسي\nمساند',
   'services.cleaning.sofa.desc': 'تنظيف الكنب والمفروشات.',
   'services.cleaning.sofa.items': 'كنب\nكراسي\nمقاعد',
 
@@ -336,11 +431,18 @@ export const ar = {
   'how.footer.micro': 'ساهلي هي منصة لتنسيق الخدمات تربط العملاء بشركات تزويد معتمدة. ساهلي لا ينفذ الخدمات ولا يعالج المدفوعات.',
 
   // Trust & Standards
-  'trust.label': 'المعايير',
-  'trust.title': 'الثقة تُطبق. ولا تُوعد.',
-  'trust.standard': 'معيار',
-  'trust.description': 'يعمل "سهلي" كبنية تحتية للتنسيق. تُحافظ على الثقة من خلال القواعد، والتحقق، والتتبع الموثق — لا من خلال التقييمات أو القوائم.',
-  'trust.vetting.title': 'التدقيق',
+  'trust.label': 'الثقة والمعايير',
+  'trust.title': 'الثقة تفرض ولا توعد.',
+  'trust.description': 'يعمل ساهلي كبنية تحتية للتنسيق. يتم الحفاظ على الثقة من خلال القواعد والتحقق والمتابعة الموثقة - وليس التقييمات أو القوائم.',
+  
+  // Vetting
+  
+  // Competency
+  
+  // Behavioral
+  
+  // Provider Rules
+  
   'trust.vetting.legal.title': 'قانوني',
   'trust.vetting.legal.body': 'يتم التحقق من التراخيص، والتسجيل، والهوية.',
   'trust.vetting.competency.title': 'الكفاءة',
@@ -482,22 +584,6 @@ export const ar = {
   'pagination.previous': 'السابق',
   'pagination.next': 'التالي',
   'footer.motto': 'سقف واحد. احتياجات متعددة. نفس المعايير.',
-
-  'services.flow.provider': 'تعيين المزود',
-  'services.flow.visit': 'الفحص والتسعير',
-  'services.boundary.is.item1': 'تنسيق مقدمي خدمات معتمدين',
-  'services.boundary.is.item2': 'نهج الفحص أولاً',
-  'services.boundary.is.item3': 'معيار خدمة احترافي',
-  'services.boundary.not.item1': 'لا يتم تنفيذها بواسطة ساهلي',
-  'services.boundary.not.item2': 'ليست حجزاً بسعر مضمون',
-  'services.boundary.not.item3': 'ليست وكالة توظيف',
-  'services.rules.lessons': 'تنسيق خبراء معتمدين فقط.',
-  'services.lessons.tutoring.items': 'الرياضيات\nالعلوم\nاللغات\nالتحضير للامتحانات',
-  'services.lessons.language.items': 'الإنجليزية\nالعربية\nالفرنسية\nالإسبانية',
-  'services.lessons.exam.items': 'SAT / ACT\nIELTS / TOEFL\nIGCSE / IB',
-  'services.lessons.training.items': 'تدريب شخصي\nتجهيز صالة رياضية منزلية\nنصائح غذائية',
-  'services.lessons.yoga.items': 'هاتا يوغا\nفينياسا\nتأمل\nعافية',
-  'services.lessons.smarthome.items': 'إعداد\nاستكشاف الأخطاء وإصلاحها\nتدريب\nأتمتة',
 
   // 404
   'notFound.title': 'الصفحة غير موجودة',

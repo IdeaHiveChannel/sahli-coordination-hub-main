@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { CheckCircle2, MessageCircle } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { CheckCircle2, MessageCircle, Heart, Baby, Stethoscope, Users, Sparkles, ShieldCheck, Clock, AlertCircle, MapPin } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 
@@ -15,138 +15,130 @@ export default function CareChildcare() {
     offset: ["start start", "end start"]
   });
 
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
-  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0]), springConfig);
-  const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.1]), springConfig);
-
   const categories = [
-    { title: t('services.care.doctor.title'), desc: t('services.care.doctor.desc') },
-    { title: t('services.care.nursing.title'), desc: t('services.care.nursing.desc') },
-    { title: t('services.care.newborn.title'), desc: t('services.care.newborn.desc') },
-    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc') },
-    { title: t('services.care.childcare.title'), desc: t('services.care.childcare.desc') }
+    { title: t('services.care.doctor.title'), desc: t('services.care.doctor.desc'), icon: <Stethoscope className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.care.nursing.title'), desc: t('services.care.nursing.desc'), icon: <Heart className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.care.newborn.title'), desc: t('services.care.newborn.desc'), icon: <Baby className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc'), icon: <Users className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.care.childcare.title'), desc: t('services.care.childcare.desc'), icon: <Baby className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
   ];
 
   const coordinationSteps = [
-    { title: '01', body: t('home.what.step1') },
-    { title: '02', body: t('home.what.step2') },
-    { title: '03', body: t('home.what.step3') },
-    { title: '04', body: t('home.what.step4') },
-    { title: '05', body: t('home.what.step5') }
+    { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
+    { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
+    { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
+    { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
+    { title: '05', body: t('home.what.step5'), icon: <CheckCircle2 size={20} /> }
+  ];
+
+  const areas = [
+    t('service.ac.areas.item1'),
+    t('service.ac.areas.item2'),
+    t('service.ac.areas.item3')
   ];
 
   return (
     <Layout>
-      {/* 1️⃣ Page Header - Compact & Advanced */}
-      <section ref={containerRef} className="relative min-h-[50vh] md:min-h-[60vh] flex flex-col justify-center overflow-hidden bg-background">
-        <div className="absolute inset-0 z-0">
-          <motion.div 
-            style={{ y, scale, opacity }}
-            className="absolute inset-0"
-          >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              crossOrigin="anonymous"
-              className="w-full h-full object-cover grayscale opacity-[0.15] scale-110"
-            >
-              <source src="https://videos.pexels.com/video-files/4549414/4549414-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-            </video>
-            
-            {/* Multi-layered gradients for depth and text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background" />
-            <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-background via-background/60 to-transparent`} />
-            
-            {/* Floating Background Blobs */}
-            <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow`} />
-            <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[250px] h-[250px] bg-primary/5 rounded-full blur-[80px] animate-pulse-slow delay-1000`} />
-          </motion.div>
+      {/* 1️⃣ Modern Split Hero Section */}
+      <section ref={containerRef} className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-background pt-20">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
         </div>
-        
-        <div className="container-sahli relative z-10 pt-32 md:pt-40 pb-12">
+
+        <div className="container-sahli relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
+            initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-lg shadow-primary/5 btn-shine">
-              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm">
+              <Sparkles size={14} className="animate-pulse" />
               {t('services.status.soon')}
             </div>
 
-            <h1 className="text-foreground text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter mb-8">
-              {t('services.care.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20, rotateX: -45 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.2 + i * 0.1, 
-                    ease: [0.16, 1, 0.3, 1] 
-                  }}
-                  className="inline-block mr-[0.15em] origin-bottom"
-                >
-                  {word}
-                </motion.span>
-              ))}
+            <h1 className="text-foreground text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter mb-8">
+              {t('services.care.title')}
             </h1>
-            
-            <p className="text-base md:text-lg text-foreground/60 font-medium mb-10 max-w-2xl leading-relaxed tracking-tight">
-              {t('services.role.clarification')}
-            </p>
 
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="cta-primary inline-flex items-center gap-3 opacity-50 cursor-not-allowed btn-shine shadow-xl shadow-primary/10"
-            >
-              <MessageCircle size={18} className="fill-primary-foreground" />
-              {t('services.status.soon')}
+            <div className="relative mb-10 group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
+                <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center gap-3">
+                  <AlertCircle className="text-primary shrink-0" size={28} />
+                  {t('services.care.title')}
+                </h2>
+                <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
+                  {t('services.role.clarification')}
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap gap-4">
+              <motion.div
+                className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/10 opacity-50 cursor-not-allowed"
+                whileHover={{ scale: 1.02 }}
+              >
+                <MessageCircle size={22} className="fill-primary-foreground" />
+                {t('services.status.soon')}
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-2xl"
+          >
+            <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
+              <img 
+                src="https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg" 
+                alt="Care and Childcare Service Qatar"
+                className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             </motion.div>
+            
+            <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-background/80 backdrop-blur-md border border-white/10 shadow-2xl">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                  <Heart size={24} />
+                </div>
+                <div>
+                  <div className="text-xs font-black tracking-widest text-primary uppercase">Verified Provider</div>
+                  <div className="text-foreground font-bold">Compassionate Care</div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
-        >
-          <div className="w-px h-16 bg-gradient-to-b from-primary/30 to-transparent relative overflow-hidden">
-            <motion.div 
-              className="absolute top-0 left-0 w-full h-1/2 bg-primary"
-              animate={{ y: ['-100%', '200%'] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
       </section>
 
-      {/* 2️⃣ Service Rules Block - Compact */}
-      <section className="bg-background py-8 border-y border-border">
+      {/* 2️⃣ Service Rules Block */}
+      <section className="py-24 md:py-32 bg-background border-y border-border">
         <div className="container-sahli">
           <motion.div 
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-foreground/[0.02] border border-border rounded-3xl p-6 md:p-8"
+            className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center">
+              Care Guidelines
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 t('services.rules.care'),
                 t('services.rules.independent'),
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-1" />
-                  <span className="text-sm font-bold text-foreground/70 leading-snug">{rule}</span>
+                <div key={i} className="flex gap-4 items-start group">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                    <CheckCircle2 size={20} />
+                  </div>
+                  <span className="text-base font-bold text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500">{rule}</span>
                 </div>
               ))}
             </div>
@@ -154,21 +146,31 @@ export default function CareChildcare() {
         </div>
       </section>
 
-      {/* 3️⃣ Service Categories - Compact */}
-      <section className="py-16 bg-background">
+      {/* 3️⃣ Service Categories */}
+      <section className="py-24 md:py-32 bg-background relative overflow-hidden">
         <div className="container-sahli">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {categories.map((cat: { title: string; desc: string }, i: number) => (
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
+              Our Care Services
+            </h2>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Personalized for your family</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((cat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="p-6 rounded-3xl bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-300"
+                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group"
               >
-                <h3 className="text-lg font-black text-foreground mb-2 tracking-tight">{cat.title}</h3>
-                <p className="text-sm text-foreground/60 leading-relaxed font-medium">
+                <div className="mb-6 group-hover:scale-110 transition-transform duration-500">
+                  {cat.icon}
+                </div>
+                <h3 className="text-xl md:text-2xl font-black text-foreground mb-4 tracking-tight leading-none group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
+                <p className="text-foreground/60 leading-relaxed text-base font-medium">
                   {cat.desc}
                 </p>
               </motion.div>
@@ -177,50 +179,63 @@ export default function CareChildcare() {
         </div>
       </section>
 
-      {/* 4️⃣ How Coordination Works - Compact */}
-      <section className="py-16 bg-background border-t border-border">
-        <div className="container-sahli">
-          <h2 className="text-3xl font-black text-foreground tracking-tighter mb-10 leading-none">
-            {t('how.flow.title')}
-          </h2>
+      {/* 4️⃣ How Coordination Works */}
+      <section className="py-24 md:py-32 bg-foreground/[0.02] border-y border-border relative overflow-hidden">
+        <div className="container-sahli relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
+              {t('how.flow.title')}
+            </h2>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Seamless Coordination</p>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {coordinationSteps.map((step: { title: string; body: string }, i: number) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
+            <div className="hidden lg:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent z-0" />
+            
+            {coordinationSteps.map((step, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.1 }}
+                className="relative z-10 flex flex-col items-center text-center group"
               >
-                <div className="text-primary text-xs font-black mb-2 uppercase tracking-widest">{step.title}</div>
-                <p className="text-sm text-foreground/60 font-medium leading-relaxed">{step.body}</p>
+                <div className="w-24 h-24 rounded-3xl bg-background border border-border flex items-center justify-center text-primary mb-8 shadow-xl group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
+                  <span className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-sm shadow-lg">
+                    {step.title}
+                  </span>
+                  <div className="group-hover:scale-110 transition-transform duration-500">
+                    {step.icon}
+                  </div>
+                </div>
+                <p className="text-foreground font-black text-lg leading-tight tracking-tight px-4">{step.body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5️⃣ Boundary Block - Compact */}
-      <section className="py-16 bg-background border-t border-border">
+      {/* 5️⃣ Boundary Block */}
+      <section className="py-24 md:py-32 bg-background">
         <div className="container-sahli">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 10 : -10 }}
+              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-6 rounded-3xl bg-primary/[0.03] border border-primary/10"
+              className="p-10 rounded-[3rem] bg-primary/[0.03] border border-primary/10"
             >
-              <h3 className="text-sm font-black text-primary mb-4 uppercase tracking-widest">
+              <h3 className="text-xl font-black text-primary mb-8 uppercase tracking-widest">
                 {t('services.boundaries.title.is')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-6">
                 {[
                   t('home.hero.label'),
                   t('services.rules.care')
                 ].map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-sm text-foreground/70 font-bold">
-                    <div className="w-1 h-1 rounded-full bg-primary" />
+                  <li key={i} className="flex gap-4 items-center text-lg text-foreground/70 font-bold">
+                    <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -228,18 +243,18 @@ export default function CareChildcare() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? -10 : 10 }}
+              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-6 rounded-3xl bg-foreground/[0.02] border border-border"
+              className="p-10 rounded-[3rem] bg-foreground/[0.02] border border-border"
             >
-              <h3 className="text-sm font-black text-foreground/40 mb-4 uppercase tracking-widest">
+              <h3 className="text-xl font-black text-foreground/40 mb-8 uppercase tracking-widest">
                 {t('services.boundaries.title.isNot')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-6">
                 {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-sm text-foreground/40 font-bold">
-                    <div className="w-1 h-1 rounded-full bg-foreground/20" />
+                  <li key={i} className="flex gap-4 items-center text-lg text-foreground/40 font-bold">
+                    <div className="w-2 h-2 rounded-full bg-foreground/20 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -249,38 +264,128 @@ export default function CareChildcare() {
         </div>
       </section>
 
-      {/* 6️⃣ Final CTA - Compact */}
-      <section className="py-16 md:py-20 bg-background border-t border-border">
-        <div className="container-sahli text-center">
+      {/* 6️⃣ Areas Served - Map Style */}
+      <section className="py-24 md:py-32 bg-background overflow-hidden">
+        <div className="container-sahli">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
+                {t('service.ac.areas.title')}
+              </h2>
+              <div className="space-y-4">
+                {areas.map((area, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-6 p-6 rounded-2xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                      <MapPin size={24} />
+                    </div>
+                    <span className="text-2xl font-black text-foreground/80">{area}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center">
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
+                <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+              </div>
+              <div className="relative text-center p-12">
+                <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-8 animate-bounce">
+                  <MapPin size={48} />
+                </div>
+                <h3 className="text-3xl font-black text-foreground mb-4">Qatar Nationwide</h3>
+                <p className="text-xl text-foreground/60 font-bold uppercase tracking-widest">Rapid Response Units</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7️⃣ Important Note - High Visibility */}
+      <section className="py-24 bg-background border-t border-border">
+        <div className="container-sahli">
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            className="relative p-12 md:p-20 rounded-[4rem] bg-foreground text-background overflow-hidden group"
           >
-            <h2 className="text-4xl md:text-5xl font-black text-foreground tracking-tighter mb-4 leading-none">
-              {t('cta.final.title')}
-            </h2>
-            <p className="text-lg text-foreground/60 font-medium mb-8 leading-tight">
-              {t('services.comingSoon.notify')}
-            </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="cta-primary px-10 py-4 text-base opacity-50 cursor-not-allowed btn-shine"
-            >
-              {t('services.comingSoon.btn')}
-            </motion.div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="relative z-10 flex flex-col md:flex-row gap-12 items-start">
+              <div className="w-20 h-20 rounded-3xl bg-primary flex items-center justify-center text-primary-foreground shrink-0 shadow-2xl shadow-primary/20">
+                <AlertCircle size={40} />
+              </div>
+              <div>
+                <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-8 leading-none">
+                  {t('service.v1.importantNote.title')}
+                </h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <p className="text-xl md:text-2xl font-bold leading-tight text-background/80 border-l-4 border-primary pl-6">
+                    {t('service.v1.importantNote.body1')}
+                  </p>
+                  <p className="text-xl md:text-2xl font-bold leading-tight text-background/80 border-l-4 border-primary/30 pl-6">
+                    {t('service.v1.importantNote.body2')}
+                  </p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 7️⃣ Micro-Legal Clarity - Compact */}
-      <footer className="py-10 bg-background border-t border-border">
-        <div className="container-sahli text-center">
-          <p className="text-[10px] text-foreground/30 font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-widest">
-            {t('services.microLegal')}
-          </p>
+      {/* 8️⃣ Final CTA */}
+      <section className="py-32 md:py-48 bg-background relative overflow-hidden border-t border-border">
+        <div className="absolute inset-0 z-0 opacity-10">
+          <img 
+            src="https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg" 
+            className="w-full h-full object-cover grayscale"
+            alt="Background"
+          />
+        </div>
+        
+        <div className="container-sahli relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto"
+          >
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-[-0.05em] mb-12 leading-[0.85]">
+              {t('cta.final.title')}
+            </h2>
+            <p className="text-xl md:text-2xl text-foreground/60 font-medium mb-12 max-w-3xl mx-auto leading-tight">
+              {t('services.comingSoon.notify')}
+            </p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+              <motion.div
+                className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30 opacity-50 cursor-not-allowed"
+              >
+                <MessageCircle size={32} className="fill-primary-foreground" />
+                {t('services.comingSoon.btn')}
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 9️⃣ Micro-Legal Clarity */}
+      <footer className="py-20 bg-background border-t border-border">
+        <div className="container-sahli">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
+              {t('services.microLegal')}
+            </p>
+            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
+              <span>Qatar 2024</span>
+              <span>SAHLI Coordination Hub</span>
+            </div>
+          </div>
         </div>
       </footer>
     </Layout>

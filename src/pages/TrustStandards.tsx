@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Shield, CheckCircle2, Eye, FileSearch, UserCheck, Scale, MessageCircle, Info, TrendingUp, Users } from 'lucide-react';
+import { Shield, CheckCircle2, Eye, FileSearch, UserCheck, Scale, MessageCircle, Target, HeartHandshake, ClipboardList, Fingerprint } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 
@@ -20,6 +20,33 @@ export default function TrustStandards() {
   const y1Spring = useSpring(y1, springConfig);
   const y2Spring = useSpring(y2, springConfig);
   const scaleSpring = useSpring(scale, springConfig);
+
+  const standards = [
+    {
+      number: t('trust.vetting.number'),
+      title: t('trust.vetting.title'),
+      items: [t('trust.vetting.item1'), t('trust.vetting.item2')],
+      icon: <Fingerprint size={28} />
+    },
+    {
+      number: t('trust.competency.number'),
+      title: t('trust.competency.title'),
+      items: [t('trust.competency.item1')],
+      icon: <Target size={28} />
+    },
+    {
+      number: t('trust.behavioral.number'),
+      title: t('trust.behavioral.title'),
+      items: [t('trust.behavioral.item1')],
+      icon: <HeartHandshake size={28} />
+    },
+    {
+      number: t('trust.rules.number'),
+      title: t('trust.rules.title'),
+      items: [t('trust.rules.item1'), t('trust.rules.item2'), t('trust.rules.item3')],
+      icon: <ClipboardList size={28} />
+    }
+  ];
 
   return (
     <Layout>
@@ -85,21 +112,7 @@ export default function TrustStandards() {
             </motion.div>
 
             <h1 className="mb-6 text-foreground text-3xl sm:text-4xl md:text-5xl font-black leading-[0.9] tracking-tighter">
-              {t('trust.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20, rotateX: -45 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.2 + i * 0.1, 
-                    ease: [0.16, 1, 0.3, 1] 
-                  }}
-                  className="inline-block mr-[0.15em] origin-bottom"
-                >
-                  {word}
-                </motion.span>
-              ))}
+              {t('trust.label')}
             </h1>
             
             <p className="text-lg md:text-xl text-foreground/60 font-medium leading-tight max-w-2xl mb-8 md:mb-10">
@@ -109,74 +122,47 @@ export default function TrustStandards() {
         </div>
       </section>
 
-      {/* Vetting Framework */}
-      <section className="relative py-16 md:py-20 bg-background overflow-hidden">
+      {/* Standards Section */}
+      <section className="relative py-16 md:py-24 bg-background overflow-hidden border-y border-border">
         <div className="container-sahli relative z-10">
-          <div className="mb-12 md:mb-16">
-            <div className="inline-block px-4 py-1.5 bg-foreground/5 rounded-full border border-border text-foreground/50 text-[10px] font-bold tracking-widest uppercase mb-6 md:mb-8">
-              {t('trust.vetting.title')}
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none">
-              {t('trust.vetting.title')}
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { title: t('trust.vetting.legal.title'), body: t('trust.vetting.legal.body'), icon: <Scale size={28} /> },
-              { title: t('trust.vetting.competency.title'), body: t('trust.vetting.competency.body'), icon: <UserCheck size={28} /> },
-              { title: t('trust.vetting.behavioral.title'), body: t('trust.vetting.behavioral.body'), icon: <Shield size={28} /> }
-            ].map((item: { title: string; body: string; icon: React.ReactNode }, i: number) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {standards.map((standard, i) => (
               <motion.div 
                 key={i}
-                className="p-6 md:p-8 rounded-[2rem] glass-morphism border border-border group hover:border-primary/20 transition-all duration-700"
+                className="flex flex-col h-full"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="w-12 h-12 rounded-xl bg-foreground/5 flex items-center justify-center text-primary mb-6 md:mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                  {item.icon}
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="text-primary/40 font-black text-4xl md:text-5xl tracking-tighter">
+                    {standard.number} <span className="opacity-20">/</span>
+                  </span>
+                  <div className="w-12 h-12 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    {standard.icon}
+                  </div>
                 </div>
-                <h3 className="text-xl md:text-2xl font-black mb-3 md:mb-4 tracking-tight text-foreground leading-none">{item.title}</h3>
-                <p className="text-foreground/60 leading-relaxed font-medium text-base md:text-lg">{item.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Provider Rules */}
-      <section className="relative py-16 md:py-20 bg-background overflow-hidden border-y border-border">
-        <div className="container-sahli relative z-10">
-          <div className="mb-12 md:mb-16">
-            <div className="inline-block px-4 py-1.5 bg-foreground/5 rounded-full border border-border text-foreground/50 text-[10px] font-bold tracking-widest uppercase mb-6 md:mb-8">
-              {t('trust.conduct.title')}
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none">
-              {t('trust.conduct.title')}
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { title: t('trust.conduct.rule1.title'), body: t('trust.conduct.rule1.body') },
-              { title: t('trust.conduct.rule2.title'), body: t('trust.conduct.rule2.body') },
-              { title: t('trust.conduct.rule3.title'), body: t('trust.conduct.rule3.body') }
-            ].map((rule: { title: string; body: string }, i: number) => (
-              <motion.div 
-                key={i} 
-                className="p-6 md:p-8 rounded-[2rem] bg-foreground/[0.02] border border-border group hover:border-primary/20 transition-all duration-500"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 md:mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                  <CheckCircle2 size={20} />
+                
+                <div className="flex-1 p-8 rounded-[2rem] glass-morphism border border-border group hover:border-primary/20 transition-all duration-700 flex flex-col">
+                  <div className="mb-2 text-[10px] font-bold tracking-widest uppercase text-foreground/40">
+                    {t('trust.standard')}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-black mb-6 tracking-tight text-foreground leading-none">
+                    {standard.title}
+                  </h3>
+                  
+                  <ul className="space-y-4 mt-auto">
+                    {standard.items.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
+                        <span className="text-foreground/70 font-bold text-sm md:text-base leading-tight">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-xl md:text-2xl font-black mb-3 md:mb-4 text-foreground tracking-tight leading-tight">{rule.title}</h3>
-                <p className="text-foreground/60 font-medium text-base md:text-lg leading-relaxed">{rule.body}</p>
               </motion.div>
             ))}
           </div>

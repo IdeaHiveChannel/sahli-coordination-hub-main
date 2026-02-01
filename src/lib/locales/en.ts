@@ -95,6 +95,23 @@ export const en = {
   'home.important.item4': 'You pay the service provider directly',
   'home.important.item5': 'SAHLI is not part of the service contract',
 
+  'trust.standard': 'Standard',
+  'trust.vetting.number': '01',
+  'trust.vetting.title': 'Vetting',
+  'trust.vetting.item1': 'Licensing and registration verified',
+  'trust.vetting.item2': 'Identity verified',
+  'trust.competency.number': '02',
+  'trust.competency.title': 'Competency',
+  'trust.competency.item1': 'Services matched by category',
+  'trust.behavioral.number': '03',
+  'trust.behavioral.title': 'Behavioral',
+  'trust.behavioral.item1': 'Professional conduct monitored',
+  'trust.rules.number': '04',
+  'trust.rules.title': 'Provider Rules',
+  'trust.rules.item1': 'Inspection before pricing (mandatory)',
+  'trust.rules.item2': 'No off-platform solicitation',
+  'trust.rules.item3': 'Professional conduct required',
+
   'home.trust.title': 'Trust & Standards',
   'home.trust.body': 'SAHLI enforces clear operational standards. Every coordination is logged, and every provider is accountable to defined service rules.',
 
@@ -133,9 +150,85 @@ export const en = {
   'services.microLegal': 'SAHLI coordinates access to independent provider companies. Providers deliver services directly. SAHLI does not handle payments.',
   'services.status.live': 'Live',
   'services.status.soon': 'Coming Soon',
-  'services.explore': 'EXPLORE SERVICE',
-  'services.comingSoon.notify': "Tell us what you need. We'll notify you when this service domain goes live.",
-  'services.comingSoon.btn': 'Notify me',
+  'services.comingSoon.notify': 'We are currently onboarding and vetting providers for this domain. Message us to be notified when this service goes live.',
+  'services.comingSoon.btn': 'Service Coming Soon',
+
+  // Service Page V1 Template
+  'service.v1.humanProblem.title': 'Still waiting for someone to show up?',
+  'service.v1.humanProblem.body': 'In Qatar, the biggest problem isn’t finding a number — it’s finding someone who actually comes.',
+  'service.v1.howItWorks.step1': 'Message SAHLI',
+  'service.v1.howItWorks.step2': 'We share your requirement',
+  'service.v1.howItWorks.step3': 'A ready company confirms',
+  'service.v1.howItWorks.step4': 'You deal directly with them',
+  'service.v1.importantNote.title': 'Important note',
+  'service.v1.importantNote.body1': 'SAHLI does not provide the service.',
+  'service.v1.importantNote.body2': 'Inspection, pricing, and payment are handled directly by the service company.',
+  'service.v1.cta.whatsapp': 'Need service now? Message SAHLI on WhatsApp',
+
+  // AC Repair
+  'service.ac.title': 'AC Repair Services in Doha, Qatar',
+  'service.ac.problem': 'AC not cooling and no one is showing up?',
+  'service.ac.sahliDoes': 'SAHLI helps you connect with available AC repair companies so you don’t waste time searching or waiting.',
+  'service.ac.includes.title': 'What the service includes',
+  'service.ac.includes.item1': 'Inspection & diagnosis',
+  'service.ac.includes.item2': 'AC servicing & cleaning',
+  'service.ac.includes.item3': 'Gas refill',
+  'service.ac.includes.item4': 'Installation & replacement',
+  'service.ac.areas.title': 'Areas served',
+  'service.ac.areas.item1': 'Doha & West Bay',
+  'service.ac.areas.item2': 'The Pearl & Lusail',
+  'service.ac.areas.item3': 'Al Waab & Al Rayyan',
+
+  // Cleaning
+  'service.cleaning.title': 'Cleaning Services in Doha, Qatar',
+  'service.cleaning.problem': 'Need a reliable cleaner who actually shows up?',
+  'service.cleaning.sahliDoes': 'SAHLI helps you connect with professional cleaning companies for your home or office.',
+  'service.cleaning.includes.title': 'What the service includes',
+  'service.cleaning.includes.item1': 'Home Deep Cleaning',
+  'service.cleaning.includes.item2': 'Sofa & Carpet Cleaning',
+  'service.cleaning.includes.item3': 'Window Cleaning',
+  'service.cleaning.includes.item4': 'Move-in/Move-out Cleaning',
+
+  // Plumbing
+  'service.plumbing.title': 'Plumbing Services in Doha, Qatar',
+  'service.plumbing.problem': 'Leaking pipes or blocked drains?',
+  'service.plumbing.sahliDoes': 'SAHLI connects you with experienced plumbers to fix your water and drainage issues.',
+  'service.plumbing.includes.title': 'What the service includes',
+  'service.plumbing.includes.item1': 'Leak detection & repair',
+  'service.plumbing.includes.item2': 'Drain unblocking',
+  'service.plumbing.includes.item3': 'Fixture installation',
+  'service.plumbing.includes.item4': 'Water heater repair',
+
+  // Electrical
+  'service.electrical.title': 'Electrical Services in Doha, Qatar',
+  'service.electrical.problem': 'Power trips or faulty wiring?',
+  'service.electrical.sahliDoes': 'SAHLI helps you find licensed electricians for safe and reliable electrical work.',
+  'service.electrical.includes.title': 'What the service includes',
+  'service.electrical.includes.item1': 'Short circuit repair',
+  'service.electrical.includes.item2': 'Wiring & rewiring',
+  'service.electrical.includes.item3': 'Lighting installation',
+  'service.electrical.includes.item4': 'DB & Breaker maintenance',
+
+  // House Shifting
+  'service.moving.title.page': 'House Shifting Services in Doha, Qatar',
+  'service.moving.problem': 'Moving home and stressed about the logistics?',
+  'service.moving.sahliDoes': 'SAHLI connects you with professional movers who handle your belongings with care.',
+  'service.moving.includes.title': 'What the service includes',
+  'service.moving.includes.item1': 'Packing & Unpacking',
+  'service.moving.includes.item2': 'Loading & Unloading',
+  'service.moving.includes.item3': 'Furniture dismantling/assembly',
+  'service.moving.includes.item4': 'Safe transportation',
+
+  // Babysitting
+  'service.babysitting.title': 'Babysitting Services in Doha, Qatar (Coming Soon)',
+  'service.babysitting.problem': 'Looking for a trusted babysitter you can count on?',
+  'service.babysitting.sahliDoes': 'SAHLI is working on connecting you with verified, background-checked childcare professionals.',
+  'service.babysitting.includes.title': 'What the service will include',
+  'service.babysitting.includes.item1': 'In-home babysitting',
+  'service.babysitting.includes.item2': 'Emergency childcare',
+  'service.babysitting.includes.item3': 'Long-term nannies',
+  'service.babysitting.includes.item4': 'Event childcare',
+
   'services.status.expanding': 'EXPANDING INFRASTRUCTURE',
   'services.roof.label': 'ROOF',
 
@@ -221,6 +314,8 @@ export const en = {
   
   'services.cleaning.sofa.title': 'Sofa Cleaning',
   'services.cleaning.upholstery.title': 'Upholstery Cleaning',
+  'services.cleaning.upholstery.desc': 'Sofa and upholstery cleaning.',
+  'services.cleaning.upholstery.items': 'Sofas\nArmchairs\nOttomans',
   'services.cleaning.sofa.desc': 'Sofa and upholstery cleaning.',
   'services.cleaning.sofa.items': 'Sofas\nArmchairs\nOttomans',
 
@@ -343,17 +438,18 @@ export const en = {
   'how.footer.micro': 'SAHLI is a service coordination platform connecting customers with verified provider companies. SAHLI does not execute services or process payments.',
 
   // Trust & Standards
-  'trust.label': 'STANDARDS',
+  'trust.label': 'Trust & Standards',
   'trust.title': 'Trust is enforced. Not promised.',
-  'trust.standard': 'Standard',
   'trust.description': 'SAHLI operates as a coordination infrastructure. Trust is maintained through rules, verification, and documented follow-up — not ratings or listings.',
-  'trust.vetting.title': 'Vetting',
-  'trust.vetting.legal.title': 'Legal',
-  'trust.vetting.legal.body': 'Licensing, registration, and identity are verified.',
-  'trust.vetting.competency.title': 'Competency',
-  'trust.vetting.competency.body': 'Service capability is validated by category.',
-  'trust.vetting.behavioral.title': 'Behavioral',
-  'trust.vetting.behavioral.body': 'Ongoing monitoring of conduct and compliance.',
+  
+  // Vetting
+  
+  // Competency
+  
+  // Behavioral
+  
+  // Provider Rules
+  
   'trust.conduct.title': 'Provider Rules',
   'trust.conduct.rule1.title': 'Inspection Before Pricing',
   'trust.conduct.rule1.body': 'No pricing without on-site inspection — always.',

@@ -18,6 +18,12 @@ import HomeRepair from "./pages/services/HomeRepair";
 import CleaningMoving from "./pages/services/CleaningMoving";
 import CareChildcare from "./pages/services/CareChildcare";
 import LessonsLifestyle from "./pages/services/LessonsLifestyle";
+import ACRepair from "./pages/services/ACRepair";
+import Cleaning from "./pages/services/Cleaning";
+import Plumbing from "./pages/services/Plumbing";
+import Electrical from "./pages/services/Electrical";
+import HouseShifting from "./pages/services/HouseShifting";
+import Babysitting from "./pages/services/Babysitting";
 import TrustStandards from "./pages/TrustStandards";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -55,6 +61,15 @@ const App = () => (
               <Route path="/services/cleaning-moving" element={<CleaningMoving />} />
               <Route path="/services/care-childcare" element={<CareChildcare />} />
               <Route path="/services/lessons-lifestyle" element={<LessonsLifestyle />} />
+              
+              {/* Service Pages V1 */}
+              <Route path="/ac-repair-qatar" element={<ACRepair />} />
+              <Route path="/cleaning-services-qatar" element={<Cleaning />} />
+              <Route path="/plumbing-services-qatar" element={<Plumbing />} />
+              <Route path="/electrical-services-qatar" element={<Electrical />} />
+              <Route path="/house-shifting-qatar" element={<HouseShifting />} />
+              <Route path="/babysitting-services-qatar" element={<Babysitting />} />
+
               <Route path="/trust-standards" element={<TrustStandards />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

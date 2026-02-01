@@ -7,7 +7,7 @@ import { ServiceRoof } from '@/components/motion/ServiceRoof';
 import { TrustPanel, TrustStatement } from '@/components/motion/TrustPanel';
 import { InfiniteMarquee } from '@/components/motion/InfiniteMarquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby } from 'lucide-react';
+import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
@@ -85,6 +85,7 @@ const Index = () => {
       title: t('home.coordinate.maintenance'), 
       description: t('home.coordinate.maintenance.body'),
       imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&fm=webp&fit=crop",
+      icon: <Wrench size={32} />,
       path: "/services/home-repair",
       subcategories: [
         t('services.homeRepair.ac.title'),
@@ -98,7 +99,8 @@ const Index = () => {
     { 
       title: t('home.coordinate.cleaning'), 
       description: t('home.coordinate.cleaning.body'),
-      imageUrl: "https://images.unsplash.com/photo-1528740561666-dc2479da08ad?q=80&w=800&fm=webp&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop",
+      icon: <Sparkles size={32} />,
       path: "/services/cleaning",
       subcategories: [
         t('services.cleaning.deep.title'),
@@ -108,7 +110,8 @@ const Index = () => {
     { 
       title: t('home.coordinate.moving'), 
       description: t('home.coordinate.moving.body'),
-      imageUrl: "https://images.unsplash.com/photo-1520038410233-7141be7e6f97?q=80&w=800&fm=webp&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=800&fm=webp&fit=crop",
+      icon: <Truck size={32} />,
       path: "/services/moving",
       subcategories: [
         t('services.moving.house.title'),
@@ -141,48 +144,50 @@ const Index = () => {
   ];
 
   const featuredServices = [
-    { title: t('home.featured.ac'), icon: <Snowflake size={24} />, intent: "AC repair" },
-    { title: t('home.featured.electrical'), icon: <Lightbulb size={24} />, intent: "electrical repair" },
-    { title: t('home.featured.plumbing'), icon: <Droplets size={24} />, intent: "plumbing" },
+    { title: t('home.featured.ac'), icon: <Snowflake size={24} />, intent: "AC repair", path: "/ac-repair-qatar" },
+    { title: t('home.featured.electrical'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: "/electrical-services-qatar" },
+    { title: t('home.featured.plumbing'), icon: <Droplets size={24} />, intent: "plumbing", path: "/plumbing-services-qatar" },
     { title: t('home.featured.appliances'), icon: <Cog size={24} />, intent: "appliance repair" },
-    { title: t('home.featured.cleaning'), icon: <Sparkles size={24} />, intent: "home deep cleaning" },
+    { title: t('home.featured.cleaning'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: "/cleaning-services-qatar" },
     { title: t('home.featured.sofa'), icon: <Sofa size={24} />, intent: "sofa & carpet cleaning" },
-    { title: t('home.featured.moving'), icon: <Truck size={24} />, intent: "house shifting" },
-    { title: t('home.featured.babysitting'), icon: <Baby size={24} />, intent: "babysitting" },
+    { title: t('home.featured.moving'), icon: <Truck size={24} />, intent: "house shifting", path: "/house-shifting-qatar" },
+    { title: t('home.featured.babysitting'), icon: <Baby size={24} />, intent: "babysitting", path: "/babysitting-services-qatar" },
   ];
 
   const trustPanels = [
     {
-      title: t('home.trust.vetting.title'),
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1000&fm=webp&fit=crop',
+      title: t('trust.vetting.title'),
+      imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&fm=webp&fit=crop',
       videoUrl: 'https://videos.pexels.com/video-files/4491451/4491451-uhd_2560_1440_24fps.mp4',
       items: [
-        { title: t('home.trust.vetting.item1.title'), description: "" },
-        { title: t('home.trust.vetting.item2.title'), description: "" },
+        { title: t('trust.vetting.item1'), description: "" },
+        { title: t('trust.vetting.item2'), description: "" },
       ]
     },
     {
-      title: t('home.trust.competency.title'),
-      imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1000&fm=webp&fit=crop',
+      title: t('trust.competency.title'),
+      imageUrl: 'https://images.unsplash.com/photo-1454165833767-027508496b4c?q=80&w=1000&fm=webp&fit=crop',
+      videoUrl: 'https://videos.pexels.com/video-files/3130204/3130204-uhd_2560_1440_30fps.mp4',
       items: [
-        { title: t('home.trust.competency.item1.title'), description: "" },
+        { title: t('trust.competency.item1'), description: "" },
       ]
     },
     {
-      title: t('home.trust.behavioral.title'),
-      imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&fm=webp&fit=crop',
+      title: t('trust.behavioral.title'),
+      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1000&fm=webp&fit=crop',
       videoUrl: 'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4',
       items: [
-        { title: t('home.trust.behavioral.item1.title'), description: "" },
+        { title: t('trust.behavioral.item1'), description: "" },
       ]
     },
     {
-      title: t('home.trust.rules.title'),
-      imageUrl: 'https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=1000&fm=webp&fit=crop',
+      title: t('trust.rules.title'),
+      imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&fm=webp&fit=crop',
+      videoUrl: 'https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4',
       items: [
-        { title: t('home.trust.rules.item1.title'), description: "" },
-        { title: t('home.trust.rules.item2.title'), description: "" },
-        { title: t('home.trust.rules.item3.title'), description: "" },
+        { title: t('trust.rules.item1'), description: "" },
+        { title: t('trust.rules.item2'), description: "" },
+        { title: t('trust.rules.item3'), description: "" },
       ]
     },
   ];
@@ -367,35 +372,56 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {featuredServices.map((service: { title: string; icon: React.ReactNode; intent: string }, index: number) => (
-              <motion.a
-                key={index}
-                href={`${WHATSAPP_LINK}?text=${encodeURIComponent(`Hi, I need SAHLI to coordinate ${service.intent}.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick(`Featured Service: ${service.title}`)}
-                className="group relative h-40 md:h-48 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass-morphism border border-border flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ 
+            {featuredServices.map((service: { title: string; icon: React.ReactNode; intent: string; path?: string }, index: number) => {
+              const content = (
+                <>
+                  {/* Desktop subtle hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block" />
+                  
+                  <div className="relative z-10 text-primary mb-4 transform transition-transform duration-500 group-hover:scale-110">
+                    {React.cloneElement(service.icon as React.ReactElement, { strokeWidth: 2 })}
+                  </div>
+                  <h3 className="relative z-10 text-sm md:text-base font-black tracking-tight text-foreground/90 group-hover:text-primary transition-colors duration-500 leading-tight">
+                    {service.title}
+                  </h3>
+                </>
+              );
+
+              const commonProps = {
+                className: "group relative h-40 md:h-48 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass-morphism border border-border flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden",
+                initial: { opacity: 0, y: 20 },
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true },
+                transition: { delay: index * 0.05 },
+                whileHover: { 
                   y: -5,
                   borderColor: "rgba(var(--primary), 0.3)",
                   boxShadow: "0 20px 40px -10px rgba(0,0,0,0.5)"
-                }}
-              >
-                {/* Desktop subtle hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block" />
-                
-                <div className="relative z-10 text-primary mb-4 transform transition-transform duration-500 group-hover:scale-110">
-                  {React.cloneElement(service.icon as React.ReactElement, { strokeWidth: 2 })}
-                </div>
-                <h3 className="relative z-10 text-sm md:text-base font-black tracking-tight text-foreground/90 group-hover:text-primary transition-colors duration-500 leading-tight">
-                  {service.title}
-                </h3>
-              </motion.a>
-            ))}
+                }
+              };
+
+              if (service.path) {
+                return (
+                  <motion.div key={index} {...commonProps}>
+                    <Link to={service.path} className="absolute inset-0 z-20" />
+                    {content}
+                  </motion.div>
+                );
+              }
+
+              return (
+                <motion.a
+                  key={index}
+                  href={`${WHATSAPP_LINK}?text=${encodeURIComponent(`Hi, I need SAHLI to coordinate ${service.intent}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick(`Featured Service: ${service.title}`)}
+                  {...commonProps}
+                >
+                  {content}
+                </motion.a>
+              );
+            })}
           </div>
 
           <div className="flex justify-center mt-12 md:mt-16">
@@ -632,12 +658,12 @@ const Index = () => {
         </div>
         <div className="container-sahli grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 relative z-10">
           {[
-            { reason: t('home.why.reason1'), icon: <Zap className="text-primary" /> },
-            { reason: t('home.why.reason2'), icon: <Shield className="text-primary" /> },
-            { reason: t('home.why.reason3'), icon: <Repeat className="text-primary" /> },
-            { reason: t('home.why.reason4'), icon: <UserCheck className="text-primary" /> },
-            { reason: t('home.why.reason5'), icon: <Sparkles className="text-primary" /> },
-            { reason: t('home.why.reason6'), icon: <Heart className="text-primary" /> },
+            { reason: t('home.why.reason1'), icon: <Search className="text-primary" /> },
+            { reason: t('home.why.reason2'), icon: <Clock className="text-primary" /> },
+            { reason: t('home.why.reason3'), icon: <DollarSign className="text-primary" /> },
+            { reason: t('home.why.reason4'), icon: <ShieldCheck className="text-primary" /> },
+            { reason: t('home.why.reason5'), icon: <PhoneOff className="text-primary" /> },
+            { reason: t('home.why.reason6'), icon: <CheckCircle2 className="text-primary" /> },
           ].map((item, i: number) => (
             <motion.div
               key={i}
@@ -806,34 +832,86 @@ const Index = () => {
       </section>
 
       {/* Trust & Standards Section */}
-      <section className="relative bg-background overflow-hidden">
-        {/* Background Blobs */}
-        <div className={`absolute top-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[150px] pointer-events-none`} />
-
+      <section className="relative bg-background overflow-hidden border-t border-border">
         <div className="container-sahli py-20 md:py-24 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
-          >
-            <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
-            {t('home.hero.label')}
-          </motion.div>
-          <motion.h2
-            className="text-foreground text-3xl md:text-4xl font-black mb-10 tracking-tighter"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            {t('home.trust.title')}
-          </motion.h2>
-        </div>
-        
-        <div className="space-y-4 md:space-y-6 pb-20 md:pb-24">
-          {trustPanels.map((panel: any, i: number) => (
-            <TrustPanel key={i} {...panel} index={i} />
-          ))}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 md:mb-16">
+            <div className="max-w-3xl">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-6"
+              >
+                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+                {t('nav.trustStandards')}
+              </motion.div>
+              <motion.h2
+                className="text-foreground text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[0.9]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                {t('home.trust.title')}
+              </motion.h2>
+            </div>
+            <motion.p 
+              className="text-lg md:text-xl text-foreground/60 font-medium max-w-md leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              {t('home.trust.body')}
+            </motion.p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {trustPanels.map((panel: any, i: number) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group flex flex-col h-full"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-primary/40 font-black text-3xl tracking-tighter">
+                    {(i === 0 && t('trust.vetting.number')) ||
+                     (i === 1 && t('trust.competency.number')) ||
+                     (i === 2 && t('trust.behavioral.number')) ||
+                     (i === 3 && t('trust.rules.number'))} <span className="opacity-20">/</span>
+                  </span>
+                  <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    {i === 0 && <Fingerprint size={24} />}
+                    {i === 1 && <Target size={24} />}
+                    {i === 2 && <HeartHandshake size={24} />}
+                    {i === 3 && <ClipboardList size={24} />}
+                  </div>
+                </div>
+
+                <div className="flex-1 p-8 rounded-[2rem] glass-morphism border border-border group-hover:border-primary/20 transition-all duration-700 flex flex-col">
+                  <div className="mb-2 text-[10px] font-bold tracking-widest uppercase text-foreground/40">
+                    {t('trust.standard')}
+                  </div>
+                  <h3 className="text-2xl font-black mb-6 tracking-tight text-foreground leading-none">
+                    {panel.title}
+                  </h3>
+                  
+                  <ul className="space-y-3 mt-auto">
+                    {panel.items.map((item: any, idx: number) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 size={16} className="text-primary mt-1 flex-shrink-0" />
+                        <span className="text-foreground/70 font-bold text-sm leading-tight">
+                          {item.title}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

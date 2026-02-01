@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Sparkles, Home, Sofa, Box, Truck, HardHat, Waves, ShieldCheck, Clock, MapPin, AlertCircle } from 'lucide-react';
-
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { MessageCircle, CheckCircle2, Droplets, ShieldCheck, Clock, MapPin, AlertCircle } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 
-export default function CleaningMoving() {
+export default function Plumbing() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -16,24 +15,19 @@ export default function CleaningMoving() {
     offset: ["start start", "end start"]
   });
 
-  const categories = [
-    { title: t('services.cleaning.regular.title'), desc: t('services.cleaning.regular.desc'), icon: <Home className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.deep.title'), desc: t('services.cleaning.deep.desc'), icon: <Sparkles className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.upholstery.title'), desc: t('services.cleaning.sofa.desc'), icon: <Sofa className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.carpet.title'), desc: t('services.cleaning.carpet.desc'), icon: <Waves className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.mattress.title'), desc: t('services.cleaning.mattress.desc'), icon: <Home className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.watertank.title'), desc: t('services.cleaning.watertank.desc'), icon: <Waves className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.moving.house.title'), desc: t('services.moving.local.desc'), icon: <Truck className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.moving.packing.title'), desc: t('services.moving.packing.desc'), icon: <Box className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.moving.dismantling.title'), desc: t('services.moving.dismantling.desc'), icon: <HardHat className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
-  ];
-
   const coordinationSteps = [
     { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
     { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
     { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
     { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
     { title: '05', body: t('home.what.step5'), icon: <CheckCircle2 size={20} /> }
+  ];
+
+  const includes = [
+    t('service.plumbing.includes.item1'),
+    t('service.plumbing.includes.item2'),
+    t('service.plumbing.includes.item3'),
+    t('service.plumbing.includes.item4')
   ];
 
   const areas = [
@@ -58,12 +52,12 @@ export default function CleaningMoving() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm">
-              <Sparkles size={14} className="animate-pulse" />
-              {t('services.cleaning.title')} & {t('services.moving.title')}
+              <Droplets size={14} className="animate-pulse" />
+              {t('home.featured.plumbing')}
             </div>
 
             <h1 className="text-foreground text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter mb-8">
-              {t('services.cleaning.title')} <span className="text-primary">&</span> {t('services.moving.title')}
+              {t('service.plumbing.title')}
             </h1>
 
             <div className="relative mb-10 group">
@@ -71,16 +65,16 @@ export default function CleaningMoving() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('services.cleaning.title')}
+                  {t('service.plumbing.problem')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('services.role.clarification')}
+                  {t('service.v1.humanProblem.body')}
                 </p>
               </div>
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('service.moving.sahliDoes')}
+              {t('service.plumbing.sahliDoes')}
             </p>
             
             <div className="flex flex-wrap gap-4">
@@ -88,7 +82,7 @@ export default function CleaningMoving() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('CleaningMoving Hero CTA')}
+                onClick={() => trackWhatsAppClick('Plumbing Hero')}
                 className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -107,8 +101,8 @@ export default function CleaningMoving() {
           >
             <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
               <img 
-                src="https://images.pexels.com/photos/4239146/pexels-photo-4239146.jpeg" 
-                alt="Cleaning and Moving Service Qatar"
+                src="https://images.pexels.com/photos/2310913/pexels-photo-2310913.jpeg" 
+                alt="Plumbing Service Qatar"
                 className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -121,7 +115,7 @@ export default function CleaningMoving() {
                 </div>
                 <div>
                   <div className="text-xs font-black tracking-widest text-primary uppercase">Verified Provider</div>
-                  <div className="text-foreground font-bold">Coordination Hub</div>
+                  <div className="text-foreground font-bold">Expert Coordination</div>
                 </div>
               </div>
             </div>
@@ -143,10 +137,10 @@ export default function CleaningMoving() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                t('services.rules.cleaning'),
-                t('services.rules.moving'),
+                t('services.rules.care'),
                 t('services.rules.independent'),
-                t('services.rules.payment')
+                t('services.rules.payment'),
+                t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
                 <div key={i} className="flex gap-4 items-start group">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
@@ -160,47 +154,45 @@ export default function CleaningMoving() {
         </div>
       </section>
 
-      {/* 3️⃣ Service Categories */}
+      {/* 3️⃣ Visual Service Features */}
       <section className="py-24 md:py-32 bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              Our Specialized Services
+              {t('service.plumbing.includes.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Everything you need in one place</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Comprehensive Plumbing Solutions</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((cat, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {includes.map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group"
+                transition={{ delay: i * 0.1 }}
+                className="group relative p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
               >
-                <div className="mb-6 group-hover:scale-110 transition-transform duration-500">
-                  {cat.icon}
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                  <CheckCircle2 size={28} />
                 </div>
-                <h3 className="text-xl md:text-2xl font-black text-foreground mb-4 tracking-tight leading-none group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
-                <p className="text-foreground/60 leading-relaxed text-base font-medium">
-                  {cat.desc}
-                </p>
+                <h3 className="text-2xl font-black text-foreground mb-2 group-hover:text-primary transition-colors">{item}</h3>
+                <div className="w-10 h-1 bg-primary/20 rounded-full group-hover:w-20 transition-all duration-500" />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4️⃣ How Coordination Works */}
+      {/* 4️⃣ How It Works - Visual Timeline */}
       <section className="py-24 md:py-32 bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
               {t('how.flow.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">The Sahli Way</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Standardized Coordination</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
@@ -370,7 +362,7 @@ export default function CleaningMoving() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackWhatsAppClick('CleaningMoving Final CTA')}
+              onClick={() => trackWhatsAppClick('Plumbing Final CTA')}
               className="cta-primary px-16 py-8 text-2xl btn-shine shadow-2xl shadow-primary/20 rounded-[2rem]"
             >
               <MessageCircle size={32} className="fill-primary-foreground" />
@@ -397,4 +389,3 @@ export default function CleaningMoving() {
     </Layout>
   );
 }
-

@@ -11,7 +11,18 @@ import {
   Truck,
   Heart, 
   BookOpen,
-  CheckCircle2
+  CheckCircle2,
+  Wind,
+  Zap,
+  Droplets,
+  Tv,
+  Hammer,
+  Bug,
+  Home,
+  Sofa,
+  Waves,
+  Box,
+  HardHat
 } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
@@ -343,7 +354,7 @@ export default function Services() {
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
-                  icon={<Wrench size={18} />}
+                  icon={<Wind size={18} />}
                   title={t('services.homeRepair.ac.title')}
                   description={t('services.homeRepair.ac.desc')}
                   items={t('services.homeRepair.ac.items')}
@@ -351,7 +362,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'ac' ? null : 'ac')}
                 />
                 <CollapsibleModule
-                  icon={<Wrench size={18} />}
+                  icon={<Zap size={18} />}
                   title={t('services.homeRepair.electrical.title')}
                   description={t('services.homeRepair.electrical.desc')}
                   items={t('services.homeRepair.electrical.items')}
@@ -359,7 +370,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'electrical' ? null : 'electrical')}
                 />
                 <CollapsibleModule
-                  icon={<Wrench size={18} />}
+                  icon={<Droplets size={18} />}
                   title={t('services.homeRepair.plumbing.title')}
                   description={t('services.homeRepair.plumbing.desc')}
                   items={t('services.homeRepair.plumbing.items')}
@@ -367,7 +378,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'plumbing' ? null : 'plumbing')}
                 />
                 <CollapsibleModule
-                  icon={<Wrench size={18} />}
+                  icon={<Tv size={18} />}
                   title={t('services.homeRepair.appliances.title')}
                   description={t('services.homeRepair.appliances.desc')}
                   items={t('services.homeRepair.appliances.items')}
@@ -375,7 +386,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'appliances' ? null : 'appliances')}
                 />
                 <CollapsibleModule
-                  icon={<Wrench size={18} />}
+                  icon={<Hammer size={18} />}
                   title={t('services.homeRepair.handyman.title')}
                   description={t('services.homeRepair.handyman.desc')}
                   items={t('services.homeRepair.handyman.items')}
@@ -383,7 +394,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'handyman' ? null : 'handyman')}
                 />
                 <CollapsibleModule
-                  icon={<Wrench size={18} />}
+                  icon={<Bug size={18} />}
                   title={t('services.homeRepair.pest.title')}
                   description={t('services.homeRepair.pest.desc')}
                   items={t('services.homeRepair.pest.items')}
@@ -464,7 +475,7 @@ export default function Services() {
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
-                  icon={<Sparkles size={18} />}
+                  icon={<Home size={18} />}
                   title={t('services.cleaning.regular.title')}
                   description={t('services.cleaning.regular.desc')}
                   items={t('services.cleaning.regular.items')}
@@ -480,15 +491,15 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'cleaning-deep' ? null : 'cleaning-deep')}
                 />
                 <CollapsibleModule
-                  icon={<Sparkles size={18} />}
-                  title={t('services.cleaning.sofa.title')}
-                  description={t('services.cleaning.sofa.desc')}
-                  items={t('services.cleaning.sofa.items')}
-                  isOpen={openModule === 'cleaning-sofa'}
-                  onToggle={() => setOpenModule(openModule === 'cleaning-sofa' ? null : 'cleaning-sofa')}
+                  icon={<Sofa size={18} />}
+                  title={t('services.cleaning.upholstery.title')}
+                  description={t('services.cleaning.upholstery.desc')}
+                  items={t('services.cleaning.upholstery.items')}
+                  isOpen={openModule === 'cleaning-upholstery'}
+                  onToggle={() => setOpenModule(openModule === 'cleaning-upholstery' ? null : 'cleaning-upholstery')}
                 />
                 <CollapsibleModule
-                  icon={<Sparkles size={18} />}
+                  icon={<Waves size={18} />}
                   title={t('services.cleaning.carpet.title')}
                   description={t('services.cleaning.carpet.desc')}
                   items={t('services.cleaning.carpet.items')}
@@ -496,7 +507,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'cleaning-carpet' ? null : 'cleaning-carpet')}
                 />
                 <CollapsibleModule
-                  icon={<Sparkles size={18} />}
+                  icon={<Home size={18} />}
                   title={t('services.cleaning.mattress.title')}
                   description={t('services.cleaning.mattress.desc')}
                   items={t('services.cleaning.mattress.items')}
@@ -504,7 +515,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'cleaning-mattress' ? null : 'cleaning-mattress')}
                 />
                 <CollapsibleModule
-                  icon={<Sparkles size={18} />}
+                  icon={<Waves size={18} />}
                   title={t('services.cleaning.watertank.title')}
                   description={t('services.cleaning.watertank.desc')}
                   items={t('services.cleaning.watertank.items')}
@@ -593,7 +604,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'moving-local' ? null : 'moving-local')}
                 />
                 <CollapsibleModule
-                  icon={<Truck size={18} />}
+                  icon={<Box size={18} />}
                   title={t('services.moving.packing.title')}
                   description={t('services.moving.packing.desc')}
                   items={t('services.moving.packing.items')}
@@ -601,7 +612,7 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'moving-packing' ? null : 'moving-packing')}
                 />
                 <CollapsibleModule
-                  icon={<Truck size={18} />}
+                  icon={<HardHat size={18} />}
                   title={t('services.moving.dismantling.title')}
                   description={t('services.moving.dismantling.desc')}
                   items={t('services.moving.dismantling.items')}

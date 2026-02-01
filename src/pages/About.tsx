@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, XCircle, ShieldCheck, Zap, Users, Calculator, FileText } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 
@@ -18,6 +18,14 @@ export default function About() {
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y1Spring = useSpring(y1, springConfig);
   const scaleSpring = useSpring(scale, springConfig);
+
+  const notList = [
+    { title: t('about.not.marketplace'), icon: <Users className="w-6 h-6" /> },
+    { title: t('about.not.provider'), icon: <ShieldCheck className="w-6 h-6" /> },
+    { title: t('about.not.execution'), icon: <Zap className="w-6 h-6" /> },
+    { title: t('about.not.pricing'), icon: <Calculator className="w-6 h-6" /> },
+    { title: t('about.not.contract'), icon: <FileText className="w-6 h-6" /> }
+  ];
 
   return (
     <Layout>
@@ -119,13 +127,7 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
-            {[
-              { title: t('about.not.marketplace') },
-              { title: t('about.not.provider') },
-              { title: t('about.not.execution') },
-              { title: t('about.not.pricing') },
-              { title: t('about.not.contract') }
-            ].map((item: { title: string }, i: number) => (
+            {notList.map((item, i: number) => (
               <motion.div
                 key={i}
                 className="p-6 rounded-2xl bg-foreground/[0.03] border border-border hover:border-primary/30 transition-all duration-500 group text-center relative overflow-hidden"
@@ -134,8 +136,11 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8 }}
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-2xl font-black">×</span>
+                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform relative">
+                  {item.icon}
+                  <div className="absolute -top-1 -right-1 bg-background rounded-full">
+                    <XCircle className="w-4 h-4 text-red-500/80" />
+                  </div>
                 </div>
                 <h3 className="text-lg md:text-xl font-black tracking-tight text-foreground/80 group-hover:text-foreground transition-colors">{item.title}</h3>
               </motion.div>

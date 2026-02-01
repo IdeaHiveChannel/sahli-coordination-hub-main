@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, ShieldCheck, Search, Heart, Zap, Shield, Repeat, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { MessageCircle, ShieldCheck, Search, Heart, Zap, Shield, Repeat, ArrowRight, CheckCircle2, Headphones, ClipboardList, Star } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 
 const HowItWorks = () => {
@@ -104,13 +104,13 @@ const HowItWorks = () => {
               className="flex flex-col p-8 rounded-[2rem] bg-foreground/5 border border-border relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <MessageCircle size={80} />
+                <Headphones size={80} />
               </div>
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
                   <span className="font-black text-lg">01</span>
                 </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">{t('how.phase1.title')}</h3>
+                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase group-hover:text-primary transition-colors">{t('how.phase1.title')}</h3>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
@@ -137,13 +137,13 @@ const HowItWorks = () => {
               className="flex flex-col p-8 rounded-[2rem] bg-foreground/[0.02] border border-border relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <Zap size={80} />
+                <ClipboardList size={80} />
               </div>
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
                   <span className="font-black text-lg">02</span>
                 </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">{t('how.phase2.title')}</h3>
+                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase group-hover:text-primary transition-colors">{t('how.phase2.title')}</h3>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
@@ -170,13 +170,13 @@ const HowItWorks = () => {
               className="flex flex-col p-8 rounded-[2rem] bg-foreground/5 border border-border relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <ShieldCheck size={80} />
+                <Star size={80} />
               </div>
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
                   <span className="font-black text-lg">03</span>
                 </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">{t('how.phase3.title')}</h3>
+                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase group-hover:text-primary transition-colors">{t('how.phase3.title')}</h3>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
@@ -220,7 +220,7 @@ const HowItWorks = () => {
                   <Shield size={12} className="fill-primary/20" />
                 </div>
                 <p className="text-sm font-bold text-foreground/80 leading-snug">
-                  {t(`home.important.item${item}`)}
+                  {t(`home.important.item${item}` as any)}
                 </p>
               </motion.div>
             ))}
