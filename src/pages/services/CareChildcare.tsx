@@ -121,7 +121,7 @@ export default function CareChildcare() {
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="py-24 md:py-32 bg-background border-y border-border">
+      <section className="section-spacing bg-background border-y border-border">
         <div className="container-sahli">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -152,7 +152,7 @@ export default function CareChildcare() {
       </section>
 
       {/* 3️⃣ Service Categories */}
-      <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+      <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
@@ -185,7 +185,7 @@ export default function CareChildcare() {
       </section>
 
       {/* 4️⃣ How Coordination Works */}
-      <section className="py-24 md:py-32 bg-foreground/[0.02] border-y border-border relative overflow-hidden">
+      <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
@@ -222,11 +222,11 @@ export default function CareChildcare() {
       </section>
 
       {/* 5️⃣ Boundary Block */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-primary/[0.03] border border-primary/10"
@@ -248,7 +248,7 @@ export default function CareChildcare() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-foreground/[0.02] border border-border"
@@ -270,7 +270,7 @@ export default function CareChildcare() {
       </section>
 
       {/* 6️⃣ Areas Served - Map Style */}
-      <section className="py-24 md:py-32 bg-background overflow-hidden">
+      <section className="section-spacing bg-background overflow-hidden">
         <div className="container-sahli">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -313,7 +313,7 @@ export default function CareChildcare() {
       </section>
 
       {/* 7️⃣ Important Note - High Visibility */}
-      <section className="py-24 bg-background border-t border-border">
+      <section className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -345,7 +345,7 @@ export default function CareChildcare() {
       </section>
 
       {/* 8️⃣ Final CTA */}
-      <section className="py-32 md:py-48 bg-background relative overflow-hidden border-t border-border">
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="absolute inset-0 z-0 opacity-10">
           <img 
             src="https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg" 
@@ -361,26 +361,34 @@ export default function CareChildcare() {
             viewport={{ once: true }}
             className="max-w-5xl mx-auto"
           >
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-[-0.05em] mb-12 leading-[0.85]">
-              {t('cta.final.title')}
+            <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
+              <Clock size={48} />
+            </div>
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
+              Coming Soon
             </h2>
-            <p className="text-xl md:text-2xl text-foreground/60 font-medium mb-12 max-w-3xl mx-auto leading-tight">
-              {t('services.comingSoon.notify')}
-            </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
               <motion.div
                 className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30 opacity-50 cursor-not-allowed"
               >
                 <MessageCircle size={32} className="fill-primary-foreground" />
-                {t('services.comingSoon.btn')}
+                {t('services.status.soon')}
               </motion.div>
+              
+              <div className="flex flex-col items-center md:items-start gap-1">
+                <div className="flex items-center gap-2 text-primary font-black tracking-widest uppercase text-sm">
+                  <ShieldCheck size={20} />
+                  Safe & Secure
+                </div>
+                <div className="text-foreground/40 font-bold">No hidden fees. Pay directly.</div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="py-20 bg-background border-t border-border">
+      <footer className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">

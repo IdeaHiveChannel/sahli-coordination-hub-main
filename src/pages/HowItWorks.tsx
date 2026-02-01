@@ -22,7 +22,7 @@ const HowItWorks = () => {
   return (
     <Layout>
       {/* Hero Section - Redesigned to be Advanced and Compact */}
-      <section ref={containerRef} className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
         {/* Background Parallax */}
         <div className="absolute inset-0 z-0">
           <motion.div 
@@ -45,23 +45,23 @@ const HowItWorks = () => {
             </video>
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-background" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-background via-background/80 to-transparent`} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
           
           {/* Floating Blobs */}
-          <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px] animate-pulse-slow`} />
+          <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px] animate-pulse-slow" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-32 pb-12">
+        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 btn-shine"
+            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 btn-shine mx-auto md:mx-0"
           >
             <Zap size={14} />
             {t('how.hero.label')}
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-foreground leading-[0.9] max-w-4xl mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
             {t('how.hero.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -198,7 +198,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Important to Know - CORE POSITIONING */}
-      <section className="relative py-12 md:py-16 bg-background overflow-hidden border-b border-border/50">
+      <section className="section-spacing relative bg-background overflow-hidden border-b border-border/50">
         <div className="container-sahli relative z-10">
           <div className="flex flex-col items-center mb-10">
             <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center">
@@ -260,7 +260,7 @@ const HowItWorks = () => {
 
 
       {/* Final CTA - Contextual - Very Compact */}
-      <section className="py-12 bg-background relative overflow-hidden border-t border-border/50">
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border/50">
         <div className="absolute inset-0 z-0 opacity-[0.03] grayscale">
           <video autoPlay loop muted playsInline crossOrigin="anonymous" className="w-full h-full object-cover">
             <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />

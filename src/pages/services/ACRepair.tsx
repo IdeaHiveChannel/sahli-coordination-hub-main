@@ -55,12 +55,12 @@ export default function ACRepair() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center md:items-start text-center md:text-start"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 btn-shine mx-auto md:mx-0">
               <Snowflake size={14} className="animate-spin-slow" />
               {t('home.featured.ac')}
             </div>
 
-            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
               {t('service.ac.title')}
             </h1>
 
@@ -77,7 +77,7 @@ export default function ACRepair() {
               </div>
             </div>
             
-            <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
+            <p className="text-lg md:text-xl text-foreground/70 max-w-2xl font-medium leading-relaxed mb-8">
               {t('service.ac.sahliDoes')}
             </p>
 
@@ -128,17 +128,19 @@ export default function ACRepair() {
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="py-24 md:py-32 bg-background border-y border-border">
+      <section className="section-spacing bg-background border-y border-border/50">
         <div className="container-sahli">
+          <div className="max-w-4xl mb-12 md:mb-16 text-center md:text-start">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-8">
+              Service Guidelines
+            </h2>
+          </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
-              Service Guidelines
-            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 t('services.rules.inspection'),
@@ -159,7 +161,7 @@ export default function ACRepair() {
       </section>
 
       {/* 3️⃣ Visual Service Features */}
-      <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+      <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-2xl">
@@ -193,7 +195,7 @@ export default function ACRepair() {
       </section>
 
       {/* 4️⃣ How it works (Visual Timeline) */}
-      <section className="py-24 md:py-32 bg-foreground/[0.02] border-y border-border relative overflow-hidden">
+      <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[50%] h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container-sahli relative z-10">
@@ -232,7 +234,7 @@ export default function ACRepair() {
       </section>
 
       {/* 5️⃣ Boundary Block */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
@@ -280,7 +282,7 @@ export default function ACRepair() {
       </section>
 
       {/* 6️⃣ Areas Served (Map View Style) */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
@@ -324,7 +326,7 @@ export default function ACRepair() {
       </section>
 
       {/* 7️⃣ Important Note (High Contrast) */}
-      <section className="py-24 bg-background">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -354,7 +356,7 @@ export default function ACRepair() {
       </section>
 
       {/* 8️⃣ Final High-Impact CTA */}
-      <section className="py-32 md:py-48 bg-background relative overflow-hidden">
+      <section className="section-spacing bg-background relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-10">
           <img 
             src="https://images.pexels.com/photos/5466804/pexels-photo-5466804.jpeg" 
@@ -400,7 +402,7 @@ export default function ACRepair() {
       </section>
 
       {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="py-20 bg-background border-t border-border">
+      <footer className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">

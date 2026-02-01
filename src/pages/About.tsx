@@ -30,7 +30,7 @@ export default function About() {
   return (
     <Layout>
       {/* Hero Section - Compact and Advanced */}
-      <section ref={containerRef} className="relative min-h-[50vh] md:min-h-[60vh] flex flex-col justify-center overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <motion.div 
             className="absolute inset-0"
@@ -55,17 +55,17 @@ export default function About() {
           <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-background via-background/80 to-transparent`} />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-32 pb-12">
+        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 shadow-lg btn-shine"
+            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 shadow-lg btn-shine mx-auto md:mx-0"
           >
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
             {t('nav.about')}
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-foreground leading-[0.9] max-w-4xl mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
             {t('about.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -86,7 +86,7 @@ export default function About() {
         <div className="container-sahli relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}

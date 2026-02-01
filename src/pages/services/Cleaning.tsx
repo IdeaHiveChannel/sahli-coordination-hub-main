@@ -128,7 +128,7 @@ export default function Cleaning() {
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="py-24 md:py-32 bg-background border-y border-border">
+      <section className="section-spacing bg-background border-y border-border">
         <div className="container-sahli">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ export default function Cleaning() {
       </section>
 
       {/* 3️⃣ Visual Service Features */}
-      <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+      <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-2xl">
@@ -193,7 +193,7 @@ export default function Cleaning() {
       </section>
 
       {/* 4️⃣ How it works (Visual Timeline) */}
-      <section className="py-24 md:py-32 bg-foreground/[0.02] border-y border-border relative overflow-hidden">
+      <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[50%] h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container-sahli relative z-10">
@@ -232,7 +232,7 @@ export default function Cleaning() {
       </section>
 
       {/* 5️⃣ Boundary Block */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
@@ -280,7 +280,7 @@ export default function Cleaning() {
       </section>
 
       {/* 6️⃣ Areas Served (Map View Style) */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
@@ -324,7 +324,7 @@ export default function Cleaning() {
       </section>
 
       {/* 7️⃣ Important Note (High Contrast) */}
-      <section className="py-24 bg-background border-t border-border">
+      <section className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -354,7 +354,7 @@ export default function Cleaning() {
       </section>
 
       {/* 8️⃣ Final High-Impact CTA */}
-      <section className="py-32 md:py-48 bg-background relative overflow-hidden border-t border-border">
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="absolute inset-0 z-0 opacity-10">
           <img 
             src="https://images.pexels.com/photos/4099467/pexels-photo-4099467.jpeg" 
@@ -400,7 +400,7 @@ export default function Cleaning() {
       </section>
 
       {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="py-20 bg-background border-t border-border">
+      <footer className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">

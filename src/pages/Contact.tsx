@@ -51,7 +51,7 @@ export default function Contact() {
   return (
     <Layout>
       {/* 1️⃣ Hero Section - Compact & Advanced */}
-      <section ref={containerRef} className="relative min-h-[50vh] md:min-h-[60vh] flex flex-col justify-center overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <motion.div 
             style={{ y, scale, opacity }}
@@ -78,19 +78,19 @@ export default function Contact() {
           </motion.div>
         </div>
 
-        <div className="container-sahli relative z-10 pt-32 md:pt-40 pb-12">
+        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-lg btn-shine">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-lg btn-shine mx-auto md:mx-0">
               <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
               {t('nav.contact')}
             </div>
 
-            <h1 className="text-foreground text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter mb-8">
+            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.85] tracking-tighter mb-8">
               {t('contact.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
@@ -112,7 +112,7 @@ export default function Contact() {
               {t('contact.primary')}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 max-w-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto md:mx-0">
               {contactMethods.map((method: ContactMethod, i: number) => (
                 <motion.a
                   key={i}
@@ -224,7 +224,7 @@ export default function Contact() {
       </section>
 
       {/* 3️⃣ Final CTA - Compact */}
-      <section className="py-16 bg-background border-t border-border">
+      <section className="section-spacing bg-background border-t border-border">
         <div className="container-sahli text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
