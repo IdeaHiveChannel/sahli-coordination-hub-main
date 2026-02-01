@@ -437,20 +437,6 @@ export default function LessonsLifestyle() {
         </div>
       </section>
 
-      {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="section-spacing bg-background border-t border-border">
-        <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
-              {t('services.microLegal')}
-            </p>
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
-              <span>Qatar 2024</span>
-              <span>SAHLI Coordination Hub</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </Layout>
   );
 }

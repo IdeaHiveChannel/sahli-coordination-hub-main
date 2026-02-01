@@ -2,9 +2,10 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Snowflake, ShieldCheck, Clock, MapPin, AlertCircle } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Snowflake, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
+import { Link } from 'react-router-dom';
 
 export default function ACRepair() {
   const { t } = useLanguage();
@@ -17,6 +18,12 @@ export default function ACRepair() {
 
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
+
+  const relatedServices = [
+    { title: t('services.homeMaintenance.plumbing.title'), path: '/plumbing-services-qatar' },
+    { title: t('services.homeMaintenance.electrical.title'), path: '/electrical-services-qatar' },
+    { title: t('services.homeMaintenance.handyman.title'), path: '/handyman-services-qatar' },
+  ];
 
   const coordinationSteps = [
     { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
@@ -401,20 +408,57 @@ export default function ACRepair() {
         </div>
       </section>
 
-      {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="section-spacing bg-background border-t border-border">
+      {/* 9️⃣ Internal Linking (SEO Strategy) */}
+      <section className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
-              {t('services.microLegal')}
-            </p>
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
-              <span>Qatar 2024</span>
-              <span>SAHLI Coordination Hub</span>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Link Up to Category */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border group"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">Service Category</h4>
+              <Link to="/home-maintenance-qatar" className="flex items-center gap-3 text-2xl font-black text-foreground group-hover:text-primary transition-colors">
+                <ArrowUp size={24} />
+                {t('services.homeMaintenance.title')}
+              </Link>
+            </motion.div>
+
+            {/* Link Sideways to Related */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border md:col-span-2"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Related Services</h4>
+              <div className="flex flex-wrap gap-4">
+                {relatedServices.map((service, i) => (
+                  <Link 
+                    key={i} 
+                    to={service.path}
+                    className="px-6 py-3 rounded-xl bg-background border border-border font-bold text-foreground/70 hover:border-primary/50 hover:text-primary transition-all duration-300"
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Back to Home */}
+          <div className="mt-12 text-center">
+            <Link to="/" className="inline-flex items-center gap-2 text-foreground/40 font-bold hover:text-primary transition-colors">
+              <ArrowUp size={16} className="-rotate-90" />
+              Back to Homepage
+            </Link>
           </div>
         </div>
-      </footer>
+      </section>
+
     </Layout>
   );
 }

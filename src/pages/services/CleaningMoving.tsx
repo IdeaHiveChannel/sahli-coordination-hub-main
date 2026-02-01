@@ -19,13 +19,12 @@ export default function CleaningMoving() {
   const categories = [
     { title: t('services.cleaning.regular.title'), desc: t('services.cleaning.regular.desc'), icon: <Home className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
     { title: t('services.cleaning.deep.title'), desc: t('services.cleaning.deep.desc'), icon: <Sparkles className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.upholstery.title'), desc: t('services.cleaning.sofa.desc'), icon: <Sofa className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.carpet.title'), desc: t('services.cleaning.carpet.desc'), icon: <Waves className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.cleaning.mattress.title'), desc: t('services.cleaning.mattress.desc'), icon: <Home className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.cleaning.specialized.title'), desc: t('services.cleaning.specialized.desc'), icon: <Sofa className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
     { title: t('services.cleaning.watertank.title'), desc: t('services.cleaning.watertank.desc'), icon: <Waves className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.moving.house.title'), desc: t('services.moving.local.desc'), icon: <Truck className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.moving.house.title'), desc: t('services.moving.house.desc'), icon: <Truck className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
     { title: t('services.moving.packing.title'), desc: t('services.moving.packing.desc'), icon: <Box className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.moving.dismantling.title'), desc: t('services.moving.dismantling.desc'), icon: <HardHat className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
+    { title: t('services.moving.dismantling.title'), desc: t('services.moving.dismantling.desc'), icon: <HardHat className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.moving.storage.title'), desc: t('services.moving.storage.desc'), icon: <Box className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
   ];
 
   const coordinationSteps = [
@@ -391,20 +390,6 @@ export default function CleaningMoving() {
         </div>
       </section>
 
-      {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="section-spacing bg-background border-t border-border">
-        <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
-              {t('services.microLegal')}
-            </p>
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
-              <span>Qatar 2024</span>
-              <span>SAHLI Coordination Hub</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </Layout>
   );
 }

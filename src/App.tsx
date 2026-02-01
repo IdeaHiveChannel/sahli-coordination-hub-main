@@ -14,15 +14,13 @@ import { trackPageView } from "./lib/gtag";
 import Index from "./pages/Index";
 import HowItWorks from "./pages/HowItWorks";
 import Services from "./pages/Services";
-import HomeRepair from "./pages/services/HomeRepair";
-import CleaningMoving from "./pages/services/CleaningMoving";
-import CareChildcare from "./pages/services/CareChildcare";
-import LessonsLifestyle from "./pages/services/LessonsLifestyle";
+import HomeMaintenance from "./pages/services/HomeMaintenance";
+import CleaningServices from "./pages/services/CleaningServices";
+import MovingServices from "./pages/services/MovingServices";
+import CareLifestyle from "./pages/services/CareLifestyle";
 import ACRepair from "./pages/services/ACRepair";
-import Cleaning from "./pages/services/Cleaning";
 import Plumbing from "./pages/services/Plumbing";
 import Electrical from "./pages/services/Electrical";
-import HouseShifting from "./pages/services/HouseShifting";
 import Babysitting from "./pages/services/Babysitting";
 import TrustStandards from "./pages/TrustStandards";
 import About from "./pages/About";
@@ -57,17 +55,17 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/services/home-repair" element={<HomeRepair />} />
-              <Route path="/services/cleaning-moving" element={<CleaningMoving />} />
-              <Route path="/services/care-childcare" element={<CareChildcare />} />
-              <Route path="/services/lessons-lifestyle" element={<LessonsLifestyle />} />
               
-              {/* Service Pages V1 */}
+              {/* 6 Pillar Pages */}
+              <Route path="/home-maintenance-qatar" element={<HomeMaintenance />} />
+              <Route path="/cleaning-services-qatar" element={<CleaningServices />} />
+              <Route path="/house-shifting-qatar" element={<MovingServices />} />
+              <Route path="/care-lifestyle-qatar" element={<CareLifestyle />} />
+              
+              {/* SEO Long-tail Pages */}
               <Route path="/ac-repair-qatar" element={<ACRepair />} />
-              <Route path="/cleaning-services-qatar" element={<Cleaning />} />
               <Route path="/plumbing-services-qatar" element={<Plumbing />} />
               <Route path="/electrical-services-qatar" element={<Electrical />} />
-              <Route path="/house-shifting-qatar" element={<HouseShifting />} />
               <Route path="/babysitting-services-qatar" element={<Babysitting />} />
 
               <Route path="/trust-standards" element={<TrustStandards />} />

@@ -124,11 +124,12 @@ export default function Services() {
   const yText = useSpring(useTransform(scrollYProgress, [0, 1], [0, -150]), springConfig);
 
   const roofs = [
-    { id: 'home-repair', label: t('services.homeRepair.title'), status: 'live' },
+    { id: 'home-maintenance', label: t('services.homeMaintenance.title'), status: 'live' },
     { id: 'cleaning', label: t('services.cleaning.title'), status: 'live' },
     { id: 'moving', label: t('services.moving.title'), status: 'live' },
-    { id: 'care-childcare', label: t('services.care.title'), status: 'soon' },
-    { id: 'lessons-lifestyle', label: t('services.lessons.title'), status: 'soon' },
+    { id: 'specialized', label: t('services.specialized.title'), status: 'live' },
+    { id: 'electronics', label: t('services.electronics.title'), status: 'live' },
+    { id: 'care-lifestyle', label: t('services.careLifestyle.title'), status: 'soon' },
   ];
 
   useEffect(() => {
@@ -301,7 +302,7 @@ export default function Services() {
       </div>
 
       {/* Roof 1: Home Maintenance - Compact */}
-      <section id="home-repair" className="relative py-12 md:py-16 scroll-mt-32 bg-background overflow-hidden">
+      <section id="home-maintenance" className="relative py-12 md:py-16 scroll-mt-32 bg-background overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         
@@ -326,9 +327,9 @@ export default function Services() {
                     {t('services.status.live')} — 01
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.homeRepair.title')}</h2>
+                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.homeMaintenance.title')}</h2>
                 <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
-                  {t('services.homeRepair.body')}
+                  {t('services.homeMaintenance.body')}
                 </p>
                 
                 <motion.div 
@@ -339,7 +340,7 @@ export default function Services() {
                       <CheckCircle2 className="text-primary w-4 h-4" />
                     </div>
                     <p className="text-[13px] font-bold text-foreground/80 leading-tight">
-                      {t('services.homeRepair.rule')}
+                      {t('services.homeMaintenance.rule')}
                     </p>
                   </div>
                 </motion.div>
@@ -355,49 +356,41 @@ export default function Services() {
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Wind size={18} />}
-                  title={t('services.homeRepair.ac.title')}
-                  description={t('services.homeRepair.ac.desc')}
-                  items={t('services.homeRepair.ac.items')}
+                  title={t('services.homeMaintenance.ac.title')}
+                  description={t('services.homeMaintenance.ac.desc')}
+                  items={t('services.homeMaintenance.ac.items')}
                   isOpen={openModule === 'ac'}
                   onToggle={() => setOpenModule(openModule === 'ac' ? null : 'ac')}
                 />
                 <CollapsibleModule
                   icon={<Zap size={18} />}
-                  title={t('services.homeRepair.electrical.title')}
-                  description={t('services.homeRepair.electrical.desc')}
-                  items={t('services.homeRepair.electrical.items')}
+                  title={t('services.homeMaintenance.electrical.title')}
+                  description={t('services.homeMaintenance.electrical.desc')}
+                  items={t('services.homeMaintenance.electrical.items')}
                   isOpen={openModule === 'electrical'}
                   onToggle={() => setOpenModule(openModule === 'electrical' ? null : 'electrical')}
                 />
                 <CollapsibleModule
                   icon={<Droplets size={18} />}
-                  title={t('services.homeRepair.plumbing.title')}
-                  description={t('services.homeRepair.plumbing.desc')}
-                  items={t('services.homeRepair.plumbing.items')}
+                  title={t('services.homeMaintenance.plumbing.title')}
+                  description={t('services.homeMaintenance.plumbing.desc')}
+                  items={t('services.homeMaintenance.plumbing.items')}
                   isOpen={openModule === 'plumbing'}
                   onToggle={() => setOpenModule(openModule === 'plumbing' ? null : 'plumbing')}
                 />
                 <CollapsibleModule
-                  icon={<Tv size={18} />}
-                  title={t('services.homeRepair.appliances.title')}
-                  description={t('services.homeRepair.appliances.desc')}
-                  items={t('services.homeRepair.appliances.items')}
-                  isOpen={openModule === 'appliances'}
-                  onToggle={() => setOpenModule(openModule === 'appliances' ? null : 'appliances')}
-                />
-                <CollapsibleModule
                   icon={<Hammer size={18} />}
-                  title={t('services.homeRepair.handyman.title')}
-                  description={t('services.homeRepair.handyman.desc')}
-                  items={t('services.homeRepair.handyman.items')}
+                  title={t('services.homeMaintenance.handyman.title')}
+                  description={t('services.homeMaintenance.handyman.desc')}
+                  items={t('services.homeMaintenance.handyman.items')}
                   isOpen={openModule === 'handyman'}
                   onToggle={() => setOpenModule(openModule === 'handyman' ? null : 'handyman')}
                 />
                 <CollapsibleModule
                   icon={<Bug size={18} />}
-                  title={t('services.homeRepair.pest.title')}
-                  description={t('services.homeRepair.pest.desc')}
-                  items={t('services.homeRepair.pest.items')}
+                  title={t('services.homeMaintenance.pest.title')}
+                  description={t('services.homeMaintenance.pest.desc')}
+                  items={t('services.homeMaintenance.pest.items')}
                   isOpen={openModule === 'pest'}
                   onToggle={() => setOpenModule(openModule === 'pest' ? null : 'pest')}
                 />
@@ -413,7 +406,7 @@ export default function Services() {
                   className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
                 >
                   <MessageCircle size={18} className="fill-primary-foreground" />
-                  {t('services.homeRepair.cta')}
+                  {t('services.homeMaintenance.cta')}
                 </motion.a>
               </div>
             </motion.div>
@@ -492,27 +485,11 @@ export default function Services() {
                 />
                 <CollapsibleModule
                   icon={<Sofa size={18} />}
-                  title={t('services.cleaning.upholstery.title')}
-                  description={t('services.cleaning.upholstery.desc')}
-                  items={t('services.cleaning.upholstery.items')}
-                  isOpen={openModule === 'cleaning-upholstery'}
-                  onToggle={() => setOpenModule(openModule === 'cleaning-upholstery' ? null : 'cleaning-upholstery')}
-                />
-                <CollapsibleModule
-                  icon={<Waves size={18} />}
-                  title={t('services.cleaning.carpet.title')}
-                  description={t('services.cleaning.carpet.desc')}
-                  items={t('services.cleaning.carpet.items')}
-                  isOpen={openModule === 'cleaning-carpet'}
-                  onToggle={() => setOpenModule(openModule === 'cleaning-carpet' ? null : 'cleaning-carpet')}
-                />
-                <CollapsibleModule
-                  icon={<Home size={18} />}
-                  title={t('services.cleaning.mattress.title')}
-                  description={t('services.cleaning.mattress.desc')}
-                  items={t('services.cleaning.mattress.items')}
-                  isOpen={openModule === 'cleaning-mattress'}
-                  onToggle={() => setOpenModule(openModule === 'cleaning-mattress' ? null : 'cleaning-mattress')}
+                  title={t('services.cleaning.specialized.title')}
+                  description={t('services.cleaning.specialized.desc')}
+                  items={t('services.cleaning.specialized.items')}
+                  isOpen={openModule === 'cleaning-specialized'}
+                  onToggle={() => setOpenModule(openModule === 'cleaning-specialized' ? null : 'cleaning-specialized')}
                 />
                 <CollapsibleModule
                   icon={<Waves size={18} />}
@@ -597,11 +574,11 @@ export default function Services() {
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Truck size={18} />}
-                  title={t('services.moving.local.title')}
-                  description={t('services.moving.local.desc')}
-                  items={t('services.moving.local.items')}
-                  isOpen={openModule === 'moving-local'}
-                  onToggle={() => setOpenModule(openModule === 'moving-local' ? null : 'moving-local')}
+                  title={t('services.moving.house.title')}
+                  description={t('services.moving.house.desc')}
+                  items={t('services.moving.house.items')}
+                  isOpen={openModule === 'moving-house'}
+                  onToggle={() => setOpenModule(openModule === 'moving-house' ? null : 'moving-house')}
                 />
                 <CollapsibleModule
                   icon={<Box size={18} />}
@@ -618,6 +595,14 @@ export default function Services() {
                   items={t('services.moving.dismantling.items')}
                   isOpen={openModule === 'moving-dismantling'}
                   onToggle={() => setOpenModule(openModule === 'moving-dismantling' ? null : 'moving-dismantling')}
+                />
+                <CollapsibleModule
+                  icon={<Truck size={18} />}
+                  title={t('services.moving.storage.title')}
+                  description={t('services.moving.storage.desc')}
+                  items={t('services.moving.storage.items')}
+                  isOpen={openModule === 'moving-storage'}
+                  onToggle={() => setOpenModule(openModule === 'moving-storage' ? null : 'moving-storage')}
                 />
               </div>
 
@@ -639,57 +624,210 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 4: Care & Childcare - COMING SOON - Compact */}
-      <section id="care-childcare" className="relative py-12 md:py-16 bg-background scroll-mt-32 overflow-hidden">
-        {/* Glass Overlay for Coming Soon */}
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-[8px] z-10 pointer-events-none" />
+      {/* Roof 4: Specialized Maintenance - Compact */}
+      <section id="specialized" className="relative py-12 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         
-        <div className="container-sahli relative z-0">
-          <div className="max-w-4xl mx-auto">
+        <div className="container-sahli">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+            <motion.div
+              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="sticky top-32 md:top-40 lg:top-44">
+                <div className="flex items-center gap-3 mb-4">
+                  <motion.div 
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20"
+                  >
+                    <HardHat size={20} />
+                  </motion.div>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md">
+                    <img src="/logos/Sahl Logo 9.png" alt="" className="w-3 h-3 object-contain" />
+                    {t('services.status.live')} — 04
+                  </span>
+                </div>
+                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.specialized.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                  Professional outdoor and specialized maintenance for your property.
+                </p>
+                
+                <motion.div 
+                  className="p-4 rounded-2xl bg-foreground/[0.03] border border-border/50 relative overflow-hidden group"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="text-primary w-4 h-4" />
+                    </div>
+                    <p className="text-[13px] font-bold text-foreground/80 leading-tight">
+                      {t('services.homeMaintenance.rule')}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="bg-foreground/[0.02] rounded-2xl border border-border shadow-xl overflow-hidden"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                <span className="text-[10px] font-black text-primary uppercase tracking-widest">{t('services.status.soon')}</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 tracking-tighter uppercase leading-none">
-                {t('services.care.title')}
-              </h2>
-              <p className="text-base md:text-lg text-foreground/60 leading-tight font-medium max-w-2xl mx-auto">
-                {t('services.care.body')}
-              </p>
-            </motion.div>
-
-            <div className="bg-foreground/[0.02] rounded-2xl border border-border/50 opacity-40 grayscale pointer-events-none">
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
-                  icon={<Heart size={18} />}
-                  title={t('services.care.doctor.title')}
-                  description={t('services.care.doctor.desc')}
-                  items={t('services.care.doctor.items')}
-                  isOpen={false}
-                  onToggle={() => {}}
+                  icon={<Bug size={18} />}
+                  title={t('services.specialized.pest.title')}
+                  description={t('services.specialized.pest.desc')}
+                  items={t('services.specialized.pest.items')}
+                  isOpen={openModule === 'spec-pest'}
+                  onToggle={() => setOpenModule(openModule === 'spec-pest' ? null : 'spec-pest')}
                 />
                 <CollapsibleModule
-                  icon={<Heart size={18} />}
-                  title={t('services.care.nursing.title')}
-                  description={t('services.care.nursing.desc')}
-                  items={t('services.care.nursing.items')}
-                  isOpen={false}
-                  onToggle={() => {}}
+                  icon={<Waves size={18} />}
+                  title={t('services.specialized.landscaping.title')}
+                  description={t('services.specialized.landscaping.desc')}
+                  items={t('services.specialized.landscaping.items')}
+                  isOpen={openModule === 'spec-landscaping'}
+                  onToggle={() => setOpenModule(openModule === 'spec-landscaping' ? null : 'spec-landscaping')}
+                />
+                <CollapsibleModule
+                  icon={<Waves size={18} />}
+                  title={t('services.specialized.pool.title')}
+                  description={t('services.specialized.pool.desc')}
+                  items={t('services.specialized.pool.items')}
+                  isOpen={openModule === 'spec-pool'}
+                  onToggle={() => setOpenModule(openModule === 'spec-pool' ? null : 'spec-pool')}
+                />
+                <CollapsibleModule
+                  icon={<Droplets size={18} />}
+                  title={t('services.specialized.waterproofing.title')}
+                  description={t('services.specialized.waterproofing.desc')}
+                  items={t('services.specialized.waterproofing.items')}
+                  isOpen={openModule === 'spec-waterproofing'}
+                  onToggle={() => setOpenModule(openModule === 'spec-waterproofing' ? null : 'spec-waterproofing')}
                 />
               </div>
-            </div>
+
+              <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
+                <motion.a 
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-primary inline-flex shadow-xl shadow-primary/20"
+                >
+                  <MessageCircle size={18} className="fill-primary-foreground" />
+                  {t('services.homeMaintenance.cta')}
+                </motion.a>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Roof 5: Lessons & Lifestyle - COMING SOON - Compact */}
-      <section id="lessons-lifestyle" className="relative py-12 md:py-16 bg-background scroll-mt-32 overflow-hidden">
+      {/* Roof 5: Electronics & Technology - Compact */}
+      <section id="electronics" className="relative py-12 md:py-16 bg-background scroll-mt-32 overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        
+        <div className="container-sahli">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+            <motion.div
+              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="sticky top-32 md:top-40 lg:top-44">
+                <div className="flex items-center gap-3 mb-4">
+                  <motion.div 
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20"
+                  >
+                    <Tv size={20} />
+                  </motion.div>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md">
+                    <img src="/logos/Sahl Logo 9.png" alt="" className="w-3 h-3 object-contain" />
+                    {t('services.status.live')} — 05
+                  </span>
+                </div>
+                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.electronics.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                  Expert coordination for all your household appliances and electronics.
+                </p>
+                
+                <motion.div 
+                  className="p-4 rounded-2xl bg-foreground/[0.03] border border-border/50 relative overflow-hidden group"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="text-primary w-4 h-4" />
+                    </div>
+                    <p className="text-[13px] font-bold text-foreground/80 leading-tight">
+                      {t('services.homeMaintenance.rule')}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-foreground/[0.02] rounded-2xl border border-border shadow-xl overflow-hidden"
+            >
+              <div className="divide-y divide-border/50">
+                <CollapsibleModule
+                  icon={<Tv size={18} />}
+                  title={t('services.electronics.appliances.title')}
+                  description={t('services.electronics.appliances.desc')}
+                  items={t('services.electronics.appliances.items')}
+                  isOpen={openModule === 'elec-appliances'}
+                  onToggle={() => setOpenModule(openModule === 'elec-appliances' ? null : 'elec-appliances')}
+                />
+                <CollapsibleModule
+                  icon={<Zap size={18} />}
+                  title={t('services.electronics.cctv.title')}
+                  description={t('services.electronics.cctv.desc')}
+                  items={t('services.electronics.cctv.items')}
+                  isOpen={openModule === 'elec-cctv'}
+                  onToggle={() => setOpenModule(openModule === 'elec-cctv' ? null : 'elec-cctv')}
+                />
+                <CollapsibleModule
+                  icon={<Tv size={18} />}
+                  title={t('services.electronics.satellite.title')}
+                  description={t('services.electronics.satellite.desc')}
+                  items={t('services.electronics.satellite.items')}
+                  isOpen={openModule === 'elec-satellite'}
+                  onToggle={() => setOpenModule(openModule === 'elec-satellite' ? null : 'elec-satellite')}
+                />
+              </div>
+
+              <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
+                <motion.a 
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-primary inline-flex shadow-xl shadow-primary/20"
+                >
+                  <MessageCircle size={18} className="fill-primary-foreground" />
+                  {t('services.homeMaintenance.cta')}
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Roof 6: Care & Lifestyle - COMING SOON - Compact */}
+      <section id="care-lifestyle" className="relative py-12 md:py-16 bg-background scroll-mt-32 overflow-hidden">
         {/* Glass Overlay for Coming Soon */}
         <div className="absolute inset-0 bg-background/80 backdrop-blur-[8px] z-10 pointer-events-none" />
         
@@ -706,28 +844,36 @@ export default function Services() {
                 <span className="text-[10px] font-black text-primary uppercase tracking-widest">{t('services.status.soon')}</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 tracking-tighter uppercase leading-none">
-                {t('services.lessons.title')}
+                {t('services.careLifestyle.title')}
               </h2>
               <p className="text-base md:text-lg text-foreground/60 leading-tight font-medium max-w-2xl mx-auto">
-                {t('services.lessons.body')}
+                Care, lifestyle, and educational support services.
               </p>
             </motion.div>
 
             <div className="bg-foreground/[0.02] rounded-2xl border border-border/50 opacity-40 grayscale pointer-events-none">
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
-                  icon={<BookOpen size={18} />}
-                  title={t('services.lessons.tutoring.title')}
-                  description={t('services.lessons.tutoring.desc')}
-                  items={t('services.lessons.tutoring.items')}
+                  icon={<Heart size={18} />}
+                  title={t('services.careLifestyle.babysitting.title')}
+                  description={t('services.careLifestyle.babysitting.desc')}
+                  items={t('services.careLifestyle.babysitting.items')}
+                  isOpen={false}
+                  onToggle={() => {}}
+                />
+                <CollapsibleModule
+                  icon={<Sparkles size={18} />}
+                  title={t('services.careLifestyle.beauty.title')}
+                  description={t('services.careLifestyle.beauty.desc')}
+                  items={t('services.careLifestyle.beauty.items')}
                   isOpen={false}
                   onToggle={() => {}}
                 />
                 <CollapsibleModule
                   icon={<BookOpen size={18} />}
-                  title={t('services.lessons.lifestyle.title')}
-                  description={t('services.lessons.lifestyle.desc')}
-                  items={t('services.lessons.lifestyle.items')}
+                  title={t('services.careLifestyle.tutoring.title')}
+                  description={t('services.careLifestyle.tutoring.desc')}
+                  items={t('services.careLifestyle.tutoring.items')}
                   isOpen={false}
                   onToggle={() => {}}
                 />

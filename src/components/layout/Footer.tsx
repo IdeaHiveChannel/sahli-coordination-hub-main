@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageToggle } from './LanguageToggle';
-import { MessageCircle, Instagram, Facebook } from 'lucide-react';
+import { MessageCircle, Instagram, Facebook, Mail } from 'lucide-react';
 import { TranslationKey } from '@/lib/i18n';
 
 import { WHATSAPP_LINK, INSTAGRAM_LINK, FACEBOOK_LINK } from '@/lib/constants';
@@ -20,9 +20,12 @@ export function Footer() {
       { key: 'nav.trustStandards' as TranslationKey, path: '/trust-standards' },
     ],
     services: [
-      { key: 'services.homeRepair.title' as TranslationKey, path: '/services/home-repair' },
-      { key: 'services.cleaning.title' as TranslationKey, path: '/services/cleaning-moving' },
-      { key: 'services.moving.title' as TranslationKey, path: '/services/cleaning-moving' },
+      { key: 'nav.homeMaintenance' as TranslationKey, path: '/home-maintenance-qatar' },
+      { key: 'nav.cleaningServices' as TranslationKey, path: '/cleaning-services-qatar' },
+      { key: 'nav.movingServices' as TranslationKey, path: '/house-shifting-qatar' },
+      { key: 'services.specialized.title' as TranslationKey, path: '/specialized-maintenance-qatar' },
+      { key: 'nav.careLifestyle' as TranslationKey, path: '/care-lifestyle-qatar' },
+      { key: 'services.electronics.title' as TranslationKey, path: '/appliance-repair-qatar' },
     ]
   };
 
@@ -131,7 +134,21 @@ export function Footer() {
                 </div>
                 <div className="min-w-0 flex flex-col justify-center">
                   <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 leading-none mb-1.5">{t('footer.whatsapp')}</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('cta.whatsapp')}</span>
+                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('contact.whatsapp.value')}</span>
+                </div>
+              </motion.a>
+
+              <motion.a 
+                href={`mailto:${t('contact.email.value')}`}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl md:rounded-3xl bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group glass-card btn-shine"
+              >
+                <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl md:rounded-2xl bg-card flex items-center justify-center text-primary shadow-xl shadow-black/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shrink-0">
+                  <Mail size={20} className="md:size-6" />
+                </div>
+                <div className="min-w-0 flex flex-col justify-center">
+                  <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 leading-none mb-1.5">{t('contact.email.label')}</span>
+                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('contact.email.value')}</span>
                 </div>
               </motion.a>
               
@@ -157,7 +174,7 @@ export function Footer() {
           <div className="flex items-center gap-6">
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
             <p className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 text-center lg:text-left">
-              © {currentYear} SAHLI HUB. {t('footer.rights.all')}
+              © {currentYear} {t('about.footer.hub')}. {t('footer.rights.all')}
             </p>
           </div>
           

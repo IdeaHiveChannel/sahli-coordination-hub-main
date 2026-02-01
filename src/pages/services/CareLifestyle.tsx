@@ -2,13 +2,20 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { CheckCircle2, MessageCircle, Heart, Baby, Stethoscope, Users, Sparkles, ShieldCheck, Clock, AlertCircle, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { CheckCircle2, MessageCircle, Heart, Baby, Stethoscope, Users, Sparkles, ShieldCheck, Clock, AlertCircle, MapPin, ArrowUp } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 
-export default function CareChildcare() {
+export default function CareLifestyle() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const relatedServices = [
+    { title: t('nav.homeMaintenance'), path: '/home-maintenance-qatar' },
+    { title: t('nav.cleaningServices'), path: '/cleaning-services-qatar' },
+    { title: t('nav.movingServices'), path: '/house-shifting-qatar' },
+  ];
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -16,11 +23,9 @@ export default function CareChildcare() {
   });
 
   const categories = [
-    { title: t('services.care.doctor.title'), desc: t('services.care.doctor.desc'), icon: <Stethoscope className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
+    { title: t('services.care.childcare.title'), desc: t('services.care.childcare.desc'), icon: <Baby className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
     { title: t('services.care.nursing.title'), desc: t('services.care.nursing.desc'), icon: <Heart className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.care.newborn.title'), desc: t('services.care.newborn.desc'), icon: <Baby className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc'), icon: <Users className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.care.childcare.title'), desc: t('services.care.childcare.desc'), icon: <Baby className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
+    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc'), icon: <Heart className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
   ];
 
   const coordinationSteps = [
@@ -59,7 +64,7 @@ export default function CareChildcare() {
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('home.coordinate.care.title')}
+              {t('services.careLifestyle.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -67,7 +72,7 @@ export default function CareChildcare() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('home.coordinate.care.title')}
+                  {t('services.careLifestyle.title')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
                   {t('services.role.clarification')}
@@ -387,20 +392,48 @@ export default function CareChildcare() {
         </div>
       </section>
 
-      {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="section-spacing bg-background border-t border-border">
+      {/* Internal Linking Section */}
+      <section className="section-spacing bg-background border-t border-border">
         <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
-              {t('services.microLegal')}
-            </p>
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
-              <span>Qatar 2024</span>
-              <span>SAHLI Coordination Hub</span>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Sideways Links to Other Pillars */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Related Domains</h4>
+              <div className="flex flex-wrap gap-4">
+                {relatedServices.map((service, i) => (
+                  <Link 
+                    key={i}
+                    to={service.path}
+                    className="px-6 py-3 rounded-xl bg-background border border-border font-bold text-foreground/60 hover:border-primary hover:text-primary transition-all"
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Back to Home Link */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border group"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Navigation</h4>
+              <Link to="/" className="flex items-center gap-3 text-2xl font-black text-foreground group-hover:text-primary transition-colors">
+                <ArrowUp size={24} className="-rotate-90" />
+                Back to Homepage
+              </Link>
+            </motion.div>
           </div>
         </div>
-      </footer>
+      </section>
+
     </Layout>
   );
 }

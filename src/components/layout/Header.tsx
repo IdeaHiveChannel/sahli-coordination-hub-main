@@ -20,11 +20,14 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems: Array<{ key: 'nav.howItWorks' | 'nav.services' | 'nav.trustStandards' | 'nav.about'; path: string }> = [
-    { key: 'nav.howItWorks', path: '/how-it-works' },
-    { key: 'nav.services', path: '/services' },
+  const navItems: Array<{ key: string; path: string }> = [
+    { key: 'nav.home', path: '/' },
+    { key: 'nav.homeMaintenance', path: '/home-maintenance-qatar' },
+    { key: 'nav.cleaningServices', path: '/cleaning-services-qatar' },
+    { key: 'nav.movingServices', path: '/house-shifting-qatar' },
+    { key: 'nav.careLifestyle', path: '/care-lifestyle-qatar' },
     { key: 'nav.trustStandards', path: '/trust-standards' },
-    { key: 'nav.about', path: '/about' },
+    { key: 'nav.howItWorks', path: '/how-it-works' },
   ];
 
   return (

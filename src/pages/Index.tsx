@@ -86,14 +86,14 @@ const Index = () => {
       description: t('home.coordinate.maintenance.body'),
       imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&fm=webp&fit=crop",
       icon: <Wrench size={32} />,
-      path: "/services/home-repair",
+      path: "/home-maintenance-qatar",
       subcategories: [
-        t('services.homeRepair.ac.title'),
-        t('services.homeRepair.electrical.title'),
-        t('services.homeRepair.plumbing.title'),
-        t('services.homeRepair.appliances.title'),
-        t('services.homeRepair.handyman.title'),
-        t('services.homeRepair.pest.title'),
+        t('services.homeMaintenance.ac.title'),
+        t('services.homeMaintenance.electrical.title'),
+        t('services.homeMaintenance.plumbing.title'),
+        t('services.homeMaintenance.appliances.title'),
+        t('services.homeMaintenance.handyman.title'),
+        t('services.homeMaintenance.pest.title'),
       ]
     },
     { 
@@ -101,10 +101,12 @@ const Index = () => {
       description: t('home.coordinate.cleaning.body'),
       imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop",
       icon: <Sparkles size={32} />,
-      path: "/services/cleaning",
+      path: "/cleaning-services-qatar",
       subcategories: [
+        t('services.cleaning.regular.title'),
         t('services.cleaning.deep.title'),
-        t('services.cleaning.upholstery.title'),
+        t('services.cleaning.specialized.title'),
+        t('services.cleaning.watertank.title'),
       ]
     },
     { 
@@ -112,9 +114,12 @@ const Index = () => {
       description: t('home.coordinate.moving.body'),
       imageUrl: "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=800&fm=webp&fit=crop",
       icon: <Truck size={32} />,
-      path: "/services/moving",
+      path: "/house-shifting-qatar",
       subcategories: [
         t('services.moving.house.title'),
+        t('services.moving.packing.title'),
+        t('services.moving.dismantling.title'),
+        t('services.moving.storage.title'),
       ]
     },
     { 
@@ -151,7 +156,7 @@ const Index = () => {
     { title: t('home.featured.cleaning'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: "/cleaning-services-qatar" },
     { title: t('home.featured.sofa'), icon: <Sofa size={24} />, intent: "sofa & carpet cleaning" },
     { title: t('home.featured.moving'), icon: <Truck size={24} />, intent: "house shifting", path: "/house-shifting-qatar" },
-    { title: t('home.featured.babysitting'), icon: <Baby size={24} />, intent: "babysitting", path: "/babysitting-services-qatar" },
+    { title: t('home.featured.babysitting'), icon: <Baby size={24} />, intent: "babysitting", path: "/services#care-childcare" },
   ];
 
   const trustPanels = [
@@ -475,7 +480,7 @@ const Index = () => {
           </div>
             
             <motion.p
-              className="text-foreground/60 max-w-sm text-base lg:text-base leading-relaxed font-medium"
+              className="text-foreground/60 max-w-sm text-base lg:text-base leading-relaxed font-medium mb-12 md:mb-16"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

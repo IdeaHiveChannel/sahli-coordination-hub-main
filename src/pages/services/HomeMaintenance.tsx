@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Truck, ShieldCheck, Clock, MapPin, AlertCircle } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { MessageCircle, CheckCircle2, Snowflake, Lightbulb, Droplets, Cog, Wrench, Shield, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
+import { Link } from 'react-router-dom';
 
-export default function HouseShifting() {
+export default function HomeMaintenance() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -15,19 +16,27 @@ export default function HouseShifting() {
     offset: ["start start", "end start"]
   });
 
+  const relatedServices = [
+    { title: t('nav.cleaningServices'), path: '/cleaning-services-qatar' },
+    { title: t('nav.movingServices'), path: '/house-shifting-qatar' },
+    { title: t('nav.careLifestyle'), path: '/care-lifestyle-qatar' },
+  ];
+
+  const categories = [
+    { title: t('services.homeMaintenance.ac.title'), desc: t('services.homeMaintenance.ac.desc'), icon: <Snowflake size={28} /> },
+    { title: t('services.homeMaintenance.plumbing.title'), desc: t('services.homeMaintenance.plumbing.desc'), icon: <Droplets size={28} /> },
+    { title: t('services.homeMaintenance.electrical.title'), desc: t('services.homeMaintenance.electrical.desc'), icon: <Lightbulb size={28} /> },
+    { title: t('services.homeMaintenance.handyman.title'), desc: t('services.homeMaintenance.handyman.desc'), icon: <Wrench size={28} /> },
+    { title: t('services.homeMaintenance.appliances.title'), desc: t('services.homeMaintenance.appliances.desc'), icon: <Cog size={28} /> },
+    { title: t('services.homeMaintenance.pest.title'), desc: t('services.homeMaintenance.pest.desc'), icon: <Shield size={28} /> }
+  ];
+
   const coordinationSteps = [
     { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
     { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
     { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
     { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
     { title: '05', body: t('home.what.step5'), icon: <CheckCircle2 size={20} /> }
-  ];
-
-  const includes = [
-    t('service.moving.includes.item1'),
-    t('service.moving.includes.item2'),
-    t('service.moving.includes.item3'),
-    t('service.moving.includes.item4')
   ];
 
   const areas = [
@@ -53,12 +62,12 @@ export default function HouseShifting() {
             className="flex flex-col items-center md:items-start text-center md:text-start"
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
-              <Truck size={14} className="animate-bounce" />
-              {t('home.coordinate.moving')}
+              <Wrench size={14} className="animate-spin-slow" />
+              {t('home.coordinate.maintenance')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('service.moving.title.page')}
+              {t('services.homeMaintenance.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -66,7 +75,7 @@ export default function HouseShifting() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('service.moving.problem')}
+                  {t('services.homeMaintenance.title')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
                   {t('services.role.clarification')}
@@ -75,7 +84,7 @@ export default function HouseShifting() {
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('service.moving.sahliDoes')}
+              {t('home.coordinate.maintenance.body')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -83,7 +92,7 @@ export default function HouseShifting() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('House Shifting Hero')}
+                onClick={() => trackWhatsAppClick('Home Repair Hero')}
                 className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -102,8 +111,8 @@ export default function HouseShifting() {
           >
             <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
               <img 
-                src="https://images.pexels.com/photos/3791617/pexels-photo-3791617.jpeg" 
-                alt="House Shifting Service Qatar"
+                src="https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg" 
+                alt="Home Repair Service Qatar"
                 className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -115,8 +124,8 @@ export default function HouseShifting() {
                   <ShieldCheck size={24} />
                 </div>
                 <div>
-                  <div className="text-xs font-black tracking-widest text-primary uppercase">Verified Provider</div>
-                  <div className="text-foreground font-bold">Secure Logistics</div>
+                  <div className="text-xs font-black tracking-widest text-primary uppercase">Verified Providers</div>
+                  <div className="text-foreground font-bold">Standardized Service</div>
                 </div>
               </div>
             </div>
@@ -133,12 +142,12 @@ export default function HouseShifting() {
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center">
-              Moving Guidelines
+            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
+              Service Guidelines
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                t('services.rules.care'),
+                t('services.rules.inspection'),
                 t('services.rules.independent'),
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
@@ -155,45 +164,47 @@ export default function HouseShifting() {
         </div>
       </section>
 
-      {/* 3️⃣ Visual Service Features */}
+      {/* 3️⃣ Service Categories */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              {t('service.moving.includes.title')}
+              Repair Categories
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">End-to-End Moving Solutions</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Expert solutions for every corner</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {includes.map((item, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((cat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group relative p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
+                transition={{ delay: i * 0.05 }}
+                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                  <CheckCircle2 size={28} />
+                  {cat.icon}
                 </div>
-                <h3 className="text-2xl font-black text-foreground mb-2 group-hover:text-primary transition-colors">{item}</h3>
-                <div className="w-10 h-1 bg-primary/20 rounded-full group-hover:w-20 transition-all duration-500" />
+                <h3 className="text-xl md:text-2xl font-black text-foreground mb-4 tracking-tight leading-none group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
+                <p className="text-foreground/60 leading-relaxed text-base font-medium">
+                  {cat.desc}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4️⃣ How It Works - Visual Timeline */}
+      {/* 4️⃣ How Coordination Works */}
       <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
               {t('how.flow.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Standardized Coordination</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Seamless Coordination</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
@@ -237,10 +248,7 @@ export default function HouseShifting() {
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-6">
-                {[
-                  t('home.hero.label'),
-                  t('services.boundaries.is.body').split('\n')[1]
-                ].map((item: string, i: number) => (
+                {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
                   <li key={i} className="flex gap-4 items-center text-lg text-foreground/70 font-bold">
                     <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
                     {item}
@@ -315,7 +323,7 @@ export default function HouseShifting() {
       </section>
 
       {/* 7️⃣ Important Note - High Visibility */}
-      <section className="section-spacing bg-background border-t border-border">
+      <section className="section-spacing bg-background">
         <div className="container-sahli">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -346,11 +354,53 @@ export default function HouseShifting() {
         </div>
       </section>
 
+      {/* Internal Linking Section */}
+      <section className="section-spacing bg-background border-t border-border">
+        <div className="container-sahli">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Sideways Links to Other Pillars */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Related Domains</h4>
+              <div className="flex flex-wrap gap-4">
+                {relatedServices.map((service, i) => (
+                  <Link 
+                    key={i}
+                    to={service.path}
+                    className="px-6 py-3 rounded-xl bg-background border border-border font-bold text-foreground/60 hover:border-primary hover:text-primary transition-all"
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Back to Home Link */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border group"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Navigation</h4>
+              <Link to="/" className="flex items-center gap-3 text-2xl font-black text-foreground group-hover:text-primary transition-colors">
+                <ArrowUp size={24} className="-rotate-90" />
+                Back to Homepage
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* 8️⃣ Final CTA */}
       <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="absolute inset-0 z-0 opacity-10">
           <img 
-            src="https://images.pexels.com/photos/3791617/pexels-photo-3791617.jpeg" 
+            src="https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg" 
             className="w-full h-full object-cover grayscale"
             alt="Background"
           />
@@ -366,9 +416,12 @@ export default function HouseShifting() {
             <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
               <Clock size={48} />
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
-              {t('service.v1.cta.whatsapp')}
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-[-0.05em] mb-12 leading-[0.85]">
+              {t('cta.final.title')}
             </h2>
+            <p className="text-xl md:text-2xl text-foreground/60 font-medium mb-12 max-w-3xl mx-auto leading-tight">
+              {t('cta.final.body')}
+            </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
               <motion.a
                 whileHover={{ scale: 1.05, y: -5 }}
@@ -376,7 +429,7 @@ export default function HouseShifting() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('House Shifting Final CTA')}
+                onClick={() => trackWhatsAppClick('Home Repair Final CTA')}
                 className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30"
               >
                 <MessageCircle size={32} className="fill-primary-foreground" />
@@ -395,20 +448,8 @@ export default function HouseShifting() {
         </div>
       </section>
 
-      {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="section-spacing bg-background border-t border-border">
-        <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
-              {t('services.microLegal')}
-            </p>
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
-              <span>Qatar 2024</span>
-              <span>SAHLI Coordination Hub</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </Layout>
   );
 }
+
+

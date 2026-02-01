@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import { Gavel, Scale, AlertTriangle, ScrollText } from 'lucide-react';
+import { Gavel, ScrollText } from 'lucide-react';
 
 export default function Terms() {
   const { t, dir } = useLanguage();
@@ -53,44 +53,53 @@ export default function Terms() {
                     transition={{ delay: 0.4 }}
                     className="p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] glass-morphism border border-border shadow-2xl shadow-black/20"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8">
-                      <Gavel className="w-6 h-6" />
+                    <div className="flex justify-between items-start mb-8">
+                      <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                        <Gavel className="w-6 h-6" />
+                      </div>
+                      <span className="text-xs font-black tracking-widest text-primary uppercase bg-primary/5 px-4 py-2 rounded-full border border-primary/10">
+                        {t('legal.terms.lastUpdated')}
+                      </span>
                     </div>
                     <p className="text-xl md:text-xl font-bold text-foreground mb-6">
                       {t('legal.terms.main.title')}
                     </p>
                     <p className="text-foreground/70 leading-relaxed font-medium">
-                      {t('legal.terms.main.body')}
+                      {t('legal.terms.intro')}
                     </p>
                   </motion.div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 group"
-                    >
-                      <Scale className="text-primary mb-6 w-8 h-8 group-hover:scale-110 transition-transform" />
-                      <h2 className="text-xl font-black text-foreground mb-4">{t('legal.terms.role.title')}</h2>
-                      <p className="text-foreground/60 leading-relaxed font-medium">
-                        {t('legal.terms.role.body')}
-                      </p>
-                    </motion.div>
-                    
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 group"
-                    >
-                      <AlertTriangle className="text-primary mb-6 w-8 h-8 group-hover:scale-110 transition-transform" />
-                      <h2 className="text-xl font-black text-foreground mb-4">{t('legal.terms.liability.title')}</h2>
-                      <p className="text-foreground/60 leading-relaxed font-medium">
-                        {t('legal.terms.liability.body')}
-                      </p>
-                    </motion.div>
+                  <div className="space-y-8">
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((sectionNum) => (
+                      <motion.div 
+                        key={sectionNum}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 group"
+                      >
+                        <h2 className="text-xl md:text-2xl font-black text-foreground mb-6 group-hover:text-primary transition-colors">
+                          {t(`legal.terms.section${sectionNum}.title` as any)}
+                        </h2>
+                        <div className="text-foreground/60 leading-relaxed font-medium whitespace-pre-line space-y-4">
+                          {(t(`legal.terms.section${sectionNum}.content` as any) as string).split('\n\n').map((paragraph: string, idx: number) => (
+                            <p key={idx}>{paragraph}</p>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
+
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-primary/5 border border-primary/20"
+                  >
+                    <p className="text-foreground/80 font-bold text-center leading-relaxed">
+                      {t('legal.terms.final')}
+                    </p>
+                  </motion.div>
                 </div>
               </div>
 
@@ -102,13 +111,13 @@ export default function Terms() {
                   className="sticky top-32 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] glass-morphism border border-border"
                 >
                   <ScrollText className="text-primary mb-8 w-12 h-12" />
-                  <h3 className="text-xl font-black text-foreground mb-6 uppercase tracking-wider">{t('legal.terms.framework.title')}</h3>
+                  <h3 className="text-xl font-black text-foreground mb-6 uppercase tracking-wider">{t('legal.coordination.title')}</h3>
                   <p className="text-foreground/70 leading-relaxed font-medium mb-8">
-                    {t('legal.terms.framework.body')}
+                    {t('legal.coordination.body')}
                   </p>
                   <div className="h-px w-full bg-border mb-8" />
                   <p className="text-xs font-black text-primary tracking-[0.3em] uppercase">
-                    {t('legal.coordination.title')}
+                    {t('legal.qatar.standard')}
                   </p>
                 </motion.div>
               </div>

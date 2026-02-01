@@ -1,8 +1,13 @@
 export const en = {
   // Navigation
+  'nav.home': 'Home',
+  'nav.homeMaintenance': 'Home Maintenance',
+  'nav.cleaningServices': 'Cleaning Services',
+  'nav.movingServices': 'Moving Services',
+  'nav.careLifestyle': 'Care & Lifestyle (Coming Soon)',
   'nav.howItWorks': 'How SAHLI Works',
-  'nav.services': 'Services',
   'nav.trustStandards': 'Trust & Standards',
+  'nav.services': 'Services',
   'nav.about': 'About',
   'nav.contact': 'Contact',
   'nav.switchLanguage': 'Switch Language',
@@ -166,13 +171,13 @@ export const en = {
   'service.v1.cta.whatsapp': 'Need service now? Message SAHLI on WhatsApp',
 
   // AC Repair
-  'service.ac.title': 'AC Repair Services in Doha, Qatar',
+  'service.ac.title': 'AC Repair & Servicing in Doha, Qatar',
   'service.ac.problem': 'AC not cooling and no one is showing up?',
   'service.ac.sahliDoes': 'SAHLI helps you connect with available AC repair companies so you don’t waste time searching or waiting.',
   'service.ac.includes.title': 'What the service includes',
   'service.ac.includes.item1': 'Inspection & diagnosis',
-  'service.ac.includes.item2': 'AC servicing & cleaning',
-  'service.ac.includes.item3': 'Gas refill',
+  'service.ac.includes.item2': 'AC servicing (cleaning)',
+  'service.ac.includes.item3': 'AC gas refill',
   'service.ac.includes.item4': 'Installation & replacement',
   'service.ac.areas.title': 'Areas served',
   'service.ac.areas.item1': 'Doha & West Bay',
@@ -180,34 +185,34 @@ export const en = {
   'service.ac.areas.item3': 'Al Waab & Al Rayyan',
 
   // Cleaning
-  'service.cleaning.title': 'Cleaning Services in Doha, Qatar',
+  'service.cleaning.title': 'Deep Cleaning Services in Doha (Move-in / Move-out)',
   'service.cleaning.problem': 'Need a reliable cleaner who actually shows up?',
   'service.cleaning.sahliDoes': 'SAHLI helps you connect with professional cleaning companies for your home or office.',
   'service.cleaning.includes.title': 'What the service includes',
-  'service.cleaning.includes.item1': 'Home Deep Cleaning',
+  'service.cleaning.includes.item1': 'House Deep Cleaning',
   'service.cleaning.includes.item2': 'Sofa & Carpet Cleaning',
   'service.cleaning.includes.item3': 'Window Cleaning',
   'service.cleaning.includes.item4': 'Move-in/Move-out Cleaning',
 
   // Plumbing
-  'service.plumbing.title': 'Plumbing Services in Doha, Qatar',
+  'service.plumbing.title': 'Plumbing Services in Doha (Leaks, Pipes, Water Heaters)',
   'service.plumbing.problem': 'Leaking pipes or blocked drains?',
   'service.plumbing.sahliDoes': 'SAHLI connects you with experienced plumbers to fix your water and drainage issues.',
   'service.plumbing.includes.title': 'What the service includes',
   'service.plumbing.includes.item1': 'Leak detection & repair',
-  'service.plumbing.includes.item2': 'Drain unblocking',
-  'service.plumbing.includes.item3': 'Fixture installation',
-  'service.plumbing.includes.item4': 'Water heater repair',
+  'service.plumbing.includes.item2': 'Pipe repair',
+  'service.plumbing.includes.item3': 'Water pump repair',
+  'service.plumbing.includes.item4': 'Water heater / geyser repair',
 
   // Electrical
-  'service.electrical.title': 'Electrical Services in Doha, Qatar',
+  'service.electrical.title': 'Electrician Services in Doha (Repairs & Installations)',
   'service.electrical.problem': 'Power trips or faulty wiring?',
   'service.electrical.sahliDoes': 'SAHLI helps you find licensed electricians for safe and reliable electrical work.',
   'service.electrical.includes.title': 'What the service includes',
-  'service.electrical.includes.item1': 'Short circuit repair',
-  'service.electrical.includes.item2': 'Wiring & rewiring',
-  'service.electrical.includes.item3': 'Lighting installation',
-  'service.electrical.includes.item4': 'DB & Breaker maintenance',
+  'service.electrical.includes.item1': 'Short circuit issues',
+  'service.electrical.includes.item2': 'Socket repair',
+  'service.electrical.includes.item3': 'DB box repair or Electrical panel repair',
+  'service.electrical.includes.item4': 'Lighting installation',
 
   // House Shifting
   'service.moving.title.page': 'House Shifting Services in Doha, Qatar',
@@ -247,7 +252,7 @@ export const en = {
   'services.boundary.is.item2': 'Inspection-first approach',
   'services.boundary.is.item3': 'Professional service standard',
   'services.boundary.not.item1': 'Not executed by SAHLI',
-  'services.boundary.not.item2': 'Not a price-guaranteed booking',
+  'services.boundary.not.item2': 'Not a fixed-price coordination',
   'services.boundary.not.item3': 'Not an employment agency',
   'services.lessons.tutoring.items': 'Academic Support\nAll Levels\nVerified Tutors',
   'services.lessons.language.title': 'Language Lessons',
@@ -268,87 +273,82 @@ export const en = {
   'services.boundaries.isNot.body': 'Not executed by SAHLI\nNot priced in advance\nNot paid through SAHLI',
 
   // Roof 1: Home Maintenance
-  'services.homeRepair.title': 'Home Maintenance',
-  'services.homeRepair.subtitle': 'AC, electrical, plumbing, and essential home fixes.',
-  'services.homeRepair.body': 'AC, electrical, plumbing, appliance repair, handyman, and pest issues.',
-  'services.homeRepair.rule': 'Inspection-first. No pricing before visit.',
-  'services.homeRepair.cta': 'Message SAHLI for Home Maintenance',
+  'services.homeMaintenance.title': 'Home Maintenance',
+  'services.homeMaintenance.path': '/home-maintenance-qatar',
+  'services.homeMaintenance.subtitle': 'AC, electrical, plumbing, and essential home fixes.',
+  'services.homeMaintenance.body': 'AC, electrical, plumbing, appliance repair, handyman, and pest issues.',
+  'services.homeMaintenance.rule': 'Inspection-first. No pricing before visit.',
+  'services.homeMaintenance.cta': 'Message SAHLI for Home Maintenance',
   
-  'services.homeRepair.ac.title': 'AC Services',
-  'services.homeRepair.ac.desc': 'AC not cooling, leaking, noisy, servicing, or new installation.',
-  'services.homeRepair.ac.items': 'AC not cooling\nLeaking\nNoisy\nServicing\nNew installation',
+  'services.homeMaintenance.ac.title': 'AC Services',
+  'services.homeMaintenance.ac.desc': 'AC Repair & Servicing in Doha, Qatar. Gas refill, duct cleaning, installation, or AMC.',
+  'services.homeMaintenance.ac.items': 'AC Repair\nAC Servicing\nAC Gas Refill\nAC Duct Cleaning\nInstallation\nAMC',
   
-  'services.homeRepair.electrical.title': 'Electrical Services',
-  'services.homeRepair.electrical.desc': 'Power issues, wiring faults, lights, switches, and sockets.',
-  'services.homeRepair.electrical.items': 'Power issues\nWiring faults\nLights\nSwitches\nSockets',
+  'services.homeMaintenance.electrical.title': 'Electrical Services',
+  'services.homeMaintenance.electrical.desc': 'Electrical Panel Repair & Installation in Doha. Short circuit fixes, sockets, and lighting.',
+  'services.homeMaintenance.electrical.items': 'Electrical Panel Repair\nShort Circuit Issues\nSocket Repair\nLighting Installation\nDB Box Repair',
   
-  'services.homeRepair.plumbing.title': 'Plumbing Services',
-  'services.homeRepair.plumbing.desc': 'Water leaks, blockages, toilets, taps, and pipe problems.',
-  'services.homeRepair.plumbing.items': 'Water leaks\nBlockages\nToilets\nTaps\nPipe problems',
+  'services.homeMaintenance.plumbing.title': 'Plumbing Services',
+  'services.homeMaintenance.plumbing.desc': 'Plumbing Services in Doha (Leaks, Pipes, Water Heaters).',
+  'services.homeMaintenance.plumbing.items': 'Leak Detection\nPipe Repair\nWater Pump Repair\nWater Heater / Geyser Repair\nBlockages',
   
-  'services.homeRepair.appliances.title': 'Appliance Repair',
-  'services.homeRepair.appliances.desc': 'Washing machine, refrigerator, oven, or dishwasher issues.',
-  'services.homeRepair.appliances.items': 'Washing machine\nRefrigerator\nOven\nDishwasher',
+  'services.homeMaintenance.appliances.title': 'Appliance Repair',
+  'services.homeMaintenance.appliances.desc': 'Professional repair for washing machines, refrigerators, dishwashers, and ovens.',
+  'services.homeMaintenance.appliances.items': 'Washing Machine\nRefrigerator\nDishwasher\nOven & Cooker Repair',
   
-  'services.homeRepair.handyman.title': 'Handyman Services',
-  'services.homeRepair.handyman.desc': 'Furniture fixing, drilling, mounting, and small home jobs.',
-  'services.homeRepair.handyman.items': 'Furniture fixing\nDrilling\nMounting\nSmall home jobs',
+  'services.homeMaintenance.handyman.title': 'Handyman Services',
+  'services.homeMaintenance.handyman.desc': 'TV mounting, curtain rods, shelf drilling, and furniture assembly & installation (IKEA).',
+  'services.homeMaintenance.handyman.items': 'TV Mounting\nCurtain Rods\nShelf Drilling\nFurniture Assembly & Installation\nIKEA Furniture Assembly',
   
-  'services.homeRepair.pest.title': 'Pest Control',
-  'services.homeRepair.pest.desc': 'Cockroaches, ants, rodents, and general pest problems.',
-  'services.homeRepair.pest.items': 'Cockroaches\nAnts\nRodents\nGeneral pest problems',
+  'services.homeMaintenance.pest.title': 'Pest Control Services',
+  'services.homeMaintenance.pest.desc': 'Professional pest control for bed bugs, cockroaches, termites, ants, and rodents.',
+  'services.homeMaintenance.pest.items': 'Bed Bugs\nCockroaches\nTermites\nAnts\nRodents',
 
-  // Roof 2: Cleaning Services
-  'services.cleaning.title': 'Cleaning Services',
-  'services.cleaning.body': 'Home cleaning, deep cleaning, sofas, carpets, and water tanks.',
+  // Roof 2: Cleaning & Sanitization
+  'services.cleaning.title': 'Cleaning & Sanitization',
+  'services.cleaning.path': '/cleaning-services-qatar',
+  'services.cleaning.body': 'House cleaning, deep cleaning, specialized sanitization, and water tanks.',
   'services.cleaning.rule': 'Scope-defined services. No hourly ambiguity.',
   'services.cleaning.cta': 'Message SAHLI for Cleaning Services',
   
-  'services.cleaning.regular.title': 'Regular Cleaning',
-  'services.cleaning.regular.desc': 'Routine home cleaning service.',
-  'services.cleaning.regular.items': 'Kitchens\nBathrooms\nLiving Areas\nBedrooms',
+  'services.cleaning.regular.title': 'House Cleaning',
+  'services.cleaning.regular.desc': 'General house cleaning, villa cleaning, apartment cleaning, and hourly support.',
+  'services.cleaning.regular.items': 'House Cleaning\nVilla Cleaning\nApartment Cleaning\nPart-time Maids\nHourly Cleaning',
   
   'services.cleaning.deep.title': 'Deep Cleaning',
-  'services.cleaning.deep.desc': 'Full house deep cleaning.',
-  'services.cleaning.deep.items': 'Full house\nKitchens\nBathrooms',
+  'services.cleaning.deep.desc': 'Move-in/out deep cleaning, post-construction, and steam deep cleaning.',
+  'services.cleaning.deep.items': 'Move-in Cleaning\nMove-out Cleaning\nPost-Construction\nSteam Deep Cleaning',
   
-  'services.cleaning.sofa.title': 'Sofa Cleaning',
-  'services.cleaning.upholstery.title': 'Upholstery Cleaning',
-  'services.cleaning.upholstery.desc': 'Sofa and upholstery cleaning.',
-  'services.cleaning.upholstery.items': 'Sofas\nArmchairs\nOttomans',
-  'services.cleaning.sofa.desc': 'Sofa and upholstery cleaning.',
-  'services.cleaning.sofa.items': 'Sofas\nArmchairs\nOttomans',
-
-  'services.cleaning.carpet.title': 'Carpet Cleaning',
-  'services.cleaning.carpet.desc': 'Carpet and rug cleaning.',
-  'services.cleaning.carpet.items': 'Wall-to-wall carpets\nArea rugs\nPersian rugs',
-
-  'services.cleaning.mattress.title': 'Mattress Cleaning',
-  'services.cleaning.mattress.desc': 'Mattress cleaning and sanitization.',
-  'services.cleaning.mattress.items': 'Cleaning\nSanitization\nStain removal',
-
+  'services.cleaning.specialized.title': 'Specialized Cleaning',
+  'services.cleaning.specialized.desc': 'Sofa, carpet, mattress, curtains, and blinds cleaning.',
+  'services.cleaning.specialized.items': 'Sofa & Carpet Cleaning\nMattress Cleaning & Sanitization\nCurtain & Blinds Cleaning',
+  
   'services.cleaning.watertank.title': 'Water Tank Cleaning',
-  'services.cleaning.watertank.desc': 'Residential water tank cleaning.',
-  'services.cleaning.watertank.items': 'Cleaning\nDisinfection\nInspection',
-
-  // Roof 3: Moving Services
-  'services.moving.title': 'Moving Services',
-  'services.moving.body': 'House shifting, packing, transport, and furniture handling.',
+  'services.cleaning.watertank.desc': 'Residential water tank cleaning and disinfection.',
+  'services.cleaning.watertank.items': 'Water Tank Cleaning\nDisinfection\nInspection',
+  
+  // Roof 3: Moving & Relocation
+  'services.moving.title': 'Moving & Relocation',
+  'services.moving.path': '/house-shifting-qatar',
+  'services.moving.body': 'House shifting, packing, furniture handling, and storage solutions.',
   'services.moving.rule': 'Scope-defined services. No hourly ambiguity.',
   'services.moving.cta': 'Message SAHLI for Moving Services',
   
-  'services.moving.local.title': 'Local Moving',
   'services.moving.house.title': 'House Shifting',
-  'services.moving.local.desc': 'Apartment and villa moving with transport and handling.',
-  'services.moving.local.items': 'Apartment moving\nVilla moving\nTransport\nHandling',
+  'services.moving.house.desc': 'Local house shifting, villa, and apartment moving in Qatar.',
+  'services.moving.house.items': 'Local House Shifting\nApartment Moving\nVilla Moving\nTransport',
   
   'services.moving.packing.title': 'Packing & Unpacking',
-  'services.moving.packing.desc': 'Professional packing and unpacking of household items.',
-  'services.moving.packing.items': 'Professional packing\nUnpacking\nHousehold items',
+  'services.moving.packing.desc': 'Professional packing and unpacking services for stress-free relocation.',
+  'services.moving.packing.items': 'Professional Packing\nUnpacking Services\nFragile Handling\nBoxing',
   
-  'services.moving.dismantling.title': 'Furniture Dismantling & Reassembly',
-  'services.moving.dismantling.desc': 'Safe dismantling and reassembly during relocation.',
-  'services.moving.dismantling.items': 'Safe dismantling\nReassembly\nRelocation support',
+  'services.moving.dismantling.title': 'Furniture Services',
+  'services.moving.dismantling.desc': 'Furniture dismantling & reassembly during or after relocation.',
+  'services.moving.dismantling.items': 'Furniture Dismantling & Reassembly\nFurniture Handling',
+  
+  'services.moving.storage.title': 'Junk Removal & Storage',
+  'services.moving.storage.desc': 'Old furniture removal, junk removal, and short-term storage.',
+  'services.moving.storage.items': 'Old Furniture Removal\nJunk Removal\nShort-term Storage',
 
   // Roof 4: Care & Childcare (Coming Soon)
   'services.care.title': 'Care & Childcare',
@@ -511,8 +511,10 @@ export const en = {
   'contact.title': 'Contact',
   'contact.primary': 'WhatsApp is the fastest entry.',
   'contact.whatsapp.value': '+974 7034 6652',
-  'contact.email.label': 'Institutional:',
-  'contact.email.value': 'hello@sahli.sa',
+  'contact.email.label': 'Email Address',
+  'contact.email.value': 'hello@serviceservice.com',
+  'contact.address.label': 'Office Location',
+  'contact.address.value': 'Doha, Qatar',
   'contact.commitment.fast.title': 'Fast Response',
   'contact.commitment.fast.body': 'Coordination requests are typically processed within 30 minutes during business hours.',
   'contact.commitment.verified.title': 'Verified Routing',
@@ -522,28 +524,98 @@ export const en = {
 
   // Legal
   'legal.terms.title': 'Terms of Use',
-  'legal.terms.main.title': 'Terms of use content will be provided.',
-  'legal.terms.main.body': 'This page outlines the coordination role, liability boundaries, replacement definition, and dispute handling stance of SAHLI. By using our services, you agree to these terms.',
-  'legal.terms.role.title': 'Coordination Role',
-  'legal.terms.role.body': 'SAHLI acts solely as a coordination intermediary. We facilitate the connection between users and independent service providers who have passed our vetting framework.',
-  'legal.terms.liability.title': 'Liability',
-  'legal.terms.liability.body': 'SAHLI is not a party to any contract or agreement between the customer and the independent service provider. The final contract for service delivery is strictly between the user and the provider.',
-  'legal.terms.framework.title': 'Legal Framework',
-  'legal.terms.framework.body': 'Our terms are designed to provide a clear and structured framework for coordination, ensuring that all parties understand their roles and responsibilities.',
+  'legal.terms.main.title': 'SAHLI Coordination Hub Terms of Use',
+  'legal.terms.lastUpdated': 'Last updated: 2026',
+  'legal.terms.intro': 'These Terms of Use govern access to and use of the website, WhatsApp communication, and coordination services operated by SAHLI Coordination Services W.L.L., operating under the brand name SAHLI (“SAHLI”, “we”, “us”, “our”). By contacting, accessing, or using SAHLI through any channel, you acknowledge that you have read, understood, and agreed to these Terms of Use.',
+  
+  'legal.terms.section1.title': '1. Legal Entity Information',
+  'legal.terms.section1.content': 'Legal Entity Name: SAHLI Coordination Services W.L.L.\nOperating Name: SAHLI\nJurisdiction: State of Qatar\n\nAll references to “SAHLI” in these Terms refer to SAHLI Coordination Services W.L.L.',
+  
+  'legal.terms.section2.title': '2. Nature of SAHLI’s Services',
+  'legal.terms.section2.content': 'SAHLI operates exclusively as a service coordination hub. SAHLI facilitates the connection between customers and independent third-party service providers for home maintenance, cleaning, moving, and related services. SAHLI does not provide, perform, supervise, or guarantee any services.',
+  
+  'legal.terms.section3.title': '3. Coordination Role',
+  'legal.terms.section3.content': 'SAHLI’s role is strictly limited to coordination and information exchange. SAHLI may:\n• Receive service requirements from customers\n• Structure and share those requirements with suitable independent service providers\n• Facilitate contact exchange once a provider confirms availability\n\nSAHLI’s involvement ends once contact details are exchanged between the customer and the service provider.',
+  
+  'legal.terms.section4.title': '4. What SAHLI Does Not Do',
+  'legal.terms.section4.content': 'For absolute clarity, SAHLI does not:\n• Execute or deliver services\n• Supervise or control service execution\n• Set, negotiate, or influence pricing\n• Employ, subcontract, or manage service providers\n• Act as a marketplace, directory, contractor, or agent\n• Process payments or hold funds\n• Guarantee service quality, timelines, or outcomes\n\nSAHLI is not a party to any service contract.',
+  
+  'legal.terms.section5.title': '5. Independent Service Providers',
+  'legal.terms.section5.content': 'All service providers coordinated through SAHLI operate as independent legal entities. Service providers are solely responsible for:\n• Inspection and assessment\n• Quotation and pricing\n• Service execution\n• Timelines, safety, and compliance\n• Payment collection\n\nAny agreement, transaction, or dispute exists exclusively between the customer and the service provider.',
+  
+  'legal.terms.section6.title': '6. Pricing & Payments',
+  'legal.terms.section6.content': 'SAHLI does not collect payments from customers.\n\nPricing:\n• Is determined by the service provider\n• Is communicated after inspection\n• Is paid directly by the customer to the provider\n\nSAHLI has no involvement in billing, refunds, cancellations, or disputes related to payment.',
+  
+  'legal.terms.section7.title': '7. No Guarantees or Warranties',
+  'legal.terms.section7.content': 'SAHLI does not provide warranties or guarantees of any kind. SAHLI does not guarantee:\n• Provider availability\n• Response times\n• Service outcomes\n• Completion timelines\n\nCoordination depends on provider availability and customer-provider agreement.',
+  
+  'legal.terms.section8.title': '8. Liability Disclaimer',
+  'legal.terms.section8.content': 'SAHLI is not liable for:\n• Service quality or workmanship\n• Delays, cancellations, or non-attendance\n• Property damage or losses\n• Safety incidents\n• Misrepresentation by service providers\n• Disputes between customers and providers\n\nCustomers acknowledge that service delivery is outside SAHLI’s control.',
+  
+  'legal.terms.section9.title': '9. Post-Service Follow-Up',
+  'legal.terms.section9.content': 'SAHLI may contact customers after service completion to collect feedback for internal coordination and quality monitoring purposes only. Feedback:\n• Does not constitute endorsement\n• Does not imply service guarantees\n• Does not create liability',
+  
+  'legal.terms.section10.title': '10. User Responsibilities',
+  'legal.terms.section10.content': 'By using SAHLI, users agree to:\n• Provide accurate and truthful information\n• Communicate respectfully with service providers\n• Make independent decisions regarding service engagement\n\nSAHLI is not responsible for user decisions or conduct.',
+  
+  'legal.terms.section11.title': '11. Modification of Terms',
+  'legal.terms.section11.content': 'SAHLI reserves the right to update or modify these Terms of Use at any time. Changes take effect upon publication on the website. Continued use of SAHLI constitutes acceptance of the updated Terms.',
+  
+  'legal.terms.section12.title': '12. Governing Scope',
+  'legal.terms.section12.content': 'These Terms apply to all interactions with SAHLI, including:\n• Website usage\n• WhatsApp communication\n• Any official SAHLI channel',
+  
+  'legal.terms.section13.title': '13. Termination of Access',
+  'legal.terms.section13.content': 'SAHLI reserves the right to limit or discontinue coordination access if misuse, abuse, or unlawful activity is identified.',
+  
+  'legal.terms.section14.title': '14. Contact Information',
+  'legal.terms.section14.content': 'SAHLI Coordination Services W.L.L.\nQatar\nWebsite: https://www.sahliservice.com\nWhatsApp: +974 7034 6652\nEmail: hello@serviceservice.com',
+  
+  'legal.terms.final': 'SAHLI acts solely as a coordination intermediary. All service-related obligations exist exclusively between the customer and the independent service provider.',
+  
   'legal.privacy.title': 'Privacy Policy',
-  'legal.privacy.intro': 'Sahli respects your privacy and is committed to protecting personal information shared with us.',
-  'legal.privacy.sections.collect.title': 'Information We Collect',
-  'legal.privacy.sections.collect.content': 'We may collect limited personal information when you contact us, submit a service request, or communicate via WhatsApp. This may include your name, phone number, location, and service-related details.',
-  'legal.privacy.sections.use.title': 'How Information Is Used',
-  'legal.privacy.sections.use.content': 'Information is used only to:\n• Review and structure service requests\n• Coordinate communication with suitable service providers\n• Respond to inquiries and operational messages\n\nSahli does not sell or rent personal data.',
-  'legal.privacy.sections.sharing.title': 'Data Sharing',
-  'legal.privacy.sections.sharing.content': 'Personal information may be shared only with relevant independent service providers for the purpose of fulfilling a service request. Sahli does not provide services directly.',
-  'legal.privacy.sections.storage.title': 'Data Storage & Security',
-  'legal.privacy.sections.storage.content': 'Reasonable administrative and technical measures are used to protect information. However, no system can guarantee absolute security.',
-  'legal.privacy.sections.thirdparty.title': 'Third-Party Services',
-  'legal.privacy.sections.thirdparty.content': 'Communication may take place through third-party platforms such as WhatsApp. Their privacy practices are governed by their own policies.',
-  'legal.privacy.sections.rights.title': 'Your Rights',
-  'legal.privacy.sections.rights.content': 'You may request correction or deletion of your personal information by contacting us.',
+  'legal.privacy.intro': 'This Privacy Policy explains how SAHLI Coordination Services W.L.L., operating under the brand name SAHLI (“SAHLI”, “we”, “us”, “our”), collects, uses, and protects personal information when you interact with our website, WhatsApp communication, and coordination services.',
+  'legal.privacy.agreement': 'By contacting or using SAHLI, you agree to the practices described in this Privacy Policy.',
+  
+  'legal.privacy.section1.title': '1. Who We Are',
+  'legal.privacy.section1.content': 'Legal Entity Name: SAHLI Coordination Services W.L.L.\nOperating Name: SAHLI\nJurisdiction: State of Qatar\n\nSAHLI operates as a service coordination hub. We facilitate connections between customers and independent third-party service providers. SAHLI does not perform services, process payments, or enter service contracts.',
+  
+  'legal.privacy.section2.title': '2. Information We Collect',
+  'legal.privacy.section2.content': 'We collect only the minimum information necessary to coordinate service requests.\n\nInformation you may provide to us:\n• Name\n• Phone number (including WhatsApp number)\n• Location (area only, not precise tracking)\n• Service requirement details\n• Messages and communication shared with SAHLI\n\nInformation collected automatically:\n• Basic website analytics (page visits, browser type, device type)\n• IP address (for security and analytics purposes only)\n\nSAHLI does not require user accounts, passwords, or profiles.',
+  
+  'legal.privacy.section3.title': '3. What We Do NOT Collect',
+  'legal.privacy.section3.content': 'SAHLI does not collect or process:\n• Payment or billing information\n• Credit or debit card details\n• National ID or passport information\n• User account credentials\n• Continuous GPS tracking\n• App-level device monitoring',
+  
+  'legal.privacy.section4.title': '4. How We Use Your Information',
+  'legal.privacy.section4.content': 'We use your information solely to:\n• Understand your service requirement\n• Coordinate with suitable independent service providers\n• Facilitate contact exchange once a provider confirms availability\n• Communicate with you regarding coordination status\n• Collect post-service feedback for internal quality monitoring\n\nWe do not use your information for public listings or reviews.',
+  
+  'legal.privacy.section5.title': '5. Information Sharing',
+  'legal.privacy.section5.content': 'SAHLI may share limited information only with independent service providers for coordination purposes. This may include your name, contact number, service requirement details, and service location area.\n\nWe do not sell, rent, or trade personal information to third parties. SAHLI does not control the privacy practices of independent service providers. Once contact is exchanged, any further interaction is between you and the provider directly.',
+  
+  'legal.privacy.section6.title': '6. Payments & Transactions',
+  'legal.privacy.section6.content': 'SAHLI does not collect payments from customers. All pricing, payments, and service transactions occur directly between the customer and the service provider. SAHLI has no access to, and no responsibility for, transaction data between customers and providers.',
+  
+  'legal.privacy.section7.title': '7. Cookies & Website Analytics',
+  'legal.privacy.section7.content': 'Our website may use basic cookies or analytics tools to improve website performance and understand general usage patterns. These tools do not identify you personally. You can manage or disable cookies through your browser settings.',
+  
+  'legal.privacy.section8.title': '8. Data Retention',
+  'legal.privacy.section8.content': 'We retain personal information only for as long as reasonably necessary to complete coordination, maintain internal records, and comply with legal or regulatory obligations. Information may be anonymized or deleted once it is no longer required.',
+  
+  'legal.privacy.section9.title': '9. Data Security',
+  'legal.privacy.section9.content': 'SAHLI takes reasonable administrative and technical measures to protect personal information from unauthorized access, misuse, or disclosure. However, no method of electronic transmission or storage is completely secure. By using SAHLI, you acknowledge this risk.',
+  
+  'legal.privacy.section10.title': '10. Children’s Privacy',
+  'legal.privacy.section10.content': 'SAHLI’s services are not intended for children under the age of 13. We do not knowingly collect personal information from children.',
+  
+  'legal.privacy.section11.title': '11. Third-Party Links',
+  'legal.privacy.section11.content': 'Our website may contain links to third-party websites or services. SAHLI is not responsible for the privacy practices or content of external sites. We encourage you to review their privacy policies independently.',
+  
+  'legal.privacy.section12.title': '12. Changes to This Privacy Policy',
+  'legal.privacy.section12.content': 'SAHLI may update this Privacy Policy from time to time. Any changes will be published on this page. Continued use of SAHLI after changes are posted constitutes acceptance of the updated policy.',
+  
+  'legal.privacy.section13.title': '13. Contact Information',
+  'legal.privacy.section13.content': 'If you have any questions about this Privacy Policy or how your information is handled, you may contact us at:\n\nSAHLI Coordination Services W.L.L.\nQatar\nWebsite: https://www.sahliservice.com\nWhatsApp: +974 7034 6652\nEmail: hello@serviceservice.com',
+  
+  'legal.privacy.final': 'SAHLI operates strictly as a coordination intermediary. Service delivery, pricing, execution, and payments are the responsibility of independent service providers.',
   'legal.notice.title': 'Impressum / Legal Notice',
   'legal.notice.operatedBy': 'This website is operated by:',
   'legal.notice.entity.label': 'Legal Entity',
@@ -564,8 +636,58 @@ export const en = {
   'legal.coordination.title': 'Coordination Standard',
   'legal.coordination.body': 'Our coordination infrastructure is built on transparency and professional discipline. We ensure every interaction meets our institutional standards.',
   'legal.qatar.standard': 'Qatar Operating Standard',
+
+  // Pillar 4: Specialized
+  'services.specialized.title': 'Outdoor & Specialized Maintenance',
+  'services.specialized.path': '/specialized-maintenance-qatar',
+  'services.specialized.pest.title': 'Pest Control Services',
+  'services.specialized.pest.desc': 'Bed bugs, cockroaches, termites, ants, and rodents.',
+  'services.specialized.pest.items': 'Bed Bugs\nCockroaches\nTermites\nAnts\nRodents',
+  'services.specialized.landscaping.title': 'Landscaping & Garden',
+  'services.specialized.landscaping.desc': 'Garden maintenance, irrigation repair, and lawn mowing.',
+  'services.specialized.landscaping.items': 'Garden Maintenance\nIrrigation Repair\nLawn Mowing',
+  'services.specialized.pool.title': 'Swimming Pool Services',
+  'services.specialized.pool.desc': 'Pool cleaning, chemical balancing, and pump repair.',
+  'services.specialized.pool.items': 'Cleaning\nChemical Balance\nPump Repair',
+  'services.specialized.waterproofing.title': 'Waterproofing',
+  'services.specialized.waterproofing.desc': 'Roof leakage repair and basement waterproofing.',
+  'services.specialized.waterproofing.items': 'Roof Leakage Repair\nBasement Waterproofing\nFull Waterproofing',
+
+  // Pillar 5: Care & Lifestyle
+  'services.careLifestyle.title': 'Care & Lifestyle',
+  'services.careLifestyle.path': '/care-lifestyle-qatar',
+  'services.careLifestyle.babysitting.title': 'Babysitting & Home Nursing',
+  'services.careLifestyle.babysitting.desc': 'On-demand babysitting and live-in nanny / monthly nanny.',
+  'services.careLifestyle.babysitting.items': 'Babysitting\nLive-in Nanny\nMonthly Nanny\nChildcare',
+  'services.careLifestyle.nursing.title': 'Home Nursing Services',
+  'services.careLifestyle.nursing.desc': 'Nursing care, elderly care, and post-operative care at home.',
+  'services.careLifestyle.nursing.items': 'Nursing Care\nElderly Care\nPost-operative',
+  'services.careLifestyle.pets.title': 'Pet Services',
+  'services.careLifestyle.pets.desc': 'Mobile pet grooming and pet sitting.',
+  'services.careLifestyle.pets.items': 'Mobile Grooming\nPet Sitting',
+  'services.careLifestyle.beauty.title': 'Home Salon Services',
+  'services.careLifestyle.beauty.desc': 'Home salon, manicure, hair, and henna services.',
+  'services.careLifestyle.beauty.items': 'Home Salon\nManicure\nHair & Henna',
+  'services.careLifestyle.tutoring.title': 'Private Tutoring in Doha',
+  'services.careLifestyle.tutoring.desc': 'British, American, and IB curriculum tutoring.',
+  'services.careLifestyle.tutoring.items': 'British Curriculum\nAmerican Curriculum\nIB Curriculum\nGeneral Tutoring',
+
+  // Pillar 6: Electronics
+  'services.electronics.title': 'Electronics & Technology',
+  'services.electronics.path': '/appliance-repair-qatar',
+  'services.electronics.appliances.title': 'Appliance Repair',
+  'services.electronics.appliances.desc': 'Washing machine, refrigerator, dishwasher, and oven & cooker repair.',
+  'services.electronics.appliances.items': 'Washing Machine\nRefrigerator\nDishwasher\nOven & Cooker',
+  'services.electronics.cctv.title': 'Smart Home & Security',
+  'services.electronics.cctv.desc': 'CCTV installation, smart lock installation, and Wi-Fi signal extender installation.',
+  'services.electronics.cctv.items': 'CCTV Installation\nSmart Lock Installation\nWi-Fi Signal Extender Installation',
+  'services.electronics.satellite.title': 'Satellite & TV',
+  'services.electronics.satellite.desc': 'IPTV installation and satellite dish repair & alignment.',
+  'services.electronics.satellite.items': 'IPTV Installation\nTV Box Configuration\nSatellite Dish Repair & Alignment',
+
   'legal.breadcrumb': 'Legal & Privacy',
   'legal.updated': 'Last updated',
+  'legal.updated.date': '2026',
 
   'about.footer.hub': 'SAHLI HUB',
   'about.hero.alt': 'SAHLI Office',
@@ -579,9 +701,9 @@ export const en = {
   'how.boundaries.dont': 'WHAT WE DON\'T',
   'footer.whatsapp': 'WhatsApp',
   'header.quickContact': 'Quick Contact',
-  'header.contact.email': 'info@sahli.co',
-  'legal.contact.email': 'hello@sahli.sa',
-  'legal.contact.website': 'sahliservices.qa',
+  'header.contact.email': 'hello@serviceservice.com',
+  'legal.contact.email': 'hello@serviceservice.com',
+  'legal.contact.website': 'www.sahliservice.com',
   'pagination.previous': 'Previous',
   'pagination.next': 'Next',
   'footer.motto': 'One roof. Many needs. Same standards.',

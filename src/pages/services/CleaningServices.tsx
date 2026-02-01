@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
+import { Link } from 'react-router-dom';
 
-export default function Cleaning() {
+export default function CleaningServices() {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -17,6 +18,19 @@ export default function Cleaning() {
 
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
+
+  const relatedServices = [
+    { title: t('nav.homeMaintenance'), path: '/home-maintenance-qatar' },
+    { title: t('nav.movingServices'), path: '/house-shifting-qatar' },
+    { title: t('nav.careLifestyle'), path: '/care-lifestyle-qatar' },
+  ];
+
+  const categories = [
+    { title: t('services.cleaning.regular.title'), desc: t('services.cleaning.regular.desc'), icon: <Sparkles size={28} /> },
+    { title: t('services.cleaning.deep.title'), desc: t('services.cleaning.deep.desc'), icon: <Sparkles size={28} /> },
+    { title: t('services.cleaning.specialized.title'), desc: t('services.cleaning.specialized.desc'), icon: <Sparkles size={28} /> },
+    { title: t('services.cleaning.watertank.title'), desc: t('services.cleaning.watertank.desc'), icon: <Sparkles size={28} /> }
+  ];
 
   const coordinationSteps = [
     { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
@@ -61,7 +75,7 @@ export default function Cleaning() {
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('service.cleaning.title')}
+              {t('services.cleaning.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -69,7 +83,7 @@ export default function Cleaning() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('service.cleaning.problem')}
+                  {t('services.cleaning.title')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
                   {t('service.v1.humanProblem.body')}
@@ -158,34 +172,33 @@ export default function Cleaning() {
         </div>
       </section>
 
-      {/* 3️⃣ Visual Service Features */}
+      {/* 3️⃣ Service Categories */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-                {t('service.cleaning.includes.title')}
-              </h2>
-            </div>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
+              {t('services.cleaning.title')}
+            </h2>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Reliable. Thorough. Simple.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {includes.map((item, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((cat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/40 hover:bg-foreground/[0.04] transition-all duration-500"
+                transition={{ delay: i * 0.05 }}
+                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-500">
-                  <CheckCircle2 size={28} />
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                  {cat.icon}
                 </div>
-                <h3 className="text-xl font-black text-foreground/90 group-hover:text-primary transition-colors duration-500 mb-2">
-                  {item}
-                </h3>
-                <div className="w-8 h-1 bg-primary/20 rounded-full group-hover:w-full transition-all duration-700" />
+                <h3 className="text-xl md:text-2xl font-black text-foreground mb-4 tracking-tight leading-none group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
+                <p className="text-foreground/60 leading-relaxed text-base font-medium">
+                  {cat.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -353,6 +366,48 @@ export default function Cleaning() {
         </div>
       </section>
 
+      {/* Internal Linking Section */}
+      <section className="section-spacing bg-background border-t border-border">
+        <div className="container-sahli">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Sideways Links to Other Pillars */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Related Domains</h4>
+              <div className="flex flex-wrap gap-4">
+                {relatedServices.map((service, i) => (
+                  <Link 
+                    key={i}
+                    to={service.path}
+                    className="px-6 py-3 rounded-xl bg-background border border-border font-bold text-foreground/60 hover:border-primary hover:text-primary transition-all"
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Back to Home Link */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border group"
+            >
+              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Navigation</h4>
+              <Link to="/" className="flex items-center gap-3 text-2xl font-black text-foreground group-hover:text-primary transition-colors">
+                <ArrowUp size={24} className="-rotate-90" />
+                Back to Homepage
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* 8️⃣ Final High-Impact CTA */}
       <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="absolute inset-0 z-0 opacity-10">
@@ -399,20 +454,6 @@ export default function Cleaning() {
         </div>
       </section>
 
-      {/* 9️⃣ Micro-Legal Clarity */}
-      <footer className="section-spacing bg-background border-t border-border">
-        <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[10px] md:text-xs text-foreground/30 font-black max-w-2xl text-center md:text-left leading-relaxed uppercase tracking-[0.3em]">
-              {t('services.microLegal')}
-            </p>
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-foreground/20 uppercase">
-              <span>Qatar 2024</span>
-              <span>SAHLI Coordination Hub</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </Layout>
   );
 }

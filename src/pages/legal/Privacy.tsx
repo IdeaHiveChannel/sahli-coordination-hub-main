@@ -7,51 +7,29 @@ import { Shield, Lock, Eye, Scale, MessageCircle, Globe, Mail, Gavel, FileText }
 export default function Privacy() {
   const { t, dir } = useLanguage();
 
-  interface PrivacySection {
-    icon: React.ReactNode;
-    title: string;
-    content: string;
-  }
-
-  const privacySections: PrivacySection[] = [
-    {
-      icon: <Lock className="w-6 h-6" />,
-      title: t('legal.privacy.sections.collect.title'),
-      content: t('legal.privacy.sections.collect.content')
-    },
-    {
-      icon: <Scale className="w-6 h-6" />,
-      title: t('legal.privacy.sections.use.title'),
-      content: t('legal.privacy.sections.use.content')
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      title: t('legal.privacy.sections.sharing.title'),
-      content: t('legal.privacy.sections.sharing.content')
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: t('legal.privacy.sections.storage.title'),
-      content: t('legal.privacy.sections.storage.content')
-    },
-    {
-      icon: <MessageCircle className="w-6 h-6" />,
-      title: t('legal.privacy.sections.thirdparty.title'),
-      content: t('legal.privacy.sections.thirdparty.content')
-    },
-    {
-      icon: <Eye className="w-6 h-6" />,
-      title: t('legal.privacy.sections.rights.title'),
-      content: t('legal.privacy.sections.rights.content')
-    }
+  const privacySections = [
+    { title: t('legal.privacy.section1.title'), content: t('legal.privacy.section1.content') },
+    { title: t('legal.privacy.section2.title'), content: t('legal.privacy.section2.content') },
+    { title: t('legal.privacy.section3.title'), content: t('legal.privacy.section3.content') },
+    { title: t('legal.privacy.section4.title'), content: t('legal.privacy.section4.content') },
+    { title: t('legal.privacy.section5.title'), content: t('legal.privacy.section5.content') },
+    { title: t('legal.privacy.section6.title'), content: t('legal.privacy.section6.content') },
+    { title: t('legal.privacy.section7.title'), content: t('legal.privacy.section7.content') },
+    { title: t('legal.privacy.section8.title'), content: t('legal.privacy.section8.content') },
+    { title: t('legal.privacy.section9.title'), content: t('legal.privacy.section9.content') },
+    { title: t('legal.privacy.section10.title'), content: t('legal.privacy.section10.content') },
+    { title: t('legal.privacy.section11.title'), content: t('legal.privacy.section11.content') },
+    { title: t('legal.privacy.section12.title'), content: t('legal.privacy.section12.content') },
+    { title: t('legal.privacy.section13.title'), content: t('legal.privacy.section13.content') },
   ];
+
+  const icons = [Shield, Lock, Eye, Scale, MessageCircle, Globe, Mail, Gavel, FileText, Shield, Lock, Eye, Scale];
 
   return (
     <Layout>
       <section className="relative min-h-screen flex flex-col pt-36 pb-20 overflow-hidden bg-background">
         {/* Floating Background Blobs */}
         <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-primary/10 rounded-full blur-[80px] md:blur-[160px] mix-blend-screen animate-pulse-slow`} />
-        <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-primary/5 rounded-full blur-[60px] md:blur-[120px] mix-blend-screen animate-pulse-slow delay-1000`} />
         
         <div className="container-sahli relative z-10">
           <motion.div
@@ -66,25 +44,11 @@ export default function Privacy() {
               </span>
             </div>
 
-            <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.85] tracking-tighter">
-              {t('legal.privacy.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, rotateX: -90, y: 50 }}
-                  animate={{ opacity: 1, rotateX: 0, y: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.2 + (i * 0.1),
-                    ease: [0.215, 0.61, 0.355, 1]
-                  }}
-                  className="inline-block origin-bottom"
-                >
-                  {word}
-                </motion.span>
-              ))}
+            <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.85] tracking-tighter uppercase">
+              {t('legal.privacy.title')}
             </h1>
             <p className="text-primary font-bold mb-16 tracking-wider uppercase text-xs">
-              {t('legal.updated')}: 24/01/2026
+              {t('legal.terms.lastUpdated')}
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
@@ -95,110 +59,40 @@ export default function Privacy() {
                   transition={{ delay: 0.2 }}
                   className="p-8 md:p-12 rounded-[2.5rem] glass-morphism border border-border"
                 >
-                  <p className="text-xl md:text-2xl text-foreground font-medium leading-relaxed mb-8">
-                    {t('legal.privacy.intro')}
-                  </p>
+                  <div className="space-y-8">
+                    <p className="text-lg md:text-xl text-foreground/80 font-medium leading-relaxed">
+                      {t('legal.privacy.intro')}
+                    </p>
+                    <p className="text-lg md:text-xl text-foreground font-bold leading-relaxed">
+                      {t('legal.privacy.agreement')}
+                    </p>
+                  </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {privacySections.map((section: PrivacySection, idx: number) => (
-                      <div key={idx} className="space-y-4">
-                        <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                          {section.icon}
+                  <div className="mt-16 space-y-16">
+                    {privacySections.map((section, idx) => {
+                      const Icon = icons[idx % icons.length];
+                      return (
+                        <div key={idx} className="space-y-6">
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                              <Icon size={20} />
+                            </div>
+                            <h2 className="text-2xl font-black text-foreground tracking-tight uppercase">
+                              {section.title}
+                            </h2>
+                          </div>
+                          <div className="text-foreground/70 leading-relaxed font-medium whitespace-pre-line space-y-4 pl-14">
+                            {section.content}
+                          </div>
                         </div>
-                        <h2 className="text-lg font-black text-foreground">{section.title}</h2>
-                        <p className="text-foreground/60 leading-relaxed font-medium">
-                          {section.content}
-                        </p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
-                  <div className="mt-12 pt-12 border-t border-border space-y-6">
-                    <h3 className="text-lg font-black text-foreground uppercase tracking-tight">{t('legal.contact.title')}</h3>
-                    <p className="text-foreground/60 text-sm">{t('legal.contact.questions')}</p>
-                    <div className="flex flex-wrap gap-6">
-                      <div className="flex items-center gap-3">
-                        <Mail className="w-5 h-5 text-primary" />
-                        <span className="text-foreground font-medium">{t('legal.contact.email')}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Globe className="w-5 h-5 text-primary" />
-                        <span className="text-foreground font-medium">{t('legal.contact.website')}</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Impressum Section */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="p-8 md:p-12 rounded-[2.5rem] bg-foreground/[0.02] border border-border"
-                >
-                  <div className="flex items-center gap-4 mb-8">
-                    <Gavel className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter uppercase">
-                      {t('legal.notice.title')}
-                    </h2>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="space-y-6">
-                      <p className="text-foreground/70 leading-relaxed font-medium">
-                        {t('legal.notice.operatedBy')}
-                      </p>
-                      <div className="space-y-4">
-                        <div className="flex flex-col">
-                          <span className="text-primary text-[10px] font-black uppercase tracking-widest mb-1">{t('legal.notice.entity.label')}</span>
-                          <span className="text-foreground font-bold">{t('legal.notice.entity.value')}</span>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-primary text-[10px] font-black uppercase tracking-widest mb-1">{t('legal.notice.tradeName.label')}</span>
-                          <span className="text-foreground font-bold">{t('legal.notice.tradeName.value')}</span>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-primary text-[10px] font-black uppercase tracking-widest mb-1">{t('legal.notice.registeredIn.label')}</span>
-                          <span className="text-foreground font-bold">{t('legal.notice.registeredIn.value')}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-8">
-                      <div className="space-y-4">
-                        <h4 className="text-foreground font-black uppercase text-sm tracking-wider">{t('legal.notice.context.title')}</h4>
-                        <p className="text-foreground/60 text-sm leading-relaxed">
-                          {t('legal.notice.context.body')}
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <h4 className="text-foreground font-black uppercase text-sm tracking-wider">{t('legal.notice.liability.title')}</h4>
-                        <p className="text-foreground/60 text-sm leading-relaxed">
-                          {t('legal.notice.liability.body')}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-12 pt-12 border-t border-border grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      <h4 className="text-foreground font-black uppercase text-sm tracking-wider">{t('legal.notice.external.title')}</h4>
-                      <p className="text-foreground/60 text-sm leading-relaxed">
-                        {t('legal.notice.external.body')}
-                      </p>
-                    </div>
-                    <div className="space-y-4">
-                      <h4 className="text-foreground font-black uppercase text-sm tracking-wider">{t('legal.contact.title')}</h4>
-                      <div className="space-y-2">
-                        <p className="text-foreground font-bold text-sm flex items-center gap-2">
-                          <Globe className="w-4 h-4 text-primary" /> {t('legal.contact.website')}
-                        </p>
-                        <p className="text-foreground font-bold text-sm flex items-center gap-2">
-                          <MessageCircle className="w-4 h-4 text-primary" /> {t('legal.notice.contact.whatsapp')}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="mt-16 pt-12 border-t border-border">
+                    <p className="text-xl font-black text-primary leading-tight uppercase italic">
+                      {t('legal.privacy.final')}
+                    </p>
                   </div>
                 </motion.div>
               </div>
@@ -210,7 +104,7 @@ export default function Privacy() {
                   transition={{ delay: 0.6 }}
                   className="sticky top-32 p-8 rounded-[2rem] glass-morphism border border-border"
                 >
-                  <FileText className="text-primary mb-8 w-12 h-12" />
+                  <Shield className="text-primary mb-8 w-12 h-12" />
                   <h3 className="text-xl font-black text-foreground mb-6 uppercase tracking-wider">{t('legal.coordination.title')}</h3>
                   <p className="text-foreground/70 leading-relaxed font-medium mb-8 text-sm">
                     {t('legal.coordination.body')}
