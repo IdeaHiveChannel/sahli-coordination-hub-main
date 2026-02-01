@@ -87,7 +87,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Coordination Phases: Before / During / After */}
-      <section className="relative py-12 md:py-16 bg-background overflow-hidden border-y border-border/50">
+      <section className="relative py-12 md:py-16 bg-background overflow-hidden border-b border-border/50">
         <div className="container-sahli relative z-10">
           <div className="flex flex-col items-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center">
@@ -110,19 +110,19 @@ const HowItWorks = () => {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
                   <span className="font-black text-lg">01</span>
                 </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">Before Service</h3>
+                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">{t('how.phase1.title')}</h3>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium">One message entry — no forms or browsing.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase1.item1')}</p>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium">Matching with vetted independent provider companies.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase1.item2')}</p>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium"><strong>Inspection comes first:</strong> No pricing before assessment.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase1.item3')}</p>
                   </div>
                 </div>
               </div>
@@ -143,19 +143,19 @@ const HowItWorks = () => {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
                   <span className="font-black text-lg">02</span>
                 </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">During Service</h3>
+                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">{t('how.phase2.title')}</h3>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium"><strong>Independent Execution:</strong> Providers operate autonomously.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase2.item1')}</p>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium">Direct communication and coordination with the provider.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase2.item2')}</p>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium">SAHLI does not supervise or interfere on-site.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase2.item3')}</p>
                   </div>
                 </div>
               </div>
@@ -176,19 +176,19 @@ const HowItWorks = () => {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
                   <span className="font-black text-lg">03</span>
                 </div>
-                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">After Service</h3>
+                <h3 className="text-2xl font-black mb-4 tracking-tight text-foreground uppercase">{t('how.phase3.title')}</h3>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium"><strong>Post-Service Audit:</strong> Coordination follow-up.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase3.item1')}</p>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium">Feedback loop confirms standards were met.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase3.item2')}</p>
                   </div>
                   <div className="flex gap-3">
                     <CheckCircle2 size={18} className="text-primary mt-1 flex-shrink-0" />
-                    <p className="text-foreground/70 text-sm font-medium">Provider standing within the network is updated.</p>
+                    <p className="text-foreground/70 text-sm font-medium">{t('how.phase3.item3')}</p>
                   </div>
                 </div>
               </div>
@@ -197,6 +197,36 @@ const HowItWorks = () => {
         </div>
       </section>
 
+      {/* Important to Know - CORE POSITIONING */}
+      <section className="relative py-12 md:py-16 bg-background overflow-hidden border-b border-border/50">
+        <div className="container-sahli relative z-10">
+          <div className="flex flex-col items-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center">
+              {t('home.important.title')}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {[1, 2, 3, 4, 5].map((item) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: item * 0.05 }}
+                className="flex items-start gap-3 p-5 rounded-2xl bg-foreground/[0.03] border border-border"
+              >
+                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mt-0.5 flex-shrink-0">
+                  <Shield size={12} className="fill-primary/20" />
+                </div>
+                <p className="text-sm font-bold text-foreground/80 leading-snug">
+                  {t(`home.important.item${item}`)}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Operational Principles - Compact Grid */}
       <section className="relative py-12 md:py-16 bg-background overflow-hidden">
@@ -208,9 +238,9 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-xl font-black mb-4 tracking-tighter text-foreground uppercase">Standardized Execution</h3>
+              <h3 className="text-xl font-black mb-4 tracking-tighter text-foreground uppercase">{t('how.execution.title')}</h3>
               <p className="text-foreground/70 leading-relaxed font-medium text-sm">
-                Every coordination follows a strict protocol. From the initial message to the final audit, our operational standards ensure consistency across all service domains.
+                {t('how.execution.body')}
               </p>
             </motion.div>
             <motion.div 
@@ -219,9 +249,9 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-xl font-black mb-4 tracking-tighter text-foreground uppercase">Verified Provider Network</h3>
+              <h3 className="text-xl font-black mb-4 tracking-tighter text-foreground uppercase">{t('how.network.title')}</h3>
               <p className="text-foreground/70 leading-relaxed font-medium text-sm">
-                We only coordinate with independent provider companies that have passed our legal, competency, and conduct vetting process.
+                {t('how.network.body')}
               </p>
             </motion.div>
           </div>

@@ -3,12 +3,11 @@ import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
 // Refined Index page with video media replacing 3D hero
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SystemDiagram } from '@/components/motion/SystemDiagram';
 import { ServiceRoof } from '@/components/motion/ServiceRoof';
 import { TrustPanel, TrustStatement } from '@/components/motion/TrustPanel';
 import { InfiniteMarquee } from '@/components/motion/InfiniteMarquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, BookOpen, Shield, Zap, Repeat, UserCheck } from 'lucide-react';
+import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
@@ -83,8 +82,8 @@ const Index = () => {
 
   const services = [
     { 
-      title: t('services.homeRepair.title'), 
-      description: t('services.homeRepair.body'),
+      title: t('home.coordinate.maintenance'), 
+      description: t('home.coordinate.maintenance.body'),
       imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&fm=webp&fit=crop",
       path: "/services/home-repair",
       subcategories: [
@@ -97,8 +96,8 @@ const Index = () => {
       ]
     },
     { 
-      title: t('services.cleaning.title'), 
-      description: t('services.cleaning.body'),
+      title: t('home.coordinate.cleaning'), 
+      description: t('home.coordinate.cleaning.body'),
       imageUrl: "https://images.unsplash.com/photo-1528740561666-dc2479da08ad?q=80&w=800&fm=webp&fit=crop",
       path: "/services/cleaning",
       subcategories: [
@@ -107,8 +106,8 @@ const Index = () => {
       ]
     },
     { 
-      title: t('services.moving.title'), 
-      description: t('services.moving.body'),
+      title: t('home.coordinate.moving'), 
+      description: t('home.coordinate.moving.body'),
       imageUrl: "https://images.unsplash.com/photo-1520038410233-7141be7e6f97?q=80&w=800&fm=webp&fit=crop",
       path: "/services/moving",
       subcategories: [
@@ -116,8 +115,8 @@ const Index = () => {
       ]
     },
     { 
-      title: t('services.care.title'), 
-      description: t('services.care.body'),
+      title: t('home.coordinate.care.title'), 
+      description: t('home.coordinate.care.body'),
       path: '/services#care-childcare',
       imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop',
       icon: <Heart size={32} />,
@@ -125,8 +124,8 @@ const Index = () => {
       subcategories: []
     },
     { 
-      title: t('services.lessons.title'), 
-      description: t('services.lessons.body'),
+      title: t('home.coordinate.lessons.title'), 
+      description: t('home.coordinate.lessons.body'),
       path: '/services#lessons-lifestyle',
       imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&fm=webp&fit=crop',
       icon: <BookOpen size={32} />,
@@ -139,28 +138,51 @@ const Index = () => {
     t('home.microTrust.vetted'),
     t('home.microTrust.recorded'),
     t('home.microTrust.coordination'),
-    t('home.hero.label'),
+  ];
+
+  const featuredServices = [
+    { title: t('home.featured.ac'), icon: <Snowflake size={24} />, intent: "AC repair" },
+    { title: t('home.featured.electrical'), icon: <Lightbulb size={24} />, intent: "electrical repair" },
+    { title: t('home.featured.plumbing'), icon: <Droplets size={24} />, intent: "plumbing" },
+    { title: t('home.featured.appliances'), icon: <Cog size={24} />, intent: "appliance repair" },
+    { title: t('home.featured.cleaning'), icon: <Sparkles size={24} />, intent: "home deep cleaning" },
+    { title: t('home.featured.sofa'), icon: <Sofa size={24} />, intent: "sofa & carpet cleaning" },
+    { title: t('home.featured.moving'), icon: <Truck size={24} />, intent: "house shifting" },
+    { title: t('home.featured.babysitting'), icon: <Baby size={24} />, intent: "babysitting" },
   ];
 
   const trustPanels = [
     {
-      title: t('trust.vetting.title'),
+      title: t('home.trust.vetting.title'),
       imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1000&fm=webp&fit=crop',
       videoUrl: 'https://videos.pexels.com/video-files/4491451/4491451-uhd_2560_1440_24fps.mp4',
       items: [
-        { title: t('trust.vetting.legal.title'), description: t('trust.vetting.legal.body') },
-        { title: t('trust.vetting.competency.title'), description: t('trust.vetting.competency.body') },
-        { title: t('trust.vetting.behavioral.title'), description: t('trust.vetting.behavioral.body') },
+        { title: t('home.trust.vetting.item1.title'), description: "" },
+        { title: t('home.trust.vetting.item2.title'), description: "" },
       ]
     },
     {
-      title: t('trust.conduct.title'),
+      title: t('home.trust.competency.title'),
+      imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1000&fm=webp&fit=crop',
+      items: [
+        { title: t('home.trust.competency.item1.title'), description: "" },
+      ]
+    },
+    {
+      title: t('home.trust.behavioral.title'),
       imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&fm=webp&fit=crop',
       videoUrl: 'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4',
       items: [
-        { title: t('trust.conduct.rule1.title'), description: t('trust.conduct.rule1.body') },
-        { title: t('trust.conduct.rule2.title'), description: t('trust.conduct.rule2.body') },
-        { title: t('trust.conduct.rule3.title'), description: t('trust.conduct.rule3.body') },
+        { title: t('home.trust.behavioral.item1.title'), description: "" },
+      ]
+    },
+    {
+      title: t('home.trust.rules.title'),
+      imageUrl: 'https://images.unsplash.com/photo-1454165833767-027ffea9e77b?q=80&w=1000&fm=webp&fit=crop',
+      items: [
+        { title: t('home.trust.rules.item1.title'), description: "" },
+        { title: t('home.trust.rules.item2.title'), description: "" },
+        { title: t('home.trust.rules.item3.title'), description: "" },
       ]
     },
   ];
@@ -259,8 +281,12 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-lg md:text-lg text-foreground/80 mb-12 md:mb-10 leading-relaxed font-medium tracking-tight">
+              <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-6 tracking-tight">
                 {t('home.hero.subtitle')}
+              </p>
+              
+              <p className="text-lg md:text-lg text-foreground/70 mb-12 md:mb-10 leading-relaxed font-medium tracking-tight">
+                {t('home.hero.subtext')}
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
@@ -300,7 +326,7 @@ const Index = () => {
           transition={{ delay: 1.5, duration: 1 }}
         >
           <span className="text-[10px] uppercase tracking-[0.4em] text-foreground/40 font-black rotate-90 mb-10 origin-center">
-            SCROLL
+            {t('home.scroll')}
           </span>
           <div className="w-px h-24 bg-gradient-to-b from-primary/30 to-transparent relative overflow-hidden">
             <motion.div 
@@ -323,6 +349,70 @@ const Index = () => {
         <InfiniteMarquee items={marqueeItems} />
       </div>
 
+      {/* Featured Services Section - Common Requests We Coordinate */}
+      <section className="section-spacing bg-background relative overflow-hidden pb-0">
+        <div className="container-sahli relative z-10">
+          <div className="text-center mb-12 md:mb-16">
+            <motion.div 
+                className="max-w-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6">
+                  {t('home.featured.title')}
+                </h2>
+              </motion.div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {featuredServices.map((service: { title: string; icon: React.ReactNode; intent: string }, index: number) => (
+              <motion.a
+                key={index}
+                href={`${WHATSAPP_LINK}?text=${encodeURIComponent(`Hi, I need SAHLI to coordinate ${service.intent}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick(`Featured Service: ${service.title}`)}
+                className="group relative h-40 md:h-48 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass-morphism border border-border flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ 
+                  y: -5,
+                  borderColor: "rgba(var(--primary), 0.3)",
+                  boxShadow: "0 20px 40px -10px rgba(0,0,0,0.5)"
+                }}
+              >
+                {/* Desktop subtle hover effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block" />
+                
+                <div className="relative z-10 text-primary mb-4 transform transition-transform duration-500 group-hover:scale-110">
+                  {React.cloneElement(service.icon as React.ReactElement, { strokeWidth: 2 })}
+                </div>
+                <h3 className="relative z-10 text-sm md:text-base font-black tracking-tight text-foreground/90 group-hover:text-primary transition-colors duration-500 leading-tight">
+                  {service.title}
+                </h3>
+              </motion.a>
+            ))}
+          </div>
+
+          <div className="flex justify-center mt-12 md:mt-16">
+            <Link to="/services">
+              <motion.button
+                className="px-8 py-4 bg-foreground/5 backdrop-blur-2xl border border-border text-foreground rounded-[1.25rem] md:rounded-[1.5rem] font-black text-sm md:text-base uppercase tracking-widest flex items-center gap-3 hover:bg-foreground/10 transition-all group btn-shine"
+                whileHover={{ y: -5, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {t('home.featured.viewAll')}
+                <ArrowRight size="18" className={`${dir === 'rtl' ? 'rotate-180' : ''} group-hover:translate-x-2 transition-transform`} />
+              </motion.button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* One Roof. Many Needs. Section - Dark & Premium */}
       <section id="services" className="section-spacing bg-background relative overflow-hidden">
         {/* Background Blobs */}
@@ -341,16 +431,22 @@ const Index = () => {
                 <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('home.coordinate.title')}
               </motion.div>
-              <motion.h2
-                className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter"
+              <motion.div 
+                className="max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
-                {t('home.coordinate.title')}
-              </motion.h2>
+                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6">
+                  {t('home.coordinate.title')}
+                </h2>
+                <p className="text-lg text-foreground/60 leading-relaxed font-medium mb-12">
+                  {t('home.coordinate.disclaimer')}
+                </p>
+              </motion.div>
             </div>
+          </div>
             
             <motion.p
               className="text-foreground/60 max-w-sm text-base lg:text-base leading-relaxed font-medium"
@@ -361,7 +457,6 @@ const Index = () => {
             >
               {t('home.footer.clarity')}
             </motion.p>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-10 xl:gap-12">
             {services.map((service: any, index: number) => (
@@ -396,12 +491,15 @@ const Index = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                {t('home.framing.subtitle')}
+                {t('home.hero.label')}
               </div>
               
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-8 leading-[0.9]">
                 {t('home.framing.title')}
               </h2>
+              <h3 className="text-primary text-xl md:text-2xl font-black tracking-tight mb-4">
+                {t('home.framing.subtitle')}
+              </h3>
               
               <div className="space-y-6">
                 <p className="text-lg md:text-xl text-foreground/80 font-medium leading-relaxed tracking-tight max-w-xl">
@@ -508,7 +606,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why SAHLI - Operating Principles - Dark & Glassmorphic */}
+      {/* Why SAHLI - Pain Points - Dark & Glassmorphic */}
       <section className="relative section-spacing bg-background overflow-hidden">
         {/* Background Blobs */}
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/[0.02] rounded-full blur-[180px] pointer-events-none`} />
@@ -532,44 +630,178 @@ const Index = () => {
             {t('home.why.title')}
           </motion.h2>
         </div>
-        <div className="container-sahli grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 relative z-10">
+        <div className="container-sahli grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 relative z-10">
           {[
-            { 
-              title: t('home.why.noDirectories.title'), 
-              body: t('home.why.noDirectories.body'),
-              icon: <Zap className="text-primary" />
-            },
-            { 
-              title: t('home.why.vetted.title'), 
-              body: t('home.why.vetted.body'),
-              icon: <Shield className="text-primary" />
-            },
-            { 
-              title: t('home.why.briefed.title'), 
-              body: t('home.why.briefed.body'),
-              icon: <Repeat className="text-primary" />
-            },
-            { 
-              title: t('home.why.control.title'), 
-              body: t('home.why.control.body'),
-              icon: <UserCheck className="text-primary" />
-            }
-          ].map((principle: { title: string; body: string; icon: React.ReactNode }, i: number) => (
+            { reason: t('home.why.reason1'), icon: <Zap className="text-primary" /> },
+            { reason: t('home.why.reason2'), icon: <Shield className="text-primary" /> },
+            { reason: t('home.why.reason3'), icon: <Repeat className="text-primary" /> },
+            { reason: t('home.why.reason4'), icon: <UserCheck className="text-primary" /> },
+            { reason: t('home.why.reason5'), icon: <Sparkles className="text-primary" /> },
+            { reason: t('home.why.reason6'), icon: <Heart className="text-primary" /> },
+          ].map((item, i: number) => (
             <motion.div
               key={i}
-              className="p-6 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-foreground/[0.02] border border-border group hover:bg-foreground/[0.04] hover:border-primary/30 transition-all duration-700 backdrop-blur-sm btn-shine"
+              className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-foreground/[0.02] border border-border group hover:bg-foreground/[0.04] hover:border-primary/30 transition-all duration-700 backdrop-blur-sm btn-shine"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.8 }}
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-[0.8rem] md:rounded-[1rem] bg-foreground/5 flex items-center justify-center mb-6 md:mb-10 shadow-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-700 group-hover:scale-110 group-hover:rotate-6">
-                {React.cloneElement(principle.icon as React.ReactElement, { size: 24 })}
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-[0.8rem] md:rounded-[1rem] bg-foreground/5 flex items-center justify-center mb-6 shadow-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-700 group-hover:scale-110 group-hover:rotate-6">
+                {React.cloneElement(item.icon as React.ReactElement, { size: 24 })}
               </div>
-              <h3 className="text-lg md:text-lg lg:text-xl font-black mb-4 md:mb-6 tracking-tighter text-foreground leading-none">{principle.title}</h3>
-              <p className="text-foreground/50 leading-relaxed font-medium text-sm md:text-base group-hover:text-foreground/80 transition-colors duration-500">{principle.body}</p>
+              <p className="text-foreground/80 leading-relaxed font-black text-lg md:text-xl group-hover:text-foreground transition-colors duration-500 tracking-tight">{item.reason}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* What SAHLI Does - Process Section */}
+      <section className="section-spacing bg-background relative overflow-hidden">
+        <div className="container-sahli relative z-10">
+          <div className="max-w-4xl mb-16 md:mb-24">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
+            >
+              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+              {t('home.hero.label')}
+            </motion.div>
+            <motion.h2
+              className="text-foreground text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tighter mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('home.what.title')}
+            </motion.h2>
+            <motion.p
+              className="text-xl text-foreground/60 leading-relaxed font-medium max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              {t('home.what.intro')}
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 relative">
+            {/* Connection line for desktop */}
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2 z-0" />
+            
+            {[
+              t('home.what.step1'),
+              t('home.what.step2'),
+              t('home.what.step3'),
+              t('home.what.step4'),
+              t('home.what.step5'),
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                className="relative z-10 p-6 rounded-3xl bg-foreground/[0.02] border border-border backdrop-blur-md flex flex-col items-center text-center group hover:border-primary/30 transition-all duration-500"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                  {i + 1}
+                </div>
+                <p className="text-sm md:text-base font-black text-foreground/80 group-hover:text-foreground transition-colors duration-500 leading-tight">
+                  {step}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.p
+            className="mt-12 text-center text-foreground/40 font-medium italic"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+          >
+            {t('home.what.footer')}
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Difference & Important Info */}
+      <section className="section-spacing bg-background relative overflow-hidden">
+        <div className="container-sahli grid lg:grid-cols-2 gap-12 md:gap-20">
+          {/* Difference */}
+          <div>
+            <motion.h2
+              className="text-foreground text-3xl font-black tracking-tighter mb-10"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('home.diff.title')}
+            </motion.h2>
+            <div className="space-y-4">
+              {[
+                t('home.diff.item1'),
+                t('home.diff.item2'),
+                t('home.diff.item3'),
+                t('home.diff.item4'),
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-foreground/[0.02] border border-border group hover:border-primary/30 transition-all duration-500"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                    <ArrowRight size={14} className={dir === 'rtl' ? 'rotate-180' : ''} />
+                  </div>
+                  <span className="font-black text-foreground/80">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+            <p className="mt-8 text-primary font-black uppercase tracking-widest text-xs">
+              {t('home.diff.footer')}
+            </p>
+          </div>
+
+          {/* Important */}
+          <div className="p-8 md:p-10 rounded-[2rem] bg-foreground/[0.02] border border-border relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full" />
+            <motion.h2
+              className="text-foreground text-3xl font-black tracking-tighter mb-10 relative z-10"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('home.important.title')}
+            </motion.h2>
+            <div className="space-y-6 relative z-10">
+              {[
+                t('home.important.item1'),
+                t('home.important.item2'),
+                t('home.important.item3'),
+                t('home.important.item4'),
+                t('home.important.item5'),
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                  <span className="text-foreground/60 font-medium leading-tight">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -586,7 +818,7 @@ const Index = () => {
             className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
           >
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
-            {t('trust.label')}
+            {t('home.hero.label')}
           </motion.div>
           <motion.h2
             className="text-foreground text-3xl md:text-4xl font-black mb-10 tracking-tighter"
@@ -596,15 +828,6 @@ const Index = () => {
           >
             {t('home.trust.title')}
           </motion.h2>
-          <motion.p
-            className="text-base md:text-lg text-foreground/60 max-w-3xl leading-relaxed font-medium"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            {t('home.trust.body')}
-          </motion.p>
         </div>
         
         <div className="space-y-4 md:space-y-6 pb-20 md:pb-24">
@@ -614,30 +837,43 @@ const Index = () => {
         </div>
       </section>
 
-      {/* System Flow Section - Dark */}
-      <section className="section-spacing bg-section-darker relative overflow-hidden">
-        {/* Background Decorative Pulses */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/[0.02] rounded-full blur-[150px] animate-pulse" />
+      {/* Areas Served Section - SEO FIX */}
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
+        <div className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-[500px] h-[500px] bg-primary/[0.02] rounded-full blur-[120px] pointer-events-none`} />
         
-        <div className="container-sahli text-center mb-16 relative z-10">
-          <motion.span 
-            className="text-primary font-black tracking-[0.3em] text-[10px] uppercase mb-4 block"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            {t('home.flow.title')}
-          </motion.span>
-          <motion.h2
-            className="text-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            {t('home.flow.title')}
-          </motion.h2>
+        <div className="container-sahli relative z-10">
+          <div className="max-w-4xl mb-12 md:mb-16">
+            <motion.h2
+              className="text-foreground text-3xl sm:text-4xl font-black tracking-tighter mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('home.areas.title')}
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              t('home.areas.item1'),
+              t('home.areas.item2'),
+              t('home.areas.item3'),
+              t('home.areas.item4'),
+            ].map((area, i) => (
+              <motion.div
+                key={i}
+                className="p-6 rounded-2xl bg-foreground/[0.02] border border-border flex items-center gap-4 group hover:border-primary/30 transition-all duration-500"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="w-2 h-2 rounded-full bg-primary" />
+                <span className="font-bold text-foreground/80 group-hover:text-foreground transition-colors">{area}</span>
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <SystemDiagram />
       </section>
 
       {/* Final CTA - Dark & Intense */}
@@ -668,40 +904,9 @@ const Index = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-12 md:mb-16 text-foreground leading-[0.85]">
-              {t('cta.final.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.8 }}
-                  className="inline-block mr-[0.2em]"
-                >
-                  {word === 'Ready' || word === 'SAHLI' || word === 'جاهزون' || word === 'سهلي' ? <span className="text-primary">{word}</span> : word}
-                </motion.span>
-              ))}
+              {t('home.cta.final.text')}
             </h2>
-            <p className="text-base md:text-lg lg:text-xl text-foreground/60 mb-12 md:mb-20 max-w-4xl mx-auto leading-relaxed font-medium tracking-tight">
-              {t('cta.final.body')}
-            </p>
-
-            {/* Micro-FAQ Block */}
-            <motion.div 
-              className="max-w-2xl mx-auto mb-16 p-8 rounded-[2rem] glass-morphism border border-primary/20 text-start relative overflow-hidden group"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <h3 className="text-lg font-black mb-4 flex items-center gap-3 text-primary">
-                <span className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-sm">?</span>
-                {t('faq.micro.question')}
-              </h3>
-              <p className="text-foreground/70 leading-relaxed font-medium">
-                {t('faq.micro.answer')}
-              </p>
-            </motion.div>
-
+            
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
               <motion.a
                 whileHover={{ y: -10, scale: 1.05 }}
@@ -713,7 +918,7 @@ const Index = () => {
                 className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-primary text-primary-foreground rounded-[1.25rem] md:rounded-[1.5rem] font-black text-base md:text-lg flex items-center justify-center gap-4 shadow-3xl shadow-primary/40 group btn-shine"
               >
                 <MessageCircle size="24" className="md:w-8 md:h-8 group-hover:rotate-12 transition-transform" />
-                {t('cta.final.cta')}
+                {t('home.cta.final.subtext')}
               </motion.a>
             </div>
           </motion.div>

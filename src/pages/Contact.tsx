@@ -35,7 +35,7 @@ export default function Contact() {
     {
       icon: <MessageCircle className="w-8 h-8" />,
       title: t('cta.whatsapp'),
-      value: '+966 50 000 0000',
+      value: t('contact.whatsapp.value'),
       link: WHATSAPP_LINK,
       primary: true
     },

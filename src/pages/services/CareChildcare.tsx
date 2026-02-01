@@ -29,10 +29,11 @@ export default function CareChildcare() {
   ];
 
   const coordinationSteps = [
-    { title: t('home.flow.step1.title'), body: t('home.flow.step1.body') },
-    { title: t('home.flow.step2.title'), body: t('home.flow.step2.body') },
-    { title: t('home.flow.step3.title'), body: t('home.flow.step3.body') },
-    { title: t('home.flow.step4.title'), body: t('home.flow.step4.body') }
+    { title: '01', body: t('home.what.step1') },
+    { title: '02', body: t('home.what.step2') },
+    { title: '03', body: t('home.what.step3') },
+    { title: '04', body: t('home.what.step4') },
+    { title: '05', body: t('home.what.step5') }
   ];
 
   return (
@@ -183,7 +184,7 @@ export default function CareChildcare() {
             {t('how.flow.title')}
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
             {coordinationSteps.map((step: { title: string; body: string }, i: number) => (
               <motion.div
                 key={i}
@@ -261,14 +262,14 @@ export default function CareChildcare() {
               {t('cta.final.title')}
             </h2>
             <p className="text-lg text-foreground/60 font-medium mb-8 leading-tight">
-              Tell us what you need. We'll notify you when this service domain goes live.
+              {t('services.comingSoon.notify')}
             </p>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="cta-primary px-10 py-4 text-base opacity-50 cursor-not-allowed btn-shine"
             >
-              Notify me
+              {t('services.comingSoon.btn')}
             </motion.div>
           </motion.div>
         </div>

@@ -21,10 +21,11 @@ export default function HomeRepair() {
   const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.1]), springConfig);
 
   const coordinationSteps = [
-    { title: t('home.flow.step1.title'), body: t('home.flow.step1.body') },
-    { title: t('home.flow.step2.title'), body: t('home.flow.step2.body') },
-    { title: t('home.flow.step3.title'), body: t('home.flow.step3.body') },
-    { title: t('home.flow.step4.title'), body: t('home.flow.step4.body') }
+    { title: '01', body: t('home.what.step1') },
+    { title: '02', body: t('home.what.step2') },
+    { title: '03', body: t('home.what.step3') },
+    { title: '04', body: t('home.what.step4') },
+    { title: '05', body: t('home.what.step5') }
   ];
 
   const categories = [
@@ -155,7 +156,7 @@ export default function HomeRepair() {
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
             {coordinationSteps.map((step: { title: string; body: string }, i: number) => (
               <motion.div
                 key={i}

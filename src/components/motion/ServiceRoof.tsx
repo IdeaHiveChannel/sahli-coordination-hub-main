@@ -174,7 +174,7 @@ export function ServiceRoof({
             }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            {dir === 'rtl' ? 'استكشف الخدمة' : 'EXPLORE SERVICE'} <span className={`text-xl leading-none ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
+            {t('services.explore')} <span className={`text-xl leading-none ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
           </motion.div>
         )}
       </div>

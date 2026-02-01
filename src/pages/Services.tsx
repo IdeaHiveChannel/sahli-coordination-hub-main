@@ -659,7 +659,7 @@ export default function Services() {
                   icon={<Heart size={18} />}
                   title={t('services.care.doctor.title')}
                   description={t('services.care.doctor.desc')}
-                  items="Consultations\nCheckups\nFollow-ups"
+                  items={t('services.care.doctor.items')}
                   isOpen={false}
                   onToggle={() => {}}
                 />
@@ -667,7 +667,7 @@ export default function Services() {
                   icon={<Heart size={18} />}
                   title={t('services.care.nursing.title')}
                   description={t('services.care.nursing.desc')}
-                  items="Medical Support\nIn-home Nursing\nElderly Support"
+                  items={t('services.care.nursing.items')}
                   isOpen={false}
                   onToggle={() => {}}
                 />
@@ -708,7 +708,7 @@ export default function Services() {
                   icon={<BookOpen size={18} />}
                   title={t('services.lessons.tutoring.title')}
                   description={t('services.lessons.tutoring.desc')}
-                  items="Academic Support\nAll Levels\nVerified Tutors"
+                  items={t('services.lessons.tutoring.items')}
                   isOpen={false}
                   onToggle={() => {}}
                 />
@@ -716,7 +716,7 @@ export default function Services() {
                   icon={<BookOpen size={18} />}
                   title={t('services.lessons.lifestyle.title')}
                   description={t('services.lessons.lifestyle.desc')}
-                  items="Personal Logistics\nLifestyle Management\nCoordination Support"
+                  items={t('services.lessons.lifestyle.items')}
                   isOpen={false}
                   onToggle={() => {}}
                 />

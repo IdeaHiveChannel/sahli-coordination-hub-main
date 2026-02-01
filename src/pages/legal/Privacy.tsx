@@ -84,7 +84,7 @@ export default function Privacy() {
               ))}
             </h1>
             <p className="text-primary font-bold mb-16 tracking-wider uppercase text-xs">
-              Last updated: 24/01/2026
+              {t('legal.updated')}: 24/01/2026
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">

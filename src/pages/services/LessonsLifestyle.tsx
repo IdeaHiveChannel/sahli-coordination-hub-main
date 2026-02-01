@@ -198,12 +198,13 @@ export default function LessonsLifestyle() {
           <h2 className="text-3xl font-black tracking-tighter mb-10 leading-none">
             {t('how.title')}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
             {[
-              { step: "01", text: t('how.flow.step1.title') },
-              { step: "02", text: t('services.flow.provider') },
-              { step: "03", text: t('services.flow.visit') },
-              { step: "04", text: t('how.flow.step3.title') }
+              { step: "01", text: t('home.what.step1') },
+              { step: "02", text: t('home.what.step2') },
+              { step: "03", text: t('home.what.step3') },
+              { step: "04", text: t('home.what.step4') },
+              { step: "05", text: t('home.what.step5') }
             ].map((item: { step: string; text: string }, i: number) => (
               <div key={i} className="relative">
                 <div className="text-3xl font-black text-primary/10 mb-2 leading-none">{item.step}</div>
@@ -269,14 +270,14 @@ export default function LessonsLifestyle() {
               {t('cta.final.title')}
             </h2>
             <p className="text-lg text-foreground/60 font-medium mb-8 leading-tight">
-              Tell us what you need. We'll notify you when this service domain goes live.
+              {t('services.comingSoon.notify')}
             </p>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="cta-primary px-10 py-4 text-base opacity-50 cursor-not-allowed btn-shine"
             >
-              Notify me
+              {t('services.comingSoon.btn')}
             </motion.div>
           </motion.div>
         </div>

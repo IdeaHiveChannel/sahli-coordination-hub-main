@@ -157,16 +157,16 @@ export function Footer() {
           <div className="flex items-center gap-6">
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
             <p className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 text-center lg:text-left">
-              © {currentYear} SAHLI HUB. {t('footer.rights') || 'ALL RIGHTS RESERVED.'}
+              © {currentYear} SAHLI HUB. {t('footer.rights.all')}
             </p>
           </div>
           
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-16">
             <Link to="/legal/privacy" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors">
-              {t('footer.privacy') || 'Privacy Policy'}
+              {t('footer.privacy')}
             </Link>
             <Link to="/legal/terms" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors">
-              {t('footer.terms') || 'Terms of Service'}
+              {t('footer.terms')}
             </Link>
             <LanguageToggle />
           </div>

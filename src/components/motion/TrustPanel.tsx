@@ -13,7 +13,7 @@ interface TrustPanelProps {
 }
 
 export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPanelProps) {
-  const { dir } = useLanguage();
+  const { t, dir } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
             className="relative"
           >
             <span className="text-primary font-bold tracking-[0.2em] text-[11px] uppercase mb-3 md:mb-5 block">
-              {index + 1 < 10 ? `0${index + 1}` : index + 1} / {dir === 'rtl' ? 'معيار' : 'Standard'}
+              {index + 1 < 10 ? `0${index + 1}` : index + 1} / {t('trust.standard')}
             </span>
             <h3 className="text-xl md:text-3xl font-black tracking-tighter text-balance leading-[1.1] md:leading-[1] mb-6 md:mb-8 text-foreground">
               {title}

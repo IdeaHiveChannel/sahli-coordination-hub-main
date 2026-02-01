@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, Search, ShieldCheck, CheckCircle2, HeartHandshake } from 'lucide-react';
+import { MessageCircle, Search, ShieldCheck, CheckCircle2, HeartHandshake, Share2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function SystemDiagram() {
@@ -23,32 +23,40 @@ export function SystemDiagram() {
 
   const steps = [
     {
-      title: t('home.flow.step1.title'),
-      description: t('home.flow.step1.body'),
+      title: t('home.what.step1.title'),
+      description: t('home.what.step1.body'),
       icon: <MessageCircle size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
       imageUrl: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=1200&fm=webp&fit=crop'
     },
     {
-      title: t('home.flow.step2.title'),
-      description: t('home.flow.step2.body'),
-      icon: <Search size={28} />,
+      title: t('home.what.step2.title'),
+      description: t('home.what.step2.body'),
+      icon: <Share2 size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
       imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1200&fm=webp&fit=crop'
     },
     {
-      title: t('home.flow.step3.title'),
-      description: t('home.flow.step3.body'),
+      title: t('home.what.step3.title'),
+      description: t('home.what.step3.body'),
       icon: <ShieldCheck size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
       imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&fm=webp&fit=crop'
     },
     {
-      title: t('home.flow.step4.title'),
-      description: t('home.flow.step4.body'),
+      title: t('home.what.step4.title'),
+      description: t('home.what.step4.body'),
+      icon: <HeartHandshake size={28} />,
+      color: 'from-primary/20 to-foreground/5',
+      accent: 'text-primary',
+      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1200&fm=webp&fit=crop'
+    },
+    {
+      title: t('home.what.step5.title'),
+      description: t('home.what.step5.body'),
       icon: <CheckCircle2 size={28} />,
       color: 'from-primary/20 to-foreground/5',
       accent: 'text-primary',
@@ -160,15 +168,21 @@ export function SystemDiagram() {
 
       {/* Closing Statement */}
       <motion.div 
-        className="mt-24 md:mt-48 text-center"
+        className="mt-24 md:mt-48 text-center max-w-2xl mx-auto px-4"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <div className="inline-flex items-center gap-4 px-6 md:px-8 py-3 md:py-4 rounded-2xl bg-primary text-primary-foreground shadow-2xl shadow-primary/30">
+        <div className="inline-flex items-center gap-4 px-6 md:px-8 py-3 md:py-4 rounded-2xl bg-primary text-primary-foreground shadow-2xl shadow-primary/30 mb-8">
           <HeartHandshake />
-          <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em]">{t('how.rules.inspection.title')}</span>
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em]">{t('home.inspection.title')}</span>
         </div>
+        <h3 className="text-2xl md:text-4xl font-black tracking-tighter text-foreground mb-4">
+          {t('home.inspection.title')}
+        </h3>
+        <p className="text-lg md:text-xl text-foreground/60 font-medium leading-relaxed">
+          {t('home.inspection.body')}
+        </p>
       </motion.div>
     </div>
   );

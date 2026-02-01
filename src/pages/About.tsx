@@ -118,11 +118,13 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
             {[
               { title: t('about.not.marketplace') },
               { title: t('about.not.provider') },
-              { title: t('about.not.employer') }
+              { title: t('about.not.execution') },
+              { title: t('about.not.pricing') },
+              { title: t('about.not.contract') }
             ].map((item: { title: string }, i: number) => (
               <motion.div
                 key={i}
