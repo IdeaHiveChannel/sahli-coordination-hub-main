@@ -69,12 +69,9 @@ export const ar = {
 
   'home.coordinate.title': 'ما ينسقه ساهلي',
   'home.coordinate.disclaimer': 'ساهلي ينسق الوصول إلى شركات تزويد مستقلة ومعتمدة. نحن لسنا مزود خدمة ولسنا طرفاً في عقد الخدمة.',
-  'home.coordinate.cleaning': 'خدمات التنظيف',
-  'home.coordinate.cleaning.body': 'تنظيف المنزل، التنظيف العميق، الكنب، السجاد، خزانات المياه',
   'home.coordinate.maintenance': 'صيانة المنزل',
-  'home.coordinate.maintenance.body': 'التكييف، الكهرباء، السباكة، إصلاح الأجهزة، العامل الشامل، مكافحة الحشرات',
+  'home.coordinate.cleaning': 'خدمات التنظيف',
   'home.coordinate.moving': 'خدمات النقل',
-  'home.coordinate.moving.body': 'نقل المنزل، التغليف، النقل، الفك والتركيب',
   'home.coordinate.care.title': 'الرعاية ورعاية الأطفال (قريباً)',
   'home.coordinate.care.body': 'زيارات الأطباء، التمريض، رعاية حديثي الولادة وكبار السن عبر وكالات مرخصة',
   'home.coordinate.lessons.title': 'الدروس ونمط الحياة (قريباً)',

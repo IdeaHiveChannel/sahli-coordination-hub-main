@@ -83,10 +83,11 @@ const Index = () => {
   const services = [
     { 
       title: t('home.coordinate.maintenance'), 
-      description: t('home.coordinate.maintenance.body'),
+      description: t('home.coordinate.maintenance'),
       imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&fm=webp&fit=crop",
       icon: <Wrench size={32} />,
       path: "/home-maintenance-qatar",
+      number: "01",
       subcategories: [
         t('services.homeMaintenance.ac.title'),
         t('services.homeMaintenance.electrical.title'),
@@ -98,10 +99,11 @@ const Index = () => {
     },
     { 
       title: t('home.coordinate.cleaning'), 
-      description: t('home.coordinate.cleaning.body'),
+      description: t('home.coordinate.cleaning'),
       imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop",
       icon: <Sparkles size={32} />,
       path: "/cleaning-services-qatar",
+      number: "02",
       subcategories: [
         t('services.cleaning.regular.title'),
         t('services.cleaning.deep.title'),
@@ -111,10 +113,11 @@ const Index = () => {
     },
     { 
       title: t('home.coordinate.moving'), 
-      description: t('home.coordinate.moving.body'),
+      description: t('home.coordinate.moving'),
       imageUrl: "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=800&fm=webp&fit=crop",
       icon: <Truck size={32} />,
       path: "/house-shifting-qatar",
+      number: "03",
       subcategories: [
         t('services.moving.house.title'),
         t('services.moving.packing.title'),
@@ -129,15 +132,17 @@ const Index = () => {
       imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop',
       icon: <Heart size={32} />,
       status: 'coming-soon' as const,
+      number: "04",
       subcategories: []
     },
     { 
       title: t('home.coordinate.lessons.title'), 
-      description: t('home.coordinate.lessons.body'),
+      description: t('home.coordinate.lessons.title'),
       path: '/services#lessons-lifestyle',
       imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&fm=webp&fit=crop',
       icon: <BookOpen size={32} />,
       status: 'coming-soon' as const,
+      number: "05",
       subcategories: []
     }
   ];
@@ -146,6 +151,7 @@ const Index = () => {
     t('home.microTrust.vetted'),
     t('home.microTrust.recorded'),
     t('home.microTrust.coordination'),
+    t('footer.intermediary'),
   ];
 
   const featuredServices = [

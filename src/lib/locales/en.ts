@@ -75,12 +75,9 @@ export const en = {
 
   'home.coordinate.title': 'What SAHLI Coordinates',
   'home.coordinate.disclaimer': 'SAHLI coordinates access to independent, verified service companies. We are not a service provider and not a party to the service contract.',
-  'home.coordinate.cleaning': 'Cleaning Services',
-  'home.coordinate.cleaning.body': 'Home cleaning, deep cleaning, sofas, carpets, water tanks',
   'home.coordinate.maintenance': 'Home Maintenance',
-  'home.coordinate.maintenance.body': 'AC, electrical, plumbing, appliance repair, handyman, pest control',
+  'home.coordinate.cleaning': 'Cleaning Services',
   'home.coordinate.moving': 'Moving Services',
-  'home.coordinate.moving.body': 'House shifting, packing, transport, dismantling & reassembly',
   'home.coordinate.care.title': 'Care & Childcare (Coming Soon)',
   'home.coordinate.care.body': 'Doctor visits, nursing, newborn & elderly care via licensed agencies',
   'home.coordinate.lessons.title': 'Lessons & Lifestyle (Coming Soon)',
