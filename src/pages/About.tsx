@@ -48,7 +48,7 @@ export default function About() {
               crossOrigin="anonymous"
               className="w-full h-full object-cover opacity-20 grayscale scale-110"
             >
-              <source src="https://videos.pexels.com/video-files/3196615/3196615-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              {/* <source src="https://videos.pexels.com/video-files/3196615/3196615-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             </video>
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-background" />

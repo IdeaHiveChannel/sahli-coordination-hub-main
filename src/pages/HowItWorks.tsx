@@ -41,7 +41,7 @@ const HowItWorks = () => {
               crossOrigin="anonymous"
               className="w-full h-full object-cover opacity-20 grayscale scale-110"
             >
-              <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+              {/* <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" /> */}
             </video>
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-background" />
@@ -261,7 +261,7 @@ const HowItWorks = () => {
       <section className="section-spacing bg-background relative overflow-hidden border-t border-border/50">
         <div className="absolute inset-0 z-0 opacity-[0.03] grayscale">
           <video autoPlay loop muted playsInline crossOrigin="anonymous" className="w-full h-full object-cover">
-            <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+            {/* <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" /> */}
           </video>
         </div>
         <div className="container-sahli text-center relative z-10">

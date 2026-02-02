@@ -202,7 +202,7 @@ export default function Services() {
               crossOrigin="anonymous"
               className="w-full h-full object-cover grayscale opacity-[0.15] scale-110"
             >
-              <source src="https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              {/* <source src="https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             </video>
             <div className={`absolute inset-0 bg-gradient-to-r ${lang === 'ar' ? 'from-primary/20 via-transparent to-transparent' : 'from-transparent via-transparent to-primary/20'} mix-blend-overlay opacity-30`} />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(var(--primary),0.1),transparent_70%)]" />

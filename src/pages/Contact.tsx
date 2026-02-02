@@ -65,7 +65,7 @@ export default function Contact() {
               crossOrigin="anonymous"
               className="w-full h-full object-cover grayscale opacity-[0.15] scale-110"
             >
-              <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              {/* <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             </video>
             
             {/* Multi-layered gradients for depth and text contrast */}

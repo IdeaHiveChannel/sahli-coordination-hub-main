@@ -188,7 +188,7 @@ const Index = () => {
     {
       title: t('trust.vetting.title'),
       imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&fm=webp&fit=crop',
-      videoUrl: 'https://videos.pexels.com/video-files/4491451/4491451-uhd_2560_1440_24fps.mp4',
+      videoUrl: '', // 'https://videos.pexels.com/video-files/4491451/4491451-uhd_2560_1440_24fps.mp4',
       items: [
         { title: t('trust.vetting.item1'), description: "" },
         { title: t('trust.vetting.item2'), description: "" },
@@ -197,7 +197,7 @@ const Index = () => {
     {
       title: t('trust.competency.title'),
       imageUrl: 'https://images.unsplash.com/photo-1454165833767-027508496b4c?q=80&w=1000&fm=webp&fit=crop',
-      videoUrl: 'https://videos.pexels.com/video-files/3130204/3130204-uhd_2560_1440_30fps.mp4',
+      videoUrl: '', // 'https://videos.pexels.com/video-files/3130204/3130204-uhd_2560_1440_30fps.mp4',
       items: [
         { title: t('trust.competency.item1'), description: "" },
       ]
@@ -205,7 +205,7 @@ const Index = () => {
     {
       title: t('trust.behavioral.title'),
       imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1000&fm=webp&fit=crop',
-      videoUrl: 'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4',
+      videoUrl: '', // 'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4',
       items: [
         { title: t('trust.behavioral.item1'), description: "" },
       ]
@@ -213,7 +213,7 @@ const Index = () => {
     {
       title: t('trust.rules.title'),
       imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=1000&fm=webp&fit=crop',
-      videoUrl: 'https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4',
+      videoUrl: '', // 'https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4',
       items: [
         { title: t('trust.rules.item1'), description: "" },
         { title: t('trust.rules.item2'), description: "" },
@@ -968,7 +968,7 @@ const Index = () => {
             crossOrigin="anonymous"
             className="w-full h-full object-cover"
           >
-            <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+            {/* <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" /> */}
           </video>
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background" />

@@ -23,7 +23,7 @@ const NotFound = () => {
             crossOrigin="anonymous"
             className="w-full h-full object-cover opacity-[0.02] grayscale"
           >
-            <source src="https://videos.pexels.com/video-files/5091624/5091624-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            {/* <source src="https://videos.pexels.com/video-files/5091624/5091624-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             <img 
               src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1200&fm=webp&fit=crop" 
               alt="Lost in Space" 
