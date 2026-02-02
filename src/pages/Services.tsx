@@ -405,7 +405,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 2: Cleaning & Logistics - Compact */}
+      {/* Roof 2: Cleaning & Coordination - Compact */}
       <section id="cleaning" className="relative py-8 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />

@@ -30,14 +30,14 @@ export const ar = {
   'footer.privacy': 'الخصوصية',
   'footer.rights': '© ساهلي. جميع الحقوق محفوظة.',
   'footer.rights.all': 'جميع الحقوق محفوظة.',
-  'footer.description': 'ساهلي هو مركز تنسيق للخدمات المنزلية والأساسية في قطر. نحن نقوم بفحص شركات التزويد المستقلة وندير نقطة الوصول لتوفير وقتك وضمان الجودة.',
+  'footer.description': 'يقوم ساهلي بتنسيق الوصول إلى شركات الخدمات المنزلية المعتمدة في قطر للصيانة والتنظيف والنقل والمزيد. ابدأ عبر واتساب.',
   'footer.company': 'الشركة',
   'footer.services': 'الخدمات',
   'footer.contact': 'التواصل',
   'footer.intermediary': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. ساهلي لا ينفذ الخدمات وليس طرفاً في عقد الخدمة.',
   
   'footer.whatsapp': 'واتساب',
-  'footer.motto': 'البنية التحتية للتنسيق للاحتياجات اليومية',
+  'footer.motto': 'مركز تنسيق الخدمات المنزلية',
   'about.footer.hub': 'ساهلي للخدمات التنسيقية ذ.م.م.',
   'footer.legalName': 'ساهلي للخدمات التنسيقية ذ.م.م.',
   'contact.whatsapp.value': '+974 3333 1354',
@@ -45,7 +45,7 @@ export const ar = {
   'contact.email.value': 'hello@sahli.co',
 
   // الصفحة الرئيسية - المحتوى النهائي المحدث
-  'home.hero.label': 'بنية تحتية للتنسيق',
+  'home.hero.label': 'مركز تنسيق الخدمات المنزلية',
   'home.hero.title': 'خدمات صيانة المنزل والتنظيف\nفي الدوحة، قطر',
   'home.hero.subtitle': 'هل لا تزال تنتظر وصول شخص ما؟',
   'home.hero.subtext': 'العثور على مزود خدمة في قطر لا ينبغي أن يعني الاتصال بأرقام عشوائية، أو الانتظار بلا نهاية، أو القلق بشأن من سيدخل منزلك.',
@@ -58,7 +58,7 @@ export const ar = {
   'home.microTrust.coordination': 'تنسيق فعال',
   
   'home.framing.title': 'أكثر من مجرد دليل. لسنا سوقاً للخدمات.',
-  'home.framing.subtitle': 'ساهلي هو مركز تنسيق.',
+  'home.framing.subtitle': 'ساهلي هو مركز لتنسيق الخدمات.',
   'home.framing.body': 'أنت لا تتصفح القوائم أو تقارن الملفات الشخصية. نحن نحدد وننسق مع مزود خدمة معتمد ومناسب بناءً على متطلباتك الخاصة.',
   
   'home.why.title': 'لماذا يستخدم الناس ساهلي',
@@ -169,16 +169,16 @@ export const ar = {
   'service.v1.cta.whatsapp': 'تحتاج خدمة الآن؟ راسل ساهلي عبر واتساب',
 
   // AC Repair
-  'services.status.expanding': 'توسيع البنية التحتية',
+  'services.status.expanding': 'توسيع نطاق تنسيق الخدمات',
   'services.roof.label': 'القطاع',
-
+  
   // Service Rules
   'services.rules.title': 'قواعد الخدمة',
   'services.rules.inspection': 'نهج المعاينة أولاً. يتم مناقشة السعر بعد التقييم في الموقع.',
   'services.rules.independent': 'يعمل مقدمو الخدمات بشكل مستقل.',
   'services.rules.payment': 'أنت تدفع لمزود الخدمة مباشرة.',
   'services.rules.cleaning': 'خدمات محددة النطاق مع مخرجات واضحة. لا غموض في الساعات.',
-  'services.rules.moving': 'التركيز على الخدمات اللوجستية والمناولة والفك / إعادة التركيب.',
+  'services.rules.moving': 'التركيز على تنسيق الخدمات المنزلية.',
   'services.rules.care': 'يتم التنسيق من خلال وكالات مرخصة مع مهنيين معتمدين.',
   'services.rules.lessons': 'تنسيق خبراء معتمدين فقط.',
   'services.homeMaintenance.rules.title': 'قواعد صيانة المنزل',
@@ -263,12 +263,12 @@ export const ar = {
   // Roof 3: Moving & Relocation
   'services.moving.title': 'النقل والترحيل',
   'services.moving.path': '/house-shifting-qatar',
-  'services.moving.subtitle': 'عمليات بحث ذات نية عالية وحساسة للوقت للنقل والمناولة.',
-  'services.moving.body': 'خدمات الترحيل ومناولة الأثاث.',
-  'services.moving.cta': 'راسل ساهلي على واتساب لخدمات نقل العفش',
-  'services.moving.rule': 'التركيز على الخدمات اللوجستية والمناولة والفك / إعادة التركيب.',
+  'services.moving.subtitle': 'طلب متزايد وخدمات حساسة للوقت لعمليات النقل والمناولة.',
+  'services.moving.body': 'خدمات النقل والمناولة للأثاث.',
+  'services.moving.cta': 'راسل ساهلي على واتساب لخدمات النقل',
+  'services.moving.rule': 'التركيز على تنسيق الخدمات.',
   
-  'services.moving.house.title': 'نقل المنازل',
+  'services.moving.house.title': 'نقل المنزل',
   'services.moving.house.desc': 'نقل الشقق والفيلات محلياً، وخدمات التغليف والتفريغ.',
   'services.moving.house.items': 'نقل الشقق والفيلات المحلية\nخدمات التعبئة والتفريغ',
   'services.moving.packing.title': 'التعبئة والتفريغ',
@@ -419,10 +419,10 @@ export const ar = {
   'services.tech.satellite.items': 'ضبط الدش\nإعداد IPTV وصندوق التلفزيون',
 
   // About Page
-  'about.title': 'بنية تحتية للتنسيق للاحتياجات اليومية',
-  'about.reason.title': 'لماذا وجدت "سهلي"',
-  'about.reason.body': 'البحث عن مزود خدمة لا ينبغي أن يكون وظيفة بدوام جزئي. تم بناء "سهلي" لتبسيط عملية ربط المستخدمين مع شركات الخدمات الموثوقة من خلال التنسيق الفعال.',
-  'about.reason.alt': 'مركز سهلي للتنسيق',
+  'about.title': 'مركز تنسيق الخدمات المنزلية',
+  'about.reason.title': 'لماذا يوجد ساهلي',
+  'about.reason.body': 'العثور على مزود خدمة لا ينبغي أن يكون وظيفة بدوام جزئي. تم بناء ساهلي لتبسيط عملية ربط المستخدمين بشركات خدمة موثوقة من خلال التنسيق النشط.',
+  'about.reason.alt': 'مركز ساهلي للتنسيق',
   'about.not.title': 'ما الذي لا تمثله "سهلي"',
   'about.not.marketplace': 'ليس سوقاً (Marketplace)',
   'about.not.provider': 'ليس مزود خدمة',

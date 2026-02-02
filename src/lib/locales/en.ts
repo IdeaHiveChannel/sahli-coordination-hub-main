@@ -30,14 +30,14 @@ export const en = {
   'footer.privacy': 'Privacy',
   'footer.rights': '© SAHLI. All rights reserved.',
   'footer.rights.all': 'All rights reserved.',
-  'footer.description': 'SAHLI is a coordination hub for home and essential services in Qatar. We vet independent provider companies and manage the access point to save you time and ensure quality.',
+  'footer.description': 'SAHLI coordinates access to verified home service companies in Qatar for maintenance, cleaning, moving, and more. Start on WhatsApp.',
   'footer.company': 'Company',
   'footer.services': 'Services',
   'footer.contact': 'Contact',
   'footer.intermediary': 'SAHLI coordinates access to independent provider companies. SAHLI does not execute services and is not a party to the service contract.',
   
   'footer.whatsapp': 'WhatsApp',
-  'footer.motto': 'Coordination Infrastructure for Everyday Needs',
+  'footer.motto': 'Home Services Coordination Hub',
   'about.footer.hub': 'SAHLI Coordination Services W.L.L.',
   'footer.legalName': 'SAHLI Coordination Services W.L.L.',
   'contact.whatsapp.value': '+974 3333 1354',
@@ -45,7 +45,7 @@ export const en = {
   'contact.email.value': 'hello@sahli.co',
 
   // Home Page - UPDATED FINAL CONTENT
-  'home.hero.label': 'Coordination Infrastructure',
+  'home.hero.label': 'Home Services Coordination Hub',
   'home.hero.title': 'Home Maintenance & Cleaning\nServices in Doha, Qatar',
   'home.hero.subtitle': 'Still waiting for someone to show up?',
   'home.hero.subtext': 'Finding a service provider in Qatar shouldn’t mean calling random numbers, waiting endlessly, or worrying who will come to your home.',
@@ -58,7 +58,7 @@ export const en = {
   'home.microTrust.coordination': 'Active Coordination',
   
   'home.framing.title': 'More Than a Directory. Not a Marketplace.',
-  'home.framing.subtitle': 'SAHLI is a coordination hub.',
+  'home.framing.subtitle': 'SAHLI is a service coordination hub.',
   'home.framing.body': 'You do not browse listings or compare profiles. We identify and coordinate with a suitable verified provider based on your specific requirement.',
   
   'home.why.title': 'Why people use SAHLI',
@@ -169,16 +169,16 @@ export const en = {
   'service.v1.cta.whatsapp': 'Need service now? Message SAHLI on WhatsApp',
 
   // AC Repair
-  'services.status.expanding': 'EXPANDING INFRASTRUCTURE',
+  'services.status.expanding': 'EXPANDING SERVICE COORDINATION',
   'services.roof.label': 'ROOF',
-
+  
   // Service Rules
   'services.rules.title': 'Service Rules',
   'services.rules.inspection': 'Inspection-first approach. Pricing discussed after on-site assessment.',
   'services.rules.independent': 'Providers operate independently.',
   'services.rules.payment': 'You pay the provider directly.',
   'services.rules.cleaning': 'Scope-defined services with clear deliverables. No hourly ambiguity.',
-  'services.rules.moving': 'Logistics, handling, and dismantling / reassembly focus.',
+  'services.rules.moving': 'Home services coordination focus.',
   'services.rules.care': 'Coordinated through licensed agencies with verified professionals.',
   'services.rules.lessons': 'Verified expert coordination only.',
   'services.homeMaintenance.rules.title': 'Home Maintenance Rules',
@@ -266,7 +266,7 @@ export const en = {
   'services.moving.subtitle': 'High intent, time-sensitive searches for shifting and handling.',
   'services.moving.body': 'Relocation and furniture handling services.',
   'services.moving.cta': 'Message SAHLI on WhatsApp for Moving Services',
-  'services.moving.rule': 'Logistics, handling, and dismantling / reassembly focus.',
+  'services.moving.rule': 'Service coordination focus.',
   
   'services.moving.house.title': 'House Shifting',
   'services.moving.house.desc': 'Local apartment & villa moving, packing, and unpacking services.',
@@ -400,7 +400,7 @@ export const en = {
   'services.lessons.lifestyle.items': 'Personal Styling\nEvent Planning Support\nConcierge Assistance',
 
   // About Page
-  'about.title': 'Coordination Infrastructure for Everyday Needs',
+  'about.title': 'Home Services Coordination Hub',
   'about.reason.title': 'Why SAHLI exists',
   'about.reason.body': 'Finding a service provider shouldn’t be a part-time job. SAHLI was built to simplify the process of connecting users with reliable service companies through active coordination.',
   'about.reason.alt': 'SAHLI Coordination Hub',

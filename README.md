@@ -1,10 +1,10 @@
-# SAHLI | Coordination Hub
+# SAHLI – Home Services Coordination Hub in Qatar
 
-SAHLI is a premium logistics and coordination hub based in Saudi Arabia, providing specialized care, childcare, lessons, and lifestyle services.
+SAHLI coordinates access to verified home service companies in Qatar for maintenance, cleaning, moving, and more. Start on WhatsApp.
 
 ## Project Overview
 
-This project is a modern, responsive web application built for SAHLI to showcase their coordination standards and service domains.
+This project is a modern, responsive web application built for SAHLI to showcase their coordination standards and service domains in Doha, Qatar.
 
 ## Technologies Used
 
@@ -66,9 +66,9 @@ npm run build
 
 ## Coordination Standards
 
-SAHLI operates under four main coordination roofs:
+SAHLI operates under main coordination roofs:
 1. **Home Maintenance**: AC, electrical, plumbing, and more.
-2. **Cleaning & Logistics**: Professional cleaning and moving services.
+2. **Cleaning & Coordination**: Professional cleaning and moving services.
 3. **Care & Support**: Specialized nursing and childcare.
 4. **Lessons & Lifestyle**: Tutoring and lifestyle coordination.
 
