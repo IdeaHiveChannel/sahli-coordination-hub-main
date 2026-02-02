@@ -354,7 +354,7 @@ export const ar = {
 
   'services.care.pets.title': 'خدمات الحيوانات الأليفة',
   'services.care.pets.desc': 'خدمات تنظيف ومجالسة الحيوانات الأليفة.',
-  'services.care.pets.items': 'تنظيف الحيوانات الأليفة\nمجالسة الحيوانات الأليفة',
+  'services.care.pets.items': 'العناية بالحيوانات الأليفة\nمجالسة الحيوانات الأليفة',
 
   'services.care.beauty.title': 'التجميل في المنزل',
   'services.care.beauty.desc': 'خدمات الصالون بما في ذلك الشعر، المانيكير، والحناء.',
@@ -457,4 +457,35 @@ export const ar = {
 
   // Extra
   'cta.final.cta': 'راسل "سهلي" على واتساب',
+
+  // Contact Page
+  'contact.title': 'تواصل مع ساهلي',
+  'contact.primary': 'نحن ننسق متطلبات الخدمة المنزلية الخاصة بك مع شركات معتمدة في قطر. راسلنا عبر واتساب للبدء.',
+  'contact.commitment.fast.title': 'استجابة سريعة',
+  'contact.commitment.fast.body': 'نهدف إلى توصيلك بمزود خدمة مستعد خلال دقائق.',
+  'contact.commitment.verified.title': 'كيانات معتمدة',
+  'contact.commitment.verified.body': 'نحن ننسق فقط مع شركات الخدمات المسجلة والمعتمدة.',
+  'contact.commitment.regional.title': 'جميع أنحاء قطر',
+  'contact.commitment.regional.body': 'تقديم خدمات التنسيق في جميع المناطق الرئيسية في قطر.',
+
+  // Trust & Standards Page
+  'trust.hero.alt': 'ثقة ومعايير ساهلي',
+  'trust.seal.alt': 'ختم ساهلي الرسمي',
+  'trust.label': 'الثقة والمعايير التشغيلية',
+  'trust.description': 'ساهلي ليس مجرد دليل. نحن نفرض معيار تنسيق صارم لضمان الموثوقية والمساءلة.',
+  'trust.blackbox.title': 'النزاهة التشغيلية',
+  'trust.blackbox.body': 'يتم تسجيل كل تفاعل. نحن نراقب سلوك المزود للحفاظ على أعلى معايير الخدمة لمستخدمينا.',
+  'trust.audit.title': 'تدقيق ما بعد الخدمة',
+  'trust.audit.body': 'نحن نتابع إتمام الخدمة للتأكد من استيفاء المعايير.',
+  'trust.witness.title': 'مراقبة نشطة',
+  'trust.witness.body': 'نحن نعمل كشاهد محايد لعملية التنسيق.',
+  'trust.customer.title': 'ماذا يعني هذا بالنسبة لك',
+  'trust.customer.point1': 'مزودو خدمات معتمدون',
+  'trust.customer.point2': 'تفاعلات مسؤولة',
+  'trust.customer.point3': 'قواعد خدمة واضحة',
+  'trust.customer.point4': 'تنسيق موثوق',
+  'trust.cta.title': 'هل أنت مستعد لتجربة طريقة أفضل؟',
+  'trust.cta.body': 'راسل ساهلي عبر واتساب ودعنا نتولى عملية التنسيق نيابة عنك.',
+  'trust.cta.whatsapp': 'راسل ساهلي عبر واتساب',
+  'trust.micro.clarity': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. ساهلي لا ينفذ الخدمات وليس طرفاً في عقد الخدمة.',
 } as const;
