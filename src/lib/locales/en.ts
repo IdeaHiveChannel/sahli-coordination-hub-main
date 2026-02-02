@@ -198,6 +198,7 @@ export const en = {
   'services.homeMaintenance.electrical.path': '/electrical-services-qatar',
   'services.homeMaintenance.plumbing.path': '/plumbing-services-qatar',
   'services.homeMaintenance.handyman.path': '/handyman-services-qatar',
+  'services.homeMaintenance.rules.title': 'Maintenance Rules',
   'services.homeMaintenance.subtitle': 'AC, electrical, plumbing, and essential home fixes.',
   'services.homeMaintenance.body': 'High-urgency services for AC, electrical, plumbing, and handyman needs.',
   'services.homeMaintenance.rule': 'Inspection-first. No pricing before visit.',
@@ -250,6 +251,7 @@ export const en = {
   // Roof 2: Cleaning & Sanitization
   'services.cleaning.title': 'Cleaning & Sanitization',
   'services.cleaning.path': '/cleaning-services-qatar',
+  'services.cleaning.rules.title': 'Cleaning Rules',
   'services.cleaning.subtitle': 'Home cleaning, deep cleaning, and specialized sanitization.',
   'services.cleaning.body': 'Recurring and seasonal cleaning demand across Qatar.',
   'services.cleaning.rule': 'Scope-defined services. No hourly ambiguity.',
@@ -270,6 +272,7 @@ export const en = {
   // Roof 3: Moving & Relocation
   'services.moving.title': 'Moving & Relocation',
   'services.moving.path': '/house-shifting-qatar',
+  'services.moving.rules.title': 'Moving Rules',
   'services.moving.subtitle': 'House shifting, packing, and furniture handling.',
   'services.moving.body': 'High intent, time-sensitive relocation and handling services.',
   'services.moving.rule': 'Scope-defined services. No hourly ambiguity.',

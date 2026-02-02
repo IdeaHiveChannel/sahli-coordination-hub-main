@@ -124,7 +124,7 @@ export default function Babysitting() {
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
             <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
-                Service Guidelines
+                {t('services.care.rules.title')}
               </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -150,7 +150,7 @@ export default function Babysitting() {
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              {t('service.babysitting.includes.title')}
+              {t('service.v1.includes.title')}
             </h2>
             <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Premium Childcare Support</p>
           </div>

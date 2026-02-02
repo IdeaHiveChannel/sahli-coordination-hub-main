@@ -148,6 +148,9 @@ export default function ACRepair() {
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
+            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
+              {t('services.homeMaintenance.rules.title')}
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 t('services.rules.inspection'),

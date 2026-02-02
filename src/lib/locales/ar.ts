@@ -109,6 +109,7 @@ export const ar = {
   'services.homeMaintenance.electrical.path': '/electrical-services-qatar',
   'services.homeMaintenance.plumbing.path': '/plumbing-services-qatar',
   'services.homeMaintenance.handyman.path': '/handyman-services-qatar',
+  'services.homeMaintenance.rules.title': 'قواعد الصيانة',
   'services.homeMaintenance.subtitle': 'التكييف، والكهرباء، والسباكة، والإصلاحات المنزلية الأساسية.',
   'services.homeMaintenance.body': 'التكييف، الكهرباء، السباكة، إصلاح الأجهزة، العامل الشامل ومكافحة الحشرات.',
   'services.homeMaintenance.rule': 'الكشف أولاً. لا تسعير قبل الزيارة.',
@@ -161,6 +162,7 @@ export const ar = {
   // Roof 2: Cleaning Services
   'services.cleaning.title': 'خدمات التنظيف',
   'services.cleaning.path': '/cleaning-services-qatar',
+  'services.cleaning.rules.title': 'قواعد التنظيف',
   'services.cleaning.subtitle': 'تنظيف المنزل، التنظيف العميق، والتعقيم المتخصص.',
   'services.cleaning.body': 'تنظيف المنزل، التنظيف العميق، التعقيم المتخصص، وخزانات المياه.',
   'services.cleaning.rule': 'خدمات محددة النطاق. لا غموض في السعر.',
@@ -201,6 +203,7 @@ export const ar = {
   // Roof 3: Moving Services
   'services.moving.title': 'خدمات النقل',
   'services.moving.path': '/house-shifting-qatar',
+  'services.moving.rules.title': 'قواعد النقل',
   'services.moving.subtitle': 'نقل المنزل، التغليف، ومناولة الأثاث.',
   'services.moving.body': 'نقل المنزل، التغليف، مناولة الأثاث، وحلول التخزين.',
   'services.moving.rule': 'خدمات محددة النطاق. لا غموض في السعر.',
