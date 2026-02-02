@@ -1,3 +1,5 @@
+import { CONTACT_EMAIL } from '../constants';
+
 export const ar = {
   // Navigation
   'nav.home': 'الصفحة الرئيسية',

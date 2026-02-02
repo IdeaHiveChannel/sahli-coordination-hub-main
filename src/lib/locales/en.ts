@@ -1,3 +1,5 @@
+import { CONTACT_EMAIL } from '../constants';
+
 export const en = {
   // Navigation
   'nav.home': 'Homepage',

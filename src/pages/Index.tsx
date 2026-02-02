@@ -177,7 +177,7 @@ const Index = () => {
     { title: t('services.homeMaintenance.ac.title'), icon: <Snowflake size={24} />, intent: "AC repair", path: t('services.homeMaintenance.ac.path') },
     { title: t('services.homeMaintenance.electrical.title'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: t('services.homeMaintenance.electrical.path') },
     { title: t('services.homeMaintenance.plumbing.title'), icon: <Droplets size={24} />, intent: "plumbing", path: t('services.homeMaintenance.plumbing.path') },
-    { title: t('services.tech.appliances.title'), icon: <Cog size={24} />, intent: "appliance repair", path: t('services.tech.path') },
+    { title: t('services.electronics.repair.title'), icon: <Cog size={24} />, intent: "appliance repair", path: t('services.electronics.path') },
     { title: t('services.cleaning.deep.title'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: t('services.cleaning.path') },
     { title: t('services.outdoor.pest.title'), icon: <Bug size={24} />, intent: "pest control", path: t('services.outdoor.path') },
     { title: t('services.moving.house.title'), icon: <Truck size={24} />, intent: "house shifting", path: t('services.moving.path') },
