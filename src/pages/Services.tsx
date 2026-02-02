@@ -103,9 +103,9 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
                   initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
-                  className="flex items-center gap-3 text-foreground font-semibold text-sm group/item py-1"
+                  className="flex items-start gap-3 text-foreground font-semibold text-sm group/item py-1"
                 >
-                  <img src="/logos/Sahl Logo 9.png" alt="" loading="lazy" className="w-3 h-3 object-contain opacity-40 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-300 shadow-sm shadow-primary/20" />
+                  <img src="/logos/Sahl Logo 9.png" alt="" loading="lazy" className="w-3 h-3 object-contain opacity-40 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-300 shadow-sm shadow-primary/20 mt-1" />
                   <span className="group-hover/item:translate-x-1 transition-transform duration-300">
                     {item}
                   </span>
@@ -210,12 +210,12 @@ export default function Services() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-background" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-32 pb-12">
+        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10">
           <motion.div
             style={{ y: yText }}
-            className="max-w-4xl"
+            className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter">
+            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter">
               {t('services.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
@@ -233,7 +233,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-base md:text-lg text-foreground/80 font-medium leading-tight max-w-2xl mb-6"
+              className="text-base md:text-lg text-foreground/80 font-medium leading-tight max-w-2xl mb-6 md:mb-8 mx-auto"
             >
               {t('services.intro')}
             </motion.p>
@@ -253,7 +253,7 @@ export default function Services() {
       {/* Sticky Selector - Enhanced Visuals */}
       <div className="sticky top-[56px] md:top-[64px] z-40 w-full glass-morphism border-y border-border shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
         <div className="container-sahli relative">
-          <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-3 scroll-smooth items-center">
+          <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-3 scroll-smooth items-center md:justify-center">
             {roofs.map((roof: { id: string; label: string; status?: string }, idx: number) => (
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
@@ -301,7 +301,7 @@ export default function Services() {
       </div>
 
       {/* Roof 1: Home Maintenance - Compact */}
-      <section id="home-maintenance" className="relative py-12 md:py-16 scroll-mt-32 bg-background overflow-hidden">
+      <section id="home-maintenance" className="relative py-8 md:py-16 scroll-mt-32 bg-background overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         
@@ -313,7 +313,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="sticky top-32 md:top-40 lg:top-44">
+              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
                 <div className="flex items-center gap-3 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -326,8 +326,8 @@ export default function Services() {
                     {t('services.status.live')} — 01
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.homeMaintenance.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.homeMaintenance.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.homeMaintenance.body')}
                 </p>
                 
@@ -406,7 +406,7 @@ export default function Services() {
       </section>
 
       {/* Roof 2: Cleaning & Logistics - Compact */}
-      <section id="cleaning" className="relative py-12 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      <section id="cleaning" className="relative py-8 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         
@@ -418,7 +418,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="sticky top-32 md:top-40 lg:top-44">
+              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
                 <div className="flex items-center gap-3 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -431,8 +431,8 @@ export default function Services() {
                     {t('services.status.live')} — 02
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.cleaning.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.cleaning.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.cleaning.body')}
                 </p>
                 
@@ -503,7 +503,7 @@ export default function Services() {
       </section>
 
       {/* Roof 3: Moving Services - Compact */}
-      <section id="moving" className="relative py-12 md:py-16 bg-background scroll-mt-32 overflow-hidden">
+      <section id="moving" className="relative py-8 md:py-16 bg-background scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         
@@ -515,7 +515,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="sticky top-32 md:top-40 lg:top-44">
+              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
                 <div className="flex items-center gap-3 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -528,8 +528,8 @@ export default function Services() {
                     {t('services.status.live')} — 03
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.moving.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.moving.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.moving.body')}
                 </p>
                 
@@ -610,7 +610,7 @@ export default function Services() {
 
 
       {/* Roof 4: Outdoor & Specialized - Compact */}
-      <section id="outdoor" className="relative py-12 md:py-16 scroll-mt-32 bg-background overflow-hidden">
+      <section id="outdoor" className="relative py-8 md:py-16 scroll-mt-32 bg-background overflow-hidden">
         <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
@@ -620,7 +620,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="sticky top-32 md:top-40 lg:top-44">
+              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
                 <div className="flex items-center gap-3 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -633,8 +633,8 @@ export default function Services() {
                     {t('services.status.live')} — 04
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.outdoor.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.outdoor.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.outdoor.subtitle')}
                 </p>
                 
@@ -713,7 +713,7 @@ export default function Services() {
       </section>
 
       {/* Roof 5: Care & Lifestyle - Compact */}
-      <section id="care" className="relative py-12 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      <section id="care" className="relative py-8 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
@@ -723,7 +723,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="sticky top-32 md:top-40 lg:top-44">
+              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
                 <div className="flex items-center gap-3 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -736,8 +736,8 @@ export default function Services() {
                     {t('services.status.comingSoon')} — 05
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.care.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.care.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.care.subtitle')}
                 </p>
                 
@@ -824,7 +824,7 @@ export default function Services() {
       </section>
 
       {/* Roof 6: Electronics & Tech - Compact */}
-      <section id="tech" className="relative py-12 md:py-16 bg-background scroll-mt-32 overflow-hidden">
+      <section id="tech" className="relative py-8 md:py-16 bg-background scroll-mt-32 overflow-hidden">
         <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
@@ -834,7 +834,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="sticky top-32 md:top-40 lg:top-44">
+              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
                 <div className="flex items-center gap-3 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -847,8 +847,8 @@ export default function Services() {
                     {t('services.status.live')} — 06
                   </span>
                 </div>
-                <h2 className="mb-4 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.electronics.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.electronics.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.electronics.subtitle')}
                 </p>
                 

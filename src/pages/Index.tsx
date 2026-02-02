@@ -273,7 +273,7 @@ const Index = () => {
           className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-gradient-to-${dir === 'rtl' ? 'r' : 'l'} from-primary/[0.08] to-transparent pointer-events-none`} 
         />
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div 
             className="max-w-7xl xl:max-w-[90%] flex flex-col items-center md:items-start"
             style={{ y: yHero }}
@@ -282,7 +282,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-4 px-5 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] md:text-xs font-black tracking-[0.25em] uppercase mb-8 mx-auto md:mx-0 shadow-lg shadow-primary/5 group overflow-hidden relative btn-shine"
+              className="inline-flex items-center gap-4 px-5 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] md:text-xs font-black tracking-[0.25em] uppercase mb-6 md:mb-8 mx-auto md:mx-0 shadow-lg shadow-primary/5 group overflow-hidden relative btn-shine"
             >
               <img 
                 src="/logos/Sahl Logo 9.png" 
@@ -292,21 +292,21 @@ const Index = () => {
               {t('home.hero.label')}
             </motion.div>
             
-            <h1 className="mb-10 text-foreground text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
+            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
               {t('home.hero.title')}
             </h1>
 
             <motion.div
-              className="mb-10 max-w-2xl flex flex-col items-center md:items-start"
+              className="mb-6 md:mb-8 max-w-2xl flex flex-col items-center md:items-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-6 tracking-tight">
+              <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-4 md:mb-6 tracking-tight">
                 {t('home.hero.subtitle')}
               </p>
               
-              <p className="text-lg md:text-lg text-foreground/70 mb-12 md:mb-10 leading-relaxed font-medium tracking-tight">
+              <p className="text-lg md:text-lg text-foreground/70 mb-8 md:mb-10 leading-relaxed font-medium tracking-tight">
                 {t('home.hero.subtext')}
               </p>
               
@@ -381,7 +381,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6">
+                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6 md:mb-8">
                   {t('home.featured.title')}
                 </h2>
               </motion.div>
@@ -480,7 +480,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6">
+                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6 md:mb-8">
                   {t('home.coordinate.title')}
                 </h2>
               </motion.div>
@@ -523,7 +523,7 @@ const Index = () => {
                 {t('home.hero.label')}
               </div>
               
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-8 leading-[0.9]">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-6 md:mb-8 leading-[0.9]">
                 {t('home.framing.title')}
               </h2>
               <h3 className="text-primary text-xl md:text-2xl font-black tracking-tight mb-4">

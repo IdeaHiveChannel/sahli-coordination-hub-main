@@ -417,4 +417,42 @@ export const ar = {
   'services.tech.satellite.title': 'الستالايت والتلفزيون',
   'services.tech.satellite.desc': 'ضبط الدش وإعداد IPTV.',
   'services.tech.satellite.items': 'ضبط الدش\nإعداد IPTV وصندوق التلفزيون',
+
+  // About Page
+  'about.title': 'بنية تحتية للتنسيق للاحتياجات اليومية',
+  'about.reason.title': 'لماذا وجدت "سهلي"',
+  'about.reason.body': 'البحث عن مزود خدمة لا ينبغي أن يكون وظيفة بدوام جزئي. تم بناء "سهلي" لتبسيط عملية ربط المستخدمين مع شركات الخدمات الموثوقة من خلال التنسيق الفعال.',
+  'about.reason.alt': 'مركز سهلي للتنسيق',
+  'about.not.title': 'ما الذي لا تمثله "سهلي"',
+  'about.not.marketplace': 'ليس سوقاً (Marketplace)',
+  'about.not.provider': 'ليس مزود خدمة',
+  'about.not.execution': 'لا نقوم بتنفيذ الخدمات',
+  'about.not.pricing': 'لا نحدد الأسعار',
+  'about.not.contract': 'لسنا طرفاً في العقد',
+  'about.position.title': 'موقعنا',
+  'about.position.body': '"سهلي" هي الطبقة التشغيلية بينك وبين منظومة الخدمات.',
+
+  // How It Works Page
+  'how.hero.label': 'سير العمل التشغيلي',
+  'how.hero.title': 'كيف يتم التنسيق',
+  'how.hero.subtitle': 'نحن نتولى عملية التواصل ذهاباً وإياباً حتى لا تضطر أنت لذلك. رسالة واحدة، تنسيق لا محدود.',
+  'how.phase1.title': 'المرحلة 1: قبل الخدمة',
+  'how.phase1.item1': 'ترسل طلبك عبر واتساب',
+  'how.phase1.item2': 'نحدد مزودي الخدمة الموثوقين والمناسبين',
+  'how.phase1.item3': 'نؤكد التوفر والاهتمام',
+  'how.phase2.title': 'المرحلة 2: أثناء الخدمة',
+  'how.phase2.item1': 'يتم إنشاء اتصال مباشر مع المزود',
+  'how.phase2.item2': 'يتم الاتفاق على الفحص والتسعير مباشرة',
+  'how.phase2.item3': 'تتم مراقبة تنفيذ الخدمة بواسطة "سهلي"',
+  'how.phase3.title': 'المرحلة 3: بعد الخدمة',
+  'how.phase3.item1': 'يتم الدفع مباشرة لمزود الخدمة',
+  'how.phase3.item2': 'يتم تسجيل الملاحظات لمراقبة الجودة',
+  'how.phase3.item3': 'يتم تحديث أداء المزود في المركز',
+  'how.execution.title': 'سياسة التنفيذ',
+  'how.execution.body': '"سهلي" لا تقوم بتنفيذ الخدمات. يتم تنفيذ جميع الخدمات من قبل شركات مستقلة وموثوقة.',
+  'how.network.title': 'إدارة الشبكة',
+  'how.network.body': 'نحن نقوم باستمرار بفحص ومراقبة شبكة المزودين لدينا لضمان الحفاظ على المعايير.',
+
+  // Extra
+  'cta.final.cta': 'راسل "سهلي" على واتساب',
 } as const;

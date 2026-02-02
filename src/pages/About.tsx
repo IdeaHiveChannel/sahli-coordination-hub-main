@@ -55,17 +55,17 @@ export default function About() {
           <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-background via-background/80 to-transparent`} />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 shadow-lg btn-shine mx-auto md:mx-0"
+            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-4 md:mb-6 shadow-lg btn-shine mx-auto md:mx-0"
           >
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
             {t('nav.about')}
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-6 md:mb-8">
             {t('about.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -82,7 +82,7 @@ export default function About() {
       </section>
 
       {/* Why We Exist - Compact Split Layout */}
-      <section className="relative py-12 md:py-16 bg-background overflow-hidden border-y border-border/50">
+      <section className="relative py-8 md:py-16 bg-background overflow-hidden border-y border-border/50">
         <div className="container-sahli relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
@@ -91,7 +91,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6 text-foreground leading-none">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6 md:mb-8 text-foreground leading-none">
                 {t('about.reason.title')}
               </h2>
               <p className="text-base md:text-lg text-foreground/70 leading-relaxed font-medium tracking-tight">
@@ -118,9 +118,9 @@ export default function About() {
       </section>
 
       {/* What SAHLI Is Not - Compact Grid */}
-      <section className="relative py-12 md:py-16 bg-background overflow-hidden">
+      <section className="relative py-8 md:py-16 bg-background overflow-hidden">
         <div className="container-sahli relative z-10">
-          <div className="flex flex-col items-center mb-10">
+          <div className="flex flex-col items-center mb-6 md:mb-10">
             <h2 className="text-center text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none">
               {t('about.not.title')}
             </h2>
@@ -150,7 +150,7 @@ export default function About() {
       </section>
 
       {/* Vision/Position - Architectural Focus - Compact */}
-      <section className="relative py-12 md:py-16 bg-background/50 overflow-hidden border-y border-border/50">
+      <section className="relative py-8 md:py-16 bg-background/50 overflow-hidden border-y border-border/50">
         <div className="container-sahli relative z-10">
           <motion.div 
             className="max-w-4xl mx-auto text-center p-8 md:p-12 rounded-3xl bg-foreground/5 border border-border relative overflow-hidden shadow-xl"
@@ -159,7 +159,7 @@ export default function About() {
             viewport={{ once: true }}
           >
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-bold tracking-widest uppercase mb-6 btn-shine">
+              <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-bold tracking-widest uppercase mb-4 md:mb-6 btn-shine">
                 <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('about.position.title')}
               </div>
@@ -172,7 +172,7 @@ export default function About() {
       </section>
 
       {/* CTA Section - Consistent and Compact */}
-      <section className="py-12 md:py-16 bg-background relative overflow-hidden">
+      <section className="py-8 md:py-16 bg-background relative overflow-hidden">
         <div className="container-sahli text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -180,10 +180,10 @@ export default function About() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6 text-foreground leading-none">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 md:mb-6 text-foreground leading-none">
               {t('cta.final.title')}
             </h2>
-            <p className="text-base text-foreground/60 mb-8 font-medium">
+            <p className="text-base text-foreground/60 mb-6 md:mb-8 font-medium">
               {t('cta.final.body')}
             </p>
             <motion.a

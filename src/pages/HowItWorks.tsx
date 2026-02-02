@@ -51,17 +51,17 @@ const HowItWorks = () => {
           <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px] animate-pulse-slow" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 btn-shine mx-auto md:mx-0"
+            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-4 md:mb-6 btn-shine mx-auto md:mx-0"
           >
             <Zap size={14} />
             {t('how.hero.label')}
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-6 md:mb-8">
             {t('how.hero.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -87,13 +87,11 @@ const HowItWorks = () => {
       </section>
 
       {/* Coordination Phases: Before / During / After */}
-      <section className="relative py-12 md:py-16 bg-background overflow-hidden border-b border-border/50">
+      <section className="relative py-8 md:py-16 bg-background overflow-hidden border-b border-border/50">
         <div className="container-sahli relative z-10">
-          <div className="flex flex-col items-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center mb-6 md:mb-8">
               {t('how.flow.title')}
             </h2>
-          </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Phase 1: Before Service */}
@@ -200,7 +198,7 @@ const HowItWorks = () => {
       {/* Important to Know - CORE POSITIONING */}
       <section className="section-spacing relative bg-background overflow-hidden border-b border-border/50">
         <div className="container-sahli relative z-10">
-          <div className="flex flex-col items-center mb-10">
+          <div className="flex flex-col items-center mb-6 md:mb-8">
             <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center">
               {t('home.important.title')}
             </h2>
@@ -229,7 +227,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Operational Principles - Compact Grid */}
-      <section className="relative py-12 md:py-16 bg-background overflow-hidden">
+      <section className="relative py-8 md:py-16 bg-background overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="grid md:grid-cols-2 gap-6">
             <motion.div 
@@ -273,10 +271,10 @@ const HowItWorks = () => {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6 text-foreground">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 md:mb-6 text-foreground">
               {t('cta.final.title')}
             </h2>
-            <p className="text-base text-foreground/60 mb-8 font-medium">
+            <p className="text-base text-foreground/60 mb-6 md:mb-8 font-medium">
               {t('cta.final.body')}
             </p>
             <motion.a

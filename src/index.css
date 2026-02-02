@@ -234,8 +234,8 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
   }
 
@@ -428,21 +428,21 @@
 
   /* Section spacing - optimized for mobile and laptop screens */
   .section-spacing {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 
   @media (min-width: 768px) {
     .section-spacing {
-      padding-top: 4.5rem;
-      padding-bottom: 4.5rem;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
   }
 
   @media (min-width: 1024px) {
     .section-spacing {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
     }
   }
 
@@ -481,7 +481,7 @@
 
   /* Utility Classes - Premium Design System */
   .container-sahli {
-    @apply mx-auto px-5 sm:px-8 md:px-10 lg:px-16 max-w-[1440px];
+    @apply mx-auto px-4 sm:px-8 md:px-10 lg:px-16 max-w-[1440px];
   }
 
   .glass-morphism {

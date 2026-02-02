@@ -398,4 +398,42 @@ export const en = {
   'services.lessons.fitness.items': 'Personal Training\nYoga & Wellness\nSwimming Instruction',
   'services.lessons.lifestyle.title': 'Lifestyle Services',
   'services.lessons.lifestyle.items': 'Personal Styling\nEvent Planning Support\nConcierge Assistance',
+
+  // About Page
+  'about.title': 'Coordination Infrastructure for Everyday Needs',
+  'about.reason.title': 'Why SAHLI exists',
+  'about.reason.body': 'Finding a service provider shouldn’t be a part-time job. SAHLI was built to simplify the process of connecting users with reliable service companies through active coordination.',
+  'about.reason.alt': 'SAHLI Coordination Hub',
+  'about.not.title': 'What SAHLI is not',
+  'about.not.marketplace': 'Not a Marketplace',
+  'about.not.provider': 'Not a Service Provider',
+  'about.not.execution': 'Not Executing Services',
+  'about.not.pricing': 'Not Determining Prices',
+  'about.not.contract': 'Not a Party to Contract',
+  'about.position.title': 'Our Positioning',
+  'about.position.body': 'SAHLI is the operational layer between you and the service ecosystem.',
+
+  // How It Works Page
+  'how.hero.label': 'Operational Workflow',
+  'how.hero.title': 'How Coordination Happens',
+  'how.hero.subtitle': 'We handle the back-and-forth so you don’t have to. One message, infinite coordination.',
+  'how.phase1.title': 'Phase 1: Before Service',
+  'how.phase1.item1': 'You send your request via WhatsApp',
+  'how.phase1.item2': 'We identify suitable verified providers',
+  'how.phase1.item3': 'We confirm availability and interest',
+  'how.phase2.title': 'Phase 2: During Service',
+  'how.phase2.item1': 'Direct contact established with provider',
+  'how.phase2.item2': 'Inspection and pricing agreed directly',
+  'how.phase2.item3': 'Service execution monitored by SAHLI',
+  'how.phase3.title': 'Phase 3: After Service',
+  'how.phase3.item1': 'Payment made directly to the provider',
+  'how.phase3.item2': 'Feedback recorded for quality control',
+  'how.phase3.item3': 'Provider performance updated in hub',
+  'how.execution.title': 'Execution Policy',
+  'how.execution.body': 'SAHLI does not execute services. All services are performed by independent, verified companies.',
+  'how.network.title': 'Network Management',
+  'how.network.body': 'We continuously vet and monitor our network of providers to ensure standards are maintained.',
+
+  // Extra
+  'cta.final.cta': 'Message SAHLI on WhatsApp',
 } as const;

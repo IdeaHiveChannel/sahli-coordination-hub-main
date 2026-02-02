@@ -53,23 +53,23 @@ export default function ElectronicsTech() {
           <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center md:items-start text-center md:text-start"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-6 md:mb-8 shadow-sm mx-auto md:mx-0">
               <Cog size={14} className="animate-spin-slow" />
               {t('services.electronics.title')}
             </div>
 
-            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
+            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-6 md:mb-8">
               {t('services.electronics.title')}
             </h1>
 
-            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-12">
+            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-8 md:mb-12">
               {t('services.electronics.subtitle')}
             </p>
 
@@ -128,7 +128,7 @@ export default function ElectronicsTech() {
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
+            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-6 md:mb-8 text-center leading-[0.9]">
               {t('services.electronics.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -153,8 +153,8 @@ export default function ElectronicsTech() {
       {/* 3️⃣ Service Categories */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6 md:mb-8">
               {t('services.electronics.categories.title')}
             </h2>
             <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('services.electronics.categories.subtitle')}</p>
@@ -270,7 +270,7 @@ export default function ElectronicsTech() {
         <div className="container-sahli">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-6 md:mb-8 leading-[0.9]">
                 {t('home.areas.title')}
               </h2>
               <div className="space-y-4">

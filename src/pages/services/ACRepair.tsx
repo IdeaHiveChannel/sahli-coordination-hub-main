@@ -58,23 +58,23 @@ export default function ACRepair() {
           <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center md:items-start text-center md:text-start"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 btn-shine mx-auto md:mx-0">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-4 md:mb-6 btn-shine mx-auto md:mx-0">
               <Snowflake size={14} className="animate-spin-slow" />
               {t('services.homeMaintenance.ac.title')}
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-6 md:mb-8">
               {t('services.homeMaintenance.ac.title')}
             </h1>
 
-            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-12">
+            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-8 md:mb-12">
               {t('services.homeMaintenance.subtitle')}
             </p>
 
@@ -127,18 +127,13 @@ export default function ACRepair() {
       {/* 2️⃣ Service Rules Block */}
       <section className="section-spacing bg-background border-y border-border/50">
         <div className="container-sahli">
-          <div className="max-w-4xl mb-12 md:mb-16 text-center md:text-start">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-8">
-              {t('services.homeMaintenance.rules.title')}
-            </h2>
-          </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
+            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-8 md:mb-12 text-center leading-[0.9]">
               {t('services.homeMaintenance.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -163,9 +158,9 @@ export default function ACRepair() {
       {/* 3️⃣ Visual Service Features */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-4 md:mb-6">
               {t('service.v1.includes.title')}
             </h2>
             </div>
@@ -199,8 +194,8 @@ export default function ACRepair() {
         <div className="absolute top-0 right-0 w-[50%] h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container-sahli relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-4 md:mb-6">
               {t('home.what.title')}
             </h2>
             <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('how.flow.subtitle')}</p>
@@ -283,7 +278,7 @@ export default function ACRepair() {
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-8">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6 md:mb-8">
                 {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
@@ -327,10 +322,10 @@ export default function ACRepair() {
         <div className="container-sahli relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[120px] rounded-full" />
           <div className="relative z-10 text-center max-w-4xl mx-auto">
-            <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
+            <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8 md:mb-12">
               <Clock size={48} />
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-8 md:mb-12 leading-[0.85]">
               {t('service.v1.cta.whatsapp')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
