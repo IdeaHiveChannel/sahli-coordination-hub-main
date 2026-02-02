@@ -42,7 +42,7 @@ export const en = {
   'footer.legalName': 'SAHLI Coordination Services W.L.L.',
   'contact.whatsapp.value': '+974 3333 1354',
   'contact.email.label': 'Email',
-  'contact.email.value': 'hello@sahliservice.com',
+  'contact.email.value': CONTACT_EMAIL,
 
   // Home Page - UPDATED FINAL CONTENT
   'home.hero.label': 'Home Services Coordination Hub',

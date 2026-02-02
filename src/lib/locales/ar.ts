@@ -42,7 +42,7 @@ export const ar = {
   'footer.legalName': 'ساهلي للخدمات التنسيقية ذ.م.م.',
   'contact.whatsapp.value': '+974 3333 1354',
   'contact.email.label': 'البريد الإلكتروني',
-  'contact.email.value': 'hello@sahliservice.com',
+  'contact.email.value': CONTACT_EMAIL,
 
   // الصفحة الرئيسية - المحتوى النهائي المحدث
   'home.hero.label': 'مركز تنسيق الخدمات المنزلية',
