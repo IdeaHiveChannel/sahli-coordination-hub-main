@@ -23,8 +23,9 @@ export function Footer() {
       { key: 'nav.homeMaintenance' as TranslationKey, path: '/home-maintenance-qatar' },
       { key: 'nav.cleaningServices' as TranslationKey, path: '/cleaning-services-qatar' },
       { key: 'nav.movingServices' as TranslationKey, path: '/house-shifting-qatar' },
-      { key: 'nav.careChildcare' as TranslationKey, path: '/care-childcare-qatar' },
-      { key: 'nav.lessonsLifestyle' as TranslationKey, path: '/lessons-lifestyle-qatar' },
+      { key: 'nav.outdoorSpecialized' as TranslationKey, path: '/outdoor-specialized-qatar' },
+      { key: 'nav.careLifestyle' as TranslationKey, path: '/care-lifestyle-qatar' },
+      { key: 'nav.electronicsTech' as TranslationKey, path: '/electronics-tech-qatar' },
     ]
   };
 

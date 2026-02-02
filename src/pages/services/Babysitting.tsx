@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Heart, ShieldCheck, Clock, MapPin, AlertCircle, Baby } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Heart, ShieldCheck, Clock, MapPin, AlertCircle, Baby, ArrowUp } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 
@@ -14,6 +15,15 @@ export default function Babysitting() {
     target: containerRef,
     offset: ["start start", "end start"]
   });
+
+  const relatedServices = [
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
+    { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
+    { title: t('nav.movingServices'), path: t('services.moving.path') },
+    { title: t('nav.outdoorSpecialized'), path: t('services.outdoor.path') },
+    { title: t('nav.careLifestyle'), path: t('services.care.path') },
+    { title: t('nav.electronicsTech'), path: t('services.electronics.path') },
+  ];
 
   const coordinationSteps = [
     { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
@@ -42,7 +52,7 @@ export default function Babysitting() {
 
         <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center md:items-start text-center md:text-start"
@@ -69,23 +79,24 @@ export default function Babysitting() {
               </div>
             </div>
             
-            <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('services.comingSoon.notify')}
-            </p>
-
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <motion.div
-                className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/10 opacity-50 cursor-not-allowed"
-                whileHover={{ scale: 1.02 }}
+              <motion.a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick('Babysitting Hero CTA')}
+                className="cta-primary px-12 py-6 text-xl btn-shine shadow-3xl shadow-primary/30"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle size={22} className="fill-primary-foreground" />
-                {t('services.status.soon')}
-              </motion.div>
+                <MessageCircle size={24} className="fill-primary-foreground" />
+                {t('cta.whatsapp')}
+              </motion.a>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-2xl"
@@ -218,7 +229,7 @@ export default function Babysitting() {
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-primary/[0.03] border border-primary/10"
@@ -227,10 +238,7 @@ export default function Babysitting() {
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-6">
-                {[
-                  t('home.hero.label'),
-                  t('services.boundaries.is.body').split('\n')[1]
-                ].map((item: string, i: number) => (
+                {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
                   <li key={i} className="flex gap-4 items-center text-lg text-foreground/70 font-bold">
                     <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
                     {item}
@@ -240,7 +248,7 @@ export default function Babysitting() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-foreground/[0.02] border border-border"
@@ -273,7 +281,7 @@ export default function Babysitting() {
                 {areas.map((area, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
@@ -296,8 +304,8 @@ export default function Babysitting() {
                 <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-8 animate-bounce">
                   <MapPin size={48} />
                 </div>
-                <h3 className="text-3xl font-black text-foreground mb-4">Qatar Nationwide</h3>
-                <p className="text-xl text-foreground/60 font-bold uppercase tracking-widest">Rapid Response Units</p>
+                <h3 className="text-3xl font-black text-foreground mb-4">{t('services.areas.qatarNationwide')}</h3>
+                <p className="text-xl text-foreground/60 font-bold uppercase tracking-widest">{t('services.areas.rapidResponse')}</p>
               </div>
             </div>
           </div>
@@ -345,28 +353,82 @@ export default function Babysitting() {
               <Clock size={48} />
             </div>
             <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
-              Coming Soon
+              {t('service.v1.cta.whatsapp')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <motion.div
-                className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30 opacity-50 cursor-not-allowed"
+              <motion.a
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick('Babysitting Final CTA')}
+                className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30"
               >
                 <MessageCircle size={32} className="fill-primary-foreground" />
-                {t('services.status.soon')}
-              </motion.div>
+                {t('cta.whatsapp')}
+              </motion.a>
               
               <div className="flex flex-col items-center md:items-start gap-1">
                 <div className="flex items-center gap-2 text-primary font-black tracking-widest uppercase text-sm">
                   <ShieldCheck size={20} />
-                  Safe & Secure
+                  {t('services.security.safeSecure')}
                 </div>
-                <div className="text-foreground/40 font-bold">No hidden fees. Pay directly.</div>
+                <div className="text-foreground/40 font-bold">{t('services.rules.payment')}</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* 9️⃣ Related Services - Quick Links */}
+      <section className="section-spacing bg-foreground/[0.02] border-t border-border">
+        <div className="container-sahli">
+          <div className="mb-16 text-center md:text-start">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter mb-4 leading-none">
+              {t('services.related.title')}
+            </h2>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">
+              {t('services.related.subtitle')}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedServices.map((service, i) => (
+              <Link
+                key={i}
+                to={service.path}
+                className="group p-8 rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-black text-foreground group-hover:text-primary transition-colors">
+                    {service.title}
+                  </span>
+                  <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                    <ArrowUp size={24} className="rotate-45" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔟 Back to Home Link */}
+      <section className="py-24 bg-background border-t border-border">
+        <div className="container-sahli flex justify-center">
+          <Link 
+            to="/"
+            className="group flex items-center gap-4 px-10 py-5 rounded-[2rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 hover:bg-foreground/[0.05]"
+          >
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+              <ArrowUp size={20} className="rotate-[-90deg] rtl:rotate-[90deg]" />
+            </div>
+            <span className="font-black text-foreground/60 group-hover:text-foreground transition-colors duration-500 text-lg uppercase tracking-widest">
+              {t('nav.home')}
+            </span>
+          </Link>
+        </div>
+      </section>
     </Layout>
   );
 }

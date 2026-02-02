@@ -8,7 +8,7 @@ import { trackWhatsAppClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
 
 export default function ACRepair() {
-  const { t } = useLanguage();
+  const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -20,9 +20,12 @@ export default function ACRepair() {
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
 
   const relatedServices = [
-    { title: t('services.homeMaintenance.plumbing.title'), path: t('services.homeMaintenance.plumbing.path') },
-    { title: t('services.homeMaintenance.electrical.title'), path: t('services.homeMaintenance.electrical.path') },
-    { title: t('services.homeMaintenance.handyman.title'), path: t('services.homeMaintenance.handyman.path') },
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
+    { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
+    { title: t('nav.movingServices'), path: t('services.moving.path') },
+    { title: t('nav.outdoorSpecialized'), path: t('services.outdoor.path') },
+    { title: t('nav.careLifestyle'), path: t('services.care.path') },
+    { title: t('nav.electronicsTech'), path: t('services.electronics.path') },
   ];
 
   const coordinationSteps = [
@@ -57,7 +60,7 @@ export default function ACRepair() {
 
         <div className="container-sahli relative z-10 pt-24 md:pt-28 pb-12 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center md:items-start text-center md:text-start"
@@ -94,18 +97,18 @@ export default function ACRepair() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick('AC Repair Hero CTA')}
-                className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
+                className="cta-primary px-12 py-6 text-xl btn-shine shadow-3xl shadow-primary/30"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle size={22} className="fill-primary-foreground" />
+                <MessageCircle size={24} className="fill-primary-foreground" />
                 {t('cta.whatsapp')}
               </motion.a>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-2xl"
@@ -125,8 +128,8 @@ export default function ACRepair() {
                   <ShieldCheck size={24} />
                 </div>
                 <div>
-                  <div className="text-xs font-black tracking-widest text-primary uppercase">Verified Provider</div>
-                  <div className="text-foreground font-bold">Standardized Coordination</div>
+                  <div className="text-xs font-black tracking-widest text-primary uppercase">{t('services.care.verifiedProvider')}</div>
+                  <div className="text-foreground font-bold">{t('how.flow.subtitle')}</div>
                 </div>
               </div>
             </div>
@@ -139,7 +142,7 @@ export default function ACRepair() {
         <div className="container-sahli">
           <div className="max-w-4xl mb-12 md:mb-16 text-center md:text-start">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-8">
-              Service Guidelines
+              {t('services.homeMaintenance.rules.title')}
             </h2>
           </div>
           <motion.div 
@@ -213,7 +216,7 @@ export default function ACRepair() {
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
               {t('home.what.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Simple. Fast. Transparent.</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('how.flow.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative">
@@ -248,7 +251,7 @@ export default function ACRepair() {
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-primary/[0.03] border border-primary/10"
@@ -257,10 +260,7 @@ export default function ACRepair() {
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-6">
-                {[
-                  t('home.hero.label'),
-                  t('services.boundaries.is.body').split('\n')[1]
-                ].map((item: string, i: number) => (
+                {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
                   <li key={i} className="flex gap-4 items-center text-lg text-foreground/70 font-bold">
                     <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
                     {item}
@@ -270,7 +270,7 @@ export default function ACRepair() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-foreground/[0.02] border border-border"
@@ -303,7 +303,7 @@ export default function ACRepair() {
                 {areas.map((area, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
@@ -327,7 +327,7 @@ export default function ACRepair() {
               <div className="absolute inset-0 bg-primary/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-1000" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="px-8 py-4 bg-background/90 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl font-black text-primary tracking-widest uppercase text-sm">
-                  Active in Doha
+                  {t('services.areas.qatarNationwide')}
                 </div>
               </div>
             </div>
@@ -339,8 +339,8 @@ export default function ACRepair() {
       <section className="section-spacing bg-background">
         <div className="container-sahli">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="p-12 md:p-20 rounded-[4rem] bg-foreground text-background relative overflow-hidden"
           >
@@ -365,24 +365,15 @@ export default function ACRepair() {
         </div>
       </section>
 
-      {/* 8️⃣ Final High-Impact CTA */}
-      <section className="section-spacing bg-background relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10">
-          <img 
-            src="https://images.pexels.com/photos/5466804/pexels-photo-5466804.jpeg" 
-            className="w-full h-full object-cover grayscale"
-            alt="Background"
-          />
-        </div>
-        
-        <div className="container-sahli relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto"
-          >
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-[-0.05em] mb-12 leading-[0.85]">
+      {/* 8️⃣ Final CTA - High Impact */}
+      <section className="section-spacing bg-background border-t border-border overflow-hidden">
+        <div className="container-sahli relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[120px] rounded-full" />
+          <div className="relative z-10 text-center max-w-4xl mx-auto">
+            <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
+              <Clock size={48} />
+            </div>
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
               {t('service.v1.cta.whatsapp')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -402,66 +393,63 @@ export default function ACRepair() {
               <div className="flex flex-col items-center md:items-start gap-1">
                 <div className="flex items-center gap-2 text-primary font-black tracking-widest uppercase text-sm">
                   <ShieldCheck size={20} />
-                  Safe & Secure
+                  {t('services.security.safeSecure')}
                 </div>
-                <div className="text-foreground/40 font-bold">No hidden fees. Pay directly.</div>
+                <div className="text-foreground/40 font-bold">{t('services.rules.payment')}</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* 9️⃣ Internal Linking (SEO Strategy) */}
-      <section className="section-spacing bg-background border-t border-border">
+      {/* 9️⃣ Related Services - Quick Links */}
+      <section className="section-spacing bg-foreground/[0.02] border-t border-border">
         <div className="container-sahli">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Link Up to Category */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border group"
-            >
-              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-4">Service Category</h4>
-              <Link to="/home-maintenance-qatar" className="flex items-center gap-3 text-2xl font-black text-foreground group-hover:text-primary transition-colors">
-                <ArrowUp size={24} />
-                {t('services.homeMaintenance.title')}
-              </Link>
-            </motion.div>
-
-            {/* Link Sideways to Related */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="p-8 rounded-3xl bg-foreground/[0.02] border border-border md:col-span-2"
-            >
-              <h4 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Related Services</h4>
-              <div className="flex flex-wrap gap-4">
-                {relatedServices.map((service, i) => (
-                  <Link 
-                    key={i} 
-                    to={service.path}
-                    className="px-6 py-3 rounded-xl bg-background border border-border font-bold text-foreground/70 hover:border-primary/50 hover:text-primary transition-all duration-300"
-                  >
-                    {service.title}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
+          <div className="mb-16 text-center md:text-start">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter mb-4 leading-none">
+              {t('services.related.title')}
+            </h2>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">
+              {t('services.related.subtitle')}
+            </p>
           </div>
-          
-          {/* Back to Home */}
-          <div className="mt-12 text-center">
-            <Link to="/" className="inline-flex items-center gap-2 text-foreground/40 font-bold hover:text-primary transition-colors">
-              <ArrowUp size={16} className="-rotate-90" />
-              Back to Homepage
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedServices.map((service, i) => (
+              <Link
+                key={i}
+                to={service.path}
+                className="group p-8 rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-black text-foreground group-hover:text-primary transition-colors">
+                    {service.title}
+                  </span>
+                  <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                    <ArrowUp size={24} className="rotate-45" />
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* 🔟 Back to Home Link */}
+      <section className="py-24 bg-background border-t border-border">
+        <div className="container-sahli flex justify-center">
+          <Link 
+            to="/"
+            className="group flex items-center gap-4 px-10 py-5 rounded-[2rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 hover:bg-foreground/[0.05]"
+          >
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+              <ArrowUp size={20} className="rotate-[-90deg] rtl:rotate-[90deg]" />
+            </div>
+            <span className="font-black text-foreground/60 group-hover:text-foreground transition-colors duration-500 text-lg uppercase tracking-widest">
+              {t('nav.home')}
+            </span>
+          </Link>
+        </div>
+      </section>
     </Layout>
   );
 }

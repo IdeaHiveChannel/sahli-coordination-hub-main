@@ -11,24 +11,25 @@ import { useEffect } from 'react';
 import { trackPageView } from "./lib/gtag";
 
 // Pages
-import Index from "./pages/Index";
-import HowItWorks from "./pages/HowItWorks";
-import Services from "./pages/Services";
-import HomeMaintenance from "./pages/services/HomeMaintenance";
-import CleaningServices from "./pages/services/CleaningServices";
-import MovingServices from "./pages/services/MovingServices";
-import CareLifestyle from "./pages/services/CareLifestyle";
-import LessonsLifestyle from "./pages/services/LessonsLifestyle";
-import ACRepair from "./pages/services/ACRepair";
-import Plumbing from "./pages/services/Plumbing";
-import Electrical from "./pages/services/Electrical";
-import Babysitting from "./pages/services/Babysitting";
-import TrustStandards from "./pages/TrustStandards";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Terms from "./pages/legal/Terms";
-import Privacy from "./pages/legal/Privacy";
-import NotFound from "./pages/NotFound";
+import Index from "@/pages/Index";
+import HowItWorks from "@/pages/HowItWorks";
+import Services from "@/pages/Services";
+import HomeMaintenance from "@/pages/services/HomeMaintenance";
+import CleaningServices from "@/pages/services/CleaningServices";
+import MovingServices from "@/pages/services/MovingServices";
+import OutdoorSpecialized from "@/pages/services/OutdoorSpecialized";
+import CareLifestyle from "@/pages/services/CareLifestyle";
+import ElectronicsTech from "@/pages/services/ElectronicsTech";
+import ACRepair from "@/pages/services/ACRepair";
+import Plumbing from "@/pages/services/Plumbing";
+import Electrical from "@/pages/services/Electrical";
+import Babysitting from "@/pages/services/Babysitting";
+import TrustStandards from "@/pages/TrustStandards";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
+import Terms from "@/pages/legal/Terms";
+import Privacy from "@/pages/legal/Privacy";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -61,8 +62,9 @@ const App = () => (
               <Route path="/home-maintenance-qatar" element={<HomeMaintenance />} />
               <Route path="/cleaning-services-qatar" element={<CleaningServices />} />
               <Route path="/house-shifting-qatar" element={<MovingServices />} />
-              <Route path="/care-childcare-qatar" element={<CareLifestyle />} />
-              <Route path="/lessons-lifestyle-qatar" element={<LessonsLifestyle />} />
+              <Route path="/outdoor-specialized-qatar" element={<OutdoorSpecialized />} />
+              <Route path="/care-lifestyle-qatar" element={<CareLifestyle />} />
+              <Route path="/electronics-tech-qatar" element={<ElectronicsTech />} />
               
               {/* SEO Long-tail Pages */}
               <Route path="/ac-repair-qatar" element={<ACRepair />} />

@@ -10,9 +10,9 @@ interface ServiceRoofProps {
   index: number;
   imageUrl?: string;
   icon?: React.ReactNode;
-  status?: 'live' | 'coming-soon';
   showDescription?: boolean;
   subcategories?: string[];
+  status?: string;
 }
 
 export function ServiceRoof({ 
@@ -22,9 +22,9 @@ export function ServiceRoof({
   index, 
   imageUrl, 
   icon, 
-  status = 'live',
   showDescription = true,
-  subcategories = []
+  subcategories = [],
+  status
 }: ServiceRoofProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -37,17 +37,15 @@ export function ServiceRoof({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const isComingSoon = status === 'coming-soon';
-
   const content = (
     <motion.div
-      className={`relative h-[360px] md:h-[450px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden ${isComingSoon ? 'cursor-default opacity-80' : 'cursor-pointer'} group transition-all duration-700 ease-out-expo btn-shine`}
-      whileHover={!isComingSoon && !isMobile ? { 
+      className={`relative h-[360px] md:h-[450px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70 grayscale-[0.5]' : ''}`}
+      whileHover={!isMobile && status !== 'comingSoon' ? { 
         y: -10,
         borderColor: 'hsla(var(--primary), 0.3)',
         boxShadow: '0 40px 80px -20px rgba(0, 0, 0, 0.4)'
       } : {}}
-      whileTap={!isComingSoon ? { scale: 0.98, y: -5 } : {}}
+      whileTap={status !== 'comingSoon' ? { scale: 0.98, y: -5 } : {}}
       initial={{ opacity: 0, y: isMobile ? 15 : 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: isMobile ? "-20px" : "-50px" }}
@@ -56,9 +54,18 @@ export function ServiceRoof({
         delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1]
       }}
-      onMouseEnter={() => !isComingSoon && !isMobile && setIsHovered(true)}
+      onMouseEnter={() => !isMobile && status !== 'comingSoon' && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Coming Soon Badge */}
+      {status === 'comingSoon' && (
+        <div className="absolute top-8 inset-inline-end-8 z-20">
+          <span className="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
+            {t('services.status.comingSoon')}
+          </span>
+        </div>
+      )}
+
       {/* Background Image with Reveal Animation */}
       {imageUrl && (
         <div className="absolute inset-0 z-0">
@@ -67,10 +74,10 @@ export function ServiceRoof({
             alt={title}
             loading="lazy"
             crossOrigin="anonymous"
-            className={`w-full h-full object-cover transition-all duration-1000 ${isComingSoon ? 'opacity-30 grayscale' : 'opacity-60 grayscale-[0.2]'}`}
+            className="w-full h-full object-cover transition-all duration-1000 opacity-60 grayscale-[0.2]"
             animate={{ 
               scale: isHovered ? 1.05 : 1,
-              filter: isHovered ? 'blur(0px) grayscale(0)' : (isComingSoon ? 'blur(4px) grayscale(1)' : 'blur(0px) grayscale(0.2)')
+              filter: isHovered ? 'blur(0px) grayscale(0)' : 'blur(0px) grayscale(0.2)'
             }}
           />
           {/* Sophisticated Overlays */}
@@ -79,30 +86,17 @@ export function ServiceRoof({
       )}
 
       {/* Glow Effect on Hover */}
-      {!isComingSoon && (
-        <motion.div 
-          className="absolute inset-0 z-0 bg-primary/5 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
-        />
-      )}
+      <motion.div 
+        className="absolute inset-0 z-0 bg-primary/5 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+      />
 
       {/* Top bar accent - Refined */}
-      {!isComingSoon && (
-        <motion.div 
-          className="absolute top-0 inset-inline-start-0 h-1 bg-primary z-10"
-          initial={{ width: 0 }}
-          animate={{ width: isHovered ? '100%' : '0%' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        />
-      )}
-
-      {/* Status Badge */}
-      {isComingSoon && (
-        <div className="absolute top-8 inset-inline-end-8 z-20">
-          <span className="px-4 py-1.5 rounded-full bg-foreground/5 backdrop-blur-md border border-foreground/10 text-foreground/80 text-[10px] font-black tracking-[0.2em] uppercase">
-            {t('services.status.soon')}
-          </span>
-        </div>
-      )}
+      <motion.div 
+        className="absolute top-0 inset-inline-start-0 h-1 bg-primary z-10"
+        initial={{ width: 0 }}
+        animate={{ width: isHovered ? '100%' : '0%' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      />
 
       {/* Index number - Modern Styling */}
       <div className="absolute top-8 inset-inline-start-8 z-10">
@@ -165,18 +159,16 @@ export function ServiceRoof({
           )}
         </motion.div>
 
-        {!isComingSoon && (
-          <motion.div 
-            className={`flex items-center gap-3 text-[11px] font-black tracking-[0.3em] uppercase ${imageUrl ? 'text-foreground/80 group-hover:text-primary' : 'text-primary'}`}
-            animate={{ 
-              x: isHovered ? 0 : (dir === 'rtl' ? 10 : -10), 
-              opacity: isHovered ? 1 : 0 
-            }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {t('services.explore')} <span className={`text-xl leading-none ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
-          </motion.div>
-        )}
+        <motion.div 
+          className={`flex items-center gap-3 text-[11px] font-black tracking-[0.3em] uppercase ${imageUrl ? 'text-foreground/80 group-hover:text-primary' : 'text-primary'}`}
+          animate={{ 
+            x: isHovered ? 0 : (dir === 'rtl' ? 10 : -10), 
+            opacity: isHovered ? 1 : 0 
+          }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {t('services.explore')} <span className={`text-xl leading-none ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
+        </motion.div>
       </div>
 
       {/* Subtle Decorative Circle */}
@@ -185,10 +177,6 @@ export function ServiceRoof({
       )}
     </motion.div>
   );
-
-  if (isComingSoon) {
-    return <div className="w-full">{content}</div>;
-  }
 
   return (
     <Link to={path} className="w-full">

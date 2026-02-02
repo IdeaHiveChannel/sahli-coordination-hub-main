@@ -7,7 +7,7 @@ import { ServiceRoof } from '@/components/motion/ServiceRoof';
 import { TrustPanel, TrustStatement } from '@/components/motion/TrustPanel';
 import { InfiniteMarquee } from '@/components/motion/InfiniteMarquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList } from 'lucide-react';
+import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
@@ -93,8 +93,6 @@ const Index = () => {
         t('services.homeMaintenance.electrical.title'),
         t('services.homeMaintenance.plumbing.title'),
         t('services.homeMaintenance.handyman.title'),
-        t('services.homeMaintenance.pest.title'),
-        t('services.homeMaintenance.appliances.title'),
       ]
     },
     { 
@@ -119,30 +117,52 @@ const Index = () => {
       number: "03",
       subcategories: [
         t('services.moving.house.title'),
-        t('services.moving.packing.title'),
         t('services.moving.dismantling.title'),
         t('services.moving.storage.title'),
       ]
     },
     { 
-      title: t('services.care.title'), 
-      description: t('services.care.subtitle'),
-      path: t('services.care.path'),
-      imageUrl: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&fm=webp&fit=crop',
-      icon: <Heart size={32} />,
-      status: 'coming-soon' as const,
+      title: t('services.outdoor.title'), 
+      description: t('services.outdoor.subtitle'),
+      imageUrl: "https://images.unsplash.com/photo-1558905619-17254261b646?q=80&w=800&fm=webp&fit=crop",
+      icon: <Leaf size={32} />,
+      path: t('services.outdoor.path'),
       number: "04",
-      subcategories: []
+      subcategories: [
+        t('services.outdoor.pest.title'),
+        t('services.outdoor.pool.title'),
+        t('services.outdoor.landscaping.title'),
+        t('services.outdoor.waterproofing.title'),
+      ]
     },
     { 
-      title: t('services.lessons.title'), 
-      description: t('services.lessons.subtitle'),
-      path: t('services.lessons.path'),
-      imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&fm=webp&fit=crop',
-      icon: <GraduationCap size={32} />,
-      status: 'coming-soon' as const,
+      title: t('services.care.title'), 
+      description: t('services.care.subtitle'),
+      imageUrl: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&fm=webp&fit=crop',
+      icon: <Heart size={32} />,
+      path: t('services.care.path'),
       number: "05",
-      subcategories: []
+      subcategories: [
+        t('services.care.childcare.title'),
+        t('services.care.healthcare.title'),
+        t('services.care.pets.title'),
+        t('services.care.beauty.title'),
+        t('services.care.tutoring.title'),
+        t('services.care.trainer.title'),
+      ]
+    },
+    { 
+      title: t('services.electronics.title'), 
+      description: t('services.electronics.subtitle'),
+      imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&fm=webp&fit=crop',
+      icon: <Cpu size={32} />,
+      path: t('services.electronics.path'),
+      number: "06",
+      subcategories: [
+        t('services.electronics.repair.title'),
+        t('services.electronics.smart.title'),
+        t('services.electronics.satellite.title'),
+      ]
     }
   ];
 
@@ -157,11 +177,11 @@ const Index = () => {
     { title: t('services.homeMaintenance.ac.title'), icon: <Snowflake size={24} />, intent: "AC repair", path: t('services.homeMaintenance.ac.path') },
     { title: t('services.homeMaintenance.electrical.title'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: t('services.homeMaintenance.electrical.path') },
     { title: t('services.homeMaintenance.plumbing.title'), icon: <Droplets size={24} />, intent: "plumbing", path: t('services.homeMaintenance.plumbing.path') },
-    { title: t('services.homeMaintenance.appliances.title'), icon: <Cog size={24} />, intent: "appliance repair", path: t('services.homeMaintenance.path') },
+    { title: t('services.tech.appliances.title'), icon: <Cog size={24} />, intent: "appliance repair", path: t('services.tech.path') },
     { title: t('services.cleaning.deep.title'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: t('services.cleaning.path') },
-    { title: t('services.cleaning.specialized.title'), icon: <Sofa size={24} />, intent: "sofa & carpet cleaning", path: t('services.cleaning.path') },
+    { title: t('services.outdoor.pest.title'), icon: <Bug size={24} />, intent: "pest control", path: t('services.outdoor.path') },
     { title: t('services.moving.house.title'), icon: <Truck size={24} />, intent: "house shifting", path: t('services.moving.path') },
-    { title: t('services.care.childcare.title'), icon: <Baby size={24} />, intent: "babysitting", path: t('services.care.childcare.path') },
+    { title: t('services.care.childcare.title'), icon: <Baby size={24} />, intent: "nanny services", path: t('services.care.path') },
   ];
 
   const trustPanels = [
@@ -494,7 +514,7 @@ const Index = () => {
               {t('home.footer.clarity')}
             </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-10 xl:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 lg:gap-10 xl:gap-12">
             {services.map((service: any, index: number) => (
               <ServiceRoof 
                 key={index} 

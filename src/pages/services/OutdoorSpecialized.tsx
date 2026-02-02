@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Snowflake, Lightbulb, Droplets, Cog, Wrench, Shield, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Bug } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Bug, Leaf, Waves, ShieldCheck, Clock, MapPin, AlertCircle, Droplets, Shield, ArrowUp } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
-import { Link } from 'react-router-dom';
 
-export default function HomeMaintenance() {
+export default function OutdoorSpecialized() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -19,18 +19,16 @@ export default function HomeMaintenance() {
   const relatedServices = [
     { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
     { title: t('nav.movingServices'), path: t('services.moving.path') },
-    { title: t('nav.outdoorSpecialized'), path: t('services.outdoor.path') },
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
     { title: t('nav.careLifestyle'), path: t('services.care.path') },
     { title: t('nav.electronicsTech'), path: t('services.electronics.path') },
   ];
 
   const categories = [
-    { title: t('services.homeMaintenance.ac.title'), desc: t('services.homeMaintenance.ac.desc'), icon: <Snowflake size={28} /> },
-    { title: t('services.homeMaintenance.plumbing.title'), desc: t('services.homeMaintenance.plumbing.desc'), icon: <Droplets size={28} /> },
-    { title: t('services.homeMaintenance.electrical.title'), desc: t('services.homeMaintenance.electrical.desc'), icon: <Lightbulb size={28} /> },
-    { title: t('services.homeMaintenance.handyman.title'), desc: t('services.homeMaintenance.handyman.desc'), icon: <Wrench size={28} /> },
-    { title: t('services.homeMaintenance.appliances.title'), desc: t('services.homeMaintenance.appliances.desc'), icon: <Cog size={28} /> },
-    { title: t('services.homeMaintenance.pest.title'), desc: t('services.homeMaintenance.pest.desc'), icon: <Bug size={28} /> }
+    { title: t('services.outdoor.pest.title'), desc: t('services.outdoor.pest.desc'), icon: <Bug size={28} /> },
+    { title: t('services.outdoor.landscaping.title'), desc: t('services.outdoor.landscaping.desc'), icon: <Leaf size={28} /> },
+    { title: t('services.outdoor.pool.title'), desc: t('services.outdoor.pool.desc'), icon: <Waves size={28} /> },
+    { title: t('services.outdoor.waterproofing.title'), desc: t('services.outdoor.waterproofing.desc'), icon: <Droplets size={28} /> }
   ];
 
   const coordinationSteps = [
@@ -44,12 +42,13 @@ export default function HomeMaintenance() {
   const areas = [
     t('home.areas.item1'),
     t('home.areas.item2'),
-    t('home.areas.item3')
+    t('home.areas.item3'),
+    t('home.areas.item4')
   ];
 
   return (
     <Layout>
-      {/* 1️⃣ Modern Split Hero Section */}
+      {/* 1️⃣ Hero Section */}
       <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full animate-pulse" />
@@ -64,12 +63,12 @@ export default function HomeMaintenance() {
             className="flex flex-col items-center md:items-start text-center md:text-start"
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
-              <Wrench size={14} className="animate-spin-slow" />
-              {t('services.homeMaintenance.title')}
+              <Leaf size={14} className="animate-spin-slow" />
+              {t('services.outdoor.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('services.homeMaintenance.title')}
+              {t('services.outdoor.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -77,7 +76,7 @@ export default function HomeMaintenance() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('services.homeMaintenance.title')}
+                  {t('services.outdoor.title')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
                   {t('services.role.clarification')}
@@ -86,7 +85,7 @@ export default function HomeMaintenance() {
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('services.homeMaintenance.body')}
+              {t('services.outdoor.subtitle')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -94,12 +93,12 @@ export default function HomeMaintenance() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Home Maintenance Hero')}
-                className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
+                onClick={() => trackWhatsAppClick('Outdoor Hero CTA')}
+                className="cta-primary px-12 py-6 text-xl btn-shine shadow-3xl shadow-primary/30"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle size={22} className="fill-primary-foreground" />
+                <MessageCircle size={24} className="fill-primary-foreground" />
                 {t('cta.whatsapp')}
               </motion.a>
             </div>
@@ -113,8 +112,8 @@ export default function HomeMaintenance() {
           >
             <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
               <img 
-                src="https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg" 
-                alt="Home Repair Service Qatar"
+                src="https://images.pexels.com/photos/4132415/pexels-photo-4132415.jpeg" 
+                alt="Outdoor Services Qatar"
                 className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -126,8 +125,8 @@ export default function HomeMaintenance() {
                   <ShieldCheck size={24} />
                 </div>
                 <div>
-                  <div className="text-xs font-black tracking-widest text-primary uppercase">Verified Providers</div>
-                  <div className="text-foreground font-bold">Standardized Service</div>
+                  <div className="text-xs font-black tracking-widest text-primary uppercase">Specialized Teams</div>
+                  <div className="text-foreground font-bold">Outdoor Excellence</div>
                 </div>
               </div>
             </div>
@@ -145,7 +144,7 @@ export default function HomeMaintenance() {
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
             <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
-              {t('services.homeMaintenance.rules.title')}
+              {t('services.outdoor.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -171,12 +170,12 @@ export default function HomeMaintenance() {
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              {t('services.homeMaintenance.categories.title')}
+              {t('services.outdoor.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('services.homeMaintenance.categories.subtitle')}</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('services.outdoor.subtitle')}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((cat, i) => (
               <motion.div
                 key={i}
@@ -293,7 +292,7 @@ export default function HomeMaintenance() {
                 {areas.map((area, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
@@ -356,32 +355,17 @@ export default function HomeMaintenance() {
         </div>
       </section>
 
-      {/* 8️⃣ Final CTA */}
-      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
-        <div className="absolute inset-0 z-0 opacity-10">
-          <img 
-            src="https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg" 
-            className="w-full h-full object-cover grayscale"
-            alt="Background"
-          />
-        </div>
-        
-        <div className="container-sahli relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto"
-          >
+      {/* 8️⃣ Final CTA - High Impact */}
+      <section className="section-spacing bg-background border-t border-border overflow-hidden">
+        <div className="container-sahli relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[120px] rounded-full" />
+          <div className="relative z-10 text-center max-w-4xl mx-auto">
             <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
               <Clock size={48} />
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-[-0.05em] mb-12 leading-[0.85]">
-              {t('cta.final.title')}
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
+              {t('service.v1.cta.whatsapp')}
             </h2>
-            <p className="text-xl md:text-2xl text-foreground/60 font-medium mb-12 max-w-3xl mx-auto leading-tight">
-              {t('cta.final.body')}
-            </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
               <motion.a
                 whileHover={{ scale: 1.05, y: -5 }}
@@ -389,7 +373,7 @@ export default function HomeMaintenance() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Home Maintenance Final CTA')}
+                onClick={() => trackWhatsAppClick('Outdoor Final CTA')}
                 className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30"
               >
                 <MessageCircle size={32} className="fill-primary-foreground" />
@@ -404,7 +388,7 @@ export default function HomeMaintenance() {
                 <div className="text-foreground/40 font-bold">{t('services.rules.payment')}</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -459,5 +443,3 @@ export default function HomeMaintenance() {
     </Layout>
   );
 }
-
-
