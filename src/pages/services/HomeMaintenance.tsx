@@ -324,8 +324,6 @@ export default function HomeMaintenance() {
         </div>
       </section>
 
-      </section>
-
       {/* 8️⃣ Final CTA */}
       <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="absolute inset-0 z-0 opacity-10">

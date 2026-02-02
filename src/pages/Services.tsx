@@ -215,16 +215,6 @@ export default function Services() {
             style={{ y: yText }}
             className="max-w-4xl"
           >
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 shadow-lg"
-            >
-              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
-              {t('services.label')}
-            </motion.div>
-            
             <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter">
               {t('services.title').split(' ').map((word: string, i: number) => (
                 <motion.span

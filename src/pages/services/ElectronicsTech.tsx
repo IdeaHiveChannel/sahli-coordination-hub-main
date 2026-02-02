@@ -308,8 +308,6 @@ export default function ElectronicsTech() {
         </div>
       </section>
 
-      </section>
-
       {/* 8️⃣ Final CTA - High Impact */}
       <section className="section-spacing bg-background border-t border-border overflow-hidden">
         <div className="container-sahli relative">

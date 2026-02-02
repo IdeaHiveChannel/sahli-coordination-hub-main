@@ -174,12 +174,12 @@ export const en = {
 
   // Service Rules
   'services.rules.title': 'Service Rules',
-  'services.rules.inspection': 'Inspection first. No pricing before visit.',
+  'services.rules.inspection': 'Inspection-first approach. Pricing discussed after on-site assessment.',
   'services.rules.independent': 'Providers operate independently.',
   'services.rules.payment': 'You pay the provider directly.',
-  'services.rules.cleaning': 'Scope-defined services. No hourly ambiguity.',
+  'services.rules.cleaning': 'Scope-defined services with clear deliverables. No hourly ambiguity.',
   'services.rules.moving': 'Logistics, handling, and dismantling / reassembly focus.',
-  'services.rules.care': 'Background-checked professionals only.',
+  'services.rules.care': 'Coordinated through licensed agencies with verified professionals.',
   'services.rules.lessons': 'Verified expert coordination only.',
   'services.homeMaintenance.rules.title': 'Home Maintenance Rules',
   'services.cleaning.rules.title': 'Cleaning Coordination Rules',
@@ -218,7 +218,7 @@ export const en = {
   'services.homeMaintenance.subtitle': 'Problem-driven coordination for AC, plumbing, and electrical needs.',
   'services.homeMaintenance.body': 'High-urgency services for essential home fixes.',
   'services.homeMaintenance.cta': 'Message SAHLI on WhatsApp for Home Maintenance',
-  'services.homeMaintenance.rule': 'Inspection first. No pricing before visit.',
+  'services.homeMaintenance.rule': 'Inspection-first approach. Pricing discussed after on-site assessment.',
   
   'services.homeMaintenance.ac.title': 'AC Services',
   'services.homeMaintenance.ac.desc': 'AC repair (not cooling, leaking, noise), gas refilling, servicing & duct cleaning, installation, and AMC.',
@@ -246,7 +246,7 @@ export const en = {
   'services.cleaning.subtitle': 'Recurring and seasonal demand across Qatar.',
   'services.cleaning.body': 'High-volume services across Qatar.',
   'services.cleaning.cta': 'Message SAHLI on WhatsApp for Cleaning Services',
-  'services.cleaning.rule': 'Scope-defined services. No hourly ambiguity.',
+  'services.cleaning.rule': 'Scope-defined services with clear deliverables. No hourly ambiguity.',
   
   'services.cleaning.regular.title': 'General Cleaning',
   'services.cleaning.regular.desc': 'Hourly home cleaning, apartment & villa cleaning, and part-time maid coordination.',
@@ -289,7 +289,7 @@ export const en = {
   'services.outdoor.subtitle': 'Seasonal and compliance-sensitive maintenance services.',
   'services.outdoor.body': 'Pest control, landscaping, pool services, and waterproofing.',
   'services.outdoor.cta': 'Message SAHLI on WhatsApp for Specialized Services',
-  'services.outdoor.rule': 'Municipality-approved and expert-led coordination.',
+  'services.outdoor.rule': 'Coordination with municipality-approved and experienced service providers.',
   
   'services.outdoor.pest.title': 'Pest Control',
   'services.outdoor.pest.desc': 'Bed bugs, cockroaches, ants, termites. Municipality-approved only.',
@@ -313,7 +313,7 @@ export const en = {
   'services.care.subtitle': 'High trust, regulated categories launched carefully.',
   'services.care.body': 'Childcare, healthcare, pet services, beauty, and tutoring.',
   'services.care.cta': 'Message SAHLI on WhatsApp for Care Services',
-  'services.care.rule': 'Background-checked and agency-verified professionals.',
+  'services.care.rule': 'Coordinated through licensed agencies with verified professionals.',
   'services.status.comingSoon': 'Coming Soon',
 
   'services.care.childcare.title': 'Childcare (via licensed agencies)',
@@ -352,34 +352,36 @@ export const en = {
   'services.care.pets.items': 'Pet Grooming\nPet Sitting',
 
   'services.care.beauty.title': 'Beauty at Home',
-  'services.care.beauty.desc': 'Salon services including hair, manicure, and henna.',
-  'services.care.beauty.items': 'Salon Services\nHair, Manicure, Henna',
+  'services.care.beauty.desc': 'Home salon services and professional beauty treatments.',
+  'services.care.beauty.items': 'Hair Styling & Coloring\nManicure & Pedicure\nFacial Treatments\nMakeup Services',
 
-  'services.care.tutoring.title': 'Tutoring',
-  'services.care.tutoring.desc': 'Private tutors for British, American, and IB curriculum.',
-  'services.care.tutoring.items': 'Private Tutors\nBritish / American / IB Curriculum Support',
-  
-  'services.care.trainer.title': 'Personal Trainer',
-  'services.care.trainer.desc': 'Expert fitness training at your convenience.',
+  'services.care.tutoring.title': 'Home Tutoring',
+  'services.care.tutoring.desc': 'Academic support for all levels and specialized subjects.',
+  'services.care.tutoring.items': 'Primary & Secondary Education\nTest Preparation (IELTS, SAT)\nLanguage Lessons\nMusic & Art Lessons',
 
+  'services.care.trainer.title': 'Personal Training',
+  'services.care.trainer.desc': 'Professional fitness training and wellness coaching.',
+  'services.care.trainer.items': 'One-on-One Fitness Coaching\nYoga & Pilates\nWeight Management\nNutrition Planning',
+
+  // Roof 6: Electronics & Tech
   'services.electronics.title': 'Electronics & Tech',
   'services.electronics.path': '/electronics-tech-qatar',
-  'services.electronics.subtitle': 'Hardware repair and specialized tech support coordination.',
-  'services.electronics.body': 'Hardware and software support.',
-  'services.electronics.cta': 'Message SAHLI on WhatsApp for Electronics Services',
-  'services.electronics.rule': 'Service-center level repairs. Genuine parts focus.',
+  'services.electronics.subtitle': 'Coordination for specialized technical and installation requirements.',
+  'services.electronics.body': 'Technical support for gadgets and appliances.',
+  'services.electronics.cta': 'Message SAHLI on WhatsApp for Electronics Support',
+  'services.electronics.rule': 'Coordination with providers following professional diagnostic and installation practices.',
 
   'services.electronics.repair.title': 'Appliance Repair',
-  'services.electronics.repair.desc': 'Washing machines, refrigerators, dishwashers, ovens & microwaves.',
-  'services.electronics.repair.items': 'Washing Machines\nRefrigerators\nDishwashers\nOvens & Microwaves',
+  'services.electronics.repair.desc': 'TV, fridge, washing machine, and kitchen appliance repair.',
+  'services.electronics.repair.items': 'TV Repair & Troubleshooting\nFridge & Freezer Repair\nWashing Machine & Dryer Repair\nOven & Dishwasher Repair',
 
   'services.electronics.smart.title': 'Smart Home & Security',
-  'services.electronics.smart.desc': 'CCTV, Wi-Fi extender, smart locks & access systems.',
-  'services.electronics.smart.items': 'CCTV Installation\nWi-Fi Extender Setup\nSmart Locks & Access Systems',
+  'services.electronics.smart.desc': 'CCTV, smart locks, and home automation setup.',
+  'services.electronics.smart.items': 'CCTV Installation & Maintenance\nSmart Lock & Doorbell Setup\nHome Automation Integration\nWiFi & Networking Support',
 
-  'services.electronics.satellite.title': 'Satellite & TV',
-  'services.electronics.satellite.desc': 'Dish alignment, IPTV & TV box setup.',
-  'services.electronics.satellite.items': 'Dish Alignment\nIPTV & TV Box Setup',
+  'services.electronics.satellite.title': 'Satellite & Audio-Visual',
+  'services.electronics.satellite.desc': 'Satellite dish alignment and home theater setup.',
+  'services.electronics.satellite.items': 'Satellite Dish Alignment & Repair\nHome Theater System Installation\nSoundbar & Audio Setup\nCable Management Solutions',
 
   'services.lessons.title': 'Lessons & Lifestyle',
   'services.lessons.subtitle': 'Verified expert coordination for your personal growth.',

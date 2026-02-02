@@ -162,11 +162,6 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar - Ultra Clean */}
-        <div className="pt-8 pb-4 text-center space-y-2">
-          <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.1em] text-primary/30 max-w-4xl mx-auto px-4">
-            {t('footer.intermediary')}
-          </p>
-        </div>
         <div className="pt-8 md:pt-12 border-t border-border flex flex-col lg:flex-row justify-between items-center gap-6 md:gap-10">
           <div className="flex items-center gap-6">
             <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
