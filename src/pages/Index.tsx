@@ -471,7 +471,7 @@ const Index = () => {
                 className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
               >
                 <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
-                {t('home.coordinate.title')}
+                {t('nav.services')}
               </motion.div>
               <motion.div 
                 className="max-w-2xl"
@@ -497,264 +497,6 @@ const Index = () => {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Framing Section - Statement - Enhanced */}
-      <section className="bg-background py-16 md:py-20 border-y border-border relative overflow-hidden">
-        {/* Decorative background */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(var(--primary),0.05),transparent_70%)] opacity-50" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-        
-        <div className="container-sahli relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 30 : -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                {t('home.hero.label')}
-              </div>
-              
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-6 md:mb-8 leading-[0.9]">
-                {t('home.framing.title')}
-              </h2>
-              <h3 className="text-primary text-xl md:text-2xl font-black tracking-tight mb-4">
-                {t('home.framing.subtitle')}
-              </h3>
-              
-              <div className="space-y-6">
-                <p className="text-lg md:text-xl text-foreground/80 font-medium leading-relaxed tracking-tight max-w-xl">
-                  {t('home.framing.body')}
-                </p>
-                
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <div className="flex items-center gap-3 px-4 py-2.5 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
-                    <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                      <Shield size={16} />
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.vetted')}</span>
-                  </div>
-                  <div className="flex items-center gap-3 px-4 py-2.5 bg-foreground/[0.03] border border-border rounded-2xl group hover:border-primary/30 transition-colors duration-500">
-                    <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                      <UserCheck size={16} />
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/80">{t('home.microTrust.recorded')}</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="relative aspect-square lg:h-[500px] flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Coordination Hub Visualizer */}
-              <div className="relative w-full max-w-sm aspect-square">
-                {/* Orbital Paths */}
-                <div className="absolute inset-0 border border-primary/10 rounded-full animate-[spin_30s_linear_infinite] opacity-30" />
-                <div className="absolute inset-[12%] border border-primary/5 rounded-full animate-[spin_20s_linear_infinite_reverse] opacity-20" />
-                <div className="absolute inset-[25%] border border-primary/10 rounded-full animate-[spin_25s_linear_infinite] opacity-30" />
-                
-                {/* Connection Lines (SVG) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
-                  <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="var(--primary)" stopOpacity="0" />
-                      <stop offset="50%" stopColor="var(--primary)" stopOpacity="0.5" />
-                      <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  {[0, 60, 120, 180, 240, 300].map((angle: number, i: number) => (
-                    <motion.line
-                      key={i}
-                      x1="50" y1="50"
-                      x2={`${50 + 40 * Math.cos(angle * Math.PI / 180)}`}
-                      y2={`${50 + 40 * Math.sin(angle * Math.PI / 180)}`}
-                      stroke="url(#lineGradient)"
-                      strokeWidth="0.5"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      whileInView={{ pathLength: 1, opacity: 1 }}
-                      transition={{ duration: 2, delay: 0.5 + i * 0.1 }}
-                    />
-                  ))}
-                </svg>
-
-                {/* Central Hub Core */}
-                <div className="absolute inset-0 flex items-center justify-center z-20">
-                  <motion.div 
-                    className="w-32 h-32 md:w-48 md:h-48 rounded-[2.5rem] bg-background border border-border flex items-center justify-center shadow-[0_0_50px_rgba(var(--primary-rgb),0.1)] relative group cursor-default"
-                    whileHover={{ scale: 1.02, borderColor: 'rgba(var(--primary-rgb), 0.4)' }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <div className="absolute inset-0 bg-primary/5 rounded-[2.5rem] blur-3xl group-hover:bg-primary/10 transition-colors duration-700" />
-                    <img 
-                      src="/logos/Sahl Logo 9.png" 
-                      alt="SAHLI Hub" 
-                      className="w-20 md:w-28 h-20 md:h-28 object-contain relative z-10 filter drop-shadow-2xl" 
-                    />
-                    
-                    {/* Glowing Core Pulse */}
-                    <div className="absolute inset-0 rounded-[2.5rem] bg-primary/5 animate-pulse" />
-                  </motion.div>
-                </div>
-
-                {/* Satellite Specialist Nodes */}
-                {[0, 60, 120, 180, 240, 300].map((angle: number, i: number) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-12 h-12 md:w-16 md:h-16 rounded-xl bg-foreground/[0.02] backdrop-blur-md border border-border flex items-center justify-center text-primary shadow-xl z-30 group"
-                    style={{
-                      top: `${50 + 40 * Math.sin(angle * Math.PI / 180)}%`,
-                      left: `${50 + 40 * Math.cos(angle * Math.PI / 180)}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.8 + i * 0.1 }}
-                  >
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 rounded-xl transition-colors duration-500" />
-                    {i % 3 === 0 ? <Zap size="20" className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
-                     i % 3 === 1 ? <Shield size="20" className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" /> : 
-                     <UserCheck size="20" className="opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why SAHLI - Pain Points - Dark & Glassmorphic */}
-      <section className="relative section-spacing bg-background overflow-hidden">
-        {/* Background Blobs */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/[0.02] rounded-full blur-[180px] pointer-events-none`} />
-
-        <div className="container-sahli mb-16 md:mb-24 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
-          >
-            <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
-            {t('home.hero.label')}
-          </motion.div>
-          <motion.h2
-            className="text-foreground text-3xl sm:text-4xl md:text-4xl font-black leading-tight tracking-tighter max-w-4xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            {t('home.why.title')}
-          </motion.h2>
-        </div>
-        <div className="container-sahli grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 relative z-10">
-          {[
-            { reason: t('home.why.reason1'), icon: <Search className="text-primary" /> },
-            { reason: t('home.why.reason2'), icon: <Clock className="text-primary" /> },
-            { reason: t('home.why.reason3'), icon: <DollarSign className="text-primary" /> },
-            { reason: t('home.why.reason4'), icon: <ShieldCheck className="text-primary" /> },
-            { reason: t('home.why.reason5'), icon: <PhoneOff className="text-primary" /> },
-            { reason: t('home.why.reason6'), icon: <CheckCircle2 className="text-primary" /> },
-          ].map((item, i: number) => (
-            <motion.div
-              key={i}
-              className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-foreground/[0.02] border border-border group hover:bg-foreground/[0.04] hover:border-primary/30 transition-all duration-700 backdrop-blur-sm btn-shine"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
-            >
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-[0.8rem] md:rounded-[1rem] bg-foreground/5 flex items-center justify-center mb-6 shadow-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-700 group-hover:scale-110 group-hover:rotate-6">
-                {React.cloneElement(item.icon as React.ReactElement, { size: 24 })}
-              </div>
-              <p className="text-foreground/80 leading-relaxed font-black text-lg md:text-xl group-hover:text-foreground transition-colors duration-500 tracking-tight">{item.reason}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* What SAHLI Does - Process Section */}
-      <section className="section-spacing bg-background relative overflow-hidden">
-        <div className="container-sahli relative z-10">
-          <div className="max-w-4xl mb-16 md:mb-24">
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
-            >
-              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
-              {t('home.hero.label')}
-            </motion.div>
-            <motion.h2
-              className="text-foreground text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tighter mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {t('home.what.title')}
-            </motion.h2>
-            <motion.p
-              className="text-xl text-foreground/60 leading-relaxed font-medium max-w-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              {t('home.what.intro')}
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 relative">
-            {/* Connection line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2 z-0" />
-            
-            {[
-              t('home.what.step1'),
-              t('home.what.step2'),
-              t('home.what.step3'),
-              t('home.what.step4'),
-              t('home.what.step5'),
-            ].map((step, i) => (
-              <motion.div
-                key={i}
-                className="relative z-10 p-6 rounded-3xl bg-foreground/[0.02] border border-border backdrop-blur-md flex flex-col items-center text-center group hover:border-primary/30 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-black mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                  {i + 1}
-                </div>
-                <p className="text-sm md:text-base font-black text-foreground/80 group-hover:text-foreground transition-colors duration-500 leading-tight">
-                  {step}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.p
-            className="mt-12 text-center text-foreground/40 font-medium italic"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-          >
-            {t('home.what.footer')}
-          </motion.p>
         </div>
       </section>
 
@@ -830,6 +572,55 @@ const Index = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How Coordination Works Section */}
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
+        <div className="container-sahli relative z-10">
+          <div className="max-w-4xl mb-16">
+            <motion.h2 
+              className="text-foreground text-3xl md:text-5xl font-black tracking-tighter mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('home.what.title')}
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-foreground/60 font-medium leading-tight max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              {t('home.what.intro')}
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: t('home.what.step1'), icon: <MessageCircle size={32} /> },
+              { title: t('home.what.step2'), icon: <Search size={32} /> },
+              { title: t('home.what.step3'), icon: <CheckCircle2 size={32} /> },
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                className="p-10 rounded-[2.5rem] bg-foreground/[0.02] border border-border group hover:border-primary/30 transition-all duration-500"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-black text-foreground/90 group-hover:text-foreground transition-colors leading-tight">
+                  {step.title}
+                </h3>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

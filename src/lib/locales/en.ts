@@ -69,10 +69,11 @@ export const en = {
   'home.why.reason3': 'Prices change after they arrive',
   'home.why.reason4': 'You don’t know who will enter your home',
   'home.why.reason5': 'You don’t have time to manage calls',
-  'home.why.reason6': 'You just want the work done properly — without chasing anyone',
-  
-  'home.what.title': 'How SAHLI Works',
-  'home.what.intro': 'SAHLI helps you connect with available service companies through one WhatsApp message.',
+  'home.why.reason6': 'You just want the work coordinated properly — without chasing anyone',
+  'home.why.cta': 'Experience the Difference',
+
+  'home.what.title': 'How Coordination Works',
+  'home.what.intro': 'SAHLI helps you connect with available service companies starting on WhatsApp.',
   'home.what.step1': 'You send your requirement on WhatsApp',
   'home.what.step2': 'We share it with suitable service companies',
   'home.what.step3': 'A company that is ready confirms',
