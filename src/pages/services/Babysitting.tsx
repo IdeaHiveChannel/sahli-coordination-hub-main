@@ -23,17 +23,12 @@ export default function Babysitting() {
     { title: '05', body: t('home.what.step5'), icon: <CheckCircle2 size={20} /> }
   ];
 
-  const includes = [
-    t('service.babysitting.includes.item1'),
-    t('service.babysitting.includes.item2'),
-    t('service.babysitting.includes.item3'),
-    t('service.babysitting.includes.item4')
-  ];
+  const includes = t('services.care.childcare.items').split('\n');
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -54,11 +49,11 @@ export default function Babysitting() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
               <Baby size={14} className="animate-bounce" />
-              {t('home.coordinate.care.title')}
+              {t('services.care.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('home.featured.babysitting')}
+              {t('services.care.childcare.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -66,10 +61,10 @@ export default function Babysitting() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('home.featured.babysitting')}
+                  {t('services.care.childcare.desc')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('services.role.clarification')}
+                  {t('services.care.subtitle')}
                 </p>
               </div>
             </div>
@@ -272,7 +267,7 @@ export default function Babysitting() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

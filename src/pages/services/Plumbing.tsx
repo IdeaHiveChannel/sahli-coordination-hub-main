@@ -24,16 +24,16 @@ export default function Plumbing() {
   ];
 
   const includes = [
-    t('service.plumbing.includes.item1'),
-    t('service.plumbing.includes.item2'),
-    t('service.plumbing.includes.item3'),
-    t('service.plumbing.includes.item4')
+    t('services.homeMaintenance.plumbing.items').split('\n')[0] || 'Leak Detection',
+    t('services.homeMaintenance.plumbing.items').split('\n')[1] || 'Pipe Repair',
+    t('services.homeMaintenance.plumbing.items').split('\n')[2] || 'Fixture Installation',
+    t('services.homeMaintenance.plumbing.items').split('\n')[3] || 'Drain Unblocking'
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -54,11 +54,11 @@ export default function Plumbing() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
               <Droplets size={14} className="animate-bounce" />
-              {t('home.featured.plumbing')}
+              {t('services.homeMaintenance.plumbing.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('service.plumbing.title')}
+              {t('services.homeMaintenance.plumbing.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -66,16 +66,16 @@ export default function Plumbing() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('service.plumbing.problem')}
+                  {t('services.homeMaintenance.plumbing.desc')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('service.v1.humanProblem.body')}
+                  {t('services.homeMaintenance.subtitle')}
                 </p>
               </div>
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('service.plumbing.sahliDoes')}
+              {t('services.homeMaintenance.body')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -160,7 +160,7 @@ export default function Plumbing() {
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              {t('service.plumbing.includes.title')}
+              {t('service.v1.includes.title')}
             </h2>
             <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Comprehensive Plumbing Solutions</p>
           </div>
@@ -277,7 +277,7 @@ export default function Plumbing() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

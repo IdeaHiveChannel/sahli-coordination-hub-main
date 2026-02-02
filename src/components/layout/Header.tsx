@@ -22,6 +22,7 @@ export function Header() {
 
   const navItems: Array<{ key: string; path: string }> = [
     { key: 'nav.services', path: '/services' },
+    { key: 'nav.about', path: '/about' },
     { key: 'nav.trustStandards', path: '/trust-standards' },
     { key: 'nav.howItWorks', path: '/how-it-works' },
   ];

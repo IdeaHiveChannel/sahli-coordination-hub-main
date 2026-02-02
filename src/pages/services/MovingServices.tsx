@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Truck, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Truck, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Box, Hammer } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
@@ -17,15 +17,16 @@ export default function MovingServices() {
   });
 
   const relatedServices = [
-    { title: t('nav.homeMaintenance'), path: '/home-maintenance-qatar' },
-    { title: t('nav.cleaningServices'), path: '/cleaning-services-qatar' },
-    { title: t('nav.careLifestyle'), path: '/care-lifestyle-qatar' },
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
+    { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
+    { title: t('nav.careChildcare'), path: t('services.care.path') },
+    { title: t('nav.lessonsLifestyle'), path: t('services.lessons.path') },
   ];
 
   const categories = [
     { title: t('services.moving.house.title'), desc: t('services.moving.house.desc'), icon: <Truck size={28} /> },
-    { title: t('services.moving.packing.title'), desc: t('services.moving.packing.desc'), icon: <Truck size={28} /> },
-    { title: t('services.moving.dismantling.title'), desc: t('services.moving.dismantling.desc'), icon: <Truck size={28} /> }
+    { title: t('services.moving.packing.title'), desc: t('services.moving.packing.desc'), icon: <Box size={28} /> },
+    { title: t('services.moving.dismantling.title'), desc: t('services.moving.dismantling.desc'), icon: <Hammer size={28} /> }
   ];
 
   const coordinationSteps = [
@@ -37,16 +38,16 @@ export default function MovingServices() {
   ];
 
   const includes = [
-    t('service.moving.includes.item1'),
-    t('service.moving.includes.item2'),
-    t('service.moving.includes.item3'),
-    t('service.moving.includes.item4')
+    t('services.moving.house.items').split('\n')[0] || 'Packing & Unpacking',
+    t('services.moving.house.items').split('\n')[1] || 'Loading & Unloading',
+    t('services.moving.house.items').split('\n')[2] || 'Furniture Assembly',
+    t('services.moving.house.items').split('\n')[3] || 'Safe Transportation'
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -67,7 +68,7 @@ export default function MovingServices() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
               <Truck size={14} className="animate-bounce" />
-              {t('home.coordinate.moving')}
+              {t('services.moving.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
@@ -88,7 +89,7 @@ export default function MovingServices() {
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('service.moving.sahliDoes')}
+              {t('services.moving.body')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -292,7 +293,7 @@ export default function MovingServices() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

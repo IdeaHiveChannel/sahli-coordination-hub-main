@@ -18,6 +18,7 @@ import HomeMaintenance from "./pages/services/HomeMaintenance";
 import CleaningServices from "./pages/services/CleaningServices";
 import MovingServices from "./pages/services/MovingServices";
 import CareLifestyle from "./pages/services/CareLifestyle";
+import LessonsLifestyle from "./pages/services/LessonsLifestyle";
 import ACRepair from "./pages/services/ACRepair";
 import Plumbing from "./pages/services/Plumbing";
 import Electrical from "./pages/services/Electrical";
@@ -60,7 +61,8 @@ const App = () => (
               <Route path="/home-maintenance-qatar" element={<HomeMaintenance />} />
               <Route path="/cleaning-services-qatar" element={<CleaningServices />} />
               <Route path="/house-shifting-qatar" element={<MovingServices />} />
-              <Route path="/care-lifestyle-qatar" element={<CareLifestyle />} />
+              <Route path="/care-childcare-qatar" element={<CareLifestyle />} />
+              <Route path="/lessons-lifestyle-qatar" element={<LessonsLifestyle />} />
               
               {/* SEO Long-tail Pages */}
               <Route path="/ac-repair-qatar" element={<ACRepair />} />

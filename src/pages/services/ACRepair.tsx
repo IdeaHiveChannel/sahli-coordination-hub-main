@@ -20,9 +20,9 @@ export default function ACRepair() {
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
 
   const relatedServices = [
-    { title: t('services.homeMaintenance.plumbing.title'), path: '/plumbing-services-qatar' },
-    { title: t('services.homeMaintenance.electrical.title'), path: '/electrical-services-qatar' },
-    { title: t('services.homeMaintenance.handyman.title'), path: '/handyman-services-qatar' },
+    { title: t('services.homeMaintenance.plumbing.title'), path: t('services.homeMaintenance.plumbing.path') },
+    { title: t('services.homeMaintenance.electrical.title'), path: t('services.homeMaintenance.electrical.path') },
+    { title: t('services.homeMaintenance.handyman.title'), path: t('services.homeMaintenance.handyman.path') },
   ];
 
   const coordinationSteps = [
@@ -34,16 +34,16 @@ export default function ACRepair() {
   ];
 
   const includes = [
-    t('service.ac.includes.item1'),
-    t('service.ac.includes.item2'),
-    t('service.ac.includes.item3'),
-    t('service.ac.includes.item4')
+    t('services.homeMaintenance.ac.items').split('\n')[0] || 'Filter Cleaning',
+    t('services.homeMaintenance.ac.items').split('\n')[1] || 'Gas Pressure Check',
+    t('services.homeMaintenance.ac.items').split('\n')[2] || 'Electrical Component Check',
+    t('services.homeMaintenance.ac.items').split('\n')[3] || 'Drain Line Cleaning'
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -64,11 +64,11 @@ export default function ACRepair() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-6 btn-shine mx-auto md:mx-0">
               <Snowflake size={14} className="animate-spin-slow" />
-              {t('home.featured.ac')}
+              {t('services.homeMaintenance.ac.title')}
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-8">
-              {t('service.ac.title')}
+              {t('services.homeMaintenance.ac.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -76,16 +76,16 @@ export default function ACRepair() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('service.ac.problem')}
+                  {t('services.homeMaintenance.ac.desc')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('service.v1.humanProblem.body')}
+                  {t('services.homeMaintenance.subtitle')}
                 </p>
               </div>
             </div>
             
             <p className="text-lg md:text-xl text-foreground/70 max-w-2xl font-medium leading-relaxed mb-8">
-              {t('service.ac.sahliDoes')}
+              {t('services.homeMaintenance.body')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -173,8 +173,8 @@ export default function ACRepair() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-                {t('service.ac.includes.title')}
-              </h2>
+              {t('service.v1.includes.title')}
+            </h2>
             </div>
           </div>
 
@@ -294,7 +294,7 @@ export default function ACRepair() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-8">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

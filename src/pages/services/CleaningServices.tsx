@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Waves, Zap } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
@@ -20,16 +20,16 @@ export default function CleaningServices() {
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
 
   const relatedServices = [
-    { title: t('nav.homeMaintenance'), path: '/home-maintenance-qatar' },
-    { title: t('nav.movingServices'), path: '/house-shifting-qatar' },
-    { title: t('nav.careLifestyle'), path: '/care-lifestyle-qatar' },
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
+    { title: t('nav.movingServices'), path: t('services.moving.path') },
+    { title: t('nav.careChildcare'), path: t('services.care.path') },
+    { title: t('nav.lessonsLifestyle'), path: t('services.lessons.path') },
   ];
 
   const categories = [
     { title: t('services.cleaning.regular.title'), desc: t('services.cleaning.regular.desc'), icon: <Sparkles size={28} /> },
-    { title: t('services.cleaning.deep.title'), desc: t('services.cleaning.deep.desc'), icon: <Sparkles size={28} /> },
-    { title: t('services.cleaning.specialized.title'), desc: t('services.cleaning.specialized.desc'), icon: <Sparkles size={28} /> },
-    { title: t('services.cleaning.watertank.title'), desc: t('services.cleaning.watertank.desc'), icon: <Sparkles size={28} /> }
+    { title: t('services.cleaning.deep.title'), desc: t('services.cleaning.deep.desc'), icon: <Waves size={28} /> },
+    { title: t('services.cleaning.specialized.title'), desc: t('services.cleaning.specialized.desc'), icon: <Zap size={28} /> }
   ];
 
   const coordinationSteps = [
@@ -41,16 +41,16 @@ export default function CleaningServices() {
   ];
 
   const includes = [
-    t('service.cleaning.includes.item1'),
-    t('service.cleaning.includes.item2'),
-    t('service.cleaning.includes.item3'),
-    t('service.cleaning.includes.item4')
+    t('services.cleaning.deep.items').split('\n')[0] || 'House Deep Cleaning',
+    t('services.cleaning.deep.items').split('\n')[1] || 'Sofa & Carpet Cleaning',
+    t('services.cleaning.deep.items').split('\n')[2] || 'Window Cleaning',
+    t('services.cleaning.deep.items').split('\n')[3] || 'Move-in/out Cleaning'
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -71,7 +71,7 @@ export default function CleaningServices() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
               <Sparkles size={14} className="animate-pulse" />
-              {t('home.featured.cleaning')}
+              {t('services.cleaning.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
@@ -86,13 +86,13 @@ export default function CleaningServices() {
                   {t('services.cleaning.title')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('service.v1.humanProblem.body')}
+                  {t('services.cleaning.subtitle')}
                 </p>
               </div>
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('service.cleaning.sahliDoes')}
+              {t('services.cleaning.body')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -298,7 +298,7 @@ export default function CleaningServices() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-8">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

@@ -82,41 +82,40 @@ const Index = () => {
 
   const services = [
     { 
-      title: t('home.coordinate.maintenance'), 
-      description: t('home.coordinate.maintenance'),
+      title: t('services.homeMaintenance.title'), 
+      description: t('services.homeMaintenance.subtitle'),
       imageUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800&fm=webp&fit=crop",
       icon: <Wrench size={32} />,
-      path: "/home-maintenance-qatar",
+      path: t('services.homeMaintenance.path'),
       number: "01",
       subcategories: [
         t('services.homeMaintenance.ac.title'),
         t('services.homeMaintenance.electrical.title'),
         t('services.homeMaintenance.plumbing.title'),
-        t('services.homeMaintenance.appliances.title'),
         t('services.homeMaintenance.handyman.title'),
         t('services.homeMaintenance.pest.title'),
+        t('services.homeMaintenance.appliances.title'),
       ]
     },
     { 
-      title: t('home.coordinate.cleaning'), 
-      description: t('home.coordinate.cleaning'),
+      title: t('services.cleaning.title'), 
+      description: t('services.cleaning.subtitle'),
       imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop",
       icon: <Sparkles size={32} />,
-      path: "/cleaning-services-qatar",
+      path: t('services.cleaning.path'),
       number: "02",
       subcategories: [
         t('services.cleaning.regular.title'),
         t('services.cleaning.deep.title'),
         t('services.cleaning.specialized.title'),
-        t('services.cleaning.watertank.title'),
       ]
     },
     { 
-      title: t('home.coordinate.moving'), 
-      description: t('home.coordinate.moving'),
+      title: t('services.moving.title'), 
+      description: t('services.moving.subtitle'),
       imageUrl: "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=800&fm=webp&fit=crop",
       icon: <Truck size={32} />,
-      path: "/house-shifting-qatar",
+      path: t('services.moving.path'),
       number: "03",
       subcategories: [
         t('services.moving.house.title'),
@@ -126,21 +125,21 @@ const Index = () => {
       ]
     },
     { 
-      title: t('home.coordinate.care.title'), 
-      description: t('home.coordinate.care.body'),
-      path: '/services#care-childcare',
-      imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&fm=webp&fit=crop',
+      title: t('services.care.title'), 
+      description: t('services.care.subtitle'),
+      path: t('services.care.path'),
+      imageUrl: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800&fm=webp&fit=crop',
       icon: <Heart size={32} />,
       status: 'coming-soon' as const,
       number: "04",
       subcategories: []
     },
     { 
-      title: t('home.coordinate.lessons.title'), 
-      description: t('home.coordinate.lessons.title'),
-      path: '/services#lessons-lifestyle',
+      title: t('services.lessons.title'), 
+      description: t('services.lessons.subtitle'),
+      path: t('services.lessons.path'),
       imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&fm=webp&fit=crop',
-      icon: <BookOpen size={32} />,
+      icon: <GraduationCap size={32} />,
       status: 'coming-soon' as const,
       number: "05",
       subcategories: []
@@ -155,14 +154,14 @@ const Index = () => {
   ];
 
   const featuredServices = [
-    { title: t('home.featured.ac'), icon: <Snowflake size={24} />, intent: "AC repair", path: "/ac-repair-qatar" },
-    { title: t('home.featured.electrical'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: "/electrical-services-qatar" },
-    { title: t('home.featured.plumbing'), icon: <Droplets size={24} />, intent: "plumbing", path: "/plumbing-services-qatar" },
-    { title: t('home.featured.appliances'), icon: <Cog size={24} />, intent: "appliance repair" },
-    { title: t('home.featured.cleaning'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: "/cleaning-services-qatar" },
-    { title: t('home.featured.sofa'), icon: <Sofa size={24} />, intent: "sofa & carpet cleaning" },
-    { title: t('home.featured.moving'), icon: <Truck size={24} />, intent: "house shifting", path: "/house-shifting-qatar" },
-    { title: t('home.featured.babysitting'), icon: <Baby size={24} />, intent: "babysitting", path: "/services#care-childcare" },
+    { title: t('services.homeMaintenance.ac.title'), icon: <Snowflake size={24} />, intent: "AC repair", path: t('services.homeMaintenance.ac.path') },
+    { title: t('services.homeMaintenance.electrical.title'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: t('services.homeMaintenance.electrical.path') },
+    { title: t('services.homeMaintenance.plumbing.title'), icon: <Droplets size={24} />, intent: "plumbing", path: t('services.homeMaintenance.plumbing.path') },
+    { title: t('services.homeMaintenance.appliances.title'), icon: <Cog size={24} />, intent: "appliance repair", path: t('services.homeMaintenance.path') },
+    { title: t('services.cleaning.deep.title'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: t('services.cleaning.path') },
+    { title: t('services.cleaning.specialized.title'), icon: <Sofa size={24} />, intent: "sofa & carpet cleaning", path: t('services.cleaning.path') },
+    { title: t('services.moving.house.title'), icon: <Truck size={24} />, intent: "house shifting", path: t('services.moving.path') },
+    { title: t('services.care.childcare.title'), icon: <Baby size={24} />, intent: "babysitting", path: t('services.care.childcare.path') },
   ];
 
   const trustPanels = [
@@ -478,7 +477,7 @@ const Index = () => {
                 <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6">
                   {t('home.coordinate.title')}
                 </h2>
-                <p className="text-lg text-foreground/60 leading-relaxed font-medium mb-12">
+                <p className="text-lg text-foreground/60 leading-relaxed font-medium mb-12 whitespace-pre-line">
                   {t('home.coordinate.disclaimer')}
                 </p>
               </motion.div>

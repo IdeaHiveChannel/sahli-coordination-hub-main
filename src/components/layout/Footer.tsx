@@ -23,9 +23,8 @@ export function Footer() {
       { key: 'nav.homeMaintenance' as TranslationKey, path: '/home-maintenance-qatar' },
       { key: 'nav.cleaningServices' as TranslationKey, path: '/cleaning-services-qatar' },
       { key: 'nav.movingServices' as TranslationKey, path: '/house-shifting-qatar' },
-      { key: 'services.specialized.title' as TranslationKey, path: '/specialized-maintenance-qatar' },
-      { key: 'nav.careLifestyle' as TranslationKey, path: '/care-lifestyle-qatar' },
-      { key: 'services.electronics.title' as TranslationKey, path: '/appliance-repair-qatar' },
+      { key: 'nav.careChildcare' as TranslationKey, path: '/care-childcare-qatar' },
+      { key: 'nav.lessonsLifestyle' as TranslationKey, path: '/lessons-lifestyle-qatar' },
     ]
   };
 

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Snowflake, Lightbulb, Droplets, Cog, Wrench, Shield, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Snowflake, Lightbulb, Droplets, Cog, Wrench, Shield, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Bug } from 'lucide-react';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
@@ -17,9 +17,10 @@ export default function HomeMaintenance() {
   });
 
   const relatedServices = [
-    { title: t('nav.cleaningServices'), path: '/cleaning-services-qatar' },
-    { title: t('nav.movingServices'), path: '/house-shifting-qatar' },
-    { title: t('nav.careLifestyle'), path: '/care-lifestyle-qatar' },
+    { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
+    { title: t('nav.movingServices'), path: t('services.moving.path') },
+    { title: t('nav.careChildcare'), path: t('services.care.path') },
+    { title: t('nav.lessonsLifestyle'), path: t('services.lessons.path') },
   ];
 
   const categories = [
@@ -28,7 +29,7 @@ export default function HomeMaintenance() {
     { title: t('services.homeMaintenance.electrical.title'), desc: t('services.homeMaintenance.electrical.desc'), icon: <Lightbulb size={28} /> },
     { title: t('services.homeMaintenance.handyman.title'), desc: t('services.homeMaintenance.handyman.desc'), icon: <Wrench size={28} /> },
     { title: t('services.homeMaintenance.appliances.title'), desc: t('services.homeMaintenance.appliances.desc'), icon: <Cog size={28} /> },
-    { title: t('services.homeMaintenance.pest.title'), desc: t('services.homeMaintenance.pest.desc'), icon: <Shield size={28} /> }
+    { title: t('services.homeMaintenance.pest.title'), desc: t('services.homeMaintenance.pest.desc'), icon: <Bug size={28} /> }
   ];
 
   const coordinationSteps = [
@@ -40,9 +41,9 @@ export default function HomeMaintenance() {
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -63,7 +64,7 @@ export default function HomeMaintenance() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
               <Wrench size={14} className="animate-spin-slow" />
-              {t('home.coordinate.maintenance')}
+              {t('services.homeMaintenance.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
@@ -84,7 +85,7 @@ export default function HomeMaintenance() {
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('home.coordinate.maintenance.body')}
+              {t('services.homeMaintenance.body')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -285,7 +286,7 @@ export default function HomeMaintenance() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

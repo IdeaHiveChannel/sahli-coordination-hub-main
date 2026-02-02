@@ -11,6 +11,13 @@ export default function LessonsLifestyle() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
+  const relatedServices = [
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
+    { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
+    { title: t('nav.movingServices'), path: t('services.moving.path') },
+    { title: t('nav.careChildcare'), path: t('services.care.path') },
+  ];
+
   const lifestyleServices = [
     { 
       title: t('services.lessons.tutoring.title'), 
@@ -18,28 +25,18 @@ export default function LessonsLifestyle() {
       icon: <GraduationCap className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
     },
     { 
-      title: t('services.lessons.language.title'), 
-      items: t('services.lessons.language.items').split('\n'),
-      icon: <Languages className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
-    },
-    { 
-      title: t('services.lessons.exam.title'), 
-      items: t('services.lessons.exam.items').split('\n'),
-      icon: <FileText className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
-    },
-    { 
-      title: t('services.lessons.fitness.title'), 
-      items: t('services.lessons.training.items').split('\n'),
-      icon: <Dumbbell className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
-    },
-    { 
-      title: t('services.lessons.yoga.title'), 
-      items: t('services.lessons.yoga.items').split('\n'),
+      title: t('services.lessons.music.title'), 
+      items: t('services.lessons.music.items').split('\n'),
       icon: <Sparkles className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
     },
     { 
-      title: t('services.lessons.smarthome.title'), 
-      items: t('services.lessons.smarthome.items').split('\n'),
+      title: t('services.lessons.fitness.title'), 
+      items: t('services.lessons.fitness.items').split('\n'),
+      icon: <Dumbbell className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
+    },
+    { 
+      title: t('services.lessons.lifestyle.title'), 
+      items: t('services.lessons.lifestyle.items').split('\n'),
       icon: <Monitor className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
     },
   ];
@@ -53,9 +50,9 @@ export default function LessonsLifestyle() {
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   const { scrollYProgress } = useScroll({
@@ -104,7 +101,7 @@ export default function LessonsLifestyle() {
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('services.comingSoon.notify')}
+              {t('services.lessons.subtitle')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -158,7 +155,7 @@ export default function LessonsLifestyle() {
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
             <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center leading-[0.9]">
-              Service Guidelines
+              {t('services.lessons.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -184,9 +181,9 @@ export default function LessonsLifestyle() {
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              Our Educational Services
+              {t('services.lessons.categories.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Master Your Future</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('services.lessons.categories.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -236,7 +233,7 @@ export default function LessonsLifestyle() {
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
               {t('how.flow.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Seamless Coordination</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('how.flow.subtitle')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
@@ -325,7 +322,7 @@ export default function LessonsLifestyle() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (

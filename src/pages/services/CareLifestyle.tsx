@@ -12,9 +12,10 @@ export default function CareLifestyle() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const relatedServices = [
-    { title: t('nav.homeMaintenance'), path: '/home-maintenance-qatar' },
-    { title: t('nav.cleaningServices'), path: '/cleaning-services-qatar' },
-    { title: t('nav.movingServices'), path: '/house-shifting-qatar' },
+    { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
+    { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
+    { title: t('nav.movingServices'), path: t('services.moving.path') },
+    { title: t('nav.lessonsLifestyle'), path: t('services.lessons.path') },
   ];
   
   const { scrollYProgress } = useScroll({
@@ -25,7 +26,7 @@ export default function CareLifestyle() {
   const categories = [
     { title: t('services.care.childcare.title'), desc: t('services.care.childcare.desc'), icon: <Baby className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
     { title: t('services.care.nursing.title'), desc: t('services.care.nursing.desc'), icon: <Heart className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> },
-    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc'), icon: <Heart className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
+    { title: t('services.care.elderly.title'), desc: t('services.care.elderly.desc'), icon: <Users className="w-8 h-8 text-primary/40 group-hover:text-primary transition-colors duration-500" /> }
   ];
 
   const coordinationSteps = [
@@ -37,9 +38,9 @@ export default function CareLifestyle() {
   ];
 
   const areas = [
-    t('service.ac.areas.item1'),
-    t('service.ac.areas.item2'),
-    t('service.ac.areas.item3')
+    t('home.areas.item1'),
+    t('home.areas.item2'),
+    t('home.areas.item3')
   ];
 
   return (
@@ -60,11 +61,11 @@ export default function CareLifestyle() {
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-sm mx-auto md:mx-0">
               <Heart size={14} className="animate-pulse" />
-              {t('home.coordinate.care.title')}
+              {t('services.care.title')}
             </div>
 
             <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter mb-8">
-              {t('services.careLifestyle.title')}
+              {t('services.care.title')}
             </h1>
 
             <div className="relative mb-10 group w-full max-w-2xl">
@@ -72,7 +73,7 @@ export default function CareLifestyle() {
               <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
                 <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
                   <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('services.careLifestyle.title')}
+                  {t('services.care.title')}
                 </h2>
                 <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
                   {t('services.role.clarification')}
@@ -81,7 +82,7 @@ export default function CareLifestyle() {
             </div>
             
             <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
-              {t('services.comingSoon.notify')}
+              {t('services.care.subtitle')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -135,7 +136,7 @@ export default function CareLifestyle() {
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
             <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-12 text-center">
-              Care Guidelines
+              {t('services.care.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -161,9 +162,9 @@ export default function CareLifestyle() {
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
-              Our Care Services
+              {t('services.care.categories.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Personalized for your family</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('services.care.categories.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -196,7 +197,7 @@ export default function CareLifestyle() {
             <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6">
               {t('how.flow.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">Seamless Coordination</p>
+            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('how.flow.subtitle')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
@@ -280,7 +281,7 @@ export default function CareLifestyle() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-8 leading-[0.9]">
-                {t('service.ac.areas.title')}
+                {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
                 {areas.map((area, i) => (
