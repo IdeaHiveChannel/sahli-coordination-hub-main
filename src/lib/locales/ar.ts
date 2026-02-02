@@ -6,7 +6,7 @@ export const ar = {
   'nav.movingServices': 'النقل والترحيل',
   'nav.outdoorSpecialized': 'الخدمات الخارجية والمتخصصة',
   'nav.careLifestyle': 'الرعاية ونمط الحياة',
-  'nav.careChildcare': 'الرعاية ورعاية الأطفال',
+  'nav.careChildcare': 'الرعاية ورعاية الأطفال (عبر وكالات مرخصة)',
   'nav.lessonsLifestyle': 'الدروس ونمط الحياة',
   'nav.electronicsTech': 'الإلكترونيات والتكنولوجيا',
   'nav.howItWorks': 'كيف يعمل ساهلي',
@@ -20,32 +20,33 @@ export const ar = {
   'nav.backToHome': 'العودة للصفحة الرئيسية',
   
   // CTA
-  'cta.whatsapp': 'راسلنا عبر واتساب',
-  'cta.message': 'راسل ساهلي',
-  'cta.final.title': 'أخبرنا بما تحتاجه. سنتولى نحن عملية التنسيق.',
-  'cta.final.body': 'تواصل مع ساهلي عبر الواتساب للارتباط بشركة خدمات معتمدة اليوم.',
+  'cta.whatsapp': 'راسل ساهلي عبر واتساب',
+  'cta.message': 'راسل ساهلي عبر واتساب',
+  'cta.final.title': 'أخبرنا بما تحتاجه. وسنتولى نحن التنسيق.',
+  'cta.final.body': 'راسل ساهلي عبر واتساب للتواصل مع شركة خدمات معتمدة اليوم.',
   
   // Footer
   'footer.terms': 'الشروط',
   'footer.privacy': 'الخصوصية',
   'footer.rights': '© ساهلي. جميع الحقوق محفوظة.',
   'footer.rights.all': 'جميع الحقوق محفوظة.',
-  'footer.description': 'بنية تحتية لتنسيق الاحتياجات اليومية',
+  'footer.description': 'ساهلي هو مركز تنسيق للخدمات المنزلية والأساسية في قطر. نحن نقوم بفحص شركات التزويد المستقلة وندير نقطة الوصول لتوفير وقتك وضمان الجودة.',
   'footer.company': 'الشركة',
   'footer.services': 'الخدمات',
-  'footer.contact': 'تواصل معنا',
+  'footer.contact': 'التواصل',
   'footer.intermediary': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. ساهلي لا ينفذ الخدمات وليس طرفاً في عقد الخدمة.',
   
   'footer.whatsapp': 'واتساب',
-  'footer.motto': 'بنية تحتية لتنسيق الاحتياجات اليومية',
-  'about.footer.hub': 'مركز ساهلي للتنسيق',
+  'footer.motto': 'البنية التحتية للتنسيق للاحتياجات اليومية',
+  'about.footer.hub': 'ساهلي للخدمات التنسيقية ذ.م.م.',
+  'footer.legalName': 'ساهلي للخدمات التنسيقية ذ.م.م.',
   'contact.whatsapp.value': '+974 3333 1354',
   'contact.email.label': 'البريد الإلكتروني',
   'contact.email.value': 'hello@sahli.co',
 
   // الصفحة الرئيسية - المحتوى النهائي المحدث
   'home.hero.label': 'بنية تحتية للتنسيق',
-  'home.hero.title': 'خدمات صيانة المنزل والتنظيف في الدوحة، قطر',
+  'home.hero.title': 'خدمات صيانة المنزل والتنظيف\nفي الدوحة، قطر',
   'home.hero.subtitle': 'هل لا تزال تنتظر وصول شخص ما؟',
   'home.hero.subtext': 'العثور على مزود خدمة في قطر لا ينبغي أن يعني الاتصال بأرقام عشوائية، أو الانتظار بلا نهاية، أو القلق بشأن من سيدخل منزلك.',
   'home.hero.cta': 'راسل ساهلي عبر واتساب',
@@ -56,9 +57,9 @@ export const ar = {
   'home.microTrust.recorded': 'تفاعلات مسجلة',
   'home.microTrust.coordination': 'تنسيق فعال',
   
-  'home.framing.title': 'ساهلي ليس دليلاً أو سوقاً إلكترونياً',
+  'home.framing.title': 'أكثر من مجرد دليل. لسنا سوقاً للخدمات.',
   'home.framing.subtitle': 'ساهلي هو مركز تنسيق.',
-  'home.framing.body': 'أنت لا تتصفح القوائم أو تقارن الملفات الشخصية. نحن نخصص المزود المعتمد المناسب بناءً على احتياجاتك المحددة.',
+  'home.framing.body': 'أنت لا تتصفح القوائم أو تقارن الملفات الشخصية. نحن نحدد وننسق مع مزود خدمة معتمد ومناسب بناءً على متطلباتك الخاصة.',
   
   'home.why.title': 'لماذا يستخدم الناس ساهلي',
   'home.why.reason1': 'أرقام كثيرة جداً على جوجل والأدلة',
@@ -77,13 +78,13 @@ export const ar = {
   'home.what.step5': 'تتعامل مباشرة مع الشركة',
   'home.what.footer': 'ساهلي لا يقوم بالعمل - نحن نساعدك على الوصول إلى الأشخاص المناسبين بشكل أسرع.',
   
-  'home.featured.title': 'خدمات شائعة ننسقها',
+  'home.featured.title': 'طلبات شائعة نقوم بتنسيقها',
   'home.featured.viewAll': 'عرض جميع الخدمات',
   
-  'home.coordinate.title': 'ما ينسقه ساهلي',
-  'home.coordinate.disclaimer': 'ينسق ساهلي الوصول إلى شركات خدمات مستقلة ومعتمدة. نحن لسنا مزود خدمة ولسنا طرفاً في عقد الخدمة.\n\nينسق ساهلي الوصول إلى شركات خدمات مستقلة. ساهلي لا ينفذ الخدمات وليس طرفاً في عقد الخدمة.',
+  'home.coordinate.title': 'ما يقوم ساهلي بتنسيقه',
+  'home.coordinate.disclaimer': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. ساهلي لا ينفذ الخدمات وليس طرفاً في عقد الخدمة.',
   
-  'home.diff.title': 'ما يجعل ساهلي مختلفاً',
+  'home.diff.title': 'ما الذي يجعل ساهلي مختلفاً',
   'home.diff.item1': 'لا تصفح للقوائم',
   'home.diff.item2': 'لا اتصال بأرقام متعددة',
   'home.diff.item3': 'لا تخمين لمن سيأتي',
@@ -141,7 +142,6 @@ export const ar = {
 
   'home.inspection.title': 'المعاينة أولاً',
   'home.inspection.body': 'لا تسعير بدون تقييم. أنت تقرر بوضوح تام.',
-  'home.footer.clarity': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. ساهلي لا ينفذ الخدمات وليس طرفاً في عقد الخدمة.',
 
   'services.areas.qatarNationwide': 'جميع أنحاء قطر',
   'services.areas.rapidResponse': 'وحدات استجابة سريعة',
@@ -152,9 +152,6 @@ export const ar = {
   'services.label': 'ما ننسقه',
   'services.title': 'ما ننسقه',
   'services.intro': 'ستة مجالات. معيار تنسيق واحد.',
-  'services.disclaimer': 'يقوم ساهلي بتنسيق الوصول إلى شركات خدمات مستقلة ومعتمدة. يتم التعامل مع التسعير والمعاينة والتنفيذ والدفع مباشرة بين العميل ومزود الخدمة.',
-  'services.role.clarification': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. يتم التعامل مع التسعير والمعاينة والتنفيذ والدفع مباشرة بين العميل ومزود الخدمة.',
-  'services.microLegal': 'يقوم ساهلي بتنسيق الوصول إلى شركات مقدمي الخدمات المستقلة. يتم التعامل مع التسعير والمعاينة والتنفيذ والدفع مباشرة بين العميل ومزود الخدمة.',
   'services.status.live': 'مباشر',
   'services.explore': 'استكشف',
   
@@ -196,7 +193,7 @@ export const ar = {
   'services.lessons.rule': 'تنسيق خبراء معتمدين فقط.',
   'how.flow.title': 'كيف يعمل ساهلي',
   'how.flow.subtitle': 'من الطلب إلى الحل',
-  'services.flow.provider': 'تعيين المزود',
+  'services.flow.provider': 'تحديد وتنسيق المزود',
   'services.flow.visit': 'المعاينة والتسعير',
   'services.boundary.is.item1': 'تنسيق مقدمي خدمات معتمدين',
   'services.boundary.is.item2': 'نهج المعاينة أولاً',
@@ -220,8 +217,8 @@ export const ar = {
   'services.homeMaintenance.handyman.path': '/handyman-services-qatar',
   'services.homeMaintenance.subtitle': 'تنسيق موجه للمشكلات لاحتياجات التكييف والسباكة والكهرباء.',
   'services.homeMaintenance.body': 'خدمات عالية الاستعجال للإصلاحات المنزلية الأساسية.',
-  'services.homeMaintenance.cta': 'راسل ساهلي لصيانة المنزل',
-  'services.homeMaintenance.rule': 'المعاينة أولاً. لا تسعير قبل الزيارة.',
+  'services.homeMaintenance.cta': 'راسل ساهلي على واتساب للصيانة المنزلية',
+  'services.homeMaintenance.rule': 'المعاينة أولاً. لا يوجد تسعير قبل الزيارة.',
   
   'services.homeMaintenance.ac.title': 'خدمات التكييف',
   'services.homeMaintenance.ac.desc': 'إصلاح التكييف (لا يبرد، تسريب، ضجيج)، تعبئة الغاز، الصيانة وتنظيف القنوات، التركيب، وعقود الصيانة السنوية.',
@@ -248,8 +245,8 @@ export const ar = {
   'services.cleaning.path': '/cleaning-services-qatar',
   'services.cleaning.subtitle': 'طلب متكرر وموسمي في جميع أنحاء قطر.',
   'services.cleaning.body': 'خدمات عالية الحجم في جميع أنحاء قطر.',
-  'services.cleaning.cta': 'راسل ساهلي لخدمات التنظيف',
-  'services.cleaning.rule': 'خدمات محددة النطاق. لا غموض في السعر.',
+  'services.cleaning.cta': 'راسل ساهلي على واتساب لخدمات التنظيف',
+  'services.cleaning.rule': 'خدمات محددة النطاق. لا غموض في الساعات.',
   
   'services.cleaning.regular.title': 'التنظيف العام',
   'services.cleaning.regular.desc': 'تنظيف المنزل بالساعة، تنظيف الشقق والفيلات، وتنسيق عاملات بنظام الساعات.',
@@ -268,10 +265,10 @@ export const ar = {
   'services.moving.path': '/house-shifting-qatar',
   'services.moving.subtitle': 'عمليات بحث ذات نية عالية وحساسة للوقت للنقل والمناولة.',
   'services.moving.body': 'خدمات الترحيل ومناولة الأثاث.',
-  'services.moving.cta': 'راسل ساهلي لخدمات النقل',
+  'services.moving.cta': 'راسل ساهلي على واتساب لخدمات نقل العفش',
   'services.moving.rule': 'التركيز على الخدمات اللوجستية، والمناولة، والفك والتركيب.',
   
-  'services.moving.house.title': 'نقل المنزل',
+  'services.moving.house.title': 'نقل المنازل',
   'services.moving.house.desc': 'نقل الشقق والفيلات محلياً، وخدمات التغليف والتفريغ.',
   'services.moving.house.items': 'نقل الشقق والفيلات المحلية\nخدمات التعبئة والتفريغ',
   'services.moving.packing.title': 'التعبئة والتفريغ',
@@ -291,9 +288,9 @@ export const ar = {
   'services.outdoor.path': '/outdoor-specialized-qatar',
   'services.outdoor.subtitle': 'خدمات صيانة موسمية وحساسة للامتثال.',
   'services.outdoor.body': 'مكافحة الحشرات، تنسيق الحدائق، خدمات المسابح، وعزل المياه.',
-  'services.outdoor.cta': 'راسل ساهلي للخدمات المتخصصة',
+  'services.outdoor.cta': 'راسل ساهلي على واتساب للخدمات المتخصصة',
   'services.outdoor.rule': 'تنسيق معتمد من البلدية وبإشراف خبراء.',
-
+  
   'services.outdoor.pest.title': 'مكافحة الحشرات',
   'services.outdoor.pest.desc': 'بق الفراش، الصراصير، النمل، الأرضة. مقدمو خدمات معتمدون من البلدية فقط.',
   'services.outdoor.pest.items': 'بق الفراش، الصراصير، النمل، الأرضة\nمقدمو خدمات معتمدون من البلدية فقط',
@@ -311,19 +308,19 @@ export const ar = {
   'services.outdoor.waterproofing.items': 'إصلاح تسرب الأسطح\nعزل الرطوبة والنزح',
 
   // Roof 5: Care & Lifestyle
-  'services.care.title': 'الرعاية ونمط الحياة',
+  'services.care.title': 'العناية وأسلوب الحياة',
   'services.care.path': '/care-lifestyle-qatar',
   'services.lessons.path': '/care-lifestyle-qatar',
   'services.lessons.expertTutors': 'مدرسون خبراء',
   'services.lessons.lifestyleExcellence': 'تميز في نمط الحياة',
-  'services.care.subtitle': 'فئات خاضعة للتنظيم وذات ثقة عالية يتم إطلاقها بعناية.',
+  'services.care.subtitle': 'فئات تتطلب ثقة عالية، تم إطلاقها بعناية.',
   'services.care.body': 'رعاية الأطفال، الرعاية الصحية، خدمات الحيوانات الأليفة، التجميل، والدروس الخصوصية.',
-  'services.care.cta': 'راسل ساهلي لخدمات الرعاية',
+  'services.care.cta': 'راسل ساهلي على واتساب لخدمات العناية',
   'services.care.rule': 'مهنيون مفحوصون أمنياً ومعتمدون من الوكالات.',
   'services.status.comingSoon': 'قريباً',
 
-  'services.care.childcare.title': 'رعاية الأطفال',
-  'services.care.childcare.desc': 'مجالسة الأطفال ومربيات شهريات من خلال وكالات مرخصة.',
+  'services.care.childcare.title': 'رعاية الأطفال (عبر وكالات مرخصة)',
+  'services.care.childcare.desc': 'جليسات الأطفال ومربيات شهريات من خلال وكالات مرخصة.',
   'services.care.childcare.items': 'مجالسة الأطفال\nمربيات شهريات (وكالات مرخصة)',
 
   'services.care.healthcare.title': 'الرعاية الصحية المنزلية',
@@ -372,8 +369,8 @@ export const ar = {
   'services.electronics.path': '/electronics-tech-qatar',
   'services.electronics.subtitle': 'عمليات بحث مدفوعة بالأجهزة والإعدادات.',
   'services.electronics.body': 'إصلاح وتركيب الأجهزة المنزلية والأنظمة التقنية.',
-  'services.electronics.cta': 'راسل ساهلي لخدمات الإلكترونيات',
-  'services.electronics.rule': 'معايير تشخيص وتركيب احترافية.',
+  'services.electronics.cta': 'راسل ساهلي على واتساب لخدمات الإلكترونيات',
+  'services.electronics.rule': 'إصلاحات على مستوى مراكز الخدمة. التركيز على قطع الغيار الأصلية.',
 
   'services.electronics.repair.title': 'إصلاح الأجهزة',
   'services.electronics.repair.desc': 'الغسالات، الثلاجات، غسالات الأطباق، الأفران والميكروويف.',

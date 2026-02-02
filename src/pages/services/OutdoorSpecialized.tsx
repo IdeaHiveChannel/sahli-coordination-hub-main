@@ -71,20 +71,7 @@ export default function OutdoorSpecialized() {
               {t('services.outdoor.title')}
             </h1>
 
-            <div className="relative mb-10 group w-full max-w-2xl">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
-                <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
-                  <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('services.outdoor.title')}
-                </h2>
-                <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('services.role.clarification')}
-                </p>
-              </div>
-            </div>
-            
-            <p className="text-xl md:text-2xl text-foreground/90 font-bold mb-10 max-w-2xl leading-tight tracking-tight">
+            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-12">
               {t('services.outdoor.subtitle')}
             </p>
 
@@ -320,38 +307,6 @@ export default function OutdoorSpecialized() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 7️⃣ Important Note - High Visibility */}
-      <section className="section-spacing bg-background">
-        <div className="container-sahli">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative p-12 md:p-20 rounded-[4rem] bg-foreground text-background overflow-hidden group"
-          >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="relative z-10 flex flex-col md:flex-row gap-12 items-start">
-              <div className="w-20 h-20 rounded-3xl bg-primary flex items-center justify-center text-primary-foreground shrink-0 shadow-2xl shadow-primary/20">
-                <AlertCircle size={40} />
-              </div>
-              <div>
-                <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-8 leading-none">
-                  {t('service.v1.importantNote.title')}
-                </h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <p className="text-xl md:text-2xl font-bold leading-tight text-background/80 border-l-4 border-primary pl-6">
-                    {t('service.v1.importantNote.body1')}
-                  </p>
-                  <p className="text-xl md:text-2xl font-bold leading-tight text-background/80 border-l-4 border-primary/30 pl-6">
-                    {t('service.v1.importantNote.body2')}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 

@@ -41,7 +41,7 @@ const Index = () => {
           "name": "What happens if I am not satisfied with the service?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SAHLI follows up after every service. If coordination standards or service quality are not met, we intervene to facilitate a resolution or assign a replacement provider as per our procedural rules."
+            "text": "SAHLI follows up after every service. If coordination standards or service quality are not met, we intervene to facilitate a resolution or coordinate a replacement provider as per our procedural rules."
           }
         }
       ]
@@ -293,21 +293,7 @@ const Index = () => {
             </motion.div>
             
             <h1 className="mb-10 text-foreground text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
-              {t('home.hero.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 30, rotateX: -45 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ 
-                    duration: 1, 
-                    delay: 0.2 + i * 0.08, 
-                    ease: [0.16, 1, 0.3, 1] 
-                  }}
-                  className="inline-block mr-[0.15em] origin-bottom"
-                >
-                  {word}
-                </motion.span>
-              ))}
+              {t('home.hero.title')}
             </h1>
 
             <motion.div
@@ -497,23 +483,10 @@ const Index = () => {
                 <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6">
                   {t('home.coordinate.title')}
                 </h2>
-                <p className="text-lg text-foreground/60 leading-relaxed font-medium mb-12 whitespace-pre-line">
-                  {t('home.coordinate.disclaimer')}
-                </p>
               </motion.div>
             </div>
           </div>
             
-            <motion.p
-              className="text-foreground/60 max-w-sm text-base lg:text-base leading-relaxed font-medium mb-12 md:mb-16"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-              {t('home.footer.clarity')}
-            </motion.p>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 lg:gap-10 xl:gap-12">
             {services.map((service: any, index: number) => (
               <ServiceRoof 

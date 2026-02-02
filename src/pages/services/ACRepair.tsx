@@ -74,21 +74,8 @@ export default function ACRepair() {
               {t('services.homeMaintenance.ac.title')}
             </h1>
 
-            <div className="relative mb-10 group w-full max-w-2xl">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl">
-                <h2 className="text-primary text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight flex items-center justify-center md:justify-start gap-3">
-                  <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('services.homeMaintenance.ac.desc')}
-                </h2>
-                <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('services.homeMaintenance.subtitle')}
-                </p>
-              </div>
-            </div>
-            
-            <p className="text-lg md:text-xl text-foreground/70 max-w-2xl font-medium leading-relaxed mb-8">
-              {t('services.homeMaintenance.body')}
+            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-12">
+              {t('services.homeMaintenance.subtitle')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -332,36 +319,6 @@ export default function ACRepair() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 7️⃣ Important Note (High Contrast) */}
-      <section className="section-spacing bg-background">
-        <div className="container-sahli">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="p-12 md:p-20 rounded-[4rem] bg-foreground text-background relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[120px] rounded-full" />
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-8 leading-none">
-                  {t('service.v1.importantNote.title')}
-                </h2>
-                <div className="w-20 h-2 bg-primary rounded-full mb-8" />
-              </div>
-              <div className="space-y-6">
-                <p className="text-xl md:text-2xl text-background/80 font-bold leading-relaxed">
-                  {t('service.v1.importantNote.body1')}
-                </p>
-                <p className="text-xl md:text-2xl text-background/80 font-bold leading-relaxed">
-                  {t('service.v1.importantNote.body2')}
-                </p>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 

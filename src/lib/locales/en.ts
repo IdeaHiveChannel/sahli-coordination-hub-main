@@ -6,7 +6,7 @@ export const en = {
   'nav.movingServices': 'Moving & Relocation',
   'nav.outdoorSpecialized': 'Outdoor & Specialized',
   'nav.careLifestyle': 'Care & Lifestyle',
-  'nav.careChildcare': 'Care & Childcare',
+  'nav.careChildcare': 'Care & Childcare (via licensed agencies)',
   'nav.lessonsLifestyle': 'Lessons & Lifestyle',
   'nav.electronicsTech': 'Electronics & Tech',
   'nav.howItWorks': 'How SAHLI Works',
@@ -20,8 +20,8 @@ export const en = {
   'nav.backToHome': 'Back to Homepage',
   
   // CTA
-  'cta.whatsapp': 'Message on WhatsApp',
-  'cta.message': 'Message SAHLI',
+  'cta.whatsapp': 'Message SAHLI on WhatsApp',
+  'cta.message': 'Message SAHLI on WhatsApp',
   'cta.final.title': 'Tell us what you need. We’ll handle the coordination.',
   'cta.final.body': 'Message SAHLI on WhatsApp to connect with a verified service company today.',
   
@@ -29,8 +29,8 @@ export const en = {
   'footer.terms': 'Terms',
   'footer.privacy': 'Privacy',
   'footer.rights': '© SAHLI. All rights reserved.',
-  'footer.rights.all': 'ALL RIGHTS RESERVED.',
-  'footer.description': 'Coordination Infrastructure for Everyday Needs',
+  'footer.rights.all': 'All rights reserved.',
+  'footer.description': 'SAHLI is a coordination hub for home and essential services in Qatar. We vet independent provider companies and manage the access point to save you time and ensure quality.',
   'footer.company': 'Company',
   'footer.services': 'Services',
   'footer.contact': 'Contact',
@@ -38,14 +38,15 @@ export const en = {
   
   'footer.whatsapp': 'WhatsApp',
   'footer.motto': 'Coordination Infrastructure for Everyday Needs',
-  'about.footer.hub': 'SAHLI Coordination Hub',
+  'about.footer.hub': 'SAHLI Coordination Services W.L.L.',
+  'footer.legalName': 'SAHLI Coordination Services W.L.L.',
   'contact.whatsapp.value': '+974 3333 1354',
   'contact.email.label': 'Email',
   'contact.email.value': 'hello@sahli.co',
 
   // Home Page - UPDATED FINAL CONTENT
   'home.hero.label': 'Coordination Infrastructure',
-  'home.hero.title': 'Home Maintenance & Cleaning Services in Doha, Qatar',
+  'home.hero.title': 'Home Maintenance & Cleaning\nServices in Doha, Qatar',
   'home.hero.subtitle': 'Still waiting for someone to show up?',
   'home.hero.subtext': 'Finding a service provider in Qatar shouldn’t mean calling random numbers, waiting endlessly, or worrying who will come to your home.',
   'home.hero.cta': 'Message SAHLI on WhatsApp',
@@ -56,9 +57,9 @@ export const en = {
   'home.microTrust.recorded': 'Recorded Interactions',
   'home.microTrust.coordination': 'Active Coordination',
   
-  'home.framing.title': 'SAHLI Is Not a Directory or a Marketplace',
+  'home.framing.title': 'More Than a Directory. Not a Marketplace.',
   'home.framing.subtitle': 'SAHLI is a coordination hub.',
-  'home.framing.body': 'You do not browse listings or compare profiles. We assign the right verified provider based on your specific requirement.',
+  'home.framing.body': 'You do not browse listings or compare profiles. We identify and coordinate with a suitable verified provider based on your specific requirement.',
   
   'home.why.title': 'Why people use SAHLI',
   'home.why.reason1': 'Too many numbers on Google and directories',
@@ -81,7 +82,7 @@ export const en = {
   'home.featured.viewAll': 'View All Services',
   
   'home.coordinate.title': 'What SAHLI Coordinates',
-  'home.coordinate.disclaimer': 'SAHLI coordinates access to independent, verified service companies. We are not a service provider and not a party to the service contract.\n\nSAHLI coordinates access to independent service companies. SAHLI does not execute services and is not a party to the service contract.',
+  'home.coordinate.disclaimer': 'SAHLI coordinates access to independent provider companies. We are not a service provider and not a party to the service contract.',
   
   'home.diff.title': 'What makes SAHLI different',
   'home.diff.item1': 'No browsing lists',
@@ -141,7 +142,6 @@ export const en = {
 
   'home.inspection.title': 'Inspection Comes First',
   'home.inspection.body': 'No pricing without assessment. You decide with full clarity.',
-  'home.footer.clarity': 'SAHLI coordinates access to independent provider companies. SAHLI does not execute services and is not a party to the service contract.',
 
   'services.areas.qatarNationwide': 'Qatar Nationwide',
   'services.areas.rapidResponse': 'Rapid Response Units',
@@ -152,9 +152,6 @@ export const en = {
   'services.label': 'WHAT WE COORDINATE',
   'services.title': 'WHAT WE COORDINATE',
   'services.intro': 'Six domains. One coordination standard.',
-  'services.disclaimer': 'SAHLI coordinates access to independent, verified service companies. Pricing, inspection, execution, and payment are handled directly between the customer and the service provider.',
-  'services.role.clarification': 'SAHLI coordinates access to independent provider companies. Pricing, inspection, execution, and payment are handled directly between the customer and the service provider.',
-  'services.microLegal': 'SAHLI coordinates access to independent provider companies. Pricing, inspection, execution, and payment are handled directly between the customer and the service provider.',
   'services.status.live': 'Live',
   'services.explore': 'Explore',
   
@@ -196,7 +193,7 @@ export const en = {
   'services.lessons.rule': 'Verified expert coordination only.',
   'how.flow.title': 'How SAHLI Works',
   'how.flow.subtitle': 'From request to resolution',
-  'services.flow.provider': 'Provider assigned',
+  'services.flow.provider': 'Provider Identified & Coordinated',
   'services.flow.visit': 'Inspection & quote',
   'services.boundary.is.item1': 'Coordination of verified providers',
   'services.boundary.is.item2': 'Inspection-first approach',
@@ -220,7 +217,7 @@ export const en = {
   'services.homeMaintenance.handyman.path': '/handyman-services-qatar',
   'services.homeMaintenance.subtitle': 'Problem-driven coordination for AC, plumbing, and electrical needs.',
   'services.homeMaintenance.body': 'High-urgency services for essential home fixes.',
-  'services.homeMaintenance.cta': 'Message SAHLI for Home Maintenance',
+  'services.homeMaintenance.cta': 'Message SAHLI on WhatsApp for Home Maintenance',
   'services.homeMaintenance.rule': 'Inspection first. No pricing before visit.',
   
   'services.homeMaintenance.ac.title': 'AC Services',
@@ -248,7 +245,7 @@ export const en = {
   'services.cleaning.path': '/cleaning-services-qatar',
   'services.cleaning.subtitle': 'Recurring and seasonal demand across Qatar.',
   'services.cleaning.body': 'High-volume services across Qatar.',
-  'services.cleaning.cta': 'Message SAHLI for Cleaning Services',
+  'services.cleaning.cta': 'Message SAHLI on WhatsApp for Cleaning Services',
   'services.cleaning.rule': 'Scope-defined services. No hourly ambiguity.',
   
   'services.cleaning.regular.title': 'General Cleaning',
@@ -268,7 +265,7 @@ export const en = {
   'services.moving.path': '/house-shifting-qatar',
   'services.moving.subtitle': 'High intent, time-sensitive searches for shifting and handling.',
   'services.moving.body': 'Relocation and furniture handling services.',
-  'services.moving.cta': 'Message SAHLI for Moving Services',
+  'services.moving.cta': 'Message SAHLI on WhatsApp for Moving Services',
   'services.moving.rule': 'Logistics, handling, and dismantling / reassembly focus.',
   
   'services.moving.house.title': 'House Shifting',
@@ -291,9 +288,9 @@ export const en = {
   'services.outdoor.path': '/outdoor-specialized-qatar',
   'services.outdoor.subtitle': 'Seasonal and compliance-sensitive maintenance services.',
   'services.outdoor.body': 'Pest control, landscaping, pool services, and waterproofing.',
-  'services.outdoor.cta': 'Message SAHLI for Specialized Services',
+  'services.outdoor.cta': 'Message SAHLI on WhatsApp for Specialized Services',
   'services.outdoor.rule': 'Municipality-approved and expert-led coordination.',
-
+  
   'services.outdoor.pest.title': 'Pest Control',
   'services.outdoor.pest.desc': 'Bed bugs, cockroaches, ants, termites. Municipality-approved only.',
   'services.outdoor.pest.items': 'Bed Bugs, Cockroaches, Ants, Termites\nMunicipality-approved Providers Only',
@@ -315,11 +312,11 @@ export const en = {
   'services.care.path': '/care-lifestyle-qatar',
   'services.care.subtitle': 'High trust, regulated categories launched carefully.',
   'services.care.body': 'Childcare, healthcare, pet services, beauty, and tutoring.',
-  'services.care.cta': 'Message SAHLI for Care Services',
+  'services.care.cta': 'Message SAHLI on WhatsApp for Care Services',
   'services.care.rule': 'Background-checked and agency-verified professionals.',
   'services.status.comingSoon': 'Coming Soon',
 
-  'services.care.childcare.title': 'Childcare',
+  'services.care.childcare.title': 'Childcare (via licensed agencies)',
   'services.care.childcare.desc': 'Babysitting and monthly nannies through licensed agencies.',
   'services.care.childcare.items': 'Babysitting\nMonthly Nannies (licensed agencies)',
 
@@ -365,12 +362,12 @@ export const en = {
   'services.care.trainer.title': 'Personal Trainer',
   'services.care.trainer.desc': 'Expert fitness training at your convenience.',
 
-  'services.electronics.title': 'Electronics & Technology',
+  'services.electronics.title': 'Electronics & Tech',
   'services.electronics.path': '/electronics-tech-qatar',
-  'services.electronics.subtitle': 'Appliance- and setup-driven searches.',
-  'services.electronics.body': 'Repair and installation for home appliances and tech systems.',
-  'services.electronics.cta': 'Message SAHLI for Electronics Services',
-  'services.electronics.rule': 'Expert diagnostics and installation standards.',
+  'services.electronics.subtitle': 'Hardware repair and specialized tech support coordination.',
+  'services.electronics.body': 'Hardware and software support.',
+  'services.electronics.cta': 'Message SAHLI on WhatsApp for Electronics Services',
+  'services.electronics.rule': 'Service-center level repairs. Genuine parts focus.',
 
   'services.electronics.repair.title': 'Appliance Repair',
   'services.electronics.repair.desc': 'Washing machines, refrigerators, dishwashers, ovens & microwaves.',
@@ -399,25 +396,4 @@ export const en = {
   'services.lessons.fitness.items': 'Personal Training\nYoga & Wellness\nSwimming Instruction',
   'services.lessons.lifestyle.title': 'Lifestyle Services',
   'services.lessons.lifestyle.items': 'Personal Styling\nEvent Planning Support\nConcierge Assistance',
-
-  // Roof 6: Electronics & Tech
-  'services.tech.title': 'Electronics & Tech',
-  'services.tech.path': '/electronics-tech-qatar',
-  'services.tech.subtitle': 'Appliance- and setup-driven coordination.',
-  'services.tech.body': 'Appliance repair, smart home setup, and satellite services.',
-  'services.tech.cta': 'Message SAHLI for Tech Support',
-  'services.tech.rule': 'Component-focused repair and setup standards.',
-  'services.footer.micro': 'SAHLI coordinates access to independent provider companies. Pricing, inspection, execution, and payment are handled directly between the customer and the service provider.',
-
-  'services.tech.appliances.title': 'Appliance Repair',
-  'services.tech.appliances.desc': 'Repair for washing machines, refrigerators, dishwashers, and ovens.',
-  'services.tech.appliances.items': 'Washing Machines\nRefrigerators\nDishwashers\nOvens & Microwaves',
-
-  'services.tech.smart.title': 'Smart Home & Security',
-  'services.tech.smart.desc': 'CCTV, Wi-Fi setup, and smart locks.',
-  'services.tech.smart.items': 'CCTV Installation\nWi-Fi Extender Setup\nSmart Locks & Access Systems',
-
-  'services.tech.satellite.title': 'Satellite & TV',
-  'services.tech.satellite.desc': 'Dish alignment and IPTV setup.',
-  'services.tech.satellite.items': 'Dish Alignment\nIPTV & TV Box Setup',
 } as const;

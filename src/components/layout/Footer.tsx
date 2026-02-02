@@ -163,9 +163,6 @@ export function Footer() {
 
         {/* Bottom Bar - Ultra Clean */}
         <div className="pt-8 pb-4 text-center space-y-2">
-          <p className="text-[10px] md:text-xs font-medium text-foreground/40 max-w-4xl mx-auto px-4">
-            {t('home.footer.clarity')}
-          </p>
           <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.1em] text-primary/30 max-w-4xl mx-auto px-4">
             {t('footer.intermediary')}
           </p>

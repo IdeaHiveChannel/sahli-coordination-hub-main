@@ -254,7 +254,7 @@ export default function Services() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-[10px] md:text-xs text-primary font-black uppercase tracking-widest opacity-60"
             >
-              {t('services.disclaimer')}
+              {t('footer.intermediary')}
             </motion.p>
           </motion.div>
         </div>
@@ -925,15 +925,6 @@ export default function Services() {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Final Disclaimer - Compact */}
-      <section className="py-12 bg-background border-t border-border">
-        <div className="container-sahli text-center">
-          <p className="text-[10px] text-foreground/30 font-medium uppercase tracking-widest max-w-3xl mx-auto">
-            {t('services.footer.micro')}
-          </p>
         </div>
       </section>
     </Layout>

@@ -79,8 +79,8 @@ export default function HomeMaintenance() {
                   <AlertCircle className="text-primary shrink-0" size={28} />
                   {t('services.homeMaintenance.title')}
                 </h2>
-                <p className="text-foreground/60 text-lg md:text-xl font-medium leading-relaxed">
-                  {t('services.role.clarification')}
+                <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-12">
+                  {t('services.homeMaintenance.subtitle')}
                 </p>
               </div>
             </div>
@@ -324,36 +324,6 @@ export default function HomeMaintenance() {
         </div>
       </section>
 
-      {/* 7️⃣ Important Note - High Visibility */}
-      <section className="section-spacing bg-background">
-        <div className="container-sahli">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative p-12 md:p-20 rounded-[4rem] bg-foreground text-background overflow-hidden group"
-          >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="relative z-10 flex flex-col md:flex-row gap-12 items-start">
-              <div className="w-20 h-20 rounded-3xl bg-primary flex items-center justify-center text-primary-foreground shrink-0 shadow-2xl shadow-primary/20">
-                <AlertCircle size={40} />
-              </div>
-              <div>
-                <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-8 leading-none">
-                  {t('service.v1.importantNote.title')}
-                </h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <p className="text-xl md:text-2xl font-bold leading-tight text-background/80 border-l-4 border-primary pl-6">
-                    {t('service.v1.importantNote.body1')}
-                  </p>
-                  <p className="text-xl md:text-2xl font-bold leading-tight text-background/80 border-l-4 border-primary/30 pl-6">
-                    {t('service.v1.importantNote.body2')}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
       </section>
 
       {/* 8️⃣ Final CTA */}

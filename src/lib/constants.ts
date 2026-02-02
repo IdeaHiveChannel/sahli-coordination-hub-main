@@ -3,7 +3,7 @@ const WHATSAPP_DISPLAY = '+974 7034 6652';
 const WHATSAPP_MESSAGE = import.meta.env.VITE_WHATSAPP_MESSAGE || 'Hi, I need help with a home service.';
 
 export const CONTACT_NUMBER = WHATSAPP_DISPLAY;
-export const CONTACT_EMAIL = 'hello@serviceservice.com';
+export const CONTACT_EMAIL = 'hello@sahli.co';
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 export const INSTAGRAM_LINK = 'https://www.instagram.com/sahliqatar/';
 export const FACEBOOK_LINK = 'https://www.facebook.com/Sahliqatar';
