@@ -87,12 +87,6 @@ export const ar = {
   'services.boundary.not.item1': 'لا يتم تنفيذها بواسطة ساهلي',
   'services.boundary.not.item2': 'تنسيق لا يشمل سعراً مسبقاً',
   'services.boundary.not.item3': 'ليست وكالة توظيف',
-  'services.lessons.tutoring.items': 'دعم أكاديمي\nجميع المستويات\nمدرسون معتمدون',
-  'services.lessons.language.items': 'الإنجليزية\nالعربية\nالفرنسية\nالإسبانية',
-  'services.lessons.exam.items': 'SAT / ACT\nIELTS / TOEFL\nIGCSE / IB',
-  'services.lessons.training.items': 'تدريب شخصي\nتجهيز صالة رياضية منزلية\nنصائح غذائية',
-  'services.lessons.yoga.items': 'هاتا يوغا\nفينياسا\nتأمل\nعافية',
-  'services.lessons.smarthome.items': 'إعداد\nاستكشاف الأخطاء وإصلاحها\nتدريب\nأتمتة',
 
   // Boundaries
   'service.v1.includes.title': 'ما تضمنه الخدمة',

@@ -7,7 +7,7 @@ import { ServiceRoof } from '@/components/motion/ServiceRoof';
 import { TrustPanel, TrustStatement } from '@/components/motion/TrustPanel';
 import { InfiniteMarquee } from '@/components/motion/InfiniteMarquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList } from 'lucide-react';
+import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList } from 'lucide-react';
 
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { trackWhatsAppClick } from '@/lib/gtag';
