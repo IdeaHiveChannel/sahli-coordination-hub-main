@@ -62,7 +62,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-4 md:mb-6 shadow-lg btn-shine mx-auto md:mx-0"
           >
-            <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+            <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
             {t('nav.about')}
           </motion.div>
 
@@ -161,7 +161,7 @@ export default function About() {
           >
             <div className="relative z-10">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-bold tracking-widest uppercase mb-4 md:mb-6 btn-shine">
-                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+                <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('about.position.title')}
               </div>
               <p className="text-xl md:text-2xl text-foreground/80 leading-tight font-black tracking-tighter italic">

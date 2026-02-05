@@ -29,6 +29,22 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 
+interface BroadcastQueueItem {
+  id: string;
+  requestId: string;
+  service: string;
+  district: string;
+  urgency: 'High' | 'Normal' | 'Flexible';
+  providersCount: number;
+  status: 'Sent' | 'Ready';
+  scheduledFor: string;
+  message: string;
+  version: number;
+  broadcastId: string;
+  targetGroup: string;
+  history: { version: number; sentAt: string; group: string }[];
+}
+
 const BroadcastQueue = () => {
   const { t, dir } = useLanguage();
   const navigate = useNavigate();
@@ -43,7 +59,7 @@ const BroadcastQueue = () => {
   const templates = storageService.getTemplates();
 
   // Filter requests that are "New" or "Broadcasted" to show in queue
-  const [queue, setQueue] = useState(() => {
+  const [queue, setQueue] = useState<BroadcastQueueItem[]>(() => {
     const broadcastedIds = broadcasts.map(b => b.request_id);
     return requests
       .filter(r => r.status === 'New' || r.status === 'Broadcasted')
@@ -52,7 +68,7 @@ const BroadcastQueue = () => {
         requestId: r.id,
         service: r.sub_service,
         district: r.area,
-        urgency: r.urgency,
+        urgency: r.urgency as 'High' | 'Normal' | 'Flexible',
         providersCount: allProviders.filter(p => 
           p.status === 'Active' && 
           p.services.includes(r.sub_service) && 
@@ -70,7 +86,7 @@ const BroadcastQueue = () => {
       }));
   });
 
-  const [selectedRequest, setSelectedRequest] = useState<any>(null);
+  const [selectedRequest, setSelectedRequest] = useState<BroadcastQueueItem | null>(null);
   const [matchingProviders, setMatchingProviders] = useState<Provider[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<string>('');
 
@@ -79,6 +95,8 @@ const BroadcastQueue = () => {
       toast.error('Please select a RateUp group first.');
       return;
     }
+
+    if (!selectedRequest) return;
 
     const currentVersion = selectedRequest.version || 1;
     let message = '';
@@ -110,6 +128,8 @@ const BroadcastQueue = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSaveBroadcast = async () => {
+    if (!selectedRequest) return;
+    
     setIsSaving(true);
     
     const version = selectedRequest.version || 1;
@@ -158,9 +178,10 @@ const BroadcastQueue = () => {
       
       toast.success(`Broadcast V${version} dispatched successfully via RateUp API.`);
       setIsGenerating(false);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Broadcast Error:', error);
-      toast.error(`Failed to send broadcast: ${error.message}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      toast.error(`Failed to send broadcast: ${message}`);
       
       // Fallback for development
       if (import.meta.env.DEV) {
@@ -196,7 +217,7 @@ const BroadcastQueue = () => {
     }
   };
 
-  const handleRetryBroadcast = (item: any) => {
+  const handleRetryBroadcast = (item: BroadcastQueueItem) => {
     const nextVersion = (item.version || 1) + 1;
     setSelectedRequest({ ...item, version: nextVersion });
     setIsGenerating(true);

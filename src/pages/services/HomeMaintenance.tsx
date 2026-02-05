@@ -33,11 +33,11 @@ export default function HomeMaintenance() {
   ];
 
   const coordinationSteps = [
-    { title: '01', body: t('home.what.step1'), icon: <MessageSquare size={20} /> },
-    { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
-    { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
-    { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
-    { title: '05', body: t('home.what.step5'), icon: <CheckCircle2 size={20} /> }
+    { title: '01', body: t('home.what.step1.body'), icon: <MessageSquare size={20} /> },
+    { title: '02', body: t('home.what.step2.body'), icon: <ShieldCheck size={20} /> },
+    { title: '03', body: t('home.what.step3.body'), icon: <Clock size={20} /> },
+    { title: '04', body: t('home.what.step4.body'), icon: <CheckCircle2 size={20} /> },
+    { title: '05', body: t('home.what.step5.body'), icon: <CheckCircle2 size={20} /> }
   ];
 
   const areas = [

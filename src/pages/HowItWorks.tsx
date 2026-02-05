@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { TranslationKey } from '@/lib/i18n';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { MessageSquare, ShieldCheck, Search, Heart, Zap, Shield, Repeat, ArrowRight, CheckCircle2, Headphones, ClipboardList, Star } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
@@ -220,7 +221,7 @@ const HowItWorks = () => {
                   <Shield size={12} className="fill-primary/20" />
                 </div>
                 <p className="text-sm font-bold text-foreground/80 leading-snug">
-                  {t(`home.important.item${item}` as any)}
+                  {t(`home.important.item${item}` as TranslationKey)}
                 </p>
               </motion.div>
             ))}

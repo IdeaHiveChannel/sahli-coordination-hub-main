@@ -130,7 +130,7 @@ const MessageTemplates = () => {
                   <select 
                     className="w-full h-10 px-3 rounded-md border border-slate-200 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20"
                     value={newTemplate.category}
-                    onChange={(e) => setNewTemplate({...newTemplate, category: e.target.value as any})}
+                    onChange={(e) => setNewTemplate({...newTemplate, category: e.target.value as MessageTemplate['category']})}
                   >
                     <option value="General">General</option>
                     <option value="Broadcast">Broadcast</option>

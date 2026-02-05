@@ -39,7 +39,7 @@ export function InfiniteMarquee({ items, speed = 40, direction = 'left' }: Infin
             <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground/10 uppercase hover:text-primary/20 transition-colors cursor-default">
               {item}
             </span>
-            <img src="/logos/Sahl Logo 9.png" alt="" className="w-5 h-5 object-contain opacity-20" />
+            <img src="/logos/SahlLogo9.png" alt="" className="w-5 h-5 object-contain opacity-20" />
           </div>
         ))}
       </motion.div>

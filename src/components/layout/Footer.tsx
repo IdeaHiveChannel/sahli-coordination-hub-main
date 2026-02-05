@@ -43,7 +43,7 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-4 group mb-10 md:mb-12 w-fit">
             <div className="relative w-48 md:w-56 h-48 md:h-56 flex items-center justify-center transition-all duration-700 ease-out-expo btn-shine rounded-3xl">
               <img 
-                src="/logos/Sahl Logo 9.png" 
+                src="/logos/SahlLogo9.png" 
                 alt="SAHLI Logo" 
                 className="w-full h-full object-contain" 
               />
@@ -167,7 +167,7 @@ export function Footer() {
         {/* Bottom Bar - Ultra Clean */}
         <div className="pt-8 md:pt-12 border-t border-border flex flex-col lg:flex-row justify-between items-center gap-6 md:gap-10">
           <div className="flex items-center gap-6">
-            <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
+            <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
             <p className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 text-center lg:text-left">
               © {currentYear} {t('about.footer.hub')}. {t('footer.rights.all')}
             </p>

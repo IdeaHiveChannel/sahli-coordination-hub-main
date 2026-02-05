@@ -188,12 +188,20 @@ export const ar = {
   
   'home.what.title': 'كيف تعمل عملية التنسيق',
   'home.what.intro': 'يساعدك ساهلي على التواصل مع شركات الخدمة المتاحة بدءاً من واتساب.',
-  'home.what.step1': 'ترسل احتياجاتك عبر الواتساب',
-  'home.what.step2': 'نشاركها مع شركات الخدمة المناسبة',
-  'home.what.step3': 'تؤكد الشركة المستعدة جاهزيتها',
-  'home.what.step4': 'يتم تبادل تفاصيل الاتصال',
-  'home.what.step5': 'تتعامل مباشرة مع الشركة',
+  'home.what.step1.title': 'مشاركة المتطلبات',
+  'home.what.step1.body': 'ترسل احتياجاتك عبر الواتساب إلى مركز التنسيق لدينا.',
+  'home.what.step2.title': 'مطابقة المزود',
+  'home.what.step2.body': 'نشارك طلبك مع شركات الخدمة المناسبة والمعتمدة.',
+  'home.what.step3.title': 'جاهزية الخدمة',
+  'home.what.step3.body': 'تؤكد الشركة المستعدة والمتاحة اهتمامها بالطلب.',
+  'home.what.step4.title': 'اتصال مباشر',
+  'home.what.step4.body': 'يتم تبادل تفاصيل الاتصال للتواصل المباشر.',
+  'home.what.step5.title': 'تنفيذ الخدمة',
+  'home.what.step5.body': 'تتعامل مباشرة مع الشركة للمعاينة والتنفيذ.',
   'home.what.footer': 'ساهلي لا يقوم بالعمل - نحن نساعدك على الوصول إلى الأشخاص المناسبين بشكل أسرع.',
+  
+  'home.inspection.title': 'المعاينة تأتي أولاً',
+  'home.inspection.body': 'لا تسعير بدون تقييم. أنت تقرر بوضوح تام.',
   
   'home.featured.title': 'طلبات شائعة نقوم بتنسيقها',
   'home.featured.viewAll': 'عرض جميع الخدمات',
@@ -308,9 +316,6 @@ export const ar = {
 
   'home.cta.final.text': 'أخبرنا بما تحتاجه. وسنتولى نحن التنسيق.',
   'home.cta.final.subtext': 'راسل ساهلي عبر واتساب',
-
-  'home.inspection.title': 'المعاينة تأتي أولاً',
-  'home.inspection.body': 'لا تسعير بدون تقييم. أنت تقرر بوضوح تام.',
 
   'services.areas.qatarNationwide': 'في جميع أنحاء قطر',
   'services.areas.rapidResponse': 'وحدات استجابة سريعة',

@@ -51,7 +51,7 @@ const NotFound = () => {
               className="mb-8 flex justify-center"
             >
               <img 
-                src="/logos/Sahl Logo 10.png" 
+                src="/logos/SahlLogo10.png" 
                 alt="404 Logo" 
                 className="w-48 h-48 md:w-64 md:h-64 object-contain" 
               />

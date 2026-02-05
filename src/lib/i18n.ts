@@ -11,5 +11,7 @@ export const translations = {
 export type TranslationKey = keyof typeof translations.en;
 
 export function t(key: TranslationKey, lang: Language): string {
-  return (translations[lang] as any)[key] || (translations['en'] as any)[key] || key;
+  const dict = translations[lang] as Record<TranslationKey, string>;
+  const fallback = translations['en'] as Record<TranslationKey, string>;
+  return dict[key] || fallback[key] || key;
 }

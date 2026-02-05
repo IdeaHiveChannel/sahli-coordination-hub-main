@@ -293,7 +293,7 @@ const RequestService = () => {
     }
 
     switch (stage) {
-      case IntakeStage.PHONE_INPUT:
+      case IntakeStage.PHONE_INPUT: {
         return (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -336,8 +336,9 @@ const RequestService = () => {
             </div>
           </motion.div>
         );
+      }
 
-      case IntakeStage.OTP_VERIFICATION:
+      case IntakeStage.OTP_VERIFICATION: {
         return (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -435,7 +436,8 @@ const RequestService = () => {
             </div>
           </motion.div>
         );
-      case IntakeStage.SERVICE_SELECTION:
+      }
+      case IntakeStage.SERVICE_SELECTION: {
         return (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -486,8 +488,9 @@ const RequestService = () => {
             </Button>
           </motion.div>
         );
+      }
 
-      case IntakeStage.SUB_SERVICE_SELECTION:
+      case IntakeStage.SUB_SERVICE_SELECTION: {
         const storedServices = storageService.getServices();
         const defaultSubServices: Record<string, string[]> = {
           maintenance: [
@@ -568,7 +571,9 @@ const RequestService = () => {
             </Button>
           </motion.div>
         );
-      case IntakeStage.AREA_SELECTION:
+      }
+
+      case IntakeStage.AREA_SELECTION: {
         const storedAreas = storageService.getAreas();
         const defaultAreas = [
           { id: 'doha', label: t('intake.screen5.option1') },
@@ -617,8 +622,9 @@ const RequestService = () => {
             </Button>
           </motion.div>
         );
+      }
 
-      case IntakeStage.DESCRIPTION_OPTIONAL:
+      case IntakeStage.DESCRIPTION_OPTIONAL: {
         return (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -648,9 +654,10 @@ const RequestService = () => {
             </div>
           </motion.div>
         );
+      }
 
-      case IntakeStage.URGENCY_SELECTION:
-        const urgencies: { id: 'High' | 'Normal' | 'Flexible', label: string, icon: any, color: string, bg: string }[] = [
+      case IntakeStage.URGENCY_SELECTION: {
+        const urgencies: { id: 'High' | 'Normal' | 'Flexible', label: string, icon: React.ElementType, color: string, bg: string }[] = [
           { id: 'High', label: t('intake.screen7.option1'), icon: Zap, color: 'text-amber-500', bg: 'bg-amber-500/10' },
           { id: 'Normal', label: t('intake.screen7.option2'), icon: Clock, color: 'text-blue-500', bg: 'bg-blue-500/10' },
           { id: 'Flexible', label: t('intake.screen7.option3'), icon: Calendar, color: 'text-slate-500', bg: 'bg-slate-500/10' }
@@ -674,7 +681,7 @@ const RequestService = () => {
                     nextStage();
                   }}
                   className={`flex items-center gap-5 p-6 rounded-2xl border-2 transition-all text-left relative group ${
-                    formData.urgency === u.label 
+                    formData.urgency === u.id 
                       ? 'border-primary bg-primary/5 shadow-lg' 
                       : 'border-border/50 hover:border-primary/30 hover:bg-muted/50'
                   }`}
@@ -694,8 +701,9 @@ const RequestService = () => {
             </Button>
           </motion.div>
         );
+      }
 
-      case IntakeStage.REVIEW_CONFIRM:
+      case IntakeStage.REVIEW_CONFIRM: {
         return (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -769,8 +777,9 @@ const RequestService = () => {
             </div>
           </motion.div>
         );
+      }
 
-      case IntakeStage.SUBMISSION_SUCCESS:
+      case IntakeStage.SUBMISSION_SUCCESS: {
         return (
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -832,6 +841,7 @@ const RequestService = () => {
             </div>
           </motion.div>
         );
+      }
 
       default:
         return null;

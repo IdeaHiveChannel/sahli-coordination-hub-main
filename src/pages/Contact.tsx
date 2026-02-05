@@ -88,7 +88,7 @@ export default function Contact() {
             className="max-w-4xl"
           >
             <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8 shadow-lg btn-shine mx-auto md:mx-0">
-              <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+              <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
               {t('nav.contact')}
             </div>
 

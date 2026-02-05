@@ -21,7 +21,12 @@ const ActiveProviders = () => {
   const filterParam = queryParams.get('filter');
   const searchParam = queryParams.get('search');
 
-  const [activeTab, setActiveTab] = useState<ProviderStatus | 'All'>((filterParam as any) || 'All');
+  const isValidStatus = (status: string | null): status is ProviderStatus => {
+    return status !== null && ['Active', 'Observed', 'Paused', 'Removed'].includes(status);
+  };
+
+  const initialTab = isValidStatus(filterParam) ? filterParam : 'All';
+  const [activeTab, setActiveTab] = useState<ProviderStatus | 'All'>(initialTab);
   const [searchQuery, setSearchQuery] = useState(searchParam || '');
   const [isSyncing, setIsSyncing] = useState<string | null>(null);
   const [providers, setProviders] = useState<Provider[]>(storageService.getProviders());
@@ -61,16 +66,17 @@ const ActiveProviders = () => {
           status: provider.status,
           services: provider.services.join(', '),
           areas: provider.areas.join(', '),
-          entity_type: provider.entity_type,
-          compliance_score: provider.compliance_score,
+          entity_type: provider.entity_type || '',
+          compliance_score: String(provider.compliance_score || 0),
           last_sync: new Date().toISOString()
         }
       });
       
       toast.success(`Synced ${provider.company_name} data to RateUp`);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Sync error:', error);
-      toast.error(`Sync failed: ${error.message}`);
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      toast.error(`Sync failed: ${message}`);
     } finally {
       setIsSyncing(null);
     }
@@ -169,10 +175,10 @@ const ActiveProviders = () => {
             />
           </div>
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-            {['Active', 'Observed', 'Paused', 'Removed', 'All'].map((tab) => (
+            {(['Active', 'Observed', 'Paused', 'Removed', 'All'] as const).map((tab) => (
               <button
                 key={tab}
-                onClick={() => handleTabChange(tab as any)}
+                onClick={() => handleTabChange(tab)}
                 className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-full border ${
                   activeTab === tab 
                     ? 'bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-200' 

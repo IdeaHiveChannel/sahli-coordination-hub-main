@@ -82,7 +82,7 @@ export function SystemDiagram() {
         >
           <div className="absolute inset-0 bg-primary/20 rounded-full blur-md" />
           <img 
-            src="/logos/Sahl Logo 9.png" 
+            src="/logos/SahlLogo9.png" 
             alt="" 
             className="w-5 h-5 object-contain relative z-10" 
           />

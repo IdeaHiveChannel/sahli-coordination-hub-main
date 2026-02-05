@@ -163,7 +163,7 @@ const ProviderResponses = () => {
     toast.success(`Manual override successful for ${overrideData.requestId}. Provider ${overrideData.providerName} assigned.`);
   };
 
-  const getStatusBadge = (response: any) => {
+  const getStatusBadge = (response: Response) => {
     const lock = lockedRequests[response.requestId];
     const isLocked = lock && (lock.status === 'LOCKED_CONFIRMED' || lock.status === 'IN_PROGRESS');
     const isInProgress = lock && lock.status === 'IN_PROGRESS';

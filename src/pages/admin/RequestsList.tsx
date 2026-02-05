@@ -114,7 +114,7 @@ const RequestsList = () => {
           last_area: manualRequest.area,
           last_request_id: newRequest.id,
           source: 'manual_entry',
-          last_status: 'New'
+          last_status: 'New' as RequestStatus
         }
       }).catch(err => console.warn('RateUp Sync Error (Manual):', err));
     }
@@ -142,7 +142,8 @@ const RequestsList = () => {
     if (tab === 'All') {
       navigate('/admin/requests');
     } else {
-      navigate(`/admin/requests?filter=${tab.replace(/\s/g, '+')}`);
+      const filterValue = tab.replace(/\s/g, '+');
+      navigate(`/admin/requests?filter=${filterValue}`);
     }
   };
 
@@ -188,7 +189,7 @@ const RequestsList = () => {
         name: `Customer ${updatedRequest.customer_phone}`,
         customFields: {
           last_request_id: updatedRequest.id,
-          last_status: newStatus,
+          last_status: newStatus as RequestStatus,
           last_updated: new Date().toISOString()
         }
       }).catch(err => console.warn('RateUp Status Sync Error:', err));
@@ -577,10 +578,10 @@ const RequestsList = () => {
             />
           </div>
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-            {['New', 'Broadcasted', 'In Progress', 'Completed', 'Dropped', 'All'].map((tab) => (
+            {OPERATIONAL_VIEWS.map((tab) => (
               <button
                 key={tab}
-                onClick={() => handleTabChange(tab as any)}
+                onClick={() => handleTabChange(tab)}
                 className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-full border ${
                   activeTab === tab 
                     ? 'bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-200' 

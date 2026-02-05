@@ -107,7 +107,7 @@ export default function TrustStandards() {
             >
               <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full" />
               <img 
-                src="/logos/Sahl Logo 9.png" 
+                src="/logos/SahlLogo9.png" 
                 alt={t('trust.seal.alt')} 
                 className="relative w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert opacity-80" 
               />

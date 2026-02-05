@@ -4,6 +4,8 @@ import { Layout } from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
 import { Gavel, ScrollText } from 'lucide-react';
 
+import { TranslationKey } from '@/lib/i18n';
+
 export default function Terms() {
   const { t, dir } = useLanguage();
 
@@ -79,10 +81,10 @@ export default function Terms() {
                         className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 group"
                       >
                         <h2 className="text-xl md:text-2xl font-black text-foreground mb-6 group-hover:text-primary transition-colors">
-                          {t(`legal.terms.section${sectionNum}.title` as any)}
+                          {t(`legal.terms.section${sectionNum}.title` as TranslationKey)}
                         </h2>
                         <div className="text-foreground/60 leading-relaxed font-medium whitespace-pre-line space-y-4">
-                          {(t(`legal.terms.section${sectionNum}.content` as any) as string).split('\n\n').map((paragraph: string, idx: number) => (
+                          {(t(`legal.terms.section${sectionNum}.content` as TranslationKey) as string).split('\n\n').map((paragraph: string, idx: number) => (
                             <p key={idx}>{paragraph}</p>
                           ))}
                         </div>

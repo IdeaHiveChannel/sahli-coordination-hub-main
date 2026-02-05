@@ -188,12 +188,20 @@ export const en = {
 
   'home.what.title': 'How Coordination Works',
   'home.what.intro': 'SAHLI helps you connect with available service companies starting on WhatsApp.',
-  'home.what.step1': 'You send your requirement on WhatsApp',
-  'home.what.step2': 'We share it with suitable service companies',
-  'home.what.step3': 'A company that is ready confirms',
-  'home.what.step4': 'Contact details are exchanged',
-  'home.what.step5': 'You deal directly with the company',
+  'home.what.step1.title': 'Requirement Shared',
+  'home.what.step1.body': 'You send your requirement on WhatsApp to our coordination hub.',
+  'home.what.step2.title': 'Provider Matching',
+  'home.what.step2.body': 'We share your request with suitable, verified service companies.',
+  'home.what.step3.title': 'Ready to Serve',
+  'home.what.step3.body': 'A company that is ready and available confirms their interest.',
+  'home.what.step4.title': 'Direct Connection',
+  'home.what.step4.body': 'Contact details are exchanged for direct communication.',
+  'home.what.step5.title': 'Service Execution',
+  'home.what.step5.body': 'You deal directly with the company for inspection and delivery.',
   'home.what.footer': 'SAHLI does not do the work — we help you reach the right people faster.',
+  
+  'home.inspection.title': 'Inspection Comes First',
+  'home.inspection.body': 'No pricing without assessment. You decide with full clarity.',
   
   'home.featured.title': 'Common Requests We Coordinate',
   'home.featured.viewAll': 'View All Services',
@@ -308,9 +316,6 @@ export const en = {
 
   'home.cta.final.text': 'Tell us what you need. We’ll handle the coordination.',
   'home.cta.final.subtext': 'Message SAHLI on WhatsApp',
-
-  'home.inspection.title': 'Inspection Comes First',
-  'home.inspection.body': 'No pricing without assessment. You decide with full clarity.',
 
   'services.areas.qatarNationwide': 'Qatar Nationwide',
   'services.areas.rapidResponse': 'Rapid Response Units',

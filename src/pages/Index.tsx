@@ -12,6 +12,21 @@ import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCa
 import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
 
+interface ServiceItem {
+  title: string;
+  description: string;
+  imageUrl: string;
+  icon: React.ReactNode;
+  path: string;
+  number: string;
+  subcategories: string[];
+}
+
+interface TrustPanel {
+  title: string;
+  items: { title: string }[];
+}
+
 const Index = () => {
   const { t, dir } = useLanguage();
 
@@ -285,7 +300,7 @@ const Index = () => {
               className="inline-flex items-center gap-4 px-5 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] md:text-xs font-black tracking-[0.25em] uppercase mb-6 md:mb-8 mx-auto md:mx-0 shadow-lg shadow-primary/5 group overflow-hidden relative btn-shine"
             >
               <img 
-                src="/logos/Sahl Logo 9.png" 
+                src="/logos/SahlLogo9.png" 
                 alt="SAHLI Logo" 
                 className="w-4 h-4 object-contain" 
               />
@@ -479,7 +494,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-8"
               >
-                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+                <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('nav.services')}
               </motion.div>
               <motion.div 
@@ -497,7 +512,7 @@ const Index = () => {
           </div>
             
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 lg:gap-10 xl:gap-12">
-            {services.map((service: any, index: number) => (
+            {services.map((service: ServiceItem, index: number) => (
               <ServiceRoof 
                 key={index} 
                 {...service} 
@@ -610,9 +625,9 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: t('home.what.step1'), icon: <MessageSquare size={32} /> },
-              { title: t('home.what.step2'), icon: <Search size={32} /> },
-              { title: t('home.what.step3'), icon: <CheckCircle2 size={32} /> },
+              { title: t('home.what.step1.title'), icon: <MessageSquare size={32} /> },
+              { title: t('home.what.step2.title'), icon: <Search size={32} /> },
+              { title: t('home.what.step3.title'), icon: <CheckCircle2 size={32} /> },
             ].map((step, i) => (
               <motion.div
                 key={i}
@@ -645,7 +660,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-6"
               >
-                <img src="/logos/Sahl Logo 9.png" alt="" className="w-4 h-4 object-contain" />
+                <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
                 {t('nav.trustStandards')}
               </motion.div>
               <motion.h2
@@ -669,7 +684,7 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trustPanels.map((panel: any, i: number) => (
+            {trustPanels.map((panel: TrustPanel, i: number) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -702,7 +717,7 @@ const Index = () => {
                   </h3>
                   
                   <ul className="space-y-3 mt-auto">
-                    {panel.items.map((item: any, idx: number) => (
+                    {panel.items.map((item: { title: string }, idx: number) => (
                       <li key={idx} className="flex items-start gap-3">
                         <CheckCircle2 size={16} className="text-primary mt-1 flex-shrink-0" />
                         <span className="text-foreground/70 font-bold text-sm leading-tight">

@@ -65,7 +65,7 @@ interface UpsertContactPayload {
   phoneNumber: string;
   name: string;
   email?: string;
-  customFields?: Record<string, any>;
+  customFields?: Record<string, unknown>;
 }
 
 export const rateupService = {
@@ -74,7 +74,7 @@ export const rateupService = {
    * Defaulting to +974 for 8-digit numbers.
    */
   formatPhoneNumber: (phone: string): string => {
-    let cleaned = phone.replace(/\D/g, '');
+    const cleaned = phone.replace(/\D/g, '');
     if (cleaned.length === 8) return `+974${cleaned}`;
     if (cleaned.startsWith('974') && cleaned.length === 11) return `+${cleaned}`;
     if (cleaned.startsWith('00')) return `+${cleaned.substring(2)}`;
@@ -160,7 +160,7 @@ export const rateupService = {
       }
 
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('RateUp Service Error:', error);
       throw error;
     }
@@ -208,7 +208,7 @@ export const rateupService = {
       }
 
       return await response.json();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('RateUp Upsert Contact Error:', error);
       throw error;
     }
@@ -239,7 +239,7 @@ export const rateupService = {
       }
 
       return await response.json();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('RateUp Create Group Error:', error);
       throw error;
     }
@@ -270,7 +270,7 @@ export const rateupService = {
       }
 
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('RateUp Add Contacts Error:', error);
       throw error;
     }
@@ -304,7 +304,7 @@ export const rateupService = {
       }
 
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('RateUp Direct Message Error:', error);
       throw error;
     }
@@ -314,7 +314,7 @@ export const rateupService = {
    * Validates if a provider is eligible to respond to a request.
    * This is part of the webhook intake logic.
    */
-  validateProviderEligibility: (provider: any, request: any): { valid: boolean; reason?: string } => {
+  validateProviderEligibility: (provider: { status: string; services: string[]; areas: string[] }, request: { service: string; district: string }): { valid: boolean; reason?: string } => {
     if (provider.status !== 'Active') {
       return { valid: false, reason: 'Provider is not active' };
     }

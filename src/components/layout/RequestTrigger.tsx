@@ -29,7 +29,7 @@ export function RequestTrigger() {
             className="bg-card px-4 py-2 rounded-2xl shadow-2xl border border-border hidden md:flex items-center gap-2"
           >
             <img 
-              src="/logos/Sahl Logo 9.png" 
+              src="/logos/SahlLogo9.png" 
               alt="" 
               className="w-4 h-4 object-contain opacity-60" 
             />

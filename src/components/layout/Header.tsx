@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
 
+import { TranslationKey } from '@/lib/i18n';
+
 export function Header() {
   const { t, dir } = useLanguage();
   const location = useLocation();
@@ -20,7 +22,7 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems: Array<{ key: string; path: string }> = [
+  const navItems: Array<{ key: TranslationKey; path: string }> = [
     { key: 'nav.services', path: '/services' },
     { key: 'nav.about', path: '/about' },
     { key: 'nav.trustStandards', path: '/trust-standards' },
@@ -52,7 +54,7 @@ export function Header() {
               className="relative w-7 h-7 md:w-9 md:h-9 flex items-center justify-center transition-all duration-500"
             >
               <img 
-                src={isScrolled || isMenuOpen ? "/logos/Sahl Logo 3.png" : "/logos/Sahl Logo 9.png"} 
+                src={isScrolled || isMenuOpen ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"} 
                 alt="SAHLI Logo" 
                 className={`absolute w-20 h-20 md:w-24 md:h-24 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
                   dir === 'rtl' ? 'right-0' : 'left-0'
@@ -63,7 +65,7 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6">
-            {navItems.map((item: { key: string; path: string }) => {
+            {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
@@ -73,7 +75,7 @@ export function Header() {
                     isActive ? 'text-primary' : 'text-foreground/80 hover:text-primary'
                   }`}
                 >
-                  {t(item.key as any)}
+                  {t(item.key)}
                   <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-500 ${
                     isActive ? 'w-full' : 'w-0 group-hover:w-full'
                   }`} />
@@ -184,7 +186,7 @@ export function Header() {
 
             <div className="relative z-10 h-full flex flex-col pt-24 px-6 md:px-12">
               <div className="flex flex-col gap-4 md:gap-6">
-                {navItems.map((item: { key: string; path: string }, i: number) => (
+                {navItems.map((item, i: number) => (
                   <motion.div
                     key={item.path}
                     initial={{ x: -50, opacity: 0 }}
@@ -204,7 +206,7 @@ export function Header() {
                     >
                       <span className="text-[12px] font-black text-primary/50 tracking-widest">0{i + 1}</span>
                       <span className="text-3xl md:text-5xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors duration-500">
-                        {t(item.key as any)}
+                        {t(item.key)}
                       </span>
                     </Link>
                   </motion.div>
