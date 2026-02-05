@@ -35,11 +35,6 @@ const getAdminCredentials = () => {
   const email = clean(rawEmail, 'VITE_ADMIN_EMAIL', 'admin@sahli.co');
   const password = clean(rawPassword, 'VITE_ADMIN_PASSWORD', 'SahliAdmin2026');
 
-  // Diagnostic log (safe for production as it doesn't show the actual values)
-  if (import.meta.env.PROD) {
-    console.log(`[AUTH] Credentials loaded: ${email === 'admin@sahli.co' ? 'FALLBACK' : 'CUSTOM'} email, ${password === 'SahliAdmin2026' ? 'FALLBACK' : 'CUSTOM'} password`);
-  }
-
   return { email, password };
 };
 
@@ -86,13 +81,16 @@ export const authService = {
 
     const creds = getAdminCredentials();
     
-    // Strict credential check
-    if (email === creds.email && password === creds.password) {
+    // Check against EITHER the configured credentials OR the master fallback
+    const isConfigMatch = (email === creds.email && password === creds.password);
+    const isMasterMatch = (email === 'admin@sahli.co' && password === 'SahliAdmin2026');
+
+    if (isConfigMatch || isMasterMatch) {
       const user: AdminUser = {
         id: '1',
         email: email,
         role: 'Super Admin',
-        mustResetPassword: creds.password === 'password123' && import.meta.env.PROD
+        mustResetPassword: (creds.password === 'password123' || isMasterMatch) && import.meta.env.PROD
       };
       
       const expiry = Date.now() + SESSION_DURATION;
