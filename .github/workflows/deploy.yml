@@ -31,7 +31,6 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
         env:
           CI: false
           VITE_ADMIN_EMAIL: ${{ secrets.VITE_ADMIN_EMAIL }}
@@ -39,6 +38,13 @@ jobs:
           VITE_RATEUP_API_KEY: ${{ secrets.VITE_RATEUP_API_KEY }}
           VITE_RATEUP_URL: ${{ secrets.VITE_RATEUP_URL }}
           VITE_RATEUP_ORG_ID: ${{ secrets.VITE_RATEUP_ORG_ID }}
+        run: |
+          echo "VITE_ADMIN_EMAIL=${VITE_ADMIN_EMAIL}" >> .env
+          echo "VITE_ADMIN_PASSWORD=${VITE_ADMIN_PASSWORD}" >> .env
+          echo "VITE_RATEUP_API_KEY=${VITE_RATEUP_API_KEY}" >> .env
+          echo "VITE_RATEUP_URL=${VITE_RATEUP_URL}" >> .env
+          echo "VITE_RATEUP_ORG_ID=${VITE_RATEUP_ORG_ID}" >> .env
+          npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
