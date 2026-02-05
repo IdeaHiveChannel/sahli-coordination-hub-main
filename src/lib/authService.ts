@@ -43,18 +43,30 @@ export const authService = {
    * Check if user is currently authenticated and session is valid
    */
   isAuthenticated: (): boolean => {
-    const session = localStorage.getItem(ADMIN_SESSION_KEY);
-    const expiry = localStorage.getItem(SESSION_EXPIRY_KEY);
-    
-    if (session !== 'true' || !expiry) return false;
+    try {
+      const session = localStorage.getItem(ADMIN_SESSION_KEY);
+      const expiry = localStorage.getItem(SESSION_EXPIRY_KEY);
+      
+      if (session !== 'true' || !expiry) return false;
 
-    // Check if session has expired
-    if (Date.now() > parseInt(expiry)) {
-      authService.logout();
+      const expiryTime = parseInt(expiry, 10);
+      if (isNaN(expiryTime)) {
+        console.error('Invalid session expiry time');
+        authService.logout();
+        return false;
+      }
+
+      // Check if session has expired
+      if (Date.now() > expiryTime) {
+        authService.logout();
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      console.error('Error checking authentication status:', e);
       return false;
     }
-
-    return true;
   },
 
   /**

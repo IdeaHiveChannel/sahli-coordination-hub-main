@@ -9,48 +9,50 @@ interface AdminProtectedRouteProps {
 }
 
 const AdminProtectedRoute = ({ children, requiredRole }: AdminProtectedRouteProps) => {
-  const [authStatus, setAuthStatus] = useState<{
-    isAuthenticated: boolean;
-    mustResetPassword: boolean;
-    role?: AdminRole;
-  } | null>(null);
+  const getAuthStatus = () => {
+    try {
+      const isAuthenticated = authService.isAuthenticated();
+      const user = authService.getCurrentUser();
+      
+      return {
+        isAuthenticated,
+        mustResetPassword: user?.mustResetPassword ?? false,
+        role: user?.role
+      };
+    } catch (error) {
+      console.error('Auth check failed:', error);
+      return { isAuthenticated: false, mustResetPassword: false };
+    }
+  };
+
+  const [authStatus, setAuthStatus] = useState(getAuthStatus());
   const location = useLocation();
 
   useEffect(() => {
-    const checkAuth = () => {
-      try {
-        const isAuthenticated = authService.isAuthenticated();
-        const user = authService.getCurrentUser();
-        
-        setAuthStatus({
-          isAuthenticated,
-          mustResetPassword: user?.mustResetPassword ?? false,
-          role: user?.role
-        });
-      } catch (error) {
-        console.error('Auth check failed:', error);
-        setAuthStatus({ isAuthenticated: false, mustResetPassword: false });
-      }
+    const syncAuth = () => {
+      setAuthStatus(getAuthStatus());
     };
 
-    // Run initial check
-    checkAuth();
+    // Run sync check
+    syncAuth();
 
-    // Listen for storage changes (triggered by authService.updatePassword)
-    window.addEventListener('storage', checkAuth);
+    // Listen for storage changes (triggered by authService.updatePassword or other tabs)
+    window.addEventListener('storage', syncAuth);
+    
+    // Periodic sync check (every 5 seconds) as a fallback
+    const interval = setInterval(syncAuth, 5000);
 
-    return () => window.removeEventListener('storage', checkAuth);
+    return () => {
+      window.removeEventListener('storage', syncAuth);
+      clearInterval(interval);
+    };
   }, []);
 
-  if (authStatus === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
   if (!authStatus.isAuthenticated) {
+    // Only redirect if we are not already on the login page
+    if (location.pathname === '/admin/login' || location.pathname === '/admin') {
+      return <>{children}</>;
+    }
     return <Navigate to="/admin/login" state={{ from: location }} replace />;
   }
 
@@ -59,7 +61,6 @@ const AdminProtectedRoute = ({ children, requiredRole }: AdminProtectedRouteProp
   }
 
   if (requiredRole && authStatus.role !== requiredRole && authStatus.role !== 'Super Admin') {
-    // If a specific role is required, and user doesn't have it (and isn't a Super Admin who has access to everything)
     return <Navigate to="/admin/dashboard" replace />;
   }
 
