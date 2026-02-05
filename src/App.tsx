@@ -9,7 +9,25 @@ import { ThemeProvider } from "next-themes";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import { trackPageView } from "./lib/gtag";
 
-// Lazy-loaded Pages
+import AdminLogin from "@/pages/admin/Login";
+import AdminPasswordReset from "@/pages/admin/PasswordReset";
+import AdminDashboard from "@/pages/admin/Dashboard";
+import AdminRequests from "@/pages/admin/RequestsList";
+import AdminProviders from "@/pages/admin/ActiveProviders";
+import AdminBroadcastQueue from "@/pages/admin/BroadcastQueue";
+import AdminProviderResponses from "@/pages/admin/ProviderResponses";
+import AdminCommunicationHistory from "@/pages/admin/CommunicationHistory";
+import AdminFeedbackAudits from "@/pages/admin/FeedbackAudits";
+import AdminProviderApplications from "@/pages/admin/ProviderApplications";
+import AdminSettings from "@/pages/admin/Settings";
+import AdminServices from "@/pages/admin/ServicesManagement";
+import AdminAreas from "@/pages/admin/AreasManagement";
+import AdminMessageTemplates from "@/pages/admin/MessageTemplates";
+import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
+
+const AdminManualAssignment = AdminDashboard;
+
+// Lazy-loaded Pages (Keep public pages lazy)
 const Index = lazy(() => import("@/pages/Index"));
 const HowItWorks = lazy(() => import("@/pages/HowItWorks"));
 const Services = lazy(() => import("@/pages/Services"));
@@ -31,22 +49,6 @@ const ProviderApplication = lazy(() => import("@/pages/ProviderApplication"));
 const Terms = lazy(() => import("@/pages/legal/Terms"));
 const Privacy = lazy(() => import("@/pages/legal/Privacy"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
-const AdminLogin = lazy(() => import("@/pages/admin/Login"));
-const AdminPasswordReset = lazy(() => import("@/pages/admin/PasswordReset"));
-const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"));
-const AdminRequests = lazy(() => import("@/pages/admin/RequestsList"));
-const AdminProviders = lazy(() => import("@/pages/admin/ActiveProviders"));
-const AdminBroadcastQueue = lazy(() => import("@/pages/admin/BroadcastQueue"));
-const AdminProviderResponses = lazy(() => import("@/pages/admin/ProviderResponses"));
-const AdminCommunicationHistory = lazy(() => import("@/pages/admin/CommunicationHistory"));
-const AdminFeedbackAudits = lazy(() => import("@/pages/admin/FeedbackAudits"));
-const AdminProviderApplications = lazy(() => import("@/pages/admin/ProviderApplications"));
-const AdminSettings = lazy(() => import("@/pages/admin/Settings"));
-const AdminServices = lazy(() => import("@/pages/admin/ServicesManagement"));
-const AdminAreas = lazy(() => import("@/pages/admin/AreasManagement"));
-const AdminManualAssignment = lazy(() => import("@/pages/admin/Dashboard")); // Keep as dashboard for now
-const AdminMessageTemplates = lazy(() => import("@/pages/admin/MessageTemplates"));
-const AdminProtectedRoute = lazy(() => import("@/components/admin/AdminProtectedRoute"));
 
 const queryClient = new QueryClient();
 
