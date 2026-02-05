@@ -86,7 +86,7 @@ export const rateupService = {
    */
   sendBroadcast: async (payload: BroadcastPayload): Promise<boolean> => {
     const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.ai';
+    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
 
     if (!apiKey) {
       console.error('RateUp API key missing');
@@ -130,7 +130,7 @@ export const rateupService = {
    */
   upsertContact: async (payload: UpsertContactPayload): Promise<{ id: string } | null> => {
     const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.ai';
+    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
     const { orgId, ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/contacts/`;
 
@@ -178,7 +178,7 @@ export const rateupService = {
    */
   createContactGroup: async (payload: ContactGroupPayload): Promise<{ id: string } | null> => {
     const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.ai';
+    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
     const { orgId, ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/contact-groups/`;
 
@@ -209,7 +209,7 @@ export const rateupService = {
    */
   addContactsToGroup: async (payload: AddContactsToGroupPayload): Promise<boolean> => {
     const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.ai';
+    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
     const { orgId, ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/contact-groups/add-existing-contacts`;
 
@@ -240,7 +240,7 @@ export const rateupService = {
    */
   sendDirectMessage: async (payload: DirectMessagePayload): Promise<boolean> => {
     const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.ai';
+    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
     const { orgId, ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/messages/send`;
 
