@@ -20,26 +20,25 @@ export interface AdminUser {
 
 // Environment-based credentials for production-ready security
 const getAdminCredentials = () => {
-  const rawEmail = import.meta.env.VITE_ADMIN_EMAIL;
-  const rawPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+  const email = import.meta.env.VITE_ADMIN_EMAIL || '';
+  const password = import.meta.env.VITE_ADMIN_PASSWORD || '';
 
   // Helper to strip "KEY=" prefix if user accidentally included it in GitHub Secrets
-  const cleanSecret = (val: string | undefined, key: string) => {
-    if (!val) return '';
+  const clean = (val: string, key: string) => {
     const prefix = `${key}=`;
     return val.startsWith(prefix) ? val.substring(prefix.length).trim() : val.trim();
   };
 
-  const email = cleanSecret(rawEmail, 'VITE_ADMIN_EMAIL');
-  const password = cleanSecret(rawPassword, 'VITE_ADMIN_PASSWORD');
+  const cleanEmail = clean(email, 'VITE_ADMIN_EMAIL');
+  const cleanPassword = clean(password, 'VITE_ADMIN_PASSWORD');
 
-  if (import.meta.env.PROD && (!email || !password)) {
+  if (import.meta.env.PROD && (!cleanEmail || !cleanPassword)) {
     console.error('CRITICAL: Admin credentials missing in production environment!');
   }
 
   return {
-    email: email || 'admin@sahli.co',
-    password: password || 'password123'
+    email: cleanEmail || 'admin@sahli.co',
+    password: cleanPassword || 'password123'
   };
 };
 
