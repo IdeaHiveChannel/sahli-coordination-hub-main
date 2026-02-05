@@ -72,6 +72,14 @@ SAHLI operates under main coordination roofs:
 3. **Care & Support**: Specialized nursing and childcare.
 4. **Lessons & Lifestyle**: Tutoring and lifestyle coordination.
 
+## Integration Model (SAHLI × RateUp)
+
+SAHLI integrates with **RateUp** as a Delivery Engine via a Direct API Bridge:
+- **Authentication**: Bearer Token (stored in `VITE_RATEUP_API_KEY`).
+- **Server**: `https://api.rateup.app`.
+- **Logic**: SAHLI generates privacy-preserving broadcasts (no customer info) and dispatches them via RateUp to WhatsApp provider groups.
+- **Spec**: See `rateup-api-spec.json` for the OpenAPI definition.
+
 ## License
 
 This project is private and proprietary to SAHLI.

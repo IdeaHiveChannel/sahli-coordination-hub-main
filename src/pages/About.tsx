@@ -1,9 +1,10 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, XCircle, ShieldCheck, Zap, Users, Calculator, FileText } from 'lucide-react';
-
+import { MessageSquare, XCircle, ShieldCheck, Zap, Users, Calculator, FileText } from 'lucide-react';
+import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
 
 export default function About() {
@@ -186,16 +187,19 @@ export default function About() {
             <p className="text-base text-foreground/60 mb-6 md:mb-8 font-medium">
               {t('cta.final.body')}
             </p>
-            <motion.a
+            <a
               href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => trackRequestClick('About Page')}
               className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-black text-base shadow-xl shadow-primary/20 hover:scale-105 transition-transform btn-shine"
-              whileHover={{ y: -3 }}
             >
-              <MessageCircle size={20} />
-              {t('cta.final.cta')}
-            </motion.a>
+              <motion.div
+                className="flex items-center gap-3"
+                whileHover={{ y: -3 }}
+              >
+                <MessageSquare size={20} />
+                {t('cta.final.cta')}
+              </motion.div>
+            </a>
           </motion.div>
         </div>
       </section>

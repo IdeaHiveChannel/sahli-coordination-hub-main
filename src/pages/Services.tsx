@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { 
   ChevronDown, 
-  MessageCircle, 
+  MessageSquare, 
   Wrench, 
   Sparkles, 
   Truck,
@@ -39,6 +39,7 @@ import {
   Info
 } from 'lucide-react';
 
+import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
 
 interface CollapsibleModuleProps {
@@ -388,17 +389,20 @@ export default function Services() {
               </div>
 
               <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
-                <motion.a 
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                <a 
                   href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={() => trackRequestClick('Services - Home Maintenance')}
                   className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
                 >
-                  <MessageCircle size={18} className="fill-primary-foreground" />
-                  {t('services.homeMaintenance.cta')}
-                </motion.a>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    {t('services.homeMaintenance.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -485,17 +489,20 @@ export default function Services() {
               </div>
 
               <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
-                <motion.a 
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                <a 
                   href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20"
+                  onClick={() => trackRequestClick('Services - Cleaning')}
+                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
                 >
-                  <MessageCircle size={18} className="fill-primary-foreground" />
-                  {t('services.cleaning.cta')}
-                </motion.a>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    {t('services.cleaning.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -590,17 +597,20 @@ export default function Services() {
               </div>
 
               <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
-                <motion.a 
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                <a 
                   href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20"
+                  onClick={() => trackRequestClick('Services - Moving')}
+                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
                 >
-                  <MessageCircle size={18} className="fill-primary-foreground" />
-                  {t('services.moving.cta')}
-                </motion.a>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    {t('services.moving.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -695,17 +705,20 @@ export default function Services() {
               </div>
 
               <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
-                <motion.a 
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                <a 
                   href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20"
+                  onClick={() => trackRequestClick('Services - Outdoor')}
+                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
                 >
-                  <MessageCircle size={18} className="fill-primary-foreground" />
-                  {t('services.outdoor.cta')}
-                </motion.a>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    {t('services.outdoor.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -901,17 +914,20 @@ export default function Services() {
               </div>
 
               <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
-                <motion.a 
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                <a 
                   href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20"
+                  onClick={() => trackRequestClick('Services - Electronics')}
+                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
                 >
-                  <MessageCircle size={18} className="fill-primary-foreground" />
-                  {t('services.electronics.cta')}
-                </motion.a>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    {t('services.electronics.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>

@@ -2,9 +2,8 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Truck, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Box, Hammer } from 'lucide-react';
-import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
+import { MessageSquare, CheckCircle2, Truck, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Box, Hammer } from 'lucide-react';
+import { trackRequestClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
 
 export default function MovingServices() {
@@ -31,7 +30,7 @@ export default function MovingServices() {
   ];
 
   const coordinationSteps = [
-    { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
+    { title: '01', body: t('home.what.step1'), icon: <MessageSquare size={20} /> },
     { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
     { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
     { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
@@ -81,18 +80,20 @@ export default function MovingServices() {
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <motion.a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('House Shifting Hero')}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('House Shifting Hero')}
                 className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle size={22} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageSquare size={22} className="fill-primary-foreground" />
+                  {t('cta.request')}
+                </motion.div>
+              </Link>
             </div>
           </motion.div>
 
@@ -339,18 +340,20 @@ export default function MovingServices() {
               {t('cta.final.title')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              <motion.a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Moving Final CTA')}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Moving Final CTA')}
                 className="cta-primary px-12 py-6 text-xl btn-shine"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle size={24} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageSquare size={24} className="fill-primary-foreground" />
+                  {t('cta.request')}
+                </motion.div>
+              </Link>
             </div>
           </motion.div>
         </div>

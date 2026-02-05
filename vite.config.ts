@@ -5,10 +5,13 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: "0.0.0.0",
     port: 8081,
     hmr: {
       overlay: false,
+    },
+    watch: {
+      usePolling: true,
     },
   },
   plugins: [react()].filter(Boolean),

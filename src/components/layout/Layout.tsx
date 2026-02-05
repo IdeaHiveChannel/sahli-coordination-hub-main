@@ -1,14 +1,16 @@
 import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { WhatsAppTrigger } from './WhatsAppTrigger';
+import { RequestTrigger } from './RequestTrigger';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LayoutProps {
   children: ReactNode;
+  hideFooter?: boolean;
+  hideTrigger?: boolean;
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, hideFooter = false, hideTrigger = false }: LayoutProps) {
   const { dir } = useLanguage();
 
   return (
@@ -17,8 +19,8 @@ export function Layout({ children }: LayoutProps) {
       <main className="flex-1 relative">
         {children}
       </main>
-      <Footer />
-      <WhatsAppTrigger />
+      {!hideFooter && <Footer />}
+      {!hideTrigger && <RequestTrigger />}
     </div>
   );
 }

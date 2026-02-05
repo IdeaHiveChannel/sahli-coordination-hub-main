@@ -1,6 +1,6 @@
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '97470346652';
-const WHATSAPP_DISPLAY = '+974 7034 6652';
-const WHATSAPP_MESSAGE = import.meta.env.VITE_WHATSAPP_MESSAGE || 'Hi, I need help with a home service.';
+export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '97470346652';
+export const WHATSAPP_DISPLAY = '+974 7034 6652';
+export const WHATSAPP_MESSAGE = import.meta.env.VITE_WHATSAPP_MESSAGE || 'Hi, I need help with a home service.';
 
 export const CONTACT_NUMBER = WHATSAPP_DISPLAY;
 export const CONTACT_EMAIL = 'hello@sahliservice.com'; // Verified updated email

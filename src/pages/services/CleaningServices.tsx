@@ -2,9 +2,8 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Waves, Zap } from 'lucide-react';
-import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
+import { MessageSquare, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Waves, Zap } from 'lucide-react';
+import { trackRequestClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
 
 export default function CleaningServices() {
@@ -31,7 +30,7 @@ export default function CleaningServices() {
   ];
 
   const coordinationSteps = [
-    { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
+    { title: '01', body: t('home.what.step1'), icon: <MessageSquare size={20} /> },
     { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
     { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
     { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
@@ -85,18 +84,20 @@ export default function CleaningServices() {
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <motion.a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Cleaning Hero CTA')}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Cleaning Hero CTA')}
                 className="cta-primary px-12 py-6 text-xl btn-shine shadow-3xl shadow-primary/30"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
               >
-                <MessageCircle size={24} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageSquare size={24} className="fill-primary-foreground" />
+                  {t('cta.request')}
+                </motion.div>
+              </Link>
             </div>
           </motion.div>
 
@@ -331,21 +332,23 @@ export default function CleaningServices() {
               <Clock size={48} />
             </div>
             <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
-              {t('service.v1.cta.whatsapp')}
+              {t('service.v1.cta.title')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <motion.a
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Cleaning Final CTA')}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Cleaning Final CTA')}
                 className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30"
               >
-                <MessageCircle size={32} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-4"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <MessageSquare size={32} className="fill-primary-foreground" />
+                  {t('cta.request')}
+                </motion.div>
+              </Link>
               
               <div className="flex flex-col items-center md:items-start gap-1">
                 <div className="flex items-center gap-2 text-primary font-black tracking-widest uppercase text-sm">

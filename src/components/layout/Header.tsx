@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageToggle } from './LanguageToggle';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageSquare, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
 
 export function Header() {
   const { t, dir } = useLanguage();
@@ -25,6 +25,7 @@ export function Header() {
     { key: 'nav.about', path: '/about' },
     { key: 'nav.trustStandards', path: '/trust-standards' },
     { key: 'nav.howItWorks', path: '/how-it-works' },
+    { key: 'nav.providerApplication', path: '/provider-application' },
   ];
 
   return (
@@ -87,18 +88,20 @@ export function Header() {
               <LanguageToggle />
             </div>
             
-            <motion.a
+            <a
               href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackWhatsAppClick('Header')}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={() => trackRequestClick('Header')}
               className="hidden sm:flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-primary text-primary-foreground rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-bold uppercase tracking-[0.1em] hover:shadow-2xl hover:shadow-primary/40 transition-all duration-500 btn-shine glow-red"
             >
-              <MessageCircle size={14} className="fill-primary-foreground" />
-              {t('cta.whatsapp')}
-            </motion.a>
+              <motion.div
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <MessageSquare size={14} className="fill-primary-foreground" />
+                {t('cta.whatsapp')}
+              </motion.div>
+            </a>
 
             {/* Mobile Menu Toggle */}
             <motion.button 
@@ -220,16 +223,22 @@ export function Header() {
                     <a href={`mailto:${t('contact.email.value')}`} className="block text-xl font-medium text-foreground hover:text-primary transition-colors">{t('contact.email.value')}</a>
                   </div>
                   
-                  <motion.a
+                  <a
                     href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      trackRequestClick('Mobile Menu');
+                      setIsMenuOpen(false);
+                    }}
                     className="flex items-center justify-center gap-4 w-full py-6 bg-primary text-primary-foreground rounded-3xl text-sm font-black uppercase tracking-widest hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500"
                   >
-                    <MessageCircle size={20} className="fill-primary-foreground" />
-                    {t('cta.whatsapp')}
-                  </motion.a>
+                    <motion.div
+                      className="flex items-center gap-4"
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <MessageSquare size={20} className="fill-primary-foreground" />
+                      {t('cta.whatsapp')}
+                    </motion.div>
+                  </a>
                 </div>
               </motion.div>
             </div>

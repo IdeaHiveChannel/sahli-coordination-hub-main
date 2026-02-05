@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
-import { Shield, Lock, Eye, Scale, MessageCircle, Globe, Mail, Gavel, FileText } from 'lucide-react';
+import { Shield, Lock, Eye, Scale, MessageSquare, Globe, Mail, Gavel, FileText } from 'lucide-react';
 
 export default function Privacy() {
   const { t, dir } = useLanguage();
@@ -23,7 +23,7 @@ export default function Privacy() {
     { title: t('legal.privacy.section13.title'), content: t('legal.privacy.section13.content') },
   ];
 
-  const icons = [Shield, Lock, Eye, Scale, MessageCircle, Globe, Mail, Gavel, FileText, Shield, Lock, Eye, Scale];
+  const icons = [Shield, Lock, Eye, Scale, MessageSquare, Globe, Mail, Gavel, FileText, Shield, Lock, Eye, Scale];
 
   return (
     <Layout>

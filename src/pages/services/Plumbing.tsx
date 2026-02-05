@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, CheckCircle2, Droplets, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
-import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
+import { MessageSquare, CheckCircle2, Droplets, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
+import { trackRequestClick } from '@/lib/gtag';
 
 export default function Plumbing() {
   const { t, dir } = useLanguage();
@@ -25,7 +24,7 @@ export default function Plumbing() {
   ];
 
   const coordinationSteps = [
-    { title: '01', body: t('home.what.step1'), icon: <MessageCircle size={20} /> },
+    { title: '01', body: t('home.what.step1'), icon: <MessageSquare size={20} /> },
     { title: '02', body: t('home.what.step2'), icon: <ShieldCheck size={20} /> },
     { title: '03', body: t('home.what.step3'), icon: <Clock size={20} /> },
     { title: '04', body: t('home.what.step4'), icon: <CheckCircle2 size={20} /> },
@@ -88,18 +87,20 @@ export default function Plumbing() {
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <motion.a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Plumbing Hero')}
-                className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Plumbing Hero CTA')}
+                className="cta-primary px-12 py-6 text-xl btn-shine shadow-3xl shadow-primary/30"
               >
-                <MessageCircle size={22} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageSquare size={24} className="fill-primary-foreground" />
+                  {t('cta.request')}
+                </motion.div>
+              </Link>
             </div>
           </motion.div>
 
@@ -329,21 +330,23 @@ export default function Plumbing() {
               <Clock size={48} />
             </div>
             <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-[0.85]">
-              {t('service.v1.cta.whatsapp')}
+              {t('service.v1.cta.title')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <motion.a
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Plumbing Final CTA')}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Plumbing Final CTA')}
                 className="cta-primary px-16 py-8 text-xl md:text-2xl btn-shine shadow-3xl shadow-primary/30"
               >
-                <MessageCircle size={32} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-4"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <MessageSquare size={32} className="fill-primary-foreground" />
+                  {t('cta.request')}
+                </motion.div>
+              </Link>
               
               <div className="flex flex-col items-center md:items-start gap-1">
                 <div className="flex items-center gap-2 text-primary font-black tracking-widest uppercase text-sm">

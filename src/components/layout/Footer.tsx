@@ -2,30 +2,31 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageToggle } from './LanguageToggle';
-import { MessageCircle, Instagram, Facebook, Mail } from 'lucide-react';
+import { MessageSquare, Instagram, Facebook, Mail } from 'lucide-react';
 import { TranslationKey } from '@/lib/i18n';
 
-import { WHATSAPP_LINK, INSTAGRAM_LINK, FACEBOOK_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
+import { INSTAGRAM_LINK, FACEBOOK_LINK, WHATSAPP_LINK } from '@/lib/constants';
+import { trackRequestClick } from '@/lib/gtag';
 
 export function Footer() {
   const { t, dir } = useLanguage();
   
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2026;
 
   const links = {
     company: [
       { key: 'nav.about' as TranslationKey, path: '/about' },
       { key: 'nav.howItWorks' as TranslationKey, path: '/how-it-works' },
       { key: 'nav.trustStandards' as TranslationKey, path: '/trust-standards' },
+      { key: 'nav.providerApplication' as TranslationKey, path: '/provider-application' },
     ],
     services: [
-      { key: 'nav.homeMaintenance' as TranslationKey, path: '/home-maintenance-qatar' },
-      { key: 'nav.cleaningServices' as TranslationKey, path: '/cleaning-services-qatar' },
-      { key: 'nav.movingServices' as TranslationKey, path: '/house-shifting-qatar' },
-      { key: 'nav.outdoorSpecialized' as TranslationKey, path: '/outdoor-specialized-qatar' },
-      { key: 'nav.careLifestyle' as TranslationKey, path: '/care-lifestyle-qatar' },
-      { key: 'nav.electronicsTech' as TranslationKey, path: '/electronics-tech-qatar' },
+      { key: 'nav.homeMaintenance' as TranslationKey, path: '/services#home-maintenance' },
+      { key: 'nav.cleaningServices' as TranslationKey, path: '/services#cleaning' },
+      { key: 'nav.movingServices' as TranslationKey, path: '/services#moving' },
+      { key: 'nav.outdoorSpecialized' as TranslationKey, path: '/services#outdoor' },
+      { key: 'nav.careLifestyle' as TranslationKey, path: '/services#care' },
+      { key: 'nav.electronicsTech' as TranslationKey, path: '/services#tech' },
     ]
   };
 
@@ -121,22 +122,24 @@ export function Footer() {
               {t('footer.contact')}
             </h4>
             <div className="space-y-6 md:space-y-8">
-              <motion.a 
-                href={WHATSAPP_LINK} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Footer')}
-                whileHover={{ scale: 1.02, y: -5 }}
+              <a
+                href={WHATSAPP_LINK}
+                onClick={() => trackRequestClick('Footer')}
                 className="flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl md:rounded-3xl bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group glass-card btn-shine"
               >
-                <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl md:rounded-2xl bg-card flex items-center justify-center text-primary shadow-xl shadow-black/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shrink-0">
-                  <MessageCircle size={20} className="md:size-6" />
-                </div>
-                <div className="min-w-0 flex flex-col justify-center">
-                  <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 leading-none mb-1.5">{t('footer.whatsapp')}</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('contact.whatsapp.value')}</span>
-                </div>
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-4 md:gap-5 w-full"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                >
+                  <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl md:rounded-2xl bg-card flex items-center justify-center text-primary shadow-xl shadow-black/10 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shrink-0">
+                    <MessageSquare size={20} className="md:size-6" />
+                  </div>
+                  <div className="min-w-0 flex flex-col justify-center">
+                    <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.25em] text-foreground/60 leading-none mb-1.5">{t('footer.whatsapp')}</span>
+                    <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('contact.whatsapp.value')}</span>
+                  </div>
+                </motion.div>
+              </a>
 
               <motion.a 
                 href={`mailto:${t('contact.email.value')}`}
@@ -176,6 +179,9 @@ export function Footer() {
             </Link>
             <Link to="/legal/terms" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors">
               {t('footer.terms')}
+            </Link>
+            <Link to="/admin" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors">
+              Admin
             </Link>
             <LanguageToggle />
           </div>

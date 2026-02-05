@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, Mail, Clock, ShieldCheck, Globe } from 'lucide-react';
+import { MessageSquare, Mail, Clock, ShieldCheck, Globe } from 'lucide-react';
 
-import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
+import { trackRequestClick } from '@/lib/gtag';
 
 interface ContactMethod {
   icon: React.ReactNode;
@@ -13,6 +13,7 @@ interface ContactMethod {
   value: string;
   link: string;
   primary: boolean;
+  isInternal?: boolean;
 }
 
 export default function Contact() {
@@ -31,13 +32,14 @@ export default function Contact() {
 
   const splitWords = (text: string) => text.split(' ');
 
-  const contactMethods = [
+  const contactMethods: ContactMethod[] = [
     {
-      icon: <MessageCircle className="w-8 h-8" />,
-      title: t('cta.whatsapp'),
+      icon: <MessageSquare className="w-8 h-8" />,
+      title: t('cta.request'),
       value: t('contact.whatsapp.value'),
-      link: WHATSAPP_LINK,
-      primary: true
+      link: "/request-service",
+      primary: true,
+      isInternal: true
     },
     {
       icon: <Mail className="w-8 h-8" />,
@@ -113,41 +115,73 @@ export default function Contact() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto md:mx-0">
-              {contactMethods.map((method: ContactMethod, i: number) => (
-                <motion.a
-                  key={i}
-                  href={method.link}
-                  target={method.primary ? "_blank" : undefined}
-                  rel={method.primary ? "noopener noreferrer" : undefined}
-                  onClick={() => method.primary && trackWhatsAppClick('Contact Page - Primary')}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + i * 0.05 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`group relative p-5 rounded-3xl transition-all duration-500 overflow-hidden ${
-                    method.primary 
-                    ? 'bg-primary text-white shadow-xl shadow-primary/20 btn-shine' 
-                    : 'bg-foreground/[0.03] border border-border hover:border-primary/30'
-                  }`}
-                >
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 ${
-                    method.primary ? 'bg-white/20' : 'bg-primary/10 text-primary'
-                  }`}>
-                    {React.cloneElement(method.icon as React.ReactElement, { className: "w-6 h-6" })}
-                  </div>
-                  <div className={`text-[10px] font-black uppercase tracking-[0.2em] mb-2 ${
-                    method.primary ? 'text-white/60' : 'text-primary'
-                  }`}>
-                    {method.title}
-                  </div>
-                  <div className={`text-base md:text-lg font-black tracking-tight ${
-                    method.primary ? 'text-white' : 'text-foreground/90'
-                  }`}>
-                    {method.value}
-                  </div>
-                </motion.a>
-              ))}
+              {contactMethods.map((method: ContactMethod, i: number) => {
+                const Content = (
+                  <>
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 ${
+                      method.primary ? 'bg-white/20' : 'bg-primary/10 text-primary'
+                    }`}>
+                      {React.cloneElement(method.icon as React.ReactElement, { className: "w-6 h-6" })}
+                    </div>
+                    <div className={`text-[10px] font-black uppercase tracking-[0.2em] mb-2 ${
+                      method.primary ? 'text-white/60' : 'text-primary'
+                    }`}>
+                      {method.title}
+                    </div>
+                    <div className={`text-base md:text-lg font-black tracking-tight ${
+                      method.primary ? 'text-white' : 'text-foreground/90'
+                    }`}>
+                      {method.value}
+                    </div>
+                  </>
+                );
+
+                if (method.isInternal) {
+                  return (
+                    <Link
+                      key={i}
+                      to={method.link}
+                      onClick={() => trackRequestClick('Contact Page - Primary')}
+                      className={`group relative p-5 rounded-3xl transition-all duration-500 overflow-hidden ${
+                        method.primary 
+                        ? 'bg-primary text-white shadow-xl shadow-primary/20 btn-shine' 
+                        : 'bg-foreground/[0.03] border border-border hover:border-primary/30'
+                      }`}
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 + i * 0.05 }}
+                        whileHover={{ y: -5, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        {Content}
+                      </motion.div>
+                    </Link>
+                  );
+                }
+
+                return (
+                  <motion.a
+                    key={i}
+                    href={method.link}
+                    target={method.primary ? "_blank" : undefined}
+                    rel={method.primary ? "noopener noreferrer" : undefined}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + i * 0.05 }}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`group relative p-5 rounded-3xl transition-all duration-500 overflow-hidden ${
+                      method.primary 
+                      ? 'bg-primary text-white shadow-xl shadow-primary/20 btn-shine' 
+                      : 'bg-foreground/[0.03] border border-border hover:border-primary/30'
+                    }`}
+                  >
+                    {Content}
+                  </motion.a>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -238,17 +272,18 @@ export default function Contact() {
             <p className="text-lg text-foreground/60 font-medium mb-8 leading-tight">
               {t('cta.final.body')}
             </p>
-            <motion.a
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackWhatsAppClick('Contact Page - Bottom CTA')}
-              className="cta-primary px-10 py-4 text-base"
             >
-              {t('cta.final.cta')}
-            </motion.a>
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Contact Page - Bottom CTA')}
+                className="cta-primary px-10 py-4 text-base inline-block"
+              >
+                {t('cta.final.cta')}
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

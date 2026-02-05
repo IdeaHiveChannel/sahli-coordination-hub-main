@@ -7,10 +7,10 @@ import { ServiceRoof } from '@/components/motion/ServiceRoof';
 import { TrustPanel, TrustStatement } from '@/components/motion/TrustPanel';
 import { InfiniteMarquee } from '@/components/motion/InfiniteMarquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageCircle, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug } from 'lucide-react';
+import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug, Send } from 'lucide-react';
 
+import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
 
 const Index = () => {
   const { t, dir } = useLanguage();
@@ -124,7 +124,7 @@ const Index = () => {
     { 
       title: t('services.outdoor.title'), 
       description: t('services.outdoor.subtitle'),
-      imageUrl: "https://images.unsplash.com/photo-1558905619-17254261b646?q=80&w=800&fm=webp&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1592417817098-8fd3d9ebc4a5?q=80&w=800&fm=webp&fit=crop",
       icon: <Leaf size={32} />,
       path: t('services.outdoor.path'),
       number: "04",
@@ -174,14 +174,14 @@ const Index = () => {
   ];
 
   const featuredServices = [
-    { title: t('services.homeMaintenance.ac.title'), icon: <Snowflake size={24} />, intent: "AC repair", path: t('services.homeMaintenance.ac.path') },
-    { title: t('services.homeMaintenance.electrical.title'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: t('services.homeMaintenance.electrical.path') },
-    { title: t('services.homeMaintenance.plumbing.title'), icon: <Droplets size={24} />, intent: "plumbing", path: t('services.homeMaintenance.plumbing.path') },
-    { title: t('services.electronics.repair.title'), icon: <Cog size={24} />, intent: "appliance repair", path: t('services.electronics.path') },
-    { title: t('services.cleaning.deep.title'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: t('services.cleaning.path') },
-    { title: t('services.outdoor.pest.title'), icon: <Bug size={24} />, intent: "pest control", path: t('services.outdoor.path') },
-    { title: t('services.moving.house.title'), icon: <Truck size={24} />, intent: "house shifting", path: t('services.moving.path') },
-    { title: t('services.care.childcare.title'), icon: <Baby size={24} />, intent: "nanny services", path: t('services.care.path') },
+    { title: t('services.homeMaintenance.ac.title'), icon: <Snowflake size={24} />, intent: "AC repair", path: '/services#home-maintenance' },
+    { title: t('services.homeMaintenance.electrical.title'), icon: <Lightbulb size={24} />, intent: "electrical repair", path: '/services#home-maintenance' },
+    { title: t('services.homeMaintenance.plumbing.title'), icon: <Droplets size={24} />, intent: "plumbing", path: '/services#home-maintenance' },
+    { title: t('services.electronics.repair.title'), icon: <Cog size={24} />, intent: "appliance repair", path: '/services#tech' },
+    { title: t('services.cleaning.deep.title'), icon: <Sparkles size={24} />, intent: "home deep cleaning", path: '/services#cleaning' },
+    { title: t('services.outdoor.pest.title'), icon: <Bug size={24} />, intent: "pest control", path: '/services#outdoor' },
+    { title: t('services.moving.house.title'), icon: <Truck size={24} />, intent: "house shifting", path: '/services#moving' },
+    { title: t('services.care.childcare.title'), icon: <Baby size={24} />, intent: "nanny services", path: '/services#care' },
   ];
 
   const trustPanels = [
@@ -247,7 +247,7 @@ const Index = () => {
               crossOrigin="anonymous"
               className="w-full h-full object-cover opacity-20 grayscale scale-110"
             >
-              <source src="https://videos.pexels.com/video-files/4489749/4489749-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-working-in-a-modern-office-4682-large.mp4" type="video/mp4" />
               {/* Fallback image */}
               <img 
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
@@ -311,18 +311,20 @@ const Index = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                <motion.a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackWhatsAppClick('Hero Section')}
+                <Link
+                  to="/request"
+                  onClick={() => trackRequestClick('Hero Section')}
                   className="w-full sm:w-auto px-6 py-4 md:px-8 md:py-4 bg-primary text-primary-foreground rounded-[1.25rem] md:rounded-[1.5rem] font-black text-base md:text-base flex items-center justify-center gap-3 hover:bg-primary/90 transition-all shadow-2xl shadow-primary/30 group btn-shine"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
                 >
-                  <MessageCircle size="20" className="md:w-6 md:h-6 group-hover:rotate-12 transition-transform" />
-                  {t('home.hero.cta')}
-                </motion.a>
+                  <motion.div
+                    className="flex items-center gap-3"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Send size="20" className="md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+                    {t('home.hero.cta')}
+                  </motion.div>
+                </Link>
                 
                 <Link to="/services" className="w-full sm:w-auto">
                   <motion.button
@@ -347,7 +349,7 @@ const Index = () => {
           transition={{ delay: 1.5, duration: 1 }}
         >
           <span className="text-[10px] uppercase tracking-[0.4em] text-foreground/40 font-black rotate-90 mb-10 origin-center">
-            {t('home.scroll')}
+            {t('home.hero.scroll')}
           </span>
           <div className="w-px h-24 bg-gradient-to-b from-primary/30 to-transparent relative overflow-hidden">
             <motion.div 
@@ -426,16 +428,23 @@ const Index = () => {
               }
 
               return (
-                <motion.a
+                <Link
                   key={index}
-                  href={`${WHATSAPP_LINK}?text=${encodeURIComponent(`Hi, I need SAHLI to coordinate ${service.intent}.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackWhatsAppClick(`Featured Service: ${service.title}`)}
-                  {...commonProps}
+                  to="/request-service"
+                  onClick={() => trackRequestClick(`Featured Service: ${service.title}`)}
+                  className={commonProps.className}
                 >
-                  {content}
-                </motion.a>
+                  <motion.div
+                    className="flex flex-col items-center justify-center h-full w-full"
+                    initial={commonProps.initial}
+                    whileInView={commonProps.whileInView}
+                    viewport={commonProps.viewport}
+                    transition={commonProps.transition}
+                    whileHover={commonProps.whileHover}
+                  >
+                    {content}
+                  </motion.div>
+                </Link>
               );
             })}
           </div>
@@ -601,7 +610,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: t('home.what.step1'), icon: <MessageCircle size={32} /> },
+              { title: t('home.what.step1'), icon: <MessageSquare size={32} /> },
               { title: t('home.what.step2'), icon: <Search size={32} /> },
               { title: t('home.what.step3'), icon: <CheckCircle2 size={32} /> },
             ].map((step, i) => (
@@ -780,18 +789,20 @@ const Index = () => {
             </h2>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-              <motion.a
-                whileHover={{ y: -10, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick('Bottom CTA')}
+              <Link
+                to="/request-service"
+                onClick={() => trackRequestClick('Bottom CTA')}
                 className="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-primary text-primary-foreground rounded-[1.25rem] md:rounded-[1.5rem] font-black text-base md:text-lg flex items-center justify-center gap-4 shadow-3xl shadow-primary/40 group btn-shine"
               >
-                <MessageCircle size="24" className="md:w-8 md:h-8 group-hover:rotate-12 transition-transform" />
-                {t('home.cta.final.subtext')}
-              </motion.a>
+                <motion.div
+                  className="flex items-center gap-4"
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <MessageSquare size="24" className="md:w-8 md:h-8 group-hover:rotate-12 transition-transform" />
+                  {t('home.cta.final.subtext')}
+                </motion.div>
+              </Link>
             </div>
           </motion.div>
         </div>

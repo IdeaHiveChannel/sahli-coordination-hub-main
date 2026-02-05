@@ -1,11 +1,11 @@
-import { MessageCircle } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
-import { trackWhatsAppClick } from '@/lib/gtag';
 
-export function WhatsAppTrigger() {
+export function RequestTrigger() {
   const { t, dir } = useLanguage();
   const [showLabel, setShowLabel] = useState(false);
 
@@ -34,29 +34,32 @@ export function WhatsAppTrigger() {
               className="w-4 h-4 object-contain opacity-60" 
             />
             <p className="text-[10px] font-black uppercase tracking-widest text-primary">
-              {t('cta.whatsapp')}
+              {t('cta.whatsapp.help')}
             </p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.a
+      <a
         href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => trackWhatsAppClick('Floating Trigger')}
+        onClick={() => trackRequestClick('Floating Trigger')}
         className="relative group"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
       >
-        <div className="absolute inset-0 bg-primary rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse" />
-        <div className="relative w-16 h-16 bg-primary text-primary-foreground rounded-full shadow-2xl flex items-center justify-center transition-transform duration-500 ease-out-expo group-hover:rotate-[15deg]">
-          <MessageCircle size={28} className="fill-primary-foreground" />
-        </div>
-        
-        {/* Pulse Ring */}
-        <div className="absolute inset-0 border-2 border-primary rounded-full animate-[ping_3s_infinite] opacity-20" />
-      </motion.a>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <div className="absolute inset-0 bg-primary rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse" />
+          <div className="relative w-16 h-16 bg-emerald-500 text-white rounded-full shadow-2xl flex items-center justify-center transition-transform duration-500 ease-out-expo group-hover:rotate-[15deg] glow-emerald">
+            <MessageSquare size={28} className="fill-white" />
+          </div>
+          
+          {/* Pulse Ring */}
+          <div className="absolute inset-0 border-2 border-emerald-500 rounded-full animate-[ping_3s_infinite] opacity-20" />
+        </motion.div>
+      </a>
     </div>
   );
 }

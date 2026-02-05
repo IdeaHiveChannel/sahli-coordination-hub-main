@@ -1,9 +1,11 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Shield, CheckCircle2, Eye, FileSearch, UserCheck, Scale, MessageCircle, Target, HeartHandshake, ClipboardList, Fingerprint } from 'lucide-react';
+import { Shield, CheckCircle2, Eye, FileSearch, UserCheck, Scale, MessageSquare, Target, HeartHandshake, ClipboardList, Fingerprint } from 'lucide-react';
 
+import { trackRequestClick } from '@/lib/gtag';
 import { WHATSAPP_LINK } from '@/lib/constants';
 
 export default function TrustStandards() {
@@ -273,17 +275,20 @@ export default function TrustStandards() {
             <p className="text-lg md:text-xl text-foreground/60 mb-10 md:mb-12 font-medium">
               {t('trust.cta.body')}
             </p>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <a
               href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => trackRequestClick('Trust Standards Page')}
               className="cta-primary btn-shine px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl shadow-2xl shadow-primary/20 inline-flex items-center gap-4"
             >
-              <MessageCircle size={24} />
-              {t('trust.cta.whatsapp')}
-            </motion.a>
+              <motion.div
+                className="flex items-center gap-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <MessageSquare size={24} />
+                {t('trust.cta.whatsapp')}
+              </motion.div>
+            </a>
             
             <p className="mt-16 md:mt-20 text-sm md:text-base text-foreground/40 font-medium max-w-2xl mx-auto leading-relaxed">
               {t('trust.micro.clarity')}

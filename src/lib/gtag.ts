@@ -26,3 +26,7 @@ export const trackEvent = (category: string, action: string, label?: string) => 
 export const trackWhatsAppClick = (location: string) => {
   trackEvent('CTA', 'WhatsApp Click', location);
 };
+
+export const trackRequestClick = (location: string) => {
+  trackEvent('CTA', 'Request Click', location);
+};

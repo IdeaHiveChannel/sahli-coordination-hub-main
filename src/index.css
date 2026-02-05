@@ -508,6 +508,10 @@
     @apply shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.5)];
   }
 
+  .glow-emerald {
+    @apply shadow-[0_0_20px_-5px_rgba(16,185,129,0.5)];
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
