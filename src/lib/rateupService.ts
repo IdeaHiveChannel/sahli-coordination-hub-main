@@ -154,7 +154,7 @@ export const rateupService = {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          phoneNumber: this.formatPhoneNumber(payload.phoneNumber),
+          phoneNumber: rateupService.formatPhoneNumber(payload.phoneNumber),
           name: payload.name,
           email: payload.email,
           customFields: payload.customFields
@@ -252,7 +252,7 @@ export const rateupService = {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          to: this.formatPhoneNumber(payload.phoneNumber),
+          to: rateupService.formatPhoneNumber(payload.phoneNumber),
           body: payload.message
         }),
       });
