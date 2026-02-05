@@ -204,7 +204,7 @@ const ProviderApplication = () => {
             >
               Partner with SAHLI
             </motion.div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9] text-balance">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-tight text-balance">
               {t('provider.apply.title')}
             </h1>
             <p className="text-xl text-foreground/60 max-w-3xl mx-auto font-medium leading-relaxed">
@@ -479,3 +479,4 @@ const ProviderApplication = () => {
 };
 
 export default ProviderApplication;
+

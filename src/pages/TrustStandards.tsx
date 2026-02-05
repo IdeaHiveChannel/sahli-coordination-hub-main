@@ -113,7 +113,7 @@ export default function TrustStandards() {
               />
             </motion.div>
 
-            <h1 className="mb-6 text-foreground text-3xl sm:text-4xl md:text-5xl font-black leading-[0.9] tracking-tighter">
+            <h1 className="mb-6 text-foreground text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tighter">
               {t('trust.label')}
             </h1>
             
@@ -150,7 +150,7 @@ export default function TrustStandards() {
                   <div className="mb-2 text-[10px] font-bold tracking-widest uppercase text-foreground/40">
                     {t('trust.standard')}
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-black mb-6 tracking-tight text-foreground leading-none">
+                  <h3 className="text-2xl md:text-3xl font-black mb-6 tracking-tight text-foreground leading-tight">
                     {standard.title}
                   </h3>
                   
@@ -183,7 +183,7 @@ export default function TrustStandards() {
             <div className="inline-block px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-bold tracking-widest uppercase mb-8 md:mb-10">
               {t('trust.blackbox.title')}
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none mb-6 md:mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-tight mb-6 md:mb-8">
               {t('trust.blackbox.title')}
             </h2>
             <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-medium">
@@ -200,7 +200,7 @@ export default function TrustStandards() {
             <div className="inline-block px-4 py-1.5 bg-foreground/5 rounded-full border border-border text-foreground/50 text-[10px] font-bold tracking-widest uppercase mb-6 md:mb-8">
               {t('trust.audit.title')}
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-tight">
               {t('trust.audit.title')}
             </h2>
           </div>
@@ -221,7 +221,7 @@ export default function TrustStandards() {
                 <div className="w-14 h-14 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary mb-8 md:mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
                   {item.icon}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-4 md:mb-6 tracking-tight text-foreground leading-none">{item.title}</h3>
+                <h3 className="text-2xl md:text-3xl font-black mb-4 md:mb-6 tracking-tight text-foreground leading-tight">{item.title}</h3>
                 <p className="text-lg md:text-xl text-foreground/60 leading-relaxed font-medium">{item.body}</p>
               </motion.div>
             ))}
@@ -233,7 +233,7 @@ export default function TrustStandards() {
       <section className="relative py-16 md:py-20 bg-background overflow-hidden border-t border-border">
         <div className="container-sahli relative z-10">
           <div className="mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-tight">
               {t('trust.customer.title')}
             </h2>
           </div>
@@ -269,7 +269,7 @@ export default function TrustStandards() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mb-6 md:mb-8 text-foreground leading-[0.9]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mb-6 md:mb-8 text-foreground leading-tight">
               {t('trust.cta.title')}
             </h2>
             <p className="text-lg md:text-xl text-foreground/60 mb-10 md:mb-12 font-medium">

@@ -44,7 +44,7 @@ export default function Privacy() {
               </span>
             </div>
 
-            <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.85] tracking-tighter uppercase">
+            <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter uppercase">
               {t('legal.privacy.title')}
             </h1>
             <p className="text-primary font-bold mb-16 tracking-wider uppercase text-xs">
@@ -122,3 +122,4 @@ export default function Privacy() {
     </Layout>
   );
 }
+

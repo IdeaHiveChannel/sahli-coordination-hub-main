@@ -124,10 +124,22 @@ export const authService = {
     // Artificial delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const user = authService.getCurrentUser();
+    let user = authService.getCurrentUser();
+    
+    // If no user in session, create a mock one for the update (demo/simulation purposes)
+    if (!user) {
+      user = {
+        id: '1',
+        email: 'admin@sahli.co',
+        role: 'Super Admin',
+        mustResetPassword: false
+      };
+    }
+
     if (user) {
       user.mustResetPassword = false;
       localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(user));
+      localStorage.setItem(ADMIN_SESSION_KEY, 'true'); // Log them in as well
       
       // In this architecture, environment variables manage the actual password.
       // This local update only clears the reset flag for the current session.

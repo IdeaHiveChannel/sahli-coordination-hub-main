@@ -307,7 +307,7 @@ const Index = () => {
               {t('home.hero.label')}
             </motion.div>
             
-            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black leading-[0.9] md:leading-[0.85] tracking-tighter">
+            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black leading-tight md:leading-tight tracking-tighter">
               {t('home.hero.title')}
             </h1>
 
@@ -398,7 +398,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6 md:mb-8">
+                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tighter mb-6 md:mb-8">
                   {t('home.featured.title')}
                 </h2>
               </motion.div>
@@ -421,7 +421,7 @@ const Index = () => {
               );
 
               const commonProps = {
-                className: "group relative h-40 md:h-48 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass-morphism border border-border flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden",
+                className: "group relative min-h-[10rem] md:min-h-[12rem] p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass-morphism border border-border flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden",
                 initial: { opacity: 0, y: 20 },
                 whileInView: { opacity: 1, y: 0 },
                 viewport: { once: true },
@@ -504,7 +504,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-[0.9] tracking-tighter mb-6 md:mb-8">
+                <h2 className="text-foreground text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tighter mb-6 md:mb-8">
                   {t('home.coordinate.title')}
                 </h2>
               </motion.div>
@@ -664,7 +664,7 @@ const Index = () => {
                 {t('nav.trustStandards')}
               </motion.div>
               <motion.h2
-                className="text-foreground text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[0.9]"
+                className="text-foreground text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -712,7 +712,7 @@ const Index = () => {
                   <div className="mb-2 text-[10px] font-bold tracking-widest uppercase text-foreground/40">
                     {t('trust.standard')}
                   </div>
-                  <h3 className="text-2xl font-black mb-6 tracking-tight text-foreground leading-none">
+                  <h3 className="text-2xl font-black mb-6 tracking-tight text-foreground leading-tight">
                     {panel.title}
                   </h3>
                   
@@ -799,7 +799,7 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-12 md:mb-16 text-foreground leading-[0.85]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-12 md:mb-16 text-foreground leading-tight">
               {t('home.cta.final.text')}
             </h2>
             
@@ -827,3 +827,5 @@ const Index = () => {
 };
 
 export default Index;
+
+

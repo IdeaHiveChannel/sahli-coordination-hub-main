@@ -56,7 +56,7 @@ const ActiveProviders = () => {
       }
 
       // 1. Upsert contact in RateUp to ensure it exists and is up to date
-      await rateupService.upsertContact({
+      const contactResult = await rateupService.upsertContact({
         orgId,
         phoneNumber: provider.whatsapp,
         name: provider.company_name,
@@ -72,7 +72,18 @@ const ActiveProviders = () => {
         }
       });
       
-      toast.success(`Synced ${provider.company_name} data to RateUp`);
+      // 2. Add to groups if any are specified
+      if (contactResult && provider.groups && provider.groups.length > 0) {
+        for (const groupId of provider.groups) {
+          await rateupService.addContactsToGroup({
+            orgId,
+            contactGroupId: groupId,
+            contactIds: [contactResult.id]
+          }).catch(err => console.warn(`Failed to add to group ${groupId}:`, err));
+        }
+      }
+      
+      toast.success(`Synced ${provider.company_name} data and groups to RateUp`);
     } catch (error) {
       console.error('Sync error:', error);
       const message = error instanceof Error ? error.message : 'Unknown error';
@@ -192,8 +203,8 @@ const ActiveProviders = () => {
         </div>
 
         <Card className="border-slate-200 overflow-hidden shadow-sm bg-white/50 backdrop-blur-sm">
-          <Table>
-            <TableHeader className="bg-slate-50/80">
+          <Table className="min-w-[900px]">
+              <TableHeader className="bg-slate-50/80">
               <TableRow className="hover:bg-transparent border-b border-slate-200">
                 <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 px-4">Company Info</TableHead>
                 <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Services</TableHead>
@@ -353,6 +364,34 @@ const ActiveProviders = () => {
                                   <Badge variant="outline" className={`h-4 text-[8px] ${provider.responsibility_confirmed ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-red-50 text-red-600 border-red-100'}`}>
                                     {provider.responsibility_confirmed ? 'Confirmed' : 'Not Confirmed'}
                                   </Badge>
+                                </div>
+                                <div className="pt-1.5 border-t border-slate-100 mt-1.5">
+                                  <span className="text-slate-400 block mb-1">RateUp Groups:</span>
+                                  <div className="flex flex-wrap gap-1 mb-2">
+                                    {provider.groups && provider.groups.length > 0 ? (
+                                      provider.groups.map(g => (
+                                        <Badge key={g} variant="outline" className="bg-primary/5 text-primary border-primary/10 text-[8px] font-bold">
+                                          {g}
+                                        </Badge>
+                                      ))
+                                    ) : (
+                                      <span className="text-[9px] italic text-slate-400">No groups assigned</span>
+                                    )}
+                                  </div>
+                                  <div className="flex gap-2">
+                                    <input 
+                                      type="text" 
+                                      placeholder="Edit groups (comma separated)" 
+                                      className="flex-1 bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-[10px] focus:outline-none focus:ring-1 focus:ring-primary/20"
+                                      defaultValue={provider.groups?.join(', ') || ''}
+                                      onBlur={(e) => {
+                                        const newGroups = e.target.value.split(',').map(g => g.trim()).filter(g => g !== '');
+                                        storageService.updateProvider(provider.id, { groups: newGroups });
+                                        setProviders(storageService.getProviders());
+                                        toast.success('Provider groups updated');
+                                      }}
+                                    />
+                                  </div>
                                 </div>
                               </div>
                             </div>

@@ -15,6 +15,7 @@ export interface Application {
   date: string;
   responsibility_confirmed: boolean;
   entity_type?: EntityType;
+  groups?: string[];
   documents?: {
     cr?: string;
     id?: string;
@@ -131,7 +132,7 @@ export const storageService = {
     return newApp;
   },
 
-  updateApplicationStatus: (id: string, status: Application['status'], entityType?: EntityType) => {
+  updateApplicationStatus: (id: string, status: Application['status'], entityType?: EntityType, groups?: string[]) => {
     const apps = storageService.getApplications();
     const index = apps.findIndex(a => a.id === id);
     if (index === -1) return;
@@ -139,6 +140,7 @@ export const storageService = {
     const app = apps[index];
     app.status = status;
     if (entityType) app.entity_type = entityType;
+    if (groups) app.groups = groups;
     
     safeStorage.set(STORAGE_KEYS.APPLICATIONS, apps);
 
@@ -176,7 +178,8 @@ export const storageService = {
       flags: 0,
       conduct_flags: 0,
       disputes: 0,
-      responsibility_confirmed: app.responsibility_confirmed
+      responsibility_confirmed: app.responsibility_confirmed,
+      groups: app.groups || []
     };
     providers.push(newProvider);
     safeStorage.set(STORAGE_KEYS.PROVIDERS, providers);

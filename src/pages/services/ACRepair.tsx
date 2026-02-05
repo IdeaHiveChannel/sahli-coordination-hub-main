@@ -69,7 +69,7 @@ export default function ACRepair() {
               {t('services.homeMaintenance.ac.title')}
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-6 md:mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-tight max-w-4xl mb-6 md:mb-8">
               {t('services.homeMaintenance.ac.title')}
             </h1>
 
@@ -134,7 +134,7 @@ export default function ACRepair() {
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-8 md:mb-12 text-center leading-[0.9]">
+            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-8 md:mb-12 text-center leading-tight">
               {t('services.homeMaintenance.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -161,7 +161,7 @@ export default function ACRepair() {
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-4 md:mb-6">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-tight mb-4 md:mb-6">
               {t('service.v1.includes.title')}
             </h2>
             </div>
@@ -196,7 +196,7 @@ export default function ACRepair() {
         
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-4 md:mb-6">
+            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-tight mb-4 md:mb-6">
               {t('home.what.title')}
             </h2>
             <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('how.flow.subtitle')}</p>
@@ -279,7 +279,7 @@ export default function ACRepair() {
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-[0.9] mb-6 md:mb-8">
+              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-tight mb-6 md:mb-8">
                 {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
@@ -326,7 +326,7 @@ export default function ACRepair() {
             <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8 md:mb-12">
               <Clock size={48} />
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-8 md:mb-12 leading-[0.85]">
+            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-8 md:mb-12 leading-tight">
               {t('service.v1.cta.title')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -361,7 +361,7 @@ export default function ACRepair() {
       <section className="section-spacing bg-foreground/[0.02] border-t border-border">
         <div className="container-sahli">
           <div className="mb-16 text-center md:text-start">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter mb-4 leading-none">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tighter mb-4 leading-tight">
               {t('services.related.title')}
             </h2>
             <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">
@@ -408,3 +408,5 @@ export default function ACRepair() {
     </Layout>
   );
 }
+
+

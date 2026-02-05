@@ -582,7 +582,7 @@ const RequestsList = () => {
               <button
                 key={tab}
                 onClick={() => handleTabChange(tab)}
-                className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-full border ${
+                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-full border ${
                   activeTab === tab 
                     ? 'bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-200' 
                     : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
@@ -596,7 +596,7 @@ const RequestsList = () => {
 
         <Card className="border-slate-200 shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm">
           <CardContent className="p-0">
-            <Table>
+            <Table className="min-w-[800px]">
               <TableHeader className="bg-slate-50/80">
                 <TableRow className="hover:bg-transparent border-b border-slate-200">
                   <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 px-4">Request Ref</TableHead>

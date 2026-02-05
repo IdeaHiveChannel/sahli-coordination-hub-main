@@ -216,7 +216,7 @@ export default function Services() {
             style={{ y: yText }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter">
+            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter">
               {t('services.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
@@ -264,7 +264,7 @@ export default function Services() {
                 whileTap={{ scale: 0.98 }}
                 key={roof.id}
                 onClick={() => handleRoofClick(roof.id)}
-                className={`relative group whitespace-nowrap px-4 py-2.5 md:px-5 md:py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-700 flex items-center gap-4 ${
+                className={`relative group px-4 py-2.5 md:px-5 md:py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-700 flex items-center gap-4 ${
                   activeRoof === roof.id
                     ? 'text-primary-foreground'
                     : 'text-foreground/40 hover:text-foreground'
@@ -327,7 +327,7 @@ export default function Services() {
                     {t('services.status.live')} — 01
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.homeMaintenance.title')}</h2>
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.homeMaintenance.title')}</h2>
                 <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.homeMaintenance.body')}
                 </p>
@@ -435,7 +435,7 @@ export default function Services() {
                     {t('services.status.live')} — 02
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.cleaning.title')}</h2>
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.cleaning.title')}</h2>
                 <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.cleaning.body')}
                 </p>
@@ -543,7 +543,7 @@ export default function Services() {
                     {t('services.status.live')} — 03
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.moving.title')}</h2>
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.moving.title')}</h2>
                 <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.moving.body')}
                 </p>
@@ -643,7 +643,7 @@ export default function Services() {
                     {t('services.status.live')} — 04
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.outdoor.title')}</h2>
+                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.outdoor.title')}</h2>
                 <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.outdoor.body')}
                 </p>
@@ -743,8 +743,8 @@ export default function Services() {
                     {t('services.status.comingSoon')} — 05
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground/80 text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.care.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/50 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground/80 text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.care.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.care.body')}
                 </p>
                 
@@ -835,8 +835,8 @@ export default function Services() {
                     {t('services.status.comingSoon')} — 06
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground/80 text-2xl md:text-3xl font-black tracking-tighter leading-none">{t('services.electronics.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/50 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="mb-4 md:mb-6 text-foreground/80 text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.electronics.title')}</h2>
+                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
                   {t('services.electronics.body')}
                 </p>
                 
@@ -918,7 +918,7 @@ export default function Services() {
               {t('about.position.title')}
             </div>
             
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-10">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-10">
               {t('services.cta.title')}
             </h2>
             
@@ -952,3 +952,4 @@ export default function Services() {
     </Layout>
   );
 }
+

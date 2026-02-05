@@ -92,7 +92,7 @@ export default function Contact() {
               {t('nav.contact')}
             </div>
 
-            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.85] tracking-tighter mb-8">
+            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter mb-8">
               {t('contact.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
@@ -266,7 +266,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 leading-none">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 leading-tight">
               {t('cta.final.title')}
             </h2>
             <p className="text-lg text-foreground/60 font-medium mb-8 leading-tight">
@@ -290,4 +290,5 @@ export default function Contact() {
     </Layout>
   );
 }
+
 

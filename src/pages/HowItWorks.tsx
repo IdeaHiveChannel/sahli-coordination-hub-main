@@ -64,7 +64,7 @@ const HowItWorks = () => {
             {t('how.hero.label')}
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-6 md:mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-tight max-w-4xl mb-6 md:mb-8">
             {t('how.hero.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -92,7 +92,7 @@ const HowItWorks = () => {
       {/* Coordination Phases: Before / During / After */}
       <section className="relative py-8 md:py-16 bg-background overflow-hidden border-b border-border/50">
         <div className="container-sahli relative z-10">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center mb-6 md:mb-8">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-tight text-center mb-6 md:mb-8">
               {t('how.flow.title')}
             </h2>
 
@@ -202,7 +202,7 @@ const HowItWorks = () => {
       <section className="section-spacing relative bg-background overflow-hidden border-b border-border/50">
         <div className="container-sahli relative z-10">
           <div className="flex flex-col items-center mb-6 md:mb-8">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none text-center">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-tight text-center">
               {t('home.important.title')}
             </h2>
           </div>
@@ -301,3 +301,4 @@ const HowItWorks = () => {
 }
 
 export default HowItWorks;
+

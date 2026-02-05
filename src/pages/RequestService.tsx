@@ -613,7 +613,7 @@ const RequestService = () => {
                   }`}
                 >
                   <MapPin size={24} className={`mb-3 ${formData.area === area.label ? 'text-primary' : 'text-foreground/30 group-hover:text-primary/50'}`} />
-                  <span className="font-black text-center">{area.label}</span>
+                  <span className="font-black text-center leading-tight">{area.label}</span>
                 </button>
               ))}
             </div>

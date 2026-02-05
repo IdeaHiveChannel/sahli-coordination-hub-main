@@ -66,7 +66,7 @@ export default function About() {
             {t('nav.about')}
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[0.85] max-w-4xl mb-6 md:mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-tight max-w-4xl mb-6 md:mb-8">
             {t('about.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -92,7 +92,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6 md:mb-8 text-foreground leading-none">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-6 md:mb-8 text-foreground leading-tight">
                 {t('about.reason.title')}
               </h2>
               <p className="text-base md:text-lg text-foreground/70 leading-relaxed font-medium tracking-tight">
@@ -122,7 +122,7 @@ export default function About() {
       <section className="relative py-8 md:py-16 bg-background overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="flex flex-col items-center mb-6 md:mb-10">
-            <h2 className="text-center text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-none">
+            <h2 className="text-center text-3xl md:text-4xl font-black tracking-tighter text-foreground leading-tight">
               {t('about.not.title')}
             </h2>
           </div>
@@ -181,7 +181,7 @@ export default function About() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 md:mb-6 text-foreground leading-none">
+            <h2 className="text-3xl md:text-4xl font-black tracking-tighter mb-4 md:mb-6 text-foreground leading-tight">
               {t('cta.final.title')}
             </h2>
             <p className="text-base text-foreground/60 mb-6 md:mb-8 font-medium">
@@ -206,3 +206,4 @@ export default function About() {
     </Layout>
   );
 }
+

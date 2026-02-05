@@ -21,6 +21,7 @@ const ProviderApplications = () => {
 
   const [reviewingApp, setReviewingApp] = useState<string | null>(null);
   const [entityType, setEntityType] = useState<EntityType>('Company');
+  const [assignedGroups, setAssignedGroups] = useState<string>('');
 
   const handleAction = (id: string, action: string, statusOverride?: string) => {
     const app = applications.find(a => a.id === id);
@@ -40,7 +41,8 @@ const ProviderApplications = () => {
     }
     
     // Update real storage
-    storageService.updateApplicationStatus(id, finalStatus, entityType);
+    const groupsArray = assignedGroups.split(',').map(g => g.trim()).filter(g => g !== '');
+    storageService.updateApplicationStatus(id, finalStatus, entityType, groupsArray);
     
     // Sync to RateUp if approved
     if (finalStatus === 'Approved') {
@@ -57,7 +59,18 @@ const ProviderApplications = () => {
             entity_type: entityType,
             services: app.services,
             areas: app.areas,
+            groups: groupsArray.join(', '),
             onboarded_at: new Date().toISOString()
+          }
+        }).then(contactResult => {
+          if (contactResult && groupsArray.length > 0) {
+            groupsArray.forEach(groupId => {
+              rateupService.addContactsToGroup({
+                orgId,
+                contactGroupId: groupId,
+                contactIds: [contactResult.id]
+              }).catch(err => console.warn(`RateUp Group Sync Error (${groupId}):`, err));
+            });
           }
         }).catch(err => console.warn('RateUp Sync Error (Approval):', err));
       }
@@ -125,14 +138,22 @@ const ProviderApplications = () => {
                       <TableCell className="text-xs font-medium text-slate-400">{app.date}</TableCell>
                       <TableCell className="text-right px-6">
                         <div className="flex gap-2 justify-end">
-                          <Button 
-                            size="sm" 
-                            variant={reviewingApp === app.id ? "default" : "outline"} 
-                            className={`h-8 gap-1 text-[10px] font-bold uppercase tracking-wider ${reviewingApp === app.id ? 'bg-slate-900' : ''}`}
-                            onClick={() => setReviewingApp(reviewingApp === app.id ? null : app.id)}
-                          >
-                            <FileText size={12} /> {reviewingApp === app.id ? 'Close Review' : 'Review Application'}
-                          </Button>
+                            <Button 
+                              size="sm" 
+                              variant={reviewingApp === app.id ? "default" : "outline"} 
+                              className={`h-8 gap-1 text-[10px] font-bold uppercase tracking-wider ${reviewingApp === app.id ? 'bg-slate-900' : ''}`}
+                              onClick={() => {
+                                if (reviewingApp === app.id) {
+                                  setReviewingApp(null);
+                                } else {
+                                  setReviewingApp(app.id);
+                                  setEntityType(app.entity_type || 'Company');
+                                  setAssignedGroups(app.groups?.join(', ') || '');
+                                }
+                              }}
+                            >
+                              <FileText size={12} /> {reviewingApp === app.id ? 'Close Review' : 'Review Application'}
+                            </Button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -228,6 +249,22 @@ const ProviderApplications = () => {
                                         {type}
                                       </button>
                                     ))}
+                                  </div>
+                                </div>
+
+                                <div className="space-y-2 pt-2 border-t border-slate-100">
+                                  <label className="text-[10px] font-bold text-slate-400 uppercase block mb-2">RateUp Group Assignment</label>
+                                  <div className="space-y-2">
+                                    <input 
+                                      type="text" 
+                                      placeholder="Enter RateUp Group IDs (comma separated)" 
+                                      className="w-full bg-slate-50 border border-slate-200 rounded-lg py-2 px-3 text-[11px] font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                                      value={assignedGroups}
+                                      onChange={(e) => setAssignedGroups(e.target.value)}
+                                    />
+                                    <p className="text-[9px] text-slate-400 italic">
+                                      These groups are used for targeted coordination broadcasts via RateUp.
+                                    </p>
                                   </div>
                                 </div>
                               </div>

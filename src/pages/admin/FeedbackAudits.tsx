@@ -256,7 +256,7 @@ const FeedbackAudits = () => {
                             flags.map((flag) => (
                               <TableRow key={flag.id} className="border-slate-50 hover:bg-slate-50/30 transition-colors">
                                 <TableCell className="font-black text-sm text-slate-900">{flag.provider}</TableCell>
-                                <TableCell className="text-xs font-medium text-slate-600 leading-relaxed max-w-[200px]">{flag.reason}</TableCell>
+                                <TableCell className="text-xs font-medium text-slate-600 leading-relaxed min-w-[200px]">{flag.reason}</TableCell>
                                 <TableCell>
                                   <Badge 
                                     variant="outline" 

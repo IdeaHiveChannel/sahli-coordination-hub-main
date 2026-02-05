@@ -135,8 +135,8 @@ export function Footer() {
                     <MessageSquare size={20} className="md:size-6" />
                   </div>
                   <div className="min-w-0 flex flex-col justify-center">
-                    <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.25em] text-foreground/60 leading-none mb-1.5">{t('footer.whatsapp')}</span>
-                    <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('contact.whatsapp.value')}</span>
+                    <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.25em] text-foreground/60 leading-tight mb-1.5">{t('footer.whatsapp')}</span>
+                    <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-tight">{t('contact.whatsapp.value')}</span>
                   </div>
                 </motion.div>
               </a>
@@ -150,8 +150,8 @@ export function Footer() {
                   <Mail size={20} className="md:size-6" />
                 </div>
                 <div className="min-w-0 flex flex-col justify-center">
-                  <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 leading-none mb-1.5">{t('contact.email.label')}</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-none">{t('contact.email.value')}</span>
+                  <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 leading-tight mb-1.5">{t('contact.email.label')}</span>
+                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-tight">{t('contact.email.value')}</span>
                 </div>
               </motion.a>
               

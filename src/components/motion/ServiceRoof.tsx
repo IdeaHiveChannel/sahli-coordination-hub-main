@@ -39,7 +39,7 @@ export function ServiceRoof({
 
   const content = (
     <motion.div
-      className={`relative h-[360px] md:h-[450px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70 grayscale-[0.5]' : ''}`}
+      className={`relative min-h-[360px] md:min-h-[450px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70 grayscale-[0.5]' : ''}`}
       whileHover={!isMobile && status !== 'comingSoon' ? { 
         y: -10,
         borderColor: 'hsla(var(--primary), 0.3)',
@@ -106,7 +106,7 @@ export function ServiceRoof({
       </div>
 
       {/* Content */}
-      <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end z-10">
+      <div className="relative min-h-[360px] md:min-h-[450px] p-8 lg:p-12 flex flex-col justify-end z-10">
         <motion.div
           animate={{ y: isHovered ? -5 : 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -167,7 +167,7 @@ export function ServiceRoof({
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          {t('services.explore')} <span className={`text-xl leading-none ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
+          {t('services.explore')} <span className={`text-xl leading-tight ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
         </motion.div>
       </div>
 

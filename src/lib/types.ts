@@ -65,6 +65,7 @@ export interface Provider {
   entity_type?: EntityType; // Internal-only
   limited_participation?: boolean; // For Conditionally Approved providers
   responsibility_confirmed?: boolean;
+  groups?: string[];
 }
 
 export interface ProviderApplication {

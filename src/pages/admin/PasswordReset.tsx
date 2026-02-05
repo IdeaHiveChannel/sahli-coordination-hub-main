@@ -14,7 +14,9 @@ const PasswordReset = () => {
   const { t, dir } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
-  const isForced = location.state?.forced === true;
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get('token');
+  const isForced = location.state?.forced === true || !!token;
   
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [email, setEmail] = useState('');
@@ -135,6 +137,9 @@ const PasswordReset = () => {
                 <p className="text-sm text-muted-foreground">
                   We've sent password reset instructions to <span className="font-bold text-foreground">{email}</span>.
                 </p>
+                <div className="mt-4 p-3 bg-primary/5 rounded border border-primary/10 text-[10px] text-primary leading-relaxed text-left">
+                  <strong>Note:</strong> As this is a secure coordination hub, password resets require manual verification by the system administrator if automated delivery is not configured for your domain.
+                </div>
               </div>
               <Button 
                 variant="outline" 
