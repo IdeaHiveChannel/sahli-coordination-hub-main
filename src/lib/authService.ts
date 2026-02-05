@@ -21,22 +21,26 @@ export interface AdminUser {
 // Environment-based credentials for production-ready security
 const getAdminCredentials = () => {
   // Directly available credentials (can be overridden by environment variables)
-  const email = import.meta.env.VITE_ADMIN_EMAIL || 'admin@sahli.co';
-  const password = import.meta.env.VITE_ADMIN_PASSWORD || 'SahliAdmin2026';
+  const rawEmail = import.meta.env.VITE_ADMIN_EMAIL;
+  const rawPassword = import.meta.env.VITE_ADMIN_PASSWORD;
 
   // Helper to strip "KEY=" prefix if user accidentally included it in GitHub Secrets
-  const clean = (val: string, key: string) => {
+  const clean = (val: string | undefined, key: string, fallback: string) => {
+    if (!val || val.trim() === '') return fallback;
     const prefix = `${key}=`;
-    return val.startsWith(prefix) ? val.substring(prefix.length).trim() : val.trim();
+    const cleaned = val.startsWith(prefix) ? val.substring(prefix.length).trim() : val.trim();
+    return cleaned === '' ? fallback : cleaned;
   };
 
-  const cleanEmail = clean(email, 'VITE_ADMIN_EMAIL');
-  const cleanPassword = clean(password, 'VITE_ADMIN_PASSWORD');
+  const email = clean(rawEmail, 'VITE_ADMIN_EMAIL', 'admin@sahli.co');
+  const password = clean(rawPassword, 'VITE_ADMIN_PASSWORD', 'SahliAdmin2026');
 
-  return {
-    email: cleanEmail,
-    password: cleanPassword
-  };
+  // Diagnostic log (safe for production as it doesn't show the actual values)
+  if (import.meta.env.PROD) {
+    console.log(`[AUTH] Credentials loaded: ${email === 'admin@sahli.co' ? 'FALLBACK' : 'CUSTOM'} email, ${password === 'SahliAdmin2026' ? 'FALLBACK' : 'CUSTOM'} password`);
+  }
+
+  return { email, password };
 };
 
 export const authService = {

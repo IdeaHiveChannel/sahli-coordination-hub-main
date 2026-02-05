@@ -51,7 +51,7 @@ const Settings = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 font-black tracking-widest text-[10px]">SYSTEM CORE</Badge>
-              <Badge variant="outline" className="bg-slate-50 text-slate-600 border-slate-200 font-bold text-[10px]">V1.0.4</Badge>
+              <Badge variant="outline" className="bg-slate-50 text-slate-600 border-slate-200 font-bold text-[10px]">V1.0.5</Badge>
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-slate-900">Control Center</h1>
             <p className="text-xs text-muted-foreground mt-1">
