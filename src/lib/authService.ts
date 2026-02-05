@@ -121,6 +121,9 @@ export const authService = {
       // This local update only clears the reset flag for the current session.
       console.log('Password updated for current session. Permanent update requires updating VITE_ADMIN_PASSWORD.');
       
+      // Trigger storage event for other components to sync
+      window.dispatchEvent(new Event('storage'));
+      
       return true;
     }
     return false;

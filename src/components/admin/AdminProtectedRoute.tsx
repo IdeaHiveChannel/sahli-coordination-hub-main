@@ -17,29 +17,29 @@ const AdminProtectedRoute = ({ children, requiredRole }: AdminProtectedRouteProp
   const location = useLocation();
 
   useEffect(() => {
-    // Safety timeout to prevent infinite loading if something crashes
-    const timeout = setTimeout(() => {
-      if (authStatus === null) {
-        console.warn('Auth check timed out, redirecting to login');
+    const checkAuth = () => {
+      try {
+        const isAuthenticated = authService.isAuthenticated();
+        const user = authService.getCurrentUser();
+        
+        setAuthStatus({
+          isAuthenticated,
+          mustResetPassword: user?.mustResetPassword ?? false,
+          role: user?.role
+        });
+      } catch (error) {
+        console.error('Auth check failed:', error);
         setAuthStatus({ isAuthenticated: false, mustResetPassword: false });
       }
-    }, 5000);
+    };
 
-    try {
-      const isAuthenticated = authService.isAuthenticated();
-      const user = authService.getCurrentUser();
-      
-      setAuthStatus({
-        isAuthenticated,
-        mustResetPassword: user?.mustResetPassword ?? false,
-        role: user?.role
-      });
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      setAuthStatus({ isAuthenticated: false, mustResetPassword: false });
-    }
+    // Run initial check
+    checkAuth();
 
-    return () => clearTimeout(timeout);
+    // Listen for storage changes (triggered by authService.updatePassword)
+    window.addEventListener('storage', checkAuth);
+
+    return () => window.removeEventListener('storage', checkAuth);
   }, []);
 
   if (authStatus === null) {
