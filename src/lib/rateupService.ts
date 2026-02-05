@@ -87,15 +87,28 @@ export const rateupService = {
   getApiConfig: () => {
     const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
     const rawUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
-    const orgId = import.meta.env.VITE_RATEUP_ORG_ID;
+    const envOrgId = import.meta.env.VITE_RATEUP_ORG_ID;
     
-    // Clean URL: Remove trailing slashes and API paths if accidentally included
+    // Clean URL: Remove trailing slashes
     let baseUrl = rawUrl.replace(/\/$/, '');
+    let extractedOrgId = '';
+
+    // If the URL contains the API path, it might also contain the Org ID
+    // Format: https://api.rateup.app/api/external/v1/{orgId}
     if (baseUrl.includes('/api/external/v1')) {
-      baseUrl = baseUrl.split('/api/external/v1')[0];
+      const parts = baseUrl.split('/api/external/v1/');
+      baseUrl = parts[0];
+      if (parts[1]) {
+        // The part after /v1/ is likely the Org ID
+        extractedOrgId = parts[1].split('/')[0];
+      }
     }
 
-    return { apiKey, baseUrl, orgId };
+    return { 
+      apiKey, 
+      baseUrl, 
+      orgId: envOrgId || extractedOrgId 
+    };
   },
 
   /**
