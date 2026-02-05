@@ -85,12 +85,23 @@ export const rateupService = {
    * Internal helper to get a clean base URL and Org ID
    */
   getApiConfig: () => {
-    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
+    const rawApiKey = import.meta.env.VITE_RATEUP_API_KEY;
     const rawUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
-    const envOrgId = import.meta.env.VITE_RATEUP_ORG_ID;
+    const rawOrgId = import.meta.env.VITE_RATEUP_ORG_ID;
+
+    // Helper to strip "KEY=" prefix if user accidentally included it in GitHub Secrets
+    const cleanSecret = (val: string | undefined, key: string) => {
+      if (!val) return '';
+      const prefix = `${key}=`;
+      return val.startsWith(prefix) ? val.substring(prefix.length).trim() : val.trim();
+    };
+
+    const apiKey = cleanSecret(rawApiKey, 'VITE_RATEUP_API_KEY');
+    const envOrgId = cleanSecret(rawOrgId, 'VITE_RATEUP_ORG_ID');
+    let baseUrl = cleanSecret(rawUrl, 'VITE_RATEUP_URL');
     
     // Clean URL: Remove trailing slashes
-    let baseUrl = rawUrl.replace(/\/$/, '');
+    baseUrl = baseUrl.replace(/\/$/, '');
     let extractedOrgId = '';
 
     // If the URL contains the API path, it might also contain the Org ID
