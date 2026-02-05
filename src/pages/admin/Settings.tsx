@@ -122,6 +122,54 @@ const Settings = () => {
               </CardFooter>
             </Card>
 
+            {/* Admin Credentials & Security */}
+            <Card className="border-primary/10 shadow-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Lock size={20} className="text-primary" />
+                  Admin Security
+                </CardTitle>
+                <CardDescription>Manage your access credentials and password reset protocols.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="p-4 rounded-xl bg-amber-50 border border-amber-100 space-y-3">
+                  <div className="flex items-center gap-2 text-amber-800">
+                    <AlertTriangle size={16} />
+                    <span className="text-xs font-bold uppercase tracking-wider">Security Notice</span>
+                  </div>
+                  <p className="text-xs text-amber-700 leading-relaxed">
+                    To permanently change your admin password, you must update the <strong>VITE_ADMIN_PASSWORD</strong> secret in your GitHub Repository settings. 
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="bg-white border-amber-200 text-amber-700 hover:bg-amber-100 font-bold text-[10px] uppercase tracking-widest"
+                    asChild
+                  >
+                    <a href="mailto:hello@sahliservice.com?subject=Admin Password Change Request&body=Hello, I would like to request a permanent password change for the Sahli Admin Portal.">
+                      Request Support Reset
+                    </a>
+                  </Button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Current Admin Email</Label>
+                      <Input value="admin@sahli.co" readOnly className="bg-slate-50 font-mono text-xs" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Current Admin Password</Label>
+                      <div className="relative">
+                        <Input type="password" value="********" readOnly className="bg-slate-50 font-mono text-xs" />
+                        <Badge className="absolute right-2 top-1.5 bg-slate-200 text-slate-600 hover:bg-slate-200 text-[8px]">PROTECTED</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Admin Roles & Access */}
             <Card className="border-primary/10 shadow-sm">
               <CardHeader>

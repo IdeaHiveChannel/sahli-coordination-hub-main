@@ -64,12 +64,12 @@ const Login = () => {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <Link 
-                    to="/admin/password-reset" 
+                  <a 
+                    href="mailto:hello@sahliservice.com?subject=Admin Password Reset Request&body=Hello, I need to reset my admin password for the Sahli Coordination Hub."
                     className="text-xs text-primary hover:underline"
                   >
                     Forgot password?
-                  </Link>
+                  </a>
                 </div>
                 <Input 
                   id="password" 
@@ -87,14 +87,16 @@ const Login = () => {
                 {isLoading ? 'Signing In...' : 'Sign In'}
               </Button>
             </form>
-            {import.meta.env.DEV && !import.meta.env.VITE_ADMIN_EMAIL && (
+            {import.meta.env.PROD && (
               <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
-                <p className="text-[10px] uppercase font-bold tracking-widest text-primary mb-2">Demo Credentials</p>
-                <div className="space-y-1">
+                <p className="text-[10px] uppercase font-bold tracking-widest text-primary mb-2">Login Help</p>
+                <p className="text-[10px] text-muted-foreground leading-relaxed">
+                  If you haven't set your own secrets yet, use the default credentials below and change them in <strong>Settings</strong> after logging in.
+                </p>
+                <div className="mt-3 space-y-1">
                   <p className="text-xs text-muted-foreground">Email: <span className="text-foreground font-mono">admin@sahli.co</span></p>
-                  <p className="text-xs text-muted-foreground">Password: <span className="text-foreground font-mono">password123</span></p>
+                  <p className="text-xs text-muted-foreground">Password: <span className="text-foreground font-mono">SahliAdmin2026</span></p>
                 </div>
-                <p className="mt-2 text-[8px] text-muted-foreground italic">Note: Set VITE_ADMIN_EMAIL and VITE_ADMIN_PASSWORD in .env to override.</p>
               </div>
             )}
           </CardContent>
