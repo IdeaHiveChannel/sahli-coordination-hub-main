@@ -82,18 +82,35 @@ export const rateupService = {
   },
 
   /**
+   * Internal helper to get a clean base URL and Org ID
+   */
+  getApiConfig: () => {
+    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
+    const rawUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
+    const orgId = import.meta.env.VITE_RATEUP_ORG_ID;
+    
+    // Clean URL: Remove trailing slashes and API paths if accidentally included
+    let baseUrl = rawUrl.replace(/\/$/, '');
+    if (baseUrl.includes('/api/external/v1')) {
+      baseUrl = baseUrl.split('/api/external/v1')[0];
+    }
+
+    return { apiKey, baseUrl, orgId };
+  },
+
+  /**
    * Dispatches a WhatsApp template broadcast to contact groups via RateUp.
    */
   sendBroadcast: async (payload: BroadcastPayload): Promise<boolean> => {
-    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
+    const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
+    const orgId = payload.orgId || envOrgId;
 
     if (!apiKey) {
       console.error('RateUp API key missing');
       return false;
     }
 
-    const { orgId, templateId, ...requestBody } = payload;
+    const { templateId, ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/templates/${templateId}/send/contact-groups`;
 
     try {
@@ -129,9 +146,9 @@ export const rateupService = {
    * Upserts a contact in RateUp (creates or updates).
    */
   upsertContact: async (payload: UpsertContactPayload): Promise<{ id: string } | null> => {
-    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
-    const { orgId, ...requestBody } = payload;
+    const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
+    const orgId = payload.orgId || envOrgId;
+    const { ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/contacts/`;
 
     if (!apiKey) {
@@ -177,9 +194,9 @@ export const rateupService = {
    * Creates a new contact group in RateUp.
    */
   createContactGroup: async (payload: ContactGroupPayload): Promise<{ id: string } | null> => {
-    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
-    const { orgId, ...requestBody } = payload;
+    const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
+    const orgId = payload.orgId || envOrgId;
+    const { ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/contact-groups/`;
 
     try {
@@ -208,9 +225,9 @@ export const rateupService = {
    * Adds existing contacts to a specific contact group.
    */
   addContactsToGroup: async (payload: AddContactsToGroupPayload): Promise<boolean> => {
-    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
-    const { orgId, ...requestBody } = payload;
+    const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
+    const orgId = payload.orgId || envOrgId;
+    const { ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/contact-groups/add-existing-contacts`;
 
     try {
@@ -239,9 +256,9 @@ export const rateupService = {
    * Sends a direct message to a specific phone number.
    */
   sendDirectMessage: async (payload: DirectMessagePayload): Promise<boolean> => {
-    const apiKey = import.meta.env.VITE_RATEUP_API_KEY;
-    const baseUrl = import.meta.env.VITE_RATEUP_URL || 'https://api.rateup.app';
-    const { orgId, ...requestBody } = payload;
+    const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
+    const orgId = payload.orgId || envOrgId;
+    const { ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/messages/send`;
 
     try {
