@@ -106,19 +106,28 @@ export const rateupService = {
 
     // If the URL contains the API path, it might also contain the Org ID
     // Format: https://api.rateup.app/api/external/v1/{orgId}
-    if (baseUrl.includes('/api/external/v1')) {
+    if (baseUrl.includes('/api/external/v1/')) {
       const parts = baseUrl.split('/api/external/v1/');
-      baseUrl = parts[0];
       if (parts[1]) {
         // The part after /v1/ is likely the Org ID
-        extractedOrgId = parts[1].split('/')[0];
+        extractedOrgId = parts[1].split('/')[0].trim();
       }
+    }
+
+    const finalOrgId = envOrgId || extractedOrgId;
+
+    if (!finalOrgId && import.meta.env.DEV) {
+      console.warn('RateUp Configuration Warning: No Org ID found in environment or URL.', {
+        hasApiKey: !!apiKey,
+        hasBaseUrl: !!baseUrl,
+        baseUrl
+      });
     }
 
     return { 
       apiKey, 
-      baseUrl, 
-      orgId: envOrgId || extractedOrgId 
+      baseUrl: baseUrl.includes('/api/external/v1') ? baseUrl.split('/api/external/v1')[0] : baseUrl, 
+      orgId: finalOrgId
     };
   },
 

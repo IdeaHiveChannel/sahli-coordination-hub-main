@@ -94,8 +94,8 @@ const Login = () => {
                   If you haven't set your own secrets yet, use the default credentials below and change them in <strong>Settings</strong> after logging in.
                 </p>
                 <div className="mt-3 space-y-1">
-                  <p className="text-xs text-muted-foreground">Email: <span className="text-foreground font-mono">admin@sahli.co</span></p>
-                  <p className="text-xs text-muted-foreground">Password: <span className="text-foreground font-mono">SahliAdmin2026</span></p>
+                  <p className="text-xs text-muted-foreground">Email: <span className="text-foreground font-mono">{import.meta.env.VITE_ADMIN_EMAIL || 'admin@sahliservice.com'}</span></p>
+                  <p className="text-xs text-muted-foreground">Password: <span className="text-foreground font-mono">{import.meta.env.VITE_ADMIN_PASSWORD || 'Sahliadmin@123'}</span></p>
                 </div>
               </div>
             )}
