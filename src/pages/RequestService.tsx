@@ -126,7 +126,7 @@ const RequestService = () => {
     
     try {
       // Integration with RateUp for WhatsApp OTP
-      const orgId = import.meta.env.VITE_RATEUP_ORG_ID;
+      const { orgId } = rateupService.getApiConfig();
       const fullPhone = formData.phone;
       
       if (orgId) {
@@ -237,7 +237,7 @@ const RequestService = () => {
       console.log('BACKEND: Request created and visible in Admin Dashboard.', newRequest);
       
       // 2. Sync to RateUp (Customer Data)
-      const orgId = import.meta.env.VITE_RATEUP_ORG_ID;
+      const { orgId } = rateupService.getApiConfig();
       if (orgId) {
         try {
           await rateupService.upsertContact({
