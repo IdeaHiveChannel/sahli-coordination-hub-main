@@ -116,11 +116,13 @@ export const rateupService = {
 
     const finalOrgId = envOrgId || extractedOrgId;
 
-    if (!finalOrgId && import.meta.env.DEV) {
-      console.warn('RateUp Configuration Warning: No Org ID found in environment or URL.', {
+    if (!finalOrgId) {
+      console.warn('RateUp Configuration Warning: No Org ID found.', {
         hasApiKey: !!apiKey,
         hasBaseUrl: !!baseUrl,
-        baseUrl
+        baseUrl,
+        isDev: import.meta.env.DEV,
+        mode: import.meta.env.MODE
       });
     }
 

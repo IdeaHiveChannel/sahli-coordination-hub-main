@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   readonly VITE_ADMIN_PASSWORD: string
   readonly VITE_RATEUP_API_KEY: string
   readonly VITE_RATEUP_URL: string
+  readonly VITE_RATEUP_ORG_ID: string
 }
 
 interface ImportMeta {

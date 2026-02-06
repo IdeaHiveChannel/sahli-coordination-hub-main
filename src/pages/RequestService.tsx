@@ -135,11 +135,12 @@ const RequestService = () => {
           phoneNumber: fullPhone,
           message: `Your SAHLI verification code is: ${newOtp}. Valid for 5 minutes.`
         });
-        console.log(`OTP sent via RateUp to ${fullPhone}`);
+        console.log(`OTP sent via RateUp to ${fullPhone} (Org: ${orgId})`);
       } else {
         // Fallback for development if API key not set
-        console.warn('VITE_RATEUP_ORG_ID missing. Falling back to console OTP.');
-        console.log(`[DEV] OTP for ${fullPhone}: ${newOtp}`);
+        console.warn('VITE_RATEUP_ORG_ID missing from environment. If this is a production build, please ensure .env variables were present during build time. Falling back to console OTP.');
+        console.log(`[DEBUG] RateUp Config:`, rateupService.getApiConfig());
+        console.log(`[OTP FALLBACK] Phone: ${fullPhone}, Code: ${newOtp}`);
         if (import.meta.env.DEV) {
           toast.info(`DEV MODE: OTP is ${newOtp}`, { duration: 5000 });
         }
