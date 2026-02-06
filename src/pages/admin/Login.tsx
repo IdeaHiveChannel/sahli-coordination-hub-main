@@ -87,18 +87,6 @@ const Login = () => {
                 {isLoading ? 'Signing In...' : 'Sign In'}
               </Button>
             </form>
-            {import.meta.env.PROD && (
-              <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
-                <p className="text-[10px] uppercase font-bold tracking-widest text-primary mb-2">Login Help</p>
-                <p className="text-[10px] text-muted-foreground leading-relaxed">
-                  If you haven't set your own secrets yet, use the default credentials below and change them in <strong>Settings</strong> after logging in.
-                </p>
-                <div className="mt-3 space-y-1">
-                  <p className="text-xs text-muted-foreground">Email: <span className="text-foreground font-mono">{import.meta.env.VITE_ADMIN_EMAIL || 'admin@sahliservice.com'}</span></p>
-                  <p className="text-xs text-muted-foreground">Password: <span className="text-foreground font-mono">{import.meta.env.VITE_ADMIN_PASSWORD || 'Sahliadmin@123'}</span></p>
-                </div>
-              </div>
-            )}
           </CardContent>
         </Card>
       </div>
