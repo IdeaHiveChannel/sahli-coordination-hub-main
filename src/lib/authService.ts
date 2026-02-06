@@ -33,8 +33,8 @@ const getAdminCredentials = () => {
     return cleaned === '' ? fallback : cleaned;
   };
 
-  const email = clean(rawEmail, 'VITE_ADMIN_EMAIL', 'admin@sahli.co');
-  const password = clean(rawPassword, 'VITE_ADMIN_PASSWORD', 'SahliAdmin2026');
+  const email = clean(rawEmail, 'VITE_ADMIN_EMAIL', 'admin@sahliservice.com');
+  const password = clean(rawPassword, 'VITE_ADMIN_PASSWORD', 'Sahliadmin@123');
 
   return { email, password };
 };
