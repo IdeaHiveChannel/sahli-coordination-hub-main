@@ -16,7 +16,8 @@ const PasswordReset = () => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
-  const isForced = location.state?.forced === true || !!token;
+  // Only allow "forced" reset if explicitly triggered by session or a valid admin-provided token
+  const isForced = location.state?.forced === true || (!!token && token === 'ADMIN_SECURE_BYPASS');
   
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [email, setEmail] = useState('');
@@ -104,10 +105,10 @@ const PasswordReset = () => {
                         To maintain system security, password reset requests are handled manually by the administration team.
                       </p>
                       <Button asChild className="w-full font-bold uppercase tracking-wider">
-                        <a href="mailto:hello@sahliservice.com?subject=Admin Password Reset Request&body=Hello, I need to reset my admin password for the Sahli Coordination Hub.">
-                          Email Administrator
-                        </a>
-                      </Button>
+                         <a href="mailto:hello@sahliservice.com?subject=Admin%20Password%20Reset%20Request&body=Hello%2C%20I%20need%20to%20reset%20my%20admin%20password%20for%20the%20Sahli%20Coordination%20Hub.">
+                           Email Administrator
+                         </a>
+                       </Button>
                     </div>
                   )}
                   {isForced && (

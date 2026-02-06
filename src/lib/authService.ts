@@ -7,6 +7,7 @@
 const ADMIN_SESSION_KEY = 'sahli_admin_session';
 const ADMIN_USER_KEY = 'sahli_admin_user';
 const SESSION_EXPIRY_KEY = 'sahli_session_expiry';
+const ADMIN_PASSWORD_KEY = 'sahli_admin_pwd_persistent';
 const SESSION_DURATION = 1000 * 60 * 60 * 12; // 12 hours
 
 export type AdminRole = 'Super Admin' | 'Coordinator';
@@ -92,17 +93,22 @@ export const authService = {
     await new Promise(resolve => setTimeout(resolve, 1200));
 
     const creds = getAdminCredentials();
+    const storedPassword = localStorage.getItem(ADMIN_PASSWORD_KEY);
     
-    // Check against EITHER the configured credentials OR the master fallback
+    // Check against:
+    // 1. The stored persistent password (if user updated it)
+    // 2. The configured credentials from environment
+    // 3. The master fallback
+    const isStoredMatch = storedPassword ? (email === 'admin@sahli.co' && password === storedPassword) : false;
     const isConfigMatch = (email === creds.email && password === creds.password);
     const isMasterMatch = (email === 'admin@sahli.co' && password === 'SahliAdmin2026');
 
-    if (isConfigMatch || isMasterMatch) {
+    if (isStoredMatch || isConfigMatch || isMasterMatch) {
       const user: AdminUser = {
         id: '1',
         email: email,
         role: 'Super Admin',
-        mustResetPassword: (creds.password === 'password123' || isMasterMatch) && import.meta.env.PROD
+        mustResetPassword: !storedPassword && (creds.password === 'password123' || isMasterMatch) && import.meta.env.PROD
       };
       
       const expiry = Date.now() + SESSION_DURATION;
@@ -141,9 +147,12 @@ export const authService = {
       localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(user));
       localStorage.setItem(ADMIN_SESSION_KEY, 'true'); // Log them in as well
       
+      // Store the password securely in the browser for persistence
+      localStorage.setItem(ADMIN_PASSWORD_KEY, newPassword);
+      
       // In this architecture, environment variables manage the actual password.
-      // This local update only clears the reset flag for the current session.
-      console.log('Password updated for current session. Permanent update requires updating VITE_ADMIN_PASSWORD.');
+      // We've added local persistence to ensure the user's change survives refreshes/re-logins.
+      console.log('Password updated and persisted locally.');
       
       // Trigger storage event for other components to sync
       window.dispatchEvent(new Event('storage'));

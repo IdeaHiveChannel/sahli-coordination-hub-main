@@ -65,7 +65,7 @@ const Login = () => {
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
                   <a 
-                    href="mailto:hello@sahliservice.com?subject=Admin Password Reset Request&body=Hello, I need to reset my admin password for the Sahli Coordination Hub."
+                    href="mailto:hello@sahliservice.com?subject=Admin%20Password%20Reset%20Request&body=Hello%2C%20I%20need%20to%20reset%20my%20admin%20password%20for%20the%20Sahli%20Coordination%20Hub."
                     className="text-xs text-primary hover:underline"
                   >
                     Forgot password?
