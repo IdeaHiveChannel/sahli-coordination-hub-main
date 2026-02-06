@@ -139,7 +139,7 @@ const Index = () => {
     { 
       title: t('services.outdoor.title'), 
       description: t('services.outdoor.subtitle'),
-      imageUrl: "https://images.unsplash.com/photo-1592417817098-8fd3d9ebc4a5?q=80&w=800&fm=webp&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?q=80&w=800&fm=webp&fit=crop",
       icon: <Leaf size={32} />,
       path: t('services.outdoor.path'),
       number: "04",
@@ -262,7 +262,7 @@ const Index = () => {
               crossOrigin="anonymous"
               className="w-full h-full object-cover opacity-20 grayscale scale-110"
             >
-              <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-working-in-a-modern-office-4682-large.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4" />
               {/* Fallback image */}
               <img 
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 

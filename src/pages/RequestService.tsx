@@ -371,14 +371,17 @@ const RequestService = () => {
                     maxLength={6}
                     value={formData.otp}
                     onChange={(v) => updateFormData('otp', v)}
-                    render={({ slots }) => (
-                      <InputOTPGroup className="gap-2">
-                        {slots.map((slot, index) => (
-                          <InputOTPSlot key={index} index={index} {...slot} className="w-12 h-14 text-lg font-bold rounded-xl border-border/50 bg-background shadow-sm" />
-                        ))}
-                      </InputOTPGroup>
-                    )}
-                  />
+                  >
+                    <InputOTPGroup className="gap-2">
+                      {[0, 1, 2, 3, 4, 5].map((index) => (
+                        <InputOTPSlot 
+                          key={index} 
+                          index={index} 
+                          className="w-12 h-14 text-lg font-bold rounded-xl border-border/50 bg-background shadow-sm" 
+                        />
+                      ))}
+                    </InputOTPGroup>
+                  </InputOTP>
                   <div className="w-full space-y-4">
                     <Button 
                       disabled={formData.otp.length !== 6 || isSubmitting}
