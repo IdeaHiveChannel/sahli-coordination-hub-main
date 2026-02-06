@@ -65,7 +65,7 @@ const PasswordReset = () => {
                 <CardDescription>
                   {isForced 
                     ? 'Your account requires a password change on first login.' 
-                    : "Enter your admin email and we'll send you instructions to reset your password."}
+                    : "Please contact hello@sahliservice.com to request a password reset for your admin account."}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -94,23 +94,27 @@ const PasswordReset = () => {
                       </div>
                     </>
                   ) : (
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="admin@sahli.co" 
-                        required 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
+                    <div className="space-y-6 py-4 text-center">
+                      <div className="flex justify-center mb-4">
+                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                          <MailCheck size={32} />
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        To maintain system security, password reset requests are handled manually by the administration team.
+                      </p>
+                      <Button asChild className="w-full font-bold uppercase tracking-wider">
+                        <a href="mailto:hello@sahliservice.com?subject=Admin Password Reset Request&body=Hello, I need to reset my admin password for the Sahli Coordination Hub.">
+                          Email Administrator
+                        </a>
+                      </Button>
                     </div>
                   )}
-                  <Button type="submit" className="w-full font-bold uppercase tracking-wider" disabled={isLoading}>
-                    {isLoading 
-                      ? (isForced ? 'Updating...' : 'Sending...') 
-                      : (isForced ? 'Update Password' : 'Send Reset Link')}
-                  </Button>
+                  {isForced && (
+                    <Button type="submit" className="w-full font-bold uppercase tracking-wider" disabled={isLoading}>
+                      {isLoading ? 'Updating...' : 'Update Password'}
+                    </Button>
+                  )}
                 </form>
               </CardContent>
               {!isForced && (
