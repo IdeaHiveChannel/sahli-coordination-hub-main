@@ -130,12 +130,29 @@ const RequestService = () => {
       const fullPhone = formData.phone;
       
       if (orgId) {
-        await rateupService.sendDirectMessage({
-          orgId,
-          phoneNumber: fullPhone,
-          message: `Your SAHLI verification code is: ${newOtp}. Valid for 5 minutes.`
-        });
-        console.log(`OTP sent via RateUp to ${fullPhone} (Org: ${orgId})`);
+        try {
+          const success = await rateupService.sendDirectMessage({
+            orgId,
+            phoneNumber: fullPhone,
+            message: `Your SAHLI verification code is: ${newOtp}. Valid for 5 minutes.`
+          });
+          
+          if (success) {
+            console.log(`OTP sent via RateUp to ${fullPhone} (Org: ${orgId})`);
+            toast.success('Verification code sent to WhatsApp');
+          } else {
+            throw new Error('RateUp service returned failure status');
+          }
+        } catch (apiError: any) {
+          console.error('WhatsApp API Failure:', apiError);
+          // Only show fallback in DEV, in PROD we want to know why it failed
+          if (import.meta.env.DEV) {
+            toast.warning(`API Error: ${apiError.message || 'Check console'}. Using fallback OTP: ${newOtp}`);
+          } else {
+            // In production, we still fallback but log clearly
+            console.warn('Production Fallback: API failed, using console OTP', apiError);
+          }
+        }
       } else {
         // Fallback for development if API key not set
         console.warn('VITE_RATEUP_ORG_ID missing from environment. If this is a production build, please ensure .env variables were present during build time. Falling back to console OTP.');

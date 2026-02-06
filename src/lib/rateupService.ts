@@ -75,9 +75,15 @@ export const rateupService = {
    */
   formatPhoneNumber: (phone: string): string => {
     const cleaned = phone.replace(/\D/g, '');
+    
+    // Debug logging for phone formatting
+    if (import.meta.env.DEV) {
+      console.log('📱 Formatting Phone:', { original: phone, cleaned });
+    }
+
     if (cleaned.length === 8) return `+974${cleaned}`;
     if (cleaned.startsWith('974') && cleaned.length === 11) return `+${cleaned}`;
-    if (cleaned.startsWith('00')) return `+${cleaned.substring(2)}`;
+    if (cleaned.startsWith('00')) return `+${cleaned.slice(2)}`;
     return cleaned.startsWith('+') ? cleaned : `+${cleaned}`;
   },
 
@@ -293,10 +299,18 @@ export const rateupService = {
   sendDirectMessage: async (payload: DirectMessagePayload): Promise<boolean> => {
     const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
     const orgId = payload.orgId || envOrgId;
-    const { ...requestBody } = payload;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/messages/send`;
+    const formattedPhone = rateupService.formatPhoneNumber(payload.phoneNumber);
 
     try {
+      if (import.meta.env.DEV) {
+        console.log('🚀 RateUp Direct Message Dispatch:', {
+          url: apiUrl,
+          to: formattedPhone,
+          message: payload.message
+        });
+      }
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -304,14 +318,31 @@ export const rateupService = {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          to: rateupService.formatPhoneNumber(payload.phoneNumber),
+          to: formattedPhone,
           body: payload.message
         }),
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `RateUp API error: ${response.statusText}`);
+        const errorText = await response.text();
+        let errorData = {};
+        try {
+          errorData = JSON.parse(errorText);
+        } catch (e) {
+          errorData = { raw: errorText };
+        }
+        
+        console.error('❌ RateUp API Error Details:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        });
+        
+        throw new Error((errorData as any).message || `RateUp API error: ${response.statusText} (${response.status})`);
+      }
+
+      if (import.meta.env.DEV) {
+        console.log('✅ RateUp Direct Message Sent Successfully');
       }
 
       return true;
