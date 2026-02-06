@@ -127,7 +127,7 @@ const RequestService = () => {
     try {
       // Integration with RateUp for WhatsApp OTP
       const { orgId } = rateupService.getApiConfig();
-      const fullPhone = formData.phone;
+      const fullPhone = rateupService.formatPhoneNumber(formData.phone);
       
       if (orgId) {
         try {
@@ -434,7 +434,7 @@ const RequestService = () => {
                       <Check size={24} strokeWidth={4} />
                     </div>
                     <p className="font-black text-emerald-600 uppercase tracking-widest text-sm">Phone Verified</p>
-                    <p className="text-xs text-emerald-600/70">{formData.phone}</p>
+                    <p className="text-xs text-emerald-600/70">{rateupService.formatPhoneNumber(formData.phone)}</p>
                   </div>
                   <Button 
                     onClick={nextStage} 

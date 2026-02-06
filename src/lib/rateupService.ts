@@ -72,8 +72,9 @@ export const rateupService = {
   /**
    * Helper to ensure phone numbers are in E.164 format for RateUp.
    * Strictly enforces +974 prefix as required by SAHLI coordination hub.
+   * Now includes spaces for improved UI readability.
    */
-  formatPhoneNumber: (phone: string): string => {
+  formatPhoneNumber: (phone: string, includeSpaces: boolean = true): string => {
     // Remove all non-numeric characters
     const cleaned = phone.replace(/\D/g, '');
     
@@ -82,28 +83,34 @@ export const rateupService = {
       console.log('📱 Formatting Phone (Strict +974):', { original: phone, cleaned });
     }
 
+    let result = '';
+
     // Case 1: 8 digits (standard Qatar local number) -> Add +974
     if (cleaned.length === 8) {
-      return `+974${cleaned}`;
+      result = `974${cleaned}`;
     }
-
-    // Case 2: Starts with 974 and has 11 digits -> Add +
-    if (cleaned.startsWith('974') && cleaned.length === 11) {
-      return `+${cleaned}`;
+    // Case 2: Starts with 974 and has 11 digits
+    else if (cleaned.startsWith('974') && cleaned.length === 11) {
+      result = cleaned;
     }
-
-    // Case 3: Starts with 00974 -> Replace 00 with +
-    if (cleaned.startsWith('00974')) {
-      return `+${cleaned.slice(2)}`;
+    // Case 3: Starts with 00974 -> Replace 00 with nothing (to be prefixed with + later)
+    else if (cleaned.startsWith('00974')) {
+      result = cleaned.slice(2);
     }
-
     // Case 4: Any other number -> Force 974 prefix if not already present
-    // If it's not starting with 974, we assume it's a local number and prefix it
-    if (!cleaned.startsWith('974')) {
-      return `+974${cleaned}`;
+    else if (!cleaned.startsWith('974')) {
+      result = `974${cleaned}`;
+    }
+    else {
+      result = cleaned;
     }
 
-    return `+${cleaned}`;
+    // Apply formatting with spaces if requested: +974 XXXX XXXX
+    if (includeSpaces && result.startsWith('974') && result.length === 11) {
+      return `+974 ${result.slice(3, 7)} ${result.slice(7)}`;
+    }
+
+    return `+${result}`;
   },
 
   /**
@@ -231,7 +238,7 @@ export const rateupService = {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          phoneNumber: rateupService.formatPhoneNumber(payload.phoneNumber),
+          phoneNumber: rateupService.formatPhoneNumber(payload.phoneNumber, false),
           name: payload.name,
           email: payload.email,
           customFields: payload.customFields
@@ -326,7 +333,7 @@ export const rateupService = {
     }
 
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/templates/send`;
-    const formattedPhone = rateupService.formatPhoneNumber(payload.phoneNumber).replace('+', ''); // API expects number
+    const formattedPhone = rateupService.formatPhoneNumber(payload.phoneNumber, false).replace('+', ''); // API expects number
     
     try {
       if (import.meta.env.DEV) {
@@ -346,7 +353,7 @@ export const rateupService = {
         },
         body: JSON.stringify({
           templateName: templateName,
-          phone: parseInt(formattedPhone),
+          phone: parseInt(formattedPhone.replace(/\s/g, '')),
           body_variables: [payload.otp] // Assuming the template has one variable for the OTP
         }),
       });
@@ -374,7 +381,7 @@ export const rateupService = {
     const { apiKey, baseUrl, orgId: envOrgId } = rateupService.getApiConfig();
     const orgId = payload.orgId || envOrgId;
     const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/messages/send`;
-    const formattedPhone = rateupService.formatPhoneNumber(payload.phoneNumber);
+    const formattedPhone = rateupService.formatPhoneNumber(payload.phoneNumber, false);
 
     try {
       if (import.meta.env.DEV) {
@@ -392,7 +399,7 @@ export const rateupService = {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          to: formattedPhone,
+          to: formattedPhone.replace(/\s/g, ''),
           body: payload.message
         }),
       });
