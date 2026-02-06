@@ -71,20 +71,39 @@ interface UpsertContactPayload {
 export const rateupService = {
   /**
    * Helper to ensure phone numbers are in E.164 format for RateUp.
-   * Defaulting to +974 for 8-digit numbers.
+   * Strictly enforces +974 prefix as required by SAHLI coordination hub.
    */
   formatPhoneNumber: (phone: string): string => {
+    // Remove all non-numeric characters
     const cleaned = phone.replace(/\D/g, '');
     
     // Debug logging for phone formatting
     if (import.meta.env.DEV) {
-      console.log('📱 Formatting Phone:', { original: phone, cleaned });
+      console.log('📱 Formatting Phone (Strict +974):', { original: phone, cleaned });
     }
 
-    if (cleaned.length === 8) return `+974${cleaned}`;
-    if (cleaned.startsWith('974') && cleaned.length === 11) return `+${cleaned}`;
-    if (cleaned.startsWith('00')) return `+${cleaned.slice(2)}`;
-    return cleaned.startsWith('+') ? cleaned : `+${cleaned}`;
+    // Case 1: 8 digits (standard Qatar local number) -> Add +974
+    if (cleaned.length === 8) {
+      return `+974${cleaned}`;
+    }
+
+    // Case 2: Starts with 974 and has 11 digits -> Add +
+    if (cleaned.startsWith('974') && cleaned.length === 11) {
+      return `+${cleaned}`;
+    }
+
+    // Case 3: Starts with 00974 -> Replace 00 with +
+    if (cleaned.startsWith('00974')) {
+      return `+${cleaned.slice(2)}`;
+    }
+
+    // Case 4: Any other number -> Force 974 prefix if not already present
+    // If it's not starting with 974, we assume it's a local number and prefix it
+    if (!cleaned.startsWith('974')) {
+      return `+974${cleaned}`;
+    }
+
+    return `+${cleaned}`;
   },
 
   /**
@@ -290,6 +309,61 @@ export const rateupService = {
     } catch (error: unknown) {
       console.error('RateUp Add Contacts Error:', error);
       throw error;
+    }
+  },
+
+  /**
+   * Sends an OTP via a WhatsApp template.
+   * Based on the RateUp API documentation: /api/external/v1/{orgId}/wa/templates/send
+   */
+  sendOTP: async (payload: { phoneNumber: string; otp: string }): Promise<boolean> => {
+    const { apiKey, baseUrl, orgId } = rateupService.getApiConfig();
+    const templateName = import.meta.env.VITE_RATEUP_TEMPLATE_ID; // Usually the template name for this endpoint
+    
+    if (!apiKey || !orgId || !templateName) {
+      console.warn('RateUp Configuration Missing for OTP:', { hasApiKey: !!apiKey, hasOrgId: !!orgId, hasTemplate: !!templateName });
+      return false;
+    }
+
+    const apiUrl = `${baseUrl}/api/external/v1/${orgId}/wa/templates/send`;
+    const formattedPhone = rateupService.formatPhoneNumber(payload.phoneNumber).replace('+', ''); // API expects number
+    
+    try {
+      if (import.meta.env.DEV) {
+        console.log('🚀 RateUp OTP Dispatch:', {
+          url: apiUrl,
+          template: templateName,
+          to: formattedPhone,
+          variables: [payload.otp]
+        });
+      }
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          templateName: templateName,
+          phone: parseInt(formattedPhone),
+          body_variables: [payload.otp] // Assuming the template has one variable for the OTP
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ RateUp OTP Error:', {
+          status: response.status,
+          error: errorText
+        });
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('RateUp OTP Service Error:', error);
+      return false;
     }
   },
 

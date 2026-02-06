@@ -86,9 +86,11 @@ const RequestsList = () => {
       return;
     }
 
+    const formattedPhone = rateupService.formatPhoneNumber(manualRequest.customerPhone);
+
     const newRequest = storageService.saveRequest({
       customer_id: `C-${Math.floor(Math.random() * 1000)}`,
-      customer_phone: manualRequest.customerPhone,
+      customer_phone: formattedPhone,
       service_category: 'General',
       sub_service: manualRequest.service,
       area: manualRequest.area,
@@ -107,8 +109,8 @@ const RequestsList = () => {
     if (orgId) {
       rateupService.upsertContact({
         orgId,
-        phoneNumber: manualRequest.customerPhone,
-        name: `Customer ${manualRequest.customerPhone}`,
+        phoneNumber: formattedPhone,
+        name: `Customer ${formattedPhone}`,
         customFields: {
           last_service: manualRequest.service,
           last_area: manualRequest.area,

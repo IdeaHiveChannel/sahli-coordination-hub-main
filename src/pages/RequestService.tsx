@@ -131,14 +131,13 @@ const RequestService = () => {
       
       if (orgId) {
         try {
-          const success = await rateupService.sendDirectMessage({
-            orgId,
+          const success = await rateupService.sendOTP({
             phoneNumber: fullPhone,
-            message: `Your SAHLI verification code is: ${newOtp}. Valid for 5 minutes.`
+            otp: newOtp
           });
           
           if (success) {
-            console.log(`OTP sent via RateUp to ${fullPhone} (Org: ${orgId})`);
+            console.log(`OTP sent via RateUp template to ${fullPhone}`);
             toast.success('Verification code sent to WhatsApp');
           } else {
             throw new Error('RateUp service returned failure status');
@@ -236,9 +235,10 @@ const RequestService = () => {
     
     try {
       // 1. Save Request to Storage Service (Live)
+      const fullPhone = rateupService.formatPhoneNumber(formData.phone);
       const newRequest = storageService.saveRequest({
-        customer_id: formData.phone,
-        customer_phone: formData.phone,
+        customer_id: fullPhone,
+        customer_phone: fullPhone,
         service_category: formData.serviceType,
         sub_service: formData.subService,
         area: formData.area,
@@ -260,8 +260,8 @@ const RequestService = () => {
         try {
           await rateupService.upsertContact({
             orgId,
-            phoneNumber: formData.phone,
-            name: `Customer ${formData.phone}`, // Using phone as name since we don't collect name yet
+            phoneNumber: fullPhone,
+            name: `Customer ${fullPhone}`, // Using phone as name since we don't collect name yet
             customFields: {
               last_service: formData.serviceType,
               last_sub_service: formData.subService,
@@ -278,7 +278,7 @@ const RequestService = () => {
 
       // 3. Trigger Message Log (Live)
       storageService.saveMessageLog({
-        phone: formData.phone,
+        phone: fullPhone,
         message: `Your request ${newRequest.id} for ${newRequest.sub_service} has been received. We are now coordinating with providers.`,
         type: 'WhatsApp',
         status: 'Sent',
@@ -369,7 +369,7 @@ const RequestService = () => {
               <p className="text-foreground/60">{t('intake.screen2.body')}</p>
               <div className="flex flex-col items-center gap-2">
                 <Badge variant="secondary" className="px-3 py-1 rounded-full font-mono text-sm">
-                  {formData.phone}
+                  {rateupService.formatPhoneNumber(formData.phone)}
                 </Badge>
                 {otpTimer > 0 && (
                   <div className="flex items-center gap-1.5 text-xs font-bold text-amber-600 animate-pulse">
