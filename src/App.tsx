@@ -71,11 +71,11 @@ const LoadingFallback = () => (
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
-      <ThemeProvider defaultTheme="dark" enableSystem={false} attribute="class">
+      <ThemeProvider defaultTheme="light" enableSystem={false} attribute="class">
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <PageTracker />
             <ScrollToTop />
             <Suspense fallback={<LoadingFallback />}>

@@ -44,7 +44,7 @@ export default function Privacy() {
               </span>
             </div>
 
-            <h1 className="mb-6 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter uppercase">
+            <h1 className="mb-6 text-foreground text-display uppercase">
               {t('legal.privacy.title')}
             </h1>
             <p className="text-primary font-bold mb-16 tracking-wider uppercase text-xs">
@@ -60,10 +60,10 @@ export default function Privacy() {
                   className="p-8 md:p-12 rounded-[2.5rem] glass-morphism border border-border"
                 >
                   <div className="space-y-8">
-                    <p className="text-lg md:text-xl text-foreground/80 font-medium leading-relaxed">
+                    <p className="text-subtitle text-foreground/80 font-medium leading-relaxed">
                       {t('legal.privacy.intro')}
                     </p>
-                    <p className="text-lg md:text-xl text-foreground font-bold leading-relaxed">
+                    <p className="text-subtitle text-foreground font-bold leading-relaxed">
                       {t('legal.privacy.agreement')}
                     </p>
                   </div>
@@ -77,11 +77,11 @@ export default function Privacy() {
                             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                               <Icon size={20} />
                             </div>
-                            <h2 className="text-2xl font-black text-foreground tracking-tight uppercase">
+                            <h2 className="text-subtitle text-foreground tracking-tight uppercase">
                               {section.title}
                             </h2>
                           </div>
-                          <div className="text-foreground/70 leading-relaxed font-medium whitespace-pre-line space-y-4 pl-14">
+                          <div className="text-body text-foreground/70 whitespace-pre-line space-y-4 pl-14">
                             {section.content}
                           </div>
                         </div>
@@ -90,7 +90,7 @@ export default function Privacy() {
                   </div>
 
                   <div className="mt-16 pt-12 border-t border-border">
-                    <p className="text-xl font-black text-primary leading-tight uppercase italic">
+                    <p className="text-subtitle text-primary leading-tight uppercase italic">
                       {t('legal.privacy.final')}
                     </p>
                   </div>
@@ -105,8 +105,8 @@ export default function Privacy() {
                   className="sticky top-32 p-8 rounded-[2rem] glass-morphism border border-border"
                 >
                   <Shield className="text-primary mb-8 w-12 h-12" />
-                  <h3 className="text-xl font-black text-foreground mb-6 uppercase tracking-wider">{t('legal.coordination.title')}</h3>
-                  <p className="text-foreground/70 leading-relaxed font-medium mb-8 text-sm">
+                  <h3 className="text-subtitle text-foreground mb-6 uppercase tracking-wider">{t('legal.coordination.title')}</h3>
+                  <p className="text-body !text-sm text-foreground/70 mb-8">
                     {t('legal.coordination.body')}
                   </p>
                   <div className="h-px w-full bg-border mb-8" />

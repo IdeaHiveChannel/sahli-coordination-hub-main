@@ -23,9 +23,19 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const floatingBlobs = (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
+      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
+      <div className="absolute inset-0 bg-slate-950/5" />
+    </div>
+  );
+
   return (
-    <div className="relative border-b border-border bg-foreground/[0.02] last:border-0 overflow-hidden">
-      <div className="container-sahli py-8 md:py-16">
+    <div className="relative border-b border-border bg-background last:border-0 overflow-hidden">
+      {floatingBlobs}
+      <div className="container-sahli relative z-10 py-6 md:py-12">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: isMobile ? 0 : (dir === 'rtl' ? 30 : -30), y: isMobile ? 15 : 0 }}
@@ -43,7 +53,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
 
             {(imageUrl || videoUrl) && (
               <motion.div 
-                className="relative aspect-[16/9] rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl group border border-border btn-shine"
+                className="relative aspect-[16/9] rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden shadow-xl group border border-border btn-shine"
                 initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

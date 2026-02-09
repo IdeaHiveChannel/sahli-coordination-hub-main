@@ -69,7 +69,7 @@ export interface Response {
   customerPhone: string;
   message: string;
   timestamp: string;
-  status: 'Eligible' | 'Waitlisted' | 'Confirmed' | 'Rejected';
+  status: 'Eligible' | 'Waitlisted' | 'Confirmed' | 'Rejected' | 'Invalid Response';
   isFirst: boolean;
   channel: string;
   assignmentMethod: 'auto' | 'manual';
@@ -105,6 +105,69 @@ export interface MessageTemplate {
   content: string;
   category: 'Broadcast' | 'Verification' | 'Follow-up' | 'General';
 }
+
+const DEFAULT_TEMPLATES: MessageTemplate[] = [
+  {
+    id: 'T-GEN-001',
+    name: 'General Coordination Request',
+    category: 'General',
+    content: 'Hello, this is SAHLI Coordination Hub. We have received your request for {service} in {area}. We are currently identifying a suitable verified provider for you.'
+  },
+  {
+    id: 'T-BC-AC',
+    name: 'AC Repair Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New AC Repair request in {area}. \n\nDetails: {details}\nUrgency: {urgency}\n\nPlease respond with "YES" if your team is available to perform an inspection today/tomorrow.'
+  },
+  {
+    id: 'T-BC-CLEAN',
+    name: 'Cleaning Service Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New Cleaning Service request in {area}. \n\nType: {service_type}\nScope: {details}\n\nPlease respond with "AVAILABLE" if you can take this booking.'
+  },
+  {
+    id: 'T-BC-MOVE',
+    name: 'Moving Service Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New Moving & Relocation request. \n\nFrom: {area_from}\nTo: {area_to}\nDetails: {details}\n\nPlease respond with "READY" if you can provide a quote after inspection.'
+  },
+  {
+    id: 'T-BC-PLUMB',
+    name: 'Plumbing Service Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New Plumbing request in {area}. \n\nIssue: {details}\nUrgency: {urgency}\n\nPlease respond with "YES" if you have a plumber available now.'
+  },
+  {
+    id: 'T-BC-ELEC',
+    name: 'Electrical Service Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New Electrical request in {area}. \n\nDetails: {details}\nUrgency: {urgency}\n\nPlease respond with "YES" if you have an electrician available for immediate dispatch.'
+  },
+  {
+    id: 'T-BC-TECH',
+    name: 'Electronics Repair Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New Electronics/Appliance repair request in {area}. \n\nItem: {service_type}\nIssue: {details}\n\nPlease respond with "AVAILABLE" if your technician can inspect this today.'
+  },
+  {
+    id: 'T-BC-PEST',
+    name: 'Pest Control Broadcast',
+    category: 'Broadcast',
+    content: 'SAHLI BROADCAST: New Pest Control/Outdoor request in {area}. \n\nService: {service_type}\nDetails: {details}\n\nPlease respond with "YES" if you can schedule an appointment.'
+  },
+  {
+    id: 'T-VF-001',
+    name: 'Provider OTP Verification',
+    category: 'Verification',
+    content: 'Your SAHLI provider verification code is: {otp}. Do not share this code with anyone.'
+  },
+  {
+    id: 'T-FU-001',
+    name: 'Service Completion Follow-up',
+    category: 'Follow-up',
+    content: 'Hello {name}, how was your experience with the {service} provided by {provider}? Your feedback helps us maintain high coordination standards.'
+  }
+];
 
 export const storageService = {
   // Applications
@@ -487,7 +550,8 @@ export const storageService = {
 
   // Templates
   getTemplates: (): MessageTemplate[] => {
-    return safeStorage.get(STORAGE_KEYS.TEMPLATES, []);
+    const templates = safeStorage.get(STORAGE_KEYS.TEMPLATES, []);
+    return templates.length > 0 ? templates : DEFAULT_TEMPLATES;
   },
 
   saveTemplate: (template: Omit<MessageTemplate, 'id'>) => {
@@ -534,6 +598,7 @@ export const storageService = {
     const responses = storageService.getResponses();
     const broadcasts = storageService.getBroadcasts();
     const feedback = storageService.getFeedback();
+    const applications = storageService.getApplications();
 
     // 1. ATTENTION & URGENCY LOGIC
     const NEW_THRESHOLD = 15 * 60000;
@@ -558,6 +623,7 @@ export const storageService = {
     );
 
     const overdueFollowUps = feedback.filter(f => f.status === 'Pending Response' && f.isOverdue).length;
+    const pendingApplicationsCount = applications.filter(a => a.status === 'Pending' || a.status === 'More Info Required').length;
 
     const oldestPendingAge = stuckNew.length > 0 
       ? Math.max(...stuckNew.map(r => now - new Date(r.created_at).getTime()))
@@ -619,8 +685,9 @@ export const storageService = {
         stuckNewCount: stuckNew.length,
         noResponseBroadcastsCount: noResponseBroadcasts.length,
         overdueFollowUps,
+        pendingApplicationsCount,
         oldestPendingMinutes: Math.round(oldestPendingAge / 60000),
-        totalUrgent: stuckNew.length + noResponseBroadcasts.length + (overdueFollowUps > 0 ? 1 : 0)
+        totalUrgent: stuckNew.length + noResponseBroadcasts.length + (overdueFollowUps > 0 ? 1 : 0) + pendingApplicationsCount
       },
       flow: {
         stalledCount: stalledRequests.length,
@@ -651,26 +718,7 @@ export const storageService = {
   // Initial Seed (Essential operational configuration only)
   seedInitialData: () => {
     if (!localStorage.getItem(STORAGE_KEYS.TEMPLATES)) {
-      localStorage.setItem(STORAGE_KEYS.TEMPLATES, JSON.stringify([
-        { 
-          id: 'T-1', 
-          name: 'Standard Broadcast', 
-          category: 'Broadcast',
-          content: 'New Service Request: {sub_service} in {area}. Reply YES to accept.' 
-        },
-        { 
-          id: 'T-2', 
-          name: 'Verification OTP', 
-          category: 'Verification',
-          content: 'Your SAHLI verification code is: {otp}. Valid for 5 minutes.' 
-        },
-        { 
-          id: 'T-3', 
-          name: 'Provider Assigned', 
-          category: 'Follow-up',
-          content: 'Success! {provider_name} has been assigned to your request {request_id}. They will contact you shortly.' 
-        }
-      ]));
+      localStorage.setItem(STORAGE_KEYS.TEMPLATES, JSON.stringify(DEFAULT_TEMPLATES));
     }
     
     // Core operational categories - Essential for the system to function

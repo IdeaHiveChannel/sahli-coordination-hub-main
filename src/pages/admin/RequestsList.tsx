@@ -18,7 +18,8 @@ import {
   FileCheck,
   Flag,
   UserCheck,
-  Star
+  Star,
+  MapPin
 } from 'lucide-react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { toast } from 'sonner';
@@ -166,6 +167,10 @@ const RequestsList = () => {
     setIsPreviewOpen(true);
   };
 
+  const handleManualEntryOpen = () => {
+    setIsManualEntryOpen(true);
+  };
+
   const filteredRequests = requests.filter(req => {
     const matchesTab = activeTab === 'All' || req.status === activeTab;
     const matchesSearch = searchQuery === '' || 
@@ -229,10 +234,10 @@ const RequestsList = () => {
         key="view"
         size="sm" 
         variant="outline" 
-        className="h-8 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1"
+        className="flex-1 md:flex-none h-11 md:h-8 text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-2 rounded-xl md:rounded-lg border-slate-200 active:scale-[0.98] transition-all"
         onClick={() => handleReview(request)}
       >
-        <Eye size={12} />
+        <Eye size={14} className="md:size-3" />
         View
       </Button>
     );
@@ -242,10 +247,10 @@ const RequestsList = () => {
         <Button 
           key="broadcast"
           size="sm" 
-          className="h-8 text-[10px] font-bold uppercase tracking-wider bg-purple-600 hover:bg-purple-700 flex items-center gap-1" 
+          className="flex-1 md:flex-none h-11 md:h-8 text-[10px] font-black uppercase tracking-wider bg-primary hover:bg-primary/90 text-white flex items-center justify-center gap-2 rounded-xl md:rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all" 
           onClick={() => handleStatusUpdate(request.id, 'Broadcasted')}
         >
-          <Sparkles size={12} />
+          <Sparkles size={14} className="md:size-3" />
           Broadcast
         </Button>
       );
@@ -254,7 +259,7 @@ const RequestsList = () => {
           key="drop"
           size="sm" 
           variant="ghost"
-          className="h-8 text-[10px] font-bold uppercase tracking-wider text-red-500 hover:text-red-600 hover:bg-red-50" 
+          className="flex-1 md:flex-none h-11 md:h-8 text-[10px] font-black uppercase tracking-wider text-red-500 hover:text-red-600 hover:bg-red-50 rounded-xl md:rounded-lg active:scale-[0.98] transition-all" 
           onClick={() => handleStatusUpdate(request.id, 'Dropped')}
         >
           Drop
@@ -265,7 +270,7 @@ const RequestsList = () => {
         <Button 
           key="manual-confirm"
           size="sm" 
-          className="h-8 text-[10px] font-bold uppercase tracking-wider" 
+          className="flex-1 md:flex-none h-11 md:h-8 text-[10px] font-black uppercase tracking-wider rounded-xl md:rounded-lg bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 active:scale-[0.98] transition-all" 
           onClick={() => handleStatusUpdate(request.id, 'Provider Confirmed')}
         >
           Log YES
@@ -276,7 +281,7 @@ const RequestsList = () => {
         <Button 
           key="confirm"
           size="sm" 
-          className="h-8 bg-blue-600 hover:bg-blue-700 text-[10px] font-bold uppercase tracking-wider" 
+          className="flex-1 md:flex-none h-11 md:h-8 bg-primary hover:bg-primary/90 text-white text-[10px] font-black uppercase tracking-wider rounded-xl md:rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all" 
           onClick={() => handleStatusUpdate(request.id, 'In Progress')}
         >
           Confirm Assignment
@@ -288,10 +293,10 @@ const RequestsList = () => {
           key="flag"
           size="sm" 
           variant="outline"
-          className="h-8 text-[10px] font-bold uppercase tracking-wider text-red-500 border-red-200 hover:bg-red-50" 
+          className="flex-1 md:flex-none h-11 md:h-8 text-[10px] font-black uppercase tracking-wider text-red-500 border-red-200 hover:bg-red-50 rounded-xl md:rounded-lg active:scale-[0.98] transition-all" 
           onClick={() => handleFlagIssue(request)}
         >
-          <Flag size={12} />
+          <Flag size={14} className="md:size-3" />
           Flag
         </Button>
       );
@@ -299,7 +304,7 @@ const RequestsList = () => {
         <Button 
           key="complete"
           size="sm" 
-          className="h-8 bg-emerald-600 hover:bg-emerald-700 text-[10px] font-bold uppercase tracking-wider" 
+          className="flex-1 md:flex-none h-11 md:h-8 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-black uppercase tracking-wider rounded-xl md:rounded-lg shadow-lg shadow-emerald-200 active:scale-[0.98] transition-all" 
           onClick={() => handleStatusUpdate(request.id, 'Completed')}
         >
           Complete
@@ -311,150 +316,281 @@ const RequestsList = () => {
           key="feedback"
           size="sm" 
           variant="outline"
-          className="h-8 text-[10px] font-bold uppercase tracking-wider text-blue-600 border-blue-200 hover:bg-blue-50" 
+          className="flex-1 md:flex-none h-11 md:h-8 text-[10px] font-black uppercase tracking-wider text-blue-600 border-blue-200 hover:bg-blue-50 rounded-xl md:rounded-lg active:scale-[0.98] transition-all" 
           onClick={() => handleRecordFeedback(request)}
         >
-          <Star size={12} />
+          <Star size={14} className="md:size-3" />
           Feedback
         </Button>
       );
     }
 
-    return <div className="flex gap-2 justify-end">{actions}</div>;
+    return <div className="flex flex-wrap md:flex-nowrap gap-2 md:gap-2 justify-end w-full">{actions}</div>;
   };
 
   return (
     <AdminLayout>
-      <div className="py-2" dir={dir}>
+      <div className="py-2 md:py-8 space-y-4 md:space-y-8" dir={dir}>
+        {/* Header Section */}
+        <div className="px-4 md:px-0">
+          <div className="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border border-slate-100/50">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="space-y-1">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 bg-primary rounded-2xl shadow-lg shadow-primary/20">
+                    <Clock className="text-white" size={24} />
+                  </div>
+                  <h1 className="text-display text-slate-900">
+                    Requests Hub
+                  </h1>
+                </div>
+                <p className="text-xs md:text-sm font-bold text-slate-500 uppercase tracking-widest ml-14 md:ml-16">
+                  {filteredRequests.length} Active Coordination Tasks
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1 sm:w-64">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                  <Input 
+                    placeholder="Search ID, Phone, Area..." 
+                    className="h-14 pl-11 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-primary transition-all font-bold text-sm"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+                <Button 
+                  onClick={handleManualEntryOpen}
+                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-2xl font-black uppercase tracking-widest shadow-lg shadow-primary/20 active:scale-95 transition-all flex items-center justify-center gap-2"
+                >
+                  <Plus size={20} strokeWidth={3} />
+                  Manual Entry
+                </Button>
+              </div>
+            </div>
+
+            {/* View Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 mt-8 -mx-2 px-2 scrollbar-hide">
+              {OPERATIONAL_VIEWS.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => handleTabChange(tab)}
+                  className={`whitespace-nowrap px-6 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 ${
+                    activeTab === tab
+                      ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                      : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Requests Grid/Table Section */}
+        <div className="px-4 md:px-0 pb-20">
+          <div className="space-y-4">
+            {filteredRequests.length === 0 ? (
+              <div className="bg-white p-12 rounded-[2.5rem] border-2 border-dashed border-slate-200 text-center space-y-4">
+                <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto">
+                  <Search size={32} className="text-slate-300" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-subtitle text-slate-900">No requests found</h3>
+                  <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">Try adjusting your filters or search query</p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    setSearchQuery('');
+                    setActiveTab('All');
+                    navigate('/admin/requests');
+                  }}
+                  className="h-12 px-6 rounded-xl font-black uppercase tracking-widest border-slate-200 active:scale-95 transition-all"
+                >
+                  Clear All Filters
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-4">
+                {filteredRequests.map((request) => (
+                  <div 
+                    key={request.id}
+                    className="bg-white p-5 md:p-6 rounded-[2rem] md:rounded-[2.5rem] shadow-xl border border-slate-100 hover:border-blue-200 transition-all group"
+                  >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                      <div className="flex items-start gap-4">
+                        <div className={`p-4 rounded-2xl shadow-sm ${getStatusColor(request.status).split(' ')[0]}`}>
+                          <MessageSquare className={getStatusColor(request.status).split(' ')[1]} size={24} />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-sm font-black uppercase tracking-tighter text-slate-900">{request.id}</span>
+                            <Badge variant="outline" className={`text-[10px] font-black uppercase px-3 py-1 rounded-full border-2 ${getStatusColor(request.status)}`}>
+                              {request.status}
+                            </Badge>
+                            {request.urgency === 'High' && (
+                              <Badge className="bg-red-500 text-white text-[10px] font-black uppercase px-3 py-1 rounded-full animate-pulse">
+                                URGENT
+                              </Badge>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-bold text-slate-500 uppercase tracking-widest">
+                            <div className="flex items-center gap-1.5">
+                              <MapPin size={14} className="text-slate-400" />
+                              {request.area}
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <Sparkles size={14} className="text-slate-400" />
+                              {request.sub_service}
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <Clock size={14} className="text-slate-400" />
+                              {getAgeInMinutes(request.created_at)}m ago
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
+                        <div className="text-right hidden md:block">
+                          <p className="text-sm font-black text-slate-900 tracking-tight">{request.customer_phone}</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{request.intake_source}</p>
+                        </div>
+                        <div className="w-full md:w-auto">
+                          {renderAction(request)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Review Dialog */}
         <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
-          <DialogContent className="sm:max-w-[500px]">
-            <DialogHeader>
-              <DialogTitle className="flex items-center gap-2">
-                <Eye className="text-primary" size={20} />
-                Review Request Details
+          <DialogContent className="w-[95%] max-w-[500px] rounded-[2rem] md:rounded-3xl border-none shadow-xl">
+            <DialogHeader className="text-left">
+              <DialogTitle className="text-subtitle text-slate-900 flex items-center gap-3">
+                <div className="p-2 bg-primary/10 rounded-xl">
+                  <Eye className="text-primary" size={20} />
+                </div>
+                Request Details
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-xs font-medium text-slate-500">
                 Detailed breakdown of {selectedRequest?.id} for coordination.
               </DialogDescription>
             </DialogHeader>
             
             {selectedRequest && (
-              <div className="space-y-4 py-4">
+              <div className="space-y-6 py-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Request ID</span>
-                    <p className="text-sm font-bold">{selectedRequest.id}</p>
+                    <p className="text-sm font-bold text-slate-900">{selectedRequest.id}</p>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Status</span>
-                    <Badge variant="outline" className={`text-[9px] font-black uppercase ${getStatusColor(selectedRequest.status)}`}>
-                      {selectedRequest.status}
-                    </Badge>
+                    <div>
+                      <Badge variant="outline" className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border-2 ${getStatusColor(selectedRequest.status)}`}>
+                        {selectedRequest.status}
+                      </Badge>
+                    </div>
                   </div>
                 </div>
 
                 {/* Evidence Bundle Section */}
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3">
+                <div className="bg-white p-5 rounded-[1.5rem] border border-slate-100 shadow-sm space-y-4">
                   <div className="flex items-center justify-between">
                     <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
                       <ShieldCheck size={14} className="text-emerald-500" />
-                      Operational Evidence Bundle
+                      Evidence Bundle
                     </h4>
-                    <Badge className={selectedRequest.audit_bundle_complete ? "bg-emerald-500" : "bg-amber-500"}>
+                    <Badge className={`${selectedRequest.audit_bundle_complete ? "bg-emerald-500" : "bg-amber-500"} text-[8px] font-black px-2 py-0.5 rounded-full`}>
                       {selectedRequest.audit_bundle_complete ? "SECURE" : "INCOMPLETE"}
                     </Badge>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4">
-                    <div className="space-y-0.5">
-                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">Identity Proof</span>
-                      <div className="flex items-center gap-1.5 text-[11px] font-medium">
+                  <div className="grid grid-cols-2 gap-y-4 gap-x-4">
+                    <div className="space-y-1">
+                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tight">Identity Proof</span>
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-700">
                         <UserCheck size={12} className="text-emerald-500" />
-                        WhatsApp OTP Verified
+                        WhatsApp Verified
                       </div>
                     </div>
-                    <div className="space-y-0.5">
-                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">Verified At</span>
-                      <div className="text-[11px] font-medium">{new Date(selectedRequest.verified_at).toLocaleString()}</div>
+                    <div className="space-y-1">
+                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tight">Verified At</span>
+                      <div className="text-[11px] font-bold text-slate-700">{new Date(selectedRequest.verified_at).toLocaleDateString()}</div>
                     </div>
-                    <div className="space-y-0.5">
-                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">Session ID</span>
-                      <div className="text-[11px] font-mono bg-white px-1 border border-slate-200 rounded">{selectedRequest.session_id}</div>
+                    <div className="space-y-1">
+                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tight">Session ID</span>
+                      <div className="text-[10px] font-mono bg-slate-50 px-2 py-0.5 border border-slate-200 rounded-lg text-slate-500 truncate">{selectedRequest.session_id}</div>
                     </div>
-                    <div className="space-y-0.5">
-                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">Terms Version</span>
-                      <div className="text-[11px] font-medium">{selectedRequest.terms_version_id}</div>
+                    <div className="space-y-1">
+                      <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tight">Terms Version</span>
+                      <div className="text-[11px] font-bold text-slate-700">{selectedRequest.terms_version_id}</div>
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-slate-200">
-                    <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tighter">Lifecycle Timestamps</span>
-                    <div className="space-y-1 mt-1">
-                      <div className="flex justify-between text-[10px]">
+                  <div className="pt-3 border-t border-slate-100">
+                    <span className="text-[9px] text-slate-400 uppercase font-bold tracking-tight">Timeline</span>
+                    <div className="space-y-2 mt-2">
+                      <div className="flex justify-between text-[10px] font-medium">
                         <span className="text-slate-500">Created</span>
-                        <span className="font-mono">{new Date(selectedRequest.created_at).toLocaleTimeString()}</span>
+                        <span className="font-bold text-slate-700">{new Date(selectedRequest.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                       </div>
-                      <div className="flex justify-between text-[10px]">
-                        <span className="text-slate-500">Last Change</span>
-                        <span className="font-mono">{new Date(selectedRequest.last_state_change_at).toLocaleTimeString()}</span>
+                      <div className="flex justify-between text-[10px] font-medium">
+                        <span className="text-slate-500">Last Update</span>
+                        <span className="font-bold text-slate-700">{new Date(selectedRequest.last_state_change_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                       </div>
-                      {selectedRequest.broadcasted_at && (
-                        <div className="flex justify-between text-[10px]">
-                          <span className="text-slate-500">Broadcasted</span>
-                          <span className="font-mono">{new Date(selectedRequest.broadcasted_at).toLocaleTimeString()}</span>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Service Category</span>
-                    <p className="text-sm font-bold">{selectedRequest.service_category}</p>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Sub-Service</span>
-                    <p className="text-sm font-bold">{selectedRequest.sub_service}</p>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Service</span>
+                    <p className="text-sm font-black text-slate-900">{selectedRequest.sub_service}</p>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Area</span>
-                    <p className="text-sm font-bold">{selectedRequest.area}</p>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Urgency</span>
-                    <p className="text-sm font-bold">{selectedRequest.urgency}</p>
+                    <p className="text-sm font-black text-slate-900">{selectedRequest.area}</p>
                   </div>
                 </div>
                 
-                <div className="space-y-1 pt-2 border-t border-slate-100">
+                <div className="space-y-2 pt-2 border-t border-slate-100">
                   <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Coordination Notes</span>
-                  <p className="text-sm bg-slate-50 p-3 rounded-md italic">
+                  <div className="text-sm bg-slate-50 p-4 rounded-2xl italic text-slate-600 border border-slate-100 leading-relaxed">
                     {selectedRequest.description || "No additional details provided."}
-                  </p>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-2">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Intake Source</span>
-                    <Badge variant="outline" className="ml-2 uppercase text-[9px]">{selectedRequest.intake_source}</Badge>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Source</span>
+                    <div>
+                      <Badge variant="outline" className="uppercase text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 border-none">{selectedRequest.intake_source}</Badge>
+                    </div>
                   </div>
                   {selectedRequest.assigned_provider_id && (
                     <div className="space-y-1 text-right">
                       <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Assigned Provider</span>
-                      <p className="text-xs font-bold text-blue-600">{selectedRequest.assigned_provider_id}</p>
+                      <p className="text-xs font-black text-blue-600">{selectedRequest.assigned_provider_id}</p>
                     </div>
                   )}
                 </div>
               </div>
             )}
 
-            <DialogFooter className="flex-col sm:flex-row gap-2">
-              <Button variant="ghost" onClick={() => setIsPreviewOpen(false)} className="text-[10px] font-bold uppercase tracking-widest">Close</Button>
+            <DialogFooter className="flex-col sm:flex-row gap-3 pt-4">
+              <Button variant="ghost" onClick={() => setIsPreviewOpen(false)} className="w-full sm:w-auto h-12 text-[10px] font-black uppercase tracking-widest rounded-xl order-3 sm:order-1">Close</Button>
               <Button 
                 variant="outline" 
-                className="gap-2 text-[10px] font-bold uppercase tracking-widest" 
+                className="w-full sm:w-auto h-12 gap-2 text-[10px] font-black uppercase tracking-widest rounded-xl border-slate-200 active:scale-95 transition-all order-2" 
                 onClick={() => {
                   setIsPreviewOpen(false);
                   if (selectedRequest) handleClarify(selectedRequest);
@@ -465,7 +601,7 @@ const RequestsList = () => {
               </Button>
               {selectedRequest?.status === 'New' && (
                 <Button 
-                  className="bg-purple-600 hover:bg-purple-700 gap-2 text-[10px] font-bold uppercase tracking-widest"
+                  className="w-full sm:w-auto h-12 bg-primary hover:bg-primary/90 gap-2 text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-primary/20 active:scale-95 transition-all order-1 sm:order-3"
                   onClick={() => {
                     setIsPreviewOpen(false);
                     handleStatusUpdate(selectedRequest?.id || '', 'Broadcasted');
@@ -479,184 +615,247 @@ const RequestsList = () => {
           </DialogContent>
         </Dialog>
 
-        <div className="flex items-center justify-between mb-8 bg-white/50 backdrop-blur-md p-4 rounded-xl border border-primary/10 shadow-sm">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 font-black tracking-widest text-[10px]">INTAKE</Badge>
-              <Badge variant="outline" className="bg-blue-50 text-blue-600 border-blue-100 font-bold text-[10px]">{requests.length} TOTAL REQUESTS</Badge>
-            </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Requests Module</h1>
-            <p className="text-xs text-muted-foreground mt-1">
-              Monitor customer intake and manage manual/explicit status transitions.
-            </p>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <Dialog open={isManualEntryOpen} onOpenChange={setIsManualEntryOpen}>
-              <DialogTrigger asChild>
-                <Button className="bg-slate-900 hover:bg-slate-800 text-white font-bold uppercase tracking-widest text-[10px] h-9 px-6 shadow-sm flex items-center gap-2">
-                  <Sparkles size={14} /> Manual Entry
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Create Manual Request</DialogTitle>
-                  <DialogDescription>
-                    Enter request details received via phone or offline channels.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="customerPhone">Customer Phone</Label>
-                    <Input 
-                      id="customerPhone" 
-                      placeholder="+974 0000 0000" 
-                      value={manualRequest.customerPhone}
-                      onChange={(e) => setManualRequest({...manualRequest, customerPhone: e.target.value})}
-                    />
+        {/* Manual Entry Dialog */}
+        <Dialog open={isManualEntryOpen} onOpenChange={setIsManualEntryOpen}>
+          <DialogContent className="w-[95%] max-w-[450px] rounded-[2.5rem] border-none shadow-xl p-0 overflow-hidden">
+            <div className="p-8 space-y-6">
+              <DialogHeader className="text-left">
+                <DialogTitle className="flex items-center gap-3 text-xl font-black uppercase tracking-tight">
+                  <div className="p-2 bg-primary rounded-xl shadow-lg shadow-primary/20">
+                    <Plus className="text-white" size={20} strokeWidth={3} />
                   </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="service">Service Required</Label>
+                  Manual Request
+                </DialogTitle>
+                <DialogDescription className="text-xs font-medium text-slate-500 uppercase tracking-widest">
+                  Create a new coordination task manually
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <Label htmlFor="customerPhone" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Customer Phone</Label>
+                  <Input 
+                    id="customerPhone" 
+                    placeholder="+974 0000 0000" 
+                    value={manualRequest.customerPhone}
+                    onChange={(e) => setManualRequest({...manualRequest, customerPhone: e.target.value})}
+                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-primary transition-all font-bold"
+                  />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="service" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Service</Label>
                     <Input 
                       id="service" 
                       placeholder="e.g. AC Repair" 
                       value={manualRequest.service}
                       onChange={(e) => setManualRequest({...manualRequest, service: e.target.value})}
+                      className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-primary transition-all font-bold"
                     />
                   </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="area">Area / Location</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="area" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Area</Label>
                     <Input 
                       id="area" 
                       placeholder="e.g. Al Waab" 
                       value={manualRequest.area}
                       onChange={(e) => setManualRequest({...manualRequest, area: e.target.value})}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="urgency">Urgency</Label>
-                    <Select 
-                      value={manualRequest.urgency}
-                      onValueChange={(val) => setManualRequest({...manualRequest, urgency: val as 'High' | 'Normal' | 'Flexible'})}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select urgency" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Flexible">Flexible</SelectItem>
-                        <SelectItem value="Normal">Normal</SelectItem>
-                        <SelectItem value="High">High</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="description">Notes / Description</Label>
-                    <Input 
-                      id="description" 
-                      placeholder="Additional details..." 
-                      value={manualRequest.description}
-                      onChange={(e) => setManualRequest({...manualRequest, description: e.target.value})}
+                      className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-primary transition-all font-bold"
                     />
                   </div>
                 </div>
-                <DialogFooter>
-                  <Button variant="outline" onClick={() => setIsManualEntryOpen(false)}>Cancel</Button>
-                  <Button onClick={handleManualEntry} className="bg-primary">Create Request</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="urgency" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Urgency Level</Label>
+                  <Select 
+                    value={manualRequest.urgency}
+                    onValueChange={(val) => setManualRequest({...manualRequest, urgency: val as 'High' | 'Normal' | 'Flexible'})}
+                  >
+                    <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-primary transition-all font-bold">
+                      <SelectValue placeholder="Select urgency" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-2xl border-slate-200">
+                      <SelectItem value="Flexible" className="font-bold">Flexible</SelectItem>
+                      <SelectItem value="Normal" className="font-bold">Normal</SelectItem>
+                      <SelectItem value="High" className="font-bold text-primary">High Urgency</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="description" className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Internal Notes</Label>
+                  <Input 
+                    id="description" 
+                    placeholder="Any specific customer requirements..." 
+                    value={manualRequest.description}
+                    onChange={(e) => setManualRequest({...manualRequest, description: e.target.value})}
+                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-primary transition-all font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setIsManualEntryOpen(false)} 
+                  className="flex-1 h-14 rounded-2xl font-black uppercase tracking-widest text-[10px] active:scale-95 transition-all"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  onClick={handleManualEntry} 
+                  className="flex-[2] h-14 rounded-2xl bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-widest text-[10px] shadow-lg shadow-primary/20 active:scale-95 transition-all"
+                >
+                  Create Request
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Navigation Tabs - Mobile Optimized */}
+        <div className="mb-6 -mx-2 px-2 overflow-x-auto no-scrollbar flex items-center gap-2 pb-2">
+          {OPERATIONAL_VIEWS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => handleTabChange(tab)}
+              className={`whitespace-nowrap px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 ${
+                activeTab === tab
+                  ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                  : 'bg-white text-slate-400 hover:text-slate-600 border border-slate-100'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
-            <input 
-              type="text" 
-              placeholder="Search by ID, service, or customer..." 
-              className="w-full bg-white border border-slate-200 rounded-lg py-2 pl-10 pr-4 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+        {/* Search & Filters */}
+        <div className="relative mb-8">
+          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <Search className="text-slate-400" size={18} />
           </div>
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-            {OPERATIONAL_VIEWS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => handleTabChange(tab)}
-                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-full border ${
-                  activeTab === tab 
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-200' 
-                    : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                }`}
+          <Input
+            placeholder="Search by ID, Service, Area or Phone..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="h-14 pl-12 pr-6 rounded-2xl border-none bg-white shadow-xl shadow-slate-200/50 text-sm font-medium focus-visible:ring-primary/20"
+          />
+        </div>
+
+        {/* Requests List - Responsive Layout */}
+        <div className="space-y-4 md:space-y-0">
+          {/* Mobile Card View (visible only on mobile) */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {filteredRequests.map((request) => (
+              <div 
+                key={request.id}
+                className="bg-white p-5 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40 space-y-4 active:scale-[0.99] transition-all"
               >
-                {tab}
-              </button>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 bg-slate-50 rounded-xl">
+                      <Clock size={16} className="text-slate-400" />
+                    </div>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{getAgeInMinutes(request.created_at)}m ago</span>
+                  </div>
+                  <Badge variant="outline" className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-full border-2 ${getStatusColor(request.status)}`}>
+                    {request.status}
+                  </Badge>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-black text-slate-900 uppercase tracking-tight leading-tight">{request.sub_service}</h3>
+                  <div className="flex items-center gap-2 mt-1 text-slate-500">
+                    <MapPin size={12} />
+                    <span className="text-xs font-bold uppercase tracking-wider">{request.area}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between py-3 border-y border-slate-50">
+                  <div className="space-y-0.5">
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Customer</p>
+                    <p className="text-xs font-bold text-slate-700">{request.customer_phone}</p>
+                  </div>
+                  <div className="text-right space-y-0.5">
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">ID</p>
+                    <p className="text-xs font-mono font-bold text-slate-700">{request.id}</p>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  {renderAction(request)}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
 
-        <Card className="border-slate-200 shadow-sm overflow-hidden bg-white/50 backdrop-blur-sm">
-          <CardContent className="p-0">
-            <Table className="min-w-[800px]">
-              <TableHeader className="bg-slate-50/80">
-                <TableRow className="hover:bg-transparent border-b border-slate-200">
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 px-4">Request Ref</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Service Details</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Customer</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 text-center">Audit</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Status</TableHead>
-                  <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4 px-6">Actions</TableHead>
+          {/* Desktop Table View (visible only on desktop) */}
+          <div className="hidden md:block bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+            <Table>
+              <TableHeader className="bg-slate-50/50">
+                <TableRow className="hover:bg-transparent border-slate-100">
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 px-8 text-slate-500">Request Details</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 text-slate-500">Status</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 text-slate-500">Customer</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 text-slate-500">Age</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 px-8 text-right text-slate-500">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredRequests.map((request) => {
-                  return (
-                    <TableRow key={request.id} className="hover:bg-slate-50/50 transition-colors">
-                      <TableCell className="font-mono font-bold text-xs text-slate-500 px-4">
-                        <div className="flex flex-col">
-                          <span>{request.id}</span>
-                          <span className="text-[9px] font-medium text-slate-400">
-                            {getAgeInMinutes(request.created_at)}m ago
-                          </span>
+                {filteredRequests.map((request) => (
+                  <TableRow key={request.id} className="group hover:bg-slate-50/50 transition-colors border-slate-100">
+                    <TableCell className="py-6 px-8">
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 bg-slate-50 rounded-2xl group-hover:bg-white transition-colors">
+                          <Plus className="text-slate-400" size={18} />
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="font-bold text-sm">{request.sub_service}</div>
-                        <div className="text-[10px] text-slate-400 font-medium uppercase tracking-tight">{request.area}</div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="font-medium text-xs">{request.customer_phone}</div>
-                        <div className="text-[9px] text-slate-400 uppercase tracking-tighter">{request.intake_source}</div>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        {request.audit_bundle_complete ? (
-                          <div className="flex flex-col items-center gap-0.5">
-                            <ShieldCheck size={14} className="text-emerald-500" />
-                            <span className="text-[8px] font-black text-emerald-600 uppercase">Secure</span>
+                        <div>
+                          <p className="text-sm font-black text-slate-900 uppercase tracking-tight">{request.sub_service}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <MapPin size={12} className="text-slate-400" />
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{request.area}</span>
+                            <span className="text-[10px] text-slate-300">\u2022</span>
+                            <span className="text-[10px] font-mono font-bold text-slate-400">{request.id}</span>
                           </div>
-                        ) : (
-                          <div className="flex flex-col items-center gap-0.5">
-                            <ShieldAlert size={14} className="text-amber-500" />
-                            <span className="text-[8px] font-black text-amber-600 uppercase">Audit Gap</span>
-                          </div>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={`text-[10px] font-black uppercase tracking-widest ${getStatusColor(request.status)}`}>
-                          {request.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {renderAction(request)}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-6">
+                      <Badge variant="outline" className={`text-[9px] font-black uppercase px-3 py-1 rounded-full border-2 ${getStatusColor(request.status)}`}>
+                        {request.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="py-6">
+                      <p className="text-xs font-bold text-slate-700">{request.customer_phone}</p>
+                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1">{request.intake_source}</p>
+                    </TableCell>
+                    <TableCell className="py-6">
+                      <div className="flex items-center gap-2 text-slate-500">
+                        <Clock size={14} />
+                        <span className="text-xs font-bold">{getAgeInMinutes(request.created_at)}m</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-6 px-8 text-right">
+                      {renderAction(request)}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+
+        {filteredRequests.length === 0 && (
+          <div className="text-center py-20 bg-white rounded-[2.5rem] border border-dashed border-slate-200 mt-8">
+            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search size={32} className="text-slate-300" />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">No requests found</h3>
+            <p className="text-slate-500 mt-2 text-sm font-medium">Try adjusting your search or filters.</p>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );

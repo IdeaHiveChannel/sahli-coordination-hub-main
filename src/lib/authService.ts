@@ -152,7 +152,6 @@ export const authService = {
       
       // In this architecture, environment variables manage the actual password.
       // We've added local persistence to ensure the user's change survives refreshes/re-logins.
-      console.log('Password updated and persisted locally.');
       
       // Trigger storage event for other components to sync
       window.dispatchEvent(new Event('storage'));
@@ -177,7 +176,6 @@ export const authService = {
   requestPasswordReset: async (email: string): Promise<boolean> => {
     // Artificial delay
     await new Promise(resolve => setTimeout(resolve, 800));
-    console.log(`Password reset link requested for: ${email}`);
     return true;
   }
 };

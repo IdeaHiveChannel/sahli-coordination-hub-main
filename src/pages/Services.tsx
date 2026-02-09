@@ -40,7 +40,7 @@ import {
 } from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
-import { WHATSAPP_LINK } from '@/lib/constants';
+import { getWhatsAppLink } from '@/lib/constants';
 
 interface CollapsibleModuleProps {
   icon: React.ReactNode;
@@ -58,20 +58,20 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
     <div className={`border-b border-border last:border-0 transition-all duration-700 ${isOpen ? 'bg-foreground/[0.03] backdrop-blur-md' : 'hover:bg-foreground/[0.01]'}`}>
       <button
         onClick={onToggle}
-        className="w-full py-3 md:py-4 flex items-center justify-between group transition-all px-4 md:px-5"
+        className="w-full py-2.5 md:py-3.5 flex items-center justify-between group transition-all px-3 md:px-5"
       >
-        <div className="flex items-center gap-5 md:gap-7">
+        <div className="flex items-center gap-4 md:gap-5">
           <motion.div 
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className={`p-2 md:p-3 rounded-xl glass-morphism text-primary transition-all duration-500 shadow-2xl ${isOpen ? 'bg-primary text-primary-foreground scale-110 shadow-primary/20' : 'group-hover:bg-primary/10'}`}
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center transition-all duration-500 shadow-md ${isOpen ? 'bg-primary text-primary-foreground scale-105' : 'bg-foreground/[0.03] text-primary group-hover:bg-primary/10'}`}
           >
-            {React.cloneElement(icon as React.ReactElement, { size: 18 })}
+            {React.cloneElement(icon as React.ReactElement, { size: 16 })}
           </motion.div>
           <div className="text-start">
-            <h3 className={`text-base md:text-lg font-black tracking-tight mb-1 transition-all duration-500 ${isOpen ? 'text-foreground' : 'text-foreground/70 group-hover:text-foreground'}`}>
+            <h3 className={`text-sm md:text-base font-black transition-all duration-500 ${isOpen ? 'text-foreground' : 'text-foreground/70 group-hover:text-foreground'}`}>
               {title}
             </h3>
-            <p className={`text-start text-[10px] md:text-xs font-medium transition-all duration-500 ${isOpen ? 'text-foreground' : 'text-foreground/60 group-hover:text-foreground/80'}`}>
+            <p className={`text-start text-[0.75rem] md:text-[0.8rem] !text-foreground/80 transition-all duration-500 max-w-xl ${isOpen ? 'text-foreground/80' : 'text-foreground/50 group-hover:text-foreground/70'}`}>
               {description}
             </p>
           </div>
@@ -79,12 +79,12 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
         <motion.div
           animate={{ 
             rotate: isOpen ? 180 : 0,
-            scale: isOpen ? 1.2 : 1
+            scale: isOpen ? 1.05 : 1
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className={`transition-colors duration-500 ${isOpen ? 'text-primary' : 'text-foreground/20 group-hover:text-primary/50'}`}
+          className={`transition-colors duration-500 shrink-0 ${isOpen ? 'text-primary' : 'text-foreground/20 group-hover:text-primary/50'}`}
         >
-          <ChevronDown size={20} strokeWidth={3} />
+          <ChevronDown size={16} strokeWidth={3} />
         </motion.div>
       </button>
 
@@ -97,17 +97,19 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className={`pb-7 ps-4 md:ps-[64px] pe-4 md:pe-7 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5`}>
+            <div className={`pb-6 ps-3 md:ps-[72px] pe-3 md:pe-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4`}>
               {items.split('\n').map((item: string, idx: number) => (
                 <motion.div 
                   key={idx} 
                   initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
-                  className="flex items-start gap-3 text-foreground font-semibold text-sm group/item py-1"
+                  className="flex items-start gap-3 text-foreground font-bold text-[0.75rem] md:text-[0.85rem] group/item py-0.5"
                 >
-                  <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-3 h-3 object-contain opacity-40 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all duration-300 shadow-sm shadow-primary/20 mt-1" />
-                  <span className="group-hover/item:translate-x-1 transition-transform duration-300">
+                  <div className="mt-1 shrink-0">
+                    <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-2.5 h-2.5 object-contain opacity-100 transition-all duration-300 shadow-sm" />
+                  </div>
+                  <span className="group-hover/item:translate-x-1 transition-transform duration-300 leading-tight">
                     {item}
                   </span>
                 </motion.div>
@@ -184,7 +186,7 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero / Selector Area - Compact & Advanced */}
-      <section ref={containerRef} className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-[45vh] md:min-h-[55vh] flex flex-col justify-center overflow-hidden bg-background">
         {/* Background Parallax */}
         <div className="absolute inset-0 z-0">
           <motion.div 
@@ -195,35 +197,38 @@ export default function Services() {
             }}
             className="absolute inset-0"
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              crossOrigin="anonymous"
-              className="w-full h-full object-cover grayscale opacity-[0.15] scale-110"
-            >
-              {/* <source src="https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
-            </video>
-            <div className={`absolute inset-0 bg-gradient-to-r ${lang === 'ar' ? 'from-primary/20 via-transparent to-transparent' : 'from-transparent via-transparent to-primary/20'} mix-blend-overlay opacity-30`} />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(var(--primary),0.1),transparent_70%)]" />
+            {/* Floating Background Blobs for homepage design base */}
+            <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow`} />
+            <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000`} />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
+            <div className="absolute inset-0 bg-slate-950/5" />
+            <div className={`absolute inset-0 bg-gradient-to-b from-slate-950/10 via-transparent to-background`} />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-background" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10">
+        <div className="container-sahli relative z-10 pt-36 md:pt-52 pb-12">
           <motion.div
             style={{ y: yText }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="mb-6 md:mb-8 text-foreground text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-label mb-6 backdrop-blur-md"
+            >
+              <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
+              {t('nav.services')}
+            </motion.div>
+
+            <h1 className="mb-6 text-foreground text-display">
               {t('services.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 + i * 0.05 }}
-                  className="inline-block me-[0.2em]"
+                  transition={{ duration: 1, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block me-[0.1em]"
                 >
                   {word}
                 </motion.span>
@@ -231,83 +236,66 @@ export default function Services() {
             </h1>
             
             <motion.p 
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-base md:text-lg text-foreground/80 font-medium leading-tight max-w-2xl mb-6 md:mb-8 mx-auto"
+              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-base md:text-lg !text-foreground/60 max-w-2xl mb-8 mx-auto leading-relaxed"
             >
               {t('services.intro')}
-            </motion.p>
-
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-[10px] md:text-xs text-primary font-black uppercase tracking-widest opacity-60"
-            >
-              {t('footer.intermediary')}
             </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Sticky Selector - Enhanced Visuals */}
-      <div className="sticky top-[56px] md:top-[64px] z-40 w-full glass-morphism border-y border-border shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
-        <div className="container-sahli relative">
+      <div className="sticky top-[48px] md:top-[56px] z-40 w-full backdrop-blur-2xl bg-background/80 border-y border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
+        <div className="container-sahli">
           <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-3 scroll-smooth items-center md:justify-center">
             {roofs.map((roof: { id: string; label: string; status?: string }, idx: number) => (
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + idx * 0.1, duration: 0.8 }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                transition={{ delay: 0.4 + idx * 0.05, duration: 0.8 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 key={roof.id}
                 onClick={() => handleRoofClick(roof.id)}
-                className={`relative group px-4 py-2.5 md:px-5 md:py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-700 flex items-center gap-4 ${
+                className={`relative px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap ${
                   activeRoof === roof.id
                     ? 'text-primary-foreground'
-                    : 'text-foreground/40 hover:text-foreground'
+                    : 'text-foreground/50 hover:text-foreground hover:bg-white/5'
                 }`}
               >
                 {activeRoof === roof.id && (
                   <motion.div 
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-primary rounded-full -z-10 shadow-2xl shadow-primary/40"
+                    className="absolute inset-0 bg-primary rounded-xl -z-10 shadow-xl shadow-primary/20"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
                 
-                <span className="relative z-10 flex items-center gap-4">
-                  {activeRoof === roof.id ? (
-                    <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-4 h-4 object-contain brightness-0 invert" />
-                  ) : (
-                    <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-4 h-4 object-contain opacity-20 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500" />
-                  )}
-                  {roof.label}
-                  {roof.status === 'comingSoon' && (
-                    <span className="text-[8px] px-1.5 py-0.5 rounded-sm bg-primary/20 text-primary border border-primary/30">
-                      {t('services.status.comingSoon')}
-                    </span>
-                  )}
-                </span>
+                <span className="relative z-10 flex items-center gap-2">
+                    <img 
+                      src="/logos/SahlLogo9.png" 
+                      alt="" 
+                      loading="lazy" 
+                      className={`w-3 h-3 object-contain transition-all duration-500 ${activeRoof === roof.id ? 'brightness-0 invert' : 'opacity-50'}`} 
+                    />
+                    {roof.label}
+                  </span>
               </motion.button>
             ))}
           </div>
-          
-          {/* Scroll Indicator (Mobile) */}
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent pointer-events-none md:hidden" />
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent pointer-events-none md:hidden" />
         </div>
       </div>
 
       {/* Roof 1: Home Maintenance - Compact */}
-      <section id="home-maintenance" className="relative py-8 md:py-16 scroll-mt-32 bg-background overflow-hidden">
+      <section id="home-maintenance" className="relative section-spacing scroll-mt-32 bg-background overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-primary/[0.03] rounded-full blur-[60px] -z-10 animate-pulse-slow" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -315,31 +303,31 @@ export default function Services() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20"
+                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
                   >
-                    <Wrench size={20} />
+                    <Wrench size={16} />
                   </motion.div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
+                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
                     {t('services.status.live')} — 01
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.homeMaintenance.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="text-display mb-3">{t('services.homeMaintenance.title')}</h2>
+                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
                   {t('services.homeMaintenance.body')}
                 </p>
                 
                 <motion.div 
-                  className="p-4 rounded-2xl bg-foreground/[0.03] border border-border/50 relative overflow-hidden group"
+                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="text-primary w-4 h-4" />
-                    </div>
-                    <p className="text-[13px] font-bold text-foreground/80 leading-tight">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Box className="text-primary w-3.5 h-3.5" />
+                  </div>
+                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.homeMaintenance.rule')}
                     </p>
                   </div>
@@ -348,10 +336,11 @@ export default function Services() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-foreground/[0.02] rounded-2xl border border-border shadow-xl overflow-hidden"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
@@ -388,18 +377,18 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
                 <a 
-                  href={WHATSAPP_LINK}
+                  href={getWhatsAppLink(t('services.homeMaintenance.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Home Maintenance')}
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
+                  className="cta-primary btn-shine"
                 >
                   <motion.div
                     className="flex items-center gap-2"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.homeMaintenance.cta')}
                   </motion.div>
                 </a>
@@ -410,12 +399,13 @@ export default function Services() {
       </section>
 
       {/* Roof 2: Cleaning & Coordination - Compact */}
-      <section id="cleaning" className="relative py-8 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      <section id="cleaning" className="relative section-spacing bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -423,31 +413,31 @@ export default function Services() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20"
+                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
                   >
-                    <Sparkles size={20} />
+                    <Sparkles size={16} />
                   </motion.div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
+                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
                     {t('services.status.live')} — 02
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.cleaning.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="text-display mb-3">{t('services.cleaning.title')}</h2>
+                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
                   {t('services.cleaning.body')}
                 </p>
                 
                 <motion.div 
-                  className="p-4 rounded-2xl bg-foreground/[0.03] border border-border/50 relative overflow-hidden group"
+                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                      <Heart className="text-primary w-4 h-4" />
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Heart className="text-primary w-3.5 h-3.5" />
                     </div>
-                    <p className="text-[13px] font-bold text-foreground/80 leading-tight">
+                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.cleaning.rule')}
                     </p>
                   </div>
@@ -456,22 +446,23 @@ export default function Services() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-foreground/[0.02] rounded-2xl border border-border shadow-xl overflow-hidden"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Home size={18} />}
-                  title={t('services.cleaning.general.title')}
-                  description={t('services.cleaning.general.desc')}
-                  items={t('services.cleaning.general.items')}
-                  isOpen={openModule === 'general-cleaning'}
-                  onToggle={() => setOpenModule(openModule === 'general-cleaning' ? null : 'general-cleaning')}
+                  title={t('services.cleaning.regular.title')}
+                  description={t('services.cleaning.regular.desc')}
+                  items={t('services.cleaning.regular.items')}
+                  isOpen={openModule === 'regular-cleaning'}
+                  onToggle={() => setOpenModule(openModule === 'regular-cleaning' ? null : 'regular-cleaning')}
                 />
                 <CollapsibleModule
-                  icon={<Sofa size={18} />}
+                  icon={<Waves size={18} />}
                   title={t('services.cleaning.deep.title')}
                   description={t('services.cleaning.deep.desc')}
                   items={t('services.cleaning.deep.items')}
@@ -479,12 +470,12 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'deep-cleaning' ? null : 'deep-cleaning')}
                 />
                 <CollapsibleModule
-                  icon={<Waves size={18} />}
-                  title={t('services.cleaning.furniture.title')}
-                  description={t('services.cleaning.furniture.desc')}
-                  items={t('services.cleaning.furniture.items')}
-                  isOpen={openModule === 'furniture-cleaning'}
-                  onToggle={() => setOpenModule(openModule === 'furniture-cleaning' ? null : 'furniture-cleaning')}
+                  icon={<Sofa size={18} />}
+                  title={t('services.cleaning.sofa.title')}
+                  description={t('services.cleaning.sofa.desc')}
+                  items={t('services.cleaning.sofa.items')}
+                  isOpen={openModule === 'sofa-cleaning'}
+                  onToggle={() => setOpenModule(openModule === 'sofa-cleaning' ? null : 'sofa-cleaning')}
                 />
                 <CollapsibleModule
                   icon={<Bug size={18} />}
@@ -496,18 +487,18 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
                 <a 
-                  href={WHATSAPP_LINK}
+                  href={getWhatsAppLink(t('services.cleaning.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Cleaning')}
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
+                  className="cta-primary btn-shine"
                 >
                   <motion.div
                     className="flex items-center gap-2"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.cleaning.cta')}
                   </motion.div>
                 </a>
@@ -517,13 +508,14 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 3: Moving & Storage - Compact */}
-      <section id="moving" className="relative py-8 md:py-16 bg-background scroll-mt-32 overflow-hidden">
+      {/* Roof 3: Moving & Relocation - Compact */}
+      <section id="moving" className="relative section-spacing scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-500" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -531,31 +523,31 @@ export default function Services() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20"
+                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
                   >
-                    <Truck size={20} />
+                    <Truck size={16} />
                   </motion.div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
+                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
                     {t('services.status.live')} — 03
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.moving.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="text-display mb-3">{t('services.moving.title')}</h2>
+                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
                   {t('services.moving.body')}
                 </p>
                 
                 <motion.div 
-                  className="p-4 rounded-2xl bg-foreground/[0.03] border border-border/50 relative overflow-hidden group"
+                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                      <Shield className="text-primary w-4 h-4" />
-                    </div>
-                    <p className="text-[13px] font-bold text-foreground/80 leading-tight">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Heart className="text-primary w-3.5 h-3.5" />
+                  </div>
+                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.moving.rule')}
                     </p>
                   </div>
@@ -564,50 +556,51 @@ export default function Services() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-foreground/[0.02] rounded-2xl border border-border shadow-xl overflow-hidden"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Box size={18} />}
-                  title={t('services.moving.full.title')}
-                  description={t('services.moving.full.desc')}
-                  items={t('services.moving.full.items')}
-                  isOpen={openModule === 'full-moving'}
-                  onToggle={() => setOpenModule(openModule === 'full-moving' ? null : 'full-moving')}
+                  title={t('services.moving.local.title')}
+                  description={t('services.moving.local.desc')}
+                  items={t('services.moving.local.items')}
+                  isOpen={openModule === 'local-moving'}
+                  onToggle={() => setOpenModule(openModule === 'local-moving' ? null : 'local-moving')}
                 />
                 <CollapsibleModule
                   icon={<Truck size={18} />}
                   title={t('services.moving.international.title')}
                   description={t('services.moving.international.desc')}
                   items={t('services.moving.international.items')}
-                  isOpen={openModule === 'intl-moving'}
-                  onToggle={() => setOpenModule(openModule === 'intl-moving' ? null : 'intl-moving')}
+                  isOpen={openModule === 'international-moving'}
+                  onToggle={() => setOpenModule(openModule === 'international-moving' ? null : 'international-moving')}
                 />
                 <CollapsibleModule
-                  icon={<ShieldCheck size={18} />}
-                  title={t('services.moving.storage.title')}
-                  description={t('services.moving.storage.desc')}
-                  items={t('services.moving.storage.items')}
-                  isOpen={openModule === 'storage'}
-                  onToggle={() => setOpenModule(openModule === 'storage' ? null : 'storage')}
+                  icon={<HardHat size={18} />}
+                  title={t('services.moving.furniture.title')}
+                  description={t('services.moving.furniture.desc')}
+                  items={t('services.moving.furniture.items')}
+                  isOpen={openModule === 'furniture-moving'}
+                  onToggle={() => setOpenModule(openModule === 'furniture-moving' ? null : 'furniture-moving')}
                 />
               </div>
 
-              <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
                 <a 
-                  href={WHATSAPP_LINK}
+                  href={getWhatsAppLink(t('services.moving.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Moving')}
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
+                  className="cta-primary btn-shine"
                 >
                   <motion.div
                     className="flex items-center gap-2"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.moving.cta')}
                   </motion.div>
                 </a>
@@ -617,13 +610,14 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 4: Outdoor & Construction - Compact */}
-      <section id="outdoor" className="relative py-8 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      {/* Roof 4: Outdoor & Specialized - Compact */}
+      <section id="outdoor" className="relative section-spacing bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -631,31 +625,31 @@ export default function Services() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/20"
+                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
                   >
-                    <HardHat size={20} />
+                    <Droplets size={16} />
                   </motion.div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/25 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
+                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
                     {t('services.status.live')} — 04
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.outdoor.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="text-display mb-3">{t('services.outdoor.title')}</h2>
+                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
                   {t('services.outdoor.body')}
                 </p>
                 
                 <motion.div 
-                  className="p-4 rounded-2xl bg-foreground/[0.03] border border-border/50 relative overflow-hidden group"
+                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                      <Sparkles className="text-primary w-4 h-4" />
-                    </div>
-                    <p className="text-[13px] font-bold text-foreground/80 leading-tight">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Smartphone className="text-primary w-3.5 h-3.5" />
+                  </div>
+                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.outdoor.rule')}
                     </p>
                   </div>
@@ -664,50 +658,43 @@ export default function Services() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-foreground/[0.02] rounded-2xl border border-border shadow-xl overflow-hidden"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
-                  icon={<Waves size={18} />}
+                  icon={<Droplets size={18} />}
                   title={t('services.outdoor.pool.title')}
                   description={t('services.outdoor.pool.desc')}
                   items={t('services.outdoor.pool.items')}
-                  isOpen={openModule === 'pool-maintenance'}
-                  onToggle={() => setOpenModule(openModule === 'pool-maintenance' ? null : 'pool-maintenance')}
+                  isOpen={openModule === 'pool'}
+                  onToggle={() => setOpenModule(openModule === 'pool' ? null : 'pool')}
                 />
                 <CollapsibleModule
-                  icon={<Heart size={18} />}
-                  title={t('services.outdoor.garden.title')}
-                  description={t('services.outdoor.garden.desc')}
-                  items={t('services.outdoor.garden.items')}
+                  icon={<Waves size={18} />}
+                  title={t('services.outdoor.landscaping.title')}
+                  description={t('services.outdoor.landscaping.desc')}
+                  items={t('services.outdoor.landscaping.items')}
                   isOpen={openModule === 'landscaping'}
                   onToggle={() => setOpenModule(openModule === 'landscaping' ? null : 'landscaping')}
                 />
-                <CollapsibleModule
-                  icon={<HardHat size={18} />}
-                  title={t('services.outdoor.construction.title')}
-                  description={t('services.outdoor.construction.desc')}
-                  items={t('services.outdoor.construction.items')}
-                  isOpen={openModule === 'renovation'}
-                  onToggle={() => setOpenModule(openModule === 'renovation' ? null : 'renovation')}
-                />
               </div>
 
-              <div className="py-6 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
                 <a 
-                  href={WHATSAPP_LINK}
+                  href={getWhatsAppLink(t('services.outdoor.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Outdoor')}
-                  className="cta-primary inline-flex shadow-xl shadow-primary/20 btn-shine"
+                  className="cta-primary btn-shine"
                 >
                   <motion.div
                     className="flex items-center gap-2"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <MessageSquare size={18} className="fill-primary-foreground" />
+                    <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.outdoor.cta')}
                   </motion.div>
                 </a>
@@ -717,13 +704,14 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 5: Home Care & Wellness - Coming Soon */}
-      <section id="care" className="relative py-8 md:py-16 bg-background scroll-mt-32 overflow-hidden">
+      {/* Roof 5: Care & Lifestyle - Compact */}
+      <section id="care" className="relative section-spacing scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-500" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -731,31 +719,31 @@ export default function Services() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center shadow-lg shadow-primary/10"
+                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
                   >
-                    <Heart size={20} />
+                    <Heart size={16} />
                   </motion.div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary/60 text-[9px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain opacity-40" />
-                    {t('services.status.comingSoon')} — 05
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
+                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
+                    {t('services.status.live')} — 05
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground/80 text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.care.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="text-display mb-3">{t('services.care.title')}</h2>
+                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
                   {t('services.care.body')}
                 </p>
                 
                 <motion.div 
-                  className="p-4 rounded-2xl bg-foreground/[0.02] border border-border/30 relative overflow-hidden"
+                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Clock className="text-primary/40 w-4 h-4" />
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="text-primary w-3.5 h-3.5" />
                     </div>
-                    <p className="text-[13px] font-bold text-foreground/40 leading-tight">
+                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.care.rule')}
                     </p>
                   </div>
@@ -764,19 +752,20 @@ export default function Services() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border/50 shadow-sm overflow-hidden opacity-60"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
             >
-              <div className="divide-y divide-border/30">
+              <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Baby size={18} />}
                   title={t('services.care.babysitting.title')}
                   description={t('services.care.babysitting.desc')}
                   items={t('services.care.babysitting.items')}
-                  isOpen={openModule === 'nanny'}
-                  onToggle={() => setOpenModule(openModule === 'nanny' ? null : 'nanny')}
+                  isOpen={openModule === 'babysitting'}
+                  onToggle={() => setOpenModule(openModule === 'babysitting' ? null : 'babysitting')}
                 />
                 <CollapsibleModule
                   icon={<Stethoscope size={18} />}
@@ -786,36 +775,37 @@ export default function Services() {
                   isOpen={openModule === 'nursing'}
                   onToggle={() => setOpenModule(openModule === 'nursing' ? null : 'nursing')}
                 />
-                <CollapsibleModule
-                  icon={<Activity size={18} />}
-                  title={t('services.care.wellness.title')}
-                  description={t('services.care.wellness.desc')}
-                  items={t('services.care.wellness.items')}
-                  isOpen={openModule === 'wellness'}
-                  onToggle={() => setOpenModule(openModule === 'wellness' ? null : 'wellness')}
-                />
               </div>
 
-              <div className="py-6 border-t border-border/30 text-center bg-foreground/[0.005]">
-                <button 
-                  disabled
-                  className="px-8 py-3 rounded-xl bg-foreground/10 text-foreground/30 text-[10px] font-black uppercase tracking-widest cursor-not-allowed"
+              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+                <a 
+                  href={getWhatsAppLink(t('services.care.whatsapp'))}
+                  onClick={() => trackRequestClick('Services - Care')}
+                  className="cta-primary btn-shine"
                 >
-                  {t('services.status.notAvailable')}
-                </button>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={16} className="fill-primary-foreground" />
+                    {t('services.care.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Roof 6: Electronics & Tech - Coming Soon */}
-      <section id="tech" className="relative py-8 md:py-16 bg-foreground/[0.01] scroll-mt-32 overflow-hidden mb-16">
+      {/* Roof 6: Electronics & Tech - Compact */}
+      <section id="tech" className="relative section-spacing bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-6 md:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
             <motion.div
               initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -823,31 +813,31 @@ export default function Services() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-2 mb-4">
                   <motion.div 
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center shadow-lg shadow-primary/10"
+                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
                   >
-                    <Smartphone size={20} />
+                    <Tv size={16} />
                   </motion.div>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary/60 text-[9px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain opacity-40" />
-                    {t('services.status.comingSoon')} — 06
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
+                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
+                    {t('services.status.live')} — 06
                   </span>
                 </div>
-                <h2 className="mb-4 md:mb-6 text-foreground/80 text-2xl md:text-3xl font-black tracking-tighter leading-tight">{t('services.electronics.title')}</h2>
-                <p className="text-sm md:text-base text-foreground/70 font-medium mb-6 md:mb-8 leading-tight">
+                <h2 className="text-display mb-3">{t('services.electronics.title')}</h2>
+                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
                   {t('services.electronics.body')}
                 </p>
                 
                 <motion.div 
-                  className="p-4 rounded-2xl bg-foreground/[0.02] border border-border/30 relative overflow-hidden"
+                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Zap className="text-primary/40 w-4 h-4" />
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="text-primary w-3.5 h-3.5" />
                     </div>
-                    <p className="text-[13px] font-bold text-foreground/40 leading-tight">
+                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.electronics.rule')}
                     </p>
                   </div>
@@ -856,45 +846,46 @@ export default function Services() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border/50 shadow-sm overflow-hidden opacity-60"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
             >
-              <div className="divide-y divide-border/30">
+              <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Tv size={18} />}
-                  title={t('services.electronics.tv.title')}
-                  description={t('services.electronics.tv.desc')}
-                  items={t('services.electronics.tv.items')}
-                  isOpen={openModule === 'tv-repair'}
-                  onToggle={() => setOpenModule(openModule === 'tv-repair' ? null : 'tv-repair')}
+                  title={t('services.electronics.home-appliances.title')}
+                  description={t('services.electronics.home-appliances.desc')}
+                  items={t('services.electronics.home-appliances.items')}
+                  isOpen={openModule === 'appliances'}
+                  onToggle={() => setOpenModule(openModule === 'appliances' ? null : 'appliances')}
                 />
                 <CollapsibleModule
                   icon={<Smartphone size={18} />}
-                  title={t('services.electronics.mobile.title')}
-                  description={t('services.electronics.mobile.desc')}
-                  items={t('services.electronics.mobile.items')}
-                  isOpen={openModule === 'mobile-repair'}
-                  onToggle={() => setOpenModule(openModule === 'mobile-repair' ? null : 'mobile-repair')}
-                />
-                <CollapsibleModule
-                  icon={<Cog size={18} />}
-                  title={t('services.electronics.smart.title')}
-                  description={t('services.electronics.smart.desc')}
-                  items={t('services.electronics.smart.items')}
-                  isOpen={openModule === 'smart-home'}
-                  onToggle={() => setOpenModule(openModule === 'smart-home' ? null : 'smart-home')}
+                  title={t('services.electronics.it.title')}
+                  description={t('services.electronics.it.desc')}
+                  items={t('services.electronics.it.items')}
+                  isOpen={openModule === 'it'}
+                  onToggle={() => setOpenModule(openModule === 'it' ? null : 'it')}
                 />
               </div>
 
-              <div className="py-6 border-t border-border/30 text-center bg-foreground/[0.005]">
-                <button 
-                  disabled
-                  className="px-8 py-3 rounded-xl bg-foreground/10 text-foreground/30 text-[10px] font-black uppercase tracking-widest cursor-not-allowed"
+              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+                <a 
+                  href={getWhatsAppLink(t('services.electronics.whatsapp'))}
+                  onClick={() => trackRequestClick('Services - Electronics')}
+                  className="cta-primary btn-shine"
                 >
-                  {t('services.status.notAvailable')}
-                </button>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageSquare size={16} className="fill-primary-foreground" />
+                    {t('services.electronics.cta')}
+                  </motion.div>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -902,9 +893,9 @@ export default function Services() {
       </section>
 
       {/* Trust Banner / Bottom CTA */}
-      <section className="py-20 md:py-32 relative overflow-hidden">
+      <section className="section-spacing relative overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 -z-10" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-primary/10 rounded-full blur-[60px] -z-10 animate-pulse-slow" />
         
         <div className="container-sahli text-center">
           <motion.div
@@ -913,37 +904,37 @@ export default function Services() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-[10px] font-black tracking-widest uppercase mb-10 shadow-lg btn-shine">
-              <img src="/logos/SahlLogo9.png" alt="" className="w-5 h-5 object-contain" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[7px] font-black tracking-widest uppercase mb-5 shadow-md btn-shine">
+              <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
               {t('about.position.title')}
             </div>
             
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-10">
+            <h2 className="text-display mb-4">
               {t('services.cta.title')}
             </h2>
             
-            <p className="text-lg md:text-xl text-foreground/70 font-medium mb-12 max-w-2xl mx-auto leading-tight">
+            <p className="text-[0.85rem] md:text-sm !text-foreground/70 mb-6 max-w-2xl mx-auto">
               {t('services.cta.body')}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
               <a 
-                href={WHATSAPP_LINK}
+                href={getWhatsAppLink(t('cta.whatsapp.general'))}
                 onClick={() => trackRequestClick('Services - Bottom CTA')}
-                className="cta-primary text-lg px-10 py-5 w-full sm:w-auto shadow-2xl shadow-primary/30 btn-shine"
+                className="cta-primary btn-shine"
               >
-                <div className="flex items-center justify-center gap-3">
-                  <MessageSquare size={22} className="fill-primary-foreground" />
+                <div className="flex items-center justify-center gap-1.5">
+                  <MessageSquare size={14} className="fill-primary-foreground" />
                   {t('services.cta.button')}
                 </div>
               </a>
               
               <Link 
                 to="/about"
-                className="group flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40 hover:text-primary transition-all duration-500"
+                className="group flex items-center gap-1.5 text-[8px] font-black uppercase tracking-[0.12em] text-foreground/40 hover:text-primary transition-all duration-500"
               >
                 {t('nav.about')}
-                <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform duration-500" />
+                <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform duration-500" />
               </Link>
             </div>
           </motion.div>

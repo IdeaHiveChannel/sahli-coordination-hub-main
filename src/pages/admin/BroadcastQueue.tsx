@@ -228,272 +228,474 @@ const BroadcastQueue = () => {
   return (
     <AdminLayout>
       <div className="py-2" dir={dir}>
-        <div className="flex items-center justify-between mb-6 bg-white/50 backdrop-blur-md p-4 rounded-xl border border-primary/10 shadow-sm">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 font-black tracking-widest text-[10px]">COORDINATION ENGINE</Badge>
-              <Badge variant="outline" className="bg-blue-50 text-blue-600 border-blue-100 font-bold text-[10px]">{queue.length} REQUESTS</Badge>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8 bg-white/50 backdrop-blur-md p-6 sm:p-10 rounded-[2.5rem] border border-primary/10 shadow-sm">
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 font-black tracking-widest text-[10px] px-3 py-1">COORDINATION ENGINE</Badge>
+              <Badge variant="outline" className="bg-blue-50 text-blue-600 border-blue-100 font-black text-[10px] px-3 py-1 uppercase">{queue.length} Requests</Badge>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Stage 6: Broadcast Queue</h1>
-            <p className="text-xs text-muted-foreground mt-1">
+            <h1 className="text-display text-slate-900">Broadcast Queue</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-2 font-medium leading-relaxed max-w-xl">
               Generate broadcasts and dispatch via RateUp to matched providers.
             </p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="h-9 border-primary/20 text-primary hover:bg-primary/5 font-bold" onClick={() => window.location.reload()}>
-              <Clock size={16} className="mr-2" />
-              Refresh
+          <div className="flex gap-4 w-full sm:w-auto">
+            <Button variant="outline" className="h-14 flex-1 sm:flex-none sm:px-8 gap-3 border-slate-200 font-black text-[11px] uppercase tracking-widest rounded-2xl transition-all active:scale-95 shadow-sm hover:bg-slate-50" onClick={() => window.location.reload()}>
+              <Clock size={18} />
+              Refresh Data
             </Button>
           </div>
         </div>
 
-        <div className="grid gap-6">
-          <Card className="border-primary/10 shadow-md overflow-hidden bg-white/80 backdrop-blur-sm">
-            <div className="h-1.5 bg-gradient-to-r from-primary/80 to-primary" />
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="flex items-center gap-2 text-lg font-bold text-slate-800">
-                    <Megaphone className="text-primary" size={20} />
-                    Broadcast Readiness
-                  </CardTitle>
-                  <CardDescription className="text-xs">
-                    Select a request to prepare and dispatch the broadcast message.
-                  </CardDescription>
-                </div>
+        <div className="grid gap-8">
+          <Card className="border-primary/10 shadow-xl overflow-hidden bg-white/80 backdrop-blur-md rounded-[2.5rem]">
+            <div className="h-2 bg-gradient-to-r from-primary/50 via-primary to-primary/50" />
+            <CardHeader className="border-b border-slate-100/50 pb-8 pt-10 px-6 sm:px-10">
+              <div>
+                <CardTitle className="flex items-center gap-4 text-subtitle text-slate-900">
+                  <Megaphone className="text-primary" size={28} />
+                  Broadcast Readiness
+                </CardTitle>
+                <CardDescription className="text-xs sm:text-sm font-bold text-slate-500 mt-2 leading-relaxed">
+                  Select a request to prepare and dispatch the broadcast message via RateUp.
+                </CardDescription>
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="rounded-xl border border-primary/5 overflow-hidden bg-white shadow-inner">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="hover:bg-transparent border-b border-primary/10 bg-slate-50/50">
-                      <TableHead className="text-[10px] font-black uppercase tracking-widest text-slate-500 py-4">Queue ID</TableHead>
-                      <TableHead className="text-[10px] font-black uppercase tracking-widest text-slate-500 py-4">Service / Request</TableHead>
-                      <TableHead className="text-[10px] font-black uppercase tracking-widest text-slate-500 py-4">Target District</TableHead>
-                      <TableHead className="text-[10px] font-black uppercase tracking-widest text-slate-500 py-4">Status</TableHead>
-                      <TableHead className="text-[10px] font-black uppercase tracking-widest text-slate-500 py-4 text-right">Action</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {queue.length === 0 ? (
-                      <TableRow>
-                        <TableCell colSpan={5} className="h-32 text-center">
-                          <div className="flex flex-col items-center justify-center text-muted-foreground">
-                            <CheckCircle2 size={32} className="mb-2 opacity-20" />
-                            <p className="text-sm font-medium">No requests waiting for broadcast</p>
-                            <p className="text-xs opacity-60">All new requests have been processed.</p>
+            <CardContent className="p-0">
+              {/* Mobile View: Card List */}
+              <div className="block sm:hidden p-6 space-y-6">
+                {queue.length === 0 ? (
+                  <div className="py-24 flex flex-col items-center justify-center text-slate-400 bg-slate-50/50 rounded-[3rem] border border-dashed border-slate-200">
+                    <CheckCircle2 size={48} className="mb-4 opacity-10" />
+                    <p className="text-lg font-black tracking-tight text-slate-300 uppercase">No requests waiting</p>
+                    <p className="text-xs font-medium text-slate-400 mt-1">Check back later for new coordination tasks.</p>
+                  </div>
+                ) : (
+                  queue.map((item) => (
+                    <div key={item.id} className="p-6 rounded-[2.5rem] border border-slate-100 bg-white shadow-lg space-y-6 active:scale-[0.98] transition-all">
+                      <div className="flex justify-between items-start">
+                        <div className="flex flex-col gap-1">
+                          <Button 
+                            variant="link" 
+                            className="p-0 h-auto font-mono font-black text-[10px] text-primary hover:no-underline tracking-tighter justify-start uppercase"
+                            onClick={() => navigate(`/admin/requests?search=${item.requestId}`)}
+                          >
+                            {item.id}
+                          </Button>
+                          <div className="flex items-center gap-3 mt-1">
+                            <span className="font-black text-xl text-slate-900 tracking-tight">{item.service}</span>
+                            <Badge variant="outline" className="text-[10px] px-2 py-0.5 bg-slate-50 font-black border-slate-200 uppercase tracking-widest rounded-lg">V{item.version}</Badge>
                           </div>
-                        </TableCell>
-                      </TableRow>
-                    ) : (
-                      queue.map((item) => (
-                        <TableRow key={item.id} className="group transition-colors hover:bg-primary/[0.03] border-b border-primary/5">
-                          <TableCell className="font-mono font-bold text-xs text-muted-foreground">
+                        </div>
+                        <Badge 
+                          variant={item.status === 'Sent' ? 'outline' : 'default'} 
+                          className={item.status === 'Sent' 
+                            ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 font-black text-[10px] px-3 py-1.5 uppercase tracking-widest rounded-full' 
+                            : 'bg-blue-600 text-white font-black text-[10px] px-3 py-1.5 shadow-md border-none uppercase tracking-widest rounded-full'}
+                        >
+                          {item.status === 'Sent' ? 'PREPARED' : 'READY'}
+                        </Badge>
+                      </div>
+
+                      <div className="flex items-center justify-between py-5 border-y border-slate-50">
+                        <div className="flex flex-col gap-1.5">
+                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">District</span>
+                          <span className="text-base font-black text-slate-900 tracking-tight">{item.district}</span>
+                        </div>
+                        {item.history && item.history.length > 0 && (
+                          <div className="flex flex-col gap-1.5 text-right">
+                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Last Group</span>
+                            <span className="text-sm font-black text-slate-600 italic tracking-tight">{item.history[item.history.length - 1].group}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 pt-2">
+                        {item.status === 'Sent' && (
+                          <Button 
+                            variant="outline"
+                            className="h-14 flex items-center justify-center gap-2 border-slate-200 hover:bg-primary/5 font-black uppercase text-[11px] tracking-[0.2em] rounded-2xl active:scale-95 transition-all shadow-sm"
+                            onClick={() => handleRetryBroadcast(item)}
+                          >
+                            <Plus size={16} />
+                            Retry
+                          </Button>
+                        )}
+                        
+                        <Dialog open={isGenerating && selectedRequest?.id === item.id} onOpenChange={(open) => {
+                          setIsGenerating(open);
+                          if (open) setSelectedRequest(item);
+                        }}>
+                          <DialogTrigger asChild>
                             <Button 
-                              variant="link" 
-                              className="p-0 h-auto font-mono font-bold text-xs text-primary hover:no-underline"
-                              onClick={() => navigate(`/admin/requests?search=${item.requestId}`)}
+                              disabled={item.status === 'Sent' && !isGenerating}
+                              className={`h-14 ${item.status === 'Sent' ? 'col-span-1' : 'col-span-2'} flex items-center justify-center gap-3 font-black uppercase text-[11px] tracking-[0.2em] rounded-2xl transition-all active:scale-95 shadow-xl ${
+                                item.status === 'Sent' 
+                                ? 'bg-slate-100 text-slate-400 cursor-not-allowed border-slate-200' 
+                                : 'bg-primary hover:bg-primary/90 text-white shadow-primary/20'
+                              }`}
+                              onClick={() => setSelectedRequest(item)}
                             >
-                              {item.id}
+                              <Sparkles size={16} className={item.status !== 'Sent' ? "text-primary" : ""} />
+                              {item.status === 'Sent' ? 'Sent' : (item.version > 1 ? `Send V${item.version}` : 'Generate')}
                             </Button>
-                          </TableCell>
-                          <TableCell className="py-4">
-                            <div className="flex flex-col">
-                              <div className="flex items-center gap-2">
-                                <span className="font-bold text-sm text-slate-800">{item.service}</span>
-                                <Badge variant="outline" className="text-[9px] h-4.5 bg-slate-50 font-bold border-slate-200">V{item.version}</Badge>
-                              </div>
-                              <span className="text-[10px] text-muted-foreground font-mono mt-0.5">{item.requestId}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge variant="secondary" className="bg-slate-100 text-slate-700 hover:bg-slate-200 text-[10px] font-bold border-transparent">
-                              {item.district}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex flex-col gap-1">
-                              <Badge 
-                                variant={item.status === 'Sent' ? 'outline' : 'default'} 
-                                className={item.status === 'Sent' 
-                                  ? 'bg-emerald-50 text-emerald-600 border-emerald-200 font-bold text-[10px]' 
-                                  : 'bg-blue-600 hover:bg-blue-700 font-bold text-[10px]'}
-                              >
-                                {item.status === 'Sent' ? 'PREPARED' : 'READY'}
-                              </Badge>
-                              {item.history && item.history.length > 0 && (
-                                <span className="text-[9px] text-muted-foreground italic font-medium">
-                                  Last: {item.history[item.history.length - 1].group}
-                                </span>
-                              )}
-                            </div>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex justify-end gap-2">
-                              {item.status === 'Sent' && (
-                                <Button 
-                                  variant="outline"
-                                  size="sm" 
-                                  className="h-8 flex items-center gap-2 border-primary/20 hover:bg-primary/5 font-black uppercase text-[10px] tracking-widest px-4 transition-all"
-                                  onClick={() => handleRetryBroadcast(item)}
-                                >
-                                  <Plus size={14} />
-                                  New Version
-                                </Button>
-                              )}
-                              
-                              <Dialog open={isGenerating && selectedRequest?.id === item.id} onOpenChange={(open) => {
-                                setIsGenerating(open);
-                                if (open) setSelectedRequest(item);
-                              }}>
-                                <DialogTrigger asChild>
-                                  <Button 
-                                    size="sm" 
-                                    disabled={item.status === 'Sent' && !isGenerating}
-                                    className={`h-8 flex items-center gap-2 font-black uppercase text-[10px] tracking-widest px-4 transition-all ${
-                                      item.status === 'Sent' 
-                                      ? 'bg-slate-100 text-slate-400 cursor-not-allowed border-transparent' 
-                                      : 'bg-primary hover:bg-primary/90 shadow-sm'
-                                    }`}
-                                    onClick={() => setSelectedRequest(item)}
-                                  >
-                                    <Sparkles size={14} />
-                                    {item.status === 'Sent' ? 'Sent' : (item.version > 1 ? `Send V${item.version}` : 'Generate')}
-                                  </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-[500px] bg-white border-primary/20 shadow-2xl p-0 overflow-hidden">
-                                  <div className="h-1.5 bg-primary w-full" />
-                                  <div className="p-6">
-                                    <DialogHeader className="mb-6">
-                                      <div className="flex items-center gap-3 mb-2">
-                                        <div className="p-2 bg-primary/10 rounded-lg">
-                                          <Sparkles className="text-primary" size={20} />
-                                        </div>
-                                        <div>
-                                          <DialogTitle className="text-xl font-bold text-slate-900">
-                                            SAHLI Broadcast Engine
-                                          </DialogTitle>
-                                          <DialogDescription className="text-slate-500 text-xs">
-                                            Preparation for {item.service} in {item.district} (V{item.version}).
-                                          </DialogDescription>
-                                        </div>
-                                      </div>
-                                    </DialogHeader>
-                                    
-                                    <div className="space-y-5">
-                                      <div className="space-y-2">
-                                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
-                                          <Users size={12} className="text-primary" />
-                                          1. Target Audience
-                                        </label>
-                                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex flex-col gap-1.5">
-                                          <span className="text-sm font-bold text-slate-800">Pre-defined RateUp Lists</span>
-                                          <p className="text-[10px] text-slate-500 leading-relaxed">Broadcast will be sent to the selected pricing group configured in RateUp.</p>
-                                        </div>
-                                      </div>
-
-                                      <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-2">
-                                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">2. Message Template</label>
-                                          <Select onValueChange={setSelectedTemplate}>
-                                            <SelectTrigger className="bg-white border-slate-200 h-10 text-xs font-medium">
-                                              <SelectValue placeholder="Choose template..." />
-                                            </SelectTrigger>
-                                            <SelectContent className="bg-white border-slate-200 shadow-xl">
-                                              <SelectItem value="none" className="text-xs">No Template (Default)</SelectItem>
-                                              {templates.filter(t => t.category === 'Broadcast').map(template => (
-                                                <SelectItem key={template.id} value={template.id} className="text-xs">
-                                                  {template.name}
-                                                </SelectItem>
-                                              ))}
-                                            </SelectContent>
-                                          </Select>
-                                        </div>
-
-                                        <div className="space-y-2">
-                                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">3. Pricing Tier</label>
-                                          <Select onValueChange={setSelectedRateUp}>
-                                            <SelectTrigger className="bg-white border-slate-200 h-10 text-xs font-medium">
-                                              <SelectValue placeholder="Choose group..." />
-                                            </SelectTrigger>
-                                            <SelectContent className="bg-white border-slate-200 shadow-xl">
-                                              <SelectItem value="RateUp A (Premium)" className="text-xs">RateUp A (Premium)</SelectItem>
-                                              <SelectItem value="RateUp B (Standard)" className="text-xs">RateUp B (Standard)</SelectItem>
-                                              <SelectItem value="RateUp C (Economy)" className="text-xs">RateUp C (Economy)</SelectItem>
-                                            </SelectContent>
-                                          </Select>
-                                        </div>
-                                      </div>
-
-                                      {generatedMessage ? (
-                                        <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
-                                          <div className="flex items-center justify-between">
-                                            <label className="text-[10px] font-black uppercase tracking-widest text-emerald-600 flex items-center gap-2">
-                                              <CheckCircle2 size={12} />
-                                              4. Generated Message
-                                            </label>
-                                            <Badge className="bg-emerald-50 text-emerald-600 border-emerald-200 text-[8px] font-black">READY TO SEND</Badge>
-                                          </div>
-                                          <div className="relative">
-                                            <Textarea 
-                                              readOnly 
-                                              value={generatedMessage} 
-                                              className="h-32 bg-slate-50 border-emerald-200 text-slate-700 font-mono text-[11px] leading-relaxed resize-none shadow-inner"
-                                            />
-                                          </div>
-                                        </div>
-                                      ) : (
-                                        <Button 
-                                          onClick={handleGenerateMessage}
-                                          className="w-full bg-primary hover:bg-primary/90 font-black uppercase tracking-widest text-[11px] h-10 shadow-sm"
-                                          disabled={!selectedRateUp}
-                                        >
-                                          Generate Message Text
-                                        </Button>
-                                      )}
-                                    </div>
-
-                                    <div className="mt-8 flex gap-3">
-                                      <Button 
-                                        variant="outline" 
-                                        onClick={() => {
-                                          setIsGenerating(false);
-                                          setGeneratedMessage('');
-                                          setSelectedRateUp('');
-                                        }}
-                                        className="flex-1 border-slate-200 text-slate-500 font-bold h-10 text-xs"
-                                      >
-                                        Cancel
-                                      </Button>
-                                      <Button 
-                                        onClick={handleSaveBroadcast}
-                                        disabled={!generatedMessage || isSaving}
-                                        className="flex-[2] bg-emerald-600 hover:bg-emerald-700 text-white font-black uppercase tracking-widest text-[11px] h-10 shadow-md shadow-emerald-100"
-                                      >
-                                        {isSaving ? (
-                                          <div className="flex items-center gap-2">
-                                            <Clock className="animate-spin" size={14} />
-                                            Dispatching...
-                                          </div>
-                                        ) : (
-                                          <div className="flex items-center gap-2">
-                                            <Send size={14} />
-                                            Send via RateUp
-                                          </div>
-                                        )}
-                                      </Button>
-                                    </div>
+                          </DialogTrigger>
+                          <DialogContent className="w-[95vw] max-w-[500px] bg-white border-primary/20 shadow-xl p-0 overflow-hidden rounded-[2.5rem]">
+                            <div className="h-2 bg-primary w-full" />
+                            <div className="p-8">
+                              <DialogHeader className="mb-8">
+                                <div className="flex items-center gap-4 mb-3">
+                                  <div className="p-4 bg-primary/10 rounded-[1.5rem] shadow-inner">
+                                    <Sparkles className="text-primary" size={28} />
                                   </div>
-                                </DialogContent>
-                              </Dialog>
+                                  <div>
+                                    <DialogTitle className="text-subtitle text-slate-900">
+                                      SAHLI Broadcast
+                                    </DialogTitle>
+                                    <DialogDescription className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">
+                                      {item.service} • {item.district} (V{item.version})
+                                    </DialogDescription>
+                                  </div>
+                                </div>
+                              </DialogHeader>
+                              
+                              <div className="space-y-8">
+                                <div className="space-y-4">
+                                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+                                    <Users size={14} className="text-primary" />
+                                    1. Target Audience
+                                  </label>
+                                  <div className="p-5 rounded-[1.5rem] bg-slate-50 border border-slate-100 flex flex-col gap-2">
+                                    <span className="text-sm font-black text-slate-900 uppercase tracking-tight">RateUp Dynamic Lists</span>
+                                    <p className="text-[11px] text-slate-500 leading-relaxed font-bold uppercase tracking-tighter">Broadcast will be sent to the specific pricing tier group.</p>
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-6">
+                                  <div className="space-y-3">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">2. Message Template</label>
+                                    <Select onValueChange={setSelectedTemplate}>
+                                      <SelectTrigger className="bg-slate-50 border-slate-100 h-14 text-[11px] font-black uppercase tracking-widest rounded-2xl focus:ring-primary/20 focus:bg-white transition-all shadow-inner">
+                                        <SelectValue placeholder="Choose template..." />
+                                      </SelectTrigger>
+                                      <SelectContent className="bg-white border-slate-200 shadow-xl rounded-2xl p-2">
+                                        <SelectItem value="none" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">No Template (Default)</SelectItem>
+                                        {templates.filter(t => t.category === 'Broadcast').map(template => (
+                                          <SelectItem key={template.id} value={template.id} className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">
+                                            {template.name}
+                                          </SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+
+                                  <div className="space-y-3">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">3. RateUp Group</label>
+                                    <Select onValueChange={setSelectedRateUp}>
+                                      <SelectTrigger className="bg-slate-50 border-slate-100 h-14 text-[11px] font-black uppercase tracking-widest rounded-2xl focus:ring-primary/20 focus:bg-white transition-all shadow-inner">
+                                        <SelectValue placeholder="Select group..." />
+                                      </SelectTrigger>
+                                      <SelectContent className="bg-white border-slate-200 shadow-xl rounded-2xl p-2">
+                                        <SelectItem value="Standard" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">Standard Partners</SelectItem>
+                                        <SelectItem value="Premium" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">Premium Fleet</SelectItem>
+                                        <SelectItem value="Urgent" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">Rapid Response Team</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </div>
+
+                                <div className="space-y-3 pt-2">
+                                  <div className="flex items-center justify-between">
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">4. Final Broadcast Payload</label>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm" 
+                                      className="h-10 px-4 text-[10px] font-black uppercase tracking-widest text-primary hover:bg-primary/5 rounded-xl active:scale-95 transition-all"
+                                      onClick={handleGenerateMessage}
+                                    >
+                                      Re-generate
+                                    </Button>
+                                  </div>
+                                  <div className="relative">
+                                    <Textarea 
+                                      className="min-h-[160px] text-xs font-mono font-bold bg-slate-50 border-slate-200 rounded-2xl resize-none p-5 leading-relaxed focus:ring-primary/20 shadow-inner"
+                                      placeholder="Message will appear here after selecting a group..."
+                                      value={generatedMessage}
+                                      readOnly
+                                    />
+                                    {!generatedMessage && (
+                                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-50/80 backdrop-blur-[1px] rounded-2xl border border-dashed border-slate-200">
+                                        <FileText size={32} className="text-slate-300 mb-2 opacity-50" />
+                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Awaiting Generation</p>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <DialogFooter className="mt-8 flex flex-row gap-3">
+                                <Button 
+                                  variant="ghost" 
+                                  className="flex-1 h-14 font-black uppercase text-[10px] tracking-widest text-slate-400 hover:text-slate-600 rounded-2xl active:scale-95 transition-all"
+                                  onClick={() => setIsGenerating(false)}
+                                >
+                                  Cancel
+                                </Button>
+                                <Button 
+                                  className="flex-[2] h-14 bg-primary hover:bg-primary/90 text-white font-black uppercase text-[10px] tracking-[0.2em] shadow-lg shadow-primary/20 rounded-2xl active:scale-95 transition-all"
+                                  disabled={!generatedMessage || isSaving}
+                                  onClick={handleSaveBroadcast}
+                                >
+                                  {isSaving ? (
+                                    <div className="flex items-center gap-2">
+                                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                      Dispatching...
+                                    </div>
+                                  ) : (
+                                    <div className="flex items-center gap-2">
+                                      <Send size={14} />
+                                      Commit
+                                    </div>
+                                  )}
+                                </Button>
+                              </DialogFooter>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* Desktop View: Table */}
+              <div className="hidden sm:block p-8">
+                <div className="rounded-[2.5rem] border border-slate-100 overflow-hidden bg-white shadow-sm">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent border-b border-slate-100 bg-slate-50/50">
+                        <TableHead className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 py-6 px-8">Queue ID</TableHead>
+                        <TableHead className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 py-6">Service / Request</TableHead>
+                        <TableHead className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 py-6">Target District</TableHead>
+                        <TableHead className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 py-6">Status</TableHead>
+                        <TableHead className="text-right text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 py-6 px-8">Action</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {queue.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={5} className="h-64 text-center">
+                            <div className="flex flex-col items-center justify-center text-muted-foreground">
+                              <CheckCircle2 size={48} className="mb-4 opacity-10" />
+                              <p className="text-lg font-black uppercase tracking-tight text-slate-300">No requests waiting</p>
+                              <p className="text-xs font-medium text-slate-400 mt-1">Check back later for new coordination tasks.</p>
                             </div>
                           </TableCell>
                         </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
+                      ) : (
+                        queue.map((item) => (
+                          <TableRow key={item.id} className="group transition-colors hover:bg-slate-50/50 border-b border-slate-50 last:border-0">
+                            <TableCell className="font-mono font-black text-xs text-slate-400 px-8 py-6">
+                              <Button 
+                                variant="link" 
+                                className="p-0 h-auto font-mono font-black text-xs text-primary hover:no-underline tracking-tighter"
+                                onClick={() => navigate(`/admin/requests?search=${item.requestId}`)}
+                              >
+                                {item.id}
+                              </Button>
+                            </TableCell>
+                            <TableCell className="py-6">
+                              <div className="flex flex-col gap-1">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-black text-base text-slate-900 tracking-tight">{item.service}</span>
+                                  <Badge variant="outline" className="text-[10px] px-2 py-0.5 bg-slate-50 font-black border-slate-200 uppercase tracking-widest rounded-lg">V{item.version}</Badge>
+                                </div>
+                                <span className="text-[10px] text-slate-400 font-black uppercase tracking-widest">{item.requestId}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell className="py-6">
+                              <Badge variant="secondary" className="bg-slate-100 text-slate-900 font-black border-none uppercase tracking-widest px-4 py-1.5 rounded-full text-[10px]">
+                                {item.district}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="py-6">
+                              <div className="flex flex-col gap-2">
+                                <Badge 
+                                  variant={item.status === 'Sent' ? 'outline' : 'default'} 
+                                  className={item.status === 'Sent' 
+                                    ? 'bg-emerald-50 text-emerald-600 border-emerald-100 font-black text-[10px] px-3 py-1 uppercase tracking-widest rounded-full w-fit' 
+                                    : 'bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] px-3 py-1 shadow-md border-none uppercase tracking-widest rounded-full w-fit'}
+                                >
+                                  {item.status === 'Sent' ? 'PREPARED' : 'READY'}
+                                </Badge>
+                                {item.history && item.history.length > 0 && (
+                                  <span className="text-[9px] text-slate-400 italic font-black uppercase tracking-widest ml-1">
+                                    Last: {item.history[item.history.length - 1].group}
+                                  </span>
+                                )}
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-right px-8 py-6">
+                              <div className="flex justify-end gap-3">
+                                {item.status === 'Sent' && (
+                                  <Button 
+                                    variant="outline"
+                                    className="h-12 flex items-center gap-2 border-slate-200 hover:bg-slate-50 font-black uppercase text-[10px] tracking-widest px-6 transition-all rounded-xl active:scale-95 shadow-sm"
+                                    onClick={() => handleRetryBroadcast(item)}
+                                  >
+                                    <Plus size={14} />
+                                    New Version
+                                  </Button>
+                                )}
+                                
+                                <Dialog open={isGenerating && selectedRequest?.id === item.id} onOpenChange={(open) => {
+                                  setIsGenerating(open);
+                                  if (open) setSelectedRequest(item);
+                                }}>
+                                  <DialogTrigger asChild>
+                                    <Button 
+                                      disabled={item.status === 'Sent' && !isGenerating}
+                                      className={`h-12 flex items-center gap-2 font-black uppercase text-[10px] tracking-[0.2em] px-8 transition-all rounded-xl active:scale-95 shadow-lg ${
+                                        item.status === 'Sent' 
+                                        ? 'bg-slate-100 text-slate-400 cursor-not-allowed border-slate-200' 
+                                        : 'bg-primary hover:bg-primary/90 text-white shadow-primary/20'
+                                      }`}
+                                      onClick={() => setSelectedRequest(item)}
+                                    >
+                                      <Sparkles size={14} className={item.status !== 'Sent' ? "text-primary" : ""} />
+                                      {item.status === 'Sent' ? 'Sent' : (item.version > 1 ? `Send V${item.version}` : 'Generate')}
+                                    </Button>
+                                  </DialogTrigger>
+                                  <DialogContent className="sm:max-w-[500px] bg-white border-primary/20 shadow-xl p-0 overflow-hidden rounded-[2.5rem]">
+                                    <div className="h-2 bg-primary w-full" />
+                                    <div className="p-8 sm:p-10">
+                                      <DialogHeader className="mb-10">
+                                        <div className="flex items-center gap-5">
+                                          <div className="p-4 bg-primary/10 rounded-[1.5rem] shadow-inner">
+                                            <Sparkles className="text-primary" size={28} />
+                                          </div>
+                                          <div>
+                                            <DialogTitle className="text-subtitle text-slate-900">
+                                              SAHLI Engine
+                                            </DialogTitle>
+                                            <DialogDescription className="text-slate-500 text-xs font-black uppercase tracking-widest mt-1">
+                                              {item.service} • {item.district} (V{item.version})
+                                            </DialogDescription>
+                                          </div>
+                                        </div>
+                                      </DialogHeader>
+                                      
+                                      <div className="space-y-8">
+                                        <div className="space-y-4">
+                                          <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+                                            <Users size={14} className="text-primary" />
+                                            1. Target Audience
+                                          </label>
+                                          <div className="p-6 rounded-[1.5rem] bg-slate-50 border border-slate-100 flex flex-col gap-2 shadow-inner">
+                                            <span className="text-sm font-black text-slate-900 uppercase tracking-tight">RateUp Dynamic Lists</span>
+                                            <p className="text-[11px] text-slate-500 leading-relaxed font-bold uppercase tracking-tighter">Broadcast will be sent to the specific pricing tier group.</p>
+                                          </div>
+                                        </div>
+  
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                          <div className="space-y-3">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">2. Template</label>
+                                            <Select onValueChange={setSelectedTemplate}>
+                                              <SelectTrigger className="bg-slate-50 border-slate-100 h-14 text-[11px] font-black uppercase tracking-widest rounded-2xl focus:ring-primary/20 focus:bg-white transition-all shadow-inner">
+                                                <SelectValue placeholder="Choose..." />
+                                              </SelectTrigger>
+                                              <SelectContent className="bg-white border-slate-200 shadow-xl rounded-2xl p-2">
+                                                <SelectItem value="none" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">No Template</SelectItem>
+                                                {templates.filter(t => t.category === 'Broadcast').map(template => (
+                                                  <SelectItem key={template.id} value={template.id} className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">
+                                                    {template.name}
+                                                  </SelectItem>
+                                                ))}
+                                              </SelectContent>
+                                            </Select>
+                                          </div>
+  
+                                          <div className="space-y-3">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">3. RateUp Group</label>
+                                            <Select onValueChange={setSelectedRateUp}>
+                                              <SelectTrigger className="bg-slate-50 border-slate-100 h-14 text-[11px] font-black uppercase tracking-widest rounded-2xl focus:ring-primary/20 focus:bg-white transition-all shadow-inner">
+                                                <SelectValue placeholder="Select..." />
+                                              </SelectTrigger>
+                                              <SelectContent className="bg-white border-slate-200 shadow-xl rounded-2xl p-2">
+                                                <SelectItem value="Standard" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">Standard</SelectItem>
+                                                <SelectItem value="Premium" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">Premium</SelectItem>
+                                                <SelectItem value="Urgent" className="text-[11px] font-black uppercase tracking-widest rounded-xl py-3 px-4 focus:bg-primary/5">Urgent</SelectItem>
+                                              </SelectContent>
+                                            </Select>
+                                          </div>
+                                        </div>
+  
+                                        <div className="space-y-3 pt-2">
+                                          <div className="flex items-center justify-between">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">4. Payload Preview</label>
+                                            <Button 
+                                              variant="ghost" 
+                                              size="sm" 
+                                              className="h-10 px-4 text-[10px] font-black uppercase tracking-widest text-primary hover:bg-primary/5 rounded-xl active:scale-95 transition-all"
+                                              onClick={handleGenerateMessage}
+                                            >
+                                              Refresh
+                                            </Button>
+                                          </div>
+                                          <div className="relative">
+                                            <Textarea 
+                                              className="min-h-[160px] text-xs font-mono font-bold bg-slate-50 border-slate-200 rounded-2xl resize-none p-6 leading-relaxed focus:ring-primary/20 shadow-inner"
+                                              placeholder="Message preview..."
+                                              value={generatedMessage}
+                                              readOnly
+                                            />
+                                            {!generatedMessage && (
+                                              <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-50/80 backdrop-blur-[1px] rounded-2xl border border-dashed border-slate-200">
+                                                <FileText size={32} className="text-slate-300 mb-2 opacity-50" />
+                                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Awaiting Generation</p>
+                                              </div>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+  
+                                      <DialogFooter className="mt-10 flex flex-row gap-4">
+                                        <Button 
+                                          variant="ghost" 
+                                          className="flex-1 h-14 font-black uppercase text-[11px] tracking-widest text-slate-400 hover:text-slate-600 rounded-2xl active:scale-95 transition-all"
+                                          onClick={() => setIsGenerating(false)}
+                                        >
+                                          Cancel
+                                        </Button>
+                                        <Button 
+                                          className="flex-[2] h-14 bg-primary hover:bg-primary/90 text-white font-black uppercase text-[11px] tracking-[0.2em] shadow-lg shadow-primary/20 rounded-2xl active:scale-95 transition-all"
+                                          disabled={!generatedMessage || isSaving}
+                                          onClick={handleSaveBroadcast}
+                                        >
+                                          {isSaving ? (
+                                            <div className="flex items-center gap-3">
+                                              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                              Dispatching
+                                            </div>
+                                          ) : (
+                                            <div className="flex items-center gap-3">
+                                              <Send size={16} />
+                                              Commit
+                                            </div>
+                                          )}
+                                        </Button>
+                                      </DialogFooter>
+                                    </div>
+                                  </DialogContent>
+                                </Dialog>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             </CardContent>
           </Card>

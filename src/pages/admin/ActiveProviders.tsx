@@ -152,48 +152,72 @@ const ActiveProviders = () => {
     }
   };
 
+  const pendingAppsCount = storageService.getApplications().filter(a => a.status === 'Pending' || a.status === 'More Info Required').length;
+
   return (
     <AdminLayout>
-      <div className="py-2" dir={dir}>
-        <div className="flex items-center justify-between mb-8 bg-white/50 backdrop-blur-md p-4 rounded-xl border border-primary/10 shadow-sm">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 font-black tracking-widest text-[10px]">GOVERNANCE</Badge>
-              <Badge variant="outline" className="bg-emerald-50 text-emerald-600 border-emerald-100 font-bold text-[10px]">{providers.length} ACTIVE PARTNERS</Badge>
+      <div className="py-2 md:py-6" dir={dir}>
+        {pendingAppsCount > 0 && (
+          <div className="mb-8 p-4 bg-amber-50 border border-amber-100 rounded-3xl flex items-center justify-between shadow-sm animate-in fade-in slide-in-from-top-4 duration-500">
+            <div className="flex items-center gap-4">
+              <div className="p-2 bg-amber-100 rounded-2xl text-amber-600">
+                <Info size={20} />
+              </div>
+              <div>
+                <h4 className="text-[11px] font-black uppercase tracking-widest text-amber-900">Pending Applications</h4>
+                <p className="text-[10px] text-amber-700 font-bold">There are {pendingAppsCount} new provider applications awaiting review.</p>
+              </div>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Provider Governance</h1>
-            <p className="text-xs text-muted-foreground mt-1">
-              Manage independent service partners and monitor performance metrics.
+            <button 
+              onClick={() => navigate('/admin/provider-applications')}
+              className="bg-amber-600 hover:bg-amber-700 text-white text-[9px] font-black uppercase tracking-widest h-9 px-6 rounded-xl shadow-lg shadow-amber-200 transition-all active:scale-95"
+            >
+              Review Now
+            </button>
+          </div>
+        )}
+
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 bg-white shadow-xl p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 gap-6">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-3">
+              <Badge className="bg-emerald-600 text-white font-black tracking-widest text-[9px] px-3 py-1 rounded-full uppercase">GOVERNANCE MODULE</Badge>
+              <Badge variant="outline" className="bg-emerald-50 text-emerald-600 border-emerald-100 font-black text-[9px] px-3 py-1 rounded-full uppercase">{providers.length} PARTNERS</Badge>
+            </div>
+            <h1 className="text-display text-slate-900">Providers</h1>
+            <p className="text-sm text-slate-500 mt-2 font-medium leading-relaxed max-w-md">
+              Manage independent service partners, monitor compliance scores, and enforce governance thresholds.
             </p>
           </div>
           
-          <div className="flex items-center gap-2">
-            <Button className="bg-primary hover:bg-primary/90 text-white font-bold uppercase tracking-widest text-[10px] h-9 px-6 shadow-sm">
+          <div className="flex items-center gap-3">
+            <Button className="w-full md:w-auto h-14 px-8 bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-widest text-[11px] rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all">
               Add New Provider
             </Button>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
-            <input 
-              type="text" 
-              placeholder="Search by ID, company, or contact..." 
-              className="w-full bg-white border border-slate-200 rounded-lg py-2 pl-10 pr-4 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+          <div className="relative flex-1 group">
+            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none transition-colors group-focus-within:text-primary">
+              <Search className="text-slate-400" size={18} />
+            </div>
+            <input
+              placeholder="Search by ID, Company, or Contact..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-14 pl-14 pr-6 rounded-2xl border-none bg-white shadow-xl text-sm font-bold focus-visible:ring-4 focus-visible:ring-primary/5 focus:outline-none transition-all placeholder:text-slate-300"
             />
           </div>
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+          
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-2 px-2 pb-2 md:pb-0">
             {(['Active', 'Observed', 'Paused', 'Removed', 'All'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => handleTabChange(tab)}
-                className={`whitespace-nowrap px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-full border ${
+                className={`whitespace-nowrap h-12 px-6 rounded-full text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 ${
                   activeTab === tab 
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-md shadow-slate-200' 
-                    : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                    ? 'bg-primary text-white shadow-lg shadow-primary/20' 
+                    : 'bg-white text-slate-400 hover:text-slate-600 border border-slate-100 hover:bg-slate-50'
                 }`}
               >
                 {tab}
@@ -202,222 +226,185 @@ const ActiveProviders = () => {
           </div>
         </div>
 
-        <Card className="border-slate-200 overflow-hidden shadow-sm bg-white/50 backdrop-blur-sm">
-          <Table className="min-w-[900px]">
-              <TableHeader className="bg-slate-50/80">
-              <TableRow className="hover:bg-transparent border-b border-slate-200">
-                <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 px-4">Company Info</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Services</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Performance Metrics</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Status</TableHead>
-                <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4 px-6">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredProviders.map((provider) => {
-                const history = storageService.getResponsesByProvider(provider.company_name);
-                
-                return (
-                  <React.Fragment key={provider.id}>
-                    <TableRow className="hover:bg-slate-50/50 transition-colors">
-                      <TableCell className="px-4">
-                        <div className="font-bold text-sm flex items-center gap-2">
-                          {provider.company_name}
-                          {provider.limited_participation && (
-                            <Badge variant="outline" className="h-4 px-1.5 text-[8px] font-black uppercase tracking-widest bg-blue-50 text-blue-600 border-blue-100">
-                              Limited
-                            </Badge>
-                          )}
-                          {provider.flags !== undefined && provider.flags >= GOVERNANCE_THRESHOLDS.MAX_CONDUCT_FLAGS_FOR_OBSERVED && (
-                            <Badge variant="destructive" className="h-4 px-1.5 text-[8px] font-black uppercase tracking-widest bg-red-600 border-none animate-pulse">
-                              <Flag size={8} className="mr-1 fill-white" />
-                              Threshold Met
-                            </Badge>
-                          )}
-                          {provider.compliance_score !== undefined && provider.compliance_score < 0.6 && (
-                            <Badge variant="outline" className="h-4 px-1.5 text-[8px] font-black uppercase tracking-widest bg-amber-50 text-amber-600 border-amber-100">
-                              Pause Rec
-                            </Badge>
-                          )}
-                        </div>
-                        <div className="text-[10px] text-slate-400 font-mono flex items-center gap-2">
-                          {provider.id}
-                          {provider.entity_type && (
-                            <span className="text-primary font-bold uppercase tracking-tighter opacity-70">[{provider.entity_type}]</span>
-                          )}
-                        </div>
-                        {history.length > 0 && (
-                          <Button 
-                            variant="link" 
-                            className="p-0 h-auto text-[10px] font-bold text-primary flex items-center gap-1 mt-1"
-                            onClick={() => navigate(`/admin/responses?search=${provider.company_name}`)}
-                          >
-                            <MessageSquare size={10} />
-                            View {history.length} {history.length === 1 ? 'Response' : 'Responses'}
-                          </Button>
+        {/* Providers List - Responsive Layout */}
+        <div className="space-y-4 md:space-y-0">
+          {/* Mobile Card View */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {filteredProviders.map((provider) => {
+              const history = storageService.getResponsesByProvider(provider.company_name);
+              return (
+                <div 
+                  key={provider.id}
+                  className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-xl space-y-5 active:scale-[0.99] transition-all"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-lg font-black text-slate-900 uppercase tracking-tight">{provider.company_name}</h3>
+                        {provider.limited_participation && (
+                          <Badge variant="outline" className="text-[8px] font-black uppercase bg-blue-50 text-blue-600 border-none">LIMITED</Badge>
                         )}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex flex-wrap gap-1">
-                          {provider.services.map(service => (
-                            <Badge key={service} variant="secondary" className="text-[9px] font-bold uppercase tracking-tighter">{service}</Badge>
-                          ))}
-                        </div>
-                        <div className="flex flex-wrap gap-1 mt-1.5">
-                          {provider.areas.map(area => (
-                            <span key={area} className="text-[8px] font-black uppercase tracking-widest bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">{area}</span>
-                          ))}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <div className="w-16 text-[8px] font-black uppercase tracking-widest text-slate-400">Response</div>
-                            <div className="flex-1 h-1 bg-slate-100 rounded-full overflow-hidden">
-                              <div className={`h-full ${provider.response_rate > 0.8 ? 'bg-emerald-500' : provider.response_rate > 0.6 ? 'bg-blue-500' : 'bg-amber-500'}`} style={{ width: `${provider.response_rate * 100}%` }} />
-                            </div>
-                            <span className="font-bold text-[10px]">{(provider.response_rate * 100).toFixed(0)}%</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-16 text-[8px] font-black uppercase tracking-widest text-slate-400">Conduct</div>
-                            <div className="flex items-center gap-0.5 text-amber-500">
-                              {[1, 2, 3, 4, 5].map((s) => (
-                                <Star key={s} size={8} className={s <= (provider.conduct_score || 0) ? 'fill-amber-500' : 'text-slate-200'} />
-                              ))}
-                            </div>
-                            <span className="font-bold text-[10px] ml-1">{provider.conduct_score?.toFixed(1)}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-16 text-[8px] font-black uppercase tracking-widest text-slate-400">Compliance</div>
-                            <Badge variant="outline" className={`h-4 px-1.5 text-[8px] font-black uppercase tracking-widest border-none ${
-                              (provider.compliance_score || 0) >= 0.8 ? 'bg-emerald-500/10 text-emerald-600' : 
-                              (provider.compliance_score || 0) >= 0.6 ? 'bg-blue-500/10 text-blue-600' : 
-                              'bg-red-500/10 text-red-600'
-                            }`}>
-                              {(provider.compliance_score || 0) >= 0.8 ? 'High' : (provider.compliance_score || 0) >= 0.6 ? 'Medium' : 'Low'}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-16 text-[8px] font-black uppercase tracking-widest text-slate-400">Disputes</div>
-                            <span className={`text-[10px] font-bold ${provider.flags && provider.flags >= GOVERNANCE_THRESHOLDS.MAX_PRICING_DISPUTES_FOR_PAUSE_RECOMMENDATION ? 'text-red-600' : 'text-slate-600'}`}>
-                              {provider.flags || 0} / {GOVERNANCE_THRESHOLDS.MAX_PRICING_DISPUTES_FOR_PAUSE_RECOMMENDATION}
-                            </span>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={`h-5 text-[10px] font-bold uppercase tracking-wider ${getStatusColor(provider.status)}`}>
-                          {provider.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            className="h-8 w-8 text-slate-400 hover:text-primary" 
-                            onClick={() => setExpandedProvider(expandedProvider === provider.id ? null : provider.id)}
-                            title="View Details"
-                          >
-                            <Info size={14} />
-                          </Button>
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            className={`h-8 w-8 text-slate-400 hover:text-blue-500 ${isSyncing === provider.id ? 'animate-spin' : ''}`}
-                            onClick={() => handleSyncToRateUp(provider)}
-                            disabled={isSyncing !== null}
-                            title="Sync to RateUp"
-                          >
-                            <RefreshCw size={14} />
-                          </Button>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-amber-500" onClick={() => handleToggleStatus(provider.id)}>
-                            {provider.status === 'Active' ? <Pause size={14} /> : <Play size="14" />}
-                          </Button>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-red-500" onClick={() => handleAddFlag(provider.id)}>
-                            <Flag size={14} />
-                          </Button>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-red-600" onClick={() => handleDelete(provider.id)}>
-                            <Trash2 size={14} />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                    {expandedProvider === provider.id && (
-                      <TableRow className="bg-slate-50/30">
-                        <TableCell colSpan={5} className="p-4">
-                          <div className="grid grid-cols-3 gap-6">
-                            <div className="space-y-2">
-                              <h5 className="text-[9px] font-black uppercase tracking-widest text-primary">Contact Info</h5>
-                              <div className="bg-white p-3 rounded-lg border border-slate-200 text-[11px] space-y-1.5">
-                                <div className="flex justify-between"><span className="text-slate-400">CR Number:</span> <span className="font-bold">{provider.crNumber || 'N/A'}</span></div>
-                                <div className="flex justify-between"><span className="text-slate-400">Email:</span> <span className="font-bold">{provider.email}</span></div>
-                                <div className="flex justify-between"><span className="text-slate-400">WhatsApp:</span> <span className="font-bold">{provider.whatsapp}</span></div>
-                              </div>
-                            </div>
-                            <div className="space-y-2">
-                              <h5 className="text-[9px] font-black uppercase tracking-widest text-primary">Governance</h5>
-                              <div className="bg-white p-3 rounded-lg border border-slate-200 text-[11px] space-y-1.5">
-                                <div className="flex justify-between"><span className="text-slate-400">Entity Type:</span> <span className="font-bold">{provider.entity_type || 'Company'}</span></div>
-                                <div className="flex justify-between">
-                                  <span className="text-slate-400">Responsibility:</span> 
-                                  <Badge variant="outline" className={`h-4 text-[8px] ${provider.responsibility_confirmed ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-red-50 text-red-600 border-red-100'}`}>
-                                    {provider.responsibility_confirmed ? 'Confirmed' : 'Not Confirmed'}
-                                  </Badge>
-                                </div>
-                                <div className="pt-1.5 border-t border-slate-100 mt-1.5">
-                                  <span className="text-slate-400 block mb-1">RateUp Groups:</span>
-                                  <div className="flex flex-wrap gap-1 mb-2">
-                                    {provider.groups && provider.groups.length > 0 ? (
-                                      provider.groups.map(g => (
-                                        <Badge key={g} variant="outline" className="bg-primary/5 text-primary border-primary/10 text-[8px] font-bold">
-                                          {g}
-                                        </Badge>
-                                      ))
-                                    ) : (
-                                      <span className="text-[9px] italic text-slate-400">No groups assigned</span>
-                                    )}
-                                  </div>
-                                  <div className="flex gap-2">
-                                    <input 
-                                      type="text" 
-                                      placeholder="Edit groups (comma separated)" 
-                                      className="flex-1 bg-slate-50 border border-slate-200 rounded-lg py-1 px-2 text-[10px] focus:outline-none focus:ring-1 focus:ring-primary/20"
-                                      defaultValue={provider.groups?.join(', ') || ''}
-                                      onBlur={(e) => {
-                                        const newGroups = e.target.value.split(',').map(g => g.trim()).filter(g => g !== '');
-                                        storageService.updateProvider(provider.id, { groups: newGroups });
-                                        setProviders(storageService.getProviders());
-                                        toast.success('Provider groups updated');
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="space-y-2">
-                              <h5 className="text-[9px] font-black uppercase tracking-widest text-primary">Quick Links</h5>
-                              <div className="flex flex-col gap-2">
-                                <Button 
-                                  variant="outline" 
-                                  size="sm" 
-                                  className="h-8 text-[9px] font-bold uppercase tracking-wider justify-start gap-2"
-                                  onClick={() => navigate(`/admin/responses?search=${provider.company_name}`)}
-                                >
-                                  <MessageSquare size={12} /> Interaction History
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </TableCell>
-                      </TableRow>
+                      </div>
+                      <p className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">{provider.id}</p>
+                    </div>
+                    <Badge variant="outline" className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border-2 ${getStatusColor(provider.status)}`}>
+                      {provider.status}
+                    </Badge>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {provider.services.slice(0, 3).map(s => (
+                      <Badge key={s} variant="secondary" className="bg-slate-50 text-slate-500 text-[8px] font-bold px-2 py-0.5 rounded-md uppercase tracking-tighter border-none">{s}</Badge>
+                    ))}
+                    {provider.services.length > 3 && (
+                      <Badge variant="secondary" className="bg-slate-50 text-slate-400 text-[8px] font-bold px-2 py-0.5 rounded-md uppercase border-none">+{provider.services.length - 3}</Badge>
                     )}
-                  </React.Fragment>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Card>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 py-4 border-y border-slate-50">
+                    <div className="space-y-1">
+                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Compliance</p>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div 
+                            className={`h-full rounded-full ${
+                              (provider.compliance_score || 0) > 0.8 ? 'bg-emerald-500' : 
+                              (provider.compliance_score || 0) > 0.6 ? 'bg-amber-500' : 'bg-red-500'
+                            }`}
+                            style={{ width: `${(provider.compliance_score || 0) * 100}%` }}
+                          />
+                        </div>
+                        <span className="text-[10px] font-black text-slate-700">{Math.round((provider.compliance_score || 0) * 100)}%</span>
+                      </div>
+                    </div>
+                    <div className="text-right space-y-1">
+                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Flags</p>
+                      <div className="flex items-center justify-end gap-1.5">
+                        <Flag size={12} className={provider.flags ? "text-red-500 fill-red-500" : "text-slate-200"} />
+                        <span className="text-xs font-black text-slate-700">{provider.flags || 0}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="outline" 
+                      className="flex-1 h-12 rounded-xl border-slate-100 text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all"
+                      onClick={() => navigate(`/admin/providers/${provider.id}`)}
+                    >
+                      Details
+                    </Button>
+                    <Button 
+                      className={`flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest active:scale-95 transition-all ${
+                        isSyncing === provider.id ? 'bg-slate-100 text-slate-400' : 'bg-primary text-white shadow-lg shadow-primary/20'
+                      }`}
+                      onClick={() => handleSyncToRateUp(provider)}
+                      disabled={isSyncing === provider.id}
+                    >
+                      {isSyncing === provider.id ? <RefreshCw className="animate-spin" size={14} /> : 'Sync'}
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="hidden md:block bg-white rounded-[2rem] border border-slate-100 shadow-xl overflow-hidden">
+            <Table>
+              <TableHeader className="bg-slate-50/50">
+                <TableRow className="hover:bg-transparent border-slate-100">
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 px-8 text-slate-500">Provider Info</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 text-slate-500">Service Coverage</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 text-slate-500">Governance</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 text-slate-500">Status</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-6 px-8 text-right text-slate-500">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredProviders.map((provider) => (
+                  <TableRow key={provider.id} className="group hover:bg-slate-50/50 transition-colors border-slate-100">
+                    <TableCell className="py-6 px-8">
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 bg-slate-50 rounded-2xl group-hover:bg-white transition-colors">
+                          <UserCheck className="text-slate-400" size={20} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-black text-slate-900 uppercase tracking-tight">{provider.company_name}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">{provider.id}</span>
+                            {provider.entity_type && <span className="text-[10px] font-black text-primary/60 uppercase">[{provider.entity_type}]</span>}
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-6">
+                      <div className="flex flex-wrap gap-1 max-w-[200px]">
+                        {provider.services.map(s => (
+                          <Badge key={s} variant="secondary" className="bg-slate-50 text-slate-500 text-[8px] font-bold px-2 py-0.5 rounded-md uppercase border-none">{s}</Badge>
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-6">
+                      <div className="space-y-2 w-32">
+                        <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-tighter">
+                          <span className="text-slate-400">Compliance</span>
+                          <span className="text-slate-700">{Math.round((provider.compliance_score || 0) * 100)}%</span>
+                        </div>
+                        <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div 
+                            className={`h-full rounded-full transition-all duration-1000 ${
+                              (provider.compliance_score || 0) > 0.8 ? 'bg-emerald-500' : 
+                              (provider.compliance_score || 0) > 0.6 ? 'bg-amber-500' : 'bg-red-500'
+                            }`}
+                            style={{ width: `${(provider.compliance_score || 0) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-6">
+                      <Badge variant="outline" className={`text-[9px] font-black uppercase px-3 py-1 rounded-full border-2 ${getStatusColor(provider.status)}`}>
+                        {provider.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="py-6 px-8 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="h-9 px-4 rounded-xl border-slate-200 text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 active:scale-95 transition-all"
+                          onClick={() => navigate(`/admin/providers/${provider.id}`)}
+                        >
+                          Details
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          className={`h-9 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all ${
+                            isSyncing === provider.id ? 'bg-slate-100 text-slate-400' : 'bg-primary text-white shadow-primary/20'
+                          }`}
+                          onClick={() => handleSyncToRateUp(provider)}
+                          disabled={isSyncing === provider.id}
+                        >
+                          {isSyncing === provider.id ? <RefreshCw className="animate-spin" size={14} /> : 'Sync'}
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+
+        {filteredProviders.length === 0 && (
+          <div className="text-center py-20 bg-white rounded-[2.5rem] border border-dashed border-slate-200 mt-8">
+            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search size={32} className="text-slate-300" />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">No partners found</h3>
+            <p className="text-slate-500 mt-2 text-sm font-medium">Try adjusting your search or filters.</p>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );

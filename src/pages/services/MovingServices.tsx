@@ -5,11 +5,23 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { MessageSquare, CheckCircle2, Truck, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Box, Hammer } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
+import { getWhatsAppLink } from '@/lib/constants';
 
 export default function MovingServices() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
+  const floatingBlobs = (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
+      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
+      
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
+      <div className="absolute inset-0 bg-slate-950/5" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-transparent to-background" />
+    </div>
+  );
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -24,9 +36,9 @@ export default function MovingServices() {
   ];
 
   const categories = [
-    { title: t('services.moving.house.title'), desc: t('services.moving.house.desc'), icon: <Truck size={28} /> },
+    { title: t('services.moving.local.title'), desc: t('services.moving.local.desc'), icon: <Truck size={28} /> },
     { title: t('services.moving.packing.title'), desc: t('services.moving.packing.desc'), icon: <Box size={28} /> },
-    { title: t('services.moving.dismantling.title'), desc: t('services.moving.dismantling.desc'), icon: <Hammer size={28} /> }
+    { title: t('services.moving.storage.title'), desc: t('services.moving.storage.desc'), icon: <Hammer size={28} /> }
   ];
 
   const coordinationSteps = [
@@ -38,10 +50,10 @@ export default function MovingServices() {
   ];
 
   const includes = [
-    t('services.moving.house.items').split('\n')[0] || 'Packing & Unpacking',
-    t('services.moving.house.items').split('\n')[1] || 'Loading & Unloading',
-    t('services.moving.house.items').split('\n')[2] || 'Furniture Assembly',
-    t('services.moving.house.items').split('\n')[3] || 'Safe Transportation'
+    t('services.moving.local.items').split('\n')[0] || 'Packing & Unpacking',
+    t('services.moving.local.items').split('\n')[1] || 'Loading & Unloading',
+    t('services.moving.local.items').split('\n')[2] || 'Furniture Assembly',
+    t('services.moving.local.items').split('\n')[3] || 'Safe Transportation'
   ];
 
   const areas = [
@@ -54,10 +66,7 @@ export default function MovingServices() {
     <Layout>
       {/* 1️⃣ Modern Split Hero Section */}
       <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full animate-pulse" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full" />
-        </div>
+        {floatingBlobs}
 
         <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
@@ -66,34 +75,36 @@ export default function MovingServices() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center md:items-start text-center md:text-start"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 text-primary text-[10px] font-black tracking-[0.2em] uppercase mb-6 md:mb-8 shadow-sm mx-auto md:mx-0">
-              <Truck size={14} className="animate-bounce" />
+            <div className="mb-6 md:mb-8 text-label !text-primary inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 shadow-sm mx-auto md:mx-0 backdrop-blur-md">
+              <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
               {t('services.moving.title')}
             </div>
 
-            <h1 className="text-foreground text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight md:leading-tight tracking-tighter mb-6 md:mb-8">
+            <h1 className="text-display mb-6 md:mb-8">
               {t('services.moving.title')}
             </h1>
 
-            <p className="text-lg md:text-xl text-foreground/70 font-medium leading-relaxed tracking-tight max-w-2xl mb-8 md:mb-12">
+            <p className="text-subtitle !text-foreground/70 max-w-2xl mb-8 md:mb-12">
               {t('services.moving.subtitle')}
             </p>
 
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <Link
-                to="/request-service"
+              <a
+                href={getWhatsAppLink(t('services.moving.whatsapp'))}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => trackRequestClick('House Shifting Hero')}
-                className="cta-primary px-10 py-5 text-lg btn-shine shadow-xl shadow-primary/20"
+                className="cta-primary px-10 py-5 btn-shine shadow-xl shadow-primary/20"
               >
                 <motion.div
                   className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <MessageSquare size={22} className="fill-primary-foreground" />
                   {t('cta.request')}
                 </motion.div>
-              </Link>
+              </a>
             </div>
           </motion.div>
 
@@ -101,25 +112,25 @@ export default function MovingServices() {
             initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-2xl"
+            className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-xl"
           >
             <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
               <img 
                 src="https://images.pexels.com/photos/3791617/pexels-photo-3791617.jpeg" 
                 alt="House Shifting Service Qatar"
-                className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             </motion.div>
             
-            <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-background/80 backdrop-blur-md border border-white/10 shadow-2xl">
+            <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-background/80 backdrop-blur-md border border-white/10 shadow-lg">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                   <ShieldCheck size={24} />
                 </div>
                 <div>
-                  <div className="text-xs font-black tracking-widest text-primary uppercase">{t('services.care.verifiedProvider')}</div>
-                  <div className="text-foreground font-bold">{t('how.flow.subtitle')}</div>
+                  <div className="text-label !text-primary">{t('services.care.verifiedProvider')}</div>
+                  <div className="text-label !text-foreground">{t('services.care.compassionateCare')}</div>
                 </div>
               </div>
             </div>
@@ -136,7 +147,7 @@ export default function MovingServices() {
             viewport={{ once: true }}
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-6 md:mb-8 text-center">
+            <h2 className="text-display mb-6 md:mb-8 text-center">
               {t('services.moving.rules.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -150,7 +161,7 @@ export default function MovingServices() {
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
                     <CheckCircle2 size={20} />
                   </div>
-                  <span className="text-base font-bold text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500">{rule}</span>
+                  <span className="text-label !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500">{rule}</span>
                 </div>
               ))}
             </div>
@@ -162,10 +173,10 @@ export default function MovingServices() {
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-tight mb-6 md:mb-8">
+            <h2 className="text-display mb-6 md:mb-8">
               {t('services.moving.categories.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('services.moving.categories.subtitle')}</p>
+            <p className="text-subtitle !text-foreground/50">{t('services.moving.categories.subtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -176,13 +187,13 @@ export default function MovingServices() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group"
+                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group hover:shadow-2xl hover:shadow-primary/5"
               >
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
                   {cat.icon}
                 </div>
-                <h3 className="text-xl md:text-2xl font-black text-foreground mb-4 tracking-tight leading-tight group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
-                <p className="text-foreground/60 leading-relaxed text-base font-medium">
+                <h3 className="text-subtitle mb-4 group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
+                <p className="text-body !text-foreground/60">
                   {cat.desc}
                 </p>
               </motion.div>
@@ -195,10 +206,10 @@ export default function MovingServices() {
       <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter leading-tight mb-6">
+            <h2 className="text-display mb-6">
               {t('how.flow.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">{t('how.flow.subtitle')}</p>
+            <p className="text-subtitle !text-foreground/50">{t('how.flow.subtitle')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
@@ -221,7 +232,7 @@ export default function MovingServices() {
                     {step.icon}
                   </div>
                 </div>
-                <p className="text-foreground font-black text-lg leading-tight tracking-tight px-4">{step.body}</p>
+                <p className="text-body !text-foreground/80 leading-tight px-4">{step.body}</p>
               </motion.div>
             ))}
           </div>
@@ -238,12 +249,12 @@ export default function MovingServices() {
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-primary/[0.03] border border-primary/10"
             >
-              <h3 className="text-xl font-black text-primary mb-8 uppercase tracking-widest">
+              <h3 className="text-subtitle !text-primary mb-8">
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-6">
                 {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-4 items-center text-lg text-foreground/70 font-bold">
+                  <li key={i} className="flex gap-4 items-center text-body !text-foreground/70">
                     <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
                     {item}
                   </li>
@@ -257,12 +268,12 @@ export default function MovingServices() {
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-foreground/[0.02] border border-border"
             >
-              <h3 className="text-xl font-black text-foreground/40 mb-8 uppercase tracking-widest">
+              <h3 className="text-subtitle !text-foreground/40 mb-8">
                 {t('services.boundaries.title.isNot')}
               </h3>
               <ul className="space-y-6">
                 {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-4 items-center text-lg text-foreground/40 font-bold">
+                  <li key={i} className="flex gap-4 items-center text-body !text-foreground/40">
                     <div className="w-2 h-2 rounded-full bg-foreground/20 shrink-0" />
                     {item}
                   </li>
@@ -278,7 +289,7 @@ export default function MovingServices() {
         <div className="container-sahli">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-foreground tracking-tighter mb-6 md:mb-8 leading-tight">
+              <h2 className="text-display mb-6 md:mb-8">
                 {t('home.areas.title')}
               </h2>
               <div className="space-y-4">
@@ -294,7 +305,7 @@ export default function MovingServices() {
                     <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <MapPin size={24} />
                     </div>
-                    <span className="text-2xl font-black text-foreground/80">{area}</span>
+                    <span className="text-subtitle group-hover:text-primary transition-colors">{area}</span>
                   </motion.div>
                 ))}
               </div>
@@ -308,8 +319,8 @@ export default function MovingServices() {
                 <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-8 animate-bounce">
                   <MapPin size={48} />
                 </div>
-                <h3 className="text-3xl font-black text-foreground mb-4">{t('services.areas.qatarNationwide')}</h3>
-                <p className="text-xl text-foreground/60 font-bold uppercase tracking-widest">{t('services.areas.rapidResponse')}</p>
+                <h2 className="text-display mb-4">{t('services.areas.qatarNationwide')}</h2>
+                <p className="text-subtitle !text-foreground/60">{t('services.areas.rapidResponse')}</p>
               </div>
             </div>
           </div>
@@ -318,13 +329,7 @@ export default function MovingServices() {
 
       {/* 8️⃣ Final CTA */}
       <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
-        <div className="absolute inset-0 z-0 opacity-10">
-          <img 
-            src="https://images.pexels.com/photos/3791617/pexels-photo-3791617.jpeg" 
-            className="w-full h-full object-cover grayscale"
-            alt="Background"
-          />
-        </div>
+        {floatingBlobs}
         
         <div className="container-sahli relative z-10 text-center">
           <motion.div
@@ -336,24 +341,26 @@ export default function MovingServices() {
             <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
               <Clock size={48} />
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-foreground tracking-tighter mb-12 leading-tight">
+            <h2 className="text-display mb-12">
               {t('cta.final.title')}
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              <Link
-                to="/request-service"
-                onClick={() => trackRequestClick('Moving Final CTA')}
-                className="cta-primary px-12 py-6 text-xl btn-shine"
+              <a
+                href={getWhatsAppLink(t('services.moving.whatsapp'))}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackRequestClick('House Shifting Bottom CTA')}
+                className="cta-primary px-12 py-6 btn-shine"
               >
                 <motion.div
                   className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <MessageSquare size={24} className="fill-primary-foreground" />
                   {t('cta.request')}
                 </motion.div>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -363,10 +370,10 @@ export default function MovingServices() {
       <section className="py-24 bg-foreground/[0.02] border-t border-border">
         <div className="container-sahli">
           <div className="mb-16">
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter mb-4">
+            <h2 className="text-display mb-4">
               {t('services.related.title')}
             </h2>
-            <p className="text-foreground/50 font-bold text-lg uppercase tracking-widest">
+            <p className="text-subtitle !text-foreground/50">
               {t('services.related.subtitle')}
             </p>
           </div>
@@ -378,7 +385,7 @@ export default function MovingServices() {
                 className="group p-8 rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xl font-black text-foreground group-hover:text-primary transition-colors">
+                  <span className="text-subtitle group-hover:text-primary transition-colors">
                     {service.title}
                   </span>
                   <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
@@ -401,7 +408,7 @@ export default function MovingServices() {
             <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
               <ArrowUp size={16} className="rotate-[-90deg] rtl:rotate-[90deg]" />
             </div>
-            <span className="font-black text-foreground/60 group-hover:text-foreground transition-colors">
+            <span className="text-label !text-foreground/60 group-hover:text-foreground transition-colors">
               {t('nav.home')}
             </span>
           </Link>

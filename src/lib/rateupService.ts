@@ -149,13 +149,16 @@ export const rateupService = {
     const finalOrgId = envOrgId || extractedOrgId;
 
     if (!finalOrgId) {
-      console.warn('RateUp Configuration Warning: No Org ID found.', {
-        hasApiKey: !!apiKey,
-        hasBaseUrl: !!baseUrl,
-        baseUrl,
-        isDev: import.meta.env.DEV,
-        mode: import.meta.env.MODE
-      });
+      if (import.meta.env.DEV) {
+        console.info('ℹ️ RateUp: No Org ID found in environment. This is expected in development if secrets aren\'t configured. OTP will fallback to console.');
+      } else {
+        console.warn('⚠️ RateUp Configuration Warning: No Org ID found.', {
+          hasApiKey: !!apiKey,
+          hasBaseUrl: !!baseUrl,
+          baseUrl,
+          mode: import.meta.env.MODE
+        });
+      }
     }
 
     return { 
@@ -352,7 +355,7 @@ export const rateupService = {
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          templateName: templateName,
+          templateName: "otp",
           phone: parseInt(formattedPhone.replace(/\s/g, '')),
           body_variables: [payload.otp] // Assuming the template has one variable for the OTP
         }),

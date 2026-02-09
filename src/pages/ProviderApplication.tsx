@@ -92,8 +92,6 @@ const ProviderApplication = () => {
           }
         });
 
-        console.log('Application saved to storage:', newApp);
-        
         // 3. Sync to RateUp (Provider Lead Data)
         const orgId = import.meta.env.VITE_RATEUP_ORG_ID;
         if (orgId) {
@@ -113,9 +111,8 @@ const ProviderApplication = () => {
                 source: 'provider_application'
               }
             });
-            console.log('RateUp: Provider lead contact upserted.');
           } catch (syncError) {
-            console.warn('RateUp Sync Warning (Non-blocking):', syncError);
+            // RateUp Sync Warning (Non-blocking)
           }
         }
 
@@ -134,8 +131,6 @@ const ProviderApplication = () => {
       setIsSubmitting(false);
       setIsSubmitted(true);
       toast.success(t('provider.apply.form.success.title'));
-      
-      console.log('Acknowledgement Hash:', acknowledgement);
     } catch (error) {
       console.error('Submission error:', error);
       toast.error('Failed to submit application. Please try again.');
@@ -170,8 +165,8 @@ const ProviderApplication = () => {
               </div>
 
               <div className="space-y-4">
-                <h2 className="text-4xl font-black tracking-tight">{t('provider.apply.form.success.title')}</h2>
-                <p className="text-foreground/60 text-lg max-w-md mx-auto">
+                <h2 className="text-display">{t('provider.apply.form.success.title')}</h2>
+                <p className="text-subtitle !text-foreground/60 max-w-md mx-auto">
                   {t('provider.apply.form.success.desc')}
                 </p>
               </div>
@@ -179,8 +174,7 @@ const ProviderApplication = () => {
               <div className="pt-4">
                 <Button 
                   onClick={() => window.location.href = '/'}
-                  variant="outline"
-                  className="h-14 px-10 rounded-xl font-black uppercase tracking-widest border-2"
+                  className="cta-primary btn-shine w-full sm:w-auto"
                 >
                   {dir === 'rtl' ? 'العودة للرئيسية' : 'Return Home'}
                 </Button>
@@ -194,20 +188,20 @@ const ProviderApplication = () => {
 
   return (
     <Layout>
-      <div className="container-sahli py-24 md:py-32">
+      <div className="container-sahli pt-32 pb-24 md:py-32">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-3 px-6 py-2 bg-primary/20 rounded-full border border-primary/30 text-primary text-xs font-black tracking-[0.2em] uppercase mb-8 shadow-xl btn-shine"
+              className="mb-8 text-label !text-primary inline-flex items-center gap-3 px-6 py-2 bg-primary/20 rounded-full border border-primary/30 shadow-xl btn-shine"
             >
               Partner with SAHLI
             </motion.div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-tight text-balance">
+            <h1 className="text-display mb-8">
               {t('provider.apply.title')}
             </h1>
-            <p className="text-xl text-foreground/60 max-w-3xl mx-auto font-medium leading-relaxed">
+            <p className="text-subtitle !text-foreground/60 max-w-3xl mx-auto">
               {t('provider.apply.subtitle')}
             </p>
           </div>
@@ -216,7 +210,7 @@ const ProviderApplication = () => {
             {/* Benefits & Info */}
             <div className="lg:col-span-4 space-y-12">
               <div className="space-y-8">
-                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary/80 border-b border-primary/10 pb-4">
+                <h3 className="text-label !text-primary/80 border-b border-primary/10 pb-4">
                   {t('provider.apply.why.title')}
                 </h3>
                 
@@ -230,32 +224,32 @@ const ProviderApplication = () => {
                       <item.icon size={24} />
                     </div>
                     <div>
-                      <h4 className="font-black text-sm uppercase tracking-wider mb-2">{item.title}</h4>
-                      <p className="text-xs text-foreground/50 leading-relaxed font-medium">{item.desc}</p>
+                      <h4 className="text-body font-black mb-2">{item.title}</h4>
+                      <p className="text-label !text-foreground/50">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="p-8 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 blur-[60px] -mr-20 -mt-20 group-hover:bg-primary/30 transition-all duration-700" />
-                <h3 className="text-lg font-black mb-6 relative z-10">{t('provider.apply.process.title')}</h3>
+              <div className="p-8 rounded-3xl bg-primary text-white shadow-xl shadow-primary/20 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 blur-[60px] -mr-20 -mt-20 group-hover:bg-white/20 transition-all duration-700" />
+                <h3 className="text-subtitle !text-white mb-6 relative z-10">{t('provider.apply.process.title')}</h3>
                 <div className="space-y-6 relative z-10">
                   <div className="flex gap-4 items-center">
-                    <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] font-black shrink-0">1</div>
-                    <p className="text-xs font-bold text-white/80">Online Application & Document Upload</p>
+                    <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-label !text-[10px] shrink-0">1</div>
+                    <p className="text-body !text-white/80">{dir === 'rtl' ? 'طلب إلكتروني وتحميل الوثائق' : 'Online Application & Document Upload'}</p>
                   </div>
                   <div className="flex gap-4 items-center">
-                    <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] font-black shrink-0">2</div>
-                    <p className="text-xs font-bold text-white/80">Compliance & Legal Document Review</p>
+                    <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-label !text-[10px] shrink-0">2</div>
+                    <p className="text-body !text-white/80">{dir === 'rtl' ? 'مراجعة الوثائق القانونية والامتثال' : 'Compliance & Legal Document Review'}</p>
                   </div>
                   <div className="flex gap-4 items-center">
-                    <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] font-black shrink-0">3</div>
-                    <p className="text-xs font-bold text-white/80">Manual Admin Approval & Hub Activation</p>
+                    <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-label !text-[10px] shrink-0">3</div>
+                    <p className="text-body !text-white/80">{dir === 'rtl' ? 'موافقة الإدارة وتفعيل الحساب' : 'Manual Admin Approval & Hub Activation'}</p>
                   </div>
                   <div className="flex gap-4 items-center">
-                     <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] font-black shrink-0">4</div>
-                     <p className="text-xs font-bold text-white/80">Phase 4: Eligible for Coordination (Based on availability and relevance)</p>
+                     <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-label !text-[10px] shrink-0">4</div>
+                     <p className="text-body !text-white/80">{dir === 'rtl' ? 'المرحلة 4: متاح للتنسيق' : 'Phase 4: Eligible for Coordination'}</p>
                    </div>
                 </div>
               </div>
@@ -267,12 +261,12 @@ const ProviderApplication = () => {
                 <div className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-3">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.companyName')}</label>
+                      <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.companyName')}</label>
                       <div className="relative">
                         <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                         <Input 
                           required 
-                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                           placeholder="Legal entity name" 
                           value={formData.companyName}
                           onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
@@ -280,12 +274,12 @@ const ProviderApplication = () => {
                       </div>
                     </div>
                     <div className="space-y-3">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.crNumber')}</label>
+                      <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.crNumber')}</label>
                       <div className="relative">
                         <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                         <Input 
                           required 
-                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                           placeholder="CR Number" 
                           value={formData.crNumber}
                           onChange={(e) => setFormData({ ...formData, crNumber: e.target.value })}
@@ -296,12 +290,12 @@ const ProviderApplication = () => {
 
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-3">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.contactPerson')}</label>
+                      <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.contactPerson')}</label>
                       <div className="relative">
                         <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                         <Input 
                           required 
-                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                           placeholder="Full name" 
                           value={formData.contactPerson}
                           onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
@@ -309,12 +303,12 @@ const ProviderApplication = () => {
                       </div>
                     </div>
                     <div className="space-y-3">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.phone')}</label>
+                      <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.phone')}</label>
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                         <Input 
                           required 
-                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                          className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                           placeholder="+974 XXXX XXXX" 
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -324,13 +318,13 @@ const ProviderApplication = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.email')}</label>
+                    <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.email')}</label>
                     <div className="relative">
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                       <Input 
                         required 
                         type="email" 
-                        className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                        className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                         placeholder="company@email.com" 
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -339,12 +333,12 @@ const ProviderApplication = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.services')}</label>
+                    <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.services')}</label>
                     <div className="relative">
                       <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                       <Input 
                         required 
-                        className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                        className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                         placeholder="e.g. AC Maintenance, Deep Cleaning, etc." 
                         value={formData.services}
                         onChange={(e) => setFormData({ ...formData, services: e.target.value })}
@@ -353,12 +347,12 @@ const ProviderApplication = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">Areas Served</label>
+                    <label className="text-label !text-foreground/50 ml-1">Areas Served</label>
                     <div className="relative">
                       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 w-5 h-5" />
                       <Input 
                         required 
-                        className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-sm font-medium" 
+                        className="pl-12 h-14 rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all text-label" 
                         placeholder="e.g. Doha, Lusail, Al Wakrah, etc." 
                         value={formData.areas}
                         onChange={(e) => setFormData({ ...formData, areas: e.target.value })}
@@ -367,10 +361,10 @@ const ProviderApplication = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/50 ml-1">{t('provider.apply.form.profile')}</label>
+                    <label className="text-label !text-foreground/50 ml-1">{t('provider.apply.form.profile')}</label>
                     <Textarea 
                       required 
-                      className="min-h-[160px] rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all p-5 text-sm font-medium leading-relaxed" 
+                      className="min-h-[160px] rounded-2xl bg-background border-border/50 focus:border-primary/50 transition-all p-5 text-label leading-relaxed" 
                       placeholder="Tell us about your company, team size, and years of experience in Qatar..." 
                       value={formData.profile}
                       onChange={(e) => setFormData({ ...formData, profile: e.target.value })}
@@ -389,8 +383,8 @@ const ProviderApplication = () => {
                           onChange={(e) => setFormData({ ...formData, responsibilityConfirmed: e.target.checked })}
                         />
                       </div>
-                      <label htmlFor="responsibility-check" className="text-xs font-bold leading-relaxed text-foreground/80 cursor-pointer">
-                        <span className="text-primary uppercase tracking-wider block mb-1">Primary Responsibility Declaration</span>
+                      <label htmlFor="responsibility-check" className="text-sm font-bold leading-relaxed text-foreground/80 cursor-pointer">
+                        <span className="text-label !text-primary block mb-1">Primary Responsibility Declaration</span>
                         I confirm that my company is directly responsible for execution, staff behavior, and compliance. We acknowledge that SAHLI coordinates requests but the provider remains the sole entity responsible for service delivery and outcome.
                       </label>
                     </div>
@@ -454,15 +448,23 @@ const ProviderApplication = () => {
                   </p>
                 </div>
 
+                {/* Submit Button */}
                 <div className="pt-8">
-                  <Button type="submit" disabled={isSubmitting} className="w-full h-16 rounded-2xl text-base font-black uppercase tracking-[0.2em] gap-3 btn-shine shadow-xl">
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="cta-primary btn-shine w-full py-8 text-lg"
+                  >
                     {isSubmitting ? (
-                      <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="flex items-center gap-3">
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        {t('provider.apply.form.submit')}
+                      </div>
                     ) : (
-                      <>
+                      <div className="flex items-center gap-3">
                         <Send size={20} />
                         {t('provider.apply.form.submit')}
-                      </>
+                      </div>
                     )}
                   </Button>
                   <p className="text-[10px] text-center text-foreground/40 font-bold mt-6 uppercase tracking-widest">

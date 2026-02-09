@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { getWhatsAppLink } from '@/lib/constants';
 
 interface ServiceRoofProps {
   title: string;
@@ -13,6 +14,7 @@ interface ServiceRoofProps {
   showDescription?: boolean;
   subcategories?: string[];
   status?: string;
+  whatsappKey?: string;
 }
 
 export function ServiceRoof({ 
@@ -24,7 +26,8 @@ export function ServiceRoof({
   icon, 
   showDescription = true,
   subcategories = [],
-  status
+  status,
+  whatsappKey
 }: ServiceRoofProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -39,7 +42,7 @@ export function ServiceRoof({
 
   const content = (
     <motion.div
-      className={`relative min-h-[360px] md:min-h-[450px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70 grayscale-[0.5]' : ''}`}
+      className={`relative min-h-[280px] md:min-h-[340px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70' : ''}`}
       whileHover={!isMobile && status !== 'comingSoon' ? { 
         y: -10,
         borderColor: 'hsla(var(--primary), 0.3)',
@@ -74,14 +77,15 @@ export function ServiceRoof({
             alt={title}
             loading="lazy"
             crossOrigin="anonymous"
-            className="w-full h-full object-cover transition-all duration-1000 opacity-60 grayscale-[0.2]"
+            className="w-full h-full object-cover transition-all duration-1000 opacity-90 group-hover:opacity-100"
             animate={{ 
               scale: isHovered ? 1.05 : 1,
-              filter: isHovered ? 'blur(0px) grayscale(0)' : 'blur(0px) grayscale(0.2)'
+              filter: isHovered ? 'blur(0px)' : 'blur(0px)'
             }}
           />
-          {/* Sophisticated Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-700" />
+          {/* Sophisticated Overlays - Reduced for better visibility */}
+          <div className="absolute inset-0 bg-slate-950/30 md:bg-slate-950/20 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-100 group-hover:opacity-70 transition-opacity duration-700 z-10" />
         </div>
       )}
 
@@ -100,35 +104,35 @@ export function ServiceRoof({
 
       {/* Index number - Modern Styling */}
       <div className="absolute top-8 inset-inline-start-8 z-10">
-        <span className={`text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-700 ${imageUrl ? 'text-foreground/40 group-hover:text-foreground/60' : 'text-primary/40 group-hover:text-primary/60'}`}>
+        <span className={`text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-700 ${imageUrl ? 'text-white/60 group-hover:text-white/80' : 'text-primary/40 group-hover:text-primary/60'}`}>
           {index + 1 < 10 ? `0${index + 1}` : index + 1}
         </span>
       </div>
 
       {/* Content */}
-      <div className="relative min-h-[360px] md:min-h-[450px] p-8 lg:p-12 flex flex-col justify-end z-10">
+      <div className="relative min-h-[280px] md:min-h-[340px] p-6 lg:p-8 flex flex-col justify-end z-10">
         <motion.div
           animate={{ y: isHovered ? -5 : 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           {icon && (
-            <div className={`mb-6 transition-all duration-700 ${imageUrl ? 'text-foreground/60 group-hover:text-primary group-hover:scale-110' : 'text-primary'}`}>
+            <div className={`mb-4 transition-all duration-700 ${imageUrl ? 'text-white group-hover:text-primary group-hover:scale-110' : 'text-primary'}`}>
               {icon}
             </div>
           )}
 
-          <h3 className={`text-xl lg:text-2xl font-black tracking-tighter mb-4 leading-tight transition-colors duration-700 ${imageUrl ? 'text-foreground group-hover:text-primary' : 'text-foreground group-hover:text-primary'}`}>
+          <h3 className={`text-lg lg:text-xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-foreground group-hover:text-primary'}`}>
             {title}
           </h3>
 
           {showDescription && description && (!subcategories || subcategories.length === 0) && (
             <motion.p
-              className={`text-[13px] lg:text-sm leading-relaxed font-normal mb-0 transition-colors duration-700 ${imageUrl ? 'text-foreground/80 group-hover:text-foreground' : 'text-foreground/80 group-hover:text-foreground'}`}
-              initial={{ height: 0, opacity: 0, marginBottom: 0 }}
+              className={`text-[13px] lg:text-sm leading-relaxed font-normal mb-0 transition-colors duration-700 ${imageUrl ? 'text-white/90 group-hover:text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.6)]' : 'text-foreground/80 group-hover:text-foreground'}`}
+              initial={{ height: 'auto', opacity: 1, marginBottom: 16 }}
               animate={{ 
-                height: isHovered ? 'auto' : 0, 
-                opacity: isHovered ? 1 : 0,
-                marginBottom: isHovered ? 20 : 0
+                height: 'auto', 
+                opacity: 1,
+                marginBottom: 16
               }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -139,18 +143,18 @@ export function ServiceRoof({
           {subcategories && subcategories.length > 0 && (
             <motion.div
               className="flex flex-wrap gap-2 overflow-hidden"
-              initial={{ height: 0, opacity: 0, marginBottom: 0 }}
+              initial={{ height: 'auto', opacity: 1, marginBottom: 20 }}
               animate={{ 
-                height: isHovered ? 'auto' : 0, 
-                opacity: isHovered ? 1 : 0,
-                marginBottom: isHovered ? 24 : 0
+                height: 'auto', 
+                opacity: 1,
+                marginBottom: 20
               }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               {subcategories.map((sub: string, i: number) => (
                 <span 
                   key={i} 
-                  className={`px-3 py-1 rounded-full text-[9px] font-black tracking-widest uppercase border transition-colors duration-500 ${imageUrl ? 'bg-foreground/5 border-foreground/10 text-foreground/80' : 'bg-primary/5 border-primary/10 text-primary/80'}`}
+                  className={`px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-black tracking-widest uppercase border transition-colors duration-500 ${imageUrl ? 'bg-white/10 border-white/30 text-white backdrop-blur-md shadow-lg group-hover:bg-white group-hover:text-primary group-hover:border-white' : 'bg-primary/10 border-primary/20 text-primary'}`}
                 >
                   {sub}
                 </span>
@@ -160,7 +164,7 @@ export function ServiceRoof({
         </motion.div>
 
         <motion.div 
-          className={`flex items-center gap-3 text-[11px] font-black tracking-[0.3em] uppercase ${imageUrl ? 'text-foreground/80 group-hover:text-primary' : 'text-primary'}`}
+          className={`flex items-center gap-3 text-[11px] font-black tracking-[0.3em] uppercase ${imageUrl ? 'text-white/80 group-hover:text-white' : 'text-primary'}`}
           animate={{ 
             x: isHovered ? 0 : (dir === 'rtl' ? 10 : -10), 
             opacity: isHovered ? 1 : 0 
@@ -179,8 +183,13 @@ export function ServiceRoof({
   );
 
   return (
-    <Link to={path} className="w-full">
+    <a 
+      href={getWhatsAppLink(whatsappKey ? t(whatsappKey as any) : t('cta.whatsapp.general'))} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="w-full"
+    >
       {content}
-    </Link>
+    </a>
   );
 }

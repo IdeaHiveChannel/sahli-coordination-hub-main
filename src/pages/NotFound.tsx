@@ -21,11 +21,11 @@ const NotFound = () => {
             muted
             playsInline
             crossOrigin="anonymous"
-            className="w-full h-full object-cover opacity-[0.02] grayscale"
+            className="w-full h-full object-cover opacity-[0.05]"
           >
             {/* <source src="https://videos.pexels.com/video-files/5091624/5091624-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             <img 
-              src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1200&fm=webp&fit=crop" 
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&fm=webp&fit=crop" 
               alt="Lost in Space" 
               crossOrigin="anonymous"
               loading="lazy"
@@ -62,7 +62,7 @@ const NotFound = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
             >
-              <h1 className="mb-6 text-foreground text-4xl md:text-7xl font-black tracking-tighter flex flex-wrap justify-center gap-x-4">
+              <h1 className="text-display-sm mb-4 flex flex-wrap justify-center gap-x-4">
                 {(t('notFound.title') as string).split(' ').map((word: string, i: number) => (
                   <motion.span
                     key={i}
@@ -79,7 +79,7 @@ const NotFound = () => {
                   </motion.span>
                 ))}
               </h1>
-              <p className="text-xl md:text-xl text-foreground/60 mb-12 font-medium leading-relaxed max-w-xl mx-auto">
+              <p className="text-[0.9rem] md:text-[1rem] !text-foreground/60 mb-8 max-w-xl mx-auto leading-relaxed">
                 {t('notFound.body')}
               </p>
             </motion.div>
@@ -88,13 +88,13 @@ const NotFound = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-6"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link to="/" className="cta-primary inline-block min-w-[200px] btn-shine">
+                <Link to="/" className="cta-primary inline-block min-w-[180px] btn-shine">
                   {t('notFound.back')}
                 </Link>
               </motion.div>
@@ -103,7 +103,7 @@ const NotFound = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link to="/contact" className="px-8 py-4 rounded-2xl bg-foreground/5 border border-border text-foreground font-bold hover:bg-foreground/10 transition-all duration-300 inline-block min-w-[200px]">
+                <Link to="/contact" className="px-6 py-3 rounded-xl bg-foreground/5 border border-border text-foreground font-bold hover:bg-foreground/10 transition-all duration-300 inline-block min-w-[180px] text-[0.9rem]">
                   {t('nav.contact')}
                 </Link>
               </motion.div>

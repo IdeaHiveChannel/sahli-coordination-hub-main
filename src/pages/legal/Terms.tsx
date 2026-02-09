@@ -11,7 +11,7 @@ export default function Terms() {
 
   return (
     <Layout>
-      <section className="relative min-h-[85vh] flex flex-col pt-32 pb-20 overflow-hidden bg-background">
+      <section className="relative section-spacing min-h-[85vh] flex flex-col pt-32 overflow-hidden bg-background">
         {/* Floating Background Blobs */}
         <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-primary/10 rounded-full blur-[80px] md:blur-[160px] mix-blend-screen animate-pulse-slow`} />
         <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-primary/5 rounded-full blur-[60px] md:blur-[120px] mix-blend-screen animate-pulse-slow delay-1000`} />
@@ -28,7 +28,7 @@ export default function Terms() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="mb-16 text-foreground text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2">
+            <h1 className="mb-16 text-foreground text-display flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2">
               {t('legal.terms.title').split(/\s+/).map((word: string, i: number) => (
                 <motion.span
                   key={i}
@@ -48,25 +48,25 @@ export default function Terms() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
               <div className="lg:col-span-8">
-                <div className="prose prose-lg prose-invert max-w-none space-y-12">
+                <div className="prose prose-lg max-w-none space-y-12">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] glass-morphism border border-border shadow-2xl shadow-black/20"
+                    className="p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] glass-morphism border border-border shadow-xl shadow-black/20"
                   >
                     <div className="flex justify-between items-start mb-8">
                       <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
                         <Gavel className="w-6 h-6" />
                       </div>
-                      <span className="text-xs font-black tracking-widest text-primary uppercase bg-primary/5 px-4 py-2 rounded-full border border-primary/10">
+                      <span className="text-label !text-primary bg-primary/5 px-4 py-2 rounded-full border border-primary/10">
                         {t('legal.terms.lastUpdated')}
                       </span>
                     </div>
-                    <p className="text-xl md:text-xl font-bold text-foreground mb-6">
+                    <p className="text-subtitle mb-6">
                       {t('legal.terms.main.title')}
                     </p>
-                    <p className="text-foreground/70 leading-relaxed font-medium">
+                    <p className="text-body !text-foreground/70">
                       {t('legal.terms.intro')}
                     </p>
                   </motion.div>
@@ -80,10 +80,10 @@ export default function Terms() {
                         viewport={{ once: true }}
                         className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 group"
                       >
-                        <h2 className="text-xl md:text-2xl font-black text-foreground mb-6 group-hover:text-primary transition-colors">
+                        <h2 className="text-subtitle mb-6 group-hover:text-primary transition-colors">
                           {t(`legal.terms.section${sectionNum}.title` as TranslationKey)}
                         </h2>
-                        <div className="text-foreground/60 leading-relaxed font-medium whitespace-pre-line space-y-4">
+                        <div className="text-body !text-foreground/60 whitespace-pre-line space-y-4">
                           {(t(`legal.terms.section${sectionNum}.content` as TranslationKey) as string).split('\n\n').map((paragraph: string, idx: number) => (
                             <p key={idx}>{paragraph}</p>
                           ))}
@@ -98,7 +98,7 @@ export default function Terms() {
                     viewport={{ once: true }}
                     className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-primary/5 border border-primary/20"
                   >
-                    <p className="text-foreground/80 font-bold text-center leading-relaxed">
+                    <p className="text-subtitle !text-foreground/80 text-center leading-relaxed">
                       {t('legal.terms.final')}
                     </p>
                   </motion.div>
@@ -113,12 +113,12 @@ export default function Terms() {
                   className="sticky top-32 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] glass-morphism border border-border"
                 >
                   <ScrollText className="text-primary mb-8 w-12 h-12" />
-                  <h3 className="text-xl font-black text-foreground mb-6 uppercase tracking-wider">{t('legal.coordination.title')}</h3>
-                  <p className="text-foreground/70 leading-relaxed font-medium mb-8">
+                  <h3 className="text-subtitle mb-6 uppercase tracking-wider">{t('legal.coordination.title')}</h3>
+                  <p className="text-body !text-foreground/70 mb-8">
                     {t('legal.coordination.body')}
                   </p>
                   <div className="h-px w-full bg-border mb-8" />
-                  <p className="text-xs font-black text-primary tracking-[0.3em] uppercase">
+                  <p className="text-label !text-primary">
                     {t('legal.qatar.standard')}
                   </p>
                 </motion.div>

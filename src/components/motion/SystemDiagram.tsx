@@ -8,6 +8,15 @@ export function SystemDiagram() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const floatingBlobs = (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
+      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
+      <div className="absolute inset-0 bg-slate-950/5" />
+    </div>
+  );
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"]
@@ -67,9 +76,11 @@ export function SystemDiagram() {
   const isRtl = dir === 'rtl';
 
   return (
-    <div ref={containerRef} className="container-sahli py-12 md:py-32 relative" style={{ position: 'relative' }} dir={dir}>
-      {/* Background Decorative Line - Animated Path */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-border hidden lg:block -translate-x-1/2">
+    <div ref={containerRef} className="bg-background border-t border-border py-12 md:py-32 relative overflow-hidden" style={{ position: 'relative' }} dir={dir}>
+      {floatingBlobs}
+      <div className="container-sahli relative z-10">
+        {/* Background Decorative Line - Animated Path */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-border hidden lg:block -translate-x-1/2">
         <motion.div 
           className="absolute top-0 left-0 right-0 bg-primary origin-top"
           style={{ height: "100%", scaleY: pathLength }}
@@ -110,7 +121,7 @@ export function SystemDiagram() {
                 <motion.div
                   whileHover={{ y: -10, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`inline-block p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] bg-foreground/[0.02] border border-border shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] hover:shadow-[0_48px_80px_-24px_rgba(var(--primary-rgb),0.15)] transition-all duration-700 group relative overflow-hidden glass-card`}
+                  className={`inline-block p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] bg-background/40 backdrop-blur-md border border-border shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] hover:shadow-[0_48px_80px_-24px_rgba(var(--primary-rgb),0.15)] transition-all duration-700 group relative overflow-hidden glass-card`}
                 >
                   {/* Background Image with Overlay */}
                   <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -119,7 +130,7 @@ export function SystemDiagram() {
                       alt="" 
                       crossOrigin="anonymous"
                       loading="lazy"
-                      className="w-full h-full object-cover opacity-[0.03] grayscale transition-all duration-1000 group-hover:scale-110 group-hover:opacity-[0.07]" 
+                      className="w-full h-full object-cover opacity-[0.08] transition-all duration-1000 group-hover:scale-110 group-hover:opacity-[0.12]" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/40 to-transparent" />
                   </div>
@@ -130,11 +141,11 @@ export function SystemDiagram() {
                   </div>
 
                   <div className="relative z-10">
-                    <span className="inline-block px-5 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] md:text-xs font-black tracking-[0.4em] uppercase mb-8 md:mb-10 border border-primary/20">
+                    <span className="inline-block px-5 py-1.5 rounded-full bg-primary/10 backdrop-blur-md text-primary text-[10px] md:text-xs font-black tracking-[0.4em] uppercase mb-8 md:mb-10 border border-primary/20">
                       {t('nav.howItWorks')} {index + 1}
                     </span>
                     <div className={`flex flex-col ${contentOnRight ? (isRtl ? 'lg:items-start' : 'lg:items-end') : (isRtl ? 'lg:items-end' : 'lg:items-start')} items-center gap-8 mb-8`}>
-                      <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${step.color} border border-border flex items-center justify-center ${step.accent} shadow-2xl group-hover:rotate-6 transition-all duration-700 group-hover:scale-110 glow-red`}>
+                      <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${step.color} border border-border flex items-center justify-center ${step.accent} shadow-xl group-hover:rotate-6 transition-all duration-700 group-hover:scale-110 glow-red`}>
                         {step.icon}
                       </div>
                       <h3 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground leading-tight">{step.title}</h3>
@@ -173,7 +184,7 @@ export function SystemDiagram() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <div className="inline-flex items-center gap-4 px-6 md:px-8 py-3 md:py-4 rounded-2xl bg-primary text-primary-foreground shadow-2xl shadow-primary/30 mb-8">
+        <div className="inline-flex items-center gap-4 px-6 md:px-8 py-3 md:py-4 rounded-2xl bg-primary text-primary-foreground shadow-xl shadow-primary/30 mb-8">
           <HeartHandshake />
           <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em]">{t('home.inspection.title')}</span>
         </div>
@@ -184,6 +195,7 @@ export function SystemDiagram() {
           {t('home.inspection.body')}
         </p>
       </motion.div>
+    </div>
     </div>
   );
 }

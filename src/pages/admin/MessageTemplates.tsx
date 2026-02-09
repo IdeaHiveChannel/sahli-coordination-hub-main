@@ -82,21 +82,21 @@ const MessageTemplates = () => {
   return (
     <AdminLayout>
       <div className="py-2" dir={dir}>
-        <div className="flex items-center justify-between mb-6 bg-white/50 backdrop-blur-md p-4 rounded-xl border border-primary/10 shadow-sm">
+        <div className="flex items-center justify-between mb-6 bg-white p-4 rounded-xl border border-primary/10 shadow-sm">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20 font-black tracking-widest text-[10px]">COMMUNICATION</Badge>
               <Badge variant="outline" className="bg-amber-50 text-amber-600 border-amber-100 font-bold text-[10px]">{templates.length} TEMPLATES</Badge>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">Message Templates</h1>
+            <h1 className="text-display text-slate-900">Message Templates</h1>
             <p className="text-xs text-muted-foreground mt-1">
               Standardize dispatch communications and provider coordination messages.
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             <Button 
               onClick={() => setIsAdding(!isAdding)}
-              className={`${isAdding ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-slate-900 hover:bg-slate-800 text-white'} font-bold h-9 shadow-sm transition-all px-4`}
+              className={`${isAdding ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-primary hover:bg-primary/90 text-white shadow-primary/20'} font-bold h-12 sm:h-9 flex-1 sm:flex-none shadow-sm transition-all px-4 rounded-xl sm:rounded-md active:scale-95`}
             >
               {isAdding ? 'Cancel' : (
                 <span className="flex items-center gap-2">
@@ -108,7 +108,7 @@ const MessageTemplates = () => {
         </div>
 
         {isAdding && (
-          <Card className="mb-8 border-primary/20 shadow-xl bg-white/90 backdrop-blur-md overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+          <Card className="mb-8 border-primary/20 shadow-xl bg-white overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
             <div className="h-1.5 bg-primary w-full" />
             <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
               <CardTitle className="text-sm font-black uppercase tracking-wider text-slate-800">Draft New Template</CardTitle>
@@ -122,13 +122,13 @@ const MessageTemplates = () => {
                     placeholder="e.g. Broadcast Accept" 
                     value={newTemplate.name}
                     onChange={(e) => setNewTemplate({...newTemplate, name: e.target.value})}
-                    className="bg-white border-slate-200 h-10"
+                    className="bg-white border-slate-200 h-12 sm:h-10 rounded-xl sm:rounded-md"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Category</label>
                   <select 
-                    className="w-full h-10 px-3 rounded-md border border-slate-200 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full h-12 sm:h-10 px-3 rounded-xl sm:rounded-md border border-slate-200 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20"
                     value={newTemplate.category}
                     onChange={(e) => setNewTemplate({...newTemplate, category: e.target.value as MessageTemplate['category']})}
                   >
@@ -155,7 +155,7 @@ const MessageTemplates = () => {
               <div className="flex justify-end pt-2">
                 <Button 
                   onClick={handleAddTemplate}
-                  className="bg-primary hover:bg-primary/90 text-white font-bold h-10 px-8 rounded-xl shadow-lg shadow-primary/20"
+                  className="bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-widest text-[10px] h-14 sm:h-10 w-full sm:w-auto px-8 rounded-2xl sm:rounded-xl shadow-lg active:scale-95 transition-all"
                 >
                   <Save size={16} className="mr-2" /> Save Template
                 </Button>
@@ -168,7 +168,7 @@ const MessageTemplates = () => {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={18} />
           <Input 
             placeholder="Search templates by name, content, or category..." 
-            className="pl-12 h-12 bg-white/80 backdrop-blur-sm border-slate-200 rounded-2xl shadow-sm focus:shadow-md transition-all text-sm font-medium"
+            className="pl-12 h-12 bg-white border-slate-200 rounded-2xl shadow-sm focus:shadow-md transition-all text-sm font-medium"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -176,10 +176,10 @@ const MessageTemplates = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredTemplates.map((template) => (
-            <Card key={template.id} className="border-slate-200/60 shadow-sm hover:shadow-xl transition-all bg-white/80 backdrop-blur-sm group overflow-hidden">
+            <Card key={template.id} className="border-slate-200/60 shadow-sm hover:shadow-xl transition-all bg-white group overflow-hidden">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b border-slate-50">
                 <div className="flex items-center gap-4">
-                  <div className="p-2.5 bg-slate-900 text-primary rounded-xl shadow-lg border border-slate-800">
+                  <div className="p-2.5 bg-primary/10 text-primary rounded-xl shadow-sm border border-primary/20">
                     {getCategoryIcon(template.category)}
                   </div>
                   <div>
@@ -221,11 +221,11 @@ const MessageTemplates = () => {
           ))}
 
           {filteredTemplates.length === 0 && (
-            <div className="col-span-full py-20 text-center bg-white/50 backdrop-blur-sm rounded-3xl border border-dashed border-slate-200">
+            <div className="col-span-full py-20 text-center bg-white rounded-3xl border border-dashed border-slate-200">
               <div className="inline-flex p-6 bg-slate-100 rounded-3xl mb-4 text-slate-300">
                 <MessageSquare className="opacity-40" size={40} />
               </div>
-              <h3 className="text-lg font-black uppercase tracking-wider text-slate-900">No Templates Found</h3>
+              <h3 className="text-subtitle text-slate-900">No Templates Found</h3>
               <p className="text-xs text-slate-500 font-medium uppercase tracking-widest mt-2 opacity-70">
                 {searchQuery ? `Your search for "${searchQuery}" returned no results.` : 'The communication catalog is currently empty.'}
               </p>

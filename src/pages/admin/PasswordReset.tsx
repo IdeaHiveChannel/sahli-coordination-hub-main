@@ -55,74 +55,84 @@ const PasswordReset = () => {
 
   return (
     <Layout hideFooter hideTrigger>
-      <div className="container-sahli py-20 flex justify-center items-center min-h-[70vh]" dir={dir}>
-        <Card className="w-full max-w-md shadow-2xl border-primary/10">
+      <div className="container-sahli py-12 md:py-20 flex justify-center items-center min-h-[85vh] px-4 sm:px-6" dir={dir}>
+        <Card className="w-full max-w-md border-none shadow-xl rounded-[2.5rem] overflow-hidden bg-white/80 backdrop-blur-xl">
           {!isSubmitted ? (
             <>
-              <CardHeader className="space-y-1 text-center">
-                <CardTitle className="text-2xl font-bold tracking-tight">
-                  {isForced ? 'Set New Password' : 'Reset Password'}
-                </CardTitle>
-                <CardDescription>
-                  {isForced 
-                    ? 'Your account requires a password change on first login.' 
-                    : "Please contact hello@sahliservice.com to request a password reset for your admin account."}
-                </CardDescription>
+              <CardHeader className="space-y-4 text-center p-8 pb-4">
+                <div className="mx-auto w-16 h-16 bg-primary rounded-2xl flex items-center justify-center text-white mb-2 shadow-xl shadow-primary/20">
+                  {isForced ? <ShieldCheck size={32} /> : <MailCheck size={32} />}
+                </div>
+                <div className="space-y-1">
+                  <CardTitle className="text-subtitle text-slate-900">
+                    {isForced ? 'Set New Password' : 'Reset Password'}
+                  </CardTitle>
+                  <CardDescription className="text-[11px] font-medium uppercase tracking-widest text-slate-400">
+                    {isForced 
+                      ? 'Action Required • Account Security' 
+                      : "Manual Verification Required"}
+                  </CardDescription>
+                </div>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+              <CardContent className="p-8 pt-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   {isForced ? (
                     <>
-                      <div className="space-y-2">
-                        <Label htmlFor="password">New Password</Label>
+                      <div className="space-y-3">
+                        <Label htmlFor="password" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">
+                          New Password
+                        </Label>
                         <Input 
                           id="password" 
                           type="password" 
                           required 
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
+                          className="h-14 rounded-2xl border-slate-100 bg-slate-50/50 focus:bg-white transition-all text-sm px-5"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="confirmPassword">Confirm Password</Label>
+                      <div className="space-y-3">
+                        <Label htmlFor="confirmPassword" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">
+                          Confirm Password
+                        </Label>
                         <Input 
                           id="confirmPassword" 
                           type="password" 
                           required 
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
+                          className="h-14 rounded-2xl border-slate-100 bg-slate-50/50 focus:bg-white transition-all text-sm px-5"
                         />
                       </div>
                     </>
                   ) : (
                     <div className="space-y-6 py-4 text-center">
-                      <div className="flex justify-center mb-4">
-                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                          <MailCheck size={32} />
-                        </div>
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="text-[11px] text-slate-500 font-medium leading-relaxed uppercase tracking-wider">
                         To maintain system security, password reset requests are handled manually by the administration team.
                       </p>
-                      <Button asChild className="w-full font-bold uppercase tracking-wider">
+                      <Button asChild className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-[11px] rounded-2xl shadow-xl shadow-primary/20 active:scale-[0.98] transition-all">
                          <a href="mailto:hello@sahliservice.com?subject=Admin%20Password%20Reset%20Request&body=Hello%2C%20I%20need%20to%20reset%20my%20admin%20password%20for%20the%20Sahli%20Coordination%20Hub.">
-                           Email Administrator
+                           Contact Admin Team
                          </a>
                        </Button>
                     </div>
                   )}
                   {isForced && (
-                    <Button type="submit" className="w-full font-bold uppercase tracking-wider" disabled={isLoading}>
+                    <Button 
+                      type="submit" 
+                      className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-[0.2em] text-[11px] rounded-2xl shadow-xl shadow-primary/20 active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100" 
+                      disabled={isLoading}
+                    >
                       {isLoading ? 'Updating...' : 'Update Password'}
                     </Button>
                   )}
                 </form>
               </CardContent>
               {!isForced && (
-                <CardFooter className="justify-center">
+                <CardFooter className="justify-center pb-8">
                   <Link 
                     to="/admin/login" 
-                    className="text-sm text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"
+                    className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary flex items-center gap-2 transition-colors"
                   >
                     <ArrowLeft size={14} />
                     Back to Login
@@ -131,34 +141,36 @@ const PasswordReset = () => {
               )}
             </>
           ) : (
-            <CardContent className="pt-10 pb-10 text-center space-y-6">
-              <div className="flex justify-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                  <MailCheck size={32} />
-                </div>
+            <CardContent className="p-8 py-12 text-center space-y-8">
+              <div className="mx-auto w-20 h-20 bg-green-50 rounded-3xl flex items-center justify-center text-green-500 shadow-xl">
+                <MailCheck size={40} />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">Check your email</h3>
-                <p className="text-sm text-muted-foreground">
-                  We've sent password reset instructions to <span className="font-bold text-foreground">{email}</span>.
+              <div className="space-y-3">
+                <h3 className="text-subtitle text-slate-900">Check your email</h3>
+                <p className="text-[11px] text-slate-500 font-medium leading-relaxed uppercase tracking-wider">
+                  We've sent password reset instructions to <br/>
+                  <span className="font-black text-slate-900 lowercase tracking-normal text-sm">{email}</span>
                 </p>
-                <div className="mt-4 p-3 bg-primary/5 rounded border border-primary/10 text-[10px] text-primary leading-relaxed text-left">
-                  <strong>Note:</strong> As this is a secure coordination hub, password resets require manual verification by the system administrator if automated delivery is not configured for your domain.
-                </div>
               </div>
-              <Button 
-                variant="outline" 
-                className="w-full"
-                onClick={() => setIsSubmitted(false)}
-              >
-                Try another email
-              </Button>
-              <Link 
-                to="/admin/login" 
-                className="text-sm text-primary hover:underline block"
-              >
-                Back to Login
-              </Link>
+              <div className="p-5 bg-slate-50 rounded-[1.5rem] border border-slate-100 text-[10px] text-slate-400 font-medium leading-relaxed text-left uppercase tracking-tight">
+                <strong className="text-slate-900 block mb-1">Security Note:</strong>
+                Password resets require manual verification by the system administrator for this secure coordination hub.
+              </div>
+              <div className="space-y-4 pt-2">
+                <Button 
+                  variant="outline" 
+                  className="w-full h-12 rounded-xl border-slate-200 text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all active:scale-[0.98]"
+                  onClick={() => setIsSubmitted(false)}
+                >
+                  Try another email
+                </Button>
+                <Link 
+                  to="/admin/login" 
+                  className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-primary/80 block transition-colors"
+                >
+                  Back to Login
+                </Link>
+              </div>
             </CardContent>
           )}
         </Card>
