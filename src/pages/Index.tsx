@@ -169,7 +169,7 @@ interface TrustPanel {
     { 
       title: t('services.moving.title'), 
       description: t('services.moving.subtitle'),
-      imageUrl: "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?q=80&w=800&fm=webp&fit=crop",
+      imageUrl: "/Services/Moving & Relocation.jpg",
       icon: <Truck size={32} />,
       path: t('services.moving.path'),
       whatsappKey: 'services.moving.whatsapp',
@@ -183,7 +183,7 @@ interface TrustPanel {
     { 
       title: t('services.outdoor.title'), 
       description: t('services.outdoor.subtitle'),
-      imageUrl: "https://images.unsplash.com/photo-1592419044706-39796d40f98c?q=80&w=800&fm=webp&fit=crop",
+      imageUrl: "/Services/Pest Control.jpg",
       icon: <Leaf size={32} />,
       path: t('services.outdoor.path'),
       whatsappKey: 'services.outdoor.whatsapp',
@@ -198,7 +198,7 @@ interface TrustPanel {
     { 
       title: t('services.care.title'), 
       description: t('services.care.subtitle'),
-      imageUrl: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&fm=webp&fit=crop',
+      imageUrl: "/Services/Nanny Care Service.jpg",
       icon: <Heart size={32} />,
       path: t('services.care.path'),
       whatsappKey: 'services.care.whatsapp',
@@ -215,7 +215,7 @@ interface TrustPanel {
     { 
       title: t('services.electronics.title'), 
       description: t('services.electronics.subtitle'),
-      imageUrl: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&fm=webp&fit=crop',
+      imageUrl: "/Services/Electronics repair.jpg",
       icon: <Cpu size={32} />,
       path: t('services.electronics.path'),
       whatsappKey: 'services.electronics.whatsapp',
