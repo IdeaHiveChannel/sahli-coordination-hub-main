@@ -43,6 +43,9 @@ interface TrustPanel {
 
   const [emblaRefDiff] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
   const [emblaRefCoverage] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4000, stopOnInteraction: false })]);
+  const [emblaRefGlance] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3500, stopOnInteraction: false })]);
+  const [emblaRefHow] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4500, stopOnInteraction: false })]);
+  const [emblaRefClarity] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
 
   const formatNumber = (num: number | string) => {
     if (lang === 'ar') {
@@ -623,7 +626,35 @@ interface TrustPanel {
             </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 xl:gap-8">
+          {/* Mobile Carousel */}
+          <div className="md:hidden overflow-hidden -mx-4 px-4 cursor-grab active:cursor-grabbing" ref={emblaRefGlance}>
+            <div className="flex">
+              {glanceItems.map((item, i) => (
+                <div key={i} className="flex-[0_0_85%] min-w-0 px-2">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="group relative p-6 rounded-[2rem] bg-foreground/[0.02] border border-border/50 flex flex-col h-full shadow-xl shadow-foreground/[0.01] overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-[3rem] -mr-6 -mt-6" />
+                    <div className="relative z-10 w-12 h-12 rounded-xl bg-white text-primary flex items-center justify-center mb-5 shadow-sm border border-border/50">
+                      {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                    </div>
+                    <h3 className="relative z-10 text-lg font-black mb-2 text-foreground leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="relative z-10 text-[0.85rem] text-foreground/60 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 xl:gap-8">
             {glanceItems.map((item, i) => (
               <motion.div 
                 key={i}
@@ -683,7 +714,39 @@ interface TrustPanel {
             {/* Desktop Connector Line */}
             <div className="hidden lg:block absolute top-10 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent z-0" />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
+            {/* Mobile Carousel */}
+            <div className="lg:hidden overflow-hidden -mx-4 px-4 cursor-grab active:cursor-grabbing" ref={emblaRefHow}>
+              <div className="flex">
+                {[1, 2, 3, 4].map((step) => (
+                  <div key={step} className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_70%] md:flex-[0_0_50%] px-2">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="group h-full"
+                    >
+                      <div className="relative p-6 rounded-[2rem] bg-white border border-border/50 shadow-xl shadow-foreground/[0.02] h-full flex flex-col">
+                        <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-black text-lg mb-6 shadow-lg shadow-primary/20 relative">
+                          {formatNumber(step)}
+                          {step === 1 && (
+                            <div className="absolute inset-0 rounded-xl bg-primary animate-ping opacity-20" />
+                          )}
+                        </div>
+                        <h3 className="text-lg font-black mb-3 text-foreground leading-tight">
+                          {t(`home.how.step${step}.title` as any)}
+                        </h3>
+                        <p className="text-[0.85rem] text-foreground/60 leading-relaxed">
+                          {t(`home.how.step${step}.desc` as any)}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden lg:grid grid-cols-4 gap-6 lg:gap-8 relative z-10">
               {[1, 2, 3, 4].map((step) => (
                 <motion.div
                   key={step}
@@ -1022,7 +1085,39 @@ interface TrustPanel {
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {/* Mobile Carousel */}
+          <div className="md:hidden overflow-hidden -mx-4 px-4 cursor-grab active:cursor-grabbing" ref={emblaRefClarity}>
+            <div className="flex">
+              {clarityItems.map((item, i) => (
+                <div key={item.id} className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_70%] px-2">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="h-full"
+                  >
+                    <div className="h-full p-6 rounded-[2rem] bg-background border border-border/50 flex flex-col items-center text-center overflow-hidden">
+                      <div className="relative mb-4">
+                        <div className="relative w-12 h-12 rounded-2xl bg-foreground/[0.03] text-primary flex items-center justify-center shadow-inner">
+                          {React.cloneElement(item.icon as React.ReactElement, { size: 24 })}
+                        </div>
+                      </div>
+                      <h3 className="text-lg font-black text-foreground mb-3 leading-tight">
+                        {item.title}
+                      </h3>
+                      <div className="w-10 h-1 bg-primary/10 rounded-full mb-4" />
+                      <p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">
+                        Verified Hub Protocol
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
             {clarityItems.map((item, i) => (
               <motion.div 
                 key={item.id}
