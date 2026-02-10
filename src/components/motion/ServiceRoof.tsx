@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getWhatsAppLink } from '@/lib/constants';
 
@@ -31,7 +32,14 @@ export function ServiceRoof({
 }: ServiceRoofProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { t, dir } = useLanguage();
+  const { t, dir, lang } = useLanguage();
+
+  const formatNumber = (num: number | string) => {
+    if (lang === 'ar') {
+      return num.toString().replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]);
+    }
+    return num.toString();
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -105,15 +113,16 @@ export function ServiceRoof({
       {/* Index number - Modern Styling */}
       <div className="absolute top-8 inset-inline-start-8 z-10">
         <span className={`text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-700 ${imageUrl ? 'text-white/60 group-hover:text-white/80' : 'text-primary/40 group-hover:text-primary/60'}`}>
-          {index + 1 < 10 ? `0${index + 1}` : index + 1}
+          {formatNumber(index + 1 < 10 ? `0${index + 1}` : index + 1)}
         </span>
       </div>
 
       {/* Content */}
-      <div className="relative min-h-[280px] md:min-h-[340px] p-6 lg:p-8 flex flex-col justify-end z-10">
+      <div className="relative min-h-[280px] md:min-h-[340px] p-6 md:p-8 flex flex-col justify-end z-10 text-center md:text-start items-center md:items-start">
         <motion.div
           animate={{ y: isHovered ? -5 : 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center md:items-start"
         >
           {icon && (
             <div className={`mb-4 transition-all duration-700 ${imageUrl ? 'text-white group-hover:text-primary group-hover:scale-110' : 'text-primary'}`}>
@@ -121,7 +130,7 @@ export function ServiceRoof({
             </div>
           )}
 
-          <h3 className={`text-lg lg:text-xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-foreground group-hover:text-primary'}`}>
+          <h3 className={`text-xl md:text-xl lg:text-2xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-foreground group-hover:text-primary'}`}>
             {title}
           </h3>
 
@@ -142,7 +151,7 @@ export function ServiceRoof({
 
           {subcategories && subcategories.length > 0 && (
             <motion.div
-              className="flex flex-wrap gap-2 overflow-hidden"
+              className="flex flex-wrap gap-2 overflow-hidden justify-center md:justify-start"
               initial={{ height: 'auto', opacity: 1, marginBottom: 20 }}
               animate={{ 
                 height: 'auto', 
@@ -161,17 +170,6 @@ export function ServiceRoof({
               ))}
             </motion.div>
           )}
-        </motion.div>
-
-        <motion.div 
-          className={`flex items-center gap-3 text-[11px] font-black tracking-[0.3em] uppercase ${imageUrl ? 'text-white/80 group-hover:text-white' : 'text-primary'}`}
-          animate={{ 
-            x: isHovered ? 0 : (dir === 'rtl' ? 10 : -10), 
-            opacity: isHovered ? 1 : 0 
-          }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {t('services.explore')} <span className={`text-xl leading-tight ${dir === 'rtl' ? 'rotate-180' : ''}`}>→</span>
         </motion.div>
       </div>
 

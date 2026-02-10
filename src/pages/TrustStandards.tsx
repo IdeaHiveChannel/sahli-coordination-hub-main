@@ -66,23 +66,13 @@ export default function TrustStandards() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img 
+              src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1920&fm=webp&fit=crop" 
+              alt={t('trust.hero.alt')} 
               crossOrigin="anonymous"
-              className="w-full h-full object-cover opacity-100"
-            >
-              {/* <source src="https://videos.pexels.com/video-files/4492147/4492147-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
-              <img 
-                src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1200&fm=webp&fit=crop" 
-                alt={t('trust.hero.alt')} 
-                crossOrigin="anonymous"
-                loading="lazy"
-                className="w-full h-full object-cover"
-              />
-            </video>
+              loading="lazy"
+              className="w-full h-full object-cover object-[75%_center] md:object-center"
+            />
           </motion.div>
           {/* Darker overlays to make images pop and remove whitish haze */}
           <div className="absolute inset-0 bg-slate-950/20 z-0" />
@@ -94,35 +84,36 @@ export default function TrustStandards() {
           <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[200px] h-[200px] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow delay-1000 z-0`} />
         </div>
 
-        <div className="container-sahli relative z-10 pt-36 md:pt-48 pb-6 md:pb-8">
+        <div className="container-sahli relative z-10 pt-36 md:pt-48 pb-6 md:pb-8 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center md:items-start text-center md:text-start max-w-4xl"
+            className="w-full flex flex-col items-center md:items-start"
             style={{ y: y2Spring }}
           >
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-4 relative"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full border border-primary/30 text-[10px] font-black tracking-widest uppercase mb-4 shadow-lg btn-shine mx-auto md:mx-0"
             >
-              <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-              <img 
-                src="/logos/SahlLogo9.png" 
-                alt={t('trust.seal.alt')} 
-                className="relative w-12 h-12 md:w-16 md:h-16 object-contain opacity-80" 
-              />
+              <Shield size={12} className="text-primary" />
+              {t('trust.hero.label')}
             </motion.div>
 
-            <h1 className="mb-4 text-foreground text-display-sm">
-              {t('trust.label')}
+            <h1 className="text-display text-foreground max-w-4xl mb-4 md:mb-6 w-full text-center md:text-start">
+              {t('trust.hero.title')}
             </h1>
-            
-            <p className="text-[0.9rem] md:text-[1rem] text-foreground/60 mb-6 md:mb-8 max-w-2xl leading-relaxed">
-              {t('trust.description')}
-            </p>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-base md:text-xl lg:text-2xl text-foreground/70 max-w-2xl font-medium w-full text-center md:text-start"
+            >
+              {t('trust.hero.subtitle')}
+            </motion.p>
           </motion.div>
         </div>
       </section>

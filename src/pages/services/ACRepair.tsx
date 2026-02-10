@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { Marquee } from '@/components/motion/Marquee';
 import { MessageSquare, CheckCircle2, Snowflake, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
@@ -77,11 +78,11 @@ export default function ACRepair() {
               {t('services.homeMaintenance.ac.title')}
             </div>
 
-            <h1 className="text-display mb-6 md:mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-6 md:mb-8 font-black leading-[1.1] tracking-tight w-full text-center md:text-start">
               {t('services.homeMaintenance.ac.title')}
             </h1>
 
-            <p className="text-subtitle !text-foreground/70 max-w-2xl mb-8 md:mb-12">
+            <p className="text-base md:text-xl lg:text-2xl !text-foreground/70 max-w-2xl mb-8 md:mb-12 w-full text-center md:text-start">
               {t('services.homeMaintenance.subtitle')}
             </p>
 
@@ -115,7 +116,7 @@ export default function ACRepair() {
             <img 
               src="https://images.pexels.com/photos/5466804/pexels-photo-5466804.jpeg" 
               alt="AC Repair Service Qatar"
-              className="w-full h-full object-cover transition-all duration-700"
+              className="w-full h-full object-cover object-[75%_center] md:object-center transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </motion.div>
@@ -147,21 +148,21 @@ export default function ACRepair() {
             <h2 className="text-display mb-8 md:mb-12 text-center">
               {t('services.homeMaintenance.rules.title')}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Marquee speed={0.5} className="-mx-4 px-4">
               {[
                 t('services.rules.inspection'),
                 t('services.rules.independent'),
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-4 items-start group">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                <div key={i} className="flex gap-4 items-start group shrink-0 w-[260px] md:w-auto">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                     <CheckCircle2 size={20} />
                   </div>
                   <span className="text-label !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500">{rule}</span>
                 </div>
               ))}
-            </div>
+            </Marquee>
           </motion.div>
         </div>
       </section>
@@ -171,13 +172,13 @@ export default function ACRepair() {
         <div className="container-sahli">
           <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-display mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-5xl mb-4 md:mb-6 font-black">
               {t('service.v1.includes.title')}
             </h2>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Marquee speed={0.4} className="-mx-4 px-4" gap={20}>
             {includes.map((item, i) => (
               <motion.div
                 key={i}
@@ -185,7 +186,7 @@ export default function ACRepair() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/40 hover:bg-foreground/[0.04] transition-all duration-500"
+                className="group p-8 rounded-[2rem] md:rounded-[1.25rem] bg-foreground/[0.02] border border-border hover:border-primary/40 hover:bg-foreground/[0.04] transition-all duration-500 shrink-0 w-[280px] md:w-auto shadow-xl shadow-primary/5"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
                   <CheckCircle2 size={28} />
@@ -196,7 +197,7 @@ export default function ACRepair() {
                 <div className="w-8 h-1 bg-primary/20 rounded-full group-hover:w-full transition-all duration-700" />
               </motion.div>
             ))}
-          </div>
+          </Marquee>
         </div>
       </section>
 
@@ -206,15 +207,13 @@ export default function ACRepair() {
         
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
-            <h2 className="text-display mb-6">
+            <h2 className="text-3xl md:text-5xl mb-6 font-black">
               {t('how.flow.title')}
             </h2>
-            <p className="text-label !text-foreground/50">{t('how.flow.subtitle')}</p>
+            <p className="text-base md:text-xl !text-foreground/50">{t('how.flow.subtitle')}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative">
-            <div className="hidden lg:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent z-0" />
-            
+          <Marquee speed={0.4} className="-mx-4 px-4" gap={48}>
             {coordinationSteps.map((step, i) => (
               <motion.div
                 key={i}
@@ -222,7 +221,7 @@ export default function ACRepair() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative z-10 flex flex-col items-center text-center group"
+                className="relative z-10 flex flex-col items-center text-center group shrink-0 w-[240px] md:w-auto"
               >
                 <div className="w-24 h-24 rounded-3xl bg-background border border-border flex items-center justify-center text-primary mb-8 shadow-xl group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
                   <span className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-sm shadow-lg">
@@ -235,7 +234,7 @@ export default function ACRepair() {
                 <p className="text-label !text-foreground/80 px-4">{step.body}</p>
               </motion.div>
             ))}
-          </div>
+          </Marquee>
         </div>
       </section>
 
@@ -292,7 +291,7 @@ export default function ACRepair() {
               <h2 className="text-display mb-6 md:mb-8">
                 {t('home.areas.title')}
               </h2>
-              <div className="space-y-4">
+              <Marquee speed={0.4} className="-mx-4 px-4" gap={16}>
                 {areas.map((area, i) => (
                   <motion.div
                     key={i}
@@ -300,7 +299,7 @@ export default function ACRepair() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-6 p-6 rounded-2xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all duration-500 group"
+                    className="flex items-center gap-6 p-6 rounded-[2rem] md:rounded-2xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all duration-500 group shrink-0 w-[240px] md:w-auto shadow-xl shadow-primary/5"
                   >
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
                       <MapPin size={20} />
@@ -308,7 +307,7 @@ export default function ACRepair() {
                     <span className="text-subtitle group-hover:text-primary transition-colors">{area}</span>
                   </motion.div>
                 ))}
-              </div>
+              </Marquee>
             </div>
             
             <div className="relative aspect-video lg:aspect-square rounded-[3rem] overflow-hidden border border-border bg-foreground/[0.02] group">
@@ -378,24 +377,24 @@ export default function ACRepair() {
               {t('services.related.subtitle')}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Marquee speed={0.4} className="-mx-4 px-4" gap={24}>
             {relatedServices.map((service, i) => (
               <Link
                 key={i}
                 to={service.path}
-                className="group p-8 rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
+                className="group p-8 rounded-[2rem] md:rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 shrink-0 w-[280px] md:w-auto shadow-xl shadow-primary/5"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-subtitle group-hover:text-primary transition-colors">
                     {service.title}
                   </span>
-                  <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                    <ArrowUp size={24} className="rotate-45" />
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                    <ArrowUp className="rotate-45" size={20} />
                   </div>
                 </div>
               </Link>
             ))}
-          </div>
+          </Marquee>
         </div>
       </section>
 

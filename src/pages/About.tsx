@@ -41,16 +41,12 @@ export default function About() {
               opacity: opacity
             }}
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img 
+              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1920&auto=format&fit=crop" 
+              alt={t('nav.about')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover opacity-100 scale-105"
-            >
-              {/* <source src="https://videos.pexels.com/video-files/3196615/3196615-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
-            </video>
+              className="w-full h-full object-cover object-[75%_center] md:object-center opacity-100 scale-105"
+            />
           </motion.div>
           {/* Darker overlays to make images pop and remove whitish haze */}
           <div className="absolute inset-0 bg-slate-950/20 z-0" />
@@ -62,7 +58,7 @@ export default function About() {
           <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[200px] h-[200px] bg-primary/5 rounded-full blur-[100px] animate-pulse-slow`} />
         </div>
 
-        <div className="container-sahli relative z-10 pt-36 md:pt-48 pb-4 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-36 md:pt-48 pb-4 flex flex-col items-center md:items-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,7 +68,7 @@ export default function About() {
             {t('nav.about')}
           </motion.div>
 
-          <h1 className="text-display text-foreground max-w-4xl mb-2 md:mb-3">
+          <h1 className="text-display text-foreground max-w-4xl mb-2 md:mb-3 w-full text-center md:text-start">
             {t('about.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}

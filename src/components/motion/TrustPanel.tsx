@@ -13,8 +13,15 @@ interface TrustPanelProps {
 }
 
 export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPanelProps) {
-  const { t, dir } = useLanguage();
+  const { t, dir, lang } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
+
+  const formatNumber = (num: number | string) => {
+    if (lang === 'ar') {
+      return num.toString().replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]);
+    }
+    return num.toString();
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);

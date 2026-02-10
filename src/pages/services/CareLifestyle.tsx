@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Marquee } from '@/components/motion/Marquee';
 import { CheckCircle2, MessageSquare, Heart, Baby, Stethoscope, Users, Sparkles, ShieldCheck, Clock, AlertCircle, MapPin, ArrowUp, GraduationCap } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
@@ -75,11 +76,11 @@ export default function CareLifestyle() {
               {t('services.care.title')}
             </div>
 
-            <h1 className="text-display mb-6 md:mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-6 md:mb-8 font-black leading-[1.1] tracking-tight w-full text-center md:text-start">
               {t('services.care.title')}
             </h1>
 
-            <p className="text-subtitle !text-foreground/70 max-w-2xl mb-8 md:mb-12">
+            <p className="text-base md:text-xl lg:text-2xl !text-foreground/70 max-w-2xl mb-8 md:mb-12 w-full text-center md:text-start">
               {t('services.care.subtitle')}
             </p>
 
@@ -113,7 +114,7 @@ export default function CareLifestyle() {
               <img 
                 src="https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg" 
                 alt="Care and Childcare Service Qatar"
-                className="w-full h-full object-cover transition-all duration-700"
+                className="w-full h-full object-cover object-[75%_center] md:object-center transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             </motion.div>
@@ -145,21 +146,21 @@ export default function CareLifestyle() {
             <h2 className="text-display mb-6 md:mb-8 text-center">
               {t('services.care.rules.title')}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Marquee speed={0.5} className="-mx-4 px-4">
               {[
                 t('services.rules.care'),
                 t('services.rules.independent'),
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-4 items-start group">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                <div key={i} className="flex gap-4 items-start group shrink-0 w-[260px] md:w-auto px-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                     <CheckCircle2 size={20} />
                   </div>
-                  <span className="text-label !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500">{rule}</span>
+                  <span className="text-label !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500 font-bold">{rule}</span>
                 </div>
               ))}
-            </div>
+            </Marquee>
           </motion.div>
         </div>
       </section>
@@ -168,13 +169,13 @@ export default function CareLifestyle() {
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-            <h2 className="text-display mb-6 md:mb-8">
+            <h2 className="text-3xl md:text-5xl mb-6 md:mb-8 font-black">
               {t('services.care.categories.title')}
             </h2>
-            <p className="text-subtitle !text-foreground/50">{t('services.care.categories.subtitle')}</p>
+            <p className="text-base md:text-xl !text-foreground/50">{t('services.care.categories.subtitle')}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Marquee speed={0.4} className="-mx-4 px-4" gap={24}>
             {categories.map((cat, i) => (
               <motion.div
                 key={i}
@@ -182,7 +183,7 @@ export default function CareLifestyle() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="p-8 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group hover:shadow-2xl hover:shadow-primary/5"
+                className="p-8 rounded-[2rem] md:rounded-[1.25rem] bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group hover:shadow-2xl hover:shadow-primary/5 shrink-0 w-[280px] md:w-auto shadow-xl shadow-primary/5"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
                   {cat.icon}
@@ -193,7 +194,7 @@ export default function CareLifestyle() {
                 </p>
               </motion.div>
             ))}
-          </div>
+          </Marquee>
         </div>
       </section>
 
@@ -201,15 +202,13 @@ export default function CareLifestyle() {
       <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-display mb-6">
+            <h2 className="text-3xl md:text-5xl mb-6 font-black">
               {t('how.flow.title')}
             </h2>
-            <p className="text-subtitle !text-foreground/50">{t('how.flow.subtitle')}</p>
+            <p className="text-base md:text-xl !text-foreground/50">{t('how.flow.subtitle')}</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative">
-            <div className="hidden lg:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent z-0" />
-            
+          <Marquee speed={0.4} className="-mx-4 px-4" gap={48}>
             {coordinationSteps.map((step, i) => (
               <motion.div
                 key={i}
@@ -217,9 +216,9 @@ export default function CareLifestyle() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative z-10 flex flex-col items-center text-center group"
+                className="relative z-10 flex flex-col items-center text-center group shrink-0 w-[240px] md:w-auto"
               >
-                <div className="w-24 h-24 rounded-3xl bg-background border border-border flex items-center justify-center text-primary mb-8 shadow-xl group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
+                <div className="w-24 h-24 rounded-[2rem] md:rounded-3xl bg-background border border-border flex items-center justify-center text-primary mb-8 shadow-xl group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500 shadow-primary/5">
                   <span className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-sm shadow-lg">
                     {step.title}
                   </span>
@@ -230,7 +229,7 @@ export default function CareLifestyle() {
                 <p className="text-body !text-foreground/80 leading-tight px-4">{step.body}</p>
               </motion.div>
             ))}
-          </div>
+          </Marquee>
         </div>
       </section>
 
@@ -242,7 +241,7 @@ export default function CareLifestyle() {
               initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-10 rounded-[3rem] bg-primary/[0.03] border border-primary/10"
+              className="p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-primary/[0.03] border border-primary/10 shadow-xl shadow-primary/5"
             >
               <h3 className="text-subtitle !text-primary mb-8">
                 {t('services.boundaries.title.is')}
@@ -261,7 +260,7 @@ export default function CareLifestyle() {
               initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-10 rounded-[3rem] bg-foreground/[0.02] border border-border"
+              className="p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-foreground/[0.02] border border-border shadow-xl shadow-primary/5"
             >
               <h3 className="text-subtitle !text-foreground/40 mb-8">
                 {t('services.boundaries.title.isNot')}
@@ -287,7 +286,7 @@ export default function CareLifestyle() {
               <h2 className="text-display mb-6 md:mb-8">
                 {t('home.areas.title')}
               </h2>
-              <div className="space-y-4">
+              <Marquee speed={0.4} className="-mx-4 px-4">
                 {areas.map((area, i) => (
                   <motion.div
                     key={i}
@@ -295,7 +294,7 @@ export default function CareLifestyle() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-6 p-6 rounded-2xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group"
+                    className="flex items-center gap-6 p-6 rounded-[2rem] md:rounded-2xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group shrink-0 w-[240px] md:w-auto shadow-xl shadow-primary/5"
                   >
                     <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <MapPin size={24} />
@@ -303,7 +302,7 @@ export default function CareLifestyle() {
                     <span className="text-subtitle group-hover:text-primary transition-colors">{area}</span>
                   </motion.div>
                 ))}
-              </div>
+              </Marquee>
             </div>
             <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center">
               <div className="absolute inset-0 opacity-20">
@@ -372,12 +371,12 @@ export default function CareLifestyle() {
               {t('services.related.subtitle')}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Marquee speed={0.4} className="-mx-4 px-4">
             {relatedServices.map((service, i) => (
               <Link
                 key={i}
                 to={service.path}
-                className="group p-8 rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500"
+                className="group p-8 rounded-[2rem] md:rounded-3xl bg-background border border-border hover:border-primary/30 transition-all duration-500 shrink-0 w-[280px] md:w-auto shadow-xl shadow-primary/5"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-subtitle group-hover:text-primary transition-colors">
@@ -389,7 +388,7 @@ export default function CareLifestyle() {
                 </div>
               </Link>
             ))}
-          </div>
+          </Marquee>
         </div>
       </section>
 

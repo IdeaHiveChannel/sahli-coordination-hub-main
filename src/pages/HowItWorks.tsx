@@ -36,16 +36,12 @@ const HowItWorks = () => {
               opacity: opacity
             }}
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img 
+              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1920&auto=format&fit=crop" 
+              alt={t('how.hero.label')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover opacity-60 scale-110"
-            >
-              {/* <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" /> */}
-            </video>
+              className="w-full h-full object-cover object-[75%_center] md:object-center opacity-60 scale-110"
+            />
           </motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
@@ -55,7 +51,7 @@ const HowItWorks = () => {
           <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[200px] h-[200px] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow delay-1000 z-0`} />
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-14 pb-4 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-24 md:pt-14 pb-4 flex flex-col items-center md:items-start">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,7 +61,7 @@ const HowItWorks = () => {
             {t('how.hero.label')}
           </motion.div>
 
-          <h1 className="text-display text-foreground max-w-2xl mb-2.5 md:mb-3">
+          <h1 className="text-display text-foreground max-w-2xl mb-2.5 md:mb-3 w-full text-center md:text-start">
             {t('how.hero.title').split(' ').map((word: string, i: number) => (
               <motion.span
                 key={i}
@@ -83,7 +79,7 @@ const HowItWorks = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-[0.85rem] md:text-sm text-foreground/70 max-w-lg mb-3 md:mb-5 leading-relaxed"
+            className="text-[0.85rem] md:text-sm text-foreground/70 max-w-lg mb-3 md:mb-5 leading-relaxed w-full text-center md:text-start"
           >
             {t('how.hero.subtitle')}
           </motion.p>

@@ -197,6 +197,12 @@ export default function Services() {
             }}
             className="absolute inset-0"
           >
+            <img 
+              src="https://images.unsplash.com/photo-1581578731548-c64695cc6958?q=80&w=1920&auto=format&fit=crop" 
+              alt={t('nav.services')}
+              crossOrigin="anonymous"
+              className="w-full h-full object-cover object-center"
+            />
             {/* Floating Background Blobs for homepage design base */}
             <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow`} />
             <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000`} />
@@ -209,19 +215,19 @@ export default function Services() {
         <div className="container-sahli relative z-10 pt-36 md:pt-52 pb-12">
           <motion.div
             style={{ y: yText }}
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto md:mx-0 text-center md:text-start"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-label mb-6 backdrop-blur-md"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-label mb-6 backdrop-blur-md mx-auto md:mx-0"
             >
               <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
               {t('nav.services')}
             </motion.div>
 
-            <h1 className="mb-6 text-foreground text-display">
+            <h1 className="mb-6 text-foreground text-display w-full text-center md:text-start">
               {t('services.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}
@@ -239,7 +245,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base md:text-lg !text-foreground/60 max-w-2xl mb-8 mx-auto leading-relaxed"
+              className="text-base md:text-lg !text-foreground/60 max-w-2xl mb-8 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start"
             >
               {t('services.intro')}
             </motion.p>

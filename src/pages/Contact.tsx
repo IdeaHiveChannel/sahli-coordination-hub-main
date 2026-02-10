@@ -66,7 +66,7 @@ export default function Contact() {
               muted
               playsInline
               crossOrigin="anonymous"
-              className="w-full h-full object-cover opacity-[0.4] scale-110"
+              className="w-full h-full object-cover object-[75%_center] md:object-center opacity-[0.4] scale-110"
             >
               {/* <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             </video>
@@ -86,14 +86,14 @@ export default function Contact() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl"
+            className="w-full flex flex-col items-center md:items-start"
           >
             <div className="inline-flex items-center gap-2 px-3 py-0.5 bg-primary/20 rounded-full border border-primary/30 text-[10px] font-black uppercase tracking-widest mb-3 shadow-lg btn-shine mx-auto md:mx-0">
               <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
               {t('nav.contact')}
             </div>
 
-            <h1 className="text-foreground text-display-sm mb-2 md:mb-3">
+            <h1 className="text-foreground text-display-sm mb-2 md:mb-3 w-full text-center md:text-start">
               {t('contact.title').split(' ').map((word: string, i: number) => (
                 <motion.span
                   key={i}

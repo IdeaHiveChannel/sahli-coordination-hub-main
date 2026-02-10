@@ -73,7 +73,7 @@ export function Header() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-[9px] md:text-[10px] font-bold uppercase tracking-[0.12em] transition-all duration-500 relative group ${
+                  className={`text-[9px] md:text-[10px] lg:text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold uppercase tracking-[0.12em] transition-all duration-500 relative group ${
                     isActive 
                       ? 'text-primary' 
                       : (isScrolled || isMenuOpen || !isDarkHeroPage ? 'text-foreground/80 hover:text-primary' : 'text-white hover:text-primary')
@@ -193,14 +193,14 @@ export function Header() {
               />
             </div>
 
-            <div className="relative z-10 h-full flex flex-col pt-24 px-6 md:px-12">
-              <div className="flex flex-col gap-4 md:gap-6">
+            <div className="relative z-10 min-h-full flex flex-col pt-24 px-6 md:px-12 max-w-screen-xl mx-auto w-full">
+              <div className="flex flex-col gap-4 md:gap-6 flex-grow">
                 {navItems.map((item, i: number) => (
                   <motion.div
                     key={item.path}
-                    initial={{ x: -50, opacity: 0 }}
+                    initial={{ x: dir === 'rtl' ? 50 : -50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    whileTap={{ x: 10, scale: 0.98 }}
+                    whileTap={{ x: dir === 'rtl' ? -10 : 10, scale: 0.98 }}
                     transition={{ 
                       type: "spring",
                       stiffness: 400,
@@ -211,10 +211,10 @@ export function Header() {
                     <Link
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className="group flex items-baseline gap-4 py-1 md:py-2"
+                      className={`group flex items-baseline gap-4 py-1 md:py-2 ${dir === 'rtl' ? 'flex-row-reverse text-right' : 'flex-row text-left'}`}
                     >
-                      <span className="text-[12px] font-black text-primary/50 tracking-widest">0{i + 1}</span>
-                      <span className="text-3xl md:text-5xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors duration-500">
+                      <span className="text-[12px] font-black text-primary/50 tracking-widest min-w-[24px]">0{i + 1}</span>
+                      <span className="text-3xl md:text-5xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors duration-500 break-words">
                         {t(item.key)}
                       </span>
                     </Link>
@@ -226,12 +226,12 @@ export function Header() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="mt-auto pb-12 pt-8 border-t border-border/50"
+                className="pb-12 pt-8 border-t border-border/50 mt-8"
               >
-                <div className="flex flex-col gap-8">
+                <div className={`flex flex-col gap-8 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
                   <div className="space-y-2">
                     <span className="text-[11px] font-black uppercase tracking-[0.3em] text-foreground/60">{t('nav.contact')}</span>
-                    <a href={`mailto:${t('contact.email.value')}`} className="block text-xl font-medium text-foreground hover:text-primary transition-colors">{t('contact.email.value')}</a>
+                    <a href={`mailto:${t('contact.email.value')}`} className="block text-xl font-medium text-foreground hover:text-primary transition-colors break-all">{t('contact.email.value')}</a>
                   </div>
                   
                   <a
@@ -244,7 +244,7 @@ export function Header() {
                     className="flex items-center justify-center gap-4 w-full py-6 bg-primary text-primary-foreground rounded-3xl text-sm font-black uppercase tracking-widest hover:shadow-xl hover:shadow-primary/30 transition-all duration-500"
                   >
                     <motion.div
-                      className="flex items-center gap-4"
+                      className={`flex items-center gap-4 ${dir === 'rtl' ? 'flex-row-reverse' : 'flex-row'}`}
                       whileTap={{ scale: 0.95 }}
                     >
                       <MessageSquare size={20} className="fill-primary-foreground" />
