@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
 // Refined Index page with video media replacing 3D hero
@@ -9,7 +9,7 @@ import { Marquee } from '@/components/motion/Marquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug, Send, Building2, Handshake, Wallet, ClipboardCheck } from 'lucide-react';
+import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug, Send, Building2, Handshake, Wallet, ClipboardCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
@@ -41,11 +41,13 @@ interface TrustPanel {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
-  const [emblaRefDiff] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
-  const [emblaRefCoverage] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4000, stopOnInteraction: false })]);
-  const [emblaRefGlance] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3500, stopOnInteraction: false })]);
-  const [emblaRefHow] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4500, stopOnInteraction: false })]);
-  const [emblaRefClarity] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
+  const [emblaRefCoverage, emblaApiCoverage] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
+  const [emblaRefGlance, emblaApiGlance] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 2500, stopOnInteraction: false })]);
+  const [emblaRefHow, emblaApiHow] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3500, stopOnInteraction: false })]);
+  const [emblaRefClarity, emblaApiClarity] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4000, stopOnInteraction: false })]);
+
+  const scrollPrev = useCallback((api: any) => api && api.scrollPrev(), []);
+  const scrollNext = useCallback((api: any) => api && api.scrollNext(), []);
 
   const formatNumber = (num: number | string) => {
     if (lang === 'ar') {
@@ -60,14 +62,6 @@ interface TrustPanel {
     }
     return price.toString();
   };
-
-  const differentiators = [
-    { title: t('home.diff.item1'), icon: <Search size={24} /> },
-    { title: t('home.diff.item2'), icon: <PhoneOff size={24} /> },
-    { title: t('home.diff.item3'), icon: <UserCheck size={24} /> },
-    { title: t('home.diff.item4'), icon: <DollarSign size={24} /> },
-    { title: t('home.diff.item5'), icon: <ShieldCheck size={24} /> },
-  ];
 
   const coverageLocations = [
     { name: t('home.coverage.location1'), image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=2064&auto=format&fit=crop" },
@@ -615,15 +609,35 @@ interface TrustPanel {
       {/* 3. WHY PEOPLE USE SAHLI (Modernized) */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli relative z-10">
-          <div className="max-w-3xl mb-10 md:mb-12 mx-auto md:mx-0 text-center md:text-start">
-            <motion.h2 
-              className="text-display mb-3"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {t('home.glance.title')}
-            </motion.h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-12 mx-auto md:mx-0 text-center md:text-start">
+            <div className="max-w-3xl">
+              <motion.h2 
+                className="text-display mb-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                {t('home.glance.title')}
+              </motion.h2>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-center md:justify-end gap-3 md:mb-2">
+              <button 
+                onClick={() => scrollPrev(emblaApiGlance)}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+              </button>
+              <button 
+                onClick={() => scrollNext(emblaApiGlance)}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+              </button>
+            </div>
           </div>
 
           {/* Mobile Carousel */}
@@ -699,15 +713,35 @@ interface TrustPanel {
       {/* 4. HOW IT WORKS (Modernized Step Flow) */}
       <section className="section-spacing bg-foreground/[0.02] relative overflow-hidden border-y border-border">
         <div className="container-sahli relative z-10">
-          <div className="max-w-4xl mb-10 md:mb-12 mx-auto md:mx-0 text-center md:text-start">
-            <motion.h2 
-              className="text-display"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {t('home.how.title')}
-            </motion.h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-12 mx-auto md:mx-0 text-center md:text-start">
+            <div className="max-w-4xl">
+              <motion.h2 
+                className="text-display"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                {t('home.how.title')}
+              </motion.h2>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-center md:justify-end gap-3 md:mb-2">
+              <button 
+                onClick={() => scrollPrev(emblaApiHow)}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-white"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+              </button>
+              <button 
+                onClick={() => scrollNext(emblaApiHow)}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-white"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+              </button>
+            </div>
           </div>
 
           <div className="relative">
@@ -977,9 +1011,29 @@ interface TrustPanel {
                 <h2 className="text-display mb-6">
                   {t('home.coverage.title')}
                 </h2>
-                <p className="text-subtitle !text-foreground/70 mb-8 max-w-md">
-                  {t('home.coverage.desc')}
-                </p>
+                <div className="flex items-center justify-between mb-8">
+                  <p className="text-subtitle !text-foreground/70 max-w-md !mb-0">
+                    {t('home.coverage.desc')}
+                  </p>
+                  
+                  {/* Navigation Buttons */}
+                  <div className="flex items-center gap-3">
+                    <button 
+                      onClick={() => scrollPrev(emblaApiCoverage)}
+                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-background/50 backdrop-blur-sm"
+                      aria-label="Previous slide"
+                    >
+                      <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+                    </button>
+                    <button 
+                      onClick={() => scrollNext(emblaApiCoverage)}
+                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-background/50 backdrop-blur-sm"
+                      aria-label="Next slide"
+                    >
+                      <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+                    </button>
+                  </div>
+                </div>
                 
                 <div className="overflow-hidden -mx-4 px-4 md:mx-0 md:px-0 cursor-grab active:cursor-grabbing" ref={emblaRefCoverage}>
                   <div className="flex">
@@ -1051,38 +1105,58 @@ interface TrustPanel {
         </div>
 
         <div className="container-sahli relative z-10 w-full">
-          <div className="flex flex-col items-center text-center mb-8 md:mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 border border-primary/10 rounded-full mb-3 md:mb-4"
-            >
-              <ShieldCheck size={12} className="text-primary" />
-              <span className="text-[0.6rem] md:text-[0.65rem] font-bold text-primary uppercase tracking-[0.2em]">
-                {t('home.hero.meta.model')}
-              </span>
-            </motion.div>
-            
-            <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground mb-3 md:mb-4 tracking-tight"
-            >
-              {t('home.clarity.title')}
-            </motion.h2>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-sm md:text-base text-foreground/50 max-w-xl font-medium px-4"
-            >
-              {t('home.standards.subtitle')}
-            </motion.p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
+            <div className="flex flex-col items-center text-center md:items-start md:text-start max-w-xl">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 border border-primary/10 rounded-full mb-3 md:mb-4"
+              >
+                <ShieldCheck size={12} className="text-primary" />
+                <span className="text-[0.6rem] md:text-[0.65rem] font-bold text-primary uppercase tracking-[0.2em]">
+                  {t('home.hero.meta.model')}
+                </span>
+              </motion.div>
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground mb-3 md:mb-4 tracking-tight"
+              >
+                {t('home.clarity.title')}
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-sm md:text-base text-foreground/50 font-medium"
+              >
+                {t('home.standards.subtitle')}
+              </motion.p>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-center md:justify-end gap-3 md:mb-4">
+              <button 
+                onClick={() => scrollPrev(emblaApiClarity)}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+              </button>
+              <button 
+                onClick={() => scrollNext(emblaApiClarity)}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
+              </button>
+            </div>
           </div>
           
           {/* Mobile Carousel */}
