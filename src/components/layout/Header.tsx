@@ -50,15 +50,15 @@ export function Header() {
           }`}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group min-w-[50px] md:min-w-[100px] relative">
+          <Link to="/" className="flex items-center gap-2 group min-w-[62px] md:min-w-[122px] relative">
             <motion.div 
               whileHover={{ rotate: 5, scale: 1.05 }}
-              className="relative w-5 h-5 md:w-7 md:h-7 flex items-center justify-center transition-all duration-500"
+              className="relative w-[1.625rem] h-[1.625rem] md:w-[2.375rem] md:h-[2.375rem] flex items-center justify-center transition-all duration-500"
             >
               <img 
                 src={isScrolled || isMenuOpen || !isDarkHeroPage ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"} 
                 alt="SAHLI Logo" 
-                className={`absolute w-12 h-12 md:w-20 md:h-20 max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
+                className={`absolute w-16 h-16 md:w-[6.625rem] md:h-[6.625rem] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
                   dir === 'rtl' ? 'right-0' : 'left-0'
                 }`} 
               />

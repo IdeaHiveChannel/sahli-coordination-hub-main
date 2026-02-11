@@ -1,27 +1,45 @@
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Shield, CheckCircle2, Eye, FileSearch, UserCheck, Scale, MessageSquare, Target, HeartHandshake, ClipboardList, Fingerprint } from 'lucide-react';
+import { 
+  Shield, 
+  CheckCircle2, 
+  Eye, 
+  FileSearch, 
+  MessageSquare, 
+  Target, 
+  HeartHandshake, 
+  ClipboardList, 
+  Fingerprint,
+  Sparkles
+} from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
 
 export default function TrustStandards() {
-  const { t, dir } = useLanguage();
+  const { t, dir, lang } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.15]);
+  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
   
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y1Spring = useSpring(y1, springConfig);
-  const y2Spring = useSpring(y2, springConfig);
   const scaleSpring = useSpring(scale, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    setMousePos({
+      x: (clientX / innerWidth - 0.5) * 40,
+      y: (clientY / innerHeight - 0.5) * 40,
+    });
+  };
 
   const standards = [
     {
@@ -52,65 +70,91 @@ export default function TrustStandards() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section ref={containerRef} className="relative min-h-[40svh] md:min-h-[50svh] flex flex-col justify-center overflow-hidden bg-background">
+      {/* Advanced Hero Section */}
+      <section 
+        ref={containerRef} 
+        onMouseMove={handleMouseMove}
+        className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center md:justify-end overflow-hidden bg-slate-950"
+      >
+        {/* Dynamic Background */}
         <div className="absolute inset-0 z-0">
           <motion.div 
             className="absolute inset-0"
             style={{ 
               y: y1Spring,
               scale: scaleSpring,
-              opacity: opacity
+              opacity: opacity,
+              x: mousePos.x * 0.2,
+              rotate: mousePos.y * 0.02
             }}
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <img 
               src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1920&fm=webp&fit=crop" 
-              alt={t('trust.hero.alt')} 
+              alt={t('trust.hero.alt')}
               crossOrigin="anonymous"
-              loading="lazy"
-              className="w-full h-full object-cover object-[75%_center] md:object-center"
+              className="w-full h-full object-cover scale-110 grayscale opacity-40"
             />
           </motion.div>
-          {/* Darker overlays to make images pop and remove whitish haze */}
-          <div className="absolute inset-0 bg-slate-950/20 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-background z-10" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/40 via-transparent to-transparent z-10`} />
           
-          {/* Floating Background Blobs */}
-          <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-primary/20 rounded-full blur-[80px] md:blur-[160px] animate-pulse-slow z-0`} />
-          <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[200px] h-[200px] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow delay-1000 z-0`} />
+          {/* Noise Texture */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          
+          {/* Advanced Overlays */}
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/20 to-slate-950 z-10" />
+          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950 via-transparent to-transparent z-10`} />
+          
+          {/* Premium Animated Blobs */}
+          <motion.div 
+            animate={{ 
+              x: [0, 50, 0], 
+              y: [0, -30, 0],
+              scale: [1, 1.2, 1],
+              rotate: [0, 45, 0]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/3' : 'right-1/3'} w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen z-0`} 
+          />
         </div>
 
-        <div className="container-sahli relative z-10 pt-36 md:pt-48 pb-6 md:pb-8 flex flex-col items-center md:items-start text-center md:text-start">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full flex flex-col items-center md:items-start"
-            style={{ y: y2Spring }}
+        <div className="container-sahli relative z-20 pt-24 pb-12 md:pb-20 flex flex-col items-center md:items-start text-center md:text-start">
+          <motion.div 
+            className="w-full max-w-[1400px] flex flex-col items-center md:items-start"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
           >
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full border border-primary/30 text-[10px] font-black tracking-widest uppercase mb-4 shadow-lg btn-shine mx-auto md:mx-0"
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-3 px-5 py-2 bg-white/5 backdrop-blur-md rounded-full border border-white/10 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/70 mb-8 md:mb-10 mx-auto md:mx-0 shadow-2xl relative overflow-hidden group"
             >
-              <Shield size={12} className="text-primary" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <Shield size={14} className="text-primary" />
               {t('trust.hero.label')}
             </motion.div>
 
-            <h1 className="text-display text-foreground max-w-4xl mb-4 md:mb-6 w-full text-center md:text-start">
-              {t('trust.hero.title')}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl 3xl:text-9xl mb-4 md:mb-6 leading-[1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+              {t('trust.hero.title').split(' ').map((word, i) => (
+                <div key={i} className="overflow-hidden inline-block mr-[0.3em]">
+                  <motion.span 
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.3 + (i * 0.08), duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                </div>
+              ))}
             </h1>
-
-            <motion.p 
+            
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base md:text-xl lg:text-2xl text-foreground/70 max-w-2xl font-medium w-full text-center md:text-start"
+              transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-base md:text-lg lg:text-xl xl:text-2xl !text-white/90 mb-6 md:mb-10 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0"
             >
               {t('trust.hero.subtitle')}
             </motion.p>
@@ -118,41 +162,43 @@ export default function TrustStandards() {
         </div>
       </section>
 
-      {/* Standards Section */}
-      <section className="relative py-8 md:py-16 bg-background overflow-hidden border-y border-border">
+      {/* Standards Section - Enhanced Grid */}
+      <section className="section-spacing bg-background relative overflow-hidden border-y border-border">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+        
         <div className="container-sahli relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {standards.map((standard, i) => (
               <motion.div 
                 key={i}
-                className="flex flex-col h-full"
+                className="flex flex-col h-full group"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="text-primary/40 font-black text-display-sm tracking-tighter">
-                    {standard.number} <span className="opacity-20">/</span>
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="text-primary/40 font-black text-4xl md:text-5xl tracking-tighter transition-all duration-500 group-hover:text-primary group-hover:scale-110">
+                    {standard.number}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-foreground/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                  <div className="w-12 h-12 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-xl group-hover:rotate-12">
                     {standard.icon}
                   </div>
                 </div>
                 
-                <div className="flex-1 p-6 rounded-[1.5rem] glass-morphism border border-border group hover:border-primary/20 transition-all duration-700 flex flex-col hover:shadow-lg">
-                  <div className="mb-1.5 text-[10px] font-black uppercase tracking-widest !text-foreground/40">
+                <div className="flex-1 p-8 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-xl border border-border group-hover:border-primary/20 transition-all duration-700 flex flex-col group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
+                  <div className="mb-2 text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40">
                     {t('trust.standard')}
                   </div>
-                  <h3 className="text-[0.9rem] md:text-[1rem] font-bold mb-4 text-foreground">
+                  <h3 className="text-xl font-black mb-6 text-foreground tracking-tight leading-none uppercase">
                     {standard.title}
                   </h3>
                   
-                  <ul className="space-y-3 mt-auto">
+                  <ul className="space-y-4 mt-auto">
                     {standard.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 size={16} className="text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-[0.8rem] md:text-[0.85rem] text-foreground/70 leading-relaxed">
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                        <span className="text-sm md:text-base text-foreground/70 leading-relaxed font-medium">
                           {item}
                         </span>
                       </li>
@@ -165,129 +211,163 @@ export default function TrustStandards() {
         </div>
       </section>
 
-      {/* During Service (Independent Execution) */}
-      <section className="relative py-8 md:py-16 bg-background overflow-hidden">
+      {/* During Service - Independent Execution - Architectural */}
+      <section className="section-spacing bg-slate-950 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_70%)] opacity-10" />
+        </div>
+
         <div className="container-sahli relative z-10">
           <motion.div 
-            className="max-w-4xl mx-auto p-6 md:p-10 rounded-[2rem] bg-foreground/5 border border-border relative overflow-hidden shadow-lg"
+            className="max-w-5xl mx-auto p-8 md:p-16 rounded-[3rem] bg-white/5 backdrop-blur-2xl border border-white/10 relative overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
           >
-            <div className="inline-block px-3 py-1 bg-primary/20 rounded-full border border-primary/30 text-[10px] font-black uppercase tracking-widest mb-6 md:mb-8">
-              {t('trust.blackbox.title')}
+            <div className="grid md:grid-cols-12 gap-12 items-center">
+              <div className="md:col-span-7">
+                <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-8">
+                  <Sparkles size={14} />
+                  {lang === 'ar' ? 'الاستقلالية' : 'Independence'}
+                </div>
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-8 tracking-tighter leading-none">
+                  {t('trust.blackbox.title')}
+                </h2>
+                <p className="text-lg md:text-xl text-white/60 leading-relaxed font-medium">
+                  {t('trust.blackbox.body')}
+                </p>
+              </div>
+              <div className="md:col-span-5 flex justify-center">
+                <div className="relative">
+                  <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-2 border-dashed border-white/10 animate-spin-slow flex items-center justify-center">
+                    <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-primary/20 blur-2xl animate-pulse" />
+                  </div>
+                  <Shield className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 text-white opacity-20" />
+                </div>
+              </div>
             </div>
-            <h2 className="text-display-sm mb-4 md:mb-6 text-foreground">
-              {t('trust.blackbox.title')}
-            </h2>
-            <p className="text-[0.85rem] md:text-sm text-foreground/70 leading-relaxed">
-              {t('trust.blackbox.body')}
-            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* After Service (Audit & Witness) */}
-      <section className="relative py-8 md:py-16 bg-background overflow-hidden border-t border-border">
+      {/* After Service - Audit & Witness */}
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="container-sahli relative z-10">
-          <div className="mb-8 md:mb-12">
-            <div className="inline-block px-3 py-1 bg-foreground/5 rounded-full border border-border text-[10px] font-black uppercase tracking-widest !text-foreground/50 mb-4 md:mb-6">
-              {t('trust.audit.title')}
-            </div>
-            <h2 className="text-display-sm text-foreground">
-              {t('trust.audit.title')}
-            </h2>
+          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center gap-6"
+            >
+              <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-foreground/5 rounded-full border border-border text-[10px] font-black uppercase tracking-[0.3em] text-foreground/50">
+                <FileSearch size={14} />
+                {t('trust.audit.title')}
+              </div>
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tighter leading-none">
+                {lang === 'ar' ? 'المراقبة والتحقق' : 'Monitoring & Verification'}
+              </h2>
+            </motion.div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { title: t('trust.audit.title'), body: t('trust.audit.body'), icon: <FileSearch size={24} /> },
-              { title: t('trust.witness.title'), body: t('trust.witness.body'), icon: <Eye size={24} /> }
-            ].map((item: { title: string; body: string; icon: React.ReactNode }, i: number) => (
+              { title: t('trust.audit.title'), body: t('trust.audit.body'), icon: <FileSearch size={32} /> },
+              { title: t('trust.witness.title'), body: t('trust.witness.body'), icon: <Eye size={32} /> }
+            ].map((item, i) => (
               <motion.div 
                 key={i}
-                className="p-6 md:p-8 rounded-[2rem] glass-morphism border border-border group hover:border-primary/20 transition-all duration-700 hover:shadow-lg"
+                className="p-10 md:p-12 rounded-[3rem] bg-foreground/[0.02] border border-border group hover:border-primary/20 transition-all duration-700 hover:shadow-2xl hover:-translate-y-2"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="w-12 h-12 rounded-xl bg-foreground/5 flex items-center justify-center text-primary mb-6 md:mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                <div className="w-16 h-16 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-700 group-hover:rotate-6 shadow-xl">
                   {item.icon}
                 </div>
-                <h3 className="text-[0.9rem] md:text-[1rem] font-bold mb-3 md:mb-4 text-foreground">{item.title}</h3>
-                <p className="text-[0.8rem] md:text-[0.85rem] text-foreground/60 leading-relaxed">{item.body}</p>
+                <h3 className="text-2xl font-black mb-6 text-foreground uppercase tracking-tight leading-none">{item.title}</h3>
+                <p className="text-lg text-foreground/60 leading-relaxed font-medium">{item.body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Customer Implications */}
-      <section className="relative py-8 md:py-16 bg-background overflow-hidden border-t border-border">
+      {/* Customer Implications - Premium Grid */}
+      <section className="section-spacing bg-slate-950 relative overflow-hidden border-t border-white/5">
         <div className="container-sahli relative z-10">
-          <div className="mb-8 md:mb-12">
-            <h2 className="text-display-sm text-foreground">
+          <div className="mb-16 md:mb-24 text-center">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter leading-none">
               {t('trust.customer.title')}
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               t('trust.customer.point1'),
               t('trust.customer.point2'),
               t('trust.customer.point3'),
               t('trust.customer.point4')
-            ].map((point: string, i: number) => (
+            ].map((point, i) => (
               <motion.div 
                 key={i}
-                className="p-5 md:p-6 rounded-[1.25rem] bg-foreground/[0.02] border border-border hover:border-primary/10 transition-colors"
+                className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-primary/30 transition-all duration-500 group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <p className={`text-[0.8rem] md:text-[0.85rem] text-foreground leading-relaxed ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{point}</p>
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+                  <CheckCircle2 size={16} />
+                </div>
+                <p className={`text-base text-white/70 leading-relaxed font-medium ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{point}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-8 md:py-16 bg-background overflow-hidden border-t border-border">
+      {/* CTA Section - Premium */}
+      <section className="section-spacing bg-background relative overflow-hidden border-t border-border">
         <div className="container-sahli relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-display-sm mb-4 md:mb-6 text-foreground">
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-black mb-8 text-foreground tracking-tighter leading-tight">
               {t('trust.cta.title')}
             </h2>
-            <p className="text-[0.9rem] md:text-[1rem] text-foreground/60 mb-8 md:mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-foreground/60 mb-12 md:mb-16 leading-relaxed font-medium max-w-2xl mx-auto">
               {t('trust.cta.body')}
             </p>
+            
             <a
               href={getWhatsAppLink(t('cta.whatsapp.general'))}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackRequestClick('Trust Standards Page')}
-              className="cta-primary btn-shine"
+              className="group relative inline-flex items-center gap-8 py-4 px-4 bg-slate-950 rounded-full border border-white/10 hover:border-primary/50 transition-all duration-500"
             >
-              <motion.div
-                className="flex items-center gap-2.5"
-                whileHover={{ y: -3 }}
-              >
-                <MessageSquare size={18} />
-                {t('trust.cta.whatsapp')}
-              </motion.div>
+              <div className="relative">
+                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)]">
+                  <MessageSquare className="w-8 h-8 text-white fill-white/20" />
+                </div>
+              </div>
+              <div className="flex flex-col text-start pr-8 pl-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-1">{lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}</span>
+                <span className="text-lg font-black text-white uppercase tracking-wider">{t('trust.cta.whatsapp')}</span>
+              </div>
             </a>
             
-            <p className="mt-12 md:mt-16 text-[0.7rem] md:text-[0.75rem] text-foreground/40 font-black uppercase tracking-widest max-w-2xl mx-auto leading-relaxed">
-              {t('trust.micro.clarity')}
-            </p>
+            <div className="mt-20 pt-10 border-t border-border">
+              <p className="text-[10px] md:text-xs text-foreground/40 font-black uppercase tracking-[0.4em] max-w-3xl mx-auto leading-loose">
+                {t('trust.micro.clarity')}
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

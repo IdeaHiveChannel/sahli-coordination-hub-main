@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
 // Refined Index page with video media replacing 3D hero
@@ -9,7 +9,7 @@ import { Marquee } from '@/components/motion/Marquee';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug, Send, Building2, Handshake, Wallet, ClipboardCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug, Send, Building2, Handshake, Wallet, ClipboardCheck } from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
@@ -41,13 +41,10 @@ interface TrustPanel {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
-  const [emblaRefCoverage, emblaApiCoverage] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
-  const [emblaRefGlance, emblaApiGlance] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 2500, stopOnInteraction: false })]);
-  const [emblaRefHow, emblaApiHow] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3500, stopOnInteraction: false })]);
-  const [emblaRefClarity, emblaApiClarity] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4000, stopOnInteraction: false })]);
-
-  const scrollPrev = useCallback((api: any) => api && api.scrollPrev(), []);
-  const scrollNext = useCallback((api: any) => api && api.scrollNext(), []);
+  const [emblaRefCoverage] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
+  const [emblaRefGlance] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 2500, stopOnInteraction: false })]);
+  const [emblaRefHow] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3500, stopOnInteraction: false })]);
+  const [emblaRefClarity] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 4000, stopOnInteraction: false })]);
 
   const formatNumber = (num: number | string) => {
     if (lang === 'ar') {
@@ -620,24 +617,6 @@ interface TrustPanel {
                 {t('home.glance.title')}
               </motion.h2>
             </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-center md:justify-end gap-3 md:mb-2">
-              <button 
-                onClick={() => scrollPrev(emblaApiGlance)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-              </button>
-              <button 
-                onClick={() => scrollNext(emblaApiGlance)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-              </button>
-            </div>
           </div>
 
           {/* Mobile Carousel */}
@@ -723,24 +702,6 @@ interface TrustPanel {
               >
                 {t('home.how.title')}
               </motion.h2>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-center md:justify-end gap-3 md:mb-2">
-              <button 
-                onClick={() => scrollPrev(emblaApiHow)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-white"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-              </button>
-              <button 
-                onClick={() => scrollNext(emblaApiHow)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-white"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-              </button>
             </div>
           </div>
 
@@ -1015,24 +976,6 @@ interface TrustPanel {
                   <p className="text-subtitle !text-foreground/70 max-w-md !mb-0">
                     {t('home.coverage.desc')}
                   </p>
-                  
-                  {/* Navigation Buttons */}
-                  <div className="flex items-center gap-3">
-                    <button 
-                      onClick={() => scrollPrev(emblaApiCoverage)}
-                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-background/50 backdrop-blur-sm"
-                      aria-label="Previous slide"
-                    >
-                      <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-                    </button>
-                    <button 
-                      onClick={() => scrollNext(emblaApiCoverage)}
-                      className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 bg-background/50 backdrop-blur-sm"
-                      aria-label="Next slide"
-                    >
-                      <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-                    </button>
-                  </div>
                 </div>
                 
                 <div className="overflow-hidden -mx-4 px-4 md:mx-0 md:px-0 cursor-grab active:cursor-grabbing" ref={emblaRefCoverage}>
@@ -1138,24 +1081,6 @@ interface TrustPanel {
               >
                 {t('home.standards.subtitle')}
               </motion.p>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-center md:justify-end gap-3 md:mb-4">
-              <button 
-                onClick={() => scrollPrev(emblaApiClarity)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-              </button>
-              <button 
-                onClick={() => scrollNext(emblaApiClarity)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={20} className={dir === 'rtl' ? 'rotate-180' : ''} />
-              </button>
             </div>
           </div>
           

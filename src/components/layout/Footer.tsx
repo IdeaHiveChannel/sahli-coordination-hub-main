@@ -41,9 +41,9 @@ export function Footer() {
           {/* Brand & Mission */}
           <div className="lg:col-span-4 pr-0 lg:pr-8 flex flex-col items-center sm:items-start text-center sm:text-left">
             <Link to="/" className="flex items-center gap-4 group mb-8 sm:mb-12 w-fit">
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 flex items-center justify-center transition-all duration-700 ease-out-expo btn-shine rounded-[2rem] sm:rounded-3xl">
+            <div className="relative w-[8.125rem] h-[8.125rem] sm:w-[10.125rem] sm:h-[10.125rem] md:w-[14.125rem] md:h-[14.125rem] flex items-center justify-center transition-all duration-700 ease-out-expo btn-shine rounded-[2rem] sm:rounded-3xl">
               <img 
-                src="/logos/SahlLogo9.png" 
+                src="/logos/SahlLogo3.png" 
                 alt="SAHLI Logo" 
                 className="w-full h-full object-contain" 
               />

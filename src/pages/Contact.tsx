@@ -53,11 +53,14 @@ export default function Contact() {
 
   return (
     <Layout>
-      {/* 1️⃣ Hero Section - Compact & Advanced */}
-      <section ref={containerRef} className="relative min-h-[35svh] md:min-h-[45svh] flex flex-col justify-center overflow-hidden bg-background">
+      {/* 1️⃣ Hero Section - Consistent with Homepage */}
+      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <motion.div 
             style={{ y, scale, opacity }}
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
             <video
@@ -66,22 +69,23 @@ export default function Contact() {
               muted
               playsInline
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-[75%_center] md:object-center opacity-[0.4] scale-110"
+              className="w-full h-full object-cover object-[75%_center] md:object-center opacity-[0.4] scale-105"
             >
               {/* <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
             </video>
             
-            {/* Multi-layered gradients for depth and text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background" />
-            <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-background via-background/60 to-transparent`} />
+            {/* Darker overlays to make content pop - Homepage Standard */}
+            <div className="absolute inset-0 bg-slate-950/40 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
+            <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
             
-            {/* Floating Background Blobs */}
-            <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow`} />
-            <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[250px] h-[250px] bg-primary/5 rounded-full blur-[80px] animate-pulse-slow delay-1000`} />
+            {/* Floating Background Blobs - Homepage Standard */}
+            <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
+            <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
           </motion.div>
         </div>
 
-        <div className="container-sahli relative z-10 pt-24 md:pt-16 pb-4 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-24 flex flex-col items-center md:items-start text-center md:text-start">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

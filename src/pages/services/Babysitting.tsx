@@ -12,17 +12,26 @@ export default function Babysitting() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
+  const { scrollY } = useScroll();
+  
+  // Parallax effects matching homepage
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
+  
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const y1Spring = useSpring(y1, springConfig);
+  const y2Spring = useSpring(y2, springConfig);
+  const scaleSpring = useSpring(scale, springConfig);
+  const yHero = useTransform(scrollY, [0, 500], [0, -100]);
 
   const relatedServices = [
     { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
     { title: t('nav.cleaningServices'), path: t('services.cleaning.path') },
     { title: t('nav.movingServices'), path: t('services.moving.path') },
     { title: t('nav.outdoorSpecialized'), path: t('services.outdoor.path') },
-    { title: t('nav.careLifestyle'), path: t('services.care.path') },
+    { title: t('nav.careLifestyle'), path: t('services.care.path.roof5') },
     { title: t('nav.electronicsTech'), path: t('services.electronics.path') },
   ];
 
@@ -34,7 +43,7 @@ export default function Babysitting() {
     { title: '05', body: t('home.what.step5.body'), icon: <CheckCircle2 size={20} /> }
   ];
 
-  const includes = t('services.care.childcare.items').split('\n');
+  const includes = t('services.care.childcare.items.roof5').split('\n');
 
   const areas = [
     t('home.areas.item1' as any),
@@ -44,97 +53,98 @@ export default function Babysitting() {
     t('home.areas.item5' as any),
   ];
 
-  const floatingBlobs = (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
-      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
-      <div className="absolute inset-0 bg-slate-950/5" />
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-transparent to-background" />
-    </div>
-  );
-
   return (
     <Layout>
-      {/* 1️⃣ Modern Split Hero Section */}
-      <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
-        {floatingBlobs}
-
-        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-center md:items-start text-center md:text-start"
+      {/* 1️⃣ Modern Immersive Hero Section - Aligned with Homepage */}
+      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
+        {/* Background Image with Homepage Parallax */}
+        <div className="absolute inset-0 z-0">
+          <motion.div 
+            className="absolute inset-0"
+            style={{ 
+              y: y1Spring,
+              scale: scaleSpring,
+              opacity: opacity
+            }}
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="mb-6 md:mb-8 text-label !text-primary inline-flex items-center gap-3 px-4 py-2 bg-primary/10 backdrop-blur-md rounded-full border border-primary/20 shadow-sm mx-auto md:mx-0">
-              <img src="/logos/SahlLogo9.png" alt="Sahli" className="w-4 h-4 object-contain animate-pulse-slow" />
-              {t('services.care.title')}
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-6 md:mb-8 font-black leading-[1.1] tracking-tight w-full text-center md:text-start">
-              {t('services.care.childcare.title')}
-            </h1>
-
-            <div className="relative mb-8 md:mb-10 group w-full max-w-2xl">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <div className="relative p-8 rounded-3xl bg-foreground/[0.03] border border-border backdrop-blur-xl flex flex-col items-center md:items-start text-center md:text-start">
-                <h3 className="text-xl md:text-2xl mb-4 flex items-center justify-center md:justify-start gap-3 font-bold w-full">
-                  <AlertCircle className="text-primary shrink-0" size={28} />
-                  {t('services.care.childcare.desc')}
-                </h3>
-                <p className="text-base md:text-xl lg:text-2xl !text-foreground/70 max-w-2xl w-full text-center md:text-start">
-                  {t('services.care.subtitle')}
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <a
-                href={getWhatsAppLink(t('services.care.childcare.whatsapp'))}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackRequestClick('Babysitting Hero CTA')}
-                className="cta-primary px-12 py-6 btn-shine shadow-xl shadow-primary/20"
-              >
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <MessageSquare size={24} className="fill-primary-foreground" />
-                  {t('cta.request')}
-                </motion.div>
-              </a>
-            </div>
+            <img 
+              src="https://images.pexels.com/photos/1257110/pexels-photo-1257110.jpeg" 
+              alt={t('services.care.childcare.title.roof5')}
+              className="w-full h-full object-cover object-center scale-105"
+            />
           </motion.div>
+          
+          {/* Overlays matching homepage */}
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
+          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+          
+          {/* Floating Background Blobs */}
+          <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
+          <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
+        </div>
+        
+        {/* Decorative elements */}
+        <motion.div 
+          style={{ y: y2Spring }}
+          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-gradient-to-${dir === 'rtl' ? 'r' : 'l'} from-primary/[0.06] to-transparent pointer-events-none z-10`} 
+        />
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-xl"
+        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
+          <motion.div 
+            className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
+            style={{ y: yHero }}
           >
-            <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+            >
               <img 
-                src="https://images.pexels.com/photos/1257110/pexels-photo-1257110.jpeg" 
-                alt="Babysitting Service Qatar"
-                className="w-full h-full object-cover object-[75%_center] md:object-center transition-all duration-700"
+                src="/logos/SahlLogo9.png" 
+                alt="" 
+                className="w-3.5 h-3.5 object-contain animate-pulse" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+              {t('services.care.title.roof5')}
             </motion.div>
             
-            <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-background/80 backdrop-blur-md border border-white/10 shadow-lg">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                  <ShieldCheck size={24} />
-                </div>
-                <div>
-                  <div className="text-label !text-primary">{t('services.care.verifiedProvider')}</div>
-                  <div className="text-label !text-foreground">{t('services.care.trustedCaregivers')}</div>
-                </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl mb-4 md:mb-6 leading-[1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+              {t('services.care.childcare.title.roof5')}
+            </h1>
+
+            <motion.div
+              className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <p className="text-base md:text-lg lg:text-xl xl:text-2xl !text-white/90 mb-6 md:mb-10 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+                {t('services.care.subtitle.roof5')}
+              </p>
+              
+              <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                <a
+                  href={getWhatsAppLink(t('services.care.childcare.whatsapp.roof5'))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackRequestClick('Babysitting Hero')}
+                  className="cta-primary px-12 py-6 btn-shine shadow-xl shadow-primary/30"
+                >
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <MessageSquare size={24} className="fill-primary-foreground" />
+                    {t('cta.request')}
+                  </motion.div>
+                </a>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -149,7 +159,7 @@ export default function Babysitting() {
             className="bg-foreground/[0.02] border border-border rounded-[3rem] p-8 md:p-12"
           >
             <h2 className="text-display mb-6 md:mb-8 text-center">
-                {t('services.care.rules.title')}
+                {t('services.care.rules.title.roof5')}
               </h2>
             <Marquee speed={0.5} className="-mx-4 px-4">
               {[
@@ -177,7 +187,7 @@ export default function Babysitting() {
             <h2 className="text-display mb-6 md:mb-8">
               {t('service.v1.includes.title')}
             </h2>
-            <p className="text-subtitle !text-foreground/50">{t('services.care.premiumChildcare')}</p>
+            <p className="text-subtitle !text-foreground/50">{t('services.care.premiumChildcare.roof5')}</p>
           </div>
 
           <Marquee speed={0.4} className="-mx-4 px-4" gap={24}>
@@ -326,7 +336,10 @@ export default function Babysitting() {
 
       {/* 8️⃣ Final CTA - High Impact */}
       <section className="section-spacing bg-background border-t border-border overflow-hidden relative">
-        {floatingBlobs}
+        {/* Floating Background Blobs */}
+        <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/15 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
+        <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
+        
         <div className="container-sahli relative z-10 text-center max-w-4xl mx-auto">
           <div className="w-24 h-24 rounded-[2.5rem] bg-primary/10 flex items-center justify-center text-primary mx-auto mb-12">
             <Clock size={48} />
@@ -340,7 +353,7 @@ export default function Babysitting() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackRequestClick('Babysitting Final CTA')}
-              className="cta-primary px-16 py-8 btn-shine shadow-xl shadow-primary/20"
+              className="cta-primary px-16 py-8 btn-shine shadow-xl shadow-primary/30"
             >
               <motion.div
                 className="flex items-center gap-2"

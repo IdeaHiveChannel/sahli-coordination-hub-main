@@ -12,13 +12,19 @@ export default function ACRepair() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
+  const { scrollY } = useScroll();
+  
+  // Parallax effects matching homepage
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
+  
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
+  const y1Spring = useSpring(y1, springConfig);
+  const y2Spring = useSpring(y2, springConfig);
+  const scaleSpring = useSpring(scale, springConfig);
+  const yHero = useTransform(scrollY, [0, 500], [0, -100]);
 
   const relatedServices = [
     { title: t('nav.homeMaintenance'), path: t('services.homeMaintenance.path') },
@@ -54,84 +60,101 @@ export default function ACRepair() {
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
       <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
-      <div className="absolute inset-0 bg-slate-950/5" />
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-transparent to-background" />
     </div>
   );
 
   return (
     <Layout>
-      {/* 1️⃣ Modern Split Hero Section */}
-      <section ref={containerRef} className="relative min-h-screen md:min-h-[90svh] flex flex-col justify-center overflow-hidden bg-background">
-        {floatingBlobs}
-
-        <div className="container-sahli relative z-10 pt-20 md:pt-28 pb-10 md:pb-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-center md:items-start text-center md:text-start"
+      {/* 1️⃣ Modern Immersive Hero Section - Aligned with Homepage */}
+      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
+        {/* Background Image with Homepage Parallax */}
+        <div className="absolute inset-0 z-0">
+          <motion.div 
+            className="absolute inset-0"
+            style={{ 
+              y: y1Spring,
+              scale: scaleSpring,
+              opacity: opacity
+            }}
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="mb-6 md:mb-8 text-label !text-primary inline-flex items-center gap-3 px-4 py-2 bg-primary/10 backdrop-blur-md rounded-full border border-primary/20 shadow-sm mx-auto md:mx-0">
-              <img src="/logos/SahlLogo9.png" alt="Sahli" className="w-4 h-4 object-contain animate-pulse-slow" />
-              {t('services.homeMaintenance.ac.title')}
-            </div>
+            <img 
+              src="https://images.pexels.com/photos/5466804/pexels-photo-5466804.jpeg" 
+              alt={t('services.homeMaintenance.ac.title')}
+              className="w-full h-full object-cover object-center scale-105"
+            />
+          </motion.div>
+          
+          {/* Overlays matching homepage */}
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
+          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+          
+          {/* Floating Background Blobs */}
+          <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
+          <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
+        </div>
+        
+        {/* Decorative elements */}
+        <motion.div 
+          style={{ y: y2Spring }}
+          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-gradient-to-${dir === 'rtl' ? 'r' : 'l'} from-primary/[0.06] to-transparent pointer-events-none z-10`} 
+        />
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-6 md:mb-8 font-black leading-[1.1] tracking-tight w-full text-center md:text-start">
+        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
+          <motion.div 
+            className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
+            style={{ y: yHero }}
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.8 }}
+              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+            >
+              <img 
+                src="/logos/SahlLogo9.png" 
+                alt="" 
+                className="w-3.5 h-3.5 object-contain animate-pulse" 
+              />
+              {t('services.homeMaintenance.ac.title')}
+            </motion.div>
+            
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl mb-4 md:mb-6 leading-[1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
               {t('services.homeMaintenance.ac.title')}
             </h1>
 
-            <p className="text-base md:text-xl lg:text-2xl !text-foreground/70 max-w-2xl mb-8 md:mb-12 w-full text-center md:text-start">
-              {t('services.homeMaintenance.subtitle')}
-            </p>
-
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <a
-                href={getWhatsAppLink(t('services.homeMaintenance.ac.whatsapp'))}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackRequestClick('AC Repair Hero CTA')}
-                className="cta-primary px-12 py-6 text-xl btn-shine"
-              >
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+            <motion.div
+              className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <p className="text-base md:text-lg lg:text-xl xl:text-2xl !text-white/90 mb-6 md:mb-10 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+                {t('services.homeMaintenance.subtitle')}
+              </p>
+              
+              <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                <a
+                  href={getWhatsAppLink(t('services.homeMaintenance.ac.whatsapp'))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackRequestClick('AC Repair Hero')}
+                  className="cta-primary px-12 py-6 btn-shine shadow-xl shadow-primary/30"
                 >
-                  <MessageSquare size={24} className="fill-primary-foreground" />
-                  {t('cta.request')}
-                </motion.div>
-              </a>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: dir === 'rtl' ? -20 : 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden border border-border shadow-xl"
-        >
-          <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]), scale: 1.1 }} className="absolute inset-0">
-            <img 
-              src="https://images.pexels.com/photos/5466804/pexels-photo-5466804.jpeg" 
-              alt="AC Repair Service Qatar"
-              className="w-full h-full object-cover object-[75%_center] md:object-center transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-          </motion.div>
-          
-          <div className="absolute bottom-8 left-8 right-8 p-6 rounded-2xl bg-background/80 backdrop-blur-md border border-white/10 shadow-lg">
-            <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                  <ShieldCheck size={24} />
-                </div>
-                <div>
-                  <div className="text-xs font-black tracking-widest text-primary uppercase">{t('services.care.verifiedProvider')}</div>
-                  <div className="text-foreground font-bold">{t('how.flow.subtitle')}</div>
-                </div>
+                  <motion.div
+                    className="flex items-center gap-2"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <MessageSquare size={24} className="fill-primary-foreground" />
+                    {t('cta.request')}
+                  </motion.div>
+                </a>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -155,11 +178,11 @@ export default function ACRepair() {
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-4 items-start group shrink-0 w-[260px] md:w-auto">
+                <div key={i} className="flex gap-4 items-start group shrink-0 w-[260px] md:w-auto p-4 md:p-0 rounded-2xl bg-background md:bg-transparent border border-border md:border-0 shadow-sm md:shadow-none">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                     <CheckCircle2 size={20} />
                   </div>
-                  <span className="text-label !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500">{rule}</span>
+                  <span className="text-sm md:text-label !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500 font-bold">{rule}</span>
                 </div>
               ))}
             </Marquee>
@@ -284,11 +307,11 @@ export default function ACRepair() {
       </section>
 
       {/* 6️⃣ Areas Served (Map View Style) */}
-      <section className="section-spacing bg-background">
+      <section className="section-spacing bg-background overflow-hidden">
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-display mb-6 md:mb-8">
+              <h2 className="text-display mb-6 md:mb-8 text-center md:text-start">
                 {t('home.areas.title')}
               </h2>
               <Marquee speed={0.4} className="-mx-4 px-4" gap={16}>
@@ -299,18 +322,18 @@ export default function ACRepair() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-6 p-6 rounded-[2rem] md:rounded-2xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all duration-500 group shrink-0 w-[240px] md:w-auto shadow-xl shadow-primary/5"
+                    className="flex items-center gap-4 md:gap-6 p-5 md:p-6 rounded-[2rem] md:rounded-2xl bg-background md:bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group shrink-0 w-[240px] md:w-auto shadow-xl shadow-primary/5"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                      <MapPin size={20} />
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
+                      <MapPin size={20} className="md:w-6 md:h-6" />
                     </div>
-                    <span className="text-subtitle group-hover:text-primary transition-colors">{area}</span>
+                    <span className="text-base md:text-subtitle font-bold group-hover:text-primary transition-colors duration-500">{area}</span>
                   </motion.div>
                 ))}
               </Marquee>
             </div>
             
-            <div className="relative aspect-video lg:aspect-square rounded-[3rem] overflow-hidden border border-border bg-foreground/[0.02] group">
+            <div className="relative aspect-square rounded-[3rem] overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center shadow-2xl shadow-primary/5 group">
               <img 
                 src="https://images.pexels.com/photos/5466806/pexels-photo-5466806.jpeg" 
                 alt="AC Repair Technician Doha"

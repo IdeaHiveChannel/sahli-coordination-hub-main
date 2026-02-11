@@ -145,7 +145,7 @@ export default function Services() {
     { id: 'cleaning', label: t('services.cleaning.title') },
     { id: 'moving', label: t('services.moving.title') },
     { id: 'outdoor', label: t('services.outdoor.title') },
-    { id: 'care', label: t('services.care.title') },
+    { id: 'care', label: t('services.care.title.roof5') },
     { id: 'tech', label: t('services.electronics.title') },
   ], [t]);
 
@@ -185,8 +185,8 @@ export default function Services() {
 
   return (
     <Layout>
-      {/* Hero / Selector Area - Compact & Advanced */}
-      <section ref={containerRef} className="relative min-h-[45vh] md:min-h-[55vh] flex flex-col justify-center overflow-hidden bg-background">
+      {/* Hero / Selector Area - Consistent with Homepage */}
+      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
         {/* Background Parallax */}
         <div className="absolute inset-0 z-0">
           <motion.div 
@@ -195,24 +195,30 @@ export default function Services() {
               scale: scale,
               opacity: opacity
             }}
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
             <img 
               src="https://images.unsplash.com/photo-1581578731548-c64695cc6958?q=80&w=1920&auto=format&fit=crop" 
               alt={t('nav.services')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center scale-105"
             />
-            {/* Floating Background Blobs for homepage design base */}
-            <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow`} />
-            <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000`} />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
-            <div className="absolute inset-0 bg-slate-950/5" />
-            <div className={`absolute inset-0 bg-gradient-to-b from-slate-950/10 via-transparent to-background`} />
           </motion.div>
+          
+          {/* Darker overlays to make images pop and remove whitish haze - Homepage Standard */}
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
+          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+
+          {/* Floating Background Blobs - Homepage Standard */}
+          <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
+          <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
         </div>
 
-        <div className="container-sahli relative z-10 pt-36 md:pt-52 pb-12">
+        <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-24">
           <motion.div
             style={{ y: yText }}
             className="max-w-4xl mx-auto md:mx-0 text-center md:text-start"
@@ -737,9 +743,9 @@ export default function Services() {
                     {t('services.status.live')} — 05
                   </span>
                 </div>
-                <h2 className="text-display mb-3">{t('services.care.title')}</h2>
+                <h2 className="text-display mb-3">{t('services.care.title.roof5')}</h2>
                 <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
-                  {t('services.care.body')}
+                  {t('services.care.body.roof5')}
                 </p>
                 
                 <motion.div 
@@ -750,7 +756,7 @@ export default function Services() {
                       <CheckCircle2 className="text-primary w-3.5 h-3.5" />
                     </div>
                     <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
-                      {t('services.care.rule')}
+                      {t('services.care.rule.roof5')}
                     </p>
                   </div>
                 </motion.div>
@@ -767,17 +773,17 @@ export default function Services() {
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
                   icon={<Baby size={18} />}
-                  title={t('services.care.babysitting.title')}
-                  description={t('services.care.babysitting.desc')}
-                  items={t('services.care.babysitting.items')}
+                  title={t('services.care.babysitting.title.roof5')}
+                  description={t('services.care.babysitting.desc.roof5')}
+                  items={t('services.care.babysitting.items.roof5')}
                   isOpen={openModule === 'babysitting'}
                   onToggle={() => setOpenModule(openModule === 'babysitting' ? null : 'babysitting')}
                 />
                 <CollapsibleModule
                   icon={<Stethoscope size={18} />}
-                  title={t('services.care.nursing.title')}
-                  description={t('services.care.nursing.desc')}
-                  items={t('services.care.nursing.items')}
+                  title={t('services.care.nursing.title.roof5')}
+                  description={t('services.care.nursing.desc.roof5')}
+                  items={t('services.care.nursing.items.roof5')}
                   isOpen={openModule === 'nursing'}
                   onToggle={() => setOpenModule(openModule === 'nursing' ? null : 'nursing')}
                 />
@@ -785,7 +791,7 @@ export default function Services() {
 
               <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
                 <a 
-                  href={getWhatsAppLink(t('services.care.whatsapp'))}
+                  href={getWhatsAppLink(t('services.care.whatsapp.roof5'))}
                   onClick={() => trackRequestClick('Services - Care')}
                   className="cta-primary btn-shine"
                 >
@@ -795,7 +801,7 @@ export default function Services() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.care.cta')}
+                    {t('services.care.cta.roof5')}
                   </motion.div>
                 </a>
               </div>
