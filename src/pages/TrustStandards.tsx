@@ -98,19 +98,9 @@ export default function TrustStandards() {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
           
           {/* Advanced Overlays removed as per user request */}
-          <div className="absolute inset-0 bg-slate-950/10 z-0" />
-          
-          {/* Premium Animated Blobs */}
-          <motion.div 
-            animate={{ 
-              x: [0, 50, 0], 
-              y: [0, -30, 0],
-              scale: [1, 1.2, 1],
-              rotate: [0, 45, 0]
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/3' : 'right-1/3'} w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen z-0`} 
-          />
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
         </div>
 
         <div className="container-sahli relative z-20 pt-24 pb-12 md:pb-20 flex flex-col items-center md:items-start text-center md:text-start">

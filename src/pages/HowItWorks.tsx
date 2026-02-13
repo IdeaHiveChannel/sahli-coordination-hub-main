@@ -83,29 +83,9 @@ const HowItWorks = () => {
             </motion.div>
             
             {/* Advanced Overlays removed as per user request */}
-            <div className="absolute inset-0 bg-slate-950/10 z-0" />
-            
-            {/* Premium Animated Blobs */}
-            <motion.div 
-              animate={{ 
-                x: [0, 50, 0], 
-                y: [0, -30, 0],
-                scale: [1, 1.2, 1],
-                rotate: [0, 45, 0]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/3' : 'right-1/3'} w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen z-0`} 
-            />
-            <motion.div 
-              animate={{ 
-                x: [0, -40, 0], 
-                y: [0, 60, 0],
-                scale: [1.2, 1, 1.2],
-                rotate: [0, -30, 0]
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/4' : 'left-1/4'} w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] mix-blend-screen z-0`} 
-            />
+            <div className="absolute inset-0 bg-slate-950/40 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
           </div>
 
           <div className="container-sahli relative z-20 pt-24 pb-12 md:pb-20 flex flex-col items-center md:items-start text-center md:text-start">

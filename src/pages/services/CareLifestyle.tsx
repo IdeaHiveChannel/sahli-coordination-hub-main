@@ -12,13 +12,6 @@ export default function CareLifestyle() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const floatingBlobs = (
-    <>
-      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/15 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
-      <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
-    </>
-  );
-
   const relatedServices = [
     { title: t('services.care.childcare.title.roof5'), path: t('services.babysitting.path') },
     { title: t('services.homeMaintenance.title'), path: '/services#home-maintenance' },
@@ -103,7 +96,9 @@ export default function CareLifestyle() {
             />
           </motion.div>
           
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-slate-950/20 z-0" />
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
         </div>
         
         {/* Decorative elements */}
@@ -357,7 +352,6 @@ export default function CareLifestyle() {
 
       {/* 8️⃣ Final CTA - High Impact */}
       <section className="py-16 md:py-20 bg-background border-t border-border overflow-hidden relative">
-        {floatingBlobs}
         <div className="container-sahli relative z-10 text-center max-w-4xl mx-auto">
           <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6">
               <Clock size={16} />

@@ -67,7 +67,9 @@ export default function Lusail() {
             />
           </motion.div>
           
-          <div className="absolute inset-0 bg-slate-950/10 z-0" />
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
         </div>
         
         <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">

@@ -55,13 +55,6 @@ export default function ACRepair() {
     t('home.areas.item3')
   ];
 
-  const floatingBlobs = (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
-      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
-    </div>
-  );
-
   return (
     <Layout>
       {/* 1️⃣ Modern Immersive Hero Section - Aligned with Homepage */}
@@ -85,7 +78,9 @@ export default function ACRepair() {
             />
           </motion.div>
           
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-slate-950/20 z-0" />
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
         </div>
         
         {/* Decorative elements */}
@@ -342,7 +337,6 @@ export default function ACRepair() {
 
       {/* 8️⃣ Final CTA - High Impact */}
       <section className="section-spacing bg-background border-t border-border overflow-hidden relative">
-        {floatingBlobs}
         <div className="container-sahli relative z-10 text-center max-w-2xl mx-auto">
           <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8 shadow-lg shadow-primary/5">
             <Clock size={16} />

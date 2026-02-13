@@ -331,38 +331,12 @@ interface TrustPanel {
               />
           </motion.div>
           
-          {/* Darker overlays removed as per user request */}
-          <div className="absolute inset-0 bg-slate-950/10 z-0" />
-          
-          {/* Premium Animated Blobs - Industrial Premium Style */}
-          <motion.div 
-            animate={{ 
-              x: [0, 50, 0], 
-              y: [0, -30, 0],
-              scale: [1, 1.2, 1],
-              rotate: [0, 45, 0]
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/3' : 'right-1/3'} w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen z-0`} 
-          />
-          <motion.div 
-            animate={{ 
-              x: [0, -30, 0], 
-              y: [0, 50, 0],
-              scale: [1, 1.1, 1],
-              rotate: [0, -30, 0]
-            }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/4' : 'left-1/4'} w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] mix-blend-screen z-0`} 
-          />
+          {/* Darker overlays for better header visibility */}
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
         </div>
         
-        {/* Decorative elements */}
-        <motion.div 
-          style={{ y: y2Spring }}
-          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-950/5 pointer-events-none z-10`} 
-        />
-
         <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
           <motion.div 
             className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
@@ -406,22 +380,6 @@ interface TrustPanel {
               <p className="text-lg md:text-lg lg:text-xl !text-white/90 mb-10 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
                 {t('home.hero.subtitle')}
               </p>
-              
-              <div className="flex flex-wrap items-center gap-3 mb-10 md:mb-10 justify-center md:justify-start w-full">
-                {heroMeta.map((item, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8 + (i * 0.1) }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="flex items-center gap-2.5 px-5 py-2.5 bg-slate-950/40 backdrop-blur-xl rounded-xl border border-white/10 text-[0.8rem] md:text-[0.75rem] font-black text-white shadow-2xl shrink-0 hover:border-primary/50 transition-colors"
-                  >
-                    <span className="text-primary">{item.icon}</span>
-                    <span className="tracking-tight">{item.label}</span>
-                  </motion.div>
-                ))}
-              </div>
               
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                 <a 
@@ -471,6 +429,85 @@ interface TrustPanel {
             />
           </div>
         </motion.div>
+      </section>
+
+      {/* 2. Service Solutions Grid - Dark Theme */}
+      <section id="services" className="min-h-[100svh] md:min-h-screen py-12 md:py-16 flex items-center bg-[#030303] relative overflow-hidden">
+        {/* Advanced Background Visuals */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_70%)]" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
+          
+          {/* Moving particles or subtle grid could go here, but keeping it clean */}
+          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full opacity-50" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full opacity-50" />
+        </div>
+
+        <div className="container-sahli relative z-10 w-full">
+          <div className="max-w-3xl mb-8 md:mb-10 mx-auto md:mx-0 text-center md:text-start">
+            <motion.h2 
+              className="text-display mb-2 text-white !text-xl md:!text-3xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('home.solutions.title')}
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-8 gap-3 md:gap-4 xl:gap-5">
+            {solutions.map((solution, i) => (
+              <motion.a
+                key={i}
+                href={getWhatsAppLink(t(solution.whatsappKey as any))}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackRequestClick(`Solution: ${solution.title}`)}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                onMouseMove={handleCardMouseMove}
+                style={{ 
+                  '--mouse-x': `${mousePos.x}px`, 
+                  '--mouse-y': `${mousePos.y}px` 
+                } as any}
+                className="group p-3 md:p-4 rounded-[1.25rem] md:rounded-[1.5rem] bg-white/[0.03] border border-white/[0.08] hover:border-primary/50 transition-all duration-500 flex flex-col items-center text-center cursor-pointer overflow-hidden relative"
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative z-10 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-xl bg-white/[0.05] text-primary flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-primary/5">
+                  {React.cloneElement(solution.icon as React.ReactElement, { size: 18 })}
+                </div>
+                <h3 className="relative z-10 text-[0.7rem] md:text-sm lg:text-base font-black mb-1 text-white group-hover:text-primary transition-colors leading-tight">
+                  {solution.title}
+                </h3>
+                <p className="relative z-10 text-[0.65rem] md:text-[0.7rem] lg:text-[0.75rem] text-white/50 leading-relaxed group-hover:text-white/70 transition-colors line-clamp-2">
+                  {solution.desc}
+                </p>
+              </motion.a>
+            ))}
+          </div>
+          
+          <div className="mt-8 md:mt-10 text-center">
+            <p className="text-white/40 mb-4 text-[0.65rem] md:text-xs font-medium max-w-lg mx-auto leading-relaxed">
+              {t('home.solutions.cta')}
+            </p>
+            <motion.a 
+              href={getWhatsAppLink(t('cta.whatsapp.general'))}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-black text-[0.65rem] md:text-xs transition-all shadow-lg shadow-primary/25 group"
+            >
+              <Send size="14" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              {t('home.final.cta')}
+            </motion.a>
+          </div>
+        </div>
       </section>
 
       {/* Trust Marquee - Refined Single Line Grey Fade Loop */}
@@ -567,85 +604,6 @@ interface TrustPanel {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Service Solutions Grid - Dark Theme */}
-      <section id="services" className="min-h-[100svh] md:min-h-screen py-12 md:py-16 flex items-center bg-[#030303] relative overflow-hidden">
-        {/* Advanced Background Visuals */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_70%)]" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
-          
-          {/* Moving particles or subtle grid could go here, but keeping it clean */}
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full opacity-50" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full opacity-50" />
-        </div>
-
-        <div className="container-sahli relative z-10 w-full">
-          <div className="max-w-3xl mb-8 md:mb-10 mx-auto md:mx-0 text-center md:text-start">
-            <motion.h2 
-              className="text-display mb-2 text-white !text-xl md:!text-3xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {t('home.solutions.title')}
-            </motion.h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-8 gap-3 md:gap-4 xl:gap-5">
-            {solutions.map((solution, i) => (
-              <motion.a
-                key={i}
-                href={getWhatsAppLink(t(solution.whatsappKey as any))}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackRequestClick(`Solution: ${solution.title}`)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                onMouseMove={handleCardMouseMove}
-                style={{ 
-                  '--mouse-x': `${mousePos.x}px`, 
-                  '--mouse-y': `${mousePos.y}px` 
-                } as any}
-                className="group p-3 md:p-4 rounded-[1.25rem] md:rounded-[1.5rem] bg-white/[0.03] border border-white/[0.08] hover:border-primary/50 transition-all duration-500 flex flex-col items-center text-center cursor-pointer overflow-hidden relative"
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative z-10 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-xl bg-white/[0.05] text-primary flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-primary/5">
-                  {React.cloneElement(solution.icon as React.ReactElement, { size: 18 })}
-                </div>
-                <h3 className="relative z-10 text-[0.7rem] md:text-sm lg:text-base font-black mb-1 text-white group-hover:text-primary transition-colors leading-tight">
-                  {solution.title}
-                </h3>
-                <p className="relative z-10 text-[0.65rem] md:text-[0.7rem] lg:text-[0.75rem] text-white/50 leading-relaxed group-hover:text-white/70 transition-colors line-clamp-2">
-                  {solution.desc}
-                </p>
-              </motion.a>
-            ))}
-          </div>
-          
-          <div className="mt-8 md:mt-10 text-center">
-            <p className="text-white/40 mb-4 text-[0.65rem] md:text-xs font-medium max-w-lg mx-auto leading-relaxed">
-              {t('home.solutions.cta')}
-            </p>
-            <motion.a 
-              href={getWhatsAppLink(t('cta.whatsapp.general'))}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-black text-[0.65rem] md:text-xs transition-all shadow-lg shadow-primary/25 group"
-            >
-              <Send size="14" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              {t('home.final.cta')}
-            </motion.a>
           </div>
         </div>
       </section>

@@ -64,10 +64,12 @@ export default function PestControl() {
             />
           </motion.div>
           
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-slate-950/20 z-0" />
+          <div className="absolute inset-0 bg-slate-950/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
         </div>
         
-        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-16 flex flex-col items-center md:items-start">
+        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
           <motion.div 
             className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
             style={{ y: yHero }}

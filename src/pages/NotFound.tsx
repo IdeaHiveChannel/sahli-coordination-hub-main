@@ -9,10 +9,6 @@ const NotFound = () => {
   return (
     <Layout>
       <section className="min-h-[85vh] bg-background flex items-center justify-center relative overflow-hidden">
-        {/* Floating Background Blobs */}
-        <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[600px] h-[600px] bg-primary/10 rounded-full blur-[160px] mix-blend-screen animate-pulse-slow`} />
-        <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow delay-1000`} />
-        
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <video

@@ -46,7 +46,7 @@ export function Header() {
           className={`flex items-center justify-between px-3 md:px-6 py-1.5 md:py-2 rounded-xl md:rounded-2xl transition-all duration-700 ${
             isScrolled || isMenuOpen
               ? 'glass-morphism shadow-[0_15px_40px_rgba(0,0,0,0.3)]' 
-              : 'bg-transparent'
+              : 'bg-slate-950/20 md:bg-transparent'
           }`}
         >
           {/* Logo */}

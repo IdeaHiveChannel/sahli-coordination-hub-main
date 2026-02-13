@@ -17,13 +17,16 @@ export default defineConfig(({ mode }) => ({
     },
   },
   server: {
-    host: "0.0.0.0",
+    host: "localhost",
     port: 8081,
+    strictPort: true,
     hmr: {
-      overlay: false,
+      protocol: 'ws',
+      host: 'localhost',
+      port: 8081,
     },
     watch: {
-      usePolling: true,
+      usePolling: false,
     },
   },
   plugins: [react()].filter(Boolean),
