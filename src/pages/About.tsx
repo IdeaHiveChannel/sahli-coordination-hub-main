@@ -33,7 +33,6 @@ export default function About() {
 
   // Advanced Parallax & Scroll Effects
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
   
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -114,7 +113,6 @@ export default function About() {
             style={{ 
               y: y1Spring,
               scale: scaleSpring,
-              opacity: opacity,
               x: mousePos.x * 0.2,
               rotate: mousePos.y * 0.02
             }}
@@ -123,17 +121,15 @@ export default function About() {
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
               alt={t('nav.about')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover scale-110 grayscale opacity-40"
+              className="w-full h-full object-cover scale-110 grayscale"
             />
           </motion.div>
           
           {/* Noise Texture */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
           
-          {/* Advanced Overlays */}
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/20 to-slate-950 z-10" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950 via-transparent to-transparent z-10`} />
+          {/* Advanced Overlays removed as per user request */}
+          <div className="absolute inset-0 bg-slate-950/10 z-0" />
           
           {/* Premium Animated Blobs */}
           <motion.div 
@@ -176,7 +172,7 @@ export default function About() {
               {t('nav.about')}
             </motion.div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-8 md:mb-10 leading-[1.1] tracking-[-0.04em] text-white font-black w-full text-center md:text-start">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-8 md:mb-10 leading-[1.1] tracking-[-0.04em] text-white font-black w-full text-center md:text-start">
               {t('about.title').split(' ').map((word, i) => (
                 <div key={i} className="overflow-hidden inline-block mr-[0.3em]">
                   <motion.span 
@@ -197,7 +193,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-base md:text-lg lg:text-xl text-white/60 mb-10 md:mb-16 font-medium leading-relaxed w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+              <p className="text-xs md:text-sm lg:text-base text-white/60 mb-10 md:mb-16 font-medium leading-relaxed w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
                 {t('about.subtitle')}
               </p>
 
@@ -269,7 +265,7 @@ export default function About() {
                     {lang === 'ar' ? 'الفلسفة' : 'The Philosophy'}
                   </div>
                   
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-[-0.03em] leading-[1.1]">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground tracking-[-0.03em] leading-[1.1]">
                     {t('about.reason.title')}
                   </h2>
                 </div>
@@ -277,12 +273,12 @@ export default function About() {
                 <div className="relative">
                   <div className="absolute top-0 left-0 w-12 h-1 bg-primary/30 rounded-full mb-8" />
                   <div className="space-y-8 pt-12">
-                    <p className="text-lg md:text-xl text-foreground/80 leading-snug font-medium italic max-w-xl whitespace-pre-line">
+                    <p className="text-base md:text-lg text-foreground/80 leading-snug font-medium italic max-w-xl whitespace-pre-line">
                       {t('about.reason.body')}
                     </p>
 
                     <div className="space-y-6">
-                      <p className="text-base md:text-lg text-foreground/60 font-medium">
+                      <p className="text-sm md:text-base text-foreground/60 font-medium">
                         {t('about.fragmentation.body')}
                       </p>
                       
@@ -332,7 +328,7 @@ export default function About() {
                     <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-xl">
                       <AlertCircle className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-none">{t('about.problems.title')}</h3>
+                    <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tighter leading-none">{t('about.problems.title')}</h3>
                   </div>
 
                   <p className="text-sm md:text-base text-white/40 mb-10 font-medium">
@@ -351,12 +347,12 @@ export default function About() {
                         <div className="mt-2 w-5 h-5 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 group-hover/item:border-primary/50 group-hover/item:bg-primary/10 transition-all duration-500">
                           <div className="w-1.5 h-1.5 rounded-full bg-primary scale-0 group-hover/item:scale-100 transition-transform duration-500" />
                         </div>
-                        <span className="text-base md:text-lg font-bold text-white/50 group-hover/item:text-white transition-colors duration-500 leading-tight">{problem}</span>
+                        <span className="text-sm md:text-base font-bold text-white/50 group-hover/item:text-white transition-colors duration-500 leading-tight">{problem}</span>
                       </motion.div>
                     ))}
                   </div>
 
-                  <p className="text-base md:text-lg font-black text-primary uppercase tracking-widest text-center py-6 border-t border-white/5">
+                  <p className="text-sm md:text-base font-black text-primary uppercase tracking-widest text-center py-6 border-t border-white/5">
                     {t('about.problems.outro')}
                   </p>
                 </div>
@@ -399,12 +395,12 @@ export default function About() {
                 {lang === 'ar' ? 'المنهجية' : 'The Methodology'}
               </div>
               
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-[-0.03em] leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-[-0.03em] leading-tight">
                 {t('about.does.title')}
               </h2>
               
               <div className="space-y-6">
-                <p className="text-base md:text-lg lg:text-xl text-white/40 font-medium max-w-3xl mx-auto leading-relaxed">
+                <p className="text-sm md:text-base lg:text-lg text-white/40 font-medium max-w-3xl mx-auto leading-relaxed">
                   {t('about.does.body')}
                 </p>
                 <p className="text-sm md:text-base font-black uppercase tracking-[0.2em] text-primary">
@@ -432,7 +428,7 @@ export default function About() {
                     {step.icon}
                   </div>
                   
-                  <h3 className="text-xl md:text-2xl font-black text-white mb-4 tracking-tight leading-relaxed group-hover:text-primary transition-colors duration-700">
+                  <h3 className="text-lg md:text-xl font-black text-white mb-4 tracking-tight leading-relaxed group-hover:text-primary transition-colors duration-700">
                     {step.title}
                   </h3>
                   
@@ -472,7 +468,7 @@ export default function About() {
                 {lang === 'ar' ? 'ما لسنا عليه' : 'Clarification'}
               </div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground tracking-[-0.03em] leading-tight mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground tracking-[-0.03em] leading-tight mb-4">
                 {t('about.not.title')}
               </h2>
               <p className="text-sm md:text-base text-foreground/40 font-bold uppercase tracking-widest">
@@ -511,7 +507,7 @@ export default function About() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-blue-500/5 pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
             
-            <p className="relative z-10 text-xl md:text-2xl lg:text-3xl text-white/90 leading-tight font-black italic tracking-tight whitespace-pre-line">
+            <p className="relative z-10 text-lg md:text-xl lg:text-2xl text-white/90 leading-tight font-black italic tracking-tight whitespace-pre-line">
               " {t('about.not.footer')} "
             </p>
             
@@ -547,11 +543,11 @@ export default function About() {
                 {t('about.position.title')}
               </div>
               
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-10 tracking-[-0.04em] leading-[0.95]">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-10 tracking-[-0.04em] leading-[0.95]">
                 {lang === 'ar' ? 'الموقع الاستراتيجي' : 'Strategic Position'}
               </h2>
               
-              <p className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed text-white/50 mb-12 max-w-2xl whitespace-pre-line">
+              <p className="text-base md:text-lg lg:text-xl font-medium leading-relaxed text-white/50 mb-12 max-w-2xl whitespace-pre-line">
                 {t('about.position.body')}
               </p>
 
@@ -563,7 +559,7 @@ export default function About() {
                   {positionOutcomeList.map((item, i) => (
                     <div key={i} className="flex items-center gap-4">
                       <div className="w-2 h-2 rounded-full bg-primary" />
-                      <span className="text-base md:text-lg font-bold text-white/70">{item}</span>
+                      <span className="text-sm md:text-base font-bold text-white/70">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -595,9 +591,9 @@ export default function About() {
                 <img 
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
                   alt="Architecture" 
-                  className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s] ease-out grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100"
+                  className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[2000ms] ease-out grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-slate-950/5" />
                 
                 {/* Floating Info Card */}
                 <motion.div 
@@ -644,9 +640,9 @@ export default function About() {
                   <MousePointer2 className="w-8 h-8" />
                 </div>
                 
-                <h3 className="text-3xl md:text-4xl font-black mb-6 text-slate-950 tracking-tighter leading-none uppercase">{t('about.benefits.homeowners.title')}</h3>
+                <h3 className="text-2xl md:text-3xl font-black mb-6 text-slate-950 tracking-tighter leading-none uppercase">{t('about.benefits.homeowners.title')}</h3>
                 
-                <p className="text-base md:text-lg text-slate-950/40 font-bold mb-10 leading-relaxed italic">
+                <p className="text-sm md:text-base text-slate-950/40 font-bold mb-10 leading-relaxed italic">
                   {t('about.benefits.homeowners.intro')}
                 </p>
 
@@ -662,7 +658,7 @@ export default function About() {
                       <div className="mt-1.5 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500 shadow-lg">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-base md:text-lg text-slate-950/40 font-bold group-hover/item:text-slate-950 transition-colors duration-500 leading-tight">{benefit}</span>
+                      <span className="text-sm md:text-base text-slate-950/40 font-bold group-hover/item:text-slate-950 transition-colors duration-500 leading-tight">{benefit}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -689,9 +685,9 @@ export default function About() {
                   <Building2 className="w-8 h-8" />
                 </div>
                 
-                <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tighter leading-none uppercase">{t('about.benefits.companies.title')}</h3>
+                <h3 className="text-2xl md:text-3xl font-black mb-6 tracking-tighter leading-none uppercase">{t('about.benefits.companies.title')}</h3>
                 
-                <p className="text-base md:text-lg text-white/30 font-bold mb-10 leading-relaxed italic">
+                <p className="text-sm md:text-base text-white/30 font-bold mb-10 leading-relaxed italic">
                   {t('about.benefits.companies.intro')}
                 </p>
 
@@ -707,7 +703,7 @@ export default function About() {
                       <div className="mt-1.5 w-6 h-6 rounded-full bg-white/5 border border-white/10 text-primary flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500 shadow-lg">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-base md:text-lg text-white/30 font-bold group-hover/item:text-white transition-colors duration-500 leading-tight">{benefit}</span>
+                      <span className="text-sm md:text-base text-white/30 font-bold group-hover/item:text-white transition-colors duration-500 leading-tight">{benefit}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -743,8 +739,8 @@ export default function About() {
                 <div className="w-16 h-16 rounded-2xl bg-primary/5 text-primary flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-xl">
                   <Target className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-6 tracking-tighter uppercase leading-none text-slate-950">{t('about.mission.title')}</h3>
-                <p className="text-base md:text-lg text-slate-950/50 leading-relaxed font-bold">{t('about.mission.body')}</p>
+                <h3 className="text-xl md:text-2xl font-black mb-6 tracking-tighter uppercase leading-none text-slate-950">{t('about.mission.title')}</h3>
+                <p className="text-sm md:text-base text-slate-950/50 leading-relaxed font-bold">{t('about.mission.body')}</p>
               </div>
             </motion.div>
 
@@ -763,8 +759,8 @@ export default function About() {
                 <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 text-primary flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-2xl">
                   <Eye className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-6 tracking-tighter uppercase leading-none">{t('about.vision.title')}</h3>
-                <p className="text-base md:text-lg text-white/40 leading-relaxed font-bold">{t('about.vision.body')}</p>
+                <h3 className="text-xl md:text-2xl font-black mb-6 tracking-tighter uppercase leading-none">{t('about.vision.title')}</h3>
+                <p className="text-sm md:text-base text-white/40 leading-relaxed font-bold">{t('about.vision.body')}</p>
               </div>
             </motion.div>
           </div>
@@ -795,11 +791,11 @@ export default function About() {
                 {t('cta.ready')}
               </motion.div>
               
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 md:mb-10 tracking-[-0.04em] leading-[0.95]">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-8 md:mb-10 tracking-[-0.04em] leading-[0.95]">
                 {t('about.getStarted.title')}
               </h2>
               
-              <p className="text-lg md:text-xl text-white/40 mb-12 md:mb-16 font-medium leading-relaxed max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-white/40 mb-12 md:mb-16 font-medium leading-relaxed max-w-2xl mx-auto">
                 {t('about.getStarted.body')}
               </p>
               
@@ -813,7 +809,7 @@ export default function About() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-10 md:px-14 py-5 md:py-6 bg-primary text-white rounded-2xl md:rounded-3xl font-black text-base md:text-lg uppercase tracking-widest hover:bg-white hover:text-primary transition-all duration-500 shadow-2xl shadow-primary/20"
+                    className="px-8 md:px-12 py-4 md:py-5 bg-primary text-white rounded-2xl md:rounded-3xl font-black text-sm md:text-base uppercase tracking-widest hover:bg-white hover:text-primary transition-all duration-500 shadow-2xl shadow-primary/20"
                   >
                     {t('about.getStarted.whatsapp')}
                   </motion.button>

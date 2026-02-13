@@ -50,20 +50,23 @@ export function Header() {
           }`}
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group min-w-[62px] md:min-w-[122px] relative">
-            <motion.div 
-              whileHover={{ rotate: 5, scale: 1.05 }}
-              className="relative w-[1.625rem] h-[1.625rem] md:w-[2.375rem] md:h-[2.375rem] flex items-center justify-center transition-all duration-500"
-            >
-              <img 
-                src={isScrolled || isMenuOpen || !isDarkHeroPage ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"} 
-                alt="SAHLI Logo" 
-                className={`absolute w-16 h-16 md:w-[6.625rem] md:h-[6.625rem] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
-                  dir === 'rtl' ? 'right-0' : 'left-0'
-                }`} 
-              />
-            </motion.div>
-          </Link>
+              <Link
+                to="/"
+                className="flex items-center gap-2 group min-w-[40px] md:min-w-[80px] relative"
+              >
+                <motion.div
+                  whileHover={{ rotate: 5, scale: 1.05 }}
+                  className="relative w-[1rem] h-[1rem] md:w-[1.5rem] md:h-[1.5rem] flex items-center justify-center transition-all duration-500"
+                >
+                  <img
+                    src={isScrolled || isMenuOpen || !isDarkHeroPage ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"}
+                    alt="SAHLI Logo"
+                    className={`absolute w-10 h-10 md:w-[4rem] md:h-[4rem] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
+                      dir === 'rtl' ? 'right-0' : 'left-0'
+                    }`}
+                  />
+                </motion.div>
+              </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-5">
@@ -100,7 +103,7 @@ export function Header() {
               href={getWhatsAppLink(t('cta.whatsapp.general'))}
               target="_blank"
               onClick={() => trackRequestClick('Header')}
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2 md:px-5 md:py-2.5 bg-primary text-primary-foreground rounded-lg md:rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-[0.08em] hover:shadow-xl hover:shadow-primary/40 transition-all duration-500 btn-shine"
+              className="hidden sm:flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 bg-primary text-primary-foreground rounded-lg md:rounded-xl text-[8px] md:text-[9px] font-black uppercase tracking-[0.08em] hover:shadow-xl hover:shadow-primary/40 transition-all duration-500 btn-shine"
             >
               <motion.div
                 className="flex items-center gap-1.5"
@@ -198,25 +201,17 @@ export function Header() {
                 {navItems.map((item, i: number) => (
                   <motion.div
                     key={item.path}
-                    initial={{ x: dir === 'rtl' ? 50 : -50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    whileTap={{ x: dir === 'rtl' ? -10 : 10, scale: 0.98 }}
-                    transition={{ 
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 17,
-                      delay: 0.1 + i * 0.1 
-                    }}
+                    initial={{ opacity: 0, x: dir === 'rtl' ? -30 : 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + (i * 0.08), duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <Link
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`group flex items-baseline gap-4 py-1 md:py-2 ${dir === 'rtl' ? 'flex-row-reverse text-right' : 'flex-row text-left'}`}
+                      className="group flex flex-col items-start gap-1 py-3 md:py-4 relative"
                     >
-                      <span className="text-[12px] font-black text-primary/50 tracking-widest min-w-[24px]">0{i + 1}</span>
-                      <span className="text-3xl md:text-5xl font-black tracking-tighter text-foreground group-hover:text-primary transition-colors duration-500 break-words">
-                        {t(item.key)}
-                      </span>
+                      <span className="text-[0.65rem] md:text-[0.7rem] font-black text-primary/40 uppercase tracking-[0.2em]">0{i + 1}</span>
+                      <span className="text-lg md:text-xl font-black text-foreground group-hover:text-primary group-hover:translate-x-2 transition-all duration-500">{t(item.key)}</span>
                     </Link>
                   </motion.div>
                 ))}
@@ -230,8 +225,8 @@ export function Header() {
               >
                 <div className={`flex flex-col gap-8 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
                   <div className="space-y-2">
-                    <span className="text-[11px] font-black uppercase tracking-[0.3em] text-foreground/60">{t('nav.contact')}</span>
-                    <a href={`mailto:${t('contact.email.value')}`} className="block text-xl font-medium text-foreground hover:text-primary transition-colors break-all">{t('contact.email.value')}</a>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/60">{t('nav.contact')}</span>
+                    <a href={`mailto:${t('contact.email.value')}`} className="block text-base font-medium text-foreground hover:text-primary transition-colors break-all">{t('contact.email.value')}</a>
                   </div>
                   
                   <a
@@ -241,7 +236,7 @@ export function Header() {
                       trackRequestClick('Mobile Menu');
                       setIsMenuOpen(false);
                     }}
-                    className="flex items-center justify-center gap-4 w-full py-6 bg-primary text-primary-foreground rounded-3xl text-sm font-black uppercase tracking-widest hover:shadow-xl hover:shadow-primary/30 transition-all duration-500"
+                    className="flex items-center justify-center gap-3 w-full py-3 bg-primary text-primary-foreground rounded-2xl text-[10px] font-black uppercase tracking-widest hover:shadow-xl hover:shadow-primary/30 transition-all duration-500"
                   >
                     <motion.div
                       className={`flex items-center gap-4 ${dir === 'rtl' ? 'flex-row-reverse' : 'flex-row'}`}

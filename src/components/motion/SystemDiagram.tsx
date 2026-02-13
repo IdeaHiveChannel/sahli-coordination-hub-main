@@ -130,9 +130,9 @@ export function SystemDiagram() {
                       alt="" 
                       crossOrigin="anonymous"
                       loading="lazy"
-                      className="w-full h-full object-cover opacity-[0.08] transition-all duration-1000 group-hover:scale-110 group-hover:opacity-[0.12]" 
+                      className="w-full h-full object-cover opacity-[0.1] transition-all duration-1000 group-hover:scale-110" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/40 to-transparent" />
+                    <div className="absolute inset-0 bg-slate-950/5" />
                   </div>
 
                   {/* Step Number Background */}

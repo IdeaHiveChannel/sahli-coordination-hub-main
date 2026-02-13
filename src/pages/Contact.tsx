@@ -28,7 +28,6 @@ export default function Contact() {
 
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
-  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0]), springConfig);
   const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.1]), springConfig);
 
   const splitWords = (text: string) => text.split(' ');
@@ -57,9 +56,9 @@ export default function Contact() {
       <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <motion.div 
-            style={{ y, scale, opacity }}
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            style={{ y, scale }}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
@@ -69,15 +68,13 @@ export default function Contact() {
               muted
               playsInline
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-[75%_center] md:object-center opacity-[0.4] scale-105"
+              className="w-full h-full object-cover object-[75%_center] md:object-center scale-105"
             >
-              {/* <source src="https://videos.pexels.com/video-files/3196611/3196611-uhd_2560_1440_25fps.mp4" type="video/mp4" /> */}
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-customer-service-representative-working-at-a-computer-4540-large.mp4" type="video/mp4" />
             </video>
             
-            {/* Darker overlays to make content pop - Homepage Standard */}
-            <div className="absolute inset-0 bg-slate-950/40 z-0" />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
-            <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+            {/* Overlays removed as per user request */}
+            <div className="absolute inset-0 bg-slate-950/10 z-0" />
             
             {/* Floating Background Blobs - Homepage Standard */}
             <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />

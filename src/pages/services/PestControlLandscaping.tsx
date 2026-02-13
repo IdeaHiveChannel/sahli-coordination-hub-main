@@ -1,17 +1,26 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Marquee } from '@/components/motion/Marquee';
-import { MessageSquare, CheckCircle2, ShieldCheck, Clock, MapPin, ArrowUp } from 'lucide-react';
+import { MessageSquare, CheckCircle2, Bug, Leaf, Waves, ShieldCheck, Clock, MapPin, AlertCircle, Droplets, Shield, ArrowUp } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
-import { Link } from 'react-router-dom';
 import { getWhatsAppLink } from '@/lib/constants';
 
-export default function Electrical() {
+export default function PestControlLandscaping() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
+  const floatingBlobs = (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
+      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
+      
+      <div className="absolute inset-0 bg-slate-950/5" />
+    </div>
+  );
+
   const { scrollY } = useScroll();
   
   // Parallax effects matching homepage
@@ -26,11 +35,18 @@ export default function Electrical() {
   const yHero = useTransform(scrollY, [0, 500], [0, -100]);
 
   const relatedServices = [
+    { title: t('services.outdoor.pest.title'), path: t('services.outdoor.pest.path') },
     { title: t('services.homeMaintenance.title'), path: '/services#home-maintenance' },
-    { title: t('services.homeMaintenance.ac.maintenance.title'), path: t('services.homeMaintenance.ac.maintenance.path') },
-    { title: t('services.homeMaintenance.plumbing.title'), path: t('services.homeMaintenance.plumbing.path') },
     { title: t('services.homeMaintenance.handyman.title'), path: t('services.homeMaintenance.handyman.path') },
-    { title: t('services.cleaning.deep.title'), path: t('services.cleaning.deep.path') },
+    { title: t('services.cleaning.title'), path: '/services#cleaning' },
+    { title: t('services.moving.title'), path: '/services#moving' },
+  ];
+
+  const categories = [
+    { title: t('services.outdoor.pest.title'), desc: t('services.outdoor.pest.desc'), icon: <Bug size={16} /> },
+    { title: t('services.outdoor.landscaping.title'), desc: t('services.outdoor.landscaping.desc'), icon: <Leaf size={16} /> },
+    { title: t('services.outdoor.pool.title'), desc: t('services.outdoor.pool.desc'), icon: <Waves size={16} /> },
+    { title: t('services.outdoor.waterproofing.title'), desc: t('services.outdoor.waterproofing.desc'), icon: <Droplets size={16} /> }
   ];
 
   const coordinationSteps = [
@@ -41,25 +57,12 @@ export default function Electrical() {
     { title: '05', body: t('home.what.step5.body'), icon: <CheckCircle2 size={16} /> }
   ];
 
-  const includes = [
-    t('services.homeMaintenance.electrical.items').split('\n')[0] || 'Short Circuit Issues',
-    t('services.homeMaintenance.electrical.items').split('\n')[1] || 'Socket Repair',
-    t('services.homeMaintenance.electrical.items').split('\n')[2] || 'DB Box Repair',
-    t('services.homeMaintenance.electrical.items').split('\n')[3] || 'Lighting Installation'
-  ];
-
   const areas = [
     t('home.areas.item1'),
     t('home.areas.item2'),
-    t('home.areas.item3')
+    t('home.areas.item3'),
+    t('home.areas.item4')
   ];
-
-  const floatingBlobs = (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
-      <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
-    </div>
-  );
 
   return (
     <Layout>
@@ -78,8 +81,8 @@ export default function Electrical() {
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <img 
-              src="/Services/Home Maintenance - Hero.jpg" 
-              alt="Professional Electrical Services Qatar"
+              src="/Services/Pest Control.jpg" 
+              alt="Pest Control & Landscaping Qatar"
               className="w-full h-full object-cover object-center scale-105"
             />
           </motion.div>
@@ -93,7 +96,7 @@ export default function Electrical() {
           className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-950/5 pointer-events-none z-10`} 
         />
 
-        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
+        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-16 flex flex-col items-center md:items-start">
           <motion.div 
             className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
             style={{ y: yHero }}
@@ -102,18 +105,18 @@ export default function Electrical() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.2em] uppercase text-primary mb-4 md:mb-5 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+              className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
             >
               <img 
                 src="/logos/SahlLogo9.png" 
                 alt="" 
-                className="w-3 h-3 object-contain animate-pulse" 
+                className="w-4 h-4 object-contain animate-pulse" 
               />
-              {t('services.homeMaintenance.electrical.title')}
+              {t('services.outdoor.title')}
             </motion.div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-5 leading-[1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
-              {t('services.homeMaintenance.electrical.title')}
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-4 md:mb-6 leading-[1.1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+              {t('services.outdoor.title')}
             </h1>
 
             <motion.div
@@ -122,21 +125,21 @@ export default function Electrical() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-xs !text-white/90 mb-6 md:mb-8 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-xl mx-auto md:mx-0">
-                {t('services.homeMaintenance.subtitle')}
+              <p className="text-xs !text-white/90 mb-6 md:mb-8 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+                {t('services.outdoor.subtitle')}
               </p>
               
-              <div className="flex flex-wrap justify-center md:justify-start gap-3">
+              <div className="flex flex-wrap justify-center md:justify-start gap-4">
                 <a
-                  href={getWhatsAppLink(t('services.homeMaintenance.electrical.whatsapp'))}
+                  href={getWhatsAppLink(t('services.outdoor.whatsapp'))}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackRequestClick('Electrical Hero')}
-                  className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30"
+                  onClick={() => trackRequestClick('Outdoor Hero CTA')}
+                  className="cta-primary px-8 py-4 text-xs btn-shine shadow-xl shadow-primary/30"
                 >
                   <motion.div
                     className="flex items-center gap-2"
-                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
@@ -150,7 +153,7 @@ export default function Electrical() {
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="section-spacing bg-background border-y border-border">
+      <section className="section-spacing bg-background border-y border-border overflow-hidden">
         <div className="container-sahli">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +162,7 @@ export default function Electrical() {
             className="bg-foreground/[0.02] border border-border rounded-xl p-4 md:p-5 shadow-xl shadow-primary/5"
           >
             <h2 className="text-lg sm:text-xl md:text-2xl mb-8 md:mb-12 text-center">
-              {t('services.homeMaintenance.rules.title')}
+              {t('services.outdoor.rules.title')}
             </h2>
             <Marquee speed={0.5} className="-mx-4 px-4" gap={12}>
               {[
@@ -168,7 +171,7 @@ export default function Electrical() {
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-3 items-start group shrink-0 w-[260px] md:w-auto p-4 md:p-0 rounded-xl bg-background md:bg-transparent border border-border md:border-0 shadow-sm md:shadow-none">
+                <div key={i} className="flex gap-3 items-start group shrink-0 w-[240px] md:w-auto p-4 md:p-0 rounded-xl bg-background md:bg-transparent border border-border md:border-0 shadow-sm md:shadow-none">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                     <CheckCircle2 size={16} />
                   </div>
@@ -180,43 +183,41 @@ export default function Electrical() {
         </div>
       </section>
 
-      {/* 3️⃣ Visual Service Features */}
+      {/* 3️⃣ Service Categories */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
             <h2 className="text-lg sm:text-xl md:text-2xl mb-4 md:mb-6">
-              {t('service.v1.includes.title')}
+              {t('services.outdoor.title')}
             </h2>
-            <p className="text-xs !text-foreground/50">{t('services.homeMaintenance.subtitle')}</p>
+            <p className="text-xs !text-foreground/50">{t('services.outdoor.subtitle')}</p>
           </div>
 
           <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
-            {includes.map((item, i) => (
+            {categories.map((cat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group p-5 md:p-6 rounded-xl bg-foreground/[0.02] border border-border hover:border-primary/40 hover:bg-foreground/[0.04] transition-all duration-500 shrink-0 w-[220px] md:w-auto shadow-xl shadow-primary/5"
+                transition={{ delay: i * 0.05 }}
+                className="shrink-0 w-[200px] md:w-auto p-5 md:p-6 rounded-xl bg-background md:bg-foreground/[0.02] border border-border hover:border-primary/20 transition-all duration-500 group shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/5"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
-                  <CheckCircle2 size={16} />
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
+                  {React.cloneElement(cat.icon as React.ReactElement, { size: 16 })}
                 </div>
-                <h3 className="text-xs font-bold mb-2">
-                  {item}
-                </h3>
-                <div className="w-8 h-0.5 bg-primary/20 rounded-full group-hover:w-full transition-all duration-700" />
+                <h3 className="text-xs mb-3 group-hover:text-primary transition-colors duration-500 font-bold uppercase tracking-wider">{cat.title}</h3>
+                <p className="text-xs !text-foreground/60 leading-relaxed">
+                  {cat.desc}
+                </p>
               </motion.div>
             ))}
           </Marquee>
         </div>
       </section>
 
-      {/* 4️⃣ How it works (Visual Timeline) */}
+      {/* 4️⃣ How Coordination Works */}
       <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[50%] h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-        
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
             <h2 className="text-lg sm:text-xl md:text-2xl mb-4 md:mb-6">
@@ -224,7 +225,7 @@ export default function Electrical() {
             </h2>
             <p className="text-xs !text-foreground/50">{t('how.flow.subtitle')}</p>
           </div>
-
+          
           <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
             {coordinationSteps.map((step, i) => (
               <motion.div
@@ -233,17 +234,17 @@ export default function Electrical() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative z-10 flex flex-col items-center text-center group shrink-0 w-[180px] md:w-auto"
+                className="shrink-0 w-[160px] md:w-auto relative z-10 flex flex-col items-center text-center group"
               >
-                <div className="w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center text-primary mb-5 shadow-xl shadow-primary/5 group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500 relative">
-                  <span className="absolute -top-1.5 -right-1.5 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-xs shadow-lg">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-background border border-border flex items-center justify-center text-primary mb-5 shadow-xl group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
+                  <span className="absolute -top-1.5 -right-1.5 w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-xs shadow-lg">
                     {step.title}
                   </span>
                   <div className="group-hover:scale-110 transition-transform duration-500">
                     {React.cloneElement(step.icon as React.ReactElement, { size: 16 })}
                   </div>
                 </div>
-                <p className="text-xs !text-foreground/80 leading-tight px-4 font-bold">{step.body}</p>
+                <p className="text-xs !text-foreground/80 px-4 font-bold">{step.body}</p>
               </motion.div>
             ))}
           </Marquee>
@@ -258,12 +259,12 @@ export default function Electrical() {
               initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="shrink-0 w-[260px] md:w-auto p-5 md:p-6 rounded-xl bg-primary/[0.03] border border-primary/10 shadow-xl shadow-primary/5"
+              className="shrink-0 w-[240px] md:w-auto p-4 md:p-5 rounded-xl bg-primary/[0.03] border border-primary/10 shadow-xl shadow-primary/5"
             >
               <h3 className="text-xs !text-primary mb-4 font-bold uppercase tracking-wider">
                 {t('services.boundaries.title.is')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
                   <li key={i} className="flex gap-3 items-center text-xs !text-foreground/70 group">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 group-hover:scale-150 transition-transform duration-300" />
@@ -277,12 +278,12 @@ export default function Electrical() {
               initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="shrink-0 w-[260px] md:w-auto p-5 md:p-6 rounded-xl bg-foreground/[0.02] border border-border shadow-xl shadow-black/5"
+              className="shrink-0 w-[240px] md:w-auto p-4 md:p-5 rounded-xl bg-foreground/[0.02] border border-border shadow-xl shadow-black/5"
             >
               <h3 className="text-xs !text-foreground/40 mb-4 font-bold uppercase tracking-wider">
                 {t('services.boundaries.title.isNot')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
                   <li key={i} className="flex gap-3 items-center text-xs !text-foreground/40 group">
                     <div className="w-1.5 h-1.5 rounded-full bg-foreground/20 shrink-0 group-hover:scale-150 transition-transform duration-300" />
@@ -295,10 +296,10 @@ export default function Electrical() {
         </div>
       </section>
 
-      {/* 6️⃣ Areas Served (Map View Style) */}
+      {/* 6️⃣ Areas Served - Map Style */}
       <section className="section-spacing bg-background overflow-hidden">
         <div className="container-sahli">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-lg sm:text-xl md:text-2xl mb-8 md:mb-12">
                 {t('home.areas.title')}
@@ -311,25 +312,27 @@ export default function Electrical() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group shrink-0 w-[180px] md:w-auto shadow-xl shadow-primary/5"
+                    className="shrink-0 w-[160px] md:w-auto flex items-center gap-2.5 p-2.5 rounded-xl bg-background md:bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group shadow-xl shadow-primary/5 hover:shadow-md"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
+                    <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                       <MapPin size={16} />
                     </div>
-                    <span className="text-xs font-bold group-hover:text-primary transition-colors duration-500">{area}</span>
+                    <span className="text-xs font-bold group-hover:text-primary transition-colors">{area}</span>
                   </motion.div>
                 ))}
               </Marquee>
             </div>
-            
-            <div className="relative aspect-video lg:aspect-square rounded-xl overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center shadow-2xl shadow-primary/5 group">
-              <div className="absolute inset-0 bg-primary/5 flex items-center justify-center">
-                <MapPin size={16} className="text-primary/20 animate-pulse" />
+            <div className="relative aspect-video md:aspect-[2/1] rounded-xl overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center shadow-2xl shadow-primary/5">
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
+                <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="px-6 py-3 bg-background/90 backdrop-blur-xl rounded-xl border border-white/10 shadow-lg text-xs !text-primary font-bold">
-                  {t('services.areas.qatarNationwide')}
+              <div className="relative text-center p-6">
+                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary mx-auto mb-3 animate-bounce">
+                  <MapPin size={16} />
                 </div>
+                <h2 className="text-base sm:text-lg md:text-xl mb-2 font-black">{t('services.areas.qatarNationwide')}</h2>
+                <p className="text-xs !text-foreground/60 font-medium">{t('services.areas.rapidResponse')}</p>
               </div>
             </div>
           </div>
@@ -339,24 +342,24 @@ export default function Electrical() {
       {/* 8️⃣ Final CTA - High Impact */}
       <section className="section-spacing bg-background border-t border-border overflow-hidden relative">
         {floatingBlobs}
-        <div className="container-sahli relative z-10 text-center max-w-2xl mx-auto">
-          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8">
-            <Clock size={16} />
-          </div>
-          <h2 className="text-lg sm:text-xl md:text-2xl mb-8">
-            {t('service.v1.cta.title')}
-          </h2>
+        <div className="container-sahli relative z-10 text-center max-w-4xl mx-auto">
+          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-8">
+              <Clock size={16} />
+            </div>
+            <h2 className="text-lg sm:text-xl md:text-2xl mb-8">
+              {t('service.v1.cta.title')}
+            </h2>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
             <a
-              href={getWhatsAppLink(t('services.homeMaintenance.electrical.whatsapp'))}
+              href={getWhatsAppLink(t('services.outdoor.whatsapp'))}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackRequestClick('Electrical Final CTA')}
-              className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30"
+              onClick={() => trackRequestClick('Outdoor Final CTA')}
+              className="cta-primary px-8 py-4 text-xs btn-shine shadow-xl shadow-primary/30"
             >
               <motion.div
                 className="flex items-center gap-2"
-                whileHover={{ y: -2, scale: 1.02 }}
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <MessageSquare size={16} className="fill-primary-foreground" />
@@ -378,25 +381,17 @@ export default function Electrical() {
               {t('services.related.subtitle')}
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
             {relatedServices.map((service, i) => (
               <Link 
                 key={i}
                 to={service.path}
-                className="p-4 md:p-5 rounded-xl bg-background border border-border hover:border-primary/30 transition-all group shadow-sm hover:shadow-xl hover:shadow-primary/5 flex flex-col justify-between"
+                className="p-3 md:p-4 rounded-xl bg-background border border-border hover:border-primary/30 transition-all group shadow-sm hover:shadow-xl hover:shadow-primary/5 flex flex-col justify-between"
               >
-                <div className="mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
-                    <ArrowUp className={`${dir === 'rtl' ? '-rotate-45' : 'rotate-45'} transition-transform duration-500 group-hover:scale-110`} size={16} />
+                <span className="text-xs font-bold group-hover:text-primary transition-colors line-clamp-2 uppercase tracking-wider">{service.title}</span>
+                <div className="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUp size={16} className="text-primary rotate-45" />
                   </div>
-                  <h3 className="text-xs font-bold leading-tight group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
-                  {t('cta.view')}
-                  <ArrowUp size={16} className={`${dir === 'rtl' ? '-rotate-90' : 'rotate-90'}`} />
-                </div>
               </Link>
             ))}
           </div>
@@ -408,12 +403,12 @@ export default function Electrical() {
         <div className="container-sahli flex justify-center">
           <Link 
             to="/"
-            className="group flex items-center gap-3 px-8 py-4 rounded-2xl bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all"
+            className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all shadow-sm hover:shadow-md"
           >
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-              <ArrowUp size={16} className="rotate-[-90deg] rtl:rotate-[90deg]" />
+              <ArrowUp size={16} className="-rotate-90" />
             </div>
-            <span className="text-xs font-bold !text-foreground/60 group-hover:text-foreground transition-colors uppercase tracking-widest">
+            <span className="text-xs font-bold text-foreground/60 group-hover:text-primary transition-colors">
               {t('nav.home')}
             </span>
           </Link>
@@ -422,3 +417,5 @@ export default function Electrical() {
     </Layout>
   );
 }
+
+

@@ -49,9 +49,10 @@ interface CollapsibleModuleProps {
   items: string;
   isOpen: boolean;
   onToggle: () => void;
+  locationLinks?: { label: string; path: string }[];
 }
 
-function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }: CollapsibleModuleProps) {
+function CollapsibleModule({ icon, title, description, items, isOpen, onToggle, locationLinks }: CollapsibleModuleProps) {
   const { dir } = useLanguage();
   
   return (
@@ -68,10 +69,10 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
             {React.cloneElement(icon as React.ReactElement, { size: 16 })}
           </motion.div>
           <div className="text-start">
-            <h3 className={`text-sm md:text-base font-black transition-all duration-500 ${isOpen ? 'text-foreground' : 'text-foreground/70 group-hover:text-foreground'}`}>
+            <h3 className={`text-xs md:text-sm font-black transition-all duration-500 ${isOpen ? 'text-foreground' : 'text-foreground/70 group-hover:text-foreground'}`}>
               {title}
             </h3>
-            <p className={`text-start text-[0.75rem] md:text-[0.8rem] !text-foreground/80 transition-all duration-500 max-w-xl ${isOpen ? 'text-foreground/80' : 'text-foreground/50 group-hover:text-foreground/70'}`}>
+            <p className={`text-start text-[0.7rem] md:text-[0.75rem] !text-foreground/80 transition-all duration-500 max-w-xl ${isOpen ? 'text-foreground/80' : 'text-foreground/50 group-hover:text-foreground/70'}`}>
               {description}
             </p>
           </div>
@@ -97,23 +98,52 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle }
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className={`pb-6 ps-3 md:ps-[72px] pe-3 md:pe-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4`}>
-              {items.split('\n').map((item: string, idx: number) => (
-                <motion.div 
-                  key={idx} 
-                  initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
-                  className="flex items-start gap-3 text-foreground font-bold text-[0.75rem] md:text-[0.85rem] group/item py-0.5"
+            <div className={`pb-6 ps-3 md:ps-[72px] pe-3 md:pe-8 flex flex-col gap-4`}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4">
+                {items.split('\n').map((item: string, idx: number) => (
+                  <motion.div 
+                    key={idx} 
+                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
+                    className="flex items-start gap-3 text-foreground font-bold text-[0.75rem] md:text-[0.85rem] group/item py-0.5"
+                  >
+                    <div className="mt-1 shrink-0">
+                      <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-2.5 h-2.5 object-contain opacity-100 transition-all duration-300 shadow-sm" />
+                    </div>
+                    <span className="group-hover/item:translate-x-1 transition-transform duration-300 leading-tight">
+                      {item}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {locationLinks && locationLinks.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                  className="pt-4 border-t border-border/30"
                 >
-                  <div className="mt-1 shrink-0">
-                    <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-2.5 h-2.5 object-contain opacity-100 transition-all duration-300 shadow-sm" />
+                  <p className="text-[0.65rem] font-black tracking-widest uppercase text-foreground/30 mb-3 flex items-center gap-2">
+                    <Info size={10} />
+                    Available Districts
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {locationLinks.map((loc, idx) => (
+                      <Link
+                        key={idx}
+                        to={loc.path}
+                        className="px-3 py-1.5 rounded-lg bg-primary/5 hover:bg-primary/10 border border-primary/10 text-[0.7rem] font-bold text-primary transition-all flex items-center gap-1.5 group/loc"
+                      >
+                        <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
+                        {loc.label}
+                        <ArrowRight size={10} className="opacity-0 -translate-x-1 group-hover/loc:opacity-100 group-hover/loc:translate-x-0 transition-all" />
+                      </Link>
+                    ))}
                   </div>
-                  <span className="group-hover/item:translate-x-1 transition-transform duration-300 leading-tight">
-                    {item}
-                  </span>
                 </motion.div>
-              ))}
+              )}
             </div>
           </motion.div>
         )}
@@ -136,7 +166,6 @@ export default function Services() {
 
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), springConfig);
-  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0]), springConfig);
   const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.2]), springConfig);
   const yText = useSpring(useTransform(scrollYProgress, [0, 1], [0, -150]), springConfig);
 
@@ -183,6 +212,12 @@ export default function Services() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const locationLinks = [
+    { label: t('location.doha.title'), path: t('location.doha.path') },
+    { label: t('location.lusail.title'), path: t('location.lusail.path') },
+    { label: t('location.thepearl.title'), path: t('location.thepearl.path') },
+  ];
+
   return (
     <Layout>
       {/* Hero / Selector Area - Consistent with Homepage */}
@@ -192,26 +227,23 @@ export default function Services() {
           <motion.div 
             style={{ 
               y: y,
-              scale: scale,
-              opacity: opacity
+              scale: scale
             }}
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0"
           >
             <img 
-              src="https://images.unsplash.com/photo-1581578731548-c64695cc6958?q=80&w=1920&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1920&auto=format&fit=crop" 
               alt={t('nav.services')}
               crossOrigin="anonymous"
               className="w-full h-full object-cover object-center scale-105"
             />
           </motion.div>
           
-          {/* Darker overlays to make images pop and remove whitish haze - Homepage Standard */}
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+          {/* Overlays removed as per user request */}
+          <div className="absolute inset-0 bg-slate-950/10 z-0" />
 
           {/* Floating Background Blobs - Homepage Standard */}
           <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
@@ -251,7 +283,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base md:text-lg !text-foreground/60 max-w-2xl mb-8 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start"
+              className="text-sm md:text-base !text-foreground/60 max-w-2xl mb-8 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start"
             >
               {t('services.intro')}
             </motion.p>
@@ -272,7 +304,7 @@ export default function Services() {
                 whileTap={{ scale: 0.95 }}
                 key={roof.id}
                 onClick={() => handleRoofClick(roof.id)}
-                className={`relative px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap ${
+                className={`relative px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap ${
                   activeRoof === roof.id
                     ? 'text-primary-foreground'
                     : 'text-foreground/50 hover:text-foreground hover:bg-white/5'
@@ -327,8 +359,10 @@ export default function Services() {
                     {t('services.status.live')} — 01
                   </span>
                 </div>
-                <h2 className="text-display mb-3">{t('services.homeMaintenance.title')}</h2>
-                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
+                <h2 className="text-xl md:text-2xl font-black text-foreground mb-4 md:mb-6">
+                  {t('services.homeMaintenance.title')}
+                </h2>
+                <p className="text-xs md:text-sm !text-foreground/60 mb-8 md:mb-10 leading-relaxed">
                   {t('services.homeMaintenance.body')}
                 </p>
                 
@@ -362,6 +396,7 @@ export default function Services() {
                   items={t('services.homeMaintenance.ac.items')}
                   isOpen={openModule === 'ac'}
                   onToggle={() => setOpenModule(openModule === 'ac' ? null : 'ac')}
+                  locationLinks={locationLinks}
                 />
                 <CollapsibleModule
                   icon={<Zap size={18} />}
@@ -370,6 +405,7 @@ export default function Services() {
                   items={t('services.homeMaintenance.electrical.items')}
                   isOpen={openModule === 'electrical'}
                   onToggle={() => setOpenModule(openModule === 'electrical' ? null : 'electrical')}
+                  locationLinks={locationLinks}
                 />
                 <CollapsibleModule
                   icon={<Droplets size={18} />}
@@ -378,6 +414,7 @@ export default function Services() {
                   items={t('services.homeMaintenance.plumbing.items')}
                   isOpen={openModule === 'plumbing'}
                   onToggle={() => setOpenModule(openModule === 'plumbing' ? null : 'plumbing')}
+                  locationLinks={locationLinks}
                 />
                 <CollapsibleModule
                   icon={<Hammer size={18} />}
@@ -386,6 +423,7 @@ export default function Services() {
                   items={t('services.homeMaintenance.handyman.items')}
                   isOpen={openModule === 'handyman'}
                   onToggle={() => setOpenModule(openModule === 'handyman' ? null : 'handyman')}
+                  locationLinks={locationLinks}
                 />
               </div>
 
@@ -472,6 +510,7 @@ export default function Services() {
                   items={t('services.cleaning.regular.items')}
                   isOpen={openModule === 'regular-cleaning'}
                   onToggle={() => setOpenModule(openModule === 'regular-cleaning' ? null : 'regular-cleaning')}
+                  locationLinks={locationLinks}
                 />
                 <CollapsibleModule
                   icon={<Waves size={18} />}
@@ -480,6 +519,7 @@ export default function Services() {
                   items={t('services.cleaning.deep.items')}
                   isOpen={openModule === 'deep-cleaning'}
                   onToggle={() => setOpenModule(openModule === 'deep-cleaning' ? null : 'deep-cleaning')}
+                  locationLinks={locationLinks}
                 />
                 <CollapsibleModule
                   icon={<Sofa size={18} />}
@@ -488,6 +528,7 @@ export default function Services() {
                   items={t('services.cleaning.sofa.items')}
                   isOpen={openModule === 'sofa-cleaning'}
                   onToggle={() => setOpenModule(openModule === 'sofa-cleaning' ? null : 'sofa-cleaning')}
+                  locationLinks={locationLinks}
                 />
                 <CollapsibleModule
                   icon={<Bug size={18} />}
@@ -496,6 +537,7 @@ export default function Services() {
                   items={t('services.cleaning.pest.items')}
                   isOpen={openModule === 'pest-control'}
                   onToggle={() => setOpenModule(openModule === 'pest-control' ? null : 'pest-control')}
+                  locationLinks={locationLinks}
                 />
               </div>
 
@@ -547,8 +589,10 @@ export default function Services() {
                     {t('services.status.live')} — 03
                   </span>
                 </div>
-                <h2 className="text-display mb-3">{t('services.moving.title')}</h2>
-                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
+                <h2 className="text-xl md:text-2xl font-black text-foreground mb-4 md:mb-6">
+                  {t('services.moving.title')}
+                </h2>
+                <p className="text-xs md:text-sm !text-foreground/60 mb-8 md:mb-10 leading-relaxed">
                   {t('services.moving.body')}
                 </p>
                 
@@ -743,8 +787,10 @@ export default function Services() {
                     {t('services.status.live')} — 05
                   </span>
                 </div>
-                <h2 className="text-display mb-3">{t('services.care.title.roof5')}</h2>
-                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
+                <h2 className="text-xl md:text-2xl font-black text-foreground mb-4 md:mb-6">
+                  {t('services.care.title.roof5')}
+                </h2>
+                <p className="text-xs md:text-sm !text-foreground/60 mb-8 md:mb-10 leading-relaxed">
                   {t('services.care.body.roof5')}
                 </p>
                 

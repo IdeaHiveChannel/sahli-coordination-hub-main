@@ -27,6 +27,11 @@ export function Footer() {
       { key: 'nav.outdoorSpecialized' as TranslationKey, path: '/services#outdoor' },
       { key: 'nav.careLifestyle' as TranslationKey, path: '/services#care' },
       { key: 'nav.electronicsTech' as TranslationKey, path: '/services#tech' },
+    ],
+    locations: [
+      { key: 'location.doha.title' as TranslationKey, path: '/home-services-doha' },
+      { key: 'location.lusail.title' as TranslationKey, path: '/home-services-lusail' },
+      { key: 'location.thepearl.title' as TranslationKey, path: '/home-services-the-pearl' },
     ]
   };
 
@@ -40,8 +45,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 sm:gap-16 md:gap-20 lg:gap-8 mb-16 md:mb-24">
           {/* Brand & Mission */}
           <div className="lg:col-span-4 pr-0 lg:pr-8 flex flex-col items-center sm:items-start text-center sm:text-left">
-            <Link to="/" className="flex items-center gap-4 group mb-8 sm:mb-12 w-fit">
-            <div className="relative w-[8.125rem] h-[8.125rem] sm:w-[10.125rem] sm:h-[10.125rem] md:w-[14.125rem] md:h-[14.125rem] flex items-center justify-center transition-all duration-700 ease-out-expo btn-shine rounded-[2rem] sm:rounded-3xl">
+            <Link to="/" className="flex items-center gap-4 group mb-6 sm:mb-8 w-fit">
+            <div className="relative w-[4rem] h-[4rem] sm:w-[5rem] sm:h-[5rem] md:w-[6rem] md:h-[6rem] flex items-center justify-center transition-all duration-700 ease-out-expo btn-shine rounded-xl">
               <img 
                 src="/logos/SahlLogo3.png" 
                 alt="SAHLI Logo" 
@@ -49,37 +54,37 @@ export function Footer() {
               />
             </div>
           </Link>
-            <p className="text-sm sm:text-base md:text-lg text-foreground/85 leading-relaxed font-black mb-8 sm:mb-10 text-balance max-w-lg">
+            <p className="text-[10px] sm:text-[11px] md:text-xs text-foreground/85 leading-relaxed font-black mb-6 sm:mb-8 text-balance max-w-lg">
               {t('footer.description')}
             </p>
             
-            <div className="flex flex-wrap justify-center sm:justify-start gap-4 md:gap-5">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-3 md:gap-4">
               <motion.a
                 href={FACEBOOK_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -5, scale: 1.1 }}
+                whileHover={{ y: -3, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-foreground/[0.03] hover:bg-primary/10 hover:text-primary transition-all duration-500 cursor-pointer flex items-center justify-center border border-border hover:border-primary/20 glass-card btn-shine active:scale-95"
+                className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-foreground/[0.03] hover:bg-primary/10 hover:text-primary transition-all duration-500 cursor-pointer flex items-center justify-center border border-border hover:border-primary/20 glass-card btn-shine active:scale-95"
               >
-                <Facebook size={20} className="sm:size-6" />
+                <Facebook size={18} className="sm:size-5" />
               </motion.a>
               <motion.a
                 href={INSTAGRAM_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -5, scale: 1.1 }}
+                whileHover={{ y: -3, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-foreground/[0.03] hover:bg-primary/10 hover:text-primary transition-all duration-500 cursor-pointer flex items-center justify-center border border-border hover:border-primary/20 glass-card btn-shine active:scale-95"
+                className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-foreground/[0.03] hover:bg-primary/10 hover:text-primary transition-all duration-500 cursor-pointer flex items-center justify-center border border-border hover:border-primary/20 glass-card btn-shine active:scale-95"
               >
-                <Instagram size={20} className="sm:size-6" />
+                <Instagram size={18} className="sm:size-5" />
               </motion.a>
             </div>
           </div>
 
           {/* Navigation Columns */}
           <div className="lg:col-span-2 lg:pt-8 text-center sm:text-left">
-            <h4 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] mb-6 sm:mb-8 md:mb-12 text-primary/80">
+            <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-4 sm:mb-6 md:mb-8 text-primary/80">
               {t('footer.company')}
             </h4>
             <ul className="space-y-4 sm:space-y-6 md:space-y-8">
@@ -87,7 +92,7 @@ export function Footer() {
                 <li key={link.key}>
                   <Link 
                     to={link.path} 
-                    className="text-sm sm:text-base md:text-lg font-bold text-foreground/75 hover:text-primary transition-all duration-500 flex items-center justify-center sm:justify-start gap-4 group active:scale-95"
+                    className="text-[10px] sm:text-[11px] md:text-xs font-bold text-foreground/75 hover:text-primary transition-all duration-500 flex items-center justify-center sm:justify-start gap-3 group active:scale-95"
                   >
                     <span className="hidden sm:block w-0 h-px bg-primary group-hover:w-6 transition-all duration-500" />
                     {t(link.key)}
@@ -98,7 +103,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2 lg:pt-8 text-center sm:text-left">
-            <h4 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] mb-6 sm:mb-8 md:mb-12 text-primary/80">
+            <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-4 sm:mb-6 md:mb-8 text-primary/80">
               {t('footer.services')}
             </h4>
             <ul className="space-y-4 sm:space-y-6 md:space-y-8">
@@ -106,9 +111,27 @@ export function Footer() {
                 <li key={link.key}>
                   <Link 
                     to={link.path} 
-                    className="text-sm sm:text-base md:text-lg font-bold text-foreground/75 hover:text-primary transition-all duration-500 flex items-center justify-center sm:justify-start gap-4 group active:scale-95"
+                    className="text-[10px] sm:text-[11px] md:text-xs font-bold text-foreground/75 hover:text-primary transition-all duration-500 flex items-center justify-center sm:justify-start gap-3 group active:scale-95"
                   >
                     <span className="hidden sm:block w-0 h-px bg-primary group-hover:w-6 transition-all duration-500" />
+                    {t(link.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            
+            {/* Location Links */}
+            <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mt-8 mb-4 sm:mb-6 md:mb-8 text-primary/80">
+              {t('location.categories.title')}
+            </h4>
+            <ul className="space-y-4 sm:space-y-6">
+              {links.locations.map((link) => (
+                <li key={link.key}>
+                  <Link 
+                    to={link.path} 
+                    className="text-[10px] md:text-[11px] font-bold text-foreground/75 hover:text-primary transition-all duration-500 flex items-center justify-center sm:justify-start gap-3 group active:scale-95"
+                  >
+                    <span className="hidden sm:block w-0 h-px bg-primary group-hover:w-4 transition-all duration-500" />
                     {t(link.key)}
                   </Link>
                 </li>
@@ -118,7 +141,7 @@ export function Footer() {
 
           {/* Contact & CTA */}
           <div className="lg:col-span-4 lg:pt-8 text-center sm:text-left">
-            <h4 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] mb-6 sm:mb-8 md:mb-10 text-primary/80">
+            <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-4 sm:mb-6 md:mb-8 text-primary/80">
               {t('footer.contact')}
             </h4>
             <div className="space-y-4 sm:space-y-6 md:space-y-8">
@@ -138,7 +161,7 @@ export function Footer() {
                   </div>
                   <div className="min-w-0 flex flex-col justify-center text-left">
                     <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.25em] text-foreground/60 leading-tight mb-1.5">{t('footer.whatsapp')}</span>
-                    <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-tight">{t('contact.whatsapp.value')}</span>
+                    <span className="text-xs md:text-sm font-bold tracking-tight text-foreground truncate leading-tight">{t('contact.whatsapp.value')}</span>
                   </div>
                 </motion.div>
               </a>
@@ -153,12 +176,12 @@ export function Footer() {
                 </div>
                 <div className="min-w-0 flex flex-col justify-center text-left">
                   <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 leading-tight mb-1.5">{t('contact.email.label')}</span>
-                  <span className="text-sm md:text-base font-bold tracking-tight text-foreground truncate leading-tight">{t('contact.email.value')}</span>
+                  <span className="text-xs md:text-sm font-bold tracking-tight text-foreground truncate leading-tight">{t('contact.email.value')}</span>
                 </div>
               </motion.a>
               
               <div className="p-6 sm:p-8 md:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-primary/[0.01] border border-primary/5 italic">
-                <p className="text-xs sm:text-sm font-bold text-primary/70 leading-relaxed">
+                <p className="text-[10px] sm:text-[11px] font-bold text-primary/70 leading-relaxed">
                   "{t('footer.motto')}"
                 </p>
               </div>
@@ -170,19 +193,24 @@ export function Footer() {
         <div className="pt-8 md:pt-12 border-t border-border flex flex-col lg:flex-row justify-between items-center gap-8 sm:gap-10">
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain opacity-50" />
-            <p className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 text-center lg:text-left">
-              © {currentYear} {t('about.footer.hub')}. {t('footer.rights.all')}
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-[9px] md:text-[10px] font-black tracking-[0.2em] uppercase text-foreground/50 text-center lg:text-left">
+                {t('footer.positioning')}
+              </p>
+              <p className="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase text-foreground/50 text-center lg:text-left">
+                © {currentYear} {t('about.footer.hub')}. {t('footer.rights.all')}
+              </p>
+            </div>
           </div>
           
           <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-16">
-            <Link to="/legal/privacy" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors active:scale-95">
+            <Link to="/legal/privacy" className="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors active:scale-95">
               {t('footer.privacy')}
             </Link>
-            <Link to="/legal/terms" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors active:scale-95">
+            <Link to="/legal/terms" className="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors active:scale-95">
               {t('footer.terms')}
             </Link>
-            <Link to="/admin" className="text-[10px] md:text-[11px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors active:scale-95">
+            <Link to="/admin" className="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase text-foreground/50 hover:text-primary transition-colors active:scale-95">
               Admin
             </Link>
             <div className="active:scale-95">

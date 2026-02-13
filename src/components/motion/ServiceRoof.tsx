@@ -13,6 +13,7 @@ interface ServiceRoofProps {
   imageUrl?: string;
   icon?: React.ReactNode;
   showDescription?: boolean;
+  showNumber?: boolean;
   subcategories?: string[];
   status?: string;
   whatsappKey?: string;
@@ -26,6 +27,7 @@ export function ServiceRoof({
   imageUrl, 
   icon, 
   showDescription = true,
+  showNumber = true,
   subcategories = [],
   status,
   whatsappKey
@@ -85,15 +87,12 @@ export function ServiceRoof({
             alt={title}
             loading="lazy"
             crossOrigin="anonymous"
-            className="w-full h-full object-cover transition-all duration-1000 opacity-90 group-hover:opacity-100"
+            className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
             animate={{ 
-              scale: isHovered ? 1.05 : 1,
-              filter: isHovered ? 'blur(0px)' : 'blur(0px)'
+              scale: isHovered ? 1.05 : 1
             }}
           />
-          {/* Sophisticated Overlays - Reduced for better visibility */}
-          <div className="absolute inset-0 bg-slate-950/30 md:bg-slate-950/20 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-100 group-hover:opacity-70 transition-opacity duration-700 z-10" />
+          {/* Overlays removed as per user request */}
         </div>
       )}
 
@@ -111,11 +110,13 @@ export function ServiceRoof({
       />
 
       {/* Index number - Modern Styling */}
-      <div className="absolute top-8 inset-inline-start-8 z-10">
-        <span className={`text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-700 ${imageUrl ? 'text-white/60 group-hover:text-white/80' : 'text-primary/40 group-hover:text-primary/60'}`}>
-          {formatNumber(index + 1 < 10 ? `0${index + 1}` : index + 1)}
-        </span>
-      </div>
+      {showNumber && (
+        <div className="absolute top-8 inset-inline-start-8 z-10">
+          <span className={`text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-700 ${imageUrl ? 'text-white/60 group-hover:text-white/80' : 'text-primary/40 group-hover:text-primary/60'}`}>
+            {formatNumber(index + 1 < 10 ? `0${index + 1}` : index + 1)}
+          </span>
+        </div>
+      )}
 
       {/* Content */}
       <div className="relative min-h-[280px] md:min-h-[340px] p-6 md:p-8 flex flex-col justify-end z-10 text-center md:text-start items-center md:items-start">

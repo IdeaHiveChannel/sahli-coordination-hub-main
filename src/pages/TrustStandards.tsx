@@ -25,7 +25,6 @@ export default function TrustStandards() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
   
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -83,7 +82,6 @@ export default function TrustStandards() {
             style={{ 
               y: y1Spring,
               scale: scaleSpring,
-              opacity: opacity,
               x: mousePos.x * 0.2,
               rotate: mousePos.y * 0.02
             }}
@@ -92,17 +90,15 @@ export default function TrustStandards() {
               src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1920&fm=webp&fit=crop" 
               alt={t('trust.hero.alt')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover scale-110 grayscale opacity-40"
+              className="w-full h-full object-cover scale-110 grayscale"
             />
           </motion.div>
           
           {/* Noise Texture */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
           
-          {/* Advanced Overlays */}
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/20 to-slate-950 z-10" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950 via-transparent to-transparent z-10`} />
+          {/* Advanced Overlays removed as per user request */}
+          <div className="absolute inset-0 bg-slate-950/10 z-0" />
           
           {/* Premium Animated Blobs */}
           <motion.div 
@@ -128,10 +124,10 @@ export default function TrustStandards() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-3 px-5 py-2 bg-white/5 backdrop-blur-md rounded-full border border-white/10 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/70 mb-8 md:mb-10 mx-auto md:mx-0 shadow-2xl relative overflow-hidden group"
+              className="inline-flex items-center gap-3 px-5 py-2 bg-white/5 backdrop-blur-md rounded-full border border-primary/20 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/70 mb-8 md:mb-10 mx-auto md:mx-0 shadow-2xl relative overflow-hidden group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              <Shield size={14} className="text-primary" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <Shield size={14} className="text-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
               {t('trust.hero.label')}
             </motion.div>
 
@@ -160,6 +156,22 @@ export default function TrustStandards() {
             </motion.p>
           </motion.div>
         </div>
+
+        {/* Advanced Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        >
+          <div className="w-px h-16 bg-gradient-to-b from-primary via-primary/20 to-transparent relative">
+            <motion.div 
+              animate={{ y: [0, 40, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" 
+            />
+          </div>
+        </motion.div>
       </section>
 
       {/* Standards Section - Enhanced Grid */}
@@ -186,19 +198,19 @@ export default function TrustStandards() {
                   </div>
                 </div>
                 
-                <div className="flex-1 p-8 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-xl border border-border group-hover:border-primary/20 transition-all duration-700 flex flex-col group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
-                  <div className="mb-2 text-[10px] font-black uppercase tracking-[0.3em] text-foreground/40">
+                <div className="flex-1 p-8 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-xl border border-primary/10 group-hover:border-primary/40 transition-all duration-700 flex flex-col group-hover:shadow-[0_20px_50px_rgba(var(--primary-rgb),0.1)] group-hover:-translate-y-2 group-hover:bg-primary/[0.02]">
+                  <div className="mb-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary/40 group-hover:text-primary transition-colors">
                     {t('trust.standard')}
                   </div>
-                  <h3 className="text-xl font-black mb-6 text-foreground tracking-tight leading-none uppercase">
+                  <h3 className="text-xl font-black mb-6 text-foreground tracking-tight leading-none uppercase group-hover:text-primary transition-colors">
                     {standard.title}
                   </h3>
                   
                   <ul className="space-y-4 mt-auto">
                     {standard.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                        <span className="text-sm md:text-base text-foreground/70 leading-relaxed font-medium">
+                      <li key={idx} className="flex items-start gap-3 group/item">
+                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-all duration-300 shadow-[0_0_5px_rgba(var(--primary-rgb),0.5)]" />
+                        <span className="text-sm md:text-base text-foreground/70 leading-relaxed font-medium group-hover/item:text-foreground transition-colors">
                           {item}
                         </span>
                       </li>
@@ -278,17 +290,17 @@ export default function TrustStandards() {
             ].map((item, i) => (
               <motion.div 
                 key={i}
-                className="p-10 md:p-12 rounded-[3rem] bg-foreground/[0.02] border border-border group hover:border-primary/20 transition-all duration-700 hover:shadow-2xl hover:-translate-y-2"
+                className="p-10 md:p-12 rounded-[3rem] bg-foreground/[0.02] border border-primary/10 group hover:border-primary/40 transition-all duration-700 hover:shadow-[0_20px_50px_rgba(var(--primary-rgb),0.1)] hover:-translate-y-2 hover:bg-primary/[0.01]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="w-16 h-16 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-700 group-hover:rotate-6 shadow-xl">
+                <div className="w-16 h-16 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-700 group-hover:rotate-6 shadow-xl group-hover:shadow-primary/20">
                   {item.icon}
                 </div>
-                <h3 className="text-2xl font-black mb-6 text-foreground uppercase tracking-tight leading-none">{item.title}</h3>
-                <p className="text-lg text-foreground/60 leading-relaxed font-medium">{item.body}</p>
+                <h3 className="text-2xl font-black mb-6 text-foreground uppercase tracking-tight leading-none group-hover:text-primary transition-colors">{item.title}</h3>
+                <p className="text-lg text-foreground/60 leading-relaxed font-medium group-hover:text-foreground/80 transition-colors">{item.body}</p>
               </motion.div>
             ))}
           </div>
@@ -313,16 +325,16 @@ export default function TrustStandards() {
             ].map((point, i) => (
               <motion.div 
                 key={i}
-                className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-primary/30 transition-all duration-500 group"
+                className="p-8 rounded-[2rem] bg-white/[0.03] border border-primary/10 hover:border-primary/40 transition-all duration-500 group hover:bg-primary/[0.02]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-lg">
                   <CheckCircle2 size={16} />
                 </div>
-                <p className={`text-base text-white/70 leading-relaxed font-medium ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{point}</p>
+                <p className={`text-base text-white/70 leading-relaxed font-medium group-hover:text-white transition-colors ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{point}</p>
               </motion.div>
             ))}
           </div>

@@ -21,7 +21,6 @@ const ProviderApplication = () => {
   
   // Parallax effects matching Index.tsx
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
   
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -31,6 +30,8 @@ const ProviderApplication = () => {
   
   const [formData, setFormData] = useState({
     companyName: '',
+    companyType: '',
+    yearsInOperation: '',
     crNumber: '',
     contactPerson: '',
     phone: '',
@@ -40,6 +41,21 @@ const ProviderApplication = () => {
     profile: '',
     responsibilityConfirmed: false
   });
+
+  const companyTypes = [
+    { value: 'llc', label: t('provider.apply.form.companyType.llc') },
+    { value: 'sole', label: t('provider.apply.form.companyType.sole') },
+    { value: 'branch', label: t('provider.apply.form.companyType.branch') },
+    { value: 'other', label: t('provider.apply.form.companyType.other') }
+  ];
+
+  const operationalYears = [
+    { value: '0_1', label: t('provider.apply.form.yearsInOperation.0_1') },
+    { value: '1_3', label: t('provider.apply.form.yearsInOperation.1_3') },
+    { value: '3_5', label: t('provider.apply.form.yearsInOperation.3_5') },
+    { value: '5_plus', label: t('provider.apply.form.yearsInOperation.5_plus') }
+  ];
+
   const [files, setFiles] = useState<{ [key: string]: File | null }>({
     cr: null,
     id: null,
@@ -209,11 +225,10 @@ const ProviderApplication = () => {
             className="absolute inset-0"
             style={{ 
               y: y1Spring,
-              scale: scaleSpring,
-              opacity: opacity
+              scale: scaleSpring
             }}
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <img 
@@ -224,10 +239,8 @@ const ProviderApplication = () => {
             />
           </motion.div>
           
-          {/* Overlays matching Index.tsx */}
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+          {/* Overlays removed as per user request */}
+          <div className="absolute inset-0 bg-slate-950/10 z-0" />
           
           {/* Floating Background Blobs - Homepage Standard */}
           <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
@@ -292,9 +305,9 @@ const ProviderApplication = () => {
                 
                 <div className="space-y-8">
                   {[
-                    { icon: Globe, title: t('provider.apply.why.reach.title'), desc: t('provider.apply.why.reach.desc'), color: 'bg-blue-500/10 text-blue-500' },
-                    { icon: ShieldCheck, title: t('provider.apply.why.clients.title'), desc: t('provider.apply.why.clients.desc'), color: 'bg-emerald-500/10 text-emerald-500' },
-                    { icon: Users, title: t('provider.apply.why.support.title'), desc: t('provider.apply.why.support.desc'), color: 'bg-primary/10 text-primary' }
+                    { icon: Target, title: t('provider.apply.why.coordination.title'), desc: t('provider.apply.why.coordination.desc'), color: 'bg-blue-500/10 text-blue-500' },
+                    { icon: ShieldCheck, title: t('provider.apply.why.intake.title'), desc: t('provider.apply.why.intake.desc'), color: 'bg-emerald-500/10 text-emerald-500' },
+                    { icon: Building2, title: t('provider.apply.why.independent.title'), desc: t('provider.apply.why.independent.desc'), color: 'bg-primary/10 text-primary' }
                   ].map((item, i) => (
                     <motion.div 
                       key={i} 
@@ -317,6 +330,23 @@ const ProviderApplication = () => {
               </motion.div>
 
               <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="p-10 rounded-[2.5rem] bg-foreground/[0.02] border border-border/50 space-y-6"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Sparkles size={20} />
+                  </div>
+                  <h3 className="text-2xl font-black text-foreground">{t('provider.apply.model.title')}</h3>
+                </div>
+                <p className="text-base text-foreground/50 leading-relaxed">
+                  {t('provider.apply.model.desc')}
+                </p>
+              </motion.div>
+
+              <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -332,10 +362,10 @@ const ProviderApplication = () => {
                 
                 <div className="space-y-8 relative z-10">
                   {[
-                    { step: 1, text: dir === 'rtl' ? 'طلب إلكتروني وتحميل الوثائق' : 'Online Application & Document Upload' },
-                    { step: 2, text: dir === 'rtl' ? 'مراجعة الوثائق القانونية والامتثال' : 'Compliance & Legal Document Review' },
-                    { step: 3, text: dir === 'rtl' ? 'موافقة الإدارة وتفعيل الحساب' : 'Manual Admin Approval & Hub Activation' },
-                    { step: 4, text: dir === 'rtl' ? 'بدء استقبال طلبات التنسيق' : 'Start Receiving Coordination Requests' }
+                    { step: 1, text: t('provider.apply.process.step1') },
+                    { step: 2, text: t('provider.apply.process.step2') },
+                    { step: 3, text: t('provider.apply.process.step3') },
+                    { step: 4, text: t('provider.apply.process.step4') }
                   ].map((item, i) => (
                     <div key={i} className="flex gap-5 items-start group">
                       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs font-black shrink-0 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
@@ -358,6 +388,16 @@ const ProviderApplication = () => {
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
                 
+                <div className="mb-12 p-8 rounded-3xl bg-primary/5 border border-primary/20 space-y-4">
+                  <div className="flex items-center gap-3 text-primary">
+                    <Info size={24} />
+                    <h4 className="text-xl font-black uppercase tracking-tight">{t('provider.apply.preapply.title')}</h4>
+                  </div>
+                  <p className="text-sm text-foreground/60 leading-relaxed font-medium">
+                    {t('provider.apply.preapply.desc')}
+                  </p>
+                </div>
+
                 <form onSubmit={handleSubmit} className="space-y-10">
                   <div className="space-y-8">
                     <div className="grid md:grid-cols-2 gap-8">
@@ -371,6 +411,43 @@ const ProviderApplication = () => {
                             value={formData.companyName}
                             onChange={e => setFormData({...formData, companyName: e.target.value})}
                           />
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyType')}</label>
+                        <div className="relative group">
+                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors z-10" size={18} />
+                          <select 
+                            required
+                            className="w-full bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 pr-4 transition-all hover:border-primary/30 appearance-none text-sm font-medium"
+                            value={formData.companyType}
+                            onChange={e => setFormData({...formData, companyType: e.target.value})}
+                          >
+                            <option value="">{dir === 'rtl' ? 'اختر النوع' : 'Select Type'}</option>
+                            {companyTypes.map(type => (
+                              <option key={type.value} value={type.value}>{type.label}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="space-y-3">
+                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.yearsInOperation')}</label>
+                        <div className="relative group">
+                          <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors z-10" size={18} />
+                          <select 
+                            required
+                            className="w-full bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 pr-4 transition-all hover:border-primary/30 appearance-none text-sm font-medium"
+                            value={formData.yearsInOperation}
+                            onChange={e => setFormData({...formData, yearsInOperation: e.target.value})}
+                          >
+                            <option value="">{dir === 'rtl' ? 'اختر المدى' : 'Select Range'}</option>
+                            {operationalYears.map(year => (
+                              <option key={year.value} value={year.value}>{year.label}</option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                       <div className="space-y-3">
@@ -518,7 +595,7 @@ const ProviderApplication = () => {
                             className="w-5 h-5 rounded-md border-2 border-border/50 text-primary focus:ring-primary/20 transition-all checked:bg-primary"
                           />
                         </div>
-                        <span className="text-sm text-foreground/60 leading-relaxed group-hover:text-foreground/80 transition-colors">
+                        <span className="text-sm text-foreground/60 leading-relaxed group-hover:text-foreground/80 transition-colors whitespace-pre-line">
                           {t('provider.apply.form.agreement')}
                         </span>
                       </label>

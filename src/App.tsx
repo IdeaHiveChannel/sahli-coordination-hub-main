@@ -34,13 +34,24 @@ const Services = lazy(() => import("@/pages/Services"));
 const HomeMaintenance = lazy(() => import("@/pages/services/HomeMaintenance"));
 const CleaningServices = lazy(() => import("@/pages/services/CleaningServices"));
 const MovingServices = lazy(() => import("@/pages/services/MovingServices"));
-const OutdoorSpecialized = lazy(() => import("@/pages/services/OutdoorSpecialized"));
+const PestControlLandscaping = lazy(() => import("@/pages/services/PestControlLandscaping"));
 const CareLifestyle = lazy(() => import("@/pages/services/CareLifestyle"));
-const ElectronicsTech = lazy(() => import("@/pages/services/ElectronicsTech"));
+const ElectronicsRepair = lazy(() => import("@/pages/services/ElectronicsRepair"));
 const ACRepair = lazy(() => import("@/pages/services/ACRepair"));
 const Plumbing = lazy(() => import("@/pages/services/Plumbing"));
 const Electrical = lazy(() => import("@/pages/services/Electrical"));
 const Babysitting = lazy(() => import("@/pages/services/Babysitting"));
+
+// New SEO High-Intent Pages
+const DeepCleaning = lazy(() => import("@/pages/services/DeepCleaning"));
+const ACMaintenance = lazy(() => import("@/pages/services/ACMaintenance"));
+const PestControl = lazy(() => import("./pages/services/PestControl"));
+
+// Location-Intent Pages
+const Doha = lazy(() => import("@/pages/locations/Doha"));
+const Lusail = lazy(() => import("@/pages/locations/Lusail"));
+const ThePearl = lazy(() => import("@/pages/locations/ThePearl"));
+
 const TrustStandards = lazy(() => import("@/pages/TrustStandards"));
 const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
@@ -87,16 +98,24 @@ const App = () => (
                 {/* 6 Pillar Pages */}
                 <Route path="/home-maintenance-qatar" element={<HomeMaintenance />} />
                 <Route path="/cleaning-services-qatar" element={<CleaningServices />} />
-                <Route path="/house-shifting-qatar" element={<MovingServices />} />
-                <Route path="/outdoor-specialized-qatar" element={<OutdoorSpecialized />} />
+                <Route path="/moving-services-qatar" element={<MovingServices />} />
+                <Route path="/pest-control-landscaping-qatar" element={<PestControlLandscaping />} />
                 <Route path="/care-lifestyle-qatar" element={<CareLifestyle />} />
-                <Route path="/electronics-tech-qatar" element={<ElectronicsTech />} />
+                <Route path="/electronics-repair-qatar" element={<ElectronicsRepair />} />
                 
-                {/* SEO Long-tail Pages */}
+                {/* SEO High-Intent Pages */}
                 <Route path="/ac-repair-qatar" element={<ACRepair />} />
+                <Route path="/ac-maintenance-qatar" element={<ACMaintenance />} />
                 <Route path="/plumbing-services-qatar" element={<Plumbing />} />
                 <Route path="/electrical-services-qatar" element={<Electrical />} />
                 <Route path="/babysitting-services-qatar" element={<Babysitting />} />
+                <Route path="/deep-cleaning-qatar" element={<DeepCleaning />} />
+                <Route path="/pest-control-qatar" element={<PestControl />} />
+
+                {/* Location-Intent Pages */}
+                <Route path="/home-services-doha" element={<Doha />} />
+                <Route path="/home-services-lusail" element={<Lusail />} />
+                <Route path="/home-services-the-pearl" element={<ThePearl />} />
 
                 <Route path="/trust-standards" element={<TrustStandards />} />
                 <Route path="/about" element={<About />} />

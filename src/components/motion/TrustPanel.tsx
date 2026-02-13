@@ -61,8 +61,8 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
             {(imageUrl || videoUrl) && (
               <motion.div 
                 className="relative aspect-[16/9] rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden shadow-xl group border border-border btn-shine"
-                initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: isMobile ? 10 : 20 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.2 }}
               >
@@ -73,7 +73,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                     muted
                     playsInline
                     crossOrigin="anonymous"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   >
                     <source src={videoUrl} type="video/mp4" />
                     {imageUrl && (
@@ -95,7 +95,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-slate-950/5 z-0" />
               </motion.div>
             )}
           </motion.div>

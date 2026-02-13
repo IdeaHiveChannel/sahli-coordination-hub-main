@@ -34,6 +34,15 @@ interface TrustPanel {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const ctaRef = useRef<HTMLElement>(null);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    setMousePos({
+      x: (clientX / innerWidth - 0.5) * 40,
+      y: (clientY / innerHeight - 0.5) * 40,
+    });
+  };
+
   const { scrollYProgress } = useScroll({
     target: ctaRef,
     offset: ["start end", "end start"]
@@ -62,10 +71,10 @@ interface TrustPanel {
 
   const coverageLocations = [
     { name: t('home.coverage.location1'), image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=2064&auto=format&fit=crop" },
-    { name: t('home.coverage.location2'), image: "https://images.unsplash.com/photo-1510665724063-f77a0bc09511?q=80&w=2070&auto=format&fit=crop" },
+    { name: t('home.coverage.location2'), image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop" },
     { name: t('home.coverage.location3'), image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop" },
-    { name: t('home.coverage.location4'), image: "https://images.unsplash.com/photo-1595111304912-320a760f38f4?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location5'), image: "https://images.unsplash.com/photo-1571731956622-7a7d8b821f5d?q=80&w=2071&auto=format&fit=crop" },
+    { name: t('home.coverage.location4'), image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" },
+    { name: t('home.coverage.location5'), image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2071&auto=format&fit=crop" },
     { name: t('home.coverage.location6'), image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop" },
     { name: t('home.coverage.location7'), image: "https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?q=80&w=1932&auto=format&fit=crop" },
     { name: t('home.coverage.location8'), image: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?q=80&w=1974&auto=format&fit=crop" },
@@ -80,16 +89,16 @@ interface TrustPanel {
   };
 
   const heroMeta = [
+    { label: t('home.hero.meta.model'), icon: <CheckCircle2 size={16} /> },
     { label: t('home.hero.meta.bestFor'), icon: <Target size={16} /> },
     { label: t('home.hero.meta.coverage'), icon: <Shield size={16} /> },
-    { label: t('home.hero.meta.model'), icon: <CheckCircle2 size={16} /> },
   ];
 
   const glanceItems = [
-    { title: t('home.glance.item1.title'), desc: t('home.glance.item1.desc'), icon: <MessageSquare size={24} /> },
-    { title: t('home.glance.item2.title'), desc: t('home.glance.item2.desc'), icon: <ShieldCheck size={24} /> },
-    { title: t('home.glance.item3.title'), desc: t('home.glance.item3.desc'), icon: <Search size={24} /> },
-    { title: t('home.glance.item4.title'), desc: t('home.glance.item4.desc'), icon: <HeartHandshake size={24} /> },
+    { title: t('home.glance.item1.title'), desc: t('home.glance.item1.desc'), icon: <Wallet size={24} /> },
+    { title: t('home.glance.item2.title'), desc: t('home.glance.item2.desc'), icon: <PhoneOff size={24} /> },
+    { title: t('home.glance.item3.title'), desc: t('home.glance.item3.desc'), icon: <ClipboardList size={24} /> },
+    { title: t('home.glance.item4.title'), desc: t('home.glance.item4.desc'), icon: <ShieldCheck size={24} /> },
   ];
 
   const solutions = [
@@ -160,7 +169,6 @@ interface TrustPanel {
   // Parallax effects
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
   
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -178,93 +186,58 @@ interface TrustPanel {
 
   const services = [
     { 
-      title: t('services.homeMaintenance.title'), 
-      description: t('services.homeMaintenance.subtitle'),
+      title: t('services.homeMaintenance.tax.title'), 
+      description: t('services.homeMaintenance.tax.items'),
       imageUrl: "/Services/AC Maintenance.jpg",
       icon: <Wrench size={32} />,
       path: t('services.homeMaintenance.path'),
       whatsappKey: 'services.homeMaintenance.whatsapp',
-      number: "01",
-      subcategories: [
-        t('services.homeMaintenance.ac.title'),
-        t('services.homeMaintenance.electrical.title'),
-        t('services.homeMaintenance.plumbing.title'),
-        t('services.homeMaintenance.handyman.title'),
-      ]
+      subcategories: []
     },
     { 
-      title: t('services.cleaning.title'), 
-      description: t('services.cleaning.subtitle'),
+      title: t('services.cleaning.tax.title'), 
+      description: t('services.cleaning.tax.items'),
       imageUrl: "/Services/Cleaning service.jpg",
       icon: <Sparkles size={32} />,
       path: t('services.cleaning.path'),
       whatsappKey: 'services.cleaning.whatsapp',
-      number: "02",
-      subcategories: [
-        t('services.cleaning.regular.title'),
-        t('services.cleaning.deep.title'),
-        t('services.cleaning.specialized.title'),
-      ]
+      subcategories: []
     },
     { 
-      title: t('services.moving.title'), 
-      description: t('services.moving.subtitle'),
+      title: t('services.moving.tax.title'), 
+      description: t('services.moving.tax.items'),
       imageUrl: "/Services/Moving & Relocation.jpg",
       icon: <Truck size={32} />,
       path: t('services.moving.path'),
       whatsappKey: 'services.moving.whatsapp',
-      number: "03",
-      subcategories: [
-        t('services.moving.house.title'),
-        t('services.moving.dismantling.title'),
-        t('services.moving.storage.title'),
-      ]
+      subcategories: []
     },
     { 
-      title: t('services.outdoor.title'), 
-      description: t('services.outdoor.subtitle'),
+      title: t('services.outdoor.tax.title'), 
+      description: t('services.outdoor.tax.items'),
       imageUrl: "/Services/Pest Control.jpg",
       icon: <Leaf size={32} />,
       path: t('services.outdoor.path'),
       whatsappKey: 'services.outdoor.whatsapp',
-      number: "04",
-      subcategories: [
-        t('services.outdoor.pest.title'),
-        t('services.outdoor.pool.title'),
-        t('services.outdoor.landscaping.title'),
-        t('services.outdoor.waterproofing.title'),
-      ]
+      subcategories: []
     },
     { 
-      title: t('services.care.title'), 
-      description: t('services.care.subtitle'),
+      title: t('services.care.tax.title'), 
+      description: t('services.care.tax.items'),
       imageUrl: "/Services/Nanny Care Service.jpg",
       icon: <Heart size={32} />,
       path: t('services.care.path'),
       whatsappKey: 'services.care.whatsapp',
-      number: "05",
-      subcategories: [
-        t('services.care.childcare.title'),
-        t('services.care.healthcare.title'),
-        t('services.care.pets.title'),
-        t('services.care.beauty.title'),
-        t('services.care.tutoring.title'),
-        t('services.care.trainer.title'),
-      ]
+      subcategories: []
     },
     { 
-      title: t('services.electronics.title'), 
-      description: t('services.electronics.subtitle'),
+      title: t('services.electronics.tax.title'), 
+      description: t('services.electronics.tax.items'),
       imageUrl: "/Services/Electronics repair.jpg",
       icon: <Cpu size={32} />,
       path: t('services.electronics.path'),
       whatsappKey: 'services.electronics.whatsapp',
-      number: "06",
-      subcategories: [
-        t('services.electronics.repair.title'),
-        t('services.electronics.smart.title'),
-        t('services.electronics.satellite.title'),
-      ]
+      subcategories: []
     }
   ];
 
@@ -327,8 +300,15 @@ interface TrustPanel {
 
   return (
     <Layout>
+      {/* Noise Texture Overlay */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay z-[100] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
       {/* Hero Section - Refined, Dynamic - Height adjusted for laptops/mobile */}
-      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
+      <section 
+        ref={containerRef} 
+        onMouseMove={handleMouseMove}
+        className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background"
+      >
         {/* Background Video/Image with subtle overlay */}
         <div className="absolute inset-0 z-0">
           <motion.div 
@@ -336,10 +316,11 @@ interface TrustPanel {
             style={{ 
               y: y1Spring,
               scale: scaleSpring,
-              opacity: opacity
+              x: mousePos.x * 0.2,
+              rotate: mousePos.y * 0.02
             }}
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <img 
@@ -350,20 +331,36 @@ interface TrustPanel {
               />
           </motion.div>
           
-          {/* Darker overlays to make images pop and remove whitish haze */}
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-background z-10" />
-          <div className={`absolute inset-0 bg-gradient-to-${dir === 'rtl' ? 'l' : 'r'} from-slate-950/60 via-transparent to-transparent z-10`} />
+          {/* Darker overlays removed as per user request */}
+          <div className="absolute inset-0 bg-slate-950/10 z-0" />
           
-          {/* Floating Background Blobs - Industrial Premium Style */}
-          <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-primary/20 rounded-full blur-[60px] md:blur-[120px] animate-pulse-slow z-0`} />
-          <div className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/3' : 'left-1/3'} w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-primary/10 rounded-full blur-[50px] md:blur-[100px] animate-pulse-slow delay-1000 z-0`} />
+          {/* Premium Animated Blobs - Industrial Premium Style */}
+          <motion.div 
+            animate={{ 
+              x: [0, 50, 0], 
+              y: [0, -30, 0],
+              scale: [1, 1.2, 1],
+              rotate: [0, 45, 0]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/3' : 'right-1/3'} w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-screen z-0`} 
+          />
+          <motion.div 
+            animate={{ 
+              x: [0, -30, 0], 
+              y: [0, 50, 0],
+              scale: [1, 1.1, 1],
+              rotate: [0, -30, 0]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className={`absolute bottom-1/4 ${dir === 'rtl' ? 'right-1/4' : 'left-1/4'} w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] mix-blend-screen z-0`} 
+          />
         </div>
         
         {/* Decorative elements */}
         <motion.div 
           style={{ y: y2Spring }}
-          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-gradient-to-${dir === 'rtl' ? 'r' : 'l'} from-primary/[0.06] to-transparent pointer-events-none z-10`} 
+          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-950/5 pointer-events-none z-10`} 
         />
 
         <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
@@ -375,18 +372,29 @@ interface TrustPanel {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+              className="inline-flex items-center gap-3 px-5 py-2.5 bg-primary/20 rounded-full border border-primary/30 text-[0.75rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-6 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
             >
               <img 
                 src="/logos/SahlLogo9.png" 
                 alt={t('home.hero.logoAlt')} 
-                className="w-3.5 h-3.5 object-contain animate-pulse" 
+                className="w-4 h-4 md:w-3.5 md:h-3.5 object-contain animate-pulse" 
               />
               {t('home.hero.label')}
             </motion.div>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl 3xl:text-9xl mb-4 md:mb-6 leading-[1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
-              {t('home.hero.title')}
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl mb-6 md:mb-8 leading-[1.1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+              {t('home.hero.title').split(' ').map((word, i) => (
+                <div key={i} className="overflow-hidden inline-block mr-[0.3em]">
+                  <motion.span 
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.3 + (i * 0.08), duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                </div>
+              ))}
             </h1>
 
             <motion.div
@@ -395,11 +403,11 @@ interface TrustPanel {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-base md:text-lg lg:text-xl xl:text-2xl !text-white/90 mb-6 md:mb-10 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+              <p className="text-lg md:text-lg lg:text-xl !text-white/90 mb-10 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
                 {t('home.hero.subtitle')}
               </p>
               
-              <div className="flex flex-wrap items-center gap-2.5 mb-8 md:mb-10 justify-center md:justify-start w-full">
+              <div className="flex flex-wrap items-center gap-3 mb-10 md:mb-10 justify-center md:justify-start w-full">
                 {heroMeta.map((item, i) => (
                   <motion.div 
                     key={i} 
@@ -407,7 +415,7 @@ interface TrustPanel {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.8 + (i * 0.1) }}
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="flex items-center gap-2.5 px-4 py-2 bg-slate-950/40 backdrop-blur-xl rounded-xl border border-white/10 text-[0.7rem] md:text-[0.75rem] font-black text-white shadow-2xl shrink-0 hover:border-primary/50 transition-colors"
+                    className="flex items-center gap-2.5 px-5 py-2.5 bg-slate-950/40 backdrop-blur-xl rounded-xl border border-white/10 text-[0.8rem] md:text-[0.75rem] font-black text-white shadow-2xl shrink-0 hover:border-primary/50 transition-colors"
                   >
                     <span className="text-primary">{item.icon}</span>
                     <span className="tracking-tight">{item.label}</span>
@@ -415,13 +423,13 @@ interface TrustPanel {
                 ))}
               </div>
               
-              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                 <a 
                   href={getWhatsAppLink(t('cta.whatsapp.general'))}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackRequestClick('Hero Section')} 
-                  className="cta-primary btn-shine w-full sm:w-auto group h-12 md:h-16 px-10 flex items-center justify-center rounded-xl shadow-[0_20px_40px_-10px_rgba(var(--primary-rgb),0.3)]"
+                  className="cta-primary btn-shine w-full sm:w-auto group h-12 md:h-12 px-8 flex items-center justify-center rounded-xl shadow-[0_20px_40px_-10px_rgba(var(--primary-rgb),0.3)]"
                 >
                   <motion.div 
                     className="flex items-center gap-3"
@@ -429,18 +437,18 @@ interface TrustPanel {
                     whileTap={{ scale: 0.98 }}
                   >
                     <Send size="18" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    <span className="tracking-widest uppercase font-black text-[0.65rem] md:text-xs">{t('home.hero.cta')}</span>
+                    <span className="tracking-widest uppercase font-black text-[0.75rem] md:text-[0.7rem]">{t('home.hero.cta')}</span>
                   </motion.div>
                 </a>
                 
                 <Link to="/services" className="w-full sm:w-auto">
                   <motion.button
-                    className="w-full sm:w-auto h-12 md:h-16 px-10 bg-white text-slate-950 rounded-xl font-black text-[0.65rem] md:text-xs flex items-center justify-center gap-3 hover:bg-white/90 hover:scale-[1.02] transition-all duration-500 group shadow-[0_20px_50px_-12px_rgba(255,255,255,0.3)]"
+                    className="w-full sm:w-auto h-12 md:h-12 px-8 bg-white text-slate-950 rounded-xl font-black text-[0.75rem] md:text-[0.7rem] flex items-center justify-center gap-3 hover:bg-white/90 hover:scale-[1.02] transition-all duration-500 group shadow-[0_20px_50px_-12px_rgba(255,255,255,0.3)]"
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {t('nav.services')}
-                    <ArrowRight size="18" className={`${dir === 'rtl' ? 'rotate-180' : ''} group-hover:translate-x-2 transition-transform duration-500`} />
+                    <ArrowRight size="20" className={`${dir === 'rtl' ? 'rotate-180' : ''} group-hover:translate-x-2 transition-transform duration-500`} />
                   </motion.button>
                 </Link>
               </div>
@@ -448,24 +456,18 @@ interface TrustPanel {
           </motion.div>
         </div>
 
-        {/* Scroll indicator - refined */}
+        {/* Advanced Scroll Indicator */}
         <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 2 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4"
         >
-          <div className="w-px h-16 bg-gradient-to-b from-primary/30 to-transparent relative overflow-hidden">
+          <div className="w-px h-16 bg-gradient-to-b from-primary via-primary/20 to-transparent relative">
             <motion.div 
-              className="absolute top-0 left-0 w-full h-1/2 bg-primary"
-              animate={{
-                y: ['-100%', '200%']
-              }}
-              transition={{ 
-                duration: 2.5, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              animate={{ y: [0, 40, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" 
             />
           </div>
         </motion.div>
@@ -488,10 +490,86 @@ interface TrustPanel {
           ))}
         </Marquee>
         
-        {/* Soft Edge Fades */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
+        {/* Edge Fades removed as per user request */}
       </div>
+
+      {/* 2.1 Differentiation Block */}
+      <section className="py-12 md:py-20 bg-[#050505] relative overflow-hidden border-y border-white/5">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/3 h-full bg-primary/5 blur-[120px] rounded-full opacity-30`} />
+        </div>
+
+        <div className="container-sahli relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left Column: The Problem */}
+            <motion.div
+              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <h2 className="text-lg md:text-xl lg:text-2xl font-black text-white mb-6 leading-tight">
+                  {t('home.differentiation.title')}
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors group">
+                    <div className="w-10 h-10 shrink-0 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center">
+                      <Search size={20} />
+                    </div>
+                    <p className="text-sm md:text-base text-white/70 leading-relaxed group-hover:text-white/90 transition-colors">
+                      {t('home.differentiation.problem1')}
+                    </p>
+                  </div>
+                  <div className="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors group">
+                    <div className="w-10 h-10 shrink-0 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center">
+                      <ClipboardList size={20} />
+                    </div>
+                    <p className="text-sm md:text-base text-white/70 leading-relaxed group-hover:text-white/90 transition-colors">
+                      {t('home.differentiation.problem2')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Column: The Solution (SAHLI) */}
+            <motion.div
+              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="p-8 md:p-10 rounded-[2.5rem] bg-primary/10 border border-primary/20 relative overflow-hidden">
+                {/* Decorative glow */}
+                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 blur-[80px] rounded-full" />
+                
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-[0.6rem] font-black tracking-widest uppercase mb-6">
+                    <ShieldCheck size={12} />
+                    {t('home.differentiation.statement')}
+                  </div>
+                  
+                  <h3 className="text-lg md:text-xl font-black text-white mb-8">
+                    {t('home.differentiation.list.title')}
+                  </h3>
+                  
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {[1, 2, 3, 4].map((item) => (
+                      <li key={item} className="flex items-center gap-3 text-white/80">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
+                        <span className="text-sm md:text-base font-bold">
+                          {t(`home.differentiation.list.item${item}` as any)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* 2. Service Solutions Grid - Dark Theme */}
       <section id="services" className="min-h-[100svh] md:min-h-screen py-12 md:py-16 flex items-center bg-[#030303] relative overflow-hidden">
@@ -509,7 +587,7 @@ interface TrustPanel {
         <div className="container-sahli relative z-10 w-full">
           <div className="max-w-3xl mb-8 md:mb-10 mx-auto md:mx-0 text-center md:text-start">
             <motion.h2 
-              className="text-display mb-2 text-white !text-2xl md:!text-4xl"
+              className="text-display mb-2 text-white !text-xl md:!text-3xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -590,6 +668,7 @@ interface TrustPanel {
               <ServiceRoof
                 key={i}
                 index={i}
+                showNumber={false}
                 title={service.title}
                 description={service.description}
                 imageUrl={service.imageUrl}
@@ -634,7 +713,7 @@ interface TrustPanel {
                     <div className="relative z-10 w-12 h-12 rounded-xl bg-white text-primary flex items-center justify-center mb-5 shadow-sm border border-border/50">
                       {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
                     </div>
-                    <h3 className="relative z-10 text-lg font-black mb-2 text-foreground leading-tight">
+                    <h3 className="relative z-10 text-base font-black mb-2 text-foreground leading-tight">
                       {item.title}
                     </h3>
                     <p className="relative z-10 text-[0.85rem] text-foreground/60 leading-relaxed">
@@ -664,7 +743,7 @@ interface TrustPanel {
                   {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
                 </div>
                 
-                <h3 className="relative z-10 text-lg font-black mb-2 text-foreground group-hover:text-primary transition-colors leading-tight">
+                <h3 className="relative z-10 text-base font-black mb-2 text-foreground group-hover:text-primary transition-colors leading-tight">
                   {item.title}
                 </h3>
                 <p className="relative z-10 text-[0.85rem] text-foreground/60 leading-relaxed">
@@ -674,18 +753,7 @@ interface TrustPanel {
             ))}
           </div>
           
-          <motion.div 
-            className="mt-12 text-center"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-block px-5 py-2.5 rounded-full bg-primary/5 border border-primary/10">
-              <p className="text-primary font-black text-xs tracking-tight">
-                {t('home.glance.mantra')}
-              </p>
-            </div>
-          </motion.div>
+          {/* Tightened mantra - promotional line removed */}
         </div>
       </section>
 
@@ -727,7 +795,7 @@ interface TrustPanel {
                             <div className="absolute inset-0 rounded-xl bg-primary animate-ping opacity-20" />
                           )}
                         </div>
-                        <h3 className="text-lg font-black mb-3 text-foreground leading-tight">
+                        <h3 className="text-base font-black mb-3 text-foreground leading-tight">
                           {t(`home.how.step${step}.title` as any)}
                         </h3>
                         <p className="text-[0.85rem] text-foreground/60 leading-relaxed">
@@ -761,7 +829,7 @@ interface TrustPanel {
                       )}
                     </div>
                     
-                    <h3 className="text-lg font-black mb-3 text-foreground leading-tight">
+                    <h3 className="text-base font-black mb-3 text-foreground leading-tight">
                       {t(`home.how.step${step}.title` as any)}
                     </h3>
                     <p className="text-[0.85rem] text-foreground/60 leading-relaxed">
@@ -770,84 +838,6 @@ interface TrustPanel {
                   </div>
                 </motion.div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. WHY COORDINATION? (Value Proposition) */}
-      <section className="section-spacing bg-background relative overflow-hidden border-b border-border">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/[0.01] -skew-x-12 transform origin-top pointer-events-none" />
-        
-        <div className="container-sahli relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-start">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center lg:items-start"
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full text-[0.65rem] font-black text-primary uppercase tracking-widest mb-6">
-                  <ShieldCheck size={12} />
-                  {t('home.standards.label')}
-                </div>
-                <h2 className="text-display mb-6">
-                  {t('home.diff.title')}
-                </h2>
-                <p className="text-xl text-foreground/60 mb-10 leading-relaxed max-w-lg">
-                  {t('home.diff.subtitle')}
-                </p>
-                
-                <div className="space-y-6">
-                  {[1, 2, 3, 4, 5].map((idx) => (
-                    <motion.div 
-                      key={idx}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="flex items-center gap-4"
-                    >
-                      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                        <CheckCircle2 size={20} />
-                      </div>
-                      <span className="text-lg font-bold text-foreground">
-                        {t(`home.diff.item${idx}` as any)}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="relative z-10 p-1 md:p-2 rounded-[3rem] bg-gradient-to-br from-primary/20 via-primary/5 to-transparent border border-primary/10 shadow-2xl"
-              >
-                <div className="relative rounded-[2.5rem] overflow-hidden bg-white aspect-square md:aspect-video lg:aspect-square">
-                  <img 
-                    src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Coordination Excellence"
-                    className="w-full h-full object-cover"
-                    crossOrigin="anonymous"
-                  />
-                  {/* Glass Card Overlay */}
-                  <div className="absolute bottom-8 left-8 right-8 p-8 rounded-[2rem] glass-morphism border border-white/20 shadow-2xl">
-                    <p className="text-lg md:text-xl font-black text-foreground text-center leading-tight">
-                      "{t('home.diff.footer')}"
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-              
-              {/* Floating Accents */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 blur-3xl rounded-full" />
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/5 blur-3xl rounded-full" />
             </div>
           </div>
         </div>
@@ -870,7 +860,7 @@ interface TrustPanel {
                   {t('home.standards.label')}
                 </div>
                 
-                <h2 className="text-display !text-2xl md:!text-4xl">
+                <h2 className="text-display !text-xl md:!text-3xl">
                   {t('home.standards.title')}
                 </h2>
                 
@@ -886,10 +876,8 @@ interface TrustPanel {
                       <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-500 animate-pulse" />
                       <span className="text-[0.55rem] md:text-[0.65rem] font-black text-foreground/40 uppercase tracking-widest">Active Verification</span>
                     </div>
-                    <div className="text-3xl md:text-4xl font-black text-primary mb-1 md:mb-2">100%</div>
-                    <div className="text-[0.55rem] md:text-xs font-bold text-foreground/40 uppercase tracking-widest">Compliance Rate</div>
-                    <p className="mt-2 md:mt-4 text-[0.7rem] md:text-sm text-foreground/60 font-medium leading-relaxed">
-                      Every company in our network undergoes a 7-point verification process before their first coordination.
+                    <p className="text-[0.7rem] md:text-sm text-foreground/60 font-medium leading-relaxed">
+                      Every company in our network undergoes a verification process before their first coordination.
                     </p>
                   </div>
                 </div>
@@ -969,14 +957,10 @@ interface TrustPanel {
                   <Target size={12} />
                   {t('home.coverage.hub')}
                 </div>
-                <h2 className="text-display mb-6">
+                <h2 className="text-display mb-6 !text-xl md:!text-3xl">
                   {t('home.coverage.title')}
                 </h2>
-                <div className="flex items-center justify-between mb-8">
-                  <p className="text-subtitle !text-foreground/70 max-w-md !mb-0">
-                    {t('home.coverage.desc')}
-                  </p>
-                </div>
+
                 
                 <div className="overflow-hidden -mx-4 px-4 md:mx-0 md:px-0 cursor-grab active:cursor-grabbing" ref={emblaRefCoverage}>
                   <div className="flex">
@@ -996,7 +980,7 @@ interface TrustPanel {
                             loading="lazy"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                          <div className="absolute inset-0 bg-slate-950/5" />
                           <div className="absolute bottom-4 left-4 right-4">
                             <span className="text-sm md:text-base font-black text-white drop-shadow-lg">
                               {loc.name}
@@ -1058,7 +1042,7 @@ interface TrustPanel {
               >
                 <ShieldCheck size={12} className="text-primary" />
                 <span className="text-[0.6rem] md:text-[0.65rem] font-bold text-primary uppercase tracking-[0.2em]">
-                  {t('home.hero.meta.model')}
+                  {t('home.hero.meta.coverage')}
                 </span>
               </motion.div>
               
@@ -1067,20 +1051,10 @@ interface TrustPanel {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground mb-3 md:mb-4 tracking-tight"
+                className="text-xl md:text-2xl lg:text-3xl font-black text-foreground mb-3 md:mb-4 tracking-tight"
               >
                 {t('home.clarity.title')}
               </motion.h2>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="text-sm md:text-base text-foreground/50 font-medium"
-              >
-                {t('home.standards.subtitle')}
-              </motion.p>
             </div>
           </div>
           
@@ -1101,13 +1075,10 @@ interface TrustPanel {
                           {React.cloneElement(item.icon as React.ReactElement, { size: 24 })}
                         </div>
                       </div>
-                      <h3 className="text-lg font-black text-foreground mb-3 leading-tight">
+                      <h3 className="text-base font-black text-foreground mb-3 leading-tight">
                         {item.title}
                       </h3>
                       <div className="w-10 h-1 bg-primary/10 rounded-full mb-4" />
-                      <p className="text-[10px] text-foreground/40 font-bold uppercase tracking-widest">
-                        Verified Hub Protocol
-                      </p>
                     </div>
                   </motion.div>
                 </div>
@@ -1139,16 +1110,12 @@ interface TrustPanel {
                     </div>
                   </div>
 
-                  <h3 className="text-lg md:text-xl font-black text-foreground mb-3 group-hover:text-primary transition-colors leading-tight">
+                  <h3 className="text-base md:text-lg font-black text-foreground mb-3 group-hover:text-primary transition-colors leading-tight">
                     {item.title}
                   </h3>
                   
                   <div className="w-10 h-1 bg-primary/10 rounded-full mb-4 group-hover:w-16 group-hover:bg-primary/30 transition-all duration-500" />
                   
-                  <p className="text-[10px] md:text-xs text-foreground/40 font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                    Verified Hub Protocol
-                  </p>
-
                   {/* Decorative element */}
                   <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-primary/[0.02] rounded-full group-hover:scale-150 transition-transform duration-700" />
                 </div>
@@ -1159,7 +1126,7 @@ interface TrustPanel {
       </section>
 
       {/* 9. FINAL CTA - With Background Image/Video Effect */}
-      <section ref={ctaRef} className="section-spacing relative overflow-hidden bg-slate-900 py-32">
+      <section ref={ctaRef} className="section-spacing relative overflow-hidden bg-slate-900 py-24">
         {/* Background Image with Parallax */}
         <motion.div 
           style={{ y: backgroundY }}
@@ -1174,7 +1141,7 @@ interface TrustPanel {
           />
           {/* Multi-layered Overlays */}
           <div className="absolute inset-0 bg-slate-900/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-slate-900/60" />
+          <div className="absolute inset-0 bg-slate-950/5" />
           <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
         </motion.div>
 
@@ -1190,12 +1157,20 @@ interface TrustPanel {
               {t('home.hero.meta.model')}
             </div>
 
-            <h2 className="text-3xl md:text-5xl font-black mb-6 text-white leading-tight">
+            <h2 className="text-2xl md:text-3xl font-black mb-6 text-white leading-tight">
               {t('home.final.title')}
             </h2>
-            <p className="text-lg md:text-xl font-medium text-white/70 mb-10 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base font-medium text-white/70 mb-10 max-w-2xl mx-auto">
               {t('home.final.subtitle')}
             </p>
+
+            <div className="mb-10 p-6 rounded-3xl bg-white/[0.05] border border-white/10 max-w-xl mx-auto">
+              <p className="text-primary font-black text-lg mb-2">{t('home.final.authority.title')}</p>
+              <p className="text-white/80 font-medium mb-3">{t('home.final.authority.body')}</p>
+              <p className="text-white/60 text-sm italic border-t border-white/5 pt-3">
+                {t('home.final.authority.selection')}
+              </p>
+            </div>
             
             <div className="flex justify-center">
               <a 
@@ -1203,7 +1178,7 @@ interface TrustPanel {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackRequestClick('Final CTA')}
-                className="group relative px-10 py-5 bg-primary text-white font-black text-lg rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)]"
+                className="group relative px-8 py-4 bg-primary text-white font-black text-base rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(var(--primary-rgb),0.4)]"
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <div className="relative flex items-center gap-3">

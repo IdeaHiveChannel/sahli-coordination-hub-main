@@ -21,8 +21,7 @@ export function InfiniteMarquee({ items, logos, speed = 40, direction = 'left' }
 
   return (
     <div className="relative w-full overflow-hidden bg-background py-12 border-y border-border/50">
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+      {/* Edge Fades removed as per user request */}
       
       <motion.div
         className="flex whitespace-nowrap gap-12"
