@@ -1,0 +1,258 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageToggle } from './LanguageToggle';
+import { MessageSquare, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+import { trackRequestClick } from '@/lib/gtag';
+import { getWhatsAppLink } from '@/lib/constants';
+
+import { TranslationKey } from '@/lib/i18n';
+
+export function Header() {
+  const { t, dir } = useLanguage();
+  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems: Array<{ key: TranslationKey; path: string }> = [
+    { key: 'nav.services', path: '/services' },
+    { key: 'nav.about', path: '/about' },
+    { key: 'nav.trustStandards', path: '/trust-standards' },
+    { key: 'nav.howItWorks', path: '/how-it-works' },
+    { key: 'nav.providerApplication', path: '/provider-application' },
+  ];
+
+  const isDarkHeroPage = ['/', '/about', '/trust-standards'].includes(location.pathname);
+
+  return (
+    <header 
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${
+        isScrolled || isMenuOpen ? 'py-1 md:py-2' : 'py-2 md:py-4'
+      }`}
+      dir={dir}
+    >
+      <div className="container-sahli relative z-[110]">
+        <motion.nav 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className={`flex items-center justify-between px-3 md:px-6 py-1.5 md:py-2 rounded-xl md:rounded-2xl transition-all duration-700 ${
+            isScrolled || isMenuOpen
+              ? 'glass-morphism shadow-[0_15px_40px_rgba(0,0,0,0.3)]' 
+              : 'bg-slate-950/20 md:bg-transparent'
+          }`}
+        >
+          {/* Logo */}
+              <Link
+                to="/"
+                className="flex items-center gap-2 group min-w-[40px] md:min-w-[80px] relative"
+              >
+                <motion.div
+                  whileHover={{ rotate: 5, scale: 1.05 }}
+                  className="relative w-[1rem] h-[1rem] md:w-[1.5rem] md:h-[1.5rem] flex items-center justify-center transition-all duration-500"
+                >
+                  <img
+                    src={isScrolled || isMenuOpen || !isDarkHeroPage ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"}
+                    alt="SAHLI Logo"
+                    className={`absolute w-10 h-10 md:w-[4rem] md:h-[4rem] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
+                      dir === 'rtl' ? 'right-0' : 'left-0'
+                    }`}
+                  />
+                </motion.div>
+              </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden xl:flex items-center gap-5">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`text-[9px] md:text-[10px] lg:text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold uppercase tracking-[0.12em] transition-all duration-500 relative group ${
+                    isActive 
+                      ? 'text-primary' 
+                      : (isScrolled || isMenuOpen || !isDarkHeroPage ? 'text-foreground/80 hover:text-primary' : 'text-white hover:text-primary')
+                  }`}
+                >
+                  {t(item.key)}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-500 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`} />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className={`flex items-center gap-1 px-1 py-0.5 rounded-lg border border-border/50 transition-colors duration-500 ${
+              isScrolled || isMenuOpen || !isDarkHeroPage ? 'bg-foreground/5 text-foreground' : 'bg-white/10 text-white'
+            }`}>
+              <LanguageToggle />
+            </div>
+            
+            <a
+              href={getWhatsAppLink(t('cta.whatsapp.general'))}
+              target="_blank"
+              onClick={() => trackRequestClick('Header')}
+              className="hidden sm:flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 bg-primary text-primary-foreground rounded-lg md:rounded-xl text-[8px] md:text-[9px] font-black uppercase tracking-[0.08em] hover:shadow-xl hover:shadow-primary/40 transition-all duration-500 btn-shine"
+            >
+              <motion.div
+                className="flex items-center gap-1.5"
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <MessageSquare size={12} className="fill-primary-foreground" />
+                {t('cta.whatsapp')}
+              </motion.div>
+            </a>
+
+            {/* Mobile Menu Toggle */}
+            <motion.button 
+              whileTap={{ scale: 0.9 }}
+              className={`xl:hidden w-9 h-9 flex flex-col items-center justify-center gap-1 rounded-xl transition-all duration-300 ${
+                isMenuOpen 
+                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
+                  : (isScrolled || !isDarkHeroPage ? 'text-foreground hover:bg-secondary/50' : 'text-white hover:bg-white/10')
+              } z-[120] relative overflow-hidden group`}
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMenuOpen(!isMenuOpen);
+              }}
+              aria-label="Toggle menu"
+            >
+              <motion.span 
+                animate={isMenuOpen ? { rotate: 45, y: 5.5 } : { rotate: 0, y: 0 }}
+                className={`w-5 h-0.5 rounded-full transition-colors ${isMenuOpen ? 'bg-primary-foreground' : 'bg-current'}`}
+              />
+              <motion.span 
+                animate={isMenuOpen ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
+                className={`w-5 h-0.5 rounded-full transition-colors ${isMenuOpen ? 'bg-primary-foreground' : 'bg-current'}`}
+              />
+              <motion.span 
+                animate={isMenuOpen ? { rotate: -45, y: -5.5 } : { rotate: 0, y: 0 }}
+                className={`w-5 h-0.5 rounded-full transition-colors ${isMenuOpen ? 'bg-primary-foreground' : 'bg-current'}`}
+              />
+            </motion.button>
+          </div>
+        </motion.nav>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.1}
+            onDragEnd={(_, info) => {
+              if (info.offset.x > 100) setIsMenuOpen(false);
+            }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[105] xl:hidden bg-background overflow-y-auto overflow-x-hidden"
+          >
+            {/* Close Button Inside Overlay */}
+            <div className={`absolute top-8 ${dir === 'rtl' ? 'left-6 md:left-12' : 'right-6 md:right-12'} z-[110]`}>
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMenuOpen(false)}
+                className="w-12 h-12 flex items-center justify-center rounded-xl bg-foreground/5 text-foreground hover:bg-foreground/10 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </motion.button>
+            </div>
+
+            {/* Animated Background Decorative Elements */}
+            <div className="absolute inset-0 z-0 opacity-20">
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 90, 0],
+                  x: [0, 50, 0]
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-20 -right-20 w-64 md:w-96 h-64 md:h-96 bg-primary/20 rounded-full blur-3xl"
+              />
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.3, 1],
+                  rotate: [0, -90, 0],
+                  x: [0, -50, 0]
+                }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-20 -left-20 w-64 md:w-96 h-64 md:h-96 bg-primary/10 rounded-full blur-3xl"
+              />
+            </div>
+
+            <div className="relative z-10 min-h-full flex flex-col pt-24 px-6 md:px-12 max-w-screen-xl mx-auto w-full">
+              <div className="flex flex-col gap-4 md:gap-6 flex-grow">
+                {navItems.map((item, i: number) => (
+                  <motion.div
+                    key={item.path}
+                    initial={{ opacity: 0, x: dir === 'rtl' ? -30 : 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + (i * 0.08), duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Link
+                      to={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="group flex flex-col items-start gap-1 py-3 md:py-4 relative"
+                    >
+                      <span className="text-[0.65rem] md:text-[0.7rem] font-black text-primary/40 uppercase tracking-[0.2em]">0{i + 1}</span>
+                      <span className="text-lg md:text-xl font-black text-foreground group-hover:text-primary group-hover:translate-x-2 transition-all duration-500">{t(item.key)}</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="pb-12 pt-8 border-t border-border/50 mt-8"
+              >
+                <div className={`flex flex-col gap-8 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/60">{t('nav.contact')}</span>
+                    <a href={`mailto:${t('contact.email.value')}`} className="block text-base font-medium text-foreground hover:text-primary transition-colors break-all">{t('contact.email.value')}</a>
+                  </div>
+                  
+                  <a
+                    href={getWhatsAppLink(t('cta.whatsapp.general'))}
+                    target="_blank"
+                    onClick={() => {
+                      trackRequestClick('Mobile Menu');
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center gap-3 w-full py-3 bg-primary text-primary-foreground rounded-2xl text-[10px] font-black uppercase tracking-widest hover:shadow-xl hover:shadow-primary/30 transition-all duration-500"
+                  >
+                    <motion.div
+                      className={`flex items-center gap-4 ${dir === 'rtl' ? 'flex-row-reverse' : 'flex-row'}`}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <MessageSquare size={20} className="fill-primary-foreground" />
+                      {t('cta.whatsapp')}
+                    </motion.div>
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+    </header>
+  );
+}

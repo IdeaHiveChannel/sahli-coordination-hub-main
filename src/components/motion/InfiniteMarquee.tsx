@@ -1,0 +1,56 @@
+import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+interface InfiniteMarqueeProps {
+  items: string[];
+  logos?: string[];
+  speed?: number;
+  direction?: 'left' | 'right';
+}
+
+export function InfiniteMarquee({ items, logos, speed = 40, direction = 'left' }: InfiniteMarqueeProps) {
+  const { dir } = useLanguage();
+  
+  // Default to a single logo if no array provided
+  const logoList = logos && logos.length > 0 ? logos : ['/logos/SahlLogo9.png'];
+  
+  // Adjust direction based on RTL
+  const effectiveDirection = dir === 'rtl' 
+    ? (direction === 'left' ? 'right' : 'left') 
+    : direction;
+
+  return (
+    <div className="relative w-full overflow-hidden bg-background py-12 border-y border-border/50">
+      {/* Edge Fades removed as per user request */}
+      
+      <motion.div
+        className="flex whitespace-nowrap gap-12"
+        animate={{
+          x: effectiveDirection === 'left' ? ['0%', '-50%'] : ['-50%', '0%'],
+        }}
+        transition={{
+          duration: speed,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        {[...items, ...items].map((item: string, index: number) => {
+          // Cycle through provided logos
+          const logoSrc = logoList[index % logoList.length];
+          
+          return (
+            <div
+              key={index}
+              className="flex items-center gap-6"
+            >
+              <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground/10 uppercase hover:text-primary/20 transition-colors cursor-default">
+                {item}
+              </span>
+              <img src={logoSrc} alt="" className="w-5 h-5 object-contain opacity-20" />
+            </div>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+}
