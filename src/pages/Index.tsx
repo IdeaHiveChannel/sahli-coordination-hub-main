@@ -251,7 +251,7 @@ export default function Index() {
       <section 
         ref={containerRef} 
         onMouseMove={handleMouseMove}
-        className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-white"
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white"
       >
         {/* Background Video/Image with subtle overlay */}
         <div className="absolute inset-0 z-0">
@@ -276,9 +276,9 @@ export default function Index() {
           {/* Overlays removed for better visibility as requested */}
         </div>
         
-        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
+        <div className="container-sahli relative z-20 py-20 md:pt-24 md:pb-0 flex flex-col items-center md:items-start">
           <div 
-            className="w-full md:max-w-[50%] flex flex-col items-center md:items-start text-center md:text-left"
+            className="w-full md:max-w-[60%] lg:max-w-[50%] flex flex-col items-center md:items-start text-center md:text-left"
           >
             <div 
               className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.65rem] md:text-[0.6rem] font-black tracking-[0.25em] uppercase text-primary mb-6 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine animate-in fade-in slide-in-from-bottom-4 duration-1000"
