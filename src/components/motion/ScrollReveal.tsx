@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -7,6 +6,7 @@ interface ScrollRevealProps {
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right' | 'none';
   duration?: number;
+  onVisibilityChange?: (visible: boolean) => void;
 }
 
 export function ScrollReveal({ 
@@ -14,32 +14,51 @@ export function ScrollReveal({
   className = '', 
   delay = 0,
   direction = 'up',
-  duration = 0.8
+  duration = 0.8,
+  onVisibilityChange
 }: ScrollRevealProps) {
-  const getInitialPosition = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          onVisibilityChange?.(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const getTransformClass = () => {
     switch (direction) {
-      case 'up': return { y: 40 };
-      case 'down': return { y: -40 };
-      case 'left': return { x: 40 };
-      case 'right': return { x: -40 };
-      case 'none': return {};
+      case 'up': return 'translate-y-10';
+      case 'down': return '-translate-y-10';
+      case 'left': return 'translate-x-10';
+      case 'right': return '-translate-x-10';
+      default: return '';
     }
   };
 
+  const transformClass = getTransformClass();
+
   return (
-    <motion.div
-      initial={{ opacity: 0, ...getInitialPosition() }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ 
-        duration, 
-        delay,
-        ease: [0.16, 1, 0.3, 1] // expo out
-      }}
-      className={className}
+    <div
+      ref={ref}
+      className={`transition-all duration-[${duration}s] ease-out-expo ${className} ${isVisible ? 'opacity-100 translate-x-0 translate-y-0' : `opacity-0 ${transformClass}`}`}
+      style={{ transitionDelay: `${delay}s`, transitionDuration: `${duration}s` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -54,22 +73,46 @@ export function StaggerContainer({
   className = '',
   staggerDelay = 0.1
 }: StaggerContainerProps) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={{
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay
-          }
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
         }
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={className}>
+      {React.Children.map(children, (child, index) => {
+        if (React.isValidElement(child)) {
+           // We can't easily force props onto arbitrary children without them accepting it.
+           // But if the children are StaggerItem, we can clone them.
+           // Or we just wrap them.
+           return (
+             <div 
+                className={`transition-all duration-700 ease-out-expo ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: `${index * staggerDelay}s` }}
+             >
+               {child}
+             </div>
+           )
+        }
+        return child;
+      })}
+    </div>
   );
 }
 
@@ -80,22 +123,13 @@ export function StaggerItem({
   children: ReactNode; 
   className?: string;
 }) {
+  // StaggerItem is now just a pass-through because StaggerContainer handles the wrapping/animation
+  // But if used standalone, it needs to handle itself.
+  // However, based on the previous implementation, it was used inside StaggerContainer.
+  // Let's make it a simple div so StaggerContainer's wrapper applies to it.
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: { 
-          opacity: 1, 
-          y: 0,
-          transition: {
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1]
-          }
-        }
-      }}
-      className={className}
-    >
+    <div className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }

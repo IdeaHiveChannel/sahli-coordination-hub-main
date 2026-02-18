@@ -409,7 +409,7 @@ export const rateupService = {
 
       if (!response.ok) {
         const errorText = await response.text();
-        let errorData = {};
+        let errorData: { message?: string; [key: string]: unknown } = {};
         try {
           errorData = JSON.parse(errorText);
         } catch (e) {
@@ -422,7 +422,7 @@ export const rateupService = {
           error: errorData
         });
         
-        throw new Error((errorData as any).message || `RateUp API error: ${response.statusText} (${response.status})`);
+        throw new Error(errorData.message || `RateUp API error: ${response.statusText} (${response.status})`);
       }
 
       if (import.meta.env.DEV) {

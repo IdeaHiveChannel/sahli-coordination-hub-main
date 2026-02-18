@@ -1,66 +1,46 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
+import { Mail, MapPin, Phone, Send, Loader2, MessageSquare, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { MessageSquare, Mail, Clock, ShieldCheck, Globe } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
-import { trackRequestClick } from '@/lib/gtag';
-import { getWhatsAppLink } from '@/lib/constants';
-
-interface ContactMethod {
-  icon: React.ReactNode;
-  title: string;
-  value: string;
-  link: string;
-  primary: boolean;
-  isInternal?: boolean;
-}
-
-export default function Contact() {
+const Contact = () => {
   const { t, dir } = useLanguage();
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isRTL = dir === 'rtl';
 
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 200]), springConfig);
-  const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.1]), springConfig);
-
-  const splitWords = (text: string) => text.split(' ');
-
-  const contactMethods: ContactMethod[] = [
-    {
-      icon: <MessageSquare className="w-8 h-8" />,
-      title: t('cta.request'),
-      value: t('contact.whatsapp.value'),
-      link: getWhatsAppLink(t('cta.whatsapp.general')),
-      primary: true,
-      isInternal: false
-    },
-    {
-      icon: <Mail className="w-8 h-8" />,
-      title: t('contact.email.label'),
-      value: t('contact.email.value'),
-      link: `mailto:${t('contact.email.value')}`,
-      primary: false
-    }
-  ];
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast.success(t('contact.form.success.title'), {
+      description: t('contact.form.success.description'),
+    });
+    
+    setIsSubmitting(false);
+    (e.target as HTMLFormElement).reset();
+  };
 
   return (
     <Layout>
-      {/* 1️⃣ Hero Section - Consistent with Homepage */}
-      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
-        <div className="absolute inset-0 z-0">
-          <motion.div 
-            style={{ y, scale }}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0"
+      <div className="min-h-screen bg-background overflow-hidden selection:bg-primary/20">
+      
+      {/* Hero Section */}
+      <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Video Background with Parallax Effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background z-10" />
+          <div className="absolute inset-0 bg-primary/5 mix-blend-overlay z-10" />
+          
+          <div 
+            className="absolute inset-0 w-full h-full transform scale-105 transition-transform duration-700 ease-out"
           >
             <video
               autoPlay
@@ -68,232 +48,239 @@ export default function Contact() {
               muted
               playsInline
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-[75%_center] md:object-center scale-105"
+              className="w-full h-full object-cover object-[75%_center] md:object-center"
             >
               <source src="https://assets.mixkit.co/videos/preview/mixkit-customer-service-representative-working-at-a-computer-4540-large.mp4" type="video/mp4" />
             </video>
-            
-            {/* Overlays removed as per user request */}
-            <div className="absolute inset-0 bg-slate-950/40 z-0" />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
-          </motion.div>
+          </div>
         </div>
 
-        <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-24 flex flex-col items-center md:items-start text-center md:text-start">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full flex flex-col items-center md:items-start"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 bg-primary/20 rounded-full border border-primary/30 text-[10px] font-black uppercase tracking-widest mb-3 shadow-lg btn-shine mx-auto md:mx-0">
-              <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
-              {t('nav.contact')}
-            </div>
-
-            <h1 className="text-foreground text-display-sm mb-2 md:mb-3 w-full text-center md:text-start">
-              {t('contact.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20, rotateX: -45 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.2 + i * 0.1, 
-                    ease: [0.16, 1, 0.3, 1] 
-                  }}
-                  className="inline-block me-[0.15em] origin-bottom"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h1>
+        <div className="container relative z-20 px-4 md:px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <ScrollReveal direction="up" duration={0.8}>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-6">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                {t('contact.hero.badge')}
+              </div>
+            </ScrollReveal>
             
-            <p className="text-[0.85rem] md:text-sm text-foreground/60 mb-4 max-w-2xl leading-relaxed">
-              {t('contact.primary')}
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto md:mx-0">
-              {contactMethods.map((method: ContactMethod, i: number) => {
-                const Content = (
-                  <>
-                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center mb-3 ${
-                      method.primary ? 'bg-white/20' : 'bg-primary/10 text-primary'
-                    }`}>
-                      {React.cloneElement(method.icon as React.ReactElement, { className: "w-4 h-4" })}
-                    </div>
-                    <div className={`text-[10px] font-black uppercase tracking-widest mb-1 ${
-                      method.primary ? 'text-white/60' : 'text-primary'
-                    }`}>
-                      {method.title}
-                    </div>
-                    <div className={`text-[0.8rem] font-medium ${
-                      method.primary ? 'text-white' : 'text-foreground/90'
-                    }`}>
-                      {method.value}
-                    </div>
-                  </>
-                );
-
-                if (method.isInternal) {
-                  return (
-                    <Link
-                      key={i}
-                      to={method.link}
-                      onClick={() => trackRequestClick('Contact Page - Primary')}
-                      className={`group relative p-4 rounded-2xl transition-all duration-500 overflow-hidden ${
-                        method.primary 
-                        ? 'bg-primary text-white shadow-xl shadow-primary/20 btn-shine' 
-                        : 'bg-foreground/[0.03] border border-border hover:border-primary/30'
-                      }`}
-                    >
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 + i * 0.05 }}
-                        whileHover={{ y: -3, scale: 1.01 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        {Content}
-                      </motion.div>
-                    </Link>
-                  );
-                }
-
-                return (
-                  <motion.a
-                    key={i}
-                    href={method.link}
-                    target={method.primary ? "_blank" : undefined}
-                    rel={method.primary ? "noopener noreferrer" : undefined}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + i * 0.05 }}
-                    whileHover={{ y: -3, scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`group relative p-4 rounded-2xl transition-all duration-500 overflow-hidden ${
-                      method.primary 
-                      ? 'bg-primary text-white shadow-xl shadow-primary/20 btn-shine' 
-                      : 'bg-foreground/[0.03] border border-border hover:border-primary/30'
-                    }`}
-                  >
-                    {Content}
-                  </motion.a>
-                );
-              })}
-            </div>
-          </motion.div>
+            <ScrollReveal direction="up" duration={0.8} delay={0.1}>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-foreground tracking-tight mb-6 leading-[1.1]">
+                {t('contact.hero.title')}
+                <span className="text-primary block mt-2">{t('contact.hero.subtitle')}</span>
+              </h1>
+            </ScrollReveal>
+            
+            <ScrollReveal direction="up" duration={0.8} delay={0.2}>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                {t('contact.hero.description')}
+              </p>
+            </ScrollReveal>
+          </div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
+        {/* Scroll Indicator */}
+        <div 
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce duration-2000"
         >
-          <div className="w-px h-12 bg-gradient-to-b from-primary/30 to-transparent relative overflow-hidden">
-            <motion.div 
-              className="absolute top-0 left-0 w-full h-1/2 bg-primary"
-              animate={{ y: ['-100%', '200%'] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* 2️⃣ Coordination Commitment - Compact */}
-      <section className="section-spacing bg-background border-t border-border">
-        <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-4 rounded-2xl bg-foreground/[0.02] border border-border flex flex-col items-center text-center group"
-            >
-              <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500">
-                <Clock className="w-4 h-4" />
-              </div>
-              <h3 className="text-[0.85rem] font-bold text-foreground mb-1">{t('contact.commitment.fast.title')}</h3>
-              <p className="text-[0.75rem] text-foreground/60 leading-relaxed">
-                {t('contact.commitment.fast.body')}
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.05 }}
-              className="p-4 rounded-2xl bg-foreground/[0.02] border border-border flex flex-col items-center text-center group"
-            >
-              <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500">
-                <ShieldCheck className="w-4 h-4" />
-              </div>
-              <h3 className="text-[0.85rem] font-bold text-foreground mb-1">{t('contact.commitment.verified.title')}</h3>
-              <p className="text-[0.75rem] text-foreground/60 leading-relaxed">
-                {t('contact.commitment.verified.body')}
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="p-4 rounded-2xl bg-foreground/[0.02] border border-border flex flex-col items-center text-center group"
-            >
-              <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-500">
-                <Globe className="w-4 h-4" />
-              </div>
-              <h3 className="text-[0.85rem] font-bold text-foreground mb-1">{t('contact.commitment.regional.title')}</h3>
-              <p className="text-[0.75rem] text-foreground/60 leading-relaxed">
-                {t('contact.commitment.regional.body')}
-              </p>
-            </motion.div>
+          <div className="w-6 h-10 rounded-full border-2 border-primary/30 flex items-start justify-center p-1 backdrop-blur-sm">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
           </div>
         </div>
       </section>
 
-      {/* 3️⃣ Final CTA - Compact */}
-      <section className="py-6 md:py-12 bg-background border-t border-border">
-        <div className="container-sahli text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="max-w-xl mx-auto"
-          >
-            <h2 className="text-display-sm mb-2 text-foreground">
-              {t('cta.final.title')}
-            </h2>
-            <p className="text-[0.85rem] md:text-sm text-foreground/60 mb-4 leading-relaxed">
-              {t('cta.final.body')}
-            </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <a
-                href={getWhatsAppLink(t('cta.whatsapp.general'))}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackRequestClick('Contact Page - Bottom CTA')}
-                className="cta-primary inline-block"
-              >
-                <div className="flex items-center gap-2">
-                  <MessageSquare size={16} />
-                  {t('cta.final.cta')}
+      <div className="container px-4 md:px-6 py-20 md:py-32 relative z-20 -mt-20">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
+          {/* Contact Information */}
+          <div className="space-y-10 order-2 lg:order-1">
+            <ScrollReveal direction="right" duration={0.8}>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('contact.info.title')}</h2>
+                <p className="text-muted-foreground text-lg">
+                  {t('contact.info.subtitle')}
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid gap-6">
+              {[
+                {
+                  icon: Phone,
+                  title: t('contact.info.phone.title'),
+                  value: "+974 7020 8690",
+                  link: "tel:+97470208690",
+                  color: "text-blue-500",
+                  bg: "bg-blue-500/10"
+                },
+                {
+                  icon: Mail,
+                  title: t('contact.info.email.title'),
+                  value: "info@sahli-hub.com",
+                  link: "mailto:info@sahli-hub.com",
+                  color: "text-purple-500",
+                  bg: "bg-purple-500/10"
+                },
+                {
+                  icon: MapPin,
+                  title: t('contact.info.address.title'),
+                  value: "Lusail, Qatar",
+                  link: "https://maps.google.com",
+                  color: "text-emerald-500",
+                  bg: "bg-emerald-500/10"
+                }
+              ].map((item, index) => (
+                <ScrollReveal key={index} direction="up" duration={0.6} delay={index * 0.1}>
+                  <a
+                    href={item.link}
+                    className="group flex items-start gap-4 p-4 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+                  >
+                    <div className={`p-3 rounded-xl ${item.bg} ${item.color} group-hover:scale-110 transition-transform duration-300`}>
+                      <item.icon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground group-hover:text-foreground transition-colors">
+                        {item.value}
+                      </p>
+                    </div>
+                    <div className={`ml-auto self-center opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${isRTL ? 'rotate-180' : ''}`}>
+                      <ArrowRight className="w-5 h-5 text-primary" />
+                    </div>
+                  </a>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Support Hours */}
+            <ScrollReveal direction="up" duration={0.8} delay={0.3}>
+              <div className="p-6 rounded-2xl bg-primary/5 border border-primary/10 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                      <Clock size={20} />
+                    </div>
+                    <h3 className="font-semibold text-lg">{t('contact.hours.title')}</h3>
+                  </div>
+                  <div className="space-y-2 text-muted-foreground">
+                    <div className="flex justify-between items-center border-b border-primary/10 pb-2">
+                      <span>{t('contact.hours.weekdays')}</span>
+                      <span className="font-medium text-foreground">8:00 AM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span>{t('contact.hours.weekends')}</span>
+                      <span className="font-medium text-foreground">Closed</span>
+                    </div>
+                  </div>
                 </div>
-              </a>
-            </motion.div>
-          </motion.div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Contact Form */}
+          <div className="order-1 lg:order-2">
+            <ScrollReveal direction="left" duration={0.8}>
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-3xl blur-xl opacity-50" />
+                
+                <div className="relative bg-card/50 backdrop-blur-xl border border-border/50 rounded-3xl p-6 md:p-8 lg:p-10 shadow-xl">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="p-3 rounded-xl bg-primary/10 text-primary">
+                      <MessageSquare size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">{t('contact.form.title')}</h3>
+                      <p className="text-sm text-muted-foreground">{t('contact.form.subtitle')}</p>
+                    </div>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium ml-1">
+                          {t('contact.form.firstName')}
+                        </label>
+                        <Input 
+                          placeholder={t('contact.form.firstNamePlaceholder')}
+                          required 
+                          className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-12"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium ml-1">
+                          {t('contact.form.lastName')}
+                        </label>
+                        <Input 
+                          placeholder={t('contact.form.lastNamePlaceholder')}
+                          required 
+                          className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-12"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium ml-1">
+                        {t('contact.form.email')}
+                      </label>
+                      <Input 
+                        type="email" 
+                        placeholder={t('contact.form.emailPlaceholder')}
+                        required 
+                        className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-12"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium ml-1">
+                        {t('contact.form.message')}
+                      </label>
+                      <Textarea 
+                        placeholder={t('contact.form.messagePlaceholder')}
+                        required 
+                        className="min-h-[150px] bg-background/50 border-border/50 focus:border-primary/50 transition-colors resize-none"
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      className="w-full h-12 text-lg font-medium bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          {t('contact.form.sending')}
+                        </>
+                      ) : (
+                        <>
+                          {t('contact.form.submit')}
+                          <Send className={`ml-2 h-5 w-5 ${isRTL ? 'rotate-180' : ''}`} />
+                        </>
+                      )}
+                    </Button>
+                    
+                    <p className="text-xs text-center text-muted-foreground mt-4 flex items-center justify-center gap-1.5">
+                      <ShieldCheck size={12} />
+                      {t('contact.form.privacy')}
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
-      </section>
+      </div>
+      </div>
     </Layout>
   );
-}
+};
+
+export default Contact;
 
 

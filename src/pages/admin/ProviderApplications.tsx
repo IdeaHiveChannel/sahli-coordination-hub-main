@@ -12,7 +12,17 @@ import { EntityType } from '@/lib/types';
 import { storageService, Application } from '@/lib/storageService';
 import { rateupService } from '@/lib/rateupService';
 
-const ReviewContent = ({ app, entityType, setEntityType, assignedGroups, setAssignedGroups, handleAction, isMobile = false }: any) => (
+interface ReviewContentProps {
+  app: Application;
+  entityType: EntityType;
+  setEntityType: (type: EntityType) => void;
+  assignedGroups: string;
+  setAssignedGroups: (groups: string) => void;
+  handleAction: (id: string, action: string, statusOverride?: string) => void;
+  isMobile?: boolean;
+}
+
+const ReviewContent = ({ app, entityType, setEntityType, assignedGroups, setAssignedGroups, handleAction, isMobile = false }: ReviewContentProps) => (
   <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-3'} gap-8`}>
     {/* Column 1: Company Profile & Info */}
     <div className="space-y-4">

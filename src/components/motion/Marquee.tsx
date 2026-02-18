@@ -1,34 +1,27 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MarqueeProps {
   children: React.ReactNode;
-  speed?: number;
+  speed?: number; // Kept for interface compatibility, but unused
   className?: string;
   pauseOnHover?: boolean;
   gap?: number;
-  pauseDuration?: number; // Duration to pause after interaction (ms)
+  pauseDuration?: number; // Unused in CSS implementation
 }
 
 /**
  * A flexible Marquee component that auto-scrolls its children.
  * Designed to work with the Sahli design system.
+ * Optimized to use CSS animations instead of JS framer-motion to reduce bundle size.
  */
 export const Marquee = ({ 
   children, 
-  speed = 0.4, 
   className = "", 
   pauseOnHover = true,
   gap = 24,
-  pauseDuration = 3500
 }: MarqueeProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [contentWidth, setContentWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const x = useMotionValue(0);
-  const [isInteracting, setIsInteracting] = useState(false);
-  const [lastInteractionTime, setLastInteractionTime] = useState(0);
   const { dir } = useLanguage();
 
   // Handle responsive behavior
@@ -41,84 +34,6 @@ export const Marquee = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Calculate content width for seamless looping
-  useEffect(() => {
-    if (containerRef.current && isMobile) {
-      const calculateWidth = () => {
-        if (containerRef.current) {
-          const firstChild = containerRef.current.children[0] as HTMLElement;
-          if (firstChild) {
-            // contentWidth is the width of one set of children plus the gap between the two sets
-            setContentWidth(firstChild.offsetWidth + gap);
-          }
-        }
-      };
-
-      // We need to wait a bit for layout to settle
-      const timer = setTimeout(calculateWidth, 100);
-      
-      // Also observe resize of the container content
-      const observer = new ResizeObserver(calculateWidth);
-      if (containerRef.current.children[0]) {
-        observer.observe(containerRef.current.children[0]);
-      }
-
-      return () => {
-        clearTimeout(timer);
-        observer.disconnect();
-      };
-    }
-  }, [children, isMobile, gap]);
-
-  // Animation loop
-  useAnimationFrame((time) => {
-    if (!isMobile || contentWidth === 0) return;
-    
-    // Check if we should be paused due to recent interaction
-    const currentTime = performance.now();
-    const shouldPause = isInteracting || (currentTime - lastInteractionTime < pauseDuration);
-    if (pauseOnHover && shouldPause) return;
-    
-    const direction = dir === 'rtl' ? 1 : -1;
-    let nextX = x.get() + (speed * direction);
-    
-    // Reset position for seamless loop
-    if (dir === 'rtl') {
-      if (nextX >= contentWidth) {
-        nextX -= contentWidth;
-      } else if (nextX < 0) {
-        nextX += contentWidth;
-      }
-    } else {
-      if (nextX <= -contentWidth) {
-        nextX += contentWidth;
-      } else if (nextX > 0) {
-        nextX -= contentWidth;
-      }
-    }
-    
-    x.set(nextX);
-  });
-
-  const handleInteractionStart = () => {
-    setIsInteracting(true);
-  };
-
-  const handleInteractionEnd = () => {
-    setIsInteracting(false);
-    setLastInteractionTime(performance.now());
-    
-    // Smooth reset to within contentWidth bounds if needed after drag
-    const currentX = x.get();
-    if (dir === 'rtl') {
-      if (currentX >= contentWidth) x.set(currentX - contentWidth);
-      else if (currentX < 0) x.set(currentX + contentWidth);
-    } else {
-      if (currentX <= -contentWidth) x.set(currentX + contentWidth);
-      else if (currentX > 0) x.set(currentX - contentWidth);
-    }
-  };
-
   // On desktop, just render the children normally without marquee
   if (!isMobile) {
     return (
@@ -130,20 +45,11 @@ export const Marquee = ({
 
   return (
     <div 
-      className={`overflow-hidden cursor-grab active:cursor-grabbing ${className}`}
-      onMouseEnter={handleInteractionStart}
-      onMouseLeave={handleInteractionEnd}
-      onTouchStart={handleInteractionStart}
-      onTouchEnd={handleInteractionEnd}
+      className={`overflow-hidden ${className} group`}
     >
-      <motion.div 
-        ref={containerRef} 
-        style={{ x, gap: `${gap}px` }} 
-        className="flex w-max"
-        drag="x"
-        dragElastic={0.1}
-        onDragStart={handleInteractionStart}
-        onDragEnd={handleInteractionEnd}
+      <div 
+        className={`flex w-max ${dir === 'rtl' ? 'animate-marquee-rtl' : 'animate-marquee'} ${pauseOnHover ? 'group-hover:[animation-play-state:paused]' : ''}`}
+        style={{ gap: `${gap}px` }}
       >
         {/* Render children twice for seamless loop */}
         <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
@@ -152,7 +58,7 @@ export const Marquee = ({
         <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
           {children}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '../layout/Header';
 import { authService } from '@/lib/authService';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LogOut, 
   LayoutDashboard, 
@@ -25,6 +24,14 @@ import { storageService } from '@/lib/storageService';
 
 interface AdminLayoutProps {
   children: ReactNode;
+}
+
+interface NavItem {
+  label: string;
+  icon?: ReactNode;
+  path: string;
+  badge?: number;
+  subItems?: NavItem[];
 }
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
@@ -103,7 +110,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     { label: 'Settings', icon: <SettingsIcon size={18} />, path: '/admin/settings' },
   ];
 
-  const isActive = (item: any) => {
+  const isActive = (item: NavItem) => {
     if (item.path.includes('?')) {
       if (location.pathname + location.search === item.path) return true;
     } else {
@@ -112,7 +119,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
     // Check sub-items
     if (item.subItems) {
-      return item.subItems.some((sub: any) => {
+      return item.subItems.some((sub: NavItem) => {
         if (sub.path.includes('?')) {
           return location.pathname + location.search === sub.path;
         }
@@ -160,8 +167,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             
             {item.subItems && (
               <div className={`ml-8 flex flex-col gap-1 border-l-2 border-slate-100 pl-4 py-2 ${active ? 'block' : 'hidden md:flex'}`}>
-                {item.subItems.map((sub: any) => {
-                  const subActive = isActive(sub.path);
+                {item.subItems.map((sub: NavItem) => {
+                  const subActive = isActive(sub);
                   return (
                     <Link
                       key={sub.label}
@@ -204,13 +211,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <div className="h-4 w-px bg-slate-100" />
           <h1 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Control Panel</h1>
         </div>
-        <motion.button
-          whileTap={{ scale: 0.9 }}
+        <button
           onClick={() => setIsMobileMenuOpen(true)}
-          className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-900"
+          className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-900 active:scale-90 transition-transform"
         >
           <Menu size={20} />
-        </motion.button>
+        </button>
       </div>
 
       <div className="flex flex-1 md:pt-16 pt-16">
@@ -242,57 +248,47 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         </aside>
 
         {/* Mobile Navigation Drawer */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[100] md:hidden"
-              />
-              <motion.aside
-                initial={{ x: dir === 'rtl' ? '100%' : '-100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: dir === 'rtl' ? '100%' : '-100%' }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className={`fixed inset-y-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[85%] max-w-[320px] bg-white z-[101] md:hidden flex flex-col shadow-xl`}
-              >
-                <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-                  <div>
-                    <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Control Panel</h2>
-                    {user && (
-                      <div className="mt-1 flex flex-col">
-                        <span className="text-sm font-black text-slate-900 truncate">{user.email.split('@')[0]}</span>
-                        <span className="text-[9px] font-black uppercase tracking-widest text-primary">{user.role}</span>
-                      </div>
-                    )}
-                  </div>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500"
-                  >
-                    <X size={20} />
-                  </motion.button>
+        {isMobileMenuOpen && (
+          <div className="fixed inset-0 z-[100] md:hidden">
+            <div
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm animate-in fade-in duration-300"
+            />
+            <aside
+              className={`absolute inset-y-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[85%] max-w-[320px] bg-white flex flex-col shadow-xl animate-in slide-in-from-${dir === 'rtl' ? 'right' : 'left'} duration-300`}
+            >
+              <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                <div>
+                  <h2 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Control Panel</h2>
+                  {user && (
+                    <div className="mt-1 flex flex-col">
+                      <span className="text-sm font-black text-slate-900 truncate">{user.email.split('@')[0]}</span>
+                      <span className="text-[9px] font-black uppercase tracking-widest text-primary">{user.role}</span>
+                    </div>
+                  )}
                 </div>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500 active:scale-90 transition-transform"
+                >
+                  <X size={20} />
+                </button>
+              </div>
 
-                <NavContent mobile />
+              <NavContent mobile />
 
-                <div className="p-6 border-t border-slate-100">
-                  <button 
-                    onClick={handleLogout}
-                    className="w-full flex items-center justify-center gap-3 bg-red-50 text-red-600 text-xs font-black uppercase tracking-widest py-4 rounded-2xl transition-all border border-red-100 active:scale-95"
-                  >
-                    <LogOut size={18} />
-                    Logout Session
-                  </button>
-                </div>
-              </motion.aside>
-            </>
-          )}
-        </AnimatePresence>
+              <div className="p-6 border-t border-slate-100">
+                <button 
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center gap-3 bg-red-50 text-red-600 text-xs font-black uppercase tracking-widest py-4 rounded-2xl transition-all border border-red-100 active:scale-95"
+                >
+                  <LogOut size={18} />
+                  Logout Session
+                </button>
+              </div>
+            </aside>
+          </div>
+        )}
 
         {/* Main Content Area */}
         <main className="flex-1 p-4 md:p-6 overflow-y-auto max-h-[calc(100vh-64px)] scroll-smooth bg-slate-50/50">

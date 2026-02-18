@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion } from 'framer-motion';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { Shield, Lock, Eye, Scale, MessageSquare, Globe, Mail, Gavel, FileText } from 'lucide-react';
 
 export default function Privacy() {
@@ -32,11 +32,7 @@ export default function Privacy() {
         <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-primary/10 rounded-full blur-[80px] md:blur-[160px] mix-blend-screen animate-pulse-slow`} />
         
         <div className="container-sahli relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="animate-in slide-in-from-bottom-8 fade-in duration-1000">
             <div className="flex items-center gap-4 mb-8">
               <div className="h-[1px] w-12 bg-primary/50" />
               <span className="text-primary font-black tracking-[0.3em] text-[10px] uppercase">
@@ -53,10 +49,10 @@ export default function Privacy() {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
               <div className="lg:col-span-8 space-y-12">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                <ScrollReveal 
+                  direction="up"
+                  delay={0.2}
+                  duration={0.8}
                   className="p-8 md:p-12 rounded-[2.5rem] glass-morphism border border-border"
                 >
                   <div className="space-y-8">
@@ -94,14 +90,14 @@ export default function Privacy() {
                       {t('legal.privacy.final')}
                     </p>
                   </div>
-                </motion.div>
+                </ScrollReveal>
               </div>
 
               <div className="lg:col-span-4">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.6 }}
+                <ScrollReveal 
+                  direction="up"
+                  delay={0.6}
+                  duration={0.8}
                   className="sticky top-32 p-8 rounded-[2rem] glass-morphism border border-border"
                 >
                   <Shield className="text-primary mb-8 w-12 h-12" />
@@ -113,10 +109,10 @@ export default function Privacy() {
                   <p className="text-[10px] font-black text-primary tracking-[0.3em] uppercase">
                     {t('legal.qatar.standard')}
                   </p>
-                </motion.div>
+                </ScrollReveal>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </Layout>

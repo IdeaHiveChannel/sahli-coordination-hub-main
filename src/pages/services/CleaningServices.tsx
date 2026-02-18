@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { Marquee } from '@/components/motion/Marquee';
 import { MessageSquare, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Waves, Zap } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
@@ -12,19 +12,6 @@ export default function CleaningServices() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollY } = useScroll();
-  
-  // Parallax effects matching homepage
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
-  
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y1Spring = useSpring(y1, springConfig);
-  const y2Spring = useSpring(y2, springConfig);
-  const scaleSpring = useSpring(scale, springConfig);
-  const yHero = useTransform(scrollY, [0, 500], [0, -100]);
-
   const relatedServices = [
     { title: t('services.cleaning.deep.title'), path: t('services.cleaning.deep.path') },
     { title: t('services.homeMaintenance.title'), path: '/services#home-maintenance' },
@@ -66,64 +53,52 @@ export default function CleaningServices() {
       <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
         {/* Background Image with Homepage Parallax */}
         <div className="absolute inset-0 z-0">
-          <motion.div 
-            className="absolute inset-0"
-            style={{ 
-              y: y1Spring,
-              scale: scaleSpring
-            }}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          <div 
+            className="absolute inset-0 animate-in zoom-in-105 duration-[1.5s] ease-out"
           >
             <img 
               src="/Services/Cleaning service.jpg" 
               alt="Professional Home Cleaning Services Qatar"
               className="w-full h-full object-cover object-center scale-105"
             />
-          </motion.div>
+          </div>
           
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-white/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
         </div>
         
         {/* Decorative elements */}
-        <motion.div 
-          style={{ y: y2Spring }}
-          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-950/5 pointer-events-none z-10`} 
+        <div 
+          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-100 pointer-events-none z-10 opacity-50`} 
         />
 
         <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
-          <motion.div 
+          <div 
             className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
-            style={{ y: yHero }}
           >
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+            <ScrollReveal 
+              direction="up"
+              duration={0.8}
+              delay={0.1}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
             >
               <img 
-                src="/logos/SahlLogo9.png" 
+                src="/logos/SahlLogo5.png" 
                 alt="" 
-                className="w-3.5 h-3.5 object-contain animate-pulse" 
+                className="w-3.5 h-3.5 object-contain animate-pulse scale-[3]" 
               />
               {t('services.cleaning.title')}
-            </motion.div>
+            </ScrollReveal>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-8 leading-[1.1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-8 leading-[1.1] tracking-tight text-slate-900 drop-shadow-2xl font-black w-full text-center md:text-start animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200 fill-mode-backwards">
               {t('services.cleaning.title')}
             </h1>
 
-            <motion.div
-              className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            <div
+              className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-start animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-backwards"
             >
-              <p className="text-base md:text-lg !text-white/90 mb-8 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+              <p className="text-base md:text-lg text-slate-700 mb-8 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
                 {t('services.cleaning.subtitle')}
               </p>
 
@@ -133,31 +108,26 @@ export default function CleaningServices() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackRequestClick('Cleaning Hero CTA')}
-                  className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30"
+                  className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30 group"
                 >
-                  <motion.div
-                    className="flex items-center gap-3"
-                    whileHover={{ y: -2, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                  <div
+                    className="flex items-center gap-3 group-hover:scale-105 group-active:scale-95 transition-transform"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('cta.request')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="section-spacing bg-background border-y border-border">
+      <section className="section-spacing bg-white border-y border-slate-200">
         <div className="container-sahli">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-foreground/[0.02] border border-border rounded-xl p-4 md:p-5"
+          <ScrollReveal 
+            className="bg-slate-50 border border-slate-200 rounded-xl p-4 md:p-5 shadow-xl shadow-primary/5"
           >
             <h2 className="text-lg sm:text-xl md:text-2xl font-black tracking-tight mb-6 md:mb-8 text-center">
               {t('services.cleaning.rules.title')}
@@ -169,53 +139,50 @@ export default function CleaningServices() {
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-2.5 items-center group shrink-0 w-[240px] px-5">
+                <div key={i} className="flex gap-3 items-start group shrink-0 w-[260px] md:w-auto p-4 md:p-0 rounded-xl bg-white md:bg-transparent border border-slate-200 md:border-0 shadow-sm md:shadow-none">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                     <CheckCircle2 size={16} />
                   </div>
-                  <span className="text-xs !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500 font-bold">{rule}</span>
+                  <span className="text-xs text-slate-600 leading-snug group-hover:text-slate-900 transition-colors duration-500 font-bold">{rule}</span>
                 </div>
               ))}
             </Marquee>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* 3️⃣ Service Categories */}
-      <section className="section-spacing bg-background relative overflow-hidden">
+      <section className="section-spacing bg-slate-50 relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight mb-3 md:mb-4">
               {t('services.cleaning.categories.title')}
             </h2>
-            <p className="text-xs !text-foreground/50">{t('services.cleaning.categories.subtitle')}</p>
+            <p className="text-xs text-slate-500">{t('services.cleaning.categories.subtitle')}</p>
           </div>
 
           <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
             {categories.map((cat, i) => (
-              <motion.div
+              <ScrollReveal
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="p-5 md:p-6 rounded-xl bg-background border border-border hover:border-primary/20 transition-all duration-500 group shrink-0 w-[240px] shadow-xl shadow-primary/5"
+                delay={i * 0.05}
+                className="p-5 md:p-6 rounded-xl bg-white border border-slate-200 hover:border-primary/20 transition-all duration-500 group shrink-0 w-[240px] shadow-xl shadow-primary/5"
               >
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
                   {React.cloneElement(cat.icon as React.ReactElement, { size: 16 })}
                 </div>
                 <h3 className="text-xs mb-3 group-hover:text-primary transition-colors duration-500 font-black uppercase tracking-wider">{cat.title}</h3>
-                <p className="text-xs !text-foreground/60 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   {cat.desc}
                 </p>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </Marquee>
         </div>
       </section>
 
       {/* 4️⃣ How it works (Visual Timeline) */}
-      <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
+      <section className="section-spacing bg-white border-y border-slate-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[50%] h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="container-sahli relative z-10">
@@ -223,20 +190,17 @@ export default function CleaningServices() {
             <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight mb-3 md:mb-4">
               {t('how.flow.title')}
             </h2>
-            <p className="text-xs !text-foreground/50">{t('how.flow.subtitle')}</p>
+            <p className="text-xs text-slate-500">{t('how.flow.subtitle')}</p>
           </div>
 
           <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
             {coordinationSteps.map((step, i) => (
-              <motion.div
+              <ScrollReveal
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                delay={i * 0.1}
                 className="relative z-10 flex flex-col items-center text-center group shrink-0 w-[160px]"
               >
-                <div className="w-16 h-16 rounded-xl bg-background border border-border flex items-center justify-center text-primary mb-6 shadow-xl shadow-primary/5 group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
+                <div className="w-16 h-16 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-primary mb-6 shadow-xl shadow-primary/5 group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
                   <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-xs shadow-lg">
                     {step.title}
                   </span>
@@ -244,60 +208,56 @@ export default function CleaningServices() {
                     {React.cloneElement(step.icon as React.ReactElement, { size: 16 })}
                   </div>
                 </div>
-                <p className="text-xs px-4 font-medium group-hover:text-primary transition-colors duration-500">{step.body}</p>
-              </motion.div>
+                <p className="text-xs px-4 font-medium text-slate-600 group-hover:text-primary transition-colors duration-500">{step.body}</p>
+              </ScrollReveal>
             ))}
           </Marquee>
         </div>
       </section>
 
       {/* 5️⃣ Boundary Block */}
-      <section className="section-spacing bg-background">
+      <section className="section-spacing bg-slate-50">
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="p-6 md:p-8 rounded-xl bg-primary/[0.03] border border-primary/10 shadow-xl shadow-primary/5"
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="p-6 md:p-8 rounded-xl bg-primary/5 border border-primary/10 shadow-xl shadow-primary/5"
             >
               <h3 className="text-xs !text-primary mb-6 font-black uppercase tracking-wider">
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-4">
                 {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-xs !text-foreground/70 group">
+                  <li key={i} className="flex gap-3 items-center text-xs text-slate-700 group">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="group-hover:text-foreground transition-colors duration-300">{item}</span>
+                    <span className="group-hover:text-slate-900 transition-colors duration-300">{item}</span>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="p-6 md:p-8 rounded-xl bg-foreground/[0.02] border border-border shadow-xl shadow-primary/5"
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'right' : 'left'}
+              className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 shadow-xl shadow-primary/5"
             >
-              <h3 className="text-xs !text-foreground/40 mb-6 font-black uppercase tracking-wider">
+              <h3 className="text-xs text-slate-400 mb-6 font-black uppercase tracking-wider">
                 {t('services.boundaries.title.isNot')}
               </h3>
               <ul className="space-y-4">
                 {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-xs !text-foreground/40 group">
-                    <div className="w-1.5 h-1.5 rounded-full bg-foreground/20 shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="group-hover:text-foreground/60 transition-colors duration-300">{item}</span>
+                  <li key={i} className="flex gap-3 items-center text-xs text-slate-500 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 group-hover:scale-150 transition-transform duration-300" />
+                    <span className="group-hover:text-slate-700 transition-colors duration-300">{item}</span>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* 6️⃣ Areas Served (Map View Style) */}
-      <section className="section-spacing bg-background overflow-hidden">
+      <section className="section-spacing bg-white overflow-hidden">
         <div className="container-sahli">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -306,24 +266,22 @@ export default function CleaningServices() {
               </h2>
               <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
                 {areas.map((area, i) => (
-                  <motion.div
+                  <ScrollReveal
                     key={i}
-                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3 md:gap-4 p-2.5 rounded-xl bg-background md:bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group shrink-0 w-[160px] shadow-xl shadow-primary/5"
+                    direction={dir === 'rtl' ? 'left' : 'right'}
+                    delay={i * 0.1}
+                    className="flex items-center gap-3 md:gap-4 p-2.5 rounded-xl bg-white md:bg-slate-50 border border-slate-200 hover:border-primary/30 transition-all group shrink-0 w-[160px] shadow-xl shadow-primary/5"
                   >
                     <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                       <MapPin size={16} />
                     </div>
                     <span className="text-xs font-bold group-hover:text-primary transition-colors duration-500">{area}</span>
-                  </motion.div>
+                  </ScrollReveal>
                 ))}
               </Marquee>
             </div>
             
-            <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center shadow-2xl shadow-primary/5 group">
+            <div className="relative aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center shadow-2xl shadow-primary/5 group">
               <img 
                 src="https://images.pexels.com/photos/6195119/pexels-photo-6195119.jpeg" 
                 alt="Cleaning Service Doha"
@@ -331,7 +289,7 @@ export default function CleaningServices() {
               />
               <div className="absolute inset-0 bg-primary/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-1000" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="px-6 py-3 bg-background/90 backdrop-blur-xl rounded-xl border border-white/10 shadow-lg text-xs !text-primary font-bold">
+                <div className="px-6 py-3 bg-white/90 backdrop-blur-xl rounded-xl border border-white/20 shadow-lg text-xs !text-primary font-bold">
                   {t('services.areas.qatarNationwide')}
                 </div>
               </div>
@@ -341,12 +299,9 @@ export default function CleaningServices() {
       </section>
 
       {/* 8️⃣ Final CTA - High Impact */}
-      <section className="section-spacing bg-background border-t border-border overflow-hidden relative">
+      <section className="section-spacing bg-slate-50 border-t border-slate-200 overflow-hidden relative">
         <div className="container-sahli relative z-10 text-center max-w-2xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <ScrollReveal
             className="max-w-5xl mx-auto text-center"
           >
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6 md:mb-8">
@@ -361,30 +316,28 @@ export default function CleaningServices() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackRequestClick('Cleaning Final CTA')}
-                className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30"
+                className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30 group"
               >
-                <motion.div
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                <div
+                  className="flex items-center gap-2 group-hover:scale-105 group-active:scale-95 transition-transform"
                 >
                   <MessageSquare size={16} className="fill-primary-foreground" />
                   {t('cta.request')}
-                </motion.div>
+                </div>
               </a>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* 🔟 Related Services - Quick Links */}
-      <section className="py-12 md:py-16 bg-foreground/[0.02] border-t border-border overflow-hidden">
+      <section className="py-12 md:py-16 bg-white border-t border-slate-200 overflow-hidden">
         <div className="container-sahli">
           <div className="mb-8 md:mb-12 text-center md:text-start">
             <h2 className="text-xl sm:text-2xl md:text-3xl mb-4">
               {t('services.related.title')}
             </h2>
-            <p className="text-xs !text-foreground/50">
+            <p className="text-xs text-slate-500">
               {t('services.related.subtitle')}
             </p>
           </div>

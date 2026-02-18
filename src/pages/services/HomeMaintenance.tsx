@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { Marquee } from '@/components/motion/Marquee';
 import { MessageSquare, CheckCircle2, Snowflake, Lightbulb, Droplets, Cog, Wrench, Shield, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Bug, Search, XCircle } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
@@ -12,19 +12,6 @@ export default function HomeMaintenance() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollY } = useScroll();
-  
-  // Parallax effects matching homepage
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
-  
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y1Spring = useSpring(y1, springConfig);
-  const y2Spring = useSpring(y2, springConfig);
-  const scaleSpring = useSpring(scale, springConfig);
-  const yHero = useTransform(scrollY, [0, 500], [0, -100]);
-
   const relatedServices = [
     { title: t('services.homeMaintenance.ac.title'), path: t('services.homeMaintenance.ac.path') },
     { title: t('services.homeMaintenance.plumbing.title'), path: t('services.homeMaintenance.plumbing.path') },
@@ -64,67 +51,55 @@ export default function HomeMaintenance() {
   return (
     <Layout>
       {/* 1️⃣ Modern Immersive Hero Section - Aligned with Homepage */}
-      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-white">
         {/* Background Image with Homepage Parallax */}
         <div className="absolute inset-0 z-0">
-          <motion.div 
-            className="absolute inset-0"
-            style={{ 
-              y: y1Spring,
-              scale: scaleSpring
-            }}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          <div 
+            className="absolute inset-0 animate-in zoom-in-105 duration-[1.5s] ease-out"
           >
             <img 
               src="/Services/Home Maintenance - Hero.jpg" 
               alt="Home Maintenance Services Qatar"
               className="w-full h-full object-cover object-center scale-105"
             />
-          </motion.div>
+          </div>
           
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-white/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
         </div>
         
         {/* Decorative elements */}
-        <motion.div 
-          style={{ y: y2Spring }}
-          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-950/5 pointer-events-none z-10`} 
+        <div 
+          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-100 pointer-events-none z-10 opacity-50`} 
         />
 
         <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
-          <motion.div 
+          <div 
             className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
-            style={{ y: yHero }}
           >
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-3 py-1 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.2em] uppercase text-primary mb-4 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+            <ScrollReveal 
+              direction="up"
+              duration={0.8}
+              delay={0.1}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.2em] uppercase text-primary mb-4 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
             >
               <img 
-                src="/logos/SahlLogo9.png" 
+                src="/logos/SahlLogo5.png" 
                 alt="" 
-                className="w-3 h-3 object-contain animate-pulse" 
+                className="w-3 h-3 object-contain animate-pulse scale-[3]" 
               />
               {t('services.homeMaintenance.title')}
-            </motion.div>
+            </ScrollReveal>
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-8 leading-[1.1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-8 leading-[1.1] tracking-tight text-slate-900 drop-shadow-2xl font-black w-full text-center md:text-start animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200 fill-mode-backwards">
               {t('services.homeMaintenance.title')}
             </h1>
 
-            <motion.div
-              className="w-full max-w-2xl flex flex-col items-center md:items-start text-center md:text-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            <div
+              className="w-full max-w-2xl flex flex-col items-center md:items-start text-center md:text-start animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-backwards"
             >
-              <p className="text-base md:text-lg !text-white/90 mb-8 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-xl mx-auto md:mx-0">
+              <p className="text-base md:text-lg text-slate-700 mb-8 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-xl mx-auto md:mx-0">
                 {t('services.homeMaintenance.subtitle')}
               </p>
 
@@ -134,31 +109,26 @@ export default function HomeMaintenance() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackRequestClick('Home Maintenance Hero')}
-                  className="cta-primary px-8 py-4 text-xs btn-shine shadow-xl shadow-primary/30"
+                  className="cta-primary px-8 py-4 text-xs btn-shine shadow-xl shadow-primary/30 group"
                 >
-                  <motion.div
-                    className="flex items-center gap-3"
-                    whileHover={{ y: -2, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                  <div
+                    className="flex items-center gap-3 group-hover:scale-105 group-active:scale-95 transition-transform"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('cta.request')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="section-spacing bg-background border-y border-border">
+      <section className="section-spacing bg-white border-y border-slate-200">
         <div className="container-sahli">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-foreground/[0.02] border border-border rounded-xl p-4 md:p-6"
+          <ScrollReveal 
+            className="bg-slate-50 border border-slate-200 rounded-xl p-4 md:p-6"
           >
             <h2 className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 text-center">
               {t('services.homeMaintenance.rules.title')}
@@ -170,72 +140,66 @@ export default function HomeMaintenance() {
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-4 items-center group shrink-0 w-[260px] md:w-auto p-5 md:p-0 rounded-xl bg-background md:bg-transparent border border-border md:border-0 shadow-sm md:shadow-none">
+                <div key={i} className="flex gap-4 items-center group shrink-0 w-[260px] md:w-auto p-5 md:p-0 rounded-xl bg-white md:bg-transparent border border-slate-200 md:border-0 shadow-sm md:shadow-none">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                     <CheckCircle2 size={16} />
                   </div>
-                  <span className="text-xs !text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-500 font-bold">{rule}</span>
+                  <span className="text-xs text-slate-600 leading-snug group-hover:text-slate-900 transition-colors duration-500 font-bold">{rule}</span>
                 </div>
               ))}
             </Marquee>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* 3️⃣ Service Categories */}
-      <section className="section-spacing bg-background relative overflow-hidden">
+      <section className="section-spacing bg-white relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
             <h2 className="text-lg sm:text-xl md:text-2xl mb-4 md:mb-6">
               {t('services.homeMaintenance.categories.title')}
             </h2>
-            <p className="text-xs !text-foreground/50">{t('services.homeMaintenance.categories.subtitle')}</p>
+            <p className="text-xs text-slate-500">{t('services.homeMaintenance.categories.subtitle')}</p>
           </div>
 
           <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
             {categories.map((cat, i) => (
-              <motion.div
+              <ScrollReveal
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="p-5 rounded-xl bg-background border border-border hover:border-primary/20 transition-all duration-500 group shrink-0 w-[240px] md:w-auto shadow-xl shadow-primary/5"
+                delay={i * 0.05}
+                className="p-5 rounded-xl bg-white border border-slate-200 hover:border-primary/20 transition-all duration-500 group shrink-0 w-[240px] md:w-auto shadow-xl shadow-primary/5"
               >
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
                   {React.cloneElement(cat.icon as React.ReactElement, { size: 16 })}
                 </div>
                 <h3 className="text-xs mb-3 group-hover:text-primary transition-colors duration-500 font-bold uppercase tracking-wider">{cat.title}</h3>
-                <p className="text-xs !text-foreground/60 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   {cat.desc}
                 </p>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </Marquee>
         </div>
       </section>
 
       {/* 4️⃣ How Coordination Works */}
-      <section className="section-spacing bg-foreground/[0.02] border-y border-border relative overflow-hidden">
+      <section className="section-spacing bg-slate-50 border-y border-slate-200 relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-lg sm:text-xl md:text-2xl mb-4 md:mb-6">
               {t('how.flow.title')}
             </h2>
-            <p className="text-xs !text-foreground/50">{t('how.flow.subtitle')}</p>
+            <p className="text-xs text-slate-500">{t('how.flow.subtitle')}</p>
           </div>
           
           <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
             {coordinationSteps.map((step, i) => (
-              <motion.div
+              <ScrollReveal
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                delay={i * 0.1}
                 className="relative z-10 flex flex-col items-center text-center group shrink-0 w-[160px] md:w-auto"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-background border border-border flex items-center justify-center text-primary mb-5 shadow-xl shadow-primary/5 group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500 relative">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-primary mb-5 shadow-xl shadow-primary/5 group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500 relative">
                   <span className="absolute -top-1.5 -right-1.5 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-xs shadow-lg">
                     {step.title}
                   </span>
@@ -244,59 +208,55 @@ export default function HomeMaintenance() {
                   </div>
                 </div>
                 <p className="text-xs px-4 font-bold group-hover:text-primary transition-colors duration-500">{step.body}</p>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </Marquee>
         </div>
       </section>
 
       {/* 5️⃣ Boundary Block */}
-      <section className="section-spacing bg-background">
+      <section className="section-spacing bg-white">
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="p-5 rounded-xl bg-primary/[0.03] border border-primary/10 shadow-xl shadow-primary/5"
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="p-5 rounded-xl bg-primary/5 border border-primary/10 shadow-xl shadow-primary/5"
             >
               <h3 className="text-xs !text-primary mb-4 font-bold uppercase tracking-wider">
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-2.5">
                 {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-xs !text-foreground/70 group">
+                  <li key={i} className="flex gap-3 items-center text-xs text-slate-600 group">
                     <div className="w-1 h-1 rounded-full bg-primary shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="group-hover:text-foreground transition-colors duration-300 font-medium">{item}</span>
+                    <span className="group-hover:text-slate-900 transition-colors duration-300 font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="p-5 rounded-xl bg-foreground/[0.02] border border-border shadow-xl shadow-primary/5"
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'right' : 'left'}
+              className="p-5 rounded-xl bg-slate-50 border border-slate-200 shadow-xl shadow-primary/5"
             >
-              <h3 className="text-xs !text-foreground/40 mb-4 font-bold uppercase tracking-wider">
+              <h3 className="text-xs text-slate-400 mb-4 font-bold uppercase tracking-wider">
                 {t('services.boundaries.title.isNot')}
               </h3>
               <ul className="space-y-2.5">
                 {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-xs !text-foreground/40 group">
-                    <div className="w-1 h-1 rounded-full bg-foreground/20 shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="group-hover:text-foreground/60 transition-colors duration-300 font-medium">{item}</span>
+                  <li key={i} className="flex gap-3 items-center text-xs text-slate-400 group">
+                    <div className="w-1 h-1 rounded-full bg-slate-200 shrink-0 group-hover:scale-150 transition-transform duration-300" />
+                    <span className="group-hover:text-slate-600 transition-colors duration-300 font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* 6️⃣ Areas Served - Map Style */}
-      <section className="section-spacing bg-background overflow-hidden">
+      <section className="section-spacing bg-white overflow-hidden">
         <div className="container-sahli">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
@@ -305,23 +265,21 @@ export default function HomeMaintenance() {
               </h2>
               <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
                 {areas.map((area, i) => (
-                  <motion.div
+                  <ScrollReveal
                     key={i}
-                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-2.5 p-3 rounded-xl bg-background md:bg-foreground/[0.02] border border-border hover:border-primary/30 transition-all group shrink-0 w-[160px] md:w-auto shadow-xl shadow-primary/5"
+                    direction={dir === 'rtl' ? 'left' : 'right'}
+                    delay={i * 0.1}
+                    className="flex items-center gap-2.5 p-3 rounded-xl bg-white md:bg-slate-50 border border-slate-200 hover:border-primary/30 transition-all group shrink-0 w-[160px] md:w-auto shadow-xl shadow-primary/5"
                   >
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
                       <MapPin size={16} />
                     </div>
                     <span className="text-xs font-bold group-hover:text-primary transition-colors duration-500">{area}</span>
-                  </motion.div>
+                  </ScrollReveal>
                 ))}
               </Marquee>
             </div>
-            <div className="relative aspect-video md:aspect-[2/1] rounded-xl overflow-hidden border border-border bg-foreground/[0.02] flex items-center justify-center shadow-2xl shadow-primary/5">
+            <div className="relative aspect-video md:aspect-[2/1] rounded-xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center shadow-2xl shadow-primary/5">
               <div className="absolute inset-0 opacity-20">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
                 <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
@@ -331,7 +289,7 @@ export default function HomeMaintenance() {
                   <MapPin size={16} />
                 </div>
                 <h2 className="text-base sm:text-lg md:text-xl mb-2 font-bold">{t('services.areas.qatarNationwide')}</h2>
-                <p className="text-xs !text-foreground/60">{t('services.areas.rapidResponse')}</p>
+                <p className="text-xs text-slate-600">{t('services.areas.rapidResponse')}</p>
               </div>
             </div>
           </div>
@@ -339,12 +297,9 @@ export default function HomeMaintenance() {
       </section>
 
       {/* 8️⃣ Final CTA - High Impact */}
-      <section className="section-spacing bg-background border-t border-border overflow-hidden relative">
+      <section className="section-spacing bg-white border-t border-slate-200 overflow-hidden relative">
         <div className="container-sahli relative z-10 text-center max-w-2xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <ScrollReveal
             className="max-w-4xl mx-auto text-center"
           >
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6 md:mb-8">
@@ -353,7 +308,7 @@ export default function HomeMaintenance() {
             <h2 className="text-lg sm:text-xl md:text-2xl mb-6">
               {t('cta.final.title')}
             </h2>
-            <p className="text-xs !text-foreground/60 mb-8 max-w-2xl mx-auto">
+            <p className="text-xs text-slate-600 mb-8 max-w-2xl mx-auto">
               {t('cta.final.body')}
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
@@ -362,19 +317,17 @@ export default function HomeMaintenance() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackRequestClick('Home Maintenance Bottom CTA')}
-                className="cta-primary px-8 py-4 text-xs btn-shine shadow-xl shadow-primary/30"
+                className="cta-primary px-8 py-4 text-xs btn-shine shadow-xl shadow-primary/30 group"
               >
-                <motion.div
-                  className="flex items-center gap-3"
-                  whileHover={{ y: -2, scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <div
+                  className="flex items-center gap-3 group-hover:scale-105 group-active:scale-95 transition-transform"
                 >
                   <MessageSquare size={16} className="fill-primary-foreground" />
                   {t('cta.request')}
-                </motion.div>
+                </div>
               </a>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
 

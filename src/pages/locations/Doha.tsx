@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { Marquee } from '@/components/motion/Marquee';
 import { MessageSquare, CheckCircle2, MapPin, ShieldCheck, Clock, Shield, Star, Zap, Snowflake, Droplets, Wrench, Bug } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
@@ -12,18 +12,6 @@ export default function Doha() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollY } = useScroll();
-  
-  // Parallax effects matching homepage
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
-  
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y1Spring = useSpring(y1, springConfig);
-  const scaleSpring = useSpring(scale, springConfig);
-  const yHero = useTransform(scrollY, [0, 500], [0, -100]);
-
   const districtServices = [
     { title: t('services.homeMaintenance.ac.title'), path: t('services.homeMaintenance.ac.path'), icon: <Snowflake size={24} /> },
     { title: t('services.cleaning.deep.title'), path: t('services.cleaning.deep.path'), icon: <Zap size={24} /> },
@@ -50,52 +38,40 @@ export default function Doha() {
       {/* 1️⃣ Hero Section */}
       <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
-          <motion.div 
-            className="absolute inset-0"
-            style={{ 
-              y: y1Spring,
-              scale: scaleSpring
-            }}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="absolute inset-0 animate-in zoom-in-105 duration-[1.5s]">
             <img 
               src="https://images.unsplash.com/photo-1577147443647-818ece99348b?q=80&w=2070&auto=format&fit=crop" 
               alt="Doha Qatar Skyline"
               className="w-full h-full object-cover object-center scale-105"
             />
-          </motion.div>
+          </div>
           
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-white/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
         </div>
         
         <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
-          <motion.div 
-            className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
-            style={{ y: yHero }}
-          >
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.8 }}
-              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+          <div className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start">
+            <ScrollReveal 
+              direction="none"
+              delay={0.1}
+              duration={0.8}
+              className="inline-flex items-center gap-2 px-3 py-1 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
             >
               <MapPin size={14} className="animate-pulse" />
               Doha & West Bay
-            </motion.div>
+            </ScrollReveal>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-4 md:mb-6 leading-[1] tracking-tight text-white drop-shadow-2xl font-black w-full text-center md:text-start">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-4 md:mb-6 leading-[1] tracking-tight text-slate-900 drop-shadow-2xl font-black w-full text-center md:text-start animate-in slide-in-from-bottom-4 fade-in duration-1000 delay-300 fill-mode-both">
               Home Services <br className="hidden md:block" /> in Doha
             </h1>
 
-            <motion.div
+            <ScrollReveal
               className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              direction="up"
+              delay={0.6}
+              duration={1}
             >
               <p className="text-[10px] sm:text-[11px] md:text-xs lg:text-sm text-white/80 mb-6 md:mb-10 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
                 Coordinating verified home maintenance, cleaning, and specialized services across Doha's premier neighborhoods. One hub for all your requirements.
@@ -107,20 +83,16 @@ export default function Doha() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackRequestClick('Doha Hero CTA')}
-                  className="cta-primary px-5 py-2.5 text-[10px] sm:text-[11px] btn-shine shadow-xl shadow-primary/30"
+                  className="cta-primary px-5 py-2.5 text-[10px] sm:text-[11px] btn-shine shadow-xl shadow-primary/30 group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ y: -5, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
+                  <div className="flex items-center gap-2 group-hover:scale-105 group-active:scale-95 transition-transform">
                     <MessageSquare size={24} className="fill-primary-foreground" />
                     {t('cta.request')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
-          </motion.div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
@@ -151,11 +123,10 @@ export default function Doha() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {districtServices.map((service, i) => (
               <Link key={i} to={service.path}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                <ScrollReveal
+                  direction="up"
+                  delay={i * 0.1}
+                  duration={0.5}
                   className="group p-6 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 h-full flex flex-col"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
@@ -165,7 +136,7 @@ export default function Doha() {
                   <div className="mt-auto flex items-center gap-2 text-primary text-xs font-bold">
                     Learn More <CheckCircle2 size={14} />
                   </div>
-                </motion.div>
+                </ScrollReveal>
               </Link>
             ))}
           </div>
@@ -224,12 +195,11 @@ export default function Doha() {
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 relative">
             {coordinationSteps.map((step, i) => (
-              <motion.div
+              <ScrollReveal
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                direction="up"
+                delay={i * 0.1}
+                duration={0.5}
                 className="relative group p-6 rounded-[2rem] bg-foreground/[0.02] border border-border hover:border-primary/50 transition-all duration-500"
               >
                 <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-500">
@@ -239,7 +209,7 @@ export default function Doha() {
                 <p className="text-xs font-medium leading-relaxed text-foreground/70 group-hover:text-foreground transition-colors duration-500">
                   {step.body}
                 </p>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -248,10 +218,10 @@ export default function Doha() {
       {/* 6️⃣ Final CTA */}
       <section className="section-spacing bg-background relative overflow-hidden">
         <div className="container-sahli relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <ScrollReveal
+            direction="up"
+            delay={0}
+            duration={0.8}
             className="max-w-4xl mx-auto p-12 md:p-20 rounded-[3rem] bg-primary text-primary-foreground shadow-2xl shadow-primary/20 relative overflow-hidden group"
           >
             <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
@@ -267,7 +237,7 @@ export default function Doha() {
               <MessageSquare size={20} className="fill-current" />
               {t('cta.request')}
             </a>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
     </Layout>

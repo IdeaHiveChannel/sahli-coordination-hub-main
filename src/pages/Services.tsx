@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { 
   ChevronDown, 
   MessageSquare, 
@@ -56,98 +56,81 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle, 
   const { dir } = useLanguage();
   
   return (
-    <div className={`border-b border-border last:border-0 transition-all duration-700 ${isOpen ? 'bg-foreground/[0.03] backdrop-blur-md' : 'hover:bg-foreground/[0.01]'}`}>
+    <div className={`border-b border-border/50 last:border-0 transition-all duration-500 ${isOpen ? 'bg-primary/[0.02]' : 'hover:bg-foreground/[0.01]'}`}>
       <button
         onClick={onToggle}
-        className="w-full py-2.5 md:py-3.5 flex items-center justify-between group transition-all px-3 md:px-5"
+        className="w-full py-3 md:py-4 flex items-center justify-between group transition-all px-4 md:px-6 gap-4"
       >
-        <div className="flex items-center gap-4 md:gap-5">
-          <motion.div 
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center transition-all duration-500 shadow-md ${isOpen ? 'bg-primary text-primary-foreground scale-105' : 'bg-foreground/[0.03] text-primary group-hover:bg-primary/10'}`}
+        <div className="flex items-start gap-3 md:gap-5 flex-1 min-w-0">
+          <div 
+            className={`w-9 h-9 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-all duration-500 shadow-sm shrink-0 ${isOpen ? 'bg-primary text-primary-foreground shadow-primary/20' : 'bg-white border border-border/50 text-foreground/70 group-hover:border-primary/30 group-hover:text-primary'}`}
           >
-            {React.cloneElement(icon as React.ReactElement, { size: 16 })}
-          </motion.div>
-          <div className="text-start">
-            <h3 className={`text-xs md:text-sm font-black transition-all duration-500 ${isOpen ? 'text-foreground' : 'text-foreground/70 group-hover:text-foreground'}`}>
+            {React.cloneElement(icon as React.ReactElement, { size: 18 })}
+          </div>
+          <div className="text-start flex-1 min-w-0 pt-0.5">
+            <h3 className={`text-sm md:text-base font-bold transition-colors duration-300 break-words leading-tight mb-1 ${isOpen ? 'text-primary' : 'text-foreground group-hover:text-foreground'}`}>
               {title}
             </h3>
-            <p className={`text-start text-[0.7rem] md:text-[0.75rem] !text-foreground/80 transition-all duration-500 max-w-xl ${isOpen ? 'text-foreground/80' : 'text-foreground/50 group-hover:text-foreground/70'}`}>
+            <p className={`text-xs md:text-sm text-foreground/60 transition-all duration-300 line-clamp-2 leading-relaxed ${isOpen ? 'text-foreground/80' : ''}`}>
               {description}
             </p>
           </div>
         </div>
-        <motion.div
-          animate={{ 
-            rotate: isOpen ? 180 : 0,
-            scale: isOpen ? 1.05 : 1
-          }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className={`transition-colors duration-500 shrink-0 ${isOpen ? 'text-primary' : 'text-foreground/20 group-hover:text-primary/50'}`}
+        <div
+          className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all duration-500 shrink-0 ${isOpen ? 'bg-primary border-primary text-primary-foreground rotate-180' : 'border-border/50 text-foreground/30 group-hover:border-primary/30 group-hover:text-primary'}`}
         >
-          <ChevronDown size={16} strokeWidth={3} />
-        </motion.div>
+          <ChevronDown size={14} strokeWidth={2.5} />
+        </div>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <div className={`pb-6 ps-3 md:ps-[72px] pe-3 md:pe-8 flex flex-col gap-4`}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-4">
-                {items.split('\n').map((item: string, idx: number) => (
-                  <motion.div 
-                    key={idx} 
-                    initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
-                    className="flex items-start gap-3 text-foreground font-bold text-[0.75rem] md:text-[0.85rem] group/item py-0.5"
-                  >
-                    <div className="mt-1 shrink-0">
-                      <img src="/logos/SahlLogo9.png" alt="" loading="lazy" className="w-2.5 h-2.5 object-contain opacity-100 transition-all duration-300 shadow-sm" />
-                    </div>
-                    <span className="group-hover/item:translate-x-1 transition-transform duration-300 leading-tight">
-                      {item}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-
-              {locationLinks && locationLinks.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  className="pt-4 border-t border-border/30"
+      <div 
+        className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+      >
+        <div className="overflow-hidden">
+          <div className={`pb-6 ps-[52px] md:ps-[84px] pe-4 md:pe-8 flex flex-col gap-4`}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
+              {items.split('\n').map((item: string, idx: number) => (
+                <div 
+                  key={idx} 
+                  className={`flex items-start gap-2.5 text-foreground/80 text-xs md:text-sm py-1 transition-all duration-500 group/item`}
+                  style={{ 
+                    transitionDelay: `${50 + idx * 30}ms`,
+                    transform: isOpen ? 'translateY(0)' : 'translateY(10px)',
+                    opacity: isOpen ? 1 : 0
+                  }}
                 >
-                  <p className="text-[0.65rem] font-black tracking-widest uppercase text-foreground/30 mb-3 flex items-center gap-2">
-                    <Info size={10} />
-                    Available Districts
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {locationLinks.map((loc, idx) => (
-                      <Link
-                        key={idx}
-                        to={loc.path}
-                        className="px-3 py-1.5 rounded-lg bg-primary/5 hover:bg-primary/10 border border-primary/10 text-[0.7rem] font-bold text-primary transition-all flex items-center gap-1.5 group/loc"
-                      >
-                        <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                        {loc.label}
-                        <ArrowRight size={10} className="opacity-0 -translate-x-1 group-hover/loc:opacity-100 group-hover/loc:translate-x-0 transition-all" />
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+                  <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/20 group-hover/item:bg-primary transition-colors duration-300" />
+                  <span className="leading-relaxed break-words w-full group-hover/item:text-primary transition-colors duration-300">
+                    {item}
+                  </span>
+                </div>
+              ))}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            {locationLinks && locationLinks.length > 0 && (
+              <div
+                className={`pt-4 mt-2 border-t border-dashed border-border/40 transition-all duration-500 delay-200 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
+              >
+                <p className="text-[0.65rem] font-bold tracking-wider uppercase text-foreground/40 mb-3 flex items-center gap-1.5">
+                  <Info size={10} />
+                  Available Districts
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {locationLinks.map((loc, idx) => (
+                    <Link
+                      key={idx}
+                      to={loc.path}
+                      className="px-2.5 py-1 rounded-md bg-secondary/50 hover:bg-secondary border border-transparent hover:border-border/10 text-[0.7rem] font-medium text-foreground/70 hover:text-foreground transition-all flex items-center gap-1.5"
+                    >
+                      {loc.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -159,16 +142,6 @@ export default function Services() {
   const [openModule, setOpenModule] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), springConfig);
-  const scale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.2]), springConfig);
-  const yText = useSpring(useTransform(scrollYProgress, [0, 1], [0, -150]), springConfig);
-
   const roofs = React.useMemo(() => [
     { id: 'home-maintenance', label: t('services.homeMaintenance.title') },
     { id: 'cleaning', label: t('services.cleaning.title') },
@@ -221,171 +194,140 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero / Selector Area - Consistent with Homepage */}
-      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-[50vh] md:min-h-[70vh] flex flex-col justify-center overflow-hidden bg-background">
         {/* Background Parallax */}
         <div className="absolute inset-0 z-0">
-          <motion.div 
-            style={{ 
-              y: y,
-              scale: scale
-            }}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0"
+          <div 
+            className="absolute inset-0 animate-in fade-in zoom-in-105 duration-[1500ms]"
           >
             <img 
               src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1920&auto=format&fit=crop" 
               alt={t('nav.services')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-center scale-105"
+              className="w-full h-full object-cover object-center"
             />
-          </motion.div>
+          </div>
           
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-white/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-24">
-          <motion.div
-            style={{ y: yText }}
+        <div className="container-sahli relative z-10 pt-28 pb-8 md:pt-32 md:pb-24">
+          <div
             className="max-w-4xl mx-auto md:mx-0 text-center md:text-start"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-label mb-6 backdrop-blur-md mx-auto md:mx-0"
-            >
-              <img src="/logos/SahlLogo9.png" alt="" className="w-4 h-4 object-contain" />
+            <div
+            className="inline-flex items-center gap-2 px-2.5 py-1 bg-primary/10 rounded-full border border-primary/20 text-label mb-6 backdrop-blur-md mx-auto md:mx-0 animate-in fade-in zoom-in-95 duration-1000"
+          >
+              <img src="/logos/SahlLogo5.png" alt="" className="w-4 h-4 object-contain scale-[3]" />
               {t('nav.services')}
-            </motion.div>
+            </div>
 
-            <h1 className="mb-6 text-foreground text-display w-full text-center md:text-start">
-              {t('services.title').split(' ').map((word: string, i: number) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="inline-block me-[0.1em]"
-                >
-                  {word}
-                </motion.span>
-              ))}
+            <h1 className="mb-4 md:mb-6 text-primary text-3xl md:text-5xl lg:text-6xl font-black w-full text-center md:text-start break-words md:max-w-[80%] leading-tight">
+              {t('services.title')}
             </h1>
             
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm md:text-base !text-foreground/60 max-w-2xl mb-8 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start"
+            <p 
+              className="text-sm md:text-lg text-slate-900 max-w-xl md:max-w-2xl mb-8 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start animate-in fade-in slide-in-from-bottom-5 fill-mode-both break-words"
+              style={{ animationDelay: '0.6s', animationDuration: '1s' }}
             >
               {t('services.intro')}
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Sticky Selector - Enhanced Visuals */}
-      <div className="sticky top-[48px] md:top-[56px] z-40 w-full backdrop-blur-2xl bg-background/80 border-y border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
+      <div className="sticky top-[60px] z-40 w-full backdrop-blur-xl bg-background/80 border-y border-border/50 shadow-sm">
         <div className="container-sahli">
-          <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-3 scroll-smooth items-center md:justify-center">
+          <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-3 scroll-smooth items-center md:justify-start px-1">
             {roofs.map((roof: { id: string; label: string; status?: string }, idx: number) => (
-              <motion.button
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + idx * 0.05, duration: 0.8 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 key={roof.id}
                 onClick={() => handleRoofClick(roof.id)}
-                className={`relative px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap ${
+                className={`relative px-3 md:px-4 py-2 md:py-2.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap shrink-0 ${
                   activeRoof === roof.id
-                    ? 'text-primary-foreground'
-                    : 'text-foreground/50 hover:text-foreground hover:bg-white/5'
+                    ? 'text-primary-foreground shadow-md shadow-primary/20 scale-105'
+                    : 'text-foreground/60 hover:text-foreground hover:bg-foreground/5'
                 }`}
               >
                 {activeRoof === roof.id && (
-                  <motion.div 
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-primary rounded-xl -z-10 shadow-xl shadow-primary/20"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  <div 
+                    className="absolute inset-0 bg-primary rounded-full -z-10 animate-in fade-in zoom-in-95 duration-200"
                   />
                 )}
                 
                 <span className="relative z-10 flex items-center gap-2">
-                    <img 
-                      src="/logos/SahlLogo9.png" 
-                      alt="" 
-                      loading="lazy" 
-                      className={`w-3 h-3 object-contain transition-all duration-500 ${activeRoof === roof.id ? 'brightness-0 invert' : 'opacity-50'}`} 
-                    />
+                    {activeRoof === roof.id && (
+                      <img 
+                        src="/logos/SahlLogo5.png" 
+                        alt="" 
+                        className="w-3 h-3 object-contain brightness-0 invert scale-[3]" 
+                      />
+                    )}
                     {roof.label}
                   </span>
-              </motion.button>
+              </button>
             ))}
           </div>
         </div>
       </div>
 
       {/* Roof 1: Home Maintenance - Compact */}
-      <section id="home-maintenance" className="relative section-spacing scroll-mt-32 bg-background overflow-hidden">
+      <section id="home-maintenance" className="relative section-spacing scroll-mt-24 md:scroll-mt-32 bg-background overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-primary/[0.03] rounded-full blur-[60px] -z-10 animate-pulse-slow" />
         
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="relative lg:sticky top-0 lg:top-44 h-fit"
             >
-              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
+              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
+                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+                  <div 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
                   >
-                    <Wrench size={16} />
-                  </motion.div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                    {t('services.status.live')} — 01
-                  </span>
+                    <Wrench size={20} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[8px] font-black tracking-widest uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                      {t('services.status.live')} — 01
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                      {t('services.homeMaintenance.title')}
+                    </h2>
+                  </div>
                 </div>
-                <h2 className="text-xl md:text-2xl font-black text-foreground mb-4 md:mb-6">
-                  {t('services.homeMaintenance.title')}
-                </h2>
-                <p className="text-xs md:text-sm !text-foreground/60 mb-8 md:mb-10 leading-relaxed">
+                
+                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
                   {t('services.homeMaintenance.body')}
                 </p>
                 
-                <motion.div 
-                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
+                <div 
+                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
                 >
                   <div className="flex items-start gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Box className="text-primary w-3.5 h-3.5" />
-                  </div>
+                    </div>
                     <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.homeMaintenance.rule')}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
+            <ScrollReveal 
+              direction="up"
+              delay={0.2}
+              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
             >
-              <div className="divide-y divide-border/50">
+              <div className="divide-y divide-border/40">
                 <CollapsibleModule
                   icon={<Wind size={18} />}
                   title={t('services.homeMaintenance.ac.title')}
@@ -424,61 +366,61 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
                 <a 
                   href={getWhatsAppLink(t('services.homeMaintenance.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Home Maintenance')}
-                  className="cta-primary btn-shine"
+                  className="cta-primary btn-shine inline-block group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.homeMaintenance.cta')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Roof 2: Cleaning & Coordination - Compact */}
-      <section id="cleaning" className="relative section-spacing bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      <section id="cleaning" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
+        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[50px] md:blur-[80px] -z-10 animate-pulse-slow" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[60px] md:blur-[100px] -z-10 animate-pulse-slow delay-700" />
         
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="relative lg:sticky top-0 lg:top-44 h-fit"
             >
-              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
+              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
+                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+                  <div 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
                   >
-                    <Sparkles size={16} />
-                  </motion.div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                    {t('services.status.live')} — 02
-                  </span>
+                    <Sparkles size={20} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                      {t('services.status.live')} — 02
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                      {t('services.cleaning.title')}
+                    </h2>
+                  </div>
                 </div>
-                <h2 className="text-display mb-3">{t('services.cleaning.title')}</h2>
-                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
+
+                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
                   {t('services.cleaning.body')}
                 </p>
                 
-                <motion.div 
-                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
+                <div 
+                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
                 >
                   <div className="flex items-start gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
@@ -488,16 +430,14 @@ export default function Services() {
                       {t('services.cleaning.rule')}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
+            <ScrollReveal 
+              direction="up"
+              delay={0.2}
+              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
@@ -542,80 +482,76 @@ export default function Services() {
                 <a 
                   href={getWhatsAppLink(t('services.cleaning.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Cleaning')}
-                  className="cta-primary btn-shine"
+                  className="cta-primary btn-shine inline-block group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.cleaning.cta')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Roof 3: Moving & Relocation - Compact */}
-      <section id="moving" className="relative section-spacing scroll-mt-32 overflow-hidden">
+      <section id="moving" className="relative section-spacing scroll-mt-24 md:scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-500" />
         
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="relative lg:sticky top-0 lg:top-44 h-fit"
             >
-              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
+              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
+                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+                  <div 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
                   >
-                    <Truck size={16} />
-                  </motion.div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                    {t('services.status.live')} — 03
-                  </span>
+                    <Truck size={20} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                      {t('services.status.live')} — 03
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                      {t('services.moving.title')}
+                    </h2>
+                  </div>
                 </div>
-                <h2 className="text-xl md:text-2xl font-black text-foreground mb-4 md:mb-6">
-                  {t('services.moving.title')}
-                </h2>
-                <p className="text-xs md:text-sm !text-foreground/60 mb-8 md:mb-10 leading-relaxed">
+
+                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
                   {t('services.moving.body')}
                 </p>
                 
-                <motion.div 
-                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
+                <div 
+                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
                 >
                   <div className="flex items-start gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Heart className="text-primary w-3.5 h-3.5" />
-                  </div>
+                    </div>
                     <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.moving.rule')}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
+            <ScrollReveal 
+              direction="up"
+              delay={0.2}
+              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
             >
-              <div className="divide-y divide-border/50">
+              <div className="divide-y divide-border/40">
                 <CollapsibleModule
                   icon={<Box size={18} />}
                   title={t('services.moving.local.title')}
@@ -642,80 +578,78 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
                 <a 
                   href={getWhatsAppLink(t('services.moving.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Moving')}
-                  className="cta-primary btn-shine"
+                  className="cta-primary btn-shine inline-block group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.moving.cta')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Roof 4: Outdoor & Specialized - Compact */}
-      <section id="outdoor" className="relative section-spacing bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      <section id="outdoor" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
         <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
         
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="relative lg:sticky top-0 lg:top-44 h-fit"
             >
-              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
+              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
+                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+                  <div 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
                   >
-                    <Droplets size={16} />
-                  </motion.div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                    {t('services.status.live')} — 04
-                  </span>
+                    <Droplets size={20} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                      {t('services.status.live')} — 04
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                      {t('services.outdoor.title')}
+                    </h2>
+                  </div>
                 </div>
-                <h2 className="text-display mb-3">{t('services.outdoor.title')}</h2>
-                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
+
+                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
                   {t('services.outdoor.body')}
                 </p>
                 
-                <motion.div 
-                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
+                <div 
+                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
                 >
                   <div className="flex items-start gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Smartphone className="text-primary w-3.5 h-3.5" />
-                  </div>
+                    </div>
                     <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
                       {t('services.outdoor.rule')}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
+            <ScrollReveal 
+              direction="up"
+              delay={0.2}
+              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
             >
               <div className="divide-y divide-border/50">
                 <CollapsibleModule
@@ -740,59 +674,57 @@ export default function Services() {
                 <a 
                   href={getWhatsAppLink(t('services.outdoor.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Outdoor')}
-                  className="cta-primary btn-shine"
+                  className="cta-primary btn-shine inline-block group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.outdoor.cta')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Roof 5: Care & Lifestyle - Compact */}
-      <section id="care" className="relative section-spacing scroll-mt-32 overflow-hidden">
+      <section id="care" className="relative section-spacing scroll-mt-24 md:scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-500" />
         
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="relative lg:sticky top-0 lg:top-44 h-fit"
             >
-              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
+              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
+                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+                  <div 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
                   >
-                    <Heart size={16} />
-                  </motion.div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                    {t('services.status.live')} — 05
-                  </span>
+                    <Heart size={20} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                      {t('services.status.live')} — 05
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                      {t('services.care.title.roof5')}
+                    </h2>
+                  </div>
                 </div>
-                <h2 className="text-xl md:text-2xl font-black text-foreground mb-4 md:mb-6">
-                  {t('services.care.title.roof5')}
-                </h2>
-                <p className="text-xs md:text-sm !text-foreground/60 mb-8 md:mb-10 leading-relaxed">
+
+                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
                   {t('services.care.body.roof5')}
                 </p>
                 
-                <motion.div 
-                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
+                <div 
+                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
                 >
                   <div className="flex items-start gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
@@ -802,18 +734,16 @@ export default function Services() {
                       {t('services.care.rule.roof5')}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
+            <ScrollReveal 
+              direction="up"
+              delay={0.2}
+              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
             >
-              <div className="divide-y divide-border/50">
+              <div className="divide-y divide-border/40">
                 <CollapsibleModule
                   icon={<Baby size={18} />}
                   title={t('services.care.babysitting.title.roof5')}
@@ -832,61 +762,61 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
                 <a 
                   href={getWhatsAppLink(t('services.care.whatsapp.roof5'))}
                   onClick={() => trackRequestClick('Services - Care')}
-                  className="cta-primary btn-shine"
+                  className="cta-primary btn-shine inline-block group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.care.cta.roof5')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Roof 6: Electronics & Tech - Compact */}
-      <section id="tech" className="relative section-spacing bg-foreground/[0.01] scroll-mt-32 overflow-hidden">
+      <section id="tech" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
         <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
         
         <div className="container-sahli">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: dir === 'rtl' ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction={dir === 'rtl' ? 'left' : 'right'}
+              className="relative lg:sticky top-0 lg:top-44 h-fit"
             >
-              <div className="sticky top-32 md:top-40 lg:top-44 flex flex-col items-center lg:items-start text-center lg:text-start">
-                <div className="flex items-center gap-2 mb-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-md"
+              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
+                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+                  <div 
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
                   >
-                    <Tv size={16} />
-                  </motion.div>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[7px] font-black tracking-widest uppercase border border-primary/20 backdrop-blur-md">
-                    <img src="/logos/SahlLogo9.png" alt="" className="w-2.5 h-2.5 object-contain" />
-                    {t('services.status.live')} — 06
-                  </span>
+                    <Tv size={20} />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                      {t('services.status.live')} — 06
+                    </span>
+                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                      {t('services.electronics.title')}
+                    </h2>
+                  </div>
                 </div>
-                <h2 className="text-display mb-3">{t('services.electronics.title')}</h2>
-                <p className="text-[0.85rem] md:text-sm !text-foreground/50 mb-5 max-w-md">
+
+                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
                   {t('services.electronics.body')}
                 </p>
                 
-                <motion.div 
-                  className="p-3.5 rounded-xl bg-foreground/[0.02] border border-border/50 relative overflow-hidden group w-full max-w-sm"
+                <div 
+                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
                 >
                   <div className="flex items-start gap-2.5">
                     <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
@@ -896,18 +826,16 @@ export default function Services() {
                       {t('services.electronics.rule')}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-foreground/[0.01] rounded-2xl border border-border shadow-lg overflow-hidden"
+            <ScrollReveal 
+              direction="up"
+              delay={0.2}
+              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
             >
-              <div className="divide-y divide-border/50">
+              <div className="divide-y divide-border/40">
                 <CollapsibleModule
                   icon={<Tv size={18} />}
                   title={t('services.electronics.home-appliances.title')}
@@ -926,23 +854,21 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
                 <a 
                   href={getWhatsAppLink(t('services.electronics.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Electronics')}
-                  className="cta-primary btn-shine"
+                  className="cta-primary btn-shine inline-block group"
                 >
-                  <motion.div
-                    className="flex items-center gap-2"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
                   >
                     <MessageSquare size={16} className="fill-primary-foreground" />
                     {t('services.electronics.cta')}
-                  </motion.div>
+                  </div>
                 </a>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -953,22 +879,20 @@ export default function Services() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-primary/10 rounded-full blur-[60px] -z-10 animate-pulse-slow" />
         
         <div className="container-sahli text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <ScrollReveal
+            direction="up"
             className="max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[7px] font-black tracking-widest uppercase mb-5 shadow-md btn-shine">
-              <img src="/logos/SahlLogo9.png" alt="" className="w-3 h-3 object-contain" />
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[7px] font-black tracking-widest uppercase mb-5 shadow-md btn-shine">
+              <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[3]" />
               {t('about.position.title')}
             </div>
             
-            <h2 className="text-display mb-4">
+            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4 break-words w-full">
               {t('services.cta.title')}
             </h2>
             
-            <p className="text-[0.85rem] md:text-sm !text-foreground/70 mb-6 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl mx-auto break-words w-full">
               {t('services.cta.body')}
             </p>
 
@@ -976,7 +900,7 @@ export default function Services() {
               <a 
                 href={getWhatsAppLink(t('cta.whatsapp.general'))}
                 onClick={() => trackRequestClick('Services - Bottom CTA')}
-                className="cta-primary btn-shine"
+                className="cta-primary btn-shine inline-block"
               >
                 <div className="flex items-center justify-center gap-1.5">
                   <MessageSquare size={14} className="fill-primary-foreground" />
@@ -992,10 +916,18 @@ export default function Services() {
                 <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform duration-500" />
               </Link>
             </div>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </section>
+
+      <div className="container-sahli py-8 md:py-12 border-t border-border/40">
+        <div className="flex items-center justify-center gap-2 md:gap-3 opacity-60">
+          <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[3]" />
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-foreground/60">
+            {t('services.end')}
+          </span>
+        </div>
+      </div>
     </Layout>
   );
 }
-

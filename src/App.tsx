@@ -1,7 +1,5 @@
 import React, { Suspense, useEffect, lazy } from 'react';
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -9,21 +7,21 @@ import { ThemeProvider } from "next-themes";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import { trackPageView } from "./lib/gtag";
 
-import AdminLogin from "@/pages/admin/Login";
-import AdminPasswordReset from "@/pages/admin/PasswordReset";
-import AdminDashboard from "@/pages/admin/Dashboard";
-import AdminRequests from "@/pages/admin/RequestsList";
-import AdminProviders from "@/pages/admin/ActiveProviders";
-import AdminBroadcastQueue from "@/pages/admin/BroadcastQueue";
-import AdminProviderResponses from "@/pages/admin/ProviderResponses";
-import AdminCommunicationHistory from "@/pages/admin/CommunicationHistory";
-import AdminFeedbackAudits from "@/pages/admin/FeedbackAudits";
-import AdminProviderApplications from "@/pages/admin/ProviderApplications";
-import AdminSettings from "@/pages/admin/Settings";
-import AdminServices from "@/pages/admin/ServicesManagement";
-import AdminAreas from "@/pages/admin/AreasManagement";
-import AdminMessageTemplates from "@/pages/admin/MessageTemplates";
-import AdminProtectedRoute from "@/components/admin/AdminProtectedRoute";
+const AdminLogin = lazy(() => import("@/pages/admin/Login"));
+const AdminPasswordReset = lazy(() => import("@/pages/admin/PasswordReset"));
+const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"));
+const AdminRequests = lazy(() => import("@/pages/admin/RequestsList"));
+const AdminProviders = lazy(() => import("@/pages/admin/ActiveProviders"));
+const AdminBroadcastQueue = lazy(() => import("@/pages/admin/BroadcastQueue"));
+const AdminProviderResponses = lazy(() => import("@/pages/admin/ProviderResponses"));
+const AdminCommunicationHistory = lazy(() => import("@/pages/admin/CommunicationHistory"));
+const AdminFeedbackAudits = lazy(() => import("@/pages/admin/FeedbackAudits"));
+const AdminProviderApplications = lazy(() => import("@/pages/admin/ProviderApplications"));
+const AdminSettings = lazy(() => import("@/pages/admin/Settings"));
+const AdminServices = lazy(() => import("@/pages/admin/ServicesManagement"));
+const AdminAreas = lazy(() => import("@/pages/admin/AreasManagement"));
+const AdminMessageTemplates = lazy(() => import("@/pages/admin/MessageTemplates"));
+const AdminProtectedRoute = lazy(() => import("@/components/admin/AdminProtectedRoute"));
 
 const AdminManualAssignment = AdminDashboard;
 
@@ -83,8 +81,6 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
       <ThemeProvider defaultTheme="light" enableSystem={false} attribute="class">
-        <TooltipProvider>
-          <Toaster />
           <Sonner />
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <PageTracker />
@@ -239,7 +235,6 @@ const App = () => (
               </Routes>
             </Suspense>
           </BrowserRouter>
-        </TooltipProvider>
       </ThemeProvider>
     </LanguageProvider>
   </QueryClientProvider>

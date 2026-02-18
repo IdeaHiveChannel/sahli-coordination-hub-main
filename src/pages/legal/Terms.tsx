@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
-import { motion } from 'framer-motion';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { Gavel, ScrollText } from 'lucide-react';
 
 import { TranslationKey } from '@/lib/i18n';
@@ -23,36 +23,26 @@ export default function Terms() {
         </div>
 
         <div className="container-sahli relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="animate-in slide-in-from-bottom-8 fade-in duration-1000">
             <h1 className="mb-16 text-foreground text-display flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2">
               {t('legal.terms.title').split(/\s+/).map((word: string, i: number) => (
-                <motion.span
+                <span
                   key={i}
-                  initial={{ opacity: 0, rotateX: -90, y: 50 }}
-                  animate={{ opacity: 1, rotateX: 0, y: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.2 + (i * 0.1),
-                    ease: [0.215, 0.61, 0.355, 1]
-                  }}
-                  className="inline-block origin-bottom pb-2"
+                  className="inline-block origin-bottom pb-2 animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both"
+                  style={{ animationDelay: `${0.2 + (i * 0.1)}s` }}
                 >
                   {word}
-                </motion.span>
+                </span>
               ))}
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
               <div className="lg:col-span-8">
                 <div className="prose prose-lg max-w-none space-y-12">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
+                  <ScrollReveal 
+                    direction="up"
+                    delay={0.4}
+                    duration={0.8}
                     className="p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] glass-morphism border border-border shadow-xl shadow-black/20"
                   >
                     <div className="flex justify-between items-start mb-8">
@@ -69,15 +59,15 @@ export default function Terms() {
                     <p className="text-body !text-foreground/70">
                       {t('legal.terms.intro')}
                     </p>
-                  </motion.div>
+                  </ScrollReveal>
                   
                   <div className="space-y-8">
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((sectionNum) => (
-                      <motion.div 
-                        key={sectionNum}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((sectionNum, index) => (
+                      <ScrollReveal 
+                        key={index}
+                        direction="up"
+                        delay={0.3 + (index * 0.1)}
+                        duration={0.8}
                         className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all duration-500 group"
                       >
                         <h2 className="text-subtitle mb-6 group-hover:text-primary transition-colors">
@@ -88,28 +78,28 @@ export default function Terms() {
                             <p key={idx}>{paragraph}</p>
                           ))}
                         </div>
-                      </motion.div>
+                      </ScrollReveal>
                     ))}
                   </div>
 
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                  <ScrollReveal 
+                    direction="up"
+                    delay={0}
+                    duration={0.8}
                     className="p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-primary/5 border border-primary/20"
                   >
                     <p className="text-subtitle !text-foreground/80 text-center leading-relaxed">
                       {t('legal.terms.final')}
                     </p>
-                  </motion.div>
+                  </ScrollReveal>
                 </div>
               </div>
 
               <div className="lg:col-span-4">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.6 }}
+                <ScrollReveal 
+                  direction="up"
+                  delay={0.5}
+                  duration={0.8}
                   className="sticky top-32 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] glass-morphism border border-border"
                 >
                   <ScrollText className="text-primary mb-8 w-12 h-12" />
@@ -121,10 +111,10 @@ export default function Terms() {
                   <p className="text-label !text-primary">
                     {t('legal.qatar.standard')}
                   </p>
-                </motion.div>
+                </ScrollReveal>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </Layout>

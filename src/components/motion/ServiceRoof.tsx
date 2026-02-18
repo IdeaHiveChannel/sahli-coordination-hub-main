@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { TranslationKey } from '@/lib/i18n';
 import { getWhatsAppLink } from '@/lib/constants';
 
 interface ServiceRoofProps {
@@ -16,7 +14,7 @@ interface ServiceRoofProps {
   showNumber?: boolean;
   subcategories?: string[];
   status?: string;
-  whatsappKey?: string;
+  whatsappKey?: TranslationKey;
 }
 
 export function ServiceRoof({ 
@@ -51,29 +49,16 @@ export function ServiceRoof({
   }, []);
 
   const content = (
-    <motion.div
-      className={`relative min-h-[280px] md:min-h-[340px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70' : ''}`}
-      whileHover={!isMobile && status !== 'comingSoon' ? { 
-        y: -10,
-        borderColor: 'hsla(var(--primary), 0.3)',
-        boxShadow: '0 40px 80px -20px rgba(0, 0, 0, 0.4)'
-      } : {}}
-      whileTap={status !== 'comingSoon' ? { scale: 0.98, y: -5 } : {}}
-      initial={{ opacity: 0, y: isMobile ? 15 : 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: isMobile ? "-20px" : "-50px" }}
-      transition={{ 
-        duration: isMobile ? 0.8 : 1, 
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1]
-      }}
+    <div
+      className={`relative min-h-[260px] sm:min-h-[280px] md:min-h-[340px] w-full rounded-[var(--radius)] border border-slate-200 bg-white overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70' : ''} animate-in fade-in slide-in-from-bottom-8 fill-mode-both hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 active:scale-[0.98] active:translate-y-[-2px]`}
+      style={{ animationDelay: `${index * 100}ms` }}
       onMouseEnter={() => !isMobile && status !== 'comingSoon' && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Coming Soon Badge */}
       {status === 'comingSoon' && (
         <div className="absolute top-8 inset-inline-end-8 z-20">
-          <span className="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
+          <span className="px-2.5 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
             {t('services.status.comingSoon')}
           </span>
         </div>
@@ -82,31 +67,25 @@ export function ServiceRoof({
       {/* Background Image with Reveal Animation */}
       {imageUrl && (
         <div className="absolute inset-0 z-0">
-          <motion.img 
+          <img 
             src={imageUrl} 
             alt={title}
             loading="lazy"
             crossOrigin="anonymous"
-            className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
-            animate={{ 
-              scale: isHovered ? 1.05 : 1
-            }}
+            className={`w-full h-full object-cover transition-all duration-1000 ${isHovered ? 'scale-105' : 'scale-100'}`}
           />
-          {/* Overlays removed as per user request */}
         </div>
       )}
 
       {/* Glow Effect on Hover */}
-      <motion.div 
-        className="absolute inset-0 z-0 bg-primary/5 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+      <div 
+        className={`absolute inset-0 z-0 bg-primary/5 blur-[40px] md:blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}
       />
 
       {/* Top bar accent - Refined */}
-      <motion.div 
-        className="absolute top-0 inset-inline-start-0 h-1 bg-primary z-10"
-        initial={{ width: 0 }}
-        animate={{ width: isHovered ? '100%' : '0%' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      <div 
+        className={`absolute top-0 inset-inline-start-0 h-1 bg-primary z-10 transition-all duration-800 ease-out`}
+        style={{ width: isHovered ? '100%' : '0%' }}
       />
 
       {/* Index number - Modern Styling */}
@@ -119,11 +98,9 @@ export function ServiceRoof({
       )}
 
       {/* Content */}
-      <div className="relative min-h-[280px] md:min-h-[340px] p-6 md:p-8 flex flex-col justify-end z-10 text-center md:text-start items-center md:items-start">
-        <motion.div
-          animate={{ y: isHovered ? -5 : 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center md:items-start"
+      <div className="relative min-h-[260px] sm:min-h-[280px] md:min-h-[340px] p-5 sm:p-6 md:p-8 flex flex-col justify-end z-10 text-center md:text-start items-center md:items-start">
+        <div
+          className={`flex flex-col items-center md:items-start transition-transform duration-600 ease-out ${isHovered ? '-translate-y-1' : 'translate-y-0'}`}
         >
           {icon && (
             <div className={`mb-4 transition-all duration-700 ${imageUrl ? 'text-white group-hover:text-primary group-hover:scale-110' : 'text-primary'}`}>
@@ -131,59 +108,46 @@ export function ServiceRoof({
             </div>
           )}
 
-          <h3 className={`text-xl md:text-xl lg:text-2xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-foreground group-hover:text-primary'}`}>
+          <h3 className={`text-lg sm:text-xl lg:text-2xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 break-words ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-slate-900 group-hover:text-primary'}`}>
             {title}
           </h3>
-
           {showDescription && description && (!subcategories || subcategories.length === 0) && (
-            <motion.p
-              className={`text-[13px] lg:text-sm leading-relaxed font-normal mb-0 transition-colors duration-700 ${imageUrl ? 'text-white/90 group-hover:text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.6)]' : 'text-foreground/80 group-hover:text-foreground'}`}
-              initial={{ height: 'auto', opacity: 1, marginBottom: 16 }}
-              animate={{ 
-                height: 'auto', 
-                opacity: 1,
-                marginBottom: 16
-              }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            <p
+              className={`text-[13px] lg:text-sm leading-relaxed font-normal mb-4 transition-colors duration-700 break-words ${imageUrl ? 'text-white/90 group-hover:text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.6)]' : 'text-slate-600 group-hover:text-slate-900'}`}
             >
               {description}
-            </motion.p>
+            </p>
           )}
 
           {subcategories && subcategories.length > 0 && (
-            <motion.div
-              className="flex flex-wrap gap-2 overflow-hidden justify-center md:justify-start"
-              initial={{ height: 'auto', opacity: 1, marginBottom: 20 }}
-              animate={{ 
-                height: 'auto', 
-                opacity: 1,
-                marginBottom: 20
-              }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <div className="flex flex-wrap gap-2 overflow-hidden justify-center md:justify-start mb-5">
               {subcategories.map((sub: string, i: number) => (
                 <span 
                   key={i} 
-                  className={`px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-black tracking-widest uppercase border transition-colors duration-500 ${imageUrl ? 'bg-white/10 border-white/30 text-white backdrop-blur-md shadow-lg group-hover:bg-white group-hover:text-primary group-hover:border-white' : 'bg-primary/10 border-primary/20 text-primary'}`}
+                  className={`px-2.5 py-1 rounded-full text-[8px] sm:text-[9px] md:text-[10px] font-black tracking-widest uppercase border transition-colors duration-500 ${imageUrl ? 'bg-white/10 border-white/30 text-white backdrop-blur-md shadow-lg group-hover:bg-white group-hover:text-primary group-hover:border-white' : 'bg-primary/10 border-primary/20 text-primary'}`}
                 >
                   {sub}
                 </span>
               ))}
-            </motion.div>
+            </div>
           )}
-        </motion.div>
+        </div>
       </div>
 
       {/* Subtle Decorative Circle */}
       {!imageUrl && (
         <div className={`absolute -bottom-10 ${dir === 'rtl' ? '-left-10' : '-right-10'} w-40 h-40 bg-primary/[0.01] rounded-full blur-3xl group-hover:bg-primary/[0.03] transition-all duration-700`} />
       )}
-    </motion.div>
+    </div>
   );
+
+  if (status === 'comingSoon') {
+    return content;
+  }
 
   return (
     <a 
-      href={getWhatsAppLink(whatsappKey ? t(whatsappKey as any) : t('cta.whatsapp.general'))} 
+      href={getWhatsAppLink(whatsappKey ? t(whatsappKey) : t('cta.whatsapp.general'))} 
       target="_blank" 
       rel="noopener noreferrer" 
       className="w-full"

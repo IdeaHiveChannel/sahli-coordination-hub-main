@@ -1,56 +1,53 @@
-import { motion } from 'framer-motion';
+import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface InfiniteMarqueeProps {
-  items: string[];
-  logos?: string[];
-  speed?: number;
-  direction?: 'left' | 'right';
+  children: React.ReactNode;
+  className?: string;
+  pauseOnHover?: boolean;
+  gap?: number;
+  speed?: number; // Duration in seconds
 }
 
-export function InfiniteMarquee({ items, logos, speed = 40, direction = 'left' }: InfiniteMarqueeProps) {
+/**
+ * An infinite scrolling marquee component that works on all screen sizes.
+ * Unlike the standard Marquee component, this does not disable on desktop.
+ * Uses Tailwind CSS animations defined in tailwind.config.ts.
+ */
+export const InfiniteMarquee = ({ 
+  children, 
+  className = "", 
+  pauseOnHover = true,
+  gap = 24,
+  speed = 20, // Default duration matches tailwind config default
+}: InfiniteMarqueeProps) => {
   const { dir } = useLanguage();
   
-  // Default to a single logo if no array provided
-  const logoList = logos && logos.length > 0 ? logos : ['/logos/SahlLogo9.png'];
+  const isRtl = dir === 'rtl';
+  // animate-marquee: moves 0 to -50% (Leftward)
+  // animate-marquee-rtl: moves -50% to 0 (Rightward)
+  const animationClass = isRtl ? 'animate-marquee-rtl' : 'animate-marquee';
   
-  // Adjust direction based on RTL
-  const effectiveDirection = dir === 'rtl' 
-    ? (direction === 'left' ? 'right' : 'left') 
-    : direction;
-
   return (
-    <div className="relative w-full overflow-hidden bg-background py-12 border-y border-border/50">
-      {/* Edge Fades removed as per user request */}
-      
-      <motion.div
-        className="flex whitespace-nowrap gap-12"
-        animate={{
-          x: effectiveDirection === 'left' ? ['0%', '-50%'] : ['-50%', '0%'],
-        }}
-        transition={{
-          duration: speed,
-          repeat: Infinity,
-          ease: "linear",
+    <div 
+      className={`overflow-hidden ${className} group`}
+    >
+      <div 
+        className={`flex w-max ${animationClass} ${pauseOnHover ? 'group-hover:[animation-play-state:paused]' : ''}`}
+        style={{ 
+          gap: `${gap}px`,
+          animationDuration: `${speed}s`,
+          paddingInlineEnd: `${gap}px`, // Ensure total width is exactly 2x the repeat distance
         }}
       >
-        {[...items, ...items].map((item: string, index: number) => {
-          // Cycle through provided logos
-          const logoSrc = logoList[index % logoList.length];
-          
-          return (
-            <div
-              key={index}
-              className="flex items-center gap-6"
-            >
-              <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground/10 uppercase hover:text-primary/20 transition-colors cursor-default">
-                {item}
-              </span>
-              <img src={logoSrc} alt="" className="w-5 h-5 object-contain opacity-20" />
-            </div>
-          );
-        })}
-      </motion.div>
+        {/* Render children twice for seamless loop */}
+        <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
+          {children}
+        </div>
+        <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
+          {children}
+        </div>
+      </div>
     </div>
   );
-}
+};

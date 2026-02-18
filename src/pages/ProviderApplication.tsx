@@ -1,15 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Building2, Mail, Phone, MapPin, Briefcase, Send, CheckCircle2, ShieldCheck, Globe, Users, Upload, File, X, Info, Shield, Zap, Sparkles, Target, Star } from 'lucide-react';
+import { Building2, Mail, Phone, Briefcase, Send, CheckCircle2, ShieldCheck, Upload, File, X, Info, Zap, Sparkles, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import { CONTACT_EMAIL } from '@/lib/constants';
 import { storageService } from '@/lib/storageService';
 import { rateupService } from '@/lib/rateupService';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 const ProviderApplication = () => {
   const { t, dir } = useLanguage();
@@ -17,16 +16,6 @@ const ProviderApplication = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-  
-  // Parallax effects matching Index.tsx
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
-  
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y1Spring = useSpring(y1, springConfig);
-  const scaleSpring = useSpring(scale, springConfig);
-  const yHero = useTransform(scrollY, [0, 500], [0, -100]);
   
   const [formData, setFormData] = useState({
     companyName: '',
@@ -147,13 +136,6 @@ const ProviderApplication = () => {
         }
 
         // 4. Provider Acknowledgement Hash
-        const acknowledgement = {
-          timestamp: new Date().toISOString(),
-          ip: '127.0.0.1', 
-          termsVersionId: 'TERMS-2024-V1',
-          userAgent: navigator.userAgent,
-          applicationId: newApp.id
-        };
       
       // Simulate slight delay for effect
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -173,24 +155,18 @@ const ProviderApplication = () => {
       <Layout>
         <div className="min-h-[85vh] bg-background pt-12 pb-24" dir={dir}>
           <div className="container-sahli max-w-2xl">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center space-y-8 py-12"
+            <div 
+              className="text-center space-y-8 py-12 animate-in fade-in zoom-in-95 duration-500"
             >
               <div className="relative mx-auto w-24 h-24">
-                <motion.div 
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", damping: 12, stiffness: 200, delay: 0.2 }}
-                  className="w-full h-full rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20"
+                <div 
+                  className="w-full h-full rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 animate-in zoom-in duration-500 delay-200 fill-mode-backwards"
                 >
                   <CheckCircle2 size={48} />
-                </motion.div>
-                <motion.div 
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute inset-0 rounded-full border-4 border-emerald-500"
+                </div>
+                <div 
+                  className="absolute inset-0 rounded-full border-4 border-emerald-500 animate-ping opacity-50"
+                  style={{ animationDuration: '2s' }}
                 />
               </div>
 
@@ -209,7 +185,7 @@ const ProviderApplication = () => {
                   {dir === 'rtl' ? 'العودة للرئيسية' : 'Return Home'}
                 </Button>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </Layout>
@@ -221,15 +197,8 @@ const ProviderApplication = () => {
       {/* Hero Section - Consistent with Homepage */}
       <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
-          <motion.div 
-            className="absolute inset-0"
-            style={{ 
-              y: y1Spring,
-              scale: scaleSpring
-            }}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          <div 
+            className="absolute inset-0 animate-in zoom-in-110 duration-[1.5s] ease-out"
           >
             <img 
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
@@ -237,46 +206,44 @@ const ProviderApplication = () => {
               crossOrigin="anonymous"
               className="w-full h-full object-cover object-center scale-105"
             />
-          </motion.div>
+          </div>
           
-          <div className="absolute inset-0 bg-slate-950/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-white/40 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
         </div>
 
         <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-24 flex flex-col items-center md:items-start">
-          <motion.div
-            style={{ y: yHero }}
+          <div
             className="w-full max-w-4xl text-center md:text-start"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <ScrollReveal
+              direction="up"
+              duration={0.6}
               className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-6 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
             >
               <Target size={14} className="animate-pulse" />
               {dir === 'rtl' ? 'انضم إلى شبكتنا' : 'Partner with SAHLI'}
-            </motion.div>
+            </ScrollReveal>
             
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal 
+              direction="up"
+              duration={0.8}
+              delay={0.2}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-2xl"
             >
-              {t('provider.apply.title')}
-            </motion.h1>
+              <h1>{t('provider.apply.title')}</h1>
+            </ScrollReveal>
             
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            <ScrollReveal
+              direction="up"
+              duration={0.8}
+              delay={0.3}
               className="text-lg md:text-xl lg:text-2xl !text-white/80 max-w-3xl font-medium leading-relaxed drop-shadow-lg"
             >
-              {t('provider.apply.subtitle')}
-            </motion.p>
-          </motion.div>
+              <p>{t('provider.apply.subtitle')}</p>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
@@ -289,13 +256,11 @@ const ProviderApplication = () => {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             {/* Benefits & Info */}
             <div className="lg:col-span-5 space-y-12">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+              <ScrollReveal 
+                direction={dir === 'rtl' ? 'right' : 'left'}
                 className="space-y-10"
               >
-                <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-foreground/5 rounded-full text-[0.65rem] font-black text-foreground/60 uppercase tracking-widest border border-border">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground/5 rounded-full text-[0.65rem] font-black text-foreground/60 uppercase tracking-widest border border-border">
                   <ShieldCheck size={14} className="text-primary" />
                   {t('provider.apply.why.title')}
                 </div>
@@ -306,12 +271,10 @@ const ProviderApplication = () => {
                     { icon: ShieldCheck, title: t('provider.apply.why.intake.title'), desc: t('provider.apply.why.intake.desc'), color: 'bg-emerald-500/10 text-emerald-500' },
                     { icon: Building2, title: t('provider.apply.why.independent.title'), desc: t('provider.apply.why.independent.desc'), color: 'bg-primary/10 text-primary' }
                   ].map((item, i) => (
-                    <motion.div 
+                    <ScrollReveal 
                       key={i} 
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
+                      direction="up"
+                      delay={i * 0.1}
                       className="flex gap-6 group"
                     >
                       <div className={`w-14 h-14 rounded-2xl ${item.color} border border-border/50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shrink-0 shadow-lg shadow-foreground/[0.02]`}>
@@ -321,15 +284,13 @@ const ProviderApplication = () => {
                         <h4 className="text-xl font-black mb-2 text-foreground group-hover:text-primary transition-colors">{item.title}</h4>
                         <p className="text-base text-foreground/50 leading-relaxed">{item.desc}</p>
                       </div>
-                    </motion.div>
+                    </ScrollReveal>
                   ))}
                 </div>
-              </motion.div>
+              </ScrollReveal>
 
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+              <ScrollReveal 
+                direction={dir === 'rtl' ? 'right' : 'left'}
                 className="p-10 rounded-[2.5rem] bg-foreground/[0.02] border border-border/50 space-y-6"
               >
                 <div className="flex items-center gap-4">
@@ -341,13 +302,10 @@ const ProviderApplication = () => {
                 <p className="text-base text-foreground/50 leading-relaxed">
                   {t('provider.apply.model.desc')}
                 </p>
-              </motion.div>
+              </ScrollReveal>
 
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="p-10 rounded-[2.5rem] bg-slate-950 text-white shadow-2xl shadow-primary/10 relative overflow-hidden group border border-white/5"
+              <ScrollReveal 
+                className="p-10 rounded-[2.5rem] bg-background text-white shadow-2xl shadow-primary/10 relative overflow-hidden group border border-white/5"
               >
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[80px] -mr-32 -mt-32 group-hover:bg-primary/30 transition-all duration-700" />
                 <div className="flex items-center gap-4 mb-8 relative z-10">
@@ -372,15 +330,13 @@ const ProviderApplication = () => {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </ScrollReveal>
             </div>
 
             {/* Application Form */}
             <div className="lg:col-span-7">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+              <ScrollReveal
+                direction="up"
                 className="glass-morphism rounded-[3rem] p-8 md:p-12 border border-border/50 shadow-2xl relative overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
@@ -617,7 +573,7 @@ const ProviderApplication = () => {
                     </Button>
                   </div>
                 </form>
-              </motion.div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -627,4 +583,3 @@ const ProviderApplication = () => {
 };
 
 export default ProviderApplication;
-
