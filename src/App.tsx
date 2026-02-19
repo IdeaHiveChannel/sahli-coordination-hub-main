@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import { trackPageView } from "./lib/gtag";
+import { CanonicalTag } from "./components/seo/CanonicalTag";
 
 const AdminLogin = lazy(() => import("@/pages/admin/Login"));
 const AdminPasswordReset = lazy(() => import("@/pages/admin/PasswordReset"));
@@ -85,6 +86,7 @@ const App = () => (
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <PageTracker />
             <ScrollToTop />
+            <CanonicalTag />
             <Suspense fallback={<LoadingFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />

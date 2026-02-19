@@ -273,7 +273,8 @@ export default function Index() {
               />
           </div>
           
-          {/* Overlays removed for better visibility as requested */}
+          {/* Dark Overlay for Text Visibility */}
+          <div className="absolute inset-0 bg-black/50 z-10" />
         </div>
         
         <div className="container-sahli relative z-20 py-20 md:pt-32 md:pb-12 flex flex-col items-center md:items-start h-full justify-center">

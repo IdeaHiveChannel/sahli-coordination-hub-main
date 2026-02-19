@@ -355,10 +355,12 @@ const ProviderApplication = () => {
                   <div className="space-y-8">
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyName')}</label>
+                        <label htmlFor="companyName" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyName')}</label>
                         <div className="relative group">
                           <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
                           <Input 
+                            id="companyName"
+                            name="companyName"
                             required
                             className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
                             value={formData.companyName}
@@ -367,10 +369,12 @@ const ProviderApplication = () => {
                         </div>
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyType')}</label>
+                        <label htmlFor="companyType" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyType')}</label>
                         <div className="relative group">
                           <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors z-10" size={18} />
                           <select 
+                            id="companyType"
+                            name="companyType"
                             required
                             className="w-full bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 pr-4 transition-all hover:border-primary/30 appearance-none text-sm font-medium"
                             value={formData.companyType}
@@ -387,10 +391,12 @@ const ProviderApplication = () => {
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.yearsInOperation')}</label>
+                        <label htmlFor="yearsInOperation" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.yearsInOperation')}</label>
                         <div className="relative group">
                           <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors z-10" size={18} />
                           <select 
+                            id="yearsInOperation"
+                            name="yearsInOperation"
                             required
                             className="w-full bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 pr-4 transition-all hover:border-primary/30 appearance-none text-sm font-medium"
                             value={formData.yearsInOperation}
@@ -404,10 +410,12 @@ const ProviderApplication = () => {
                         </div>
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.crNumber')}</label>
+                        <label htmlFor="crNumber" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.crNumber')}</label>
                         <div className="relative group">
                           <File className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
                           <Input 
+                            id="crNumber"
+                            name="crNumber"
                             required
                             className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
                             value={formData.crNumber}
@@ -419,10 +427,12 @@ const ProviderApplication = () => {
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.contactPerson')}</label>
+                        <label htmlFor="contactPerson" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.contactPerson')}</label>
                         <div className="relative group">
                           <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
                           <Input 
+                            id="contactPerson"
+                            name="contactPerson"
                             required
                             className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
                             value={formData.contactPerson}
@@ -431,10 +441,12 @@ const ProviderApplication = () => {
                         </div>
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.phone')}</label>
+                        <label htmlFor="phone" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.phone')}</label>
                         <div className="relative group">
                           <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
                           <Input 
+                            id="phone"
+                            name="phone"
                             required
                             type="tel"
                             placeholder="+974"
@@ -447,10 +459,12 @@ const ProviderApplication = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.email')}</label>
+                      <label htmlFor="email" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.email')}</label>
                       <div className="relative group">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
                         <Input 
+                          id="email"
+                          name="email"
                           required
                           type="email"
                           className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
@@ -462,8 +476,10 @@ const ProviderApplication = () => {
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.services')}</label>
+                        <label htmlFor="services" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.services')}</label>
                         <Textarea 
+                          id="services"
+                          name="services"
                           required
                           placeholder={dir === 'rtl' ? 'مثال: صيانة تكييف، كهرباء، سباكة' : 'e.g., AC maintenance, electrical, plumbing'}
                           className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl min-h-[120px] p-4 transition-all resize-none hover:border-primary/30"
@@ -472,8 +488,10 @@ const ProviderApplication = () => {
                         />
                       </div>
                       <div className="space-y-3">
-                        <label className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.areas')}</label>
+                        <label htmlFor="areas" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.areas')}</label>
                         <Textarea 
+                          id="areas"
+                          name="areas"
                           required
                           placeholder={dir === 'rtl' ? 'مثال: الدوحة، الوكرة، لوسيل' : 'e.g., Doha, Al Wakrah, Lusail'}
                           className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl min-h-[120px] p-4 transition-all resize-none hover:border-primary/30"

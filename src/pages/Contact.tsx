@@ -203,20 +203,24 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium ml-1">
+                        <label htmlFor="firstName" className="text-sm font-medium ml-1">
                           {t('contact.form.firstName')}
                         </label>
                         <Input 
+                          id="firstName"
+                          name="firstName"
                           placeholder={t('contact.form.firstNamePlaceholder')}
                           required 
                           className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-12"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium ml-1">
+                        <label htmlFor="lastName" className="text-sm font-medium ml-1">
                           {t('contact.form.lastName')}
                         </label>
                         <Input 
+                          id="lastName"
+                          name="lastName"
                           placeholder={t('contact.form.lastNamePlaceholder')}
                           required 
                           className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-12"
@@ -225,10 +229,12 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium ml-1">
+                      <label htmlFor="email" className="text-sm font-medium ml-1">
                         {t('contact.form.email')}
                       </label>
                       <Input 
+                        id="email"
+                        name="email"
                         type="email" 
                         placeholder={t('contact.form.emailPlaceholder')}
                         required 
@@ -237,10 +243,12 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium ml-1">
+                      <label htmlFor="message" className="text-sm font-medium ml-1">
                         {t('contact.form.message')}
                       </label>
                       <Textarea 
+                        id="message"
+                        name="message"
                         placeholder={t('contact.form.messagePlaceholder')}
                         required 
                         className="min-h-[150px] bg-background/50 border-border/50 focus:border-primary/50 transition-colors resize-none"
