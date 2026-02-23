@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TranslationKey } from '@/lib/i18n';
-import { MessageSquare, ShieldCheck, Search, Heart, Zap, Shield, Repeat, ArrowRight, CheckCircle2, Headphones, ClipboardList, Star, Clock, UserCheck, ShieldAlert } from 'lucide-react';
+import { MessageSquare, ShieldCheck, Search, Heart, Zap, Shield, Repeat, ArrowRight, CheckCircle2, Headphones, ClipboardList, Star, Clock, UserCheck, ShieldAlert, EyeOff, ListX, Target, CalendarCheck } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
@@ -249,7 +249,7 @@ const HowItWorks = () => {
         {/* New Section: Why Not Just Search Online? */}
         <section className="relative py-24 md:py-32 bg-slate-50 overflow-hidden">
           <div className="container-sahli relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               <ScrollReveal
                 direction={dir === 'rtl' ? 'left' : 'right'}
                 duration={0.8}
@@ -260,11 +260,11 @@ const HowItWorks = () => {
                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-8">
                   {t('how.positioning.title')}
                 </h2>
-                <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed mb-12">
+                <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed mb-8">
                   {t('how.positioning.subtitle')}
                 </p>
                 
-                <div className="space-y-6">
+                <div className="space-y-4 mb-8">
                   {[
                     t('how.positioning.problem1'),
                     t('how.positioning.problem2'),
@@ -272,11 +272,11 @@ const HowItWorks = () => {
                     t('how.positioning.problem4')
                   ].map((text, i) => (
                     <div key={i} className="flex items-center gap-4 text-slate-600 group/item">
-                    <div className="w-5 h-5 rounded-full border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover/item:border-primary/50 transition-colors">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-colors" />
+                      <div className="w-5 h-5 rounded-full border border-red-200 flex items-center justify-center flex-shrink-0 group-hover/item:border-red-400 transition-colors">
+                        <div className="w-1.5 h-1.5 rounded-full bg-red-400 group-hover/item:bg-red-500 transition-colors" />
+                      </div>
+                      <span className="font-medium group-hover/item:text-slate-900 transition-colors">{text}</span>
                     </div>
-                    <span className="font-medium group-hover/item:text-slate-900 transition-colors">{text}</span>
-                  </div>
                   ))}
                 </div>
               </ScrollReveal>
@@ -287,15 +287,34 @@ const HowItWorks = () => {
                 className="relative p-8 md:p-12 rounded-[3rem] bg-white border border-slate-200 shadow-md backdrop-blur-xl scale-95 hover:scale-100 transition-transform duration-500"
               >
                 <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
-                <h3 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-wider">
-                  {t('how.positioning.approach.title')}
+                
+                <h3 className="text-2xl font-black text-slate-900 mb-6 tracking-wide">
+                  {t('how.positioning.statement')}
                 </h3>
+                
                 <p className="text-slate-600 text-lg leading-relaxed font-medium mb-8">
-                  {t('how.positioning.approach.body')}
+                  {t('how.positioning.list.title')}
                 </p>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    t('how.positioning.list.item1'),
+                    t('how.positioning.list.item2'),
+                    t('how.positioning.list.item3'),
+                    t('how.positioning.list.item4')
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-4 text-slate-600 group/item">
+                      <div className="w-5 h-5 rounded-full border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover/item:border-primary/50 transition-colors">
+                        <CheckCircle2 className="w-3 h-3 text-primary" />
+                      </div>
+                      <span className="font-medium group-hover/item:text-slate-900 transition-colors">{text}</span>
+                    </div>
+                  ))}
+                </div>
+
                 <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-                  <p className="text-primary font-bold">
-                    {t('how.positioning.approach.highlight')}
+                  <p className="text-primary font-bold text-center">
+                    {t('how.positioning.footer')}
                   </p>
                 </div>
               </ScrollReveal>
@@ -319,32 +338,27 @@ const HowItWorks = () => {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
                 {
                   title: t('how.why.point1.title'),
                   desc: t('how.why.point1.desc'),
-                  icon: <UserCheck size={24} />
+                  icon: <EyeOff size={24} />
                 },
                 {
                   title: t('how.why.point2.title'),
                   desc: t('how.why.point2.desc'),
-                  icon: <ShieldCheck size={24} />
+                  icon: <ListX size={24} />
                 },
                 {
                   title: t('how.why.point3.title'),
                   desc: t('how.why.point3.desc'),
-                  icon: <Search size={24} />
+                  icon: <Target size={24} />
                 },
                 {
                   title: t('how.why.point4.title'),
                   desc: t('how.why.point4.desc'),
-                  icon: <Repeat size={24} />
-                },
-                {
-                  title: t('how.why.point5.title'),
-                  desc: t('how.why.point5.desc'),
-                  icon: <ShieldAlert size={24} />
+                  icon: <CalendarCheck size={24} />
                 }
               ].map((item, idx) => (
                 <ScrollReveal

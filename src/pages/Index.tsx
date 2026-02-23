@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { MetaTags } from '@/components/seo/MetaTags';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
-// Refined Index page with video media replacing 3D hero
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Dynamic imports for performance
@@ -10,11 +10,15 @@ const Marquee = lazy(() => import('@/components/motion/Marquee').then(module => 
 
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { MessageSquare, ArrowRight, Wrench, Sparkles, Truck, Heart, GraduationCap, BookOpen, Shield, Zap, Repeat, UserCheck, Snowflake, Lightbulb, Droplets, Cog, Sofa, Baby, Search, Clock, DollarSign, ShieldCheck, PhoneOff, CheckCircle2, Fingerprint, Target, HeartHandshake, ClipboardList, Leaf, Cpu, Bug, Send, Building2, Handshake, Wallet, ClipboardCheck } from 'lucide-react';
+import { 
+  ArrowRight, Wrench, Sparkles, Truck, Heart, Snowflake, Lightbulb, Droplets, Cog, Baby, 
+  Search, ShieldCheck, ClipboardList, Leaf, Cpu, Bug, Send, Wallet, MapPin, ChevronDown 
+} from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
+import { TranslationKey } from '@/lib/i18n';
 
 interface ServiceItem {
   title: string;
@@ -25,19 +29,13 @@ interface ServiceItem {
   number: string;
   subcategories: string[];
   whatsappKey?: TranslationKey;
+  status?: string;
 }
-
-interface TrustPanel {
-  title: string;
-  items: { title: string }[];
-}
-
-import { TranslationKey } from '@/lib/i18n';
 
 export default function Index() {
   const { t, dir, lang } = useLanguage();
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const ctaRef = useRef<HTMLElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
@@ -48,7 +46,6 @@ export default function Index() {
     });
   };
 
-  const [emblaRefCoverage] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
   const [emblaRefGlance] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 2500, stopOnInteraction: false })]);
   const [emblaRefHow] = useEmblaCarousel({ loop: true, direction: dir === 'rtl' ? 'rtl' : 'ltr' }, [Autoplay({ delay: 3500, stopOnInteraction: false })]);
 
@@ -59,106 +56,124 @@ export default function Index() {
     return num.toString();
   };
 
-  const formatPrice = (price: number | string) => {
-    if (lang === 'ar') {
-      return price.toString().replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]);
-    }
-    return price.toString();
-  };
-
-  const coverageLocations = [
-    { name: t('home.coverage.location1'), image: "https://images.unsplash.com/photo-1669815007479-494b3b51c2c3?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location2'), image: "https://images.unsplash.com/photo-1537345532964-7c8f0749f8b8?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location3'), image: "https://images.unsplash.com/photo-1662702888780-2c51e49c9a94?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location4'), image: "https://images.unsplash.com/photo-1669300884869-e6e11c67c031?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location5'), image: "https://images.unsplash.com/photo-1647755392881-6baf80b2b979?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location6'), image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=2064&auto=format&fit=crop" },
-    { name: t('home.coverage.location7'), image: "https://images.unsplash.com/photo-1594924718090-284232024404?q=80&w=2070&auto=format&fit=crop" },
-    { name: t('home.coverage.location8'), image: "https://images.unsplash.com/photo-1647755353498-d67d415b7db5?q=80&w=2070&auto=format&fit=crop" },
-  ];
-
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  const heroMeta = [
-    { label: t('home.hero.meta.model'), icon: <CheckCircle2 size={16} /> },
-    { label: t('home.hero.meta.bestFor'), icon: <Target size={16} /> },
-    { label: t('home.hero.meta.coverage'), icon: <Shield size={16} /> },
-  ];
-
   const glanceItems = [
     { title: t('home.glance.item1.title'), desc: t('home.glance.item1.desc'), icon: <Wallet size={24} /> },
-    { title: t('home.glance.item2.title'), desc: t('home.glance.item2.desc'), icon: <PhoneOff size={24} /> },
+    { title: t('home.glance.item2.title'), desc: t('home.glance.item2.desc'), icon: <Search size={24} /> },
     { title: t('home.glance.item3.title'), desc: t('home.glance.item3.desc'), icon: <ClipboardList size={24} /> },
     { title: t('home.glance.item4.title'), desc: t('home.glance.item4.desc'), icon: <ShieldCheck size={24} /> },
   ];
 
   const solutions = [
-    { title: t('home.solutions.ac.title'), desc: t('home.solutions.ac.desc'), icon: <Snowflake size={32} />, whatsappKey: 'services.homeMaintenance.ac.whatsapp' },
-    { title: t('home.solutions.electrical.title'), desc: t('home.solutions.electrical.desc'), icon: <Lightbulb size={32} />, whatsappKey: 'services.homeMaintenance.electrical.whatsapp' },
-    { title: t('home.solutions.plumbing.title'), desc: t('home.solutions.plumbing.desc'), icon: <Droplets size={32} />, whatsappKey: 'services.homeMaintenance.plumbing.whatsapp' },
-    { title: t('home.solutions.appliances.title'), desc: t('home.solutions.appliances.desc'), icon: <Cog size={32} />, whatsappKey: 'services.homeMaintenance.appliances.whatsapp' },
-    { title: t('home.solutions.moving.title'), desc: t('home.solutions.moving.desc'), icon: <Truck size={32} />, whatsappKey: 'services.moving.local.whatsapp' },
-    { title: t('home.solutions.cleaning.title'), desc: t('home.solutions.cleaning.desc'), icon: <Sparkles size={32} />, whatsappKey: 'services.cleaning.deep.whatsapp' },
-    { title: t('home.solutions.pest.title'), desc: t('home.solutions.pest.desc'), icon: <Bug size={32} />, whatsappKey: 'services.cleaning.pest.whatsapp' },
-    { title: t('home.solutions.childcare.title'), desc: t('home.solutions.childcare.desc'), icon: <Baby size={32} />, whatsappKey: 'services.care.childcare.whatsapp' },
+    { 
+      title: t('home.solutions.ac.title'), 
+      desc: t('home.solutions.ac.desc'), 
+      icon: <Snowflake size={32} />, 
+      whatsappKey: 'services.homeMaintenance.ac.whatsapp',
+      links: [
+        { label: 'AC Maintenance Qatar', path: '/ac-maintenance-qatar' },
+        { label: 'AC Repair in Al Wakrah', path: '/ac-repair-al-wakrah' }
+      ]
+    },
+    { 
+      title: t('home.solutions.electrical.title'), 
+      desc: t('home.solutions.electrical.desc'), 
+      icon: <Lightbulb size={32} />, 
+      whatsappKey: 'services.homeMaintenance.electrical.whatsapp',
+      links: [
+        { label: 'Electrician Qatar', path: '/electrical-services-qatar' },
+        { label: 'Emergency Electrician Doha', path: '/electrician-doha' }
+      ]
+    },
+    { 
+      title: t('home.solutions.plumbing.title'), 
+      desc: t('home.solutions.plumbing.desc'), 
+      icon: <Droplets size={32} />, 
+      whatsappKey: 'services.homeMaintenance.plumbing.whatsapp',
+      links: [
+        { label: 'Plumbing Services Qatar', path: '/plumbing-services-qatar' },
+        { label: '24/7 Plumber Doha', path: '/plumber-doha' }
+      ]
+    },
+    { 
+      title: t('home.solutions.appliances.title'), 
+      desc: t('home.solutions.appliances.desc'), 
+      icon: <Cog size={32} />, 
+      whatsappKey: 'services.homeMaintenance.appliances.whatsapp',
+      links: [
+        { label: 'Appliance Repair Qatar', path: '/appliance-repair-qatar' },
+        { label: 'Fridge Repair Doha', path: '/fridge-repair-doha' }
+      ]
+    },
+    { 
+      title: t('home.solutions.moving.title'), 
+      desc: t('home.solutions.moving.desc'), 
+      icon: <Truck size={32} />, 
+      whatsappKey: 'services.moving.local.whatsapp',
+      links: [
+        { label: 'Movers in Qatar', path: '/moving-services-qatar' },
+        { label: 'House Moving Doha', path: '/movers-doha' }
+      ]
+    },
+    { 
+      title: t('home.solutions.cleaning.title'), 
+      desc: t('home.solutions.cleaning.desc'), 
+      icon: <Sparkles size={32} />, 
+      whatsappKey: 'services.cleaning.deep.whatsapp',
+      links: [
+        { label: 'Deep Cleaning Qatar', path: '/cleaning-services-qatar' },
+        { label: 'Cleaning Company Doha', path: '/deep-cleaning-doha' }
+      ]
+    },
+    { 
+      title: t('home.solutions.pest.title'), 
+      desc: t('home.solutions.pest.desc'), 
+      icon: <Bug size={32} />, 
+      whatsappKey: 'services.cleaning.pest.whatsapp',
+      links: [
+        { label: 'Pest Control Qatar', path: '/pest-control-qatar' },
+        { label: 'Pest Control Doha', path: '/pest-control-doha' }
+      ]
+    },
+    { 
+      title: t('home.solutions.childcare.title'), 
+      desc: t('home.solutions.childcare.desc'), 
+      icon: <Baby size={32} />, 
+      whatsappKey: 'services.care.childcare.whatsapp',
+      links: [
+        { label: 'Nanny Services Qatar', path: '/childcare-qatar' },
+        { label: 'Babysitting Doha', path: '/babysitting-doha' }
+      ]
+    },
   ];
 
-  useEffect(() => {
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Do you provide the home services directly?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. SAHLI is a coordination hub. We vet independent provider companies and manage the access point. The provider company delivers the service and handles your payment directly."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does SAHLI select the provider for my request?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "SAHLI matches your specific requirement with a verified provider company based on their documented competency, availability in your area, and past performance within our network."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens if I am not satisfied with the service?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "SAHLI follows up after every service. If coordination standards or service quality are not met, we intervene to facilitate a resolution or coordinate a replacement provider as per our procedural rules."
-          }
-        }
-      ]
-    };
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.innerHTML = JSON.stringify(schema);
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": t('home.faq.q1'),
+        "acceptedAnswer": { "@type": "Answer", "text": t('home.faq.a1') }
+      },
+      {
+        "@type": "Question",
+        "name": t('home.faq.q2'),
+        "acceptedAnswer": { "@type": "Answer", "text": t('home.faq.a2') }
+      },
+      {
+        "@type": "Question",
+        "name": t('home.faq.q3'),
+        "acceptedAnswer": { "@type": "Answer", "text": t('home.faq.a3') }
+      },
+      {
+        "@type": "Question",
+        "name": t('home.faq.q4'),
+        "acceptedAnswer": { "@type": "Answer", "text": t('home.faq.a4') }
+      }
+    ]
+  };
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // scroll logic if needed
-    };
-    return () => window.removeEventListener('resize', handleScroll);
-  }, []);
 
   const services: ServiceItem[] = [
     { 
@@ -168,8 +183,9 @@ export default function Index() {
       icon: <Wrench size={32} />,
       path: t('services.homeMaintenance.path'),
       whatsappKey: 'services.homeMaintenance.whatsapp' as TranslationKey,
-      subcategories: [],
-      number: '01'
+      subcategories: [t('services.ac.install'), t('services.ac.repair'), t('services.ac.gas')],
+      number: '01',
+      status: 'comingSoon'
     },
     { 
       title: t('services.cleaning.tax.title'), 
@@ -178,7 +194,7 @@ export default function Index() {
       icon: <Sparkles size={32} />,
       path: t('services.cleaning.path'),
       whatsappKey: 'services.cleaning.whatsapp' as TranslationKey,
-      subcategories: [],
+      subcategories: [t('services.cleaning.deep'), t('services.cleaning.sofa'), t('services.cleaning.carpet')],
       number: '02'
     },
     { 
@@ -188,7 +204,7 @@ export default function Index() {
       icon: <Truck size={32} />,
       path: t('services.moving.path'),
       whatsappKey: 'services.moving.whatsapp' as TranslationKey,
-      subcategories: [],
+      subcategories: [t('services.moving.house'), t('services.moving.office'), t('services.moving.packing')],
       number: '03'
     },
     { 
@@ -198,7 +214,7 @@ export default function Index() {
       icon: <Leaf size={32} />,
       path: t('services.outdoor.path'),
       whatsappKey: 'services.outdoor.whatsapp' as TranslationKey,
-      subcategories: [],
+      subcategories: [t('services.pest.insects'), t('services.pest.termites'), t('services.pest.rodents')],
       number: '04'
     },
     { 
@@ -208,8 +224,9 @@ export default function Index() {
       icon: <Heart size={32} />,
       path: t('services.care.path'),
       whatsappKey: 'services.care.whatsapp' as TranslationKey,
-      subcategories: [],
-      number: '05'
+      subcategories: [t('services.care.babysitting'), t('services.care.newborn'), t('services.care.elderly')],
+      number: '05',
+      status: 'comingSoon'
     },
     { 
       title: t('services.electronics.tax.title'), 
@@ -218,8 +235,9 @@ export default function Index() {
       icon: <Cpu size={32} />,
       path: t('services.electronics.path'),
       whatsappKey: 'services.electronics.whatsapp' as TranslationKey,
-      subcategories: [],
-      number: '06'
+      subcategories: [t('services.electronics.tv'), t('services.electronics.microwave'), t('services.electronics.washing')],
+      number: '06',
+      status: 'comingSoon'
     }
   ];
 
@@ -231,289 +249,246 @@ export default function Index() {
     t('home.coordinate.disclaimer'),
   ];
 
-  const featuredServices = [
-    { title: t('services.homeMaintenance.ac.title'), icon: <Snowflake size={24} />, intent: t('home.featured.intent.ac'), path: '/services#home-maintenance', whatsappKey: 'services.homeMaintenance.ac.whatsapp' },
-    { title: t('services.homeMaintenance.electrical.title'), icon: <Lightbulb size={24} />, intent: t('home.featured.intent.electrical'), path: '/services#home-maintenance', whatsappKey: 'services.homeMaintenance.electrical.whatsapp' },
-    { title: t('services.homeMaintenance.plumbing.title'), icon: <Droplets size={24} />, intent: t('home.featured.intent.plumbing'), path: '/services#home-maintenance', whatsappKey: 'services.homeMaintenance.plumbing.whatsapp' },
-    { title: t('services.electronics.repair.title'), icon: <Cog size={24} />, intent: t('home.featured.intent.appliance'), path: '/services#tech', whatsappKey: 'services.homeMaintenance.appliances.whatsapp' },
-    { title: t('services.cleaning.deep.title'), icon: <Sparkles size={24} />, intent: t('home.featured.intent.cleaning'), path: '/services#cleaning', whatsappKey: 'services.cleaning.whatsapp' },
-    { title: t('services.outdoor.pest.title'), icon: <Bug size={24} />, intent: t('home.featured.intent.pest'), path: '/services#outdoor', whatsappKey: 'services.homeMaintenance.pest.whatsapp' },
-    { title: t('services.moving.house.title'), icon: <Truck size={24} />, intent: t('home.featured.intent.moving'), path: '/services#moving', whatsappKey: 'services.moving.whatsapp' },
-    { title: t('services.care.childcare.title'), icon: <Baby size={24} />, intent: t('home.featured.intent.childcare'), path: '/services#care', whatsappKey: 'services.care.childcare.whatsapp' },
-  ];
-
   return (
     <Layout>
-      {/* Noise Texture Overlay removed for better visibility */}
-      {/* <div className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay z-[100] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" /> */}
+      <MetaTags 
+        title={t('home.meta.title')} 
+        description={t('home.meta.description')} 
+        canonical="https://sahliservice.com/"
+        schema={schema}
+      />
 
-      {/* Hero Section - Refined, Dynamic - Height adjusted for laptops/mobile */}
+      {/* Hero Section */}
       <section 
         ref={containerRef} 
         onMouseMove={handleMouseMove}
-        className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white"
+        className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden bg-background"
       >
-        {/* Background Video/Image with subtle overlay */}
+        {/* Background */}
         <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 transition-transform duration-[2000ms] ease-out"
             style={{ 
-              transform: `scale(1) translate(${mousePos.x * 0.2}px, ${mousePos.y * 0.2}px)`
+              transform: `scale(1.05) translate(${mousePos.x * 0.1}px, ${mousePos.y * 0.1}px)`
             }}
           >
             <img 
-                src="/Services/Home Maintenance - Hero.jpg" 
-                alt={t('home.hero.imgAlt')}
-                crossOrigin="anonymous"
-                fetchPriority="high"
-                loading="eager"
-                decoding="sync"
-                sizes="(max-width: 768px) 100vw, 100vw"
-                className="w-full h-full object-cover object-center animate-scale-in"
-              />
-          </div>
-          
-          {/* Dark Overlay for Text Visibility */}
-          <div className="absolute inset-0 bg-black/50 z-10" />
-        </div>
-        
-        <div className="container-sahli relative z-20 py-20 md:pt-32 md:pb-12 flex flex-col items-center md:items-start h-full justify-center">
-          <div 
-            className="w-full md:max-w-[75%] flex flex-col items-center md:items-start text-center md:text-left"
-          >
-            <div 
-              className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.65rem] md:text-[0.6rem] font-black tracking-[0.25em] uppercase text-primary mb-6 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine animate-in fade-in slide-in-from-bottom-4 duration-1000"
-            >
-              <img 
-                src="/logos/SahlLogo5.png" 
-                alt={t('home.hero.logoAlt')} 
-                className="w-4 h-4 md:w-3.5 md:h-3.5 object-contain animate-pulse scale-[3]" 
-              />
-              {t('home.hero.label')}
-            </div>
-            
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-6 md:mb-8 leading-[1.1] tracking-tight text-primary drop-shadow-md font-black w-full text-center md:text-left break-words">
-              {t('home.hero.title').split(' ').map((word, i) => (
-                <div key={i} className="inline-block mr-[0.3em]">
-                  <span 
-                    className="inline-block animate-in fade-in slide-in-from-bottom-4 fill-mode-both"
-                    style={{ animationDelay: `${0.3 + (i * 0.08)}s`, animationDuration: '0.8s' }}
-                  >
-                    {word}
-                  </span>
-                </div>
-              ))}
-            </h1>
-
-            <div
-              className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-left animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
-              style={{ animationDelay: '0.6s', animationDuration: '1s' }}
-            >
-              <p className="text-lg md:text-lg lg:text-xl text-white mb-10 md:mb-12 font-medium leading-relaxed drop-shadow-sm w-full text-center md:text-left max-w-2xl mx-auto md:mx-0 break-words">
-                {t('home.hero.subtitle')}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                <a 
-                  href={getWhatsAppLink(t('cta.whatsapp.general'))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackRequestClick('Hero Section')} 
-                  className="cta-primary btn-shine w-full sm:w-auto group h-12 md:h-12 px-8 flex items-center justify-center rounded-xl shadow-[0_20px_40px_-10px_rgba(var(--primary-rgb),0.3)] transition-transform hover:-translate-y-1 active:scale-95"
-                >
-                  <div 
-                    className="flex items-center gap-3"
-                  >
-                    <Send size="18" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    <span className="tracking-widest uppercase font-black text-[0.75rem] md:text-[0.7rem]">{t('home.hero.cta')}</span>
-                  </div>
-                </a>
-                
-                <Link to="/services" className="w-full sm:w-auto">
-                  <button
-                    className="w-full sm:w-auto h-12 md:h-12 px-8 bg-slate-900 text-white rounded-xl font-black text-[0.75rem] md:text-[0.7rem] flex items-center justify-center gap-3 hover:bg-slate-800 hover:scale-[1.02] transition-all duration-500 group shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] active:scale-95"
-                  >
-                    {t('nav.services')}
-                    <ArrowRight size="20" className={`${dir === 'rtl' ? 'rotate-180' : ''} group-hover:translate-x-2 transition-transform duration-500`} />
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Advanced Scroll Indicator */}
-        <div 
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4 animate-in fade-in delay-1000 duration-1000 fill-mode-both"
-        >
-          <div className="w-px h-16 bg-gradient-to-b from-primary via-primary/20 to-transparent relative">
-            <div 
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-900 shadow-[0_0_10px_rgba(0,0,0,0.8)] animate-bounce" 
+              src="/Services/Home Maintenance - Hero.jpg" 
+              alt={t('home.hero.imgAlt')}
+              crossOrigin="anonymous"
+              // @ts-expect-error - fetchpriority is a valid attribute
+              fetchpriority="high"
+              loading="eager"
+              decoding="sync"
+              className="w-full h-full object-cover object-center opacity-30"
             />
           </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-10" />
         </div>
-      </section>
-
-      {/* 2. Service Solutions Grid - Light Theme */}
-      <section id="services" className="min-h-[100svh] md:min-h-screen py-12 md:py-16 flex items-center bg-slate-50 relative overflow-hidden">
-        {/* Advanced Background Visuals */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_70%)]" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-900/[0.05] to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-900/[0.05] to-transparent" />
-          
-          {/* Moving particles or subtle grid could go here, but keeping it clean */}
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full opacity-50" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[150px] rounded-full opacity-50" />
-        </div>
-
-        <div className="container-sahli relative z-10 w-full">
-          <div className="max-w-3xl mb-8 md:mb-10 mx-auto md:mx-0 text-center md:text-start">
-            <ScrollReveal>
-              <h2 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-6 md:mb-8 break-words"
-              >
-                {t('home.solutions.title')}
-              </h2>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-8 gap-3 md:gap-4 xl:gap-5">
-            {solutions.map((solution, i) => (
-              <ScrollReveal
-                key={i}
-                delay={i * 0.05}
-                className="h-full"
-              >
-                <a
-                  href={getWhatsAppLink(t(solution.whatsappKey as TranslationKey))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackRequestClick(`Solution: ${solution.title}`)}
-                  onMouseMove={handleCardMouseMove}
-                  style={{ 
-                    '--mouse-x': `${mousePos.x}px`, 
-                    '--mouse-y': `${mousePos.y}px` 
-                  } as React.CSSProperties}
-                  className="group h-full p-3 md:p-4 rounded-[1.25rem] md:rounded-[1.5rem] bg-white border border-slate-200 hover:border-primary/50 transition-all duration-500 flex flex-col items-center text-center cursor-pointer overflow-hidden relative shadow-sm hover:shadow-md"
-                >
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative z-10 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-xl bg-slate-100 text-primary flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm">
-                    {React.cloneElement(solution.icon as React.ReactElement, { size: 18 })}
-                  </div>
-                  <h3 className="relative z-10 text-sm sm:text-base md:text-xl font-bold mb-2 text-slate-900 group-hover:text-primary transition-colors leading-tight break-words">
-                    {solution.title}
-                  </h3>
-                  <p className="relative z-10 text-[0.6rem] sm:text-[0.65rem] md:text-[0.7rem] lg:text-[0.75rem] text-slate-500 leading-relaxed group-hover:text-slate-700 transition-colors line-clamp-3 break-words">
-                    {solution.desc}
-                  </p>
-                </a>
-              </ScrollReveal>
-            ))}
+        
+        <div className="container-sahli relative z-20 pt-24 pb-16 flex flex-col items-center md:items-start text-center md:text-left">
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 backdrop-blur-md rounded-full border border-primary/20 text-xs font-black tracking-widest uppercase text-primary mb-8 shadow-lg shadow-primary/5 animate-reveal"
+          >
+            <img 
+              src="/logos/SahlLogo5.png" 
+              alt={t('home.hero.logoAlt')} 
+              className="w-4 h-4 object-contain animate-pulse" 
+            />
+            {t('home.hero.label')}
           </div>
           
-          <div className="mt-8 md:mt-10 text-center">
-            <p className="text-slate-500 mb-4 text-[0.65rem] md:text-xs font-medium max-w-lg mx-auto leading-relaxed">
-              {t('home.solutions.cta')}
-            </p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6 leading-tight tracking-tight max-w-4xl animate-reveal" style={{ animationDelay: '0.1s' }}>
+            {t('home.hero.title')}
+          </h1>
+          
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-10 font-medium leading-relaxed max-w-2xl animate-reveal text-balance" style={{ animationDelay: '0.2s' }}>
+            {t('home.hero.subtitle')}
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-reveal" style={{ animationDelay: '0.3s' }}>
             <a 
               href={getWhatsAppLink(t('cta.whatsapp.general'))}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-black text-[0.65rem] md:text-xs transition-all shadow-lg shadow-primary/25 group hover:scale-105 active:scale-95"
+              onClick={() => trackRequestClick('Hero Section')}
+              className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-xl font-bold text-base hover:bg-primary-dark transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 flex items-center justify-center gap-2 group"
             >
-              <Send size="14" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              {t('home.final.cta')}
+              <Send size={18} className="group-hover:rotate-12 transition-transform" />
+              {t('home.hero.cta')}
             </a>
+            <Link 
+              to="/services"
+              className="w-full sm:w-auto px-6 py-3 bg-secondary text-foreground border border-border rounded-xl font-bold text-base hover:bg-secondary/80 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
+            >
+              {t('nav.services')}
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className="mt-12 inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 backdrop-blur-sm border border-border rounded-full text-sm text-muted-foreground font-medium animate-reveal hover:bg-secondary/80 transition-colors" style={{ animationDelay: '0.4s' }}>
+            <MapPin size={16} className="text-primary" />
+            <span>Serving Doha, Al Rayyan, Al Wakrah & More</span>
+          </div>
+        </div>
+
+        <div
+          className={`hidden lg:block absolute inset-y-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 z-20 pointer-events-none`}
+        >
+          <div
+            className="h-full flex items-center justify-center"
+            style={{
+              transform: `translate(${mousePos.x * 0.12}px, ${mousePos.y * -0.06}px)`,
+              transition: 'transform 600ms ease-out',
+            }}
+          >
+            <div className="relative w-[320px] xl:w-[360px] aspect-[4/5] rounded-[2rem] bg-background border border-primary/20 shadow-[0_25px_80px_rgba(15,23,42,0.6)] overflow-hidden">
+              <img
+                src="/Services/AC Maintenance.jpg"
+                alt="Technician performing home maintenance service"
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-x-6 bottom-6 bg-background/95 border border-primary/20 rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+                    SAHLI COORDINATION
+                  </span>
+                  <span className="text-xs font-semibold text-foreground">
+                    24/7 AC • Plumbing • Electrical
+                  </span>
+                  <span className="text-[11px] text-muted-foreground">
+                    Doha • Al Rayyan • Al Wakrah
+                  </span>
+                </div>
+                <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/40">
+                  <Send size={18} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Marquee - Refined Single Line Grey Fade Loop */}
-      <div className="relative border-y border-slate-200 bg-slate-50 py-4 overflow-hidden">
-        <Suspense fallback={<div className="h-10 bg-slate-50" />}>
-          <Marquee 
-            gap={60}
-            className="flex items-center"
-          >
+      {/* Services Grid */}
+      <section id="services" className="section-spacing bg-secondary/5 relative overflow-hidden">
+        <div className="container-sahli relative z-10">
+          <div className="max-w-3xl mb-12 mx-auto md:mx-0 text-center md:text-start">
+            <ScrollReveal>
+              <span className="text-primary font-bold uppercase tracking-widest text-sm mb-3 block">
+                {t('home.solutions.microHook')}
+              </span>
+              <h2 className="text-2xl md:text-4xl text-foreground mb-4">
+                {t('home.solutions.title')}
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed text-balance">
+                {t('home.solutions.subtitle')}
+              </p>
+            </ScrollReveal>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            {solutions.map((solution, i) => (
+              <ScrollReveal key={i} delay={i * 0.05} className="h-full">
+                <div
+                  onClick={() => {
+                    trackRequestClick(`Solution: ${solution.title}`);
+                    window.open(getWhatsAppLink(t(solution.whatsappKey as TranslationKey)), '_blank');
+                  }}
+                  className="card-premium h-full p-6 sm:p-8 flex flex-col items-center text-center cursor-pointer group relative overflow-hidden"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-sm">
+                    {React.cloneElement(solution.icon as React.ReactElement, { size: 24 })}
+                  </div>
+                  
+                  <h3 className="text-base md:text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {solution.title}
+                  </h3>
+                  
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3 font-medium">
+                    {solution.desc}
+                  </p>
+                  
+                  <div className="mt-auto pt-4 w-full border-t border-border flex flex-wrap gap-2">
+                    {solution.links.map((link, idx) => (
+                      <Link 
+                        key={idx}
+                        to={link.path}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          trackRequestClick(`SEO Link: ${link.label}`);
+                        }}
+                        className="text-[10px] sm:text-xs text-muted-foreground bg-secondary/20 px-2 py-1 rounded-md hover:bg-primary hover:text-white transition-colors duration-300"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Marquee */}
+      <div className="border-y border-border bg-secondary/5 py-8 overflow-hidden">
+        <Suspense fallback={<div className="h-10" />}>
+          <Marquee gap={80} className="flex items-center">
             {marqueeItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-6 whitespace-nowrap">
-                <span className="text-[0.65rem] md:text-[0.75rem] font-black tracking-[0.2em] text-slate-400 uppercase hover:text-primary/60 transition-colors duration-500 cursor-default">
+              <div key={i} className="flex items-center gap-4 px-4 group">
+                <div className="w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary transition-colors" />
+                <span className="text-sm md:text-base font-bold tracking-[0.15em] text-muted-foreground uppercase group-hover:text-primary transition-colors cursor-default">
                   {item}
                 </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-primary/20 shadow-[0_0_10px_rgba(var(--primary-rgb),0.2)]" />
               </div>
             ))}
           </Marquee>
         </Suspense>
-        
-        {/* Edge Fades removed as per user request */}
       </div>
 
-      {/* 2.1 Differentiation Block - Light Theme */}
-      <section className="py-12 md:py-20 bg-slate-50 relative overflow-hidden border-y border-slate-200">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/3 h-full bg-primary/5 blur-[120px] rounded-full opacity-30`} />
-        </div>
-
+      {/* Differentiation Section */}
+      <section className="section-spacing bg-white relative overflow-hidden">
         <div className="container-sahli relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Column: The Problem */}
-            <ScrollReveal
-              direction={dir === 'rtl' ? 'left' : 'right'}
-              className="space-y-8"
-            >
-              <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-6 md:mb-8 leading-tight text-center lg:text-left break-words">
-                  {t('home.differentiation.title')}
-                </h2>
-                <div className="space-y-6">
-                  <div className="flex gap-4 p-5 rounded-2xl bg-white border border-slate-200 hover:border-primary/20 transition-colors group shadow-sm">
-                    <div className="w-10 h-10 shrink-0 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <ScrollReveal direction={dir === 'rtl' ? 'left' : 'right'}>
+              <h2 className="text-2xl md:text-4xl text-slate-900 mb-6 leading-tight">
+                {t('home.differentiation.title')}
+              </h2>
+              <div className="space-y-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="flex gap-4 p-5 rounded-2xl bg-secondary/10 border border-border hover:border-primary/20 hover:bg-primary/5 transition-colors group">
+                    <div className="w-10 h-10 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center">
                       <Search size={20} />
                     </div>
-                    <p className="text-sm md:text-base text-slate-600 leading-relaxed group-hover:text-slate-900 transition-colors break-words">
-                      {t('home.differentiation.problem1')}
+                    <p className="text-base font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                      {t(`home.differentiation.problem${i}` as TranslationKey)}
                     </p>
                   </div>
-                  <div className="flex gap-4 p-5 rounded-2xl bg-white border border-slate-200 hover:border-primary/20 transition-colors group shadow-sm">
-                    <div className="w-10 h-10 shrink-0 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center">
-                      <ClipboardList size={20} />
-                    </div>
-                    <p className="text-sm md:text-base text-slate-600 leading-relaxed group-hover:text-slate-900 transition-colors break-words">
-                      {t('home.differentiation.problem2')}
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </ScrollReveal>
 
-            {/* Right Column: The Solution (SAHLI) */}
-            <ScrollReveal
-              direction={dir === 'rtl' ? 'right' : 'left'}
-              className="relative"
-            >
-              <div className="p-8 md:p-10 rounded-[2.5rem] bg-primary/5 border border-primary/20 relative overflow-hidden">
-                {/* Decorative glow */}
-                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 blur-[80px] rounded-full" />
+            <ScrollReveal direction={dir === 'rtl' ? 'right' : 'left'}>
+              <div className="p-8 md:p-10 rounded-[2.5rem] bg-foreground text-background relative overflow-hidden shadow-2xl shadow-foreground/5">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] rounded-full -mr-16 -mt-16" />
                 
-                <div className="relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary text-white text-[0.6rem] font-black tracking-widest uppercase mb-6">
-                    <ShieldCheck size={12} />
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-black tracking-widest uppercase mb-8 border border-primary/20">
+                    <ShieldCheck size={14} />
                     {t('home.differentiation.statement')}
                   </div>
                   
-                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-8 break-words">
+                  <h3 className="text-2xl font-bold mb-8 text-background">
                     {t('home.differentiation.list.title')}
                   </h3>
                   
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full text-left">
+                  <ul className="space-y-6">
                     {[1, 2, 3, 4].map((item) => (
-                      <li key={item} className="flex items-center gap-3 text-slate-700 justify-start">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
-                        <span className="text-sm md:text-base font-bold">
+                      <li key={item} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0 mt-0.5 shadow-lg shadow-primary/25">
+                          <ArrowRight size={14} className="text-white" />
+                        </div>
+                        <span className="text-base font-medium text-background/80">
                           {t(`home.differentiation.list.item${item}` as TranslationKey)}
                         </span>
                       </li>
@@ -526,20 +501,24 @@ export default function Index() {
         </div>
       </section>
 
-      {/* 2.5 Major Categories */}
-      <section id="categories" className="section-spacing bg-white relative overflow-hidden border-t border-slate-200">
+      {/* Major Categories */}
+      <section id="categories" className="section-spacing bg-secondary/5 relative overflow-hidden border-t border-border">
         <div className="container-sahli relative z-10">
-          <div className="max-w-3xl mb-8 md:mb-10 mx-auto md:mx-0 text-center md:text-start">
+          <div className="max-w-3xl mb-12 mx-auto md:mx-0 text-center md:text-start">
             <ScrollReveal>
-              <h2 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-6 md:mb-8 break-words"
-              >
+              <span className="text-primary font-bold uppercase tracking-widest text-sm mb-3 block">
+                {t('services.microHook')}
+              </span>
+              <h2 className="text-2xl md:text-4xl text-foreground mb-4">
                 {t('services.title')}
               </h2>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed text-balance">
+                {t('services.subtitle')}
+              </p>
             </ScrollReveal>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8 xl:gap-10">
-            <Suspense fallback={<div className="min-h-[260px] sm:min-h-[280px] md:min-h-[340px] bg-slate-50 rounded-[var(--radius)]" />}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
+            <Suspense fallback={<div className="min-h-[300px] bg-card rounded-2xl animate-pulse" />}>
               {services.map((service, i) => (
                 <ServiceRoof
                   key={i}
@@ -559,181 +538,198 @@ export default function Index() {
         </div>
       </section>
 
-      {/* 3. WHY PEOPLE USE SAHLI (Modernized) */}
+      {/* Why People Choose SAHLI */}
       <section className="section-spacing bg-white relative overflow-hidden">
         <div className="container-sahli relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-12 mx-auto md:mx-0 text-center md:text-start">
-            <div className="max-w-3xl">
-              <ScrollReveal>
-                <h2 
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-6 md:mb-8 break-words"
-                >
-                  {t('home.glance.title')}
-                </h2>
-              </ScrollReveal>
-            </div>
-          </div>
+          <ScrollReveal className="mb-12 md:mb-20 text-center md:text-left">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm mb-3 block">
+              {t('home.glance.subtitle') || 'Why Choose Us'}
+            </span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl text-foreground font-black tracking-tight">
+              {t('home.glance.title')}
+            </h2>
+          </ScrollReveal>
 
           {/* Mobile Carousel */}
-          <div className="md:hidden overflow-hidden -mx-4 px-4 cursor-grab active:cursor-grabbing" ref={emblaRefGlance}>
-            <div className="flex">
+          <div className="md:hidden overflow-hidden -mx-5 px-5 pb-8" ref={emblaRefGlance}>
+            <div className="flex gap-4">
               {glanceItems.map((item, i) => (
-                <div key={i} className="flex-[0_0_85%] min-w-0 px-2">
-                  <ScrollReveal
-                    className="group relative p-6 rounded-[2rem] bg-slate-50 border border-slate-200 flex flex-col h-full shadow-xl shadow-slate-200/50 overflow-hidden"
-                  >
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-[3rem] -mr-6 -mt-6" />
-                    <div className="relative z-10 w-12 h-12 rounded-xl bg-white text-primary flex items-center justify-center mb-5 shadow-sm border border-slate-200">
-                      {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                <div key={i} className="flex-[0_0_85%] min-w-0">
+                  <div className="h-full p-6 rounded-3xl bg-secondary/30 border border-border flex flex-col">
+                    <div className="w-12 h-12 rounded-2xl bg-card text-primary shadow-sm flex items-center justify-center mb-5 border border-border">
+                      {React.cloneElement(item.icon as React.ReactElement, { size: 24 })}
                     </div>
-                    <h3 className="relative z-10 text-xl md:text-2xl font-bold mb-2 text-slate-900 leading-tight break-words">
-                      {item.title}
-                    </h3>
-                    <p className="relative z-10 text-[0.85rem] text-slate-600 leading-relaxed break-words">
-                      {item.desc}
-                    </p>
-                  </ScrollReveal>
+                    <h3 className="text-lg font-bold text-foreground mb-3">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-medium">{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Desktop Grid */}
-          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 xl:gap-8">
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {glanceItems.map((item, i) => (
-              <ScrollReveal
-                key={i}
-                delay={i * 0.1}
-                className="group relative p-6 rounded-[2rem] bg-slate-50 border border-slate-200 hover:border-primary/30 transition-all duration-500 flex flex-col h-full shadow-xl shadow-slate-200/50 hover:shadow-primary/5 overflow-hidden"
-              >
-                {/* Visual Accent */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-[3rem] -mr-6 -mt-6 transition-transform group-hover:scale-110 duration-500" />
-                
-                <div className="relative z-10 w-12 h-12 rounded-xl bg-white text-primary flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-slate-200">
-                  {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+              <ScrollReveal key={i} delay={i * 0.1} className="h-full">
+                <div className="group h-full p-8 rounded-3xl bg-secondary/30 border border-border hover:border-primary/20 hover:bg-card hover:shadow-xl hover:shadow-slate-200/40 transition-all duration-500">
+                  <div className="w-16 h-16 rounded-2xl bg-card text-primary shadow-sm flex items-center justify-center mb-8 border border-border group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 transition-all duration-500">
+                    {React.cloneElement(item.icon as React.ReactElement, { size: 32 })}
+                  </div>
+                  <h3 className="text-lg lg:text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{item.title}</h3>
+                  <p className="text-base text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors font-medium">{item.desc}</p>
                 </div>
-                
-                <h3 className="relative z-10 text-xl md:text-2xl font-bold mb-2 text-slate-900 group-hover:text-primary transition-colors leading-tight break-words">
-                  {item.title}
-                </h3>
-                <p className="relative z-10 text-[0.85rem] text-slate-600 leading-relaxed break-words">
-                  {item.desc}
-                </p>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="section-spacing bg-secondary/30 border-y border-border">
+        <div className="container-sahli">
+          <ScrollReveal className="mb-12 md:mb-20 text-center">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm mb-3 block">
+              {t('home.how.subtitle') || 'Process'}
+            </span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl text-foreground font-black tracking-tight">
+              {t('home.how.title')}
+            </h2>
+          </ScrollReveal>
+
+          <div className="hidden lg:grid grid-cols-4 gap-8 relative">
+            <div className="absolute top-10 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-slate-300 to-transparent z-0 opacity-30" />
+            
+            {[1, 2, 3, 4].map((step) => (
+              <ScrollReveal key={step} delay={step * 0.1} className="relative z-10 group h-full">
+                <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col items-center text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-3xl font-black mb-8 shadow-lg shadow-slate-900/20 group-hover:scale-110 group-hover:bg-primary group-hover:shadow-primary/30 transition-all duration-500 relative">
+                    {formatNumber(step)}
+                    <div className="absolute -bottom-3 -right-3 w-8 h-8 rounded-full bg-slate-100 border-4 border-white flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-black text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                    {t(`home.how.step${step}.title` as TranslationKey)}
+                  </h3>
+                  <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                    {t(`home.how.step${step}.desc` as TranslationKey)}
+                  </p>
+                </div>
               </ScrollReveal>
             ))}
           </div>
           
-          {/* Tightened mantra - promotional line removed */}
-        </div>
-      </section>
-
-      {/* 4. HOW IT WORKS (Modernized Step Flow) */}
-      <section className="section-spacing bg-slate-50 relative overflow-hidden border-y border-slate-200">
-        <div className="container-sahli relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-12 mx-auto md:mx-0 text-center md:text-start">
-            <div className="max-w-4xl">
-              <ScrollReveal>
-                <h2 
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-6 md:mb-8 break-words"
-                >
-                  {t('home.how.title')}
-                </h2>
-              </ScrollReveal>
-            </div>
-          </div>
-
-          <div className="relative">
-            {/* Desktop Connector Line */}
-            <div className="hidden lg:block absolute top-10 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent z-0" />
-            
-            {/* Mobile Carousel */}
-            <div className="lg:hidden overflow-hidden -mx-4 px-4 cursor-grab active:cursor-grabbing" ref={emblaRefHow}>
-              <div className="flex">
-                {[1, 2, 3, 4].map((step) => (
-                  <div key={step} className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_70%] md:flex-[0_0_50%] px-2">
-                    <ScrollReveal
-                      className="group h-full"
-                    >
-                      <div className="relative p-6 rounded-[2rem] bg-white border border-slate-200 shadow-xl shadow-slate-200/50 h-full flex flex-col">
-                        <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-black text-lg mb-6 shadow-lg shadow-primary/20 relative">
-                          {formatNumber(step)}
-                          {step === 1 && (
-                            <div className="absolute inset-0 rounded-xl bg-primary animate-ping opacity-20" />
-                          )}
-                        </div>
-                        <h3 className="text-base font-black mb-3 text-slate-900 leading-tight break-words">
-                          {t(`home.how.step${step}.title` as TranslationKey)}
-                        </h3>
-                        <p className="text-[0.85rem] text-slate-600 leading-relaxed break-words">
-                          {t(`home.how.step${step}.desc` as TranslationKey)}
-                        </p>
-                      </div>
-                    </ScrollReveal>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop Grid */}
-            <div className="hidden lg:grid grid-cols-4 gap-6 lg:gap-8 relative z-10">
+          {/* Mobile View */}
+          <div className="lg:hidden -mx-5 px-5 pb-8 overflow-hidden" ref={emblaRefHow}>
+             <div className="flex gap-4">
               {[1, 2, 3, 4].map((step) => (
-                <ScrollReveal
-                  key={step}
-                  delay={step * 0.1}
-                  className="group"
-                >
-                  <div className="relative p-6 rounded-[2rem] bg-white border border-slate-200 group-hover:border-primary/40 transition-all duration-500 shadow-xl shadow-slate-200/50 h-full flex flex-col">
-                    {/* Step Number Badge */}
-                    <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-black text-lg mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-primary/20 relative">
+                <div key={step} className="flex-[0_0_85%] min-w-0">
+                  <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm h-full flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-2xl font-black mb-6 shadow-lg shadow-slate-900/20">
                       {formatNumber(step)}
-                      {/* Pulse effect for current/first step */}
-                      {step === 1 && (
-                        <div className="absolute inset-0 rounded-xl bg-primary animate-ping opacity-20" />
-                      )}
                     </div>
-                    
-                    <h3 className="text-base font-black mb-3 text-slate-900 leading-tight break-words">
+                    <h3 className="text-xl font-black text-slate-900 mb-3">
                       {t(`home.how.step${step}.title` as TranslationKey)}
                     </h3>
-                    <p className="text-[0.85rem] text-slate-600 leading-relaxed break-words">
+                    <p className="text-sm text-slate-700 leading-relaxed font-medium">
                       {t(`home.how.step${step}.desc` as TranslationKey)}
                     </p>
                   </div>
-                </ScrollReveal>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-
-      
-      {/* Final CTA - Minimalist */}
-      <section className="py-20 md:py-28 bg-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-1/2 h-full bg-primary/5 blur-[100px] rounded-full opacity-20" />
+      {/* FAQ Section */}
+      <section className="section-spacing bg-background relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(241,41,89,0.03),transparent_50%)]" />
+        <div className="container-sahli max-w-4xl relative z-10">
+          <ScrollReveal className="text-center mb-16 md:mb-24">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm mb-3 block">
+              {t('home.faq.subtitle') || 'Common Questions'}
+            </span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground mb-6">{t('home.faq.title')}</h2>
+          </ScrollReveal>
+          
+          <div className="space-y-6">
+            {[1, 2, 3, 4].map((i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div 
+                  className={`bg-card rounded-3xl border transition-all duration-500 overflow-hidden group ${
+                    openFaq === i 
+                      ? 'border-primary/30 shadow-xl shadow-primary/5' 
+                      : 'border-border hover:border-border hover:shadow-lg hover:shadow-border/40'
+                  }`}
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+                    aria-expanded={openFaq === i}
+                  >
+                    <h3 className={`font-bold text-base md:text-lg transition-colors duration-300 ${
+                      openFaq === i ? 'text-primary' : 'text-foreground group-hover:text-primary/80'
+                    }`}>
+                      {t(`home.faq.q${i}` as TranslationKey)}
+                    </h3>
+                    <div className={`flex-shrink-0 ml-6 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      openFaq === i 
+                        ? 'bg-primary text-white rotate-180 shadow-lg shadow-primary/30' 
+                        : 'bg-secondary/20 text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
+                    }`}>
+                      <ChevronDown size={20} />
+                    </div>
+                  </button>
+                  
+                  <div 
+                    className={`grid transition-[grid-template-rows] duration-500 ease-out-expo ${
+                      openFaq === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="p-6 md:p-8 pt-0 text-muted-foreground leading-relaxed text-sm md:text-base font-medium">
+                        {t(`home.faq.a${i}` as TranslationKey)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 md:py-32 bg-foreground relative overflow-hidden text-center isolate">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(241,41,89,0.15),transparent_70%)] animate-pulse duration-[5000ms]" />
         
-        <div className="container-sahli relative z-10 text-center">
+        <div className="container-sahli relative z-10">
           <ScrollReveal>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-8 tracking-tight break-words">
-              {t('home.final.title')}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-background mb-8 tracking-tight leading-tight">
+              {t('home.emotional.title')}
             </h2>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a 
-                href={getWhatsAppLink(t('cta.whatsapp.general'))}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto min-h-[3.5rem] h-auto py-4 px-8 bg-primary hover:bg-primary-light text-white rounded-xl font-black flex items-center justify-center gap-3 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/25"
-              >
-                <MessageSquare size={20} />
-                <span className="tracking-widest uppercase text-sm">{t('home.final.cta')}</span>
-              </a>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-12 text-background/80 font-medium text-base md:text-lg tracking-wide">
+              <span>{t('home.emotional.line1')}</span>
+              <span className="hidden md:block w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(241,41,89,0.5)]" />
+              <span>{t('home.emotional.line2')}</span>
+              <span className="hidden md:block w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(241,41,89,0.5)]" />
+              <span>{t('home.emotional.line3')}</span>
             </div>
+            
+            <a 
+              href={getWhatsAppLink(t('cta.whatsapp.general'))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-background text-foreground px-8 py-4 rounded-full font-black text-base md:text-lg hover:bg-background/90 hover:scale-105 transition-all duration-300 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_-15px_rgba(255,255,255,0.4)] group"
+            >
+              <Send size={20} className="text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
+              {t('home.final.cta')}
+            </a>
           </ScrollReveal>
         </div>
       </section>
     </Layout>
   );
-};
-
+}

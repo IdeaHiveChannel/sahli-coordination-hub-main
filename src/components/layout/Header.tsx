@@ -43,7 +43,7 @@ export function Header() {
           className={`flex items-center justify-between px-3 md:px-6 py-1.5 md:py-2 rounded-xl md:rounded-2xl transition-all duration-700 animate-in slide-in-from-top-5 fade-in ${
             isScrolled || isMenuOpen
               ? 'glass-morphism shadow-[0_15px_40px_rgba(0,0,0,0.3)]' 
-              : 'bg-slate-100/80 md:bg-transparent'
+              : 'bg-background/80 md:bg-transparent'
           }`}
         >
           {/* Logo */}
@@ -57,7 +57,7 @@ export function Header() {
                   <img
                     src={isScrolled || isMenuOpen || !isDarkHeroPage ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"}
                     alt="SAHLI Logo"
-                    className={`absolute w-[70px] h-[70px] md:w-[94px] md:h-[94px] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
+                    className={`absolute w-[50px] h-[50px] md:w-[70px] md:h-[70px] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
                       dir === 'rtl' ? 'right-0' : 'left-0'
                     }`}
                   />
@@ -72,10 +72,10 @@ export function Header() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-[9px] md:text-[10px] lg:text-[11px] xl:text-[12px] 2xl:text-[13px] font-bold uppercase tracking-[0.12em] transition-all duration-500 relative group ${
+                  className={`text-[11px] lg:text-xs xl:text-sm font-bold uppercase tracking-[0.15em] transition-all duration-500 relative group ${
                     isActive 
                       ? 'text-primary' 
-                      : (isScrolled || isMenuOpen || !isDarkHeroPage ? 'text-slate-900/80 hover:text-primary' : 'text-white hover:text-primary')
+                      : (isScrolled || isMenuOpen || !isDarkHeroPage ? 'text-foreground/80 hover:text-primary' : 'text-white hover:text-primary')
                   }`}
                 >
                   {t(item.key)}
@@ -89,8 +89,8 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2 md:gap-3">
-            <div className={`flex items-center gap-1 px-1 py-0.5 rounded-lg border border-slate-200/50 transition-colors duration-500 ${
-              isScrolled || isMenuOpen || !isDarkHeroPage ? 'bg-slate-900/5 text-slate-900' : 'bg-white/10 text-white'
+            <div className={`flex items-center gap-1 px-1 py-0.5 rounded-lg border border-border/50 transition-colors duration-500 ${
+              isScrolled || isMenuOpen || !isDarkHeroPage ? 'bg-foreground/5 text-foreground' : 'bg-white/10 text-white'
             }`}>
               <LanguageToggle />
             </div>
@@ -99,12 +99,12 @@ export function Header() {
               href={getWhatsAppLink(t('cta.whatsapp.general'))}
               target="_blank"
               onClick={() => trackRequestClick('Header')}
-              className="hidden sm:flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 bg-primary text-primary-foreground rounded-lg md:rounded-xl text-[8px] md:text-[9px] font-black uppercase tracking-[0.08em] hover:shadow-xl hover:shadow-primary/40 transition-all duration-500 btn-shine"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 bg-primary text-primary-foreground rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:shadow-xl hover:shadow-primary/40 transition-all duration-500 btn-shine"
             >
               <div
-                className="flex items-center gap-1.5 hover:scale-105 hover:-translate-y-[1px] active:scale-95 transition-transform duration-300"
+                className="flex items-center gap-2 hover:scale-105 hover:-translate-y-[1px] active:scale-95 transition-transform duration-300"
               >
-                <MessageSquare size={12} className="fill-primary-foreground" />
+                <MessageSquare size={14} className="fill-primary-foreground" />
                 {t('cta.whatsapp')}
               </div>
             </a>
@@ -114,7 +114,7 @@ export function Header() {
               className={`xl:hidden w-9 h-9 flex flex-col items-center justify-center gap-1 rounded-xl transition-all duration-300 active:scale-90 ${
                 isMenuOpen 
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
-                  : (isScrolled || !isDarkHeroPage ? 'text-slate-900 hover:bg-secondary/50' : 'text-white hover:bg-white/10')
+                  : (isScrolled || !isDarkHeroPage ? 'text-foreground hover:bg-secondary/50' : 'text-white hover:bg-white/10')
               } z-[120] relative overflow-hidden group`}
               onClick={(e) => {
                 e.preventDefault();
@@ -148,7 +148,7 @@ export function Header() {
         <div className={`absolute top-8 ${dir === 'rtl' ? 'left-6 md:left-12' : 'right-6 md:right-12'} z-[110]`}>
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="w-12 h-12 flex items-center justify-center rounded-xl bg-slate-900/5 text-slate-900 hover:bg-slate-900/10 transition-colors active:scale-90"
+            className="w-12 h-12 flex items-center justify-center rounded-xl bg-foreground/5 text-foreground hover:bg-foreground/10 transition-colors active:scale-90"
             aria-label="Close menu"
           >
             <X size={24} />
@@ -183,21 +183,21 @@ export function Header() {
                   className="group flex flex-col items-start gap-1 py-3 md:py-4 relative"
                 >
                   <span className="text-[0.65rem] md:text-[0.7rem] font-black text-primary/40 uppercase tracking-[0.2em]">0{i + 1}</span>
-                  <span className="text-lg md:text-xl font-black text-slate-900 group-hover:text-primary group-hover:translate-x-2 transition-all duration-500">{t(item.key)}</span>
+                  <span className="text-lg md:text-xl font-black text-foreground group-hover:text-primary group-hover:translate-x-2 transition-all duration-500">{t(item.key)}</span>
                 </Link>
               </div>
             ))}
           </div>
           
           <div 
-            className={`pb-12 pt-8 border-t border-slate-200/50 mt-8 transition-all duration-700 delay-500 ${
+            className={`pb-12 pt-8 border-t border-border/50 mt-8 transition-all duration-700 delay-500 ${
               isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
             <div className={`flex flex-col gap-8 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
               <div className="space-y-2">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900/60">{t('nav.contact')}</span>
-                <a href={`mailto:${t('contact.email.value')}`} className="block text-base font-medium text-slate-900 hover:text-primary transition-colors break-all">{t('contact.email.value')}</a>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/60">{t('nav.contact')}</span>
+                <a href={`mailto:${t('contact.email.value')}`} className="block text-base font-medium text-foreground hover:text-primary transition-colors break-all">{t('contact.email.value')}</a>
               </div>
               
               <a

@@ -51,6 +51,15 @@ const Doha = lazy(() => import("@/pages/locations/Doha"));
 const Lusail = lazy(() => import("@/pages/locations/Lusail"));
 const ThePearl = lazy(() => import("@/pages/locations/ThePearl"));
 
+// Phase 1 City-Specific Pages (Layer 3)
+const PlumberDoha = lazy(() => import("@/pages/services/city/PlumberDoha"));
+const ElectricianDoha = lazy(() => import("@/pages/services/city/ElectricianDoha"));
+const ElectricianRayyan = lazy(() => import("@/pages/services/city/ElectricianRayyan"));
+const CleaningDoha = lazy(() => import("@/pages/services/city/CleaningDoha"));
+const CleaningLusail = lazy(() => import("@/pages/services/city/CleaningLusail"));
+const ACRepairWakrah = lazy(() => import("@/pages/services/city/ACRepairWakrah"));
+const MoversDoha = lazy(() => import("@/pages/services/city/MoversDoha"));
+
 const TrustStandards = lazy(() => import("@/pages/TrustStandards"));
 const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
@@ -109,6 +118,15 @@ const App = () => (
                 <Route path="/babysitting-services-qatar" element={<Babysitting />} />
                 <Route path="/deep-cleaning-qatar" element={<DeepCleaning />} />
                 <Route path="/pest-control-qatar" element={<PestControl />} />
+
+                {/* Phase 1 City-Specific Pages (Layer 3) */}
+                <Route path="/plumber-doha" element={<PlumberDoha />} />
+                <Route path="/electrician-doha" element={<ElectricianDoha />} />
+                <Route path="/electrician-ar-rayyan" element={<ElectricianRayyan />} />
+                <Route path="/cleaning-doha" element={<CleaningDoha />} />
+                <Route path="/cleaning-lusail" element={<CleaningLusail />} />
+                <Route path="/ac-repair-al-wakrah" element={<ACRepairWakrah />} />
+                <Route path="/movers-doha" element={<MoversDoha />} />
 
                 {/* Location-Intent Pages */}
                 <Route path="/home-services-doha" element={<Doha />} />

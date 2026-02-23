@@ -19,13 +19,18 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const onVisibilityChangeRef = useRef(onVisibilityChange);
+
+  useEffect(() => {
+    onVisibilityChangeRef.current = onVisibilityChange;
+  }, [onVisibilityChange]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          onVisibilityChange?.(true);
+          onVisibilityChangeRef.current?.(true);
           observer.disconnect();
         }
       },

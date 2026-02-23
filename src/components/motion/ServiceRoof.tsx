@@ -50,7 +50,7 @@ export function ServiceRoof({
 
   const content = (
     <div
-      className={`relative min-h-[260px] sm:min-h-[280px] md:min-h-[340px] w-full rounded-[var(--radius)] border border-slate-200 bg-white overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70' : ''} animate-in fade-in slide-in-from-bottom-8 fill-mode-both hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 active:scale-[0.98] active:translate-y-[-2px]`}
+      className={`relative min-h-[260px] sm:min-h-[280px] md:min-h-[340px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70' : ''} animate-in fade-in slide-in-from-bottom-8 fill-mode-both hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 active:scale-[0.98] active:translate-y-[-2px]`}
       style={{ animationDelay: `${index * 100}ms` }}
       onMouseEnter={() => !isMobile && status !== 'comingSoon' && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -66,15 +66,19 @@ export function ServiceRoof({
 
       {/* Background Image with Reveal Animation */}
       {imageUrl && (
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={imageUrl} 
-            alt={title}
-            loading="lazy"
-            crossOrigin="anonymous"
-            className={`w-full h-full object-cover transition-all duration-1000 ${isHovered ? 'scale-105' : 'scale-100'}`}
-          />
-        </div>
+        <>
+          <div className="absolute inset-0 z-0">
+            <img 
+              src={imageUrl} 
+              alt={title}
+              loading="lazy"
+              crossOrigin="anonymous"
+              className={`w-full h-full object-cover transition-all duration-1000 ${isHovered ? 'scale-105' : 'scale-100'}`}
+            />
+          </div>
+          {/* Gradient Overlay for Text Visibility */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-700" />
+        </>
       )}
 
       {/* Glow Effect on Hover */}
@@ -108,12 +112,12 @@ export function ServiceRoof({
             </div>
           )}
 
-          <h3 className={`text-lg sm:text-xl lg:text-2xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 break-words ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-slate-900 group-hover:text-primary'}`}>
+          <h3 className={`text-base sm:text-lg lg:text-xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 break-words ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-foreground group-hover:text-primary'}`}>
             {title}
           </h3>
           {showDescription && description && (!subcategories || subcategories.length === 0) && (
             <p
-              className={`text-[13px] lg:text-sm leading-relaxed font-normal mb-4 transition-colors duration-700 break-words ${imageUrl ? 'text-white/90 group-hover:text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.6)]' : 'text-slate-600 group-hover:text-slate-900'}`}
+              className={`text-xs lg:text-sm leading-relaxed font-normal mb-4 transition-colors duration-700 break-words ${imageUrl ? 'text-white/90 group-hover:text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.6)]' : 'text-muted-foreground group-hover:text-foreground'}`}
             >
               {description}
             </p>
@@ -124,7 +128,7 @@ export function ServiceRoof({
               {subcategories.map((sub: string, i: number) => (
                 <span 
                   key={i} 
-                  className={`px-2.5 py-1 rounded-full text-[8px] sm:text-[9px] md:text-[10px] font-black tracking-widest uppercase border transition-colors duration-500 ${imageUrl ? 'bg-white/10 border-white/30 text-white backdrop-blur-md shadow-lg group-hover:bg-white group-hover:text-primary group-hover:border-white' : 'bg-primary/10 border-primary/20 text-primary'}`}
+                  className={`px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold tracking-wider uppercase border transition-colors duration-500 ${imageUrl ? 'bg-white/10 border-white/30 text-white backdrop-blur-md shadow-lg group-hover:bg-white group-hover:text-primary group-hover:border-white' : 'bg-primary/10 border-primary/20 text-primary'}`}
                 >
                   {sub}
                 </span>

@@ -1,26 +1,29 @@
-import ReactGA from 'react-ga4';
-import { GA_MEASUREMENT_ID } from './constants';
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
+}
 
 export const initGA = () => {
-  if (GA_MEASUREMENT_ID) {
-    ReactGA.initialize(GA_MEASUREMENT_ID);
-  }
+  // Initialized via GTM in index.html
+  window.dataLayer = window.dataLayer || [];
 };
 
 export const trackPageView = (path: string) => {
-  if (GA_MEASUREMENT_ID) {
-    ReactGA.send({ hitType: 'pageview', page: path });
-  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'page_view',
+    page_path: path
+  });
 };
 
 export const trackEvent = (category: string, action: string, label?: string) => {
-  if (GA_MEASUREMENT_ID) {
-    ReactGA.event({
-      category,
-      action,
-      label,
-    });
-  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: action,
+    event_category: category,
+    event_label: label
+  });
 };
 
 export const trackWhatsAppClick = (location: string) => {

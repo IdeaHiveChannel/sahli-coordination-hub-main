@@ -35,12 +35,12 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
       <div className={`absolute top-1/4 ${dir === 'rtl' ? 'left-1/4' : 'right-1/4'} w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[100px] md:blur-[160px] animate-pulse-slow z-0`} />
       <div className={`absolute bottom-0 ${dir === 'rtl' ? 'right-0' : 'left-0'} w-[300px] h-[300px] bg-primary/5 rounded-full blur-[120px] animate-pulse-slow delay-1000 z-0`} />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,hsla(var(--primary),0.15),transparent_70%)]" />
-      <div className="absolute inset-0 bg-slate-100" />
+      <div className="absolute inset-0 bg-background/50" />
     </div>
   );
 
   return (
-    <div className="relative border-b border-slate-200 bg-white last:border-0 overflow-hidden">
+    <div className="relative border-b border-border bg-background last:border-0 overflow-hidden">
       {floatingBlobs}
       <div className="container-sahli relative z-10 py-6 md:py-12">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
@@ -52,7 +52,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
             <span className="text-primary font-bold tracking-[0.2em] text-[11px] uppercase mb-3 md:mb-5 block">
               {index + 1 < 10 ? `0${index + 1}` : index + 1} / {t('trust.standard')}
             </span>
-            <h3 className="text-xl md:text-3xl font-black tracking-tighter text-balance leading-[1.1] md:leading-[1] mb-6 md:mb-8 text-slate-900">
+            <h3 className="text-xl md:text-3xl font-black tracking-tighter text-balance leading-[1.1] md:leading-[1] mb-6 md:mb-8 text-foreground">
               {title}
             </h3>
           </ScrollReveal>
@@ -63,7 +63,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                 direction="up"
                 duration={0.5}
                 delay={0.2 + i * 0.1}
-                className="group flex gap-4 md:gap-6 p-5 md:p-6 rounded-[1.5rem] transition-all duration-500 hover:bg-slate-50 border border-slate-200 hover:border-primary/20 cursor-default glass-card btn-shine active:scale-98"
+                className="group flex gap-4 md:gap-6 p-5 md:p-6 rounded-[1.5rem] transition-all duration-500 hover:bg-muted/50 border border-border hover:border-primary/20 cursor-default glass-card btn-shine active:scale-98"
               >
                 <div className="mt-1">
                   <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:rotate-12 group-hover:scale-110 shadow-lg shadow-primary/5">
@@ -72,7 +72,7 @@ export function TrustPanel({ title, items, index, imageUrl, videoUrl }: TrustPan
                 </div>
                 <div>
                   <h4 className="text-lg md:text-xl font-black mb-1 md:mb-2 group-hover:text-primary transition-colors tracking-tight">{item.title}</h4>
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed font-medium">{item.description}</p>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">{item.description}</p>
                 </div>
               </ScrollReveal>
             ))}

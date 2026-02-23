@@ -3,7 +3,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { Marquee } from '@/components/motion/Marquee';
-import { MessageSquare, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Waves, Zap } from 'lucide-react';
+import { MetaTags } from '@/components/seo/MetaTags';
+import { MessageSquare, CheckCircle2, Sparkles, ShieldCheck, Clock, MapPin, AlertCircle, ArrowUp, Waves, Zap, HelpCircle, Search, Wallet, ArrowLeft } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
 import { Link } from 'react-router-dom';
 import { getWhatsAppLink } from '@/lib/constants';
@@ -11,6 +12,62 @@ import { getWhatsAppLink } from '@/lib/constants';
 export default function CleaningServices() {
   const { t, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Cleaning Services Qatar",
+    "description": t('services.cleaning.subtitle'),
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "SAHLI Coordination Hub"
+    },
+    "mainEntity": {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": t('services.cleaning.problem'),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": t('services.cleaning.problem.desc')
+          }
+        },
+        {
+          "@type": "Question",
+          "name": t('services.cleaning.why'),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": t('services.cleaning.why.desc')
+          }
+        },
+        {
+          "@type": "Question",
+          "name": t('services.cleaning.inspection'),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": t('services.cleaning.inspection.desc')
+          }
+        },
+        {
+          "@type": "Question",
+          "name": t('services.cleaning.pricing'),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": t('services.cleaning.pricing.desc')
+          }
+        },
+        {
+          "@type": "Question",
+          "name": t('services.cleaning.availability'),
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": t('services.cleaning.availability.desc')
+          }
+        }
+      ]
+    }
+  };
   
   const relatedServices = [
     { title: t('services.cleaning.deep.title'), path: t('services.cleaning.deep.path') },
@@ -34,102 +91,77 @@ export default function CleaningServices() {
     { title: '05', body: t('home.what.step5.body'), icon: <CheckCircle2 size={16} /> }
   ];
 
-  const includes = [
-    t('services.cleaning.deep.items').split('\n')[0] || 'House Deep Cleaning',
-    t('services.cleaning.deep.items').split('\n')[1] || 'Sofa & Carpet Cleaning',
-    t('services.cleaning.deep.items').split('\n')[2] || 'Window Cleaning',
-    t('services.cleaning.deep.items').split('\n')[3] || 'Move-in/out Cleaning'
-  ];
-
   const areas = [
-    t('home.areas.item1'),
-    t('home.areas.item2'),
-    t('home.areas.item3')
+    'Doha', 'Lusail', 'Al Wakrah', 'Al Rayyan', 'Al Daayen', 'Umm Salal', 'Al Khor'
   ];
 
   return (
     <Layout>
-      {/* Hero Section - Aligned with Homepage Full-Width Design */}
-      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
-        {/* Background Image with Homepage Parallax */}
+      <MetaTags 
+        title={t('services.cleaning.title')} 
+        description={t('services.cleaning.subtitle')} 
+        schema={schema} 
+      />
+      {/* 1️⃣ Hero Section - Standardized */}
+      <section ref={containerRef} className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 animate-in zoom-in-105 duration-[1.5s] ease-out"
-          >
+          <div className="absolute inset-0">
             <img 
               src="/Services/Cleaning service.jpg" 
               alt="Professional Home Cleaning Services Qatar"
               className="w-full h-full object-cover object-center scale-105"
             />
           </div>
-          
-          <div className="absolute inset-0 bg-white/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-background/40 md:bg-background/20 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-transparent z-0" />
         </div>
-        
-        {/* Decorative elements */}
-        <div 
-          className={`absolute top-0 ${dir === 'rtl' ? 'left-0' : 'right-0'} w-1/2 h-full bg-slate-100 pointer-events-none z-10 opacity-50`} 
-        />
 
-        <div className="container-sahli relative z-20 pt-16 pb-12 md:pb-20 flex flex-col items-center md:items-start">
-          <div 
-            className="w-full max-w-[1400px] flex flex-col items-center md:items-start text-center md:text-start"
-          >
-            <ScrollReveal 
-              direction="up"
-              duration={0.8}
-              delay={0.1}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/20 rounded-full border border-primary/30 text-xs font-black tracking-[0.25em] uppercase text-primary mb-4 md:mb-6 mx-auto md:mx-0 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
-            >
-              <img 
-                src="/logos/SahlLogo5.png" 
-                alt="" 
-                className="w-3.5 h-3.5 object-contain animate-pulse scale-[3]" 
-              />
-              {t('services.cleaning.title')}
-            </ScrollReveal>
-            
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-8 leading-[1.1] tracking-tight text-slate-900 drop-shadow-2xl font-black w-full text-center md:text-start animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200 fill-mode-backwards">
-              {t('services.cleaning.title')}
-            </h1>
-
-            <div
-              className="w-full max-w-3xl flex flex-col items-center md:items-start text-center md:text-start animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-backwards"
-            >
-              <p className="text-base md:text-lg text-slate-700 mb-8 md:mb-12 font-medium leading-relaxed drop-shadow-lg w-full text-center md:text-start max-w-2xl mx-auto md:mx-0">
+        <div className="container-sahli relative z-20 pt-20">
+          <div className="max-w-4xl">
+            <ScrollReveal>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20 text-xs font-bold tracking-wider uppercase text-primary mb-6">
+                <Sparkles size={14} className="animate-pulse" />
+                <span>{t('services.cleaning.title')}</span>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 leading-tight tracking-tight">
+                {t('services.cleaning.title')}
+              </h1>
+              
+              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-10 font-medium leading-relaxed max-w-2xl text-balance">
                 {t('services.cleaning.subtitle')}
               </p>
 
-              <div className="flex flex-wrap justify-center md:justify-start gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
                 <a
                   href={getWhatsAppLink(t('services.cleaning.whatsapp'))}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackRequestClick('Cleaning Hero CTA')}
-                  className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30 group"
+                  className="w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary-dark transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 flex items-center justify-center gap-3 group"
                 >
-                  <div
-                    className="flex items-center gap-3 group-hover:scale-105 group-active:scale-95 transition-transform"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('cta.request')}
-                  </div>
+                  <MessageSquare size={20} className="group-hover:-translate-y-0.5 transition-transform" />
+                  {t('cta.request')}
                 </a>
+                
+                <div className="w-full sm:w-auto px-8 py-4 bg-background/10 backdrop-blur-md text-foreground rounded-xl font-bold border border-foreground/10 flex items-center justify-center gap-2">
+                  <Clock size={20} className="text-primary" />
+                  <span>24/7 Service Available</span>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* 2️⃣ Service Rules Block */}
-      <section className="section-spacing bg-white border-y border-slate-200">
+      <section className="section-spacing bg-background border-y border-border">
         <div className="container-sahli">
           <ScrollReveal 
-            className="bg-slate-50 border border-slate-200 rounded-xl p-4 md:p-5 shadow-xl shadow-primary/5"
+            className="bg-card border border-border rounded-xl p-6 md:p-8"
           >
-            <h2 className="text-lg sm:text-xl md:text-2xl font-black tracking-tight mb-6 md:mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight mb-8 md:mb-10 text-center text-foreground">
               {t('services.cleaning.rules.title')}
             </h2>
             <Marquee speed={0.5} className="-mx-4 px-4" gap={12}>
@@ -139,11 +171,11 @@ export default function CleaningServices() {
                 t('services.rules.payment'),
                 t('trust.conduct.rule3.title')
               ].map((rule: string, i: number) => (
-                <div key={i} className="flex gap-3 items-start group shrink-0 w-[260px] md:w-auto p-4 md:p-0 rounded-xl bg-white md:bg-transparent border border-slate-200 md:border-0 shadow-sm md:shadow-none">
+                <div key={i} className="flex gap-4 items-center group shrink-0 w-[280px] md:w-auto p-5 md:p-0 rounded-xl bg-background md:bg-transparent border border-border md:border-0">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
-                    <CheckCircle2 size={16} />
+                    <CheckCircle2 size={18} />
                   </div>
-                  <span className="text-xs text-slate-600 leading-snug group-hover:text-slate-900 transition-colors duration-500 font-bold">{rule}</span>
+                  <span className="text-sm text-muted-foreground leading-snug group-hover:text-foreground transition-colors duration-500 font-bold">{rule}</span>
                 </div>
               ))}
             </Marquee>
@@ -151,86 +183,136 @@ export default function CleaningServices() {
         </div>
       </section>
 
+      {/* 2.5️⃣ Problems & Diagnostics */}
+      <section className="section-spacing bg-background relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary/5 skew-x-12 opacity-50 z-0" />
+        <div className="container-sahli relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Problem Card */}
+            <ScrollReveal delay={0.1} className="p-6 md:p-8 rounded-2xl bg-card border border-border hover:border-red-500/30 hover:shadow-xl transition-all duration-300 group">
+              <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                <AlertCircle size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-foreground">{t('services.cleaning.problem')}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{t('services.cleaning.problem.desc')}</p>
+              
+              <div className="flex items-start gap-3 pt-6 border-t border-border">
+                <HelpCircle size={18} className="text-amber-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className="block text-xs font-bold text-foreground mb-1">{t('services.cleaning.why')}</span>
+                  <p className="text-xs text-muted-foreground">{t('services.cleaning.why.desc')}</p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Inspection/Diagnosis Card */}
+            <ScrollReveal delay={0.2} className="p-6 md:p-8 rounded-2xl bg-secondary text-secondary-foreground shadow-xl transform md:-translate-y-4">
+              <div className="w-12 h-12 rounded-xl bg-background/20 flex items-center justify-center text-primary mb-6">
+                <Search size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">{t('services.cleaning.inspection')}</h3>
+              <p className="text-sm text-secondary-foreground/80 leading-relaxed">{t('services.cleaning.inspection.desc')}</p>
+            </ScrollReveal>
+
+            {/* Availability/Solution Card */}
+            <ScrollReveal delay={0.3} className="p-6 md:p-8 rounded-2xl bg-card border border-border hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 group">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 transition-transform">
+                <CheckCircle2 size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-foreground">{t('services.cleaning.pricing')}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{t('services.cleaning.pricing.desc')}</p>
+              
+              <div className="flex items-start gap-3 pt-6 border-t border-border">
+                <Clock size={18} className="text-primary shrink-0 mt-0.5" />
+                <div>
+                  <span className="block text-xs font-bold text-foreground mb-1">{t('services.cleaning.availability')}</span>
+                  <p className="text-xs text-muted-foreground">{t('services.cleaning.availability.desc')}</p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+          </div>
+        </div>
+      </section>
+
       {/* 3️⃣ Service Categories */}
-      <section className="section-spacing bg-slate-50 relative overflow-hidden">
+      <section className="section-spacing bg-secondary/5 relative overflow-hidden">
         <div className="container-sahli relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight mb-3 md:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-4 text-foreground">
               {t('services.cleaning.categories.title')}
             </h2>
-            <p className="text-xs text-slate-500">{t('services.cleaning.categories.subtitle')}</p>
+            <p className="text-sm text-muted-foreground">{t('services.cleaning.categories.subtitle')}</p>
           </div>
 
-          <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
+          <Marquee speed={0.5} pauseOnHover={true} className="py-4">
             {categories.map((cat, i) => (
-              <ScrollReveal
+              <div
                 key={i}
-                delay={i * 0.05}
-                className="p-5 md:p-6 rounded-xl bg-white border border-slate-200 hover:border-primary/20 transition-all duration-500 group shrink-0 w-[240px] shadow-xl shadow-primary/5"
+                className="p-6 md:p-8 rounded-2xl bg-card border border-border hover:border-primary/20 transition-all duration-500 group shadow-sm hover:shadow-xl hover:shadow-primary/5 mx-4 w-[350px]"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
-                  {React.cloneElement(cat.icon as React.ReactElement, { size: 16 })}
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
+                  {React.cloneElement(cat.icon as React.ReactElement, { size: 20 })}
                 </div>
-                <h3 className="text-xs mb-3 group-hover:text-primary transition-colors duration-500 font-black uppercase tracking-wider">{cat.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors duration-500">{cat.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {cat.desc}
                 </p>
-              </ScrollReveal>
+              </div>
             ))}
           </Marquee>
         </div>
       </section>
 
       {/* 4️⃣ How it works (Visual Timeline) */}
-      <section className="section-spacing bg-white border-y border-slate-200 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[50%] h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-        
+      <section className="section-spacing bg-background border-y border-border relative overflow-hidden">
         <div className="container-sahli relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight mb-3 md:mb-4">
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-4 text-foreground">
               {t('how.flow.title')}
             </h2>
-            <p className="text-xs text-slate-500">{t('how.flow.subtitle')}</p>
+            <p className="text-sm text-muted-foreground">{t('how.flow.subtitle')}</p>
           </div>
 
-          <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
             {coordinationSteps.map((step, i) => (
               <ScrollReveal
                 key={i}
                 delay={i * 0.1}
-                className="relative z-10 flex flex-col items-center text-center group shrink-0 w-[160px]"
+                className="relative z-10 flex flex-col items-center text-center group"
               >
-                <div className="w-16 h-16 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-primary mb-6 shadow-xl shadow-primary/5 group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-xs shadow-lg">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-card border border-border flex items-center justify-center text-primary mb-6 shadow-sm group-hover:border-primary/50 group-hover:shadow-primary/10 transition-all duration-500">
+                  <span className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-black text-xs shadow-lg border-2 border-background">
                     {step.title}
                   </span>
                   <div className="group-hover:scale-110 transition-transform duration-500">
-                    {React.cloneElement(step.icon as React.ReactElement, { size: 16 })}
+                    {React.cloneElement(step.icon as React.ReactElement, { size: 20 })}
                   </div>
                 </div>
-                <p className="text-xs px-4 font-medium text-slate-600 group-hover:text-primary transition-colors duration-500">{step.body}</p>
+                <p className="text-xs sm:text-sm px-2 font-bold text-muted-foreground group-hover:text-primary transition-colors duration-500 leading-tight">{step.body}</p>
               </ScrollReveal>
             ))}
-          </Marquee>
+          </div>
         </div>
       </section>
 
       {/* 5️⃣ Boundary Block */}
-      <section className="section-spacing bg-slate-50">
+      <section className="section-spacing bg-secondary/5">
         <div className="container-sahli">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ScrollReveal
               direction={dir === 'rtl' ? 'left' : 'right'}
-              className="p-6 md:p-8 rounded-xl bg-primary/5 border border-primary/10 shadow-xl shadow-primary/5"
+              className="p-6 md:p-8 rounded-2xl bg-primary/5 border border-primary/10 shadow-xl shadow-primary/5"
             >
-              <h3 className="text-xs !text-primary mb-6 font-black uppercase tracking-wider">
+              <h3 className="text-sm font-black text-primary uppercase tracking-wider mb-6">
                 {t('services.boundaries.title.is')}
               </h3>
               <ul className="space-y-4">
                 {t('services.boundaries.is.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-xs text-slate-700 group">
+                  <li key={i} className="flex gap-3 items-center text-sm text-foreground group">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="group-hover:text-slate-900 transition-colors duration-300">{item}</span>
+                    <span className="group-hover:text-primary transition-colors duration-300 font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -238,16 +320,16 @@ export default function CleaningServices() {
 
             <ScrollReveal
               direction={dir === 'rtl' ? 'right' : 'left'}
-              className="p-6 md:p-8 rounded-xl bg-white border border-slate-200 shadow-xl shadow-primary/5"
+              className="p-6 md:p-8 rounded-2xl bg-card border border-border shadow-xl shadow-primary/5"
             >
-              <h3 className="text-xs text-slate-400 mb-6 font-black uppercase tracking-wider">
+              <h3 className="text-sm font-black text-muted-foreground uppercase tracking-wider mb-6">
                 {t('services.boundaries.title.isNot')}
               </h3>
               <ul className="space-y-4">
                 {t('services.boundaries.isNot.body').split('\n').map((item: string, i: number) => (
-                  <li key={i} className="flex gap-3 items-center text-xs text-slate-500 group">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="group-hover:text-slate-700 transition-colors duration-300">{item}</span>
+                  <li key={i} className="flex gap-3 items-center text-sm text-muted-foreground group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30 shrink-0 group-hover:scale-150 transition-transform duration-300" />
+                    <span className="group-hover:text-foreground transition-colors duration-300">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -257,39 +339,39 @@ export default function CleaningServices() {
       </section>
 
       {/* 6️⃣ Areas Served (Map View Style) */}
-      <section className="section-spacing bg-white overflow-hidden">
+      <section className="section-spacing bg-background overflow-hidden">
         <div className="container-sahli">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight mb-6 md:mb-8 text-center md:text-start">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-6 md:mb-8 text-center md:text-start text-foreground">
                 {t('home.areas.title')}
               </h2>
-              <Marquee speed={0.4} className="-mx-4 px-4" gap={12}>
+              <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                 {areas.map((area, i) => (
                   <ScrollReveal
                     key={i}
                     direction={dir === 'rtl' ? 'left' : 'right'}
                     delay={i * 0.1}
-                    className="flex items-center gap-3 md:gap-4 p-2.5 rounded-xl bg-white md:bg-slate-50 border border-slate-200 hover:border-primary/30 transition-all group shrink-0 w-[160px] shadow-xl shadow-primary/5"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-all group shadow-sm hover:shadow-md"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-lg shadow-primary/5">
-                      <MapPin size={16} />
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+                      <MapPin size={14} />
                     </div>
-                    <span className="text-xs font-bold group-hover:text-primary transition-colors duration-500">{area}</span>
+                    <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-500">{area}</span>
                   </ScrollReveal>
                 ))}
-              </Marquee>
+              </div>
             </div>
             
-            <div className="relative aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center shadow-2xl shadow-primary/5 group">
+            <div className="relative aspect-video rounded-2xl overflow-hidden border border-border bg-muted flex items-center justify-center shadow-2xl shadow-primary/5 group">
               <img 
                 src="https://images.pexels.com/photos/6195119/pexels-photo-6195119.jpeg" 
                 alt="Cleaning Service Doha"
-                className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000 opacity-90"
               />
               <div className="absolute inset-0 bg-primary/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-1000" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="px-6 py-3 bg-white/90 backdrop-blur-xl rounded-xl border border-white/20 shadow-lg text-xs !text-primary font-bold">
+                <div className="px-6 py-3 bg-background/90 backdrop-blur-xl rounded-xl border border-border shadow-lg text-sm text-primary font-bold">
                   {t('services.areas.qatarNationwide')}
                 </div>
               </div>
@@ -297,85 +379,42 @@ export default function CleaningServices() {
           </div>
         </div>
       </section>
-
-      {/* 8️⃣ Final CTA - High Impact */}
-      <section className="section-spacing bg-slate-50 border-t border-slate-200 overflow-hidden relative">
-        <div className="container-sahli relative z-10 text-center max-w-2xl mx-auto">
-          <ScrollReveal
-            className="max-w-5xl mx-auto text-center"
-          >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-6 md:mb-8">
-              <Clock size={16} />
-            </div>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-black mb-8 md:mb-10 tracking-tight">
-              {t('service.v1.cta.title')}
-            </h2>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
-              <a
-                href={getWhatsAppLink(t('services.cleaning.whatsapp'))}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackRequestClick('Cleaning Final CTA')}
-                className="cta-primary px-6 py-3 text-xs btn-shine shadow-xl shadow-primary/30 group"
-              >
-                <div
-                  className="flex items-center gap-2 group-hover:scale-105 group-active:scale-95 transition-transform"
-                >
-                  <MessageSquare size={16} className="fill-primary-foreground" />
-                  {t('cta.request')}
-                </div>
-              </a>
-            </div>
-          </ScrollReveal>
+      
+      {/* 7️⃣ Related Services (Marquee) */}
+      <section className="py-12 bg-secondary/5 border-t border-border overflow-hidden">
+        <div className="container-sahli mb-8">
+          <h2 className="text-xl font-bold text-center text-muted-foreground uppercase tracking-widest">
+            {t('services.related')}
+          </h2>
         </div>
+        <Marquee speed={0.4} className="py-4">
+          {relatedServices.map((service, i) => (
+            <Link 
+              key={i} 
+              to={service.path}
+              className="mx-4 group flex items-center gap-3 px-6 py-3 rounded-full bg-card border border-border hover:border-primary hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
+            >
+              <div className="w-2 h-2 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
+              <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors whitespace-nowrap">
+                {service.title}
+              </span>
+            </Link>
+          ))}
+        </Marquee>
       </section>
 
-      {/* 🔟 Related Services - Quick Links */}
-      <section className="py-12 md:py-16 bg-white border-t border-slate-200 overflow-hidden">
-        <div className="container-sahli">
-          <div className="mb-8 md:mb-12 text-center md:text-start">
-            <h2 className="text-xl sm:text-2xl md:text-3xl mb-4">
-              {t('services.related.title')}
-            </h2>
-            <p className="text-xs text-slate-500">
-              {t('services.related.subtitle')}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-            {relatedServices.map((service, i) => (
-              <Link 
-                key={i}
-                to={service.path}
-                className="p-3 md:p-4 rounded-xl bg-background border border-border hover:border-primary/30 transition-all group shadow-sm hover:shadow-xl hover:shadow-primary/5 flex flex-col justify-between"
-              >
-                <span className="text-xs font-bold group-hover:text-primary transition-colors line-clamp-2 uppercase tracking-wider">{service.title}</span>
-                <div className="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUp size={16} className="text-primary rotate-45" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 11️⃣ Back to Home Link */}
+      {/* 8️⃣ Back to Home Link */}
       <section className="py-12 bg-background border-t border-border">
         <div className="container-sahli flex justify-center">
           <Link 
-            to="/"
-            className="group flex items-center gap-3 px-6 py-3 rounded-2xl bg-foreground/[0.03] border border-border hover:border-primary/20 transition-all"
+            to="/" 
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-secondary/50 hover:bg-secondary text-muted-foreground hover:text-foreground transition-all duration-300 font-medium text-sm group"
           >
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-              <ArrowUp size={16} className="rotate-[-90deg] rtl:rotate-[90deg]" />
-            </div>
-            <span className="text-xs !text-foreground/60 group-hover:text-foreground transition-colors">
-              {t('nav.home')}
-            </span>
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            <span>{t('nav.home')}</span>
           </Link>
         </div>
       </section>
     </Layout>
   );
 }
-
-
