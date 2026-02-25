@@ -8,6 +8,7 @@ import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
 import { Link } from 'react-router-dom';
 import { MetaTags } from '@/components/seo/MetaTags';
+import { TranslationKey } from '@/lib/i18n';
 
 export default function Doha() {
   const { t, dir } = useLanguage();
@@ -226,7 +227,9 @@ export default function Doha() {
                   <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-black py-1 px-3 rounded-full -mt-2 -mr-2 shadow-md">
                     {step.title}
                   </div>
-                  <h3 className="text-lg font-bold mb-3 text-foreground">{t(`home.what.step${i + 1}.title` as any) || `Step ${i+1}`}</h3>
+                  <h3 className="text-lg font-bold mb-3 text-foreground">
+                    {t(`home.what.step${i + 1}.title` as TranslationKey) || `Step ${i + 1}`}
+                  </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {step.body}
                   </p>

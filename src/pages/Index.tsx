@@ -70,8 +70,8 @@ export default function Index() {
       icon: <Snowflake size={32} />, 
       whatsappKey: 'services.homeMaintenance.ac.whatsapp',
       links: [
-        { label: 'AC Maintenance Qatar', path: '/ac-maintenance-qatar' },
-        { label: 'AC Repair in Al Wakrah', path: '/ac-repair-al-wakrah' }
+        { label: t('home.solutions.ac.link1'), path: '/ac-maintenance-qatar' },
+        { label: t('home.solutions.ac.link2'), path: '/ac-repair-al-wakrah' }
       ]
     },
     { 
@@ -80,8 +80,8 @@ export default function Index() {
       icon: <Lightbulb size={32} />, 
       whatsappKey: 'services.homeMaintenance.electrical.whatsapp',
       links: [
-        { label: 'Electrician Qatar', path: '/electrical-services-qatar' },
-        { label: 'Emergency Electrician Doha', path: '/electrician-doha' }
+        { label: t('home.solutions.electrical.link1'), path: '/electrical-services-qatar' },
+        { label: t('home.solutions.electrical.link2'), path: '/electrician-doha' }
       ]
     },
     { 
@@ -90,8 +90,8 @@ export default function Index() {
       icon: <Droplets size={32} />, 
       whatsappKey: 'services.homeMaintenance.plumbing.whatsapp',
       links: [
-        { label: 'Plumbing Services Qatar', path: '/plumbing-services-qatar' },
-        { label: '24/7 Plumber Doha', path: '/plumber-doha' }
+        { label: t('home.solutions.plumbing.link1'), path: '/plumbing-services-qatar' },
+        { label: t('home.solutions.plumbing.link2'), path: '/plumber-doha' }
       ]
     },
     { 
@@ -100,8 +100,8 @@ export default function Index() {
       icon: <Cog size={32} />, 
       whatsappKey: 'services.homeMaintenance.appliances.whatsapp',
       links: [
-        { label: 'Appliance Repair Qatar', path: '/appliance-repair-qatar' },
-        { label: 'Fridge Repair Doha', path: '/fridge-repair-doha' }
+        { label: t('home.solutions.appliances.link1'), path: '/appliance-repair-qatar' },
+        { label: t('home.solutions.appliances.link2'), path: '/fridge-repair-doha' }
       ]
     },
     { 
@@ -110,8 +110,8 @@ export default function Index() {
       icon: <Truck size={32} />, 
       whatsappKey: 'services.moving.local.whatsapp',
       links: [
-        { label: 'Movers in Qatar', path: '/moving-services-qatar' },
-        { label: 'House Moving Doha', path: '/movers-doha' }
+        { label: t('home.solutions.moving.link1'), path: '/moving-services-qatar' },
+        { label: t('home.solutions.moving.link2'), path: '/movers-doha' }
       ]
     },
     { 
@@ -120,8 +120,8 @@ export default function Index() {
       icon: <Sparkles size={32} />, 
       whatsappKey: 'services.cleaning.deep.whatsapp',
       links: [
-        { label: 'Deep Cleaning Qatar', path: '/cleaning-services-qatar' },
-        { label: 'Cleaning Company Doha', path: '/deep-cleaning-doha' }
+        { label: t('home.solutions.cleaning.link1'), path: '/cleaning-services-qatar' },
+        { label: t('home.solutions.cleaning.link2'), path: '/deep-cleaning-doha' }
       ]
     },
     { 
@@ -130,8 +130,8 @@ export default function Index() {
       icon: <Bug size={32} />, 
       whatsappKey: 'services.cleaning.pest.whatsapp',
       links: [
-        { label: 'Pest Control Qatar', path: '/pest-control-qatar' },
-        { label: 'Pest Control Doha', path: '/pest-control-doha' }
+        { label: t('home.solutions.pest.link1'), path: '/pest-control-qatar' },
+        { label: t('home.solutions.pest.link2'), path: '/pest-control-doha' }
       ]
     },
     { 
@@ -140,8 +140,8 @@ export default function Index() {
       icon: <Baby size={32} />, 
       whatsappKey: 'services.care.childcare.whatsapp',
       links: [
-        { label: 'Nanny Services Qatar', path: '/childcare-qatar' },
-        { label: 'Babysitting Doha', path: '/babysitting-doha' }
+        { label: t('home.solutions.childcare.link1'), path: '/childcare-qatar' },
+        { label: t('home.solutions.childcare.link2'), path: '/babysitting-doha' }
       ]
     },
   ];
@@ -328,7 +328,7 @@ export default function Index() {
 
           <div className="mt-12 inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 backdrop-blur-sm border border-border rounded-full text-sm text-muted-foreground font-medium animate-reveal hover:bg-secondary/80 transition-colors" style={{ animationDelay: '0.4s' }}>
             <MapPin size={16} className="text-primary" />
-            <span>Serving Doha, Al Rayyan, Al Wakrah & More</span>
+            <span>{t('home.hero.municipalities')}</span>
           </div>
         </div>
 
@@ -349,15 +349,15 @@ export default function Index() {
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-x-6 bottom-6 bg-background/95 border border-primary/20 rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
-                <div className="flex flex-col gap-0.5">
+                <div className={`flex flex-col gap-0.5 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
                   <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-                    SAHLI COORDINATION
+                    {t('home.hero.overlay.brand')}
                   </span>
                   <span className="text-xs font-semibold text-foreground">
-                    24/7 AC • Plumbing • Electrical
+                    {t('home.hero.overlay.services')}
                   </span>
                   <span className="text-[11px] text-muted-foreground">
-                    Doha • Al Rayyan • Al Wakrah
+                    {t('how.coverage.areas')}
                   </span>
                 </div>
                 <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/40">

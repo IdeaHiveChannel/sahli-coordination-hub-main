@@ -118,7 +118,7 @@ export default function ElectricianDoha() {
             <ScrollReveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20 text-xs font-bold tracking-wider uppercase text-primary mb-6">
                 <MapPin size={14} className="animate-pulse" />
-                <span>Doha, Qatar</span>
+                <span>{t('services.city.doha.badge')}</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-6 leading-tight tracking-tight">
