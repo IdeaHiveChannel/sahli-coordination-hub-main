@@ -146,8 +146,6 @@ export default function Services() {
     { id: 'home-maintenance', label: t('services.homeMaintenance.title') },
     { id: 'cleaning', label: t('services.cleaning.title') },
     { id: 'moving', label: t('services.moving.title') },
-    { id: 'outdoor', label: t('services.outdoor.title') },
-    { id: 'care', label: t('services.care.title.roof5') },
     { id: 'tech', label: t('services.electronics.title') },
   ], [t]);
 
@@ -560,22 +558,6 @@ export default function Services() {
                   isOpen={openModule === 'local-moving'}
                   onToggle={() => setOpenModule(openModule === 'local-moving' ? null : 'local-moving')}
                 />
-                <CollapsibleModule
-                  icon={<Truck size={18} />}
-                  title={t('services.moving.international.title')}
-                  description={t('services.moving.international.desc')}
-                  items={t('services.moving.international.items')}
-                  isOpen={openModule === 'international-moving'}
-                  onToggle={() => setOpenModule(openModule === 'international-moving' ? null : 'international-moving')}
-                />
-                <CollapsibleModule
-                  icon={<HardHat size={18} />}
-                  title={t('services.moving.furniture.title')}
-                  description={t('services.moving.furniture.desc')}
-                  items={t('services.moving.furniture.items')}
-                  isOpen={openModule === 'furniture-moving'}
-                  onToggle={() => setOpenModule(openModule === 'furniture-moving' ? null : 'furniture-moving')}
-                />
               </div>
 
               <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
@@ -597,191 +579,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 4: Outdoor & Specialized - Compact */}
-      <section id="outdoor" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
-        
-        <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <ScrollReveal
-              direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-44 h-fit"
-            >
-              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
-                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
-                  <div 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
-                  >
-                    <Droplets size={20} />
-                  </div>
-                  <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
-                      {t('services.status.live')} — 04
-                    </span>
-                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
-                      {t('services.outdoor.title')}
-                    </h2>
-                  </div>
-                </div>
-
-                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
-                  {t('services.outdoor.body')}
-                </p>
-                
-                <div 
-                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
-                >
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Smartphone className="text-primary w-3.5 h-3.5" />
-                    </div>
-                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
-                      {t('services.outdoor.rule')}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal 
-              direction="up"
-              delay={0.2}
-              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
-            >
-              <div className="divide-y divide-border/50">
-                <CollapsibleModule
-                  icon={<Droplets size={18} />}
-                  title={t('services.outdoor.pool.title')}
-                  description={t('services.outdoor.pool.desc')}
-                  items={t('services.outdoor.pool.items')}
-                  isOpen={openModule === 'pool'}
-                  onToggle={() => setOpenModule(openModule === 'pool' ? null : 'pool')}
-                />
-                <CollapsibleModule
-                  icon={<Waves size={18} />}
-                  title={t('services.outdoor.landscaping.title')}
-                  description={t('services.outdoor.landscaping.desc')}
-                  items={t('services.outdoor.landscaping.items')}
-                  isOpen={openModule === 'landscaping'}
-                  onToggle={() => setOpenModule(openModule === 'landscaping' ? null : 'landscaping')}
-                />
-              </div>
-
-              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
-                <a 
-                  href={getWhatsAppLink(t('services.outdoor.whatsapp'))}
-                  onClick={() => trackRequestClick('Services - Outdoor')}
-                  className="cta-primary btn-shine inline-block group"
-                >
-                  <div
-                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.outdoor.cta')}
-                  </div>
-                </a>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Roof 5: Care & Lifestyle - Compact */}
-      <section id="care" className="relative section-spacing scroll-mt-24 md:scroll-mt-32 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-500" />
-        
-        <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
-            <ScrollReveal
-              direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-44 h-fit"
-            >
-              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
-                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
-                  <div 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
-                  >
-                    <Heart size={20} />
-                  </div>
-                  <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
-                      {t('services.status.live')} — 05
-                    </span>
-                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
-                      {t('services.care.title.roof5')}
-                    </h2>
-                  </div>
-                </div>
-
-                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
-                  {t('services.care.body.roof5')}
-                </p>
-                
-                <div 
-                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
-                >
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="text-primary w-3.5 h-3.5" />
-                    </div>
-                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
-                      {t('services.care.rule.roof5')}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal 
-              direction="up"
-              delay={0.2}
-              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
-            >
-              <div className="divide-y divide-border/40">
-                <CollapsibleModule
-                  icon={<Baby size={18} />}
-                  title={t('services.care.babysitting.title.roof5')}
-                  description={t('services.care.babysitting.desc.roof5')}
-                  items={t('services.care.babysitting.items.roof5')}
-                  isOpen={openModule === 'babysitting'}
-                  onToggle={() => setOpenModule(openModule === 'babysitting' ? null : 'babysitting')}
-                />
-                <CollapsibleModule
-                  icon={<Stethoscope size={18} />}
-                  title={t('services.care.nursing.title.roof5')}
-                  description={t('services.care.nursing.desc.roof5')}
-                  items={t('services.care.nursing.items.roof5')}
-                  isOpen={openModule === 'nursing'}
-                  onToggle={() => setOpenModule(openModule === 'nursing' ? null : 'nursing')}
-                />
-              </div>
-
-              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
-                <a 
-                  href={getWhatsAppLink(t('services.care.whatsapp.roof5'))}
-                  onClick={() => trackRequestClick('Services - Care')}
-                  className="cta-primary btn-shine inline-block group"
-                >
-                  <div
-                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.care.cta.roof5')}
-                  </div>
-                </a>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Roof 6: Electronics & Tech - Compact */}
+      {/* Roof 4: Electronics & Tech - Compact */}
       <section id="tech" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
@@ -803,7 +601,7 @@ export default function Services() {
                   <div className="flex flex-col items-start">
                     <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
                       <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
-                      {t('services.status.live')} — 06
+                      {t('services.status.live')} — 04
                     </span>
                     <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
                       {t('services.electronics.title')}
@@ -843,14 +641,6 @@ export default function Services() {
                   items={t('services.electronics.home-appliances.items')}
                   isOpen={openModule === 'appliances'}
                   onToggle={() => setOpenModule(openModule === 'appliances' ? null : 'appliances')}
-                />
-                <CollapsibleModule
-                  icon={<Smartphone size={18} />}
-                  title={t('services.electronics.it.title')}
-                  description={t('services.electronics.it.desc')}
-                  items={t('services.electronics.it.items')}
-                  isOpen={openModule === 'it'}
-                  onToggle={() => setOpenModule(openModule === 'it' ? null : 'it')}
                 />
               </div>
 

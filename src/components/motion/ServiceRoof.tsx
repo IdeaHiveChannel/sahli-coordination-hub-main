@@ -50,20 +50,11 @@ export function ServiceRoof({
 
   const content = (
     <div
-      className={`relative min-h-[260px] sm:min-h-[280px] md:min-h-[340px] w-full rounded-[var(--radius)] border border-border bg-card overflow-hidden cursor-pointer group transition-all duration-700 ease-out-expo btn-shine ${status === 'comingSoon' ? 'opacity-70' : ''} animate-in fade-in slide-in-from-bottom-8 fill-mode-both hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 active:scale-[0.98] active:translate-y-[-2px]`}
+      className={`relative min-h-[300px] sm:min-h-[340px] md:min-h-[400px] w-full rounded-[2.5rem] border border-white/10 bg-[#0a0a0b] overflow-hidden cursor-pointer group transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${status === 'comingSoon' ? 'opacity-70' : ''} animate-in fade-in slide-in-from-bottom-8 fill-mode-both hover:-translate-y-4 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] hover:border-primary/40 active:scale-[0.98]`}
       style={{ animationDelay: `${index * 100}ms` }}
       onMouseEnter={() => !isMobile && status !== 'comingSoon' && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Coming Soon Badge */}
-      {status === 'comingSoon' && (
-        <div className="absolute top-8 inset-inline-end-8 z-20">
-          <span className="px-2.5 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded-full text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
-            {t('services.status.comingSoon')}
-          </span>
-        </div>
-      )}
-
       {/* Background Image with Reveal Animation */}
       {imageUrl && (
         <>
@@ -72,76 +63,54 @@ export function ServiceRoof({
               src={imageUrl} 
               alt={title}
               loading="lazy"
-              crossOrigin="anonymous"
-              className={`w-full h-full object-cover transition-all duration-1000 ${isHovered ? 'scale-105' : 'scale-100'}`}
+              className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${isHovered ? 'scale-110' : 'scale-100'}`}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] via-[#0a0a0b]/60 to-transparent z-10" />
           </div>
-          {/* Gradient Overlay for Text Visibility */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-700" />
         </>
       )}
 
-      {/* Glow Effect on Hover */}
+      {/* Decorative Glow */}
       <div 
-        className={`absolute inset-0 z-0 bg-primary/5 blur-[40px] md:blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}
+        className={`absolute -inset-20 z-0 bg-primary/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none`}
       />
-
-      {/* Top bar accent - Refined */}
-      <div 
-        className={`absolute top-0 inset-inline-start-0 h-1 bg-primary z-10 transition-all duration-800 ease-out`}
-        style={{ width: isHovered ? '100%' : '0%' }}
-      />
-
-      {/* Index number - Modern Styling */}
-      {showNumber && (
-        <div className="absolute top-8 inset-inline-start-8 z-10">
-          <span className={`text-[11px] font-black tracking-[0.4em] uppercase transition-colors duration-700 ${imageUrl ? 'text-white/60 group-hover:text-white/80' : 'text-primary/40 group-hover:text-primary/60'}`}>
-            {formatNumber(index + 1 < 10 ? `0${index + 1}` : index + 1)}
-          </span>
-        </div>
-      )}
 
       {/* Content */}
-      <div className="relative min-h-[260px] sm:min-h-[280px] md:min-h-[340px] p-5 sm:p-6 md:p-8 flex flex-col justify-end z-10 text-center md:text-start items-center md:items-start">
-        <div
-          className={`flex flex-col items-center md:items-start transition-transform duration-600 ease-out ${isHovered ? '-translate-y-1' : 'translate-y-0'}`}
-        >
+      <div className="relative h-full p-8 md:p-10 flex flex-col justify-end z-20">
+        <div className="mb-6 flex items-center justify-between">
           {icon && (
-            <div className={`mb-4 transition-all duration-700 ${imageUrl ? 'text-white group-hover:text-primary group-hover:scale-110' : 'text-primary'}`}>
+            <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white group-hover:bg-primary group-hover:border-primary transition-all duration-500 shadow-2xl">
               {icon}
             </div>
           )}
+          <div className="flex flex-col items-end">
+             <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] group-hover:text-primary transition-colors">
+               {formatNumber(index + 1 < 10 ? `0${index + 1}` : index + 1)}
+             </span>
+          </div>
+        </div>
 
-          <h3 className={`text-base sm:text-lg lg:text-xl font-black tracking-tighter mb-2 leading-tight transition-colors duration-700 break-words ${imageUrl ? 'text-white group-hover:text-primary [text-shadow:0_4px_8px_rgba(0,0,0,0.8)]' : 'text-foreground group-hover:text-primary'}`}>
-            {title}
-          </h3>
-          {showDescription && description && (!subcategories || subcategories.length === 0) && (
-            <p
-              className={`text-xs lg:text-sm leading-relaxed font-normal mb-4 transition-colors duration-700 break-words ${imageUrl ? 'text-white/90 group-hover:text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.6)]' : 'text-muted-foreground group-hover:text-foreground'}`}
+        <h3 className="text-xl sm:text-2xl font-black text-white mb-3 tracking-tighter leading-tight group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+
+        {showDescription && description && (
+          <p className="text-sm text-slate-400 font-medium leading-relaxed mb-6 line-clamp-2 opacity-80 group-hover:opacity-100 transition-opacity">
+            {description}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-2">
+          {subcategories.map((sub, i) => (
+            <span 
+              key={i} 
+              className="px-3 py-1 rounded-lg text-[9px] font-black tracking-widest uppercase bg-white/5 border border-white/10 text-white/60 backdrop-blur-md group-hover:border-primary/40 group-hover:text-white transition-all"
             >
-              {description}
-            </p>
-          )}
-
-          {subcategories && subcategories.length > 0 && (
-            <div className="flex flex-wrap gap-2 overflow-hidden justify-center md:justify-start mb-5">
-              {subcategories.map((sub: string, i: number) => (
-                <span 
-                  key={i} 
-                  className={`px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold tracking-wider uppercase border transition-colors duration-500 ${imageUrl ? 'bg-white/10 border-white/30 text-white backdrop-blur-md shadow-lg group-hover:bg-white group-hover:text-primary group-hover:border-white' : 'bg-primary/10 border-primary/20 text-primary'}`}
-                >
-                  {sub}
-                </span>
-              ))}
-            </div>
-          )}
+              {sub}
+            </span>
+          ))}
         </div>
       </div>
-
-      {/* Subtle Decorative Circle */}
-      {!imageUrl && (
-        <div className={`absolute -bottom-10 ${dir === 'rtl' ? '-left-10' : '-right-10'} w-40 h-40 bg-primary/[0.01] rounded-full blur-3xl group-hover:bg-primary/[0.03] transition-all duration-700`} />
-      )}
     </div>
   );
 

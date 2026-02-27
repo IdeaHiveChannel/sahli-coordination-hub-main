@@ -20,7 +20,7 @@ export default function ElectronicsRepair() {
     "description": t('services.electronics.subtitle'),
     "provider": {
       "@type": "LocalBusiness",
-      "name": "SAHLI Coordination Hub"
+      "name": "SAHLI"
     },
     "mainEntity": {
       "@type": "FAQPage",

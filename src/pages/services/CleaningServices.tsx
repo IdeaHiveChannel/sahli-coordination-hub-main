@@ -20,7 +20,7 @@ export default function CleaningServices() {
     "description": t('services.cleaning.subtitle'),
     "provider": {
       "@type": "LocalBusiness",
-      "name": "SAHLI Coordination Hub"
+      "name": "SAHLI"
     },
     "mainEntity": {
       "@type": "FAQPage",

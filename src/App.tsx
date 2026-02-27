@@ -33,33 +33,24 @@ const Services = lazy(() => import("@/pages/Services"));
 const HomeMaintenance = lazy(() => import("@/pages/services/HomeMaintenance"));
 const CleaningServices = lazy(() => import("@/pages/services/CleaningServices"));
 const MovingServices = lazy(() => import("@/pages/services/MovingServices"));
-const PestControlLandscaping = lazy(() => import("@/pages/services/PestControlLandscaping"));
-const CareLifestyle = lazy(() => import("@/pages/services/CareLifestyle"));
 const ElectronicsRepair = lazy(() => import("@/pages/services/ElectronicsRepair"));
 const ACRepair = lazy(() => import("@/pages/services/ACRepair"));
 const Plumbing = lazy(() => import("@/pages/services/Plumbing"));
 const Electrical = lazy(() => import("@/pages/services/Electrical"));
-const Babysitting = lazy(() => import("@/pages/services/Babysitting"));
 
 // New SEO High-Intent Pages
-const DeepCleaning = lazy(() => import("@/pages/services/DeepCleaning"));
-const ACMaintenance = lazy(() => import("@/pages/services/ACMaintenance"));
-const PestControl = lazy(() => import("./pages/services/PestControl"));
-
-// Location-Intent Pages
-const Doha = lazy(() => import("@/pages/locations/Doha"));
-const Lusail = lazy(() => import("@/pages/locations/Lusail"));
-const ThePearl = lazy(() => import("@/pages/locations/ThePearl"));
-
-// Phase 1 City-Specific Pages (Layer 3)
+const DeepCleaningDoha = lazy(() => import("@/pages/services/city/DeepCleaningDoha"));
+const ACRepairDoha = lazy(() => import("@/pages/services/city/ACRepairDoha"));
+const PestControlQatar = lazy(() => import("@/pages/services/PestControlQatar"));
 const PlumberDoha = lazy(() => import("@/pages/services/city/PlumberDoha"));
-const ElectricianDoha = lazy(() => import("@/pages/services/city/ElectricianDoha"));
-const ElectricianRayyan = lazy(() => import("@/pages/services/city/ElectricianRayyan"));
-const CleaningDoha = lazy(() => import("@/pages/services/city/CleaningDoha"));
-const CleaningLusail = lazy(() => import("@/pages/services/city/CleaningLusail"));
-const ACRepairWakrah = lazy(() => import("@/pages/services/city/ACRepairWakrah"));
 const MoversDoha = lazy(() => import("@/pages/services/city/MoversDoha"));
 
+// Location-Intent Pages
+const HomeServicesDoha = lazy(() => import("@/pages/locations/HomeServicesDoha"));
+const HomeServicesLusail = lazy(() => import("@/pages/locations/HomeServicesLusail"));
+const HomeServicesWakrah = lazy(() => import("@/pages/locations/HomeServicesWakrah"));
+
+const Blog = lazy(() => import("@/pages/Blog"));
 const TrustStandards = lazy(() => import("@/pages/TrustStandards"));
 const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
@@ -106,33 +97,25 @@ const App = () => (
                 <Route path="/home-maintenance-qatar" element={<HomeMaintenance />} />
                 <Route path="/cleaning-services-qatar" element={<CleaningServices />} />
                 <Route path="/moving-services-qatar" element={<MovingServices />} />
-                <Route path="/pest-control-landscaping-qatar" element={<PestControlLandscaping />} />
-                <Route path="/care-lifestyle-qatar" element={<CareLifestyle />} />
+                <Route path="/pest-control-landscaping-qatar" element={<PestControl />} />
                 <Route path="/electronics-repair-qatar" element={<ElectronicsRepair />} />
                 
                 {/* SEO High-Intent Pages */}
-                <Route path="/ac-repair-qatar" element={<ACRepair />} />
-                <Route path="/ac-maintenance-qatar" element={<ACMaintenance />} />
+                <Route path="/ac-repair-doha" element={<ACRepairDoha />} />
+                <Route path="/ac-maintenance-qatar" element={<ACRepair />} />
                 <Route path="/plumbing-services-qatar" element={<Plumbing />} />
                 <Route path="/electrical-services-qatar" element={<Electrical />} />
-                <Route path="/babysitting-services-qatar" element={<Babysitting />} />
-                <Route path="/deep-cleaning-qatar" element={<DeepCleaning />} />
-                <Route path="/pest-control-qatar" element={<PestControl />} />
-
-                {/* Phase 1 City-Specific Pages (Layer 3) */}
+                <Route path="/deep-cleaning-doha" element={<DeepCleaningDoha />} />
+                <Route path="/pest-control-qatar" element={<PestControlQatar />} />
                 <Route path="/plumber-doha" element={<PlumberDoha />} />
-                <Route path="/electrician-doha" element={<ElectricianDoha />} />
-                <Route path="/electrician-ar-rayyan" element={<ElectricianRayyan />} />
-                <Route path="/cleaning-doha" element={<CleaningDoha />} />
-                <Route path="/cleaning-lusail" element={<CleaningLusail />} />
-                <Route path="/ac-repair-al-wakrah" element={<ACRepairWakrah />} />
                 <Route path="/movers-doha" element={<MoversDoha />} />
 
                 {/* Location-Intent Pages */}
-                <Route path="/home-services-doha" element={<Doha />} />
-                <Route path="/home-services-lusail" element={<Lusail />} />
-                <Route path="/home-services-the-pearl" element={<ThePearl />} />
+                <Route path="/home-services-doha" element={<HomeServicesDoha />} />
+                <Route path="/home-services-lusail" element={<HomeServicesLusail />} />
+                <Route path="/home-services-al-wakrah" element={<HomeServicesWakrah />} />
 
+                <Route path="/blog" element={<Blog />} />
                 <Route path="/trust-standards" element={<TrustStandards />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />

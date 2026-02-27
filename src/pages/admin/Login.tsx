@@ -53,7 +53,7 @@ const Login = () => {
               <div className="space-y-2">
                 <CardTitle className="text-display text-slate-900">Admin Portal</CardTitle>
                 <CardDescription className="text-[11px] font-black uppercase tracking-[0.2em] text-primary/60">
-                  Secure Access • Coordination Hub
+                  Secure Access • Professional Services
                 </CardDescription>
               </div>
             </CardHeader>
@@ -81,7 +81,7 @@ const Login = () => {
                         Password
                       </Label>
                       <a 
-                        href="mailto:hello@sahliservice.com?subject=Admin%20Password%20Reset%20Request&body=Hello%2C%20I%20need%20to%20reset%20my%20admin%20password%20for%20the%20Sahli%20Coordination%20Hub."
+                        href="mailto:hello@sahliservice.com?subject=Admin%20Password%20Reset%20Request&body=Hello%2C%20I%20need%20to%20reset%20my%20admin%20password."
                         className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-colors"
                       >
                         Forgot?

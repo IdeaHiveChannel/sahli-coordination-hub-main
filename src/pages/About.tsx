@@ -714,8 +714,8 @@ export default function About() {
                   </button>
                 </a>
                 <div className="flex items-center gap-4 px-8 py-5 md:py-6 bg-white border border-slate-200 rounded-2xl md:rounded-3xl shadow-sm">
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-slate-600 text-sm md:text-base font-bold">{lang === 'ar' ? 'متاح الآن' : 'Available Now'}</span>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                  <span className="text-slate-600 text-sm md:text-base font-bold">{t('contact.hours.title')}</span>
                 </div>
               </div>
             </div>

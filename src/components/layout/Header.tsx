@@ -34,53 +34,52 @@ export function Header() {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${
-        isScrolled || isMenuOpen ? 'py-1 md:py-2' : 'py-2 md:py-4'
+        isScrolled || isMenuOpen ? 'py-1 md:py-2' : 'py-3 md:py-5'
       }`}
       dir={dir}
     >
       <div className="container-sahli relative z-[110]">
         <nav 
-          className={`flex items-center justify-between px-3 md:px-6 py-1.5 md:py-2 rounded-xl md:rounded-2xl transition-all duration-700 animate-in slide-in-from-top-5 fade-in ${
+          className={`flex items-center justify-between px-4 md:px-8 py-2 md:py-3 rounded-2xl md:rounded-[2rem] transition-all duration-700 animate-in slide-in-from-top-5 fade-in ${
             isScrolled || isMenuOpen
-              ? 'glass-morphism shadow-[0_15px_40px_rgba(0,0,0,0.3)]' 
-              : 'bg-background/80 md:bg-transparent'
+              ? 'glass-morphism shadow-[0_20px_50px_rgba(0,0,0,0.4)] border-white/5' 
+              : 'bg-white/5 backdrop-blur-md border border-white/10'
           }`}
         >
           {/* Logo */}
               <Link
                 to="/"
-                className="flex items-center gap-2 group min-w-[40px] md:min-w-[80px] relative"
+                className="flex items-center gap-3 group min-w-[40px] md:min-w-[80px] relative"
               >
                 <div
-                  className="relative w-[1rem] h-[1rem] md:w-[1.5rem] md:h-[1.5rem] flex items-center justify-center transition-all duration-500 hover:rotate-[5deg] hover:scale-105"
+                  className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center transition-all duration-500 group-hover:scale-110"
                 >
                   <img
-                    src={isScrolled || isMenuOpen || !isDarkHeroPage ? "/logos/SahlLogo3.png" : "/logos/SahlLogo9.png"}
+                    src="/logos/SahlLogo3.png"
                     alt="SAHLI Logo"
-                    className={`absolute w-[50px] h-[50px] md:w-[70px] md:h-[70px] max-w-none object-contain transition-all duration-500 top-1/2 -translate-y-1/2 ${
-                      dir === 'rtl' ? 'right-0' : 'left-0'
-                    }`}
+                    className="w-full h-full object-contain"
                   />
                 </div>
+                <span className="hidden sm:block text-lg font-black tracking-tighter text-white uppercase">SAHLI</span>
               </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center gap-5">
+          <div className="hidden xl:flex items-center gap-8">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-[11px] lg:text-xs xl:text-sm font-bold uppercase tracking-[0.15em] transition-all duration-500 relative group ${
+                  className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group py-2 ${
                     isActive 
                       ? 'text-primary' 
-                      : (isScrolled || isMenuOpen || !isDarkHeroPage ? 'text-foreground/80 hover:text-primary' : 'text-white hover:text-primary')
+                      : 'text-white/70 hover:text-white'
                   }`}
                 >
                   {t(item.key)}
-                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-500 ${
-                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-primary rounded-full transition-all duration-500 ${
+                    isActive ? 'w-4' : 'w-0 group-hover:w-2'
                   }`} />
                 </Link>
               );
@@ -88,10 +87,8 @@ export function Header() {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 md:gap-3">
-            <div className={`flex items-center gap-1 px-1 py-0.5 rounded-lg border border-border/50 transition-colors duration-500 ${
-              isScrolled || isMenuOpen || !isDarkHeroPage ? 'bg-foreground/5 text-foreground' : 'bg-white/10 text-white'
-            }`}>
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="flex items-center gap-2 px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-white transition-all duration-500 hover:bg-white/10">
               <LanguageToggle />
             </div>
             
@@ -99,14 +96,10 @@ export function Header() {
               href={getWhatsAppLink(t('cta.whatsapp.general'))}
               target="_blank"
               onClick={() => trackRequestClick('Header')}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 bg-primary text-primary-foreground rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:shadow-xl hover:shadow-primary/40 transition-all duration-500 btn-shine"
+              className="hidden sm:flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:shadow-[0_10px_20px_-5px_rgba(241,41,89,0.5)] transition-all duration-500 active:scale-95 group"
             >
-              <div
-                className="flex items-center gap-2 hover:scale-105 hover:-translate-y-[1px] active:scale-95 transition-transform duration-300"
-              >
-                <MessageSquare size={14} className="fill-primary-foreground" />
-                {t('cta.whatsapp')}
-              </div>
+              <MessageSquare size={14} className="fill-white group-hover:rotate-12 transition-transform" />
+              {t('cta.whatsapp')}
             </a>
 
             {/* Mobile Menu Toggle */}

@@ -171,11 +171,9 @@ const Contact = () => {
                   <div className="space-y-2 text-muted-foreground">
                     <div className="flex justify-between items-center border-b border-primary/10 pb-2">
                       <span>{t('contact.hours.weekdays')}</span>
-                      <span className="font-medium text-foreground">8:00 AM - 6:00 PM</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>{t('contact.hours.weekends')}</span>
-                      <span className="font-medium text-foreground">Closed</span>
                     </div>
                   </div>
                 </div>

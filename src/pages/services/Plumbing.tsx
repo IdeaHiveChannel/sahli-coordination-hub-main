@@ -20,7 +20,7 @@ export default function Plumbing() {
     "description": t('services.homeMaintenance.subtitle'),
     "provider": {
       "@type": "LocalBusiness",
-      "name": "SAHLI Coordination Hub"
+      "name": "SAHLI"
     },
     "mainEntity": {
       "@type": "FAQPage",

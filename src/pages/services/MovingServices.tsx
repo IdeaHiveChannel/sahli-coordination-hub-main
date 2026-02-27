@@ -20,7 +20,7 @@ export default function MovingServices() {
     "description": t('services.moving.subtitle'),
     "provider": {
       "@type": "LocalBusiness",
-      "name": "SAHLI Coordination Hub"
+      "name": "SAHLI"
     },
     "mainEntity": {
       "@type": "FAQPage",

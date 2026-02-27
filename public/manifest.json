@@ -1,6 +1,7 @@
 {
   "short_name": "SAHLI",
-  "name": "SAHLI – Home Services Coordination Hub in Qatar",
+  "name": "SAHLI | Professional Home Services",
+  "description": "Professional home services across Qatar.",
   "icons": [
     {
       "src": "/logos/SahlLogo.png",
