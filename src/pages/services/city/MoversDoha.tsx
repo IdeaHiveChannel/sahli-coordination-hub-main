@@ -30,7 +30,7 @@ export default function MoversDoha() {
       serviceKey="moving"
       icon={<Truck size={24} />}
       heroImage="/Services/Moving & Relocation.jpg"
-      whatsappKey="services.moving.local.whatsapp"
+      whatsappKey="services.moving.whatsapp"
       scopeItems={scopeItems}
       faqs={faqs}
       relatedServices={relatedServices}

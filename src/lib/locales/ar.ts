@@ -785,7 +785,6 @@ export const ar = {
   'services.care.cta.roof5': 'طلب رعاية',
 
   'services.electronics.body': 'إصلاح وتركيب الإلكترونيات.',
-  'services.electronics.home-appliances.title': 'الأجهزة المنزلية',
   'services.electronics.home-appliances.desc': 'إصلاح الأجهزة المنزلية.',
   'services.electronics.home-appliances.items': 'غسالات\nثلاجات\nأفران\nغسالات صحون',
   'services.electronics.cta': 'طلب دعم تقني',

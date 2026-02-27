@@ -39,16 +39,16 @@ const Plumbing = lazy(() => import("@/pages/services/Plumbing"));
 const Electrical = lazy(() => import("@/pages/services/Electrical"));
 
 // New SEO High-Intent Pages
-const DeepCleaningDoha = lazy(() => import("@/pages/services/city/DeepCleaningDoha"));
-const ACRepairDoha = lazy(() => import("@/pages/services/city/ACRepairDoha"));
-const PestControlQatar = lazy(() => import("@/pages/services/PestControlQatar"));
-const PlumberDoha = lazy(() => import("@/pages/services/city/PlumberDoha"));
-const MoversDoha = lazy(() => import("@/pages/services/city/MoversDoha"));
+const DeepCleaningDoha = lazy(() => import("@/pages/services/city/DeepCleaningDoha.tsx"));
+const ACRepairDoha = lazy(() => import("@/pages/services/city/ACRepairDoha.tsx"));
+const PestControlQatar = lazy(() => import("@/pages/services/PestControlQatar.tsx"));
+const PlumberDoha = lazy(() => import("@/pages/services/city/PlumberDoha.tsx"));
+const MoversDoha = lazy(() => import("@/pages/services/city/MoversDoha.tsx"));
 
 // Location-Intent Pages
-const HomeServicesDoha = lazy(() => import("@/pages/locations/HomeServicesDoha"));
-const HomeServicesLusail = lazy(() => import("@/pages/locations/HomeServicesLusail"));
-const HomeServicesWakrah = lazy(() => import("@/pages/locations/HomeServicesWakrah"));
+const HomeServicesDoha = lazy(() => import("@/pages/locations/HomeServicesDoha.tsx"));
+const HomeServicesLusail = lazy(() => import("@/pages/locations/HomeServicesLusail.tsx"));
+const HomeServicesWakrah = lazy(() => import("@/pages/locations/HomeServicesWakrah.tsx"));
 
 const Blog = lazy(() => import("@/pages/Blog"));
 const TrustStandards = lazy(() => import("@/pages/TrustStandards"));
@@ -97,7 +97,7 @@ const App = () => (
                 <Route path="/home-maintenance-qatar" element={<HomeMaintenance />} />
                 <Route path="/cleaning-services-qatar" element={<CleaningServices />} />
                 <Route path="/moving-services-qatar" element={<MovingServices />} />
-                <Route path="/pest-control-landscaping-qatar" element={<PestControl />} />
+                <Route path="/pest-control-landscaping-qatar" element={<PestControlQatar />} />
                 <Route path="/electronics-repair-qatar" element={<ElectronicsRepair />} />
                 
                 {/* SEO High-Intent Pages */}
