@@ -586,15 +586,7 @@ export const ar = {
   'home.how.step3.title': '3. المعاينة والخدمة',
   'services.microHook': 'خدمات منزلية احترافية في جميع أنحاء قطر',
   'services.subtitle': 'حلول متخصصة لكل جانب من جوانب صيانة منزلك ورعايته.',
-  'services.ac.install': 'تركيب',
-  'services.ac.repair': 'صيانة',
-  'services.ac.gas': 'تعبئة غاز',
-  'services.cleaning.deep': 'تنظيف عميق',
-  'services.cleaning.sofa': 'تنظيف كنب',
-  'services.cleaning.carpet': 'تنظيف سجاد',
-  'services.moving.house': 'نقل عفش',
-  'services.moving.packing': 'تغليف',
-
+  
   'home.proof.coordinated': 'تم التنسيق مؤخراً في الدوحة والوكرة ولوسيل.',
   'home.proof.testimonial1.customer': 'عميل في الريان',
   'home.proof.testimonial1.text': 'كانت المعاينة واضحة. تم شرح التسعير قبل بدء العمل.',

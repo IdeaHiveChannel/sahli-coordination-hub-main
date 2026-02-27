@@ -331,13 +331,13 @@ export const en = {
   'services.microHook': 'Professional Home Services across Qatar',
   'services.subtitle': 'Expert solutions for every aspect of your home maintenance and care needs.',
   'services.ac.install': 'Installation',
-  'services.ac.repair': 'Repair',
-  'services.ac.gas': 'Gas Refill',
+  'services.ac.repair': 'AC Repair',
+  'services.ac.gas': 'AC Gas Top-up',
   'services.cleaning.deep': 'Deep Cleaning',
   'services.cleaning.sofa': 'Sofa Cleaning',
   'services.cleaning.carpet': 'Carpet Cleaning',
   'services.moving.house': 'House Moving',
-  'services.moving.packing': 'Packing',
+  'services.moving.packing': 'Professional Packing',
 
   'home.proof.coordinated': 'Recently coordinated in Doha, Al Wakrah, and Lusail.',
   'home.proof.testimonial1.customer': 'Customer in Al Rayyan',
@@ -713,15 +713,6 @@ export const en = {
   
   'services.homeMaintenance.ac.items': 'Filter Cleaning\nGas Pressure Check\nElectrical Component Check\nDrain Line Cleaning',
 
-  'services.ac.repair': 'AC Repair',
-  'services.ac.gas': 'AC Gas Top-up',
-  'services.cleaning.deep': 'Deep Cleaning',
-  'services.cleaning.sofa': 'Sofa Cleaning',
-  'services.cleaning.carpet': 'Carpet Cleaning',
-  'services.moving.house': 'House Moving',
-  'services.moving.packing': 'Professional Packing',
-  'services.electronics.home-appliances.title': 'Home Appliances',
-  
   'home.areas.item1': 'Doha',
   'home.areas.item2': 'Al Rayyan',
   'home.areas.item3': 'Al Wakrah',

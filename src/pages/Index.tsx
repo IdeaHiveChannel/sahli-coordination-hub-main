@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useRef, lazy, Suspense } from 'react';
 import { MetaTags } from '@/components/seo/MetaTags';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
@@ -11,9 +11,9 @@ const Marquee = lazy(() => import('@/components/motion/Marquee').then(module => 
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { 
-  ArrowRight, Wrench, Sparkles, Truck, Heart, Snowflake, Lightbulb, Droplets, Cog, Baby, 
-  Search, ShieldCheck, ClipboardList, Leaf, Cpu, Bug, Send, Wallet, MapPin, ChevronDown,
-  Eye, BarChart3, ThumbsUp, CheckCircle2
+  ArrowRight, Wrench, Sparkles, Truck, Snowflake, Lightbulb, Droplets, Cog, 
+  Search, ShieldCheck, ClipboardList, Leaf, Cpu, Bug, Send, ChevronDown,
+  Eye, BarChart3, ThumbsUp
 } from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
