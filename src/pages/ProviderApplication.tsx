@@ -153,14 +153,16 @@ const ProviderApplication = () => {
   if (isSubmitted) {
     return (
       <Layout>
-        <div className="min-h-[85vh] bg-background pt-12 pb-24" dir={dir}>
-          <div className="container-sahli max-w-2xl">
+        <div className="min-h-screen bg-[#0a0a0b] flex items-center justify-center" dir={dir}>
+          <div className="container-sahli max-w-2xl px-6">
             <div 
-              className="text-center space-y-8 py-12 animate-in fade-in zoom-in-95 duration-500"
+              className="text-center space-y-12 py-20 animate-in fade-in zoom-in-95 duration-700 bg-white/5 backdrop-blur-3xl rounded-[4rem] border border-white/10 shadow-2xl relative overflow-hidden"
             >
-              <div className="relative mx-auto w-24 h-24">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50" />
+              
+              <div className="relative mx-auto w-24 h-24 z-10">
                 <div 
-                  className="w-full h-full rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 animate-in zoom-in duration-500 delay-200 fill-mode-backwards"
+                  className="w-full h-full rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-2xl shadow-emerald-500/40 animate-in zoom-in duration-500 delay-200 fill-mode-backwards"
                 >
                   <CheckCircle2 size={48} />
                 </div>
@@ -170,17 +172,17 @@ const ProviderApplication = () => {
                 />
               </div>
 
-              <div className="space-y-4">
-                <h2 className="text-display">{t('provider.apply.form.success.title')}</h2>
-                <p className="text-subtitle !text-foreground/60 max-w-md mx-auto">
+              <div className="space-y-6 relative z-10">
+                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase">{t('provider.apply.form.success.title')}</h2>
+                <p className="text-lg md:text-xl text-slate-400 max-w-md mx-auto font-medium italic">
                   {t('provider.apply.form.success.desc')}
                 </p>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-8 relative z-10 px-10">
                 <Button 
                   onClick={() => window.location.href = '/'}
-                  className="cta-primary btn-shine w-full sm:w-auto"
+                  className="w-full h-16 bg-primary hover:bg-primary/90 text-white rounded-2xl font-black text-sm uppercase tracking-widest transition-all shadow-2xl shadow-primary/20 hover:-translate-y-1.5 active:scale-95"
                 >
                   {dir === 'rtl' ? 'العودة للرئيسية' : 'Return Home'}
                 </Button>
@@ -195,7 +197,7 @@ const ProviderApplication = () => {
   return (
     <Layout>
       {/* Hero Section - Consistent with Homepage */}
-      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] max-h-[1000px] flex flex-col justify-center md:justify-end overflow-hidden bg-background">
+      <section ref={containerRef} className="relative min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center md:justify-end overflow-hidden bg-[#0a0a0b]">
         <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 animate-in zoom-in-110 duration-[1.5s] ease-out"
@@ -204,25 +206,24 @@ const ProviderApplication = () => {
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
               alt={t('nav.providerApplication')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-center scale-105"
+              className="w-full h-full object-cover object-center scale-110 opacity-40 brightness-50"
             />
           </div>
           
-          <div className="absolute inset-0 bg-white/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/40 via-[#0a0a0b]/80 to-[#0a0a0b] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(241,41,89,0.1),transparent_50%)] z-10" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-24 flex flex-col items-center md:items-start">
+        <div className="container-sahli relative z-10 pt-32 pb-12 md:pb-32 flex flex-col items-center md:items-start">
           <div
             className="w-full max-w-4xl text-center md:text-start"
           >
             <ScrollReveal
               direction="up"
               duration={0.6}
-              className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/20 rounded-full border border-primary/30 text-[0.6rem] md:text-[0.65rem] font-black tracking-[0.25em] uppercase text-primary mb-6 shadow-lg shadow-primary/10 relative overflow-hidden btn-shine"
+              className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 text-[10px] font-black tracking-[0.2em] uppercase text-primary mb-10 shadow-2xl mx-auto md:mx-0"
             >
-              <Target size={14} className="animate-pulse" />
+              <Target size={16} className="animate-pulse" />
               {dir === 'rtl' ? 'انضم إلى شبكتنا' : 'Partner with SAHLI'}
             </ScrollReveal>
             
@@ -230,7 +231,7 @@ const ProviderApplication = () => {
               direction="up"
               duration={0.8}
               delay={0.2}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-2xl"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9]"
             >
               <h1>{t('provider.apply.title')}</h1>
             </ScrollReveal>
@@ -239,7 +240,7 @@ const ProviderApplication = () => {
               direction="up"
               duration={0.8}
               delay={0.3}
-              className="text-lg md:text-xl lg:text-2xl !text-white/80 max-w-3xl font-medium leading-relaxed drop-shadow-lg"
+              className="text-lg md:text-xl lg:text-2xl text-slate-400 max-w-3xl font-medium leading-relaxed italic"
             >
               <p>{t('provider.apply.subtitle')}</p>
             </ScrollReveal>
@@ -247,42 +248,41 @@ const ProviderApplication = () => {
         </div>
       </section>
 
-      <div className="section-spacing bg-background relative overflow-hidden" dir={dir}>
+      <div className="section-spacing bg-[#0a0a0b] relative overflow-hidden" dir={dir}>
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
-
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/[0.03] rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
+        
         <div className="container-sahli relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-12 gap-16 md:gap-24 lg:gap-32 items-start">
             {/* Benefits & Info */}
-            <div className="lg:col-span-5 space-y-12">
+            <div className="lg:col-span-5 space-y-16">
               <ScrollReveal 
                 direction={dir === 'rtl' ? 'right' : 'left'}
-                className="space-y-10"
+                className="space-y-12"
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-foreground/5 rounded-full text-[0.65rem] font-black text-foreground/60 uppercase tracking-widest border border-border">
-                  <ShieldCheck size={14} className="text-primary" />
+                <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-white/5 rounded-full text-[10px] font-black text-primary uppercase tracking-[0.3em] border border-white/10">
+                  <ShieldCheck size={16} />
                   {t('provider.apply.why.title')}
                 </div>
                 
-                <div className="space-y-8">
+                <div className="space-y-10">
                   {[
-                    { icon: Target, title: t('provider.apply.why.coordination.title'), desc: t('provider.apply.why.coordination.desc'), color: 'bg-blue-500/10 text-blue-500' },
-                    { icon: ShieldCheck, title: t('provider.apply.why.intake.title'), desc: t('provider.apply.why.intake.desc'), color: 'bg-emerald-500/10 text-emerald-500' },
+                    { icon: Target, title: t('provider.apply.why.coordination.title'), desc: t('provider.apply.why.coordination.desc'), color: 'bg-primary/10 text-primary' },
+                    { icon: ShieldCheck, title: t('provider.apply.why.intake.title'), desc: t('provider.apply.why.intake.desc'), color: 'bg-primary/10 text-primary' },
                     { icon: Building2, title: t('provider.apply.why.independent.title'), desc: t('provider.apply.why.independent.desc'), color: 'bg-primary/10 text-primary' }
                   ].map((item, i) => (
                     <ScrollReveal 
                       key={i} 
                       direction="up"
                       delay={i * 0.1}
-                      className="flex gap-6 group"
+                      className="flex gap-8 group"
                     >
-                      <div className={`w-14 h-14 rounded-2xl ${item.color} border border-border/50 flex items-center justify-center group-hover:scale-110 transition-all duration-500 shrink-0 shadow-lg shadow-foreground/[0.02]`}>
-                        <item.icon size={28} />
+                      <div className={`w-16 h-16 rounded-2xl ${item.color} border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-700 shrink-0 shadow-2xl shadow-primary/10`}>
+                        <item.icon size={32} />
                       </div>
                       <div className="pt-1">
-                        <h4 className="text-xl font-black mb-2 text-foreground group-hover:text-primary transition-colors">{item.title}</h4>
-                        <p className="text-base text-foreground/50 leading-relaxed">{item.desc}</p>
+                        <h4 className="text-xl md:text-2xl font-black mb-3 text-white group-hover:text-primary transition-colors tracking-tight">{item.title}</h4>
+                        <p className="text-base md:text-lg text-slate-400 leading-relaxed font-medium">{item.desc}</p>
                       </div>
                     </ScrollReveal>
                   ))}
@@ -291,42 +291,42 @@ const ProviderApplication = () => {
 
               <ScrollReveal 
                 direction={dir === 'rtl' ? 'right' : 'left'}
-                className="p-10 rounded-[2.5rem] bg-foreground/[0.02] border border-border/50 space-y-6"
+                className="p-10 md:p-14 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-3xl space-y-8"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                    <Sparkles size={20} />
+                <div className="flex items-center gap-5">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-xl shadow-primary/10">
+                    <Sparkles size={24} />
                   </div>
-                  <h3 className="text-2xl font-black text-foreground">{t('provider.apply.model.title')}</h3>
+                  <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter uppercase">{t('provider.apply.model.title')}</h3>
                 </div>
-                <p className="text-base text-foreground/50 leading-relaxed">
+                <p className="text-base md:text-lg text-slate-400 leading-relaxed font-medium italic">
                   {t('provider.apply.model.desc')}
                 </p>
               </ScrollReveal>
 
               <ScrollReveal 
-                className="p-10 rounded-[2.5rem] bg-background text-white shadow-2xl shadow-primary/10 relative overflow-hidden group border border-white/5"
+                className="p-10 md:p-14 rounded-[3rem] bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl relative overflow-hidden group"
               >
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[80px] -mr-32 -mt-32 group-hover:bg-primary/30 transition-all duration-700" />
-                <div className="flex items-center gap-4 mb-8 relative z-10">
-                  <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
-                    <Zap size={20} fill="currentColor" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50" />
+                <div className="flex items-center gap-5 mb-10 relative z-10">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary shadow-xl shadow-primary/20">
+                    <Zap size={24} fill="currentColor" />
                   </div>
-                  <h3 className="text-2xl font-black text-white">{t('provider.apply.process.title')}</h3>
+                  <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter uppercase">{t('provider.apply.process.title')}</h3>
                 </div>
                 
-                <div className="space-y-8 relative z-10">
+                <div className="space-y-10 relative z-10">
                   {[
                     { step: 1, text: t('provider.apply.process.step1') },
                     { step: 2, text: t('provider.apply.process.step2') },
                     { step: 3, text: t('provider.apply.process.step3') },
                     { step: 4, text: t('provider.apply.process.step4') }
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-5 items-start group">
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs font-black shrink-0 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+                    <div key={i} className="flex gap-6 items-start group">
+                      <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-sm font-black text-white shrink-0 shadow-2xl shadow-primary/40 group-hover:scale-110 transition-transform">
                         {item.step}
                       </div>
-                      <p className="text-base font-bold text-white/80 pt-1 leading-snug group-hover:text-white transition-colors">{item.text}</p>
+                      <p className="text-lg font-black text-slate-300 pt-1 leading-snug group-hover:text-white transition-colors">{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -337,87 +337,87 @@ const ProviderApplication = () => {
             <div className="lg:col-span-7">
               <ScrollReveal
                 direction="up"
-                className="glass-morphism rounded-[3rem] p-8 md:p-12 border border-border/50 shadow-2xl relative overflow-hidden"
+                className="bg-white/5 backdrop-blur-3xl rounded-[4rem] p-10 md:p-16 border border-white/10 shadow-2xl relative overflow-hidden"
               >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
                 
-                <div className="mb-12 p-8 rounded-3xl bg-primary/5 border border-primary/20 space-y-4">
-                  <div className="flex items-center gap-3 text-primary">
-                    <Info size={24} />
-                    <h4 className="text-xl font-black uppercase tracking-tight">{t('provider.apply.preapply.title')}</h4>
+                <div className="mb-16 p-10 rounded-[2.5rem] bg-primary/10 border border-primary/20 space-y-6">
+                  <div className="flex items-center gap-4 text-primary">
+                    <Info size={28} />
+                    <h4 className="text-xl md:text-2xl font-black uppercase tracking-tight">{t('provider.apply.preapply.title')}</h4>
                   </div>
-                  <p className="text-sm text-foreground/60 leading-relaxed font-medium">
+                  <p className="text-base text-slate-300 leading-relaxed font-medium italic">
                     {t('provider.apply.preapply.desc')}
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-10">
-                  <div className="space-y-8">
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label htmlFor="companyName" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyName')}</label>
+                <form onSubmit={handleSubmit} className="space-y-12">
+                  <div className="space-y-10">
+                    <div className="grid md:grid-cols-2 gap-10">
+                      <div className="space-y-4">
+                        <label htmlFor="companyName" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.companyName')}</label>
                         <div className="relative group">
-                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
+                          <Building2 className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={20} />
                           <Input 
                             id="companyName"
                             name="companyName"
                             required
-                            className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
+                            className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 transition-all hover:bg-white/[0.08] text-white font-medium"
                             value={formData.companyName}
                             onChange={e => setFormData({...formData, companyName: e.target.value})}
                           />
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <label htmlFor="companyType" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.companyType')}</label>
+                      <div className="space-y-4">
+                        <label htmlFor="companyType" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.companyType')}</label>
                         <div className="relative group">
-                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors z-10" size={18} />
+                          <Building2 className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors z-10" size={20} />
                           <select 
                             id="companyType"
                             name="companyType"
                             required
-                            className="w-full bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 pr-4 transition-all hover:border-primary/30 appearance-none text-sm font-medium"
+                            className="w-full bg-white/5 border border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 pr-4 transition-all hover:bg-white/[0.08] appearance-none text-white font-medium text-sm"
                             value={formData.companyType}
                             onChange={e => setFormData({...formData, companyType: e.target.value})}
                           >
-                            <option value="">{dir === 'rtl' ? 'اختر النوع' : 'Select Type'}</option>
+                            <option value="" className="bg-[#0a0a0b]">{dir === 'rtl' ? 'اختر النوع' : 'Select Type'}</option>
                             {companyTypes.map(type => (
-                              <option key={type.value} value={type.value}>{type.label}</option>
+                              <option key={type.value} value={type.value} className="bg-[#0a0a0b]">{type.label}</option>
                             ))}
                           </select>
                         </div>
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label htmlFor="yearsInOperation" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.yearsInOperation')}</label>
+                    <div className="grid md:grid-cols-2 gap-10">
+                      <div className="space-y-4">
+                        <label htmlFor="yearsInOperation" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.yearsInOperation')}</label>
                         <div className="relative group">
-                          <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors z-10" size={18} />
+                          <Sparkles className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors z-10" size={20} />
                           <select 
                             id="yearsInOperation"
                             name="yearsInOperation"
                             required
-                            className="w-full bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 pr-4 transition-all hover:border-primary/30 appearance-none text-sm font-medium"
+                            className="w-full bg-white/5 border border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 pr-4 transition-all hover:bg-white/[0.08] appearance-none text-white font-medium text-sm"
                             value={formData.yearsInOperation}
                             onChange={e => setFormData({...formData, yearsInOperation: e.target.value})}
                           >
-                            <option value="">{dir === 'rtl' ? 'اختر المدى' : 'Select Range'}</option>
+                            <option value="" className="bg-[#0a0a0b]">{dir === 'rtl' ? 'اختر المدى' : 'Select Range'}</option>
                             {operationalYears.map(year => (
-                              <option key={year.value} value={year.value}>{year.label}</option>
+                              <option key={year.value} value={year.value} className="bg-[#0a0a0b]">{year.label}</option>
                             ))}
                           </select>
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <label htmlFor="crNumber" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.crNumber')}</label>
+                      <div className="space-y-4">
+                        <label htmlFor="crNumber" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.crNumber')}</label>
                         <div className="relative group">
-                          <File className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
+                          <File className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={20} />
                           <Input 
                             id="crNumber"
                             name="crNumber"
                             required
-                            className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
+                            className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 transition-all hover:bg-white/[0.08] text-white font-medium"
                             value={formData.crNumber}
                             onChange={e => setFormData({...formData, crNumber: e.target.value})}
                           />
@@ -425,32 +425,32 @@ const ProviderApplication = () => {
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label htmlFor="contactPerson" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.contactPerson')}</label>
+                    <div className="grid md:grid-cols-2 gap-10">
+                      <div className="space-y-4">
+                        <label htmlFor="contactPerson" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.contactPerson')}</label>
                         <div className="relative group">
-                          <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
+                          <Briefcase className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={20} />
                           <Input 
                             id="contactPerson"
                             name="contactPerson"
                             required
-                            className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
+                            className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 transition-all hover:bg-white/[0.08] text-white font-medium"
                             value={formData.contactPerson}
                             onChange={e => setFormData({...formData, contactPerson: e.target.value})}
                           />
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <label htmlFor="phone" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.phone')}</label>
+                      <div className="space-y-4">
+                        <label htmlFor="phone" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.phone')}</label>
                         <div className="relative group">
-                          <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
+                          <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={20} />
                           <Input 
                             id="phone"
                             name="phone"
                             required
                             type="tel"
                             placeholder="+974"
-                            className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
+                            className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 transition-all hover:bg-white/[0.08] text-white font-medium"
                             value={formData.phone}
                             onChange={e => setFormData({...formData, phone: e.target.value})}
                           />
@@ -458,43 +458,43 @@ const ProviderApplication = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-3">
-                      <label htmlFor="email" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.email')}</label>
+                    <div className="space-y-4">
+                      <label htmlFor="email" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.email')}</label>
                       <div className="relative group">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
+                        <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors" size={20} />
                         <Input 
                           id="email"
                           name="email"
                           required
                           type="email"
-                          className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-14 pl-12 transition-all hover:border-primary/30"
+                          className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 transition-all hover:bg-white/[0.08] text-white font-medium"
                           value={formData.email}
                           onChange={e => setFormData({...formData, email: e.target.value})}
                         />
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-3">
-                        <label htmlFor="services" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.services')}</label>
+                    <div className="grid md:grid-cols-2 gap-10">
+                      <div className="space-y-4">
+                        <label htmlFor="services" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.services')}</label>
                         <Textarea 
                           id="services"
                           name="services"
                           required
                           placeholder={dir === 'rtl' ? 'مثال: صيانة تكييف، كهرباء، سباكة' : 'e.g., AC maintenance, electrical, plumbing'}
-                          className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl min-h-[120px] p-4 transition-all resize-none hover:border-primary/30"
+                          className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-[2rem] min-h-[160px] p-6 transition-all resize-none hover:bg-white/[0.08] text-white font-medium"
                           value={formData.services}
                           onChange={e => setFormData({...formData, services: e.target.value})}
                         />
                       </div>
-                      <div className="space-y-3">
-                        <label htmlFor="areas" className="text-[0.7rem] font-black uppercase tracking-widest text-foreground/50 ml-1">{t('provider.apply.form.areas')}</label>
+                      <div className="space-y-4">
+                        <label htmlFor="areas" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.areas')}</label>
                         <Textarea 
                           id="areas"
                           name="areas"
                           required
                           placeholder={dir === 'rtl' ? 'مثال: الدوحة، الوكرة، لوسيل' : 'e.g., Doha, Al Wakrah, Lusail'}
-                          className="bg-foreground/[0.03] border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-2xl min-h-[120px] p-4 transition-all resize-none hover:border-primary/30"
+                          className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-[2rem] min-h-[160px] p-6 transition-all resize-none hover:bg-white/[0.08] text-white font-medium"
                           value={formData.areas}
                           onChange={e => setFormData({...formData, areas: e.target.value})}
                         />
@@ -502,39 +502,39 @@ const ProviderApplication = () => {
                     </div>
 
                     {/* Document Upload Section */}
-                    <div className="space-y-6 pt-6 border-t border-border/50">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                          <Upload size={18} />
+                    <div className="space-y-8 pt-10 border-t border-white/5">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shadow-xl shadow-primary/10">
+                          <Upload size={22} />
                         </div>
-                        <h4 className="text-sm font-black uppercase tracking-widest text-foreground/70">{t('provider.apply.form.upload.title')}</h4>
+                        <h4 className="text-sm font-black uppercase tracking-[0.4em] text-white/70">{t('provider.apply.form.upload.title')}</h4>
                       </div>
                       
-                      <div className="grid sm:grid-cols-3 gap-6">
+                      <div className="grid sm:grid-cols-3 gap-8">
                         {[
                           { type: 'cr', label: t('provider.apply.form.upload.cr') },
                           { type: 'id', label: t('provider.apply.form.upload.id') },
                           { type: 'license', label: t('provider.apply.form.upload.license') }
                         ].map((doc) => (
-                          <div key={doc.type} className="space-y-3">
-                            <label className="text-[0.65rem] font-black uppercase tracking-widest text-foreground/40 block ml-1">{doc.label}</label>
+                          <div key={doc.type} className="space-y-4">
+                            <label className="text-[10px] font-black uppercase tracking-[0.3em] text-primary/40 block ml-1">{doc.label}</label>
                             <div className="relative group/file">
                               {files[doc.type] ? (
-                                <div className="h-28 rounded-2xl bg-primary/5 border-2 border-primary/20 flex flex-col items-center justify-center p-3 relative group transition-all">
-                                  <File className="text-primary mb-1" size={24} />
-                                  <span className="text-[0.6rem] font-bold text-primary truncate w-full text-center">{files[doc.type]?.name}</span>
+                                <div className="h-32 rounded-2xl bg-primary/10 border-2 border-primary/30 flex flex-col items-center justify-center p-4 relative group transition-all shadow-2xl">
+                                  <File className="text-primary mb-2" size={32} />
+                                  <span className="text-[10px] font-black text-primary truncate w-full text-center px-2">{files[doc.type]?.name}</span>
                                   <button 
                                     type="button"
                                     onClick={() => removeFile(doc.type)}
-                                    className="absolute -top-2 -right-2 w-6 h-6 bg-destructive text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+                                    className="absolute -top-3 -right-3 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
                                   >
-                                    <X size={14} />
+                                    <X size={16} />
                                   </button>
                                 </div>
                               ) : (
-                                <label className="h-28 rounded-2xl bg-foreground/[0.03] border-2 border-dashed border-border/50 hover:border-primary/30 hover:bg-primary/[0.02] flex flex-col items-center justify-center p-3 cursor-pointer transition-all group/label">
-                                  <Upload className="text-foreground/20 group-hover/label:text-primary transition-colors mb-2" size={24} />
-                                  <span className="text-[0.6rem] font-black text-foreground/30 group-hover/label:text-primary/60 transition-colors text-center uppercase tracking-tighter">
+                                <label className="h-32 rounded-2xl bg-white/5 border-2 border-dashed border-white/10 hover:border-primary/50 hover:bg-white/[0.08] flex flex-col items-center justify-center p-4 cursor-pointer transition-all group/label shadow-inner">
+                                  <Upload className="text-white/10 group-hover/label:text-primary transition-colors mb-3" size={32} />
+                                  <span className="text-[10px] font-black text-white/20 group-hover/label:text-primary transition-colors text-center uppercase tracking-[0.2em]">
                                     {dir === 'rtl' ? 'اضغط للرفع' : 'Click to Upload'}
                                   </span>
                                   <input 
@@ -549,24 +549,24 @@ const ProviderApplication = () => {
                           </div>
                         ))}
                       </div>
-                      <p className="text-[0.65rem] text-foreground/40 italic flex items-center gap-1.5 ml-1">
-                        <Info size={12} />
+                      <p className="text-[10px] text-slate-500 italic flex items-center gap-2 ml-1 font-medium">
+                        <Info size={14} className="text-primary" />
                         {t('provider.apply.form.upload.hint')}
                       </p>
                     </div>
 
-                    <div className="pt-6 border-t border-border/30">
-                      <label className="flex items-start gap-4 cursor-pointer group">
+                    <div className="pt-10 border-t border-white/5">
+                      <label className="flex items-start gap-6 cursor-pointer group">
                         <div className="relative flex items-center pt-1">
                           <input 
                             type="checkbox" 
                             required
                             checked={formData.responsibilityConfirmed}
                             onChange={e => setFormData({...formData, responsibilityConfirmed: e.target.checked})}
-                            className="w-5 h-5 rounded-md border-2 border-border/50 text-primary focus:ring-primary/20 transition-all checked:bg-primary"
+                            className="w-6 h-6 rounded-md border-2 border-white/10 bg-white/5 text-primary focus:ring-primary/20 transition-all checked:bg-primary"
                           />
                         </div>
-                        <span className="text-sm text-foreground/60 leading-relaxed group-hover:text-foreground/80 transition-colors whitespace-pre-line">
+                        <span className="text-base text-slate-400 leading-relaxed group-hover:text-white transition-colors whitespace-pre-line font-medium italic">
                           {t('provider.apply.form.agreement')}
                         </span>
                       </label>
@@ -575,17 +575,17 @@ const ProviderApplication = () => {
                     <Button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full h-16 bg-primary hover:bg-primary/90 text-white rounded-2xl text-lg font-black shadow-xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden btn-shine"
+                      className="w-full h-20 bg-primary hover:bg-primary/90 text-white rounded-2xl text-xl font-black shadow-2xl shadow-primary/20 transition-all active:scale-[0.98] group relative overflow-hidden"
                     >
                       {isSubmitting ? (
-                        <div className="flex items-center gap-3">
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          <span className="uppercase tracking-widest">{dir === 'rtl' ? 'جاري الإرسال...' : 'SUBMITTING...'}</span>
+                        <div className="flex items-center gap-4">
+                          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span className="uppercase tracking-[0.3em]">{dir === 'rtl' ? 'جاري الإرسال...' : 'SUBMITTING...'}</span>
                         </div>
                       ) : (
-                        <div className="flex items-center justify-center gap-3">
-                          <span className="uppercase tracking-[0.2em]">{t('provider.apply.form.submit')}</span>
-                          <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        <div className="flex items-center justify-center gap-4">
+                          <span className="uppercase tracking-[0.3em]">{t('provider.apply.form.submit')}</span>
+                          <Send size={24} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500" />
                         </div>
                       )}
                     </Button>

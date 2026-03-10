@@ -56,30 +56,30 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle, 
   const { dir } = useLanguage();
   
   return (
-    <div className={`border-b border-border/50 last:border-0 transition-all duration-500 ${isOpen ? 'bg-primary/[0.02]' : 'hover:bg-foreground/[0.01]'}`}>
+    <div className={`border-b border-white/5 last:border-0 transition-all duration-500 ${isOpen ? 'bg-primary/5' : 'hover:bg-white/[0.02]'}`}>
       <button
         onClick={onToggle}
-        className="w-full py-3 md:py-4 flex items-center justify-between group transition-all px-4 md:px-6 gap-4"
+        className="w-full py-4 md:py-6 flex items-center justify-between group transition-all px-4 md:px-8 gap-4"
       >
-        <div className="flex items-start gap-3 md:gap-5 flex-1 min-w-0">
+        <div className="flex items-start gap-4 md:gap-6 flex-1 min-w-0">
           <div 
-            className={`w-9 h-9 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-all duration-500 shadow-sm shrink-0 ${isOpen ? 'bg-primary text-primary-foreground shadow-primary/20' : 'bg-white border border-border/50 text-foreground/70 group-hover:border-primary/30 group-hover:text-primary'}`}
+            className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all duration-500 shadow-2xl shrink-0 ${isOpen ? 'bg-primary text-white shadow-primary/40' : 'bg-white/5 border border-white/10 text-white/70 group-hover:border-primary/50 group-hover:text-primary'}`}
           >
-            {React.cloneElement(icon as React.ReactElement, { size: 18 })}
+            {React.cloneElement(icon as React.ReactElement, { size: 20 })}
           </div>
           <div className="text-start flex-1 min-w-0 pt-0.5">
-            <h3 className={`text-sm md:text-base font-bold transition-colors duration-300 break-words leading-tight mb-1 ${isOpen ? 'text-primary' : 'text-foreground group-hover:text-foreground'}`}>
+            <h3 className={`text-base md:text-lg font-black transition-colors duration-300 break-words leading-tight mb-1.5 ${isOpen ? 'text-primary' : 'text-white group-hover:text-primary'}`}>
               {title}
             </h3>
-            <p className={`text-xs md:text-sm text-foreground/60 transition-all duration-300 line-clamp-2 leading-relaxed ${isOpen ? 'text-foreground/80' : ''}`}>
+            <p className={`text-xs md:text-sm text-slate-400 transition-all duration-300 line-clamp-2 leading-relaxed ${isOpen ? 'text-slate-300' : ''}`}>
               {description}
             </p>
           </div>
         </div>
         <div
-          className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all duration-500 shrink-0 ${isOpen ? 'bg-primary border-primary text-primary-foreground rotate-180' : 'border-border/50 text-foreground/30 group-hover:border-primary/30 group-hover:text-primary'}`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-500 shrink-0 ${isOpen ? 'bg-primary border-primary text-white rotate-180' : 'border-white/10 text-white/30 group-hover:border-primary/50 group-hover:text-primary'}`}
         >
-          <ChevronDown size={14} strokeWidth={2.5} />
+          <ChevronDown size={16} strokeWidth={2.5} />
         </div>
       </button>
 
@@ -87,20 +87,20 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle, 
         className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
       >
         <div className="overflow-hidden">
-          <div className={`pb-6 ps-[52px] md:ps-[84px] pe-4 md:pe-8 flex flex-col gap-4`}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
+          <div className={`pb-8 ps-[72px] md:ps-[104px] pe-4 md:pe-12 flex flex-col gap-6`}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
               {items.split('\n').map((item: string, idx: number) => (
                 <div 
                   key={idx} 
-                  className={`flex items-start gap-2.5 text-foreground/80 text-xs md:text-sm py-1 transition-all duration-500 group/item`}
+                  className={`flex items-start gap-3 text-slate-300 text-xs md:text-sm py-1.5 transition-all duration-500 group/item`}
                   style={{ 
                     transitionDelay: `${50 + idx * 30}ms`,
                     transform: isOpen ? 'translateY(0)' : 'translateY(10px)',
                     opacity: isOpen ? 1 : 0
                   }}
                 >
-                  <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/20 group-hover/item:bg-primary transition-colors duration-300" />
-                  <span className="leading-relaxed break-words w-full group-hover/item:text-primary transition-colors duration-300">
+                  <div className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-colors duration-300" />
+                  <span className="leading-relaxed break-words w-full group-hover/item:text-white transition-colors duration-300">
                     {item}
                   </span>
                 </div>
@@ -109,19 +109,20 @@ function CollapsibleModule({ icon, title, description, items, isOpen, onToggle, 
 
             {locationLinks && locationLinks.length > 0 && (
               <div
-                className={`pt-4 mt-2 border-t border-dashed border-border/40 transition-all duration-500 delay-200 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
+                className={`pt-6 mt-2 border-t border-dashed border-white/10 transition-all duration-500 delay-200 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
               >
-                <p className="text-[0.65rem] font-bold tracking-wider uppercase text-foreground/40 mb-3 flex items-center gap-1.5">
-                  <Info size={10} />
+                <p className="text-[10px] font-black tracking-[0.2em] uppercase text-white/40 mb-4 flex items-center gap-2">
+                  <Info size={12} className="text-primary" />
                   Available Districts
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   {locationLinks.map((loc, idx) => (
                     <Link
                       key={idx}
                       to={loc.path}
-                      className="px-2.5 py-1 rounded-md bg-secondary/50 hover:bg-secondary border border-transparent hover:border-border/10 text-[0.7rem] font-medium text-foreground/70 hover:text-foreground transition-all flex items-center gap-1.5"
+                      className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-primary/20 border border-white/5 hover:border-primary/30 text-[11px] font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2"
                     >
+                      <div className="w-1 h-1 rounded-full bg-primary" />
                       {loc.label}
                     </Link>
                   ))}
@@ -192,76 +193,90 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero / Selector Area - Consistent with Homepage */}
-      <section ref={containerRef} className="relative min-h-[50vh] md:min-h-[70vh] flex flex-col justify-center overflow-hidden bg-background">
-        {/* Background Parallax */}
+      <section ref={containerRef} className="relative min-h-[60vh] md:min-h-[80vh] flex flex-col justify-center overflow-hidden bg-[#0a0a0b]">
+        {/* Background Parallax and Gradients */}
         <div className="absolute inset-0 z-0">
           <div 
-            className="absolute inset-0 animate-in fade-in zoom-in-105 duration-[1500ms]"
+            className="absolute inset-0 animate-in fade-in zoom-in-105 duration-[2000ms]"
           >
             <img 
               src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1920&auto=format&fit=crop" 
               alt={t('nav.services')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center opacity-40 scale-110"
             />
           </div>
           
-          <div className="absolute inset-0 bg-white/40 z-0" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-transparent z-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/40 via-[#0a0a0b]/80 to-[#0a0a0b] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(241,41,89,0.1),transparent_50%)] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(241,41,89,0.05),transparent_50%)] z-10" />
         </div>
 
-        <div className="container-sahli relative z-10 pt-28 pb-8 md:pt-32 md:pb-24">
+        <div className="container-sahli relative z-20 pt-32 pb-12 md:pt-40 md:pb-32">
           <div
             className="max-w-4xl mx-auto md:mx-0 text-center md:text-start"
           >
             <div
-            className="inline-flex items-center gap-2 px-2.5 py-1 bg-primary/10 rounded-full border border-primary/20 text-label mb-6 backdrop-blur-md mx-auto md:mx-0 animate-in fade-in zoom-in-95 duration-1000"
+            className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 text-[10px] font-black tracking-[0.2em] uppercase text-primary mb-10 shadow-2xl mx-auto md:mx-0 animate-in fade-in zoom-in-95 duration-1000"
           >
-              <img src="/logos/SahlLogo5.png" alt="" className="w-4 h-4 object-contain scale-[3]" />
+              <img src="/logos/SahlLogo5.png" alt="" className="w-5 h-5 object-contain scale-[2.5]" />
               {t('nav.services')}
             </div>
 
-            <h1 className="mb-4 md:mb-6 text-primary text-3xl md:text-5xl lg:text-6xl font-black w-full text-center md:text-start break-words md:max-w-[80%] leading-tight">
-              {t('services.title')}
+            <h1 className="mb-6 md:mb-10 text-white text-4xl md:text-6xl lg:text-8xl font-black w-full text-center md:text-start break-words md:max-w-[90%] leading-[0.9] tracking-tighter">
+              {t('services.title').split(' ').map((word, i) => (
+                <span key={i} className={i === 1 ? "text-primary block md:inline" : "block md:inline"}>
+                  {word}{' '}
+                </span>
+              ))}
             </h1>
             
             <p 
-              className="text-sm md:text-lg text-slate-900 max-w-xl md:max-w-2xl mb-8 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start animate-in fade-in slide-in-from-bottom-5 fill-mode-both break-words"
+              className="text-base md:text-xl text-slate-400 max-w-xl md:max-w-2xl mb-12 mx-auto md:mx-0 leading-relaxed w-full text-center md:text-start animate-in fade-in slide-in-from-bottom-5 fill-mode-both break-words font-medium"
               style={{ animationDelay: '0.6s', animationDuration: '1s' }}
             >
               {t('services.intro')}
             </p>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+               <a 
+                href={getWhatsAppLink(t('cta.whatsapp.general'))}
+                className="px-8 py-4 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 flex items-center gap-3"
+              >
+                <MessageSquare size={18} />
+                {t('services.cta.button')}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Sticky Selector - Enhanced Visuals */}
-      <div className="sticky top-[60px] z-40 w-full backdrop-blur-xl bg-background/80 border-y border-border/50 shadow-sm">
+      <div className="sticky top-[70px] z-50 w-full backdrop-blur-2xl bg-[#0a0a0b]/80 border-y border-white/5 shadow-2xl">
         <div className="container-sahli">
-          <div className="flex overflow-x-auto no-scrollbar gap-2 sm:gap-4 py-3 scroll-smooth items-center md:justify-start px-1">
+          <div className="flex overflow-x-auto no-scrollbar gap-3 sm:gap-6 py-4 scroll-smooth items-center md:justify-start px-1">
             {roofs.map((roof: { id: string; label: string; status?: string }, idx: number) => (
               <button
                 key={roof.id}
                 onClick={() => handleRoofClick(roof.id)}
-                className={`relative px-3 md:px-4 py-2 md:py-2.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap shrink-0 ${
+                className={`relative px-4 md:px-6 py-3 rounded-xl text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap shrink-0 group ${
                   activeRoof === roof.id
-                    ? 'text-primary-foreground shadow-md shadow-primary/20 scale-105'
-                    : 'text-foreground/60 hover:text-foreground hover:bg-foreground/5'
+                    ? 'text-white'
+                    : 'text-white/40 hover:text-white'
                 }`}
               >
                 {activeRoof === roof.id && (
                   <div 
-                    className="absolute inset-0 bg-primary rounded-full -z-10 animate-in fade-in zoom-in-95 duration-200"
+                    className="absolute inset-0 bg-primary rounded-xl shadow-2xl shadow-primary/30 animate-in fade-in zoom-in-95 duration-300"
                   />
                 )}
                 
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center gap-3">
                     {activeRoof === roof.id && (
                       <img 
                         src="/logos/SahlLogo5.png" 
                         alt="" 
-                        className="w-3 h-3 object-contain brightness-0 invert scale-[3]" 
+                        className="w-4 h-4 object-contain brightness-0 invert scale-[2.5]" 
                       />
                     )}
                     {roof.label}
@@ -273,46 +288,46 @@ export default function Services() {
       </div>
 
       {/* Roof 1: Home Maintenance - Compact */}
-      <section id="home-maintenance" className="relative section-spacing scroll-mt-24 md:scroll-mt-32 bg-background overflow-hidden">
+      <section id="home-maintenance" className="relative section-spacing scroll-mt-32 bg-[#0a0a0b] overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-primary/[0.03] rounded-full blur-[60px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.05] rounded-full blur-[120px] -z-10" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
             <ScrollReveal
               direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-44 h-fit"
+              className="relative lg:sticky top-0 lg:top-48 h-fit"
             >
-              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
-                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+              <div className="flex flex-col items-start text-start">
+                <div className="flex items-center gap-5 mb-8 w-full">
                   <div 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0"
                   >
-                    <Wrench size={20} />
+                    <Wrench size={28} />
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[8px] font-black tracking-widest uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[2.5]" />
                       {t('services.status.live')} — 01
                     </span>
-                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                    <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
                       {t('services.homeMaintenance.title')}
                     </h2>
                   </div>
                 </div>
                 
-                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
+                <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
                   {t('services.homeMaintenance.body')}
                 </p>
                 
                 <div 
-                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 relative overflow-hidden group w-full"
                 >
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Box className="text-primary w-3.5 h-3.5" />
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <Box className="text-primary w-5 h-5" />
                     </div>
-                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
+                    <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed italic">
                       {t('services.homeMaintenance.rule')}
                     </p>
                   </div>
@@ -323,9 +338,9 @@ export default function Services() {
             <ScrollReveal 
               direction="up"
               delay={0.2}
-              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
+              className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
             >
-              <div className="divide-y divide-border/40">
+              <div className="divide-y divide-white/5">
                 <CollapsibleModule
                   icon={<Wind size={18} />}
                   title={t('services.homeMaintenance.ac.title')}
@@ -364,18 +379,14 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
+              <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
                 <a 
                   href={getWhatsAppLink(t('services.homeMaintenance.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Home Maintenance')}
-                  className="cta-primary btn-shine inline-block group"
+                  className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
                 >
-                  <div
-                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.homeMaintenance.cta')}
-                  </div>
+                  <MessageSquare size={18} />
+                  {t('services.homeMaintenance.cta')}
                 </a>
               </div>
             </ScrollReveal>
@@ -384,47 +395,46 @@ export default function Services() {
       </section>
 
       {/* Roof 2: Cleaning & Coordination - Compact */}
-      <section id="cleaning" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
+      <section id="cleaning" className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[50px] md:blur-[80px] -z-10 animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[60px] md:blur-[100px] -z-10 animate-pulse-slow delay-700" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[150px] -z-10" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
             <ScrollReveal
               direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-44 h-fit"
+              className="relative lg:sticky top-0 lg:top-48 h-fit"
             >
-              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
-                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+              <div className="flex flex-col items-start text-start">
+                <div className="flex items-center gap-5 mb-8 w-full">
                   <div 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0"
                   >
-                    <Sparkles size={20} />
+                    <Sparkles size={28} />
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[2.5]" />
                       {t('services.status.live')} — 02
                     </span>
-                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                    <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
                       {t('services.cleaning.title')}
                     </h2>
                   </div>
                 </div>
 
-                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
+                <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
                   {t('services.cleaning.body')}
                 </p>
                 
                 <div 
-                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 relative overflow-hidden group w-full"
                 >
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Heart className="text-primary w-3.5 h-3.5" />
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <Heart className="text-primary w-5 h-5" />
                     </div>
-                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
+                    <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed italic">
                       {t('services.cleaning.rule')}
                     </p>
                   </div>
@@ -435,9 +445,9 @@ export default function Services() {
             <ScrollReveal 
               direction="up"
               delay={0.2}
-              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
+              className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
             >
-              <div className="divide-y divide-border/50">
+              <div className="divide-y divide-white/5">
                 <CollapsibleModule
                   icon={<Home size={18} />}
                   title={t('services.cleaning.regular.title')}
@@ -476,18 +486,14 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border text-center bg-foreground/[0.01]">
+              <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
                 <a 
                   href={getWhatsAppLink(t('services.cleaning.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Cleaning')}
-                  className="cta-primary btn-shine inline-block group"
+                  className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
                 >
-                  <div
-                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.cleaning.cta')}
-                  </div>
+                  <MessageSquare size={18} />
+                  {t('services.cleaning.cta')}
                 </a>
               </div>
             </ScrollReveal>
@@ -496,47 +502,46 @@ export default function Services() {
       </section>
 
       {/* Roof 3: Moving & Relocation - Compact */}
-      <section id="moving" className="relative section-spacing scroll-mt-24 md:scroll-mt-32 overflow-hidden">
+      <section id="moving" className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-500" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.05] rounded-full blur-[120px] -z-10" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
             <ScrollReveal
               direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-44 h-fit"
+              className="relative lg:sticky top-0 lg:top-48 h-fit"
             >
-              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
-                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+              <div className="flex flex-col items-start text-start">
+                <div className="flex items-center gap-5 mb-8 w-full">
                   <div 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0"
                   >
-                    <Truck size={20} />
+                    <Truck size={28} />
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[2.5]" />
                       {t('services.status.live')} — 03
                     </span>
-                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                    <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
                       {t('services.moving.title')}
                     </h2>
                   </div>
                 </div>
 
-                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
+                <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
                   {t('services.moving.body')}
                 </p>
                 
                 <div 
-                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 relative overflow-hidden group w-full"
                 >
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Heart className="text-primary w-3.5 h-3.5" />
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <Heart className="text-primary w-5 h-5" />
                     </div>
-                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
+                    <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed italic">
                       {t('services.moving.rule')}
                     </p>
                   </div>
@@ -547,9 +552,9 @@ export default function Services() {
             <ScrollReveal 
               direction="up"
               delay={0.2}
-              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
+              className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
             >
-              <div className="divide-y divide-border/40">
+              <div className="divide-y divide-white/5">
                 <CollapsibleModule
                   icon={<Box size={18} />}
                   title={t('services.moving.local.title')}
@@ -560,18 +565,14 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
+              <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
                 <a 
                   href={getWhatsAppLink(t('services.moving.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Moving')}
-                  className="cta-primary btn-shine inline-block group"
+                  className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
                 >
-                  <div
-                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.moving.cta')}
-                  </div>
+                  <MessageSquare size={18} />
+                  {t('services.moving.cta')}
                 </a>
               </div>
             </ScrollReveal>
@@ -580,47 +581,46 @@ export default function Services() {
       </section>
 
       {/* Roof 4: Electronics & Tech - Compact */}
-      <section id="tech" className="relative section-spacing bg-foreground/[0.01] scroll-mt-24 md:scroll-mt-32 overflow-hidden">
+      <section id="tech" className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-[250px] h-[250px] bg-primary/[0.05] rounded-full blur-[80px] -z-10 animate-pulse-slow" />
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[100px] -z-10 animate-pulse-slow delay-700" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[150px] -z-10" />
         
         <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
             <ScrollReveal
               direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-44 h-fit"
+              className="relative lg:sticky top-0 lg:top-48 h-fit"
             >
-              <div className="flex flex-col items-start text-start bg-white md:bg-transparent p-5 md:p-0 rounded-2xl md:rounded-none border border-border/40 md:border-0 shadow-sm md:shadow-none">
-                <div className="flex items-center gap-3 md:gap-2 mb-4 w-full md:w-auto border-b border-border/40 pb-4 md:border-0 md:pb-0">
+              <div className="flex flex-col items-start text-start">
+                <div className="flex items-center gap-5 mb-8 w-full">
                   <div 
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/20 shrink-0"
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0"
                   >
-                    <Tv size={20} />
+                    <Tv size={28} />
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-2.5 h-2.5 object-contain scale-[3]" />
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
+                      <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[2.5]" />
                       {t('services.status.live')} — 04
                     </span>
-                    <h2 className="text-xl md:text-3xl font-black text-primary mt-1 leading-none break-words w-full">
+                    <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
                       {t('services.electronics.title')}
                     </h2>
                   </div>
                 </div>
 
-                <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-10 leading-relaxed break-words w-full">
+                <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
                   {t('services.electronics.body')}
                 </p>
                 
                 <div 
-                  className="p-3.5 rounded-xl bg-secondary/30 border border-secondary/50 relative overflow-hidden group w-full max-w-sm"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 relative overflow-hidden group w-full"
                 >
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="text-primary w-3.5 h-3.5" />
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="text-primary w-5 h-5" />
                     </div>
-                    <p className="text-[0.7rem] font-bold text-foreground/70 leading-relaxed italic">
+                    <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed italic">
                       {t('services.electronics.rule')}
                     </p>
                   </div>
@@ -631,9 +631,9 @@ export default function Services() {
             <ScrollReveal 
               direction="up"
               delay={0.2}
-              className="bg-white rounded-2xl border border-border/40 shadow-sm overflow-hidden"
+              className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
             >
-              <div className="divide-y divide-border/40">
+              <div className="divide-y divide-white/5">
                 <CollapsibleModule
                   icon={<Tv size={18} />}
                   title={t('services.electronics.home-appliances.title')}
@@ -644,18 +644,14 @@ export default function Services() {
                 />
               </div>
 
-              <div className="py-5 border-t border-border/40 text-center bg-foreground/[0.01]">
+              <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
                 <a 
                   href={getWhatsAppLink(t('services.electronics.whatsapp'))}
                   onClick={() => trackRequestClick('Services - Electronics')}
-                  className="cta-primary btn-shine inline-block group"
+                  className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
                 >
-                  <div
-                    className="flex items-center gap-2 group-hover:scale-105 group-hover:-translate-y-0.5 group-active:scale-95 transition-transform duration-300"
-                  >
-                    <MessageSquare size={16} className="fill-primary-foreground" />
-                    {t('services.electronics.cta')}
-                  </div>
+                  <MessageSquare size={18} />
+                  {t('services.electronics.cta')}
                 </a>
               </div>
             </ScrollReveal>
@@ -664,56 +660,54 @@ export default function Services() {
       </section>
 
       {/* Trust Banner / Bottom CTA */}
-      <section className="section-spacing relative overflow-hidden">
+      <section className="section-spacing relative overflow-hidden bg-[#0a0a0b]">
         <div className="absolute inset-0 bg-primary/5 -z-10" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-primary/10 rounded-full blur-[60px] -z-10 animate-pulse-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/[0.08] rounded-full blur-[120px] -z-10 animate-pulse-slow" />
         
         <div className="container-sahli text-center">
           <ScrollReveal
             direction="up"
             className="max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/20 rounded-full border border-primary/30 text-primary text-[7px] font-black tracking-widest uppercase mb-5 shadow-md btn-shine">
-              <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[3]" />
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 text-[10px] font-black tracking-[0.2em] uppercase text-primary mb-10 shadow-2xl mx-auto">
+              <img src="/logos/SahlLogo5.png" alt="" className="w-5 h-5 object-contain scale-[2.5]" />
               {t('about.position.title')}
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-black text-primary mb-4 break-words w-full">
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 break-words w-full tracking-tighter">
               {t('services.cta.title')}
             </h2>
             
-            <p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl mx-auto break-words w-full">
+            <p className="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto break-words w-full font-medium leading-relaxed">
               {t('services.cta.body')}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <a 
                 href={getWhatsAppLink(t('cta.whatsapp.general'))}
                 onClick={() => trackRequestClick('Services - Bottom CTA')}
-                className="cta-primary btn-shine inline-block"
+                className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/40 flex items-center gap-3"
               >
-                <div className="flex items-center justify-center gap-1.5">
-                  <MessageSquare size={14} className="fill-primary-foreground" />
-                  {t('services.cta.button')}
-                </div>
+                <MessageSquare size={18} />
+                {t('services.cta.button')}
               </a>
               
               <Link 
                 to="/about"
-                className="group flex items-center gap-1.5 text-[8px] font-black uppercase tracking-[0.12em] text-foreground/40 hover:text-primary transition-all duration-500"
+                className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-white/40 hover:text-primary transition-all duration-500"
               >
                 {t('nav.about')}
-                <ArrowRight size={10} className="group-hover:translate-x-1.5 transition-transform duration-500" />
+                <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500" />
               </Link>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      <div className="container-sahli py-8 md:py-12 border-t border-border/40">
-        <div className="flex items-center justify-center gap-2 md:gap-3 opacity-60">
-          <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[3]" />
-          <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-foreground/60">
+      <div className="container-sahli py-12 md:py-20 border-t border-white/5 bg-[#0a0a0b]">
+        <div className="flex items-center justify-center gap-4 opacity-40">
+          <img src="/logos/SahlLogo5.png" alt="" className="w-4 h-4 object-contain scale-[2.5]" />
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/60">
             {t('services.end')}
           </span>
         </div>

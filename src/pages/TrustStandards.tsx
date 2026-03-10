@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/layout/Layout';
 import { 
@@ -65,7 +65,7 @@ export default function TrustStandards() {
       <section 
         ref={containerRef} 
         onMouseMove={handleMouseMove}
-        className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center md:justify-end overflow-hidden bg-white"
+        className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center md:justify-end overflow-hidden bg-[#0a0a0b]"
       >
         {/* Dynamic Background */}
         <div className="absolute inset-0 z-0">
@@ -79,31 +79,31 @@ export default function TrustStandards() {
               src="https://images.unsplash.com/photo-1521791136064-7986c2923216?q=80&w=1920&fm=webp&fit=crop" 
               alt={t('trust.hero.alt')}
               crossOrigin="anonymous"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover opacity-40 grayscale brightness-50"
             />
           </div>
           
-          {/* Noise Texture */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0b]/40 via-[#0a0a0b]/80 to-[#0a0a0b] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(241,41,89,0.1),transparent_50%)] z-10" />
         </div>
 
-        <div className="container-sahli relative z-20 pt-24 pb-12 md:pb-20 flex flex-col items-center md:items-start text-center md:text-start">
+        <div className="container-sahli relative z-20 pt-24 pb-12 md:pb-32 flex flex-col items-center md:items-start text-center md:text-start">
           <div 
             className="w-full max-w-[1400px] flex flex-col items-center md:items-start animate-in fade-in duration-1000"
           >
             <div 
-              className="inline-flex items-center gap-3 px-5 py-2 bg-slate-50 backdrop-blur-md rounded-full border border-primary/20 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-slate-900/70 mb-8 md:mb-10 mx-auto md:mx-0 shadow-2xl relative overflow-hidden group animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-both"
+              className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-primary mb-10 mx-auto md:mx-0 shadow-2xl relative overflow-hidden group animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 fill-mode-both"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              <Shield size={14} className="text-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <Shield size={16} className="text-primary" />
               {t('trust.hero.label')}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl 3xl:text-9xl mb-4 md:mb-6 leading-[1] tracking-tight text-slate-900 drop-shadow-sm font-black w-full text-center md:text-start">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-black text-white mb-8 leading-[0.9] tracking-tighter w-full text-center md:text-start">
               {t('trust.hero.title').split(' ').map((word, i) => (
                 <div key={i} className="overflow-hidden inline-block mr-[0.3em]">
                   <span 
-                    className="inline-block animate-in slide-in-from-bottom-full fade-in fill-mode-both"
+                    className={`inline-block animate-in slide-in-from-bottom-full fade-in fill-mode-both ${i === 1 ? 'text-primary' : ''}`}
                     style={{ animationDelay: `${0.3 + (i * 0.08)}s`, animationDuration: '1s' }}
                   >
                     {word}
@@ -113,7 +113,7 @@ export default function TrustStandards() {
             </h1>
             
             <p
-              className="text-base md:text-lg lg:text-xl xl:text-2xl !text-slate-700 mb-6 md:mb-10 font-medium leading-relaxed drop-shadow-sm w-full text-center md:text-start max-w-2xl mx-auto md:mx-0 animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
+              className="text-lg md:text-2xl text-slate-400 mb-12 md:mb-20 font-medium leading-relaxed w-full text-center md:text-start max-w-2xl mx-auto md:mx-0 animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
               style={{ animationDelay: '0.8s', animationDuration: '1.2s' }}
             >
               {t('trust.hero.subtitle')}
@@ -126,48 +126,48 @@ export default function TrustStandards() {
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 animate-in fade-in fill-mode-both"
           style={{ animationDelay: '2s' }}
         >
-          <div className="w-px h-16 bg-gradient-to-b from-primary via-primary/20 to-transparent relative">
+          <div className="w-px h-20 bg-gradient-to-b from-primary via-primary/20 to-transparent relative">
             <div 
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-900 shadow-[0_0_10px_rgba(0,0,0,0.8)] animate-bounce" 
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_20px_rgba(241,41,89,0.8)] animate-bounce" 
             />
           </div>
         </div>
       </section>
 
       {/* Standards Section - Enhanced Grid */}
-      <section className="section-spacing bg-white relative overflow-hidden border-y border-slate-200">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+      <section className="section-spacing bg-[#0a0a0b] relative overflow-hidden border-y border-white/5">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/[0.03] rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
         
         <div className="container-sahli relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {standards.map((standard, i) => (
               <ScrollReveal
                 key={i}
                 delay={i * 0.1}
                 className="flex flex-col h-full group"
               >
-                <div className="mb-6 flex items-center justify-between">
-                  <span className="text-primary/40 font-black text-4xl md:text-5xl tracking-tighter transition-all duration-500 group-hover:text-primary group-hover:scale-110">
+                <div className="mb-8 flex items-center justify-between">
+                  <span className="text-white/10 font-black text-5xl md:text-6xl tracking-tighter transition-all duration-500 group-hover:text-primary group-hover:scale-110">
                     {standard.number}
                   </span>
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-xl group-hover:rotate-12">
-                    {standard.icon}
+                  <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-2xl group-hover:rotate-12">
+                    {React.cloneElement(standard.icon as React.ReactElement, { size: 32 })}
                   </div>
                 </div>
                 
-                <div className="flex-1 p-8 rounded-[2.5rem] bg-white backdrop-blur-xl border border-primary/10 group-hover:border-primary/40 transition-all duration-700 flex flex-col group-hover:shadow-[0_20px_50px_rgba(var(--primary-rgb),0.1)] group-hover:-translate-y-2 group-hover:bg-primary/[0.02]">
-                  <div className="mb-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary/40 group-hover:text-primary transition-colors">
+                <div className="flex-1 p-10 rounded-[3rem] bg-white/5 backdrop-blur-xl border border-white/10 group-hover:border-primary/40 transition-all duration-700 flex flex-col group-hover:shadow-2xl group-hover:-translate-y-3 hover:bg-white/[0.08]">
+                  <div className="mb-4 text-[10px] font-black uppercase tracking-[0.4em] text-primary/40 group-hover:text-primary transition-colors">
                     {t('trust.standard')}
                   </div>
-                  <h3 className="text-xl font-black mb-6 text-slate-900 tracking-tight leading-none uppercase group-hover:text-primary transition-colors">
+                  <h3 className="text-xl md:text-2xl font-black mb-8 text-white tracking-tight leading-tight uppercase group-hover:text-primary transition-colors">
                     {standard.title}
                   </h3>
                   
-                  <ul className="space-y-4 mt-auto">
+                  <ul className="space-y-6 mt-auto">
                     {standard.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 group/item">
-                        <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-all duration-300 shadow-[0_0_5px_rgba(var(--primary-rgb),0.5)]" />
-                        <span className="text-sm md:text-base text-slate-600 leading-relaxed font-medium group-hover/item:text-slate-900 transition-colors">
+                      <li key={idx} className="flex items-start gap-4 group/item">
+                        <div className="mt-2 w-2 h-2 rounded-full bg-primary/40 group-hover/item:bg-primary transition-all duration-300" />
+                        <span className="text-base text-slate-400 leading-relaxed font-medium group-hover/item:text-white transition-colors">
                           {item}
                         </span>
                       </li>
@@ -181,34 +181,36 @@ export default function TrustStandards() {
       </section>
 
       {/* During Service - Independent Execution - Architectural */}
-      <section className="section-spacing bg-white relative overflow-hidden">
+      <section className="section-spacing bg-[#0a0a0b] relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,var(--primary)_0%,transparent_70%)] opacity-10" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(241,41,89,0.1)_0%,transparent_70%)] opacity-20" />
         </div>
 
         <div className="container-sahli relative z-10">
           <ScrollReveal
-            className="max-w-5xl mx-auto p-8 md:p-16 rounded-[3rem] bg-slate-50 backdrop-blur-md md:backdrop-blur-2xl border border-slate-200 relative overflow-hidden shadow-2xl"
+            className="max-w-6xl mx-auto p-12 md:p-24 rounded-[4rem] bg-white/5 backdrop-blur-3xl border border-white/10 relative overflow-hidden shadow-2xl group"
           >
-            <div className="grid md:grid-cols-12 gap-12 items-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            
+            <div className="grid md:grid-cols-12 gap-16 items-center relative z-10">
               <div className="md:col-span-7">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-primary/10 rounded-full border border-primary/20 text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-8">
-                  <Sparkles size={14} />
+                <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 rounded-full border border-primary/20 text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-10">
+                  <Sparkles size={16} />
                   {lang === 'ar' ? 'الاستقلالية' : 'Independence'}
                 </div>
-                <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-8 tracking-tighter leading-none">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-10 tracking-tighter leading-[0.95]">
                   {t('trust.blackbox.title')}
                 </h2>
-                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+                <p className="text-lg md:text-2xl text-slate-400 leading-relaxed font-medium italic">
                   {t('trust.blackbox.body')}
                 </p>
               </div>
               <div className="md:col-span-5 flex justify-center">
                 <div className="relative">
-                  <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-2 border-dashed border-slate-200 animate-spin-slow flex items-center justify-center">
-                    <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-primary/20 blur-2xl animate-pulse" />
+                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-dashed border-white/10 animate-spin-slow flex items-center justify-center">
+                    <div className="w-44 h-44 md:w-56 md:h-56 rounded-full bg-primary/20 blur-[80px] animate-pulse" />
                   </div>
-                  <Shield className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 text-slate-300 opacity-20" />
+                  <Shield className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-36 md:h-36 text-primary opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
                 </div>
               </div>
             </div>
@@ -217,37 +219,37 @@ export default function TrustStandards() {
       </section>
 
       {/* After Service - Audit & Witness */}
-      <section className="section-spacing bg-white relative overflow-hidden border-t border-slate-200">
+      <section className="section-spacing bg-[#0a0a0b] relative overflow-hidden border-t border-white/5">
         <div className="container-sahli relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+          <div className="max-w-4xl mx-auto text-center mb-24 md:mb-32">
             <ScrollReveal
-              className="flex flex-col items-center gap-6"
+              className="flex flex-col items-center gap-10"
             >
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-slate-100 rounded-full border border-slate-200 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-                <FileSearch size={14} />
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 rounded-full border border-white/10 text-[10px] font-black uppercase tracking-[0.4em] text-primary shadow-2xl">
+                <FileSearch size={18} />
                 {t('trust.audit.title')}
               </div>
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-none">
+              <h2 className="text-4xl md:text-6xl lg:text-8xl font-black text-white tracking-tighter leading-[0.9]">
                 {lang === 'ar' ? 'المراقبة والتحقق' : 'Monitoring & Verification'}
               </h2>
             </ScrollReveal>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
-              { title: t('trust.audit.title'), body: t('trust.audit.body'), icon: <FileSearch size={32} /> },
-              { title: t('trust.witness.title'), body: t('trust.witness.body'), icon: <Eye size={32} /> }
+              { title: t('trust.audit.title'), body: t('trust.audit.body'), icon: <FileSearch size={40} /> },
+              { title: t('trust.witness.title'), body: t('trust.witness.body'), icon: <Eye size={40} /> }
             ].map((item, i) => (
               <ScrollReveal
                 key={i}
                 delay={i * 0.1}
-                className="p-10 md:p-12 rounded-[3rem] bg-slate-50 border border-primary/10 group hover:border-primary/40 transition-all duration-700 hover:shadow-[0_20px_50px_rgba(var(--primary-rgb),0.1)] hover:-translate-y-2 hover:bg-primary/[0.01]"
+                className="p-12 md:p-16 rounded-[4rem] bg-white/5 border border-white/10 group hover:border-primary/40 transition-all duration-700 hover:shadow-2xl hover:-translate-y-4 hover:bg-white/[0.08]"
               >
-                <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-primary mb-10 group-hover:bg-primary group-hover:text-white transition-all duration-700 group-hover:rotate-6 shadow-xl group-hover:shadow-primary/20">
+                <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 text-primary mb-12 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-700 group-hover:rotate-6 shadow-2xl group-hover:shadow-primary/40">
                   {item.icon}
                 </div>
-                <h3 className="text-2xl font-black mb-6 text-slate-900 uppercase tracking-tight leading-none group-hover:text-primary transition-colors">{item.title}</h3>
-                <p className="text-lg text-slate-600 leading-relaxed font-medium group-hover:text-slate-800 transition-colors">{item.body}</p>
+                <h3 className="text-2xl md:text-3xl font-black mb-8 text-white uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">{item.title}</h3>
+                <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-medium group-hover:text-white transition-colors">{item.body}</p>
               </ScrollReveal>
             ))}
           </div>
@@ -255,15 +257,15 @@ export default function TrustStandards() {
       </section>
 
       {/* Customer Implications - Premium Grid */}
-      <section className="section-spacing bg-white relative overflow-hidden border-t border-slate-200">
+      <section className="section-spacing bg-[#0a0a0b] relative overflow-hidden border-t border-white/5">
         <div className="container-sahli relative z-10">
-          <div className="mb-16 md:mb-24 text-center">
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-none">
+          <div className="mb-24 md:mb-32 text-center">
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none">
               {t('trust.customer.title')}
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               t('trust.customer.point1'),
               t('trust.customer.point2'),
@@ -273,12 +275,12 @@ export default function TrustStandards() {
               <ScrollReveal
                 key={i}
                 delay={i * 0.1}
-                className="p-8 rounded-[2rem] bg-slate-50 border border-slate-200 hover:border-primary/40 transition-all duration-500 group hover:bg-primary/[0.02]"
+                className="p-10 rounded-[3rem] bg-white/5 border border-white/10 hover:border-primary/40 transition-all duration-500 group hover:bg-white/[0.08] shadow-2xl"
               >
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-lg">
-                  <CheckCircle2 size={16} />
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-2xl">
+                  <CheckCircle2 size={20} />
                 </div>
-                <p className={`text-base text-slate-900/70 leading-relaxed font-medium group-hover:text-slate-900 transition-colors ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{point}</p>
+                <p className={`text-base md:text-lg text-slate-400 leading-relaxed font-medium group-hover:text-white transition-colors ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{point}</p>
               </ScrollReveal>
             ))}
           </div>
@@ -286,15 +288,15 @@ export default function TrustStandards() {
       </section>
 
       {/* CTA Section - Premium */}
-      <section className="section-spacing bg-white relative overflow-hidden border-t border-slate-200">
+      <section className="section-spacing bg-[#0a0a0b] relative overflow-hidden border-t border-white/5">
         <div className="container-sahli relative z-10 text-center">
           <ScrollReveal
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto"
           >
-            <h2 className="text-2xl md:text-4xl lg:text-6xl font-black mb-8 text-slate-900 tracking-tighter leading-tight">
+            <h2 className="text-4xl md:text-6xl lg:text-8xl font-black mb-12 text-white tracking-tighter leading-[0.9]">
               {t('trust.cta.title')}
             </h2>
-            <p className="text-lg md:text-xl text-slate-600 mb-12 md:mb-16 leading-relaxed font-medium max-w-2xl mx-auto">
+            <p className="text-lg md:text-2xl text-slate-400 mb-16 md:mb-24 leading-relaxed font-medium max-w-3xl mx-auto italic">
               {t('trust.cta.body')}
             </p>
             
@@ -303,21 +305,21 @@ export default function TrustStandards() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackRequestClick('Trust Standards Page')}
-              className="group relative inline-flex items-center gap-8 py-4 px-4 bg-white rounded-full border border-slate-200 hover:border-primary/50 transition-all duration-500"
+              className="group relative inline-flex items-center gap-12 py-6 px-8 bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 hover:border-primary/50 transition-all duration-700 hover:bg-white/[0.08] shadow-2xl"
             >
               <div className="relative">
-                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-[0_0_30px_rgba(var(--primary-rgb),0.3)]">
-                  <MessageSquare className="w-8 h-8 text-white fill-white/20" />
+                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-700 shadow-2xl shadow-primary/40">
+                  <MessageSquare size={32} className="text-white" />
                 </div>
               </div>
-              <div className="flex flex-col text-start pr-8 pl-2">
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-1">{lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}</span>
-                <span className="text-lg font-black text-slate-900 uppercase tracking-wider">{t('trust.cta.whatsapp')}</span>
+              <div className="flex flex-col text-start pr-12 pl-4">
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary mb-2">{lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}</span>
+                <span className="text-xl md:text-2xl font-black text-white uppercase tracking-widest">{t('trust.cta.whatsapp')}</span>
               </div>
             </a>
             
-            <div className="mt-20 pt-10 border-t border-slate-200">
-              <p className="text-[10px] md:text-xs text-slate-400 font-black uppercase tracking-[0.4em] max-w-3xl mx-auto leading-loose">
+            <div className="mt-32 md:mt-48 pt-16 border-t border-white/5">
+              <p className="text-[10px] md:text-xs text-white/10 font-black uppercase tracking-[0.6em] max-w-4xl mx-auto leading-[3]">
                 {t('trust.micro.clarity')}
               </p>
             </div>

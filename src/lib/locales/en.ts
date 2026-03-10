@@ -446,6 +446,8 @@ export const en = {
   'how.services.cleaning.desc': 'Deep cleaning for move-in/out and post-construction.',
   'how.services.pest.title': 'Pest Control',
   'how.services.pest.desc': 'Safe and effective treatment for all types of pests.',
+  'how.services.childcare.title': 'Childcare',
+  'how.services.childcare.desc': 'Trusted nannies and babysitters for your peace of mind.',
 
   // Positioning
   'how.positioning.label': 'The Problem',
