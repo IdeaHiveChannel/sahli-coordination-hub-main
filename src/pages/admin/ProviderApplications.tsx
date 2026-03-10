@@ -5,7 +5,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { CheckCircle2, XCircle, Info, FileText, HelpCircle, ShieldAlert } from 'lucide-react';
+import { CheckCircle2, XCircle, Info, FileText, HelpCircle, ShieldAlert, Download } from 'lucide-react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { CONTACT_EMAIL } from '@/lib/constants';
 import { EntityType } from '@/lib/types';
@@ -22,154 +22,198 @@ interface ReviewContentProps {
   isMobile?: boolean;
 }
 
-const ReviewContent = ({ app, entityType, setEntityType, assignedGroups, setAssignedGroups, handleAction, isMobile = false }: ReviewContentProps) => (
-  <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-3'} gap-8`}>
-    {/* Column 1: Company Profile & Info */}
-    <div className="space-y-4">
-      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary ml-1">Company Profile</h4>
-      <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm space-y-5">
-        <div>
-          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">About Company</label>
-          <p className="text-xs text-slate-600 font-medium leading-relaxed italic">
-            "{app.profile || 'No profile provided.'}"
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-6 pt-4 border-t border-slate-50">
-          <div>
-            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">CR Number</label>
-            <span className="text-xs font-mono font-black text-slate-900">{app.crNumber}</span>
-          </div>
-          <div>
-            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Contact Person</label>
-            <span className="text-xs font-black text-slate-900">{app.contactPerson}</span>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-6 pt-2">
-          <div>
-            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">WhatsApp</label>
-            <span className="text-xs font-black text-slate-900">{app.phone}</span>
-          </div>
-          <div>
-            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Email</label>
-            <span className="text-xs font-black text-slate-900 lowercase">{app.email}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+const ReviewContent = ({ app, entityType, setEntityType, assignedGroups, setAssignedGroups, handleAction, isMobile = false }: ReviewContentProps) => {
+  const handleDownload = () => {
+    const data = `
+SAHLI PROVIDER APPLICATION DATA
+--------------------------------
+Application ID: ${app.id}
+Company Name: ${app.name}
+Contact Person: ${app.contactPerson}
+CR Number: ${app.crNumber}
+Email: ${app.email}
+Phone/WhatsApp: ${app.phone}
+Services: ${app.services}
+Areas: ${app.areas}
+Profile: ${app.profile || 'N/A'}
+Status: ${app.status}
+Date: ${app.date}
+Entity Type: ${app.entity_type || 'N/A'}
+Groups: ${app.groups?.join(', ') || 'N/A'}
+Documents Provided:
+- CR Document: ${app.documents?.cr ? 'YES (' + app.documents.cr + ')' : 'NO'}
+- QID/ID: ${app.documents?.id ? 'YES (' + app.documents.id + ')' : 'NO'}
+- Trade License: ${app.documents?.license ? 'YES (' + app.documents.license + ')' : 'NO'}
+--------------------------------
+    `;
+    const blob = new Blob([data], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `provider_app_${app.name.replace(/\s+/g, '_')}_${app.id}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success("Provider application data downloaded successfully");
+  };
 
-    {/* Column 2: Governance & Documents */}
-    <div className="space-y-4">
-      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary ml-1">Verification Documents</h4>
-      <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm space-y-5">
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-black text-slate-400 uppercase tracking-tight">Responsibility Declaration</span>
-          {app.responsibility_confirmed ? (
-            <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 text-[8px] font-black uppercase tracking-widest px-2 py-1">Confirmed</Badge>
-          ) : (
-            <Badge variant="destructive" className="text-[8px] font-black uppercase tracking-widest px-2 py-1">Missing</Badge>
-          )}
-        </div>
-        
-        <div className="space-y-3 pt-4 border-t border-slate-50">
-          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Uploaded Files</label>
-          <div className="space-y-2">
-            {[
-              { label: 'CR Document', file: app.documents?.cr },
-              { label: 'QID Copy', file: app.documents?.id },
-              { label: 'Trade License', file: app.documents?.license }
-            ].map((doc, i) => (
-              <div key={i} className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100 transition-all hover:bg-white hover:border-slate-200">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-tight">{doc.label}</span>
-                {doc.file ? (
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] text-emerald-600 font-black truncate max-w-[100px]">{doc.file}</span>
-                    <CheckCircle2 size={12} className="text-emerald-500" />
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] text-red-400 font-black uppercase tracking-tighter">Not Uploaded</span>
-                    <XCircle size={12} className="text-red-400" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3 pt-4 border-t border-slate-50">
-          <label className="text-[10px] font-black text-slate-900 uppercase tracking-tight block">Entity Type</label>
-          <div className="flex flex-wrap gap-2">
-            {['Company', 'Agency', 'Subcontracting Firm'].map((type) => (
-              <button
-                key={type}
-                onClick={() => setEntityType(type as EntityType)}
-                className={`px-4 h-11 rounded-xl text-[9px] font-black uppercase tracking-[0.1em] transition-all border active:scale-95 ${
-                  entityType === type 
-                    ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' 
-                    : 'bg-white text-slate-400 border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-3 pt-4 border-t border-slate-50">
-          <label className="text-[10px] font-black text-slate-900 uppercase tracking-tight block">RateUp Group Assignment</label>
-          <div className="space-y-2">
-            <input 
-              type="text" 
-              placeholder="Enter Group IDs..." 
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl h-14 px-5 text-[11px] font-bold focus:outline-none focus:ring-4 focus:ring-primary/5 focus:bg-white transition-all"
-              value={assignedGroups}
-              onChange={(e) => setAssignedGroups(e.target.value)}
-            />
-            <p className="text-[9px] text-slate-400 font-medium italic px-1">
-              Used for targeted coordination broadcasts via RateUp.
+  return (
+    <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-3'} gap-8`}>
+      {/* Column 1: Company Profile & Info */}
+      <div className="space-y-4">
+        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary ml-1">Company Profile</h4>
+        <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm space-y-5">
+          <div>
+            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">About Company</label>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed italic">
+              "{app.profile || 'No profile provided.'}"
             </p>
           </div>
+          <div className="grid grid-cols-2 gap-6 pt-4 border-t border-slate-50">
+            <div>
+              <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">CR Number</label>
+              <span className="text-xs font-mono font-black text-slate-900">{app.crNumber}</span>
+            </div>
+            <div>
+              <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Contact Person</label>
+              <span className="text-xs font-black text-slate-900">{app.contactPerson}</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-6 pt-2">
+            <div>
+              <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">WhatsApp</label>
+              <span className="text-xs font-black text-slate-900">{app.phone}</span>
+            </div>
+            <div>
+              <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Email</label>
+              <span className="text-xs font-black text-slate-900 lowercase">{app.email}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    {/* Column 3: Review Actions */}
-    <div className="space-y-4">
-      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary ml-1">Review Actions</h4>
-      <div className="grid grid-cols-1 gap-3">
-        <Button 
-          variant="outline" 
-          className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest border-slate-200 rounded-2xl hover:bg-slate-50 active:scale-95 transition-all" 
-          onClick={() => handleAction(app.id, 'requested more info')}
-        >
-          <HelpCircle size={16} className="text-slate-400" /> Request More Info
-        </Button>
-        <Button 
-          variant="outline" 
-          className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest text-primary border-primary/20 bg-primary/5 hover:bg-primary/10 rounded-2xl active:scale-95 transition-all"
-          onClick={() => handleAction(app.id, 'conditionally approved', 'Conditionally Approved')}
-        >
-          <ShieldAlert size={16} /> Conditional Approval
-        </Button>
-        <Button 
-          variant="outline" 
-          className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest text-red-600 border-red-100 bg-red-50/30 hover:bg-red-50 rounded-2xl active:scale-95 transition-all" 
-          onClick={() => handleAction(app.id, 'rejected')}
-        >
-          <XCircle size={16} /> Reject Application
-        </Button>
-        <div className="pt-4">
+      {/* Column 2: Governance & Documents */}
+      <div className="space-y-4">
+        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary ml-1">Verification Documents</h4>
+        <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm space-y-5">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-tight">Responsibility Declaration</span>
+            {app.responsibility_confirmed ? (
+              <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 text-[8px] font-black uppercase tracking-widest px-2 py-1">Confirmed</Badge>
+            ) : (
+              <Badge variant="destructive" className="text-[8px] font-black uppercase tracking-widest px-2 py-1">Missing</Badge>
+            )}
+          </div>
+          
+          <div className="space-y-3 pt-4 border-t border-slate-50">
+            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Uploaded Files</label>
+            <div className="space-y-2">
+              {[
+                { label: 'CR Document', file: app.documents?.cr },
+                { label: 'QID Copy', file: app.documents?.id },
+                { label: 'Trade License', file: app.documents?.license }
+              ].map((doc, i) => (
+                <div key={i} className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100 transition-all hover:bg-white hover:border-slate-200">
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-tight">{doc.label}</span>
+                  {doc.file ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[9px] text-emerald-600 font-black truncate max-w-[100px]">{doc.file}</span>
+                      <CheckCircle2 size={12} className="text-emerald-500" />
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[9px] text-red-400 font-black uppercase tracking-tighter">Not Uploaded</span>
+                      <XCircle size={12} className="text-red-400" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-3 pt-4 border-t border-slate-50">
+            <label className="text-[10px] font-black text-slate-900 uppercase tracking-tight block">Entity Type</label>
+            <div className="flex flex-wrap gap-2">
+              {['Company', 'Agency', 'Subcontracting Firm'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setEntityType(type as EntityType)}
+                  className={`px-4 h-11 rounded-xl text-[9px] font-black uppercase tracking-[0.1em] transition-all border active:scale-95 ${
+                    entityType === type 
+                      ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' 
+                      : 'bg-white text-slate-400 border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-3 pt-4 border-t border-slate-50">
+            <label className="text-[10px] font-black text-slate-900 uppercase tracking-tight block">RateUp Group Assignment</label>
+            <div className="space-y-2">
+              <input 
+                type="text" 
+                placeholder="Enter Group IDs..." 
+                className="w-full bg-slate-50 border border-slate-100 rounded-2xl h-14 px-5 text-[11px] font-bold focus:outline-none focus:ring-4 focus:ring-primary/5 focus:bg-white transition-all"
+                value={assignedGroups}
+                onChange={(e) => setAssignedGroups(e.target.value)}
+              />
+              <p className="text-[9px] text-slate-400 font-medium italic px-1">
+                Used for targeted coordination broadcasts via RateUp.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Column 3: Review Actions */}
+      <div className="space-y-4">
+        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary ml-1">Review Actions</h4>
+        <div className="grid grid-cols-1 gap-3">
           <Button 
-            className="w-full h-16 gap-3 text-[11px] font-black uppercase tracking-[0.2em] bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/20 rounded-[2rem] active:scale-95 transition-all" 
-            onClick={() => handleAction(app.id, 'approved')}
+            variant="outline" 
+            className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest border-slate-200 rounded-2xl hover:bg-slate-50 active:scale-95 transition-all" 
+            onClick={() => handleAction(app.id, 'requested more info')}
           >
-            <CheckCircle2 size={20} className="text-emerald-400" /> Approve & Activate
+            <HelpCircle size={16} className="text-slate-400" /> Request More Info
           </Button>
+          <Button 
+            variant="outline" 
+            className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest text-primary border-primary/20 bg-primary/5 hover:bg-primary/10 rounded-2xl active:scale-95 transition-all"
+            onClick={() => handleAction(app.id, 'conditionally approved', 'Conditionally Approved')}
+          >
+            <ShieldAlert size={16} /> Conditional Approval
+          </Button>
+          <Button 
+            variant="outline" 
+            className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest border-emerald-100 bg-emerald-50/30 hover:bg-emerald-50 text-emerald-600 rounded-2xl active:scale-95 transition-all" 
+            onClick={handleDownload}
+          >
+            <Download size={16} /> Download Full Data
+          </Button>
+          <Button 
+            variant="outline" 
+            className="h-14 gap-3 text-[10px] font-black uppercase tracking-widest text-red-600 border-red-100 bg-red-50/30 hover:bg-red-50 rounded-2xl active:scale-95 transition-all" 
+            onClick={() => handleAction(app.id, 'rejected')}
+          >
+            <XCircle size={16} /> Reject Application
+          </Button>
+          <div className="pt-4">
+            <Button 
+              className="w-full h-16 gap-3 text-[11px] font-black uppercase tracking-[0.2em] bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/20 rounded-[2rem] active:scale-95 transition-all" 
+              onClick={() => handleAction(app.id, 'approved')}
+            >
+              <CheckCircle2 size={20} className="text-emerald-400" /> Approve & Activate
+            </Button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ProviderApplications = () => {
   const { dir } = useLanguage();

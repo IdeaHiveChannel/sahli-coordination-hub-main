@@ -1,4 +1,5 @@
-import React, { useState, useRef, lazy, Suspense } from 'react';
+import React, { useState, useRef, lazy, Suspense, useEffect } from 'react';
+import { storageService } from '@/lib/storageService';
 import { MetaTags } from '@/components/seo/MetaTags';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { 
   ArrowRight, Wrench, Sparkles, Truck, Snowflake, Lightbulb, Droplets, Cog, 
   Search, ShieldCheck, ClipboardList, Leaf, Cpu, Bug, Send, ChevronDown,
-  Eye, BarChart3, ThumbsUp
+  Eye, BarChart3, ThumbsUp, Settings, MessageSquare, Zap
 } from 'lucide-react';
 
 import { trackRequestClick } from '@/lib/gtag';
@@ -80,6 +81,8 @@ export default function Index() {
     }
   ];
 
+
+
   const solutions = [
     { 
       title: t('home.solutions.ac.title'), 
@@ -102,26 +105,6 @@ export default function Index() {
       ]
     },
     { 
-      title: t('home.solutions.plumbing.title'), 
-      desc: t('home.solutions.plumbing.desc'), 
-      icon: <Droplets size={32} />, 
-      whatsappKey: 'services.homeMaintenance.plumbing.whatsapp' as TranslationKey,
-      links: [
-        { label: t('home.solutions.plumbing.link1'), path: '/plumbing-services-qatar' },
-        { label: t('home.solutions.plumbing.link2'), path: '/plumber-doha' }
-      ]
-    },
-    { 
-      title: t('home.solutions.electrical.title'), 
-      desc: t('home.solutions.electrical.desc'), 
-      icon: <Lightbulb size={32} />, 
-      whatsappKey: 'services.homeMaintenance.electrical.whatsapp' as TranslationKey,
-      links: [
-        { label: t('home.solutions.electrical.link1'), path: '/electrical-services-qatar' },
-        { label: t('home.solutions.electrical.link2'), path: '/services#electrical' }
-      ]
-    },
-    { 
       title: t('home.solutions.cleaning.title'), 
       desc: t('home.solutions.cleaning.desc'), 
       icon: <Sparkles size={32} />, 
@@ -129,16 +112,6 @@ export default function Index() {
       links: [
         { label: t('home.solutions.cleaning.link1'), path: '/cleaning-services-qatar' },
         { label: t('home.solutions.cleaning.link2'), path: '/deep-cleaning-doha' }
-      ]
-    },
-    { 
-      title: t('home.solutions.moving.title'), 
-      desc: t('home.solutions.moving.desc'), 
-      icon: <Truck size={32} />, 
-      whatsappKey: 'services.moving.local.whatsapp' as TranslationKey,
-      links: [
-        { label: t('home.solutions.moving.link1'), path: '/moving-services-qatar' },
-        { label: t('home.solutions.moving.link2'), path: '/movers-doha' }
       ]
     },
   ];
@@ -192,6 +165,19 @@ export default function Index() {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const [adminServices, setAdminServices] = useState<string[]>([]);
+
+  useEffect(() => {
+    const adminServices = storageService.getServices();
+    // Initialize with default services if storage is empty
+    if (adminServices.length === 0) {
+      storageService.saveService('AC Repair & Maintenance');
+      storageService.saveService('Deep Cleaning');
+      storageService.saveService('Pest Control');
+    }
+    setAdminServices(storageService.getServices());
+  }, []);
+
   const services: ServiceItem[] = [
     { 
       title: t('services.homeMaintenance.tax.title'), 
@@ -214,16 +200,6 @@ export default function Index() {
       number: '02'
     },
     { 
-      title: t('services.moving.tax.title'), 
-      description: t('services.moving.tax.items'),
-      imageUrl: "/Services/Moving & Relocation.jpg",
-      icon: <Truck size={32} />,
-      path: t('services.moving.path'),
-      whatsappKey: 'services.moving.whatsapp' as TranslationKey,
-      subcategories: [t('services.moving.house'), t('services.moving.packing')],
-      number: '03'
-    },
-    { 
       title: t('services.outdoor.tax.title'), 
       description: t('services.outdoor.tax.items'),
       imageUrl: "/Services/Pest Control.jpg",
@@ -231,18 +207,21 @@ export default function Index() {
       path: t('services.outdoor.path'),
       whatsappKey: 'services.outdoor.whatsapp' as TranslationKey,
       subcategories: [t('services.outdoor.pest.title')],
-      number: '04'
+      number: '03'
     },
-    { 
-      title: t('services.electronics.tax.title'), 
-      description: t('services.electronics.tax.items'),
-      imageUrl: "/Services/Electronics repair.jpg",
-      icon: <Cpu size={32} />,
-      path: t('services.electronics.path'),
-      whatsappKey: 'services.electronics.whatsapp' as TranslationKey,
-      subcategories: [t('services.electronics.home-appliances.title')],
-      number: '05'
-    }
+    // Dynamically added services from Admin
+    ...adminServices
+       .filter(s => !['AC Maintenance', 'Cleaning', 'Pest Control', 'Home Maintenance', 'Cleaning Services', 'Outdoor Services', 'AC Repair & Maintenance', 'Deep Cleaning'].includes(s))
+      .map((s, i) => ({
+        title: s,
+        description: t('services.status.live'),
+        imageUrl: "/Services/Home Maintenance - Hero.jpg",
+        icon: <Settings size={32} />,
+        path: "/services",
+        whatsappKey: 'cta.whatsapp.general' as TranslationKey,
+        subcategories: [],
+        number: String(4 + i).padStart(2, '0')
+      }))
   ];
 
   const faqs = [
@@ -559,41 +538,88 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Major Categories */}
-      <section id="categories" className="py-24 md:py-32 bg-[#0a0a0b] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(241,41,89,0.05),transparent_50%)]" />
+      {/* Featured Services - 3 Fixed, Rest Admin Controlled */}
+      <section id="services" className="relative py-24 md:py-32 bg-[#0a0a0b] overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(241,41,89,0.05),transparent_50%)] pointer-events-none" />
+        
         <div className="container-sahli relative z-10">
-          <div className="max-w-4xl mb-20 mx-auto lg:mx-0 text-center lg:text-left">
-            <ScrollReveal>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-[10px] font-black tracking-widest uppercase text-primary mb-6">
-                <ClipboardList size={14} />
-                {t('services.microHook')}
-              </div>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 tracking-tighter">
-                {t('services.title')}
-              </h2>
-              <p className="text-lg text-slate-400 leading-relaxed max-w-2xl font-medium">
-                {t('services.subtitle')}
-              </p>
-            </ScrollReveal>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            <Suspense fallback={<div className="min-h-[300px] bg-white/5 rounded-[2.5rem] animate-pulse" />}>
-              {services.map((service, i) => (
-                <ServiceRoof
-                  key={i}
-                  index={i}
-                  showNumber={true}
-                  title={service.title}
-                  description={service.description}
-                  imageUrl={service.imageUrl}
-                  icon={React.cloneElement(service.icon as React.ReactElement, { size: 28 })}
-                  path={service.path}
-                  subcategories={service.subcategories}
-                  whatsappKey={service.whatsappKey}
-                />
-              ))}
-            </Suspense>
+          <ScrollReveal className="text-center mb-16 md:mb-24 max-w-4xl mx-auto">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-[10px] md:text-xs font-black tracking-[0.3em] uppercase border border-primary/20 mb-6">
+              <Sparkles size={14} className="animate-pulse" />
+              {t('services.microHook')}
+            </span>
+            <h2 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter uppercase leading-[0.9]">
+              {t('services.title')}
+            </h2>
+            <p className="text-lg md:text-xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
+              {t('services.subtitle')}
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {services.map((service, index) => (
+              <ScrollReveal 
+                key={service.title}
+                delay={index * 0.1}
+                className="group relative"
+              >
+                <div className="h-full bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 overflow-hidden hover:border-primary/50 transition-all duration-500 shadow-2xl hover:shadow-primary/20 flex flex-col">
+                  {/* Image Container with Hover Effect */}
+                  <div className="relative h-64 overflow-hidden">
+                    <img 
+                      src={service.imageUrl} 
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] via-transparent to-transparent opacity-60" />
+                    <div className="absolute top-6 left-6 w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-xl shadow-primary/40 transform -rotate-6 group-hover:rotate-0 transition-transform">
+                      {service.icon}
+                    </div>
+                    <div className="absolute top-6 right-6 px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-black tracking-widest uppercase">
+                      {service.number}
+                    </div>
+                  </div>
+
+                  <div className="p-8 md:p-10 flex flex-col flex-grow">
+                    <h3 className="text-2xl md:text-3xl font-black text-white mb-4 group-hover:text-primary transition-colors tracking-tighter uppercase leading-none">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm md:text-base text-slate-400 mb-8 font-medium leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    <div className="mt-auto space-y-6">
+                      <div className="flex flex-wrap gap-2">
+                        {service.subcategories.map((sub) => (
+                          <span key={sub} className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-bold text-slate-300 uppercase tracking-wider">
+                            {sub}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/5">
+                        <Link 
+                          to={service.path}
+                          className="flex-1 h-14 bg-white/5 hover:bg-white/10 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all border border-white/10 flex items-center justify-center gap-2 group/btn"
+                        >
+                          {t('home.solutions.ac.link1')}
+                          <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-1" />
+                        </Link>
+                          <a 
+                            href={getWhatsAppLink(t(service.whatsappKey as TranslationKey))}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 h-14 bg-primary text-white rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all shadow-lg shadow-primary/20 hover:bg-primary/90 flex items-center justify-center gap-2"
+                          >
+                            <MessageSquare size={14} />
+                            {t('cta.whatsapp')}
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>

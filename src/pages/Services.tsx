@@ -143,12 +143,26 @@ export default function Services() {
   const [openModule, setOpenModule] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const roofs = React.useMemo(() => [
-    { id: 'home-maintenance', label: t('services.homeMaintenance.title') },
-    { id: 'cleaning', label: t('services.cleaning.title') },
-    { id: 'moving', label: t('services.moving.title') },
-    { id: 'tech', label: t('services.electronics.title') },
-  ], [t]);
+  const [adminServices, setAdminServices] = useState<string[]>([]);
+
+  useEffect(() => {
+    setAdminServices(storageService.getServices());
+  }, []);
+
+  const roofs = React.useMemo(() => {
+    const baseRoofs = [
+      { id: 'home-maintenance', label: t('services.homeMaintenance.title') },
+      { id: 'cleaning', label: t('services.cleaning.title') },
+      { id: 'pest-control', label: t('services.outdoor.tax.title') },
+    ];
+    
+    // Add dynamic roofs from admin if they don't match base ones
+    const dynamicRoofs = adminServices
+       .filter(s => !['Home Maintenance', 'Cleaning', 'Pest Control', 'AC Repair', 'Deep Cleaning', 'AC Repair & Maintenance'].includes(s))
+      .map(s => ({ id: s.toLowerCase().replace(/\s+/g, '-'), label: s }));
+
+    return [...baseRoofs, ...dynamicRoofs];
+  }, [t, adminServices]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -350,33 +364,6 @@ export default function Services() {
                   onToggle={() => setOpenModule(openModule === 'ac' ? null : 'ac')}
                   locationLinks={locationLinks}
                 />
-                <CollapsibleModule
-                  icon={<Zap size={18} />}
-                  title={t('services.homeMaintenance.electrical.title')}
-                  description={t('services.homeMaintenance.electrical.desc')}
-                  items={t('services.homeMaintenance.electrical.items')}
-                  isOpen={openModule === 'electrical'}
-                  onToggle={() => setOpenModule(openModule === 'electrical' ? null : 'electrical')}
-                  locationLinks={locationLinks}
-                />
-                <CollapsibleModule
-                  icon={<Droplets size={18} />}
-                  title={t('services.homeMaintenance.plumbing.title')}
-                  description={t('services.homeMaintenance.plumbing.desc')}
-                  items={t('services.homeMaintenance.plumbing.items')}
-                  isOpen={openModule === 'plumbing'}
-                  onToggle={() => setOpenModule(openModule === 'plumbing' ? null : 'plumbing')}
-                  locationLinks={locationLinks}
-                />
-                <CollapsibleModule
-                  icon={<Hammer size={18} />}
-                  title={t('services.homeMaintenance.handyman.title')}
-                  description={t('services.homeMaintenance.handyman.desc')}
-                  items={t('services.homeMaintenance.handyman.items')}
-                  isOpen={openModule === 'handyman'}
-                  onToggle={() => setOpenModule(openModule === 'handyman' ? null : 'handyman')}
-                  locationLinks={locationLinks}
-                />
               </div>
 
               <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
@@ -449,39 +436,12 @@ export default function Services() {
             >
               <div className="divide-y divide-white/5">
                 <CollapsibleModule
-                  icon={<Home size={18} />}
-                  title={t('services.cleaning.regular.title')}
-                  description={t('services.cleaning.regular.desc')}
-                  items={t('services.cleaning.regular.items')}
-                  isOpen={openModule === 'regular-cleaning'}
-                  onToggle={() => setOpenModule(openModule === 'regular-cleaning' ? null : 'regular-cleaning')}
-                  locationLinks={locationLinks}
-                />
-                <CollapsibleModule
                   icon={<Waves size={18} />}
                   title={t('services.cleaning.deep.title')}
                   description={t('services.cleaning.deep.desc')}
                   items={t('services.cleaning.deep.items')}
                   isOpen={openModule === 'deep-cleaning'}
                   onToggle={() => setOpenModule(openModule === 'deep-cleaning' ? null : 'deep-cleaning')}
-                  locationLinks={locationLinks}
-                />
-                <CollapsibleModule
-                  icon={<Sofa size={18} />}
-                  title={t('services.cleaning.sofa.title')}
-                  description={t('services.cleaning.sofa.desc')}
-                  items={t('services.cleaning.sofa.items')}
-                  isOpen={openModule === 'sofa-cleaning'}
-                  onToggle={() => setOpenModule(openModule === 'sofa-cleaning' ? null : 'sofa-cleaning')}
-                  locationLinks={locationLinks}
-                />
-                <CollapsibleModule
-                  icon={<Bug size={18} />}
-                  title={t('services.cleaning.pest.title')}
-                  description={t('services.cleaning.pest.desc')}
-                  items={t('services.cleaning.pest.items')}
-                  isOpen={openModule === 'pest-control'}
-                  onToggle={() => setOpenModule(openModule === 'pest-control' ? null : 'pest-control')}
                   locationLinks={locationLinks}
                 />
               </div>
@@ -501,8 +461,8 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 3: Moving & Relocation - Compact */}
-      <section id="moving" className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
+      {/* Roof 3: Pest Control - Compact */}
+      <section id="pest-control" className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.05] rounded-full blur-[120px] -z-10" />
         
@@ -517,7 +477,7 @@ export default function Services() {
                   <div 
                     className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0"
                   >
-                    <Truck size={28} />
+                    <Bug size={28} />
                   </div>
                   <div className="flex flex-col items-start">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
@@ -525,13 +485,13 @@ export default function Services() {
                       {t('services.status.live')} — 03
                     </span>
                     <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
-                      {t('services.moving.title')}
+                      {t('services.outdoor.tax.title')}
                     </h2>
                   </div>
                 </div>
 
                 <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
-                  {t('services.moving.body')}
+                  {t('services.outdoor.body')}
                 </p>
                 
                 <div 
@@ -539,10 +499,10 @@ export default function Services() {
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <Heart className="text-primary w-5 h-5" />
+                      <Shield className="text-primary w-5 h-5" />
                     </div>
                     <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed italic">
-                      {t('services.moving.rule')}
+                      {t('services.outdoor.rule')}
                     </p>
                   </div>
                 </div>
@@ -556,23 +516,24 @@ export default function Services() {
             >
               <div className="divide-y divide-white/5">
                 <CollapsibleModule
-                  icon={<Box size={18} />}
-                  title={t('services.moving.local.title')}
-                  description={t('services.moving.local.desc')}
-                  items={t('services.moving.local.items')}
-                  isOpen={openModule === 'local-moving'}
-                  onToggle={() => setOpenModule(openModule === 'local-moving' ? null : 'local-moving')}
+                  icon={<Bug size={18} />}
+                  title={t('services.cleaning.pest.title')}
+                  description={t('services.cleaning.pest.desc')}
+                  items={t('services.cleaning.pest.items')}
+                  isOpen={openModule === 'pest-control-module'}
+                  onToggle={() => setOpenModule(openModule === 'pest-control-module' ? null : 'pest-control-module')}
+                  locationLinks={locationLinks}
                 />
               </div>
 
               <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
                 <a 
-                  href={getWhatsAppLink(t('services.moving.whatsapp'))}
-                  onClick={() => trackRequestClick('Services - Moving')}
+                  href={getWhatsAppLink(t('services.outdoor.whatsapp'))}
+                  onClick={() => trackRequestClick('Services - Pest Control')}
                   className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
                 >
                   <MessageSquare size={18} />
-                  {t('services.moving.cta')}
+                  {t('services.homeMaintenance.cta')}
                 </a>
               </div>
             </ScrollReveal>
@@ -580,84 +541,60 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Roof 4: Electronics & Tech - Compact */}
-      <section id="tech" className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[150px] -z-10" />
-        
-        <div className="container-sahli">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
-            <ScrollReveal
-              direction={dir === 'rtl' ? 'left' : 'right'}
-              className="relative lg:sticky top-0 lg:top-48 h-fit"
-            >
-              <div className="flex flex-col items-start text-start">
-                <div className="flex items-center gap-5 mb-8 w-full">
-                  <div 
-                    className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0"
-                  >
-                    <Tv size={28} />
-                  </div>
-                  <div className="flex flex-col items-start">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
-                      <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[2.5]" />
-                      {t('services.status.live')} — 04
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
-                      {t('services.electronics.title')}
-                    </h2>
-                  </div>
-                </div>
-
-                <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
-                  {t('services.electronics.body')}
-                </p>
-                
-                <div 
-                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 relative overflow-hidden group w-full"
+      {/* Roof 4+: Dynamic Admin Services */}
+      {adminServices
+        .filter(s => !['Home Maintenance', 'Cleaning', 'Pest Control', 'AC Repair', 'Deep Cleaning', 'AC Repair & Maintenance'].includes(s))
+        .map((s, i) => (
+          <section key={s} id={s.toLowerCase().replace(/\s+/g, '-')} className="relative section-spacing bg-[#0a0a0b] scroll-mt-32 overflow-hidden">
+            <div className="container-sahli">
+              <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-20">
+                <ScrollReveal
+                  direction={dir === 'rtl' ? 'left' : 'right'}
+                  className="relative lg:sticky top-0 lg:top-48 h-fit"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="text-primary w-5 h-5" />
+                  <div className="flex flex-col items-start text-start">
+                    <div className="flex items-center gap-5 mb-8 w-full">
+                      <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 shrink-0">
+                        <Cog size={28} />
+                      </div>
+                      <div className="flex flex-col items-start">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black tracking-[0.2em] uppercase border border-primary/20">
+                          <img src="/logos/SahlLogo5.png" alt="" className="w-3 h-3 object-contain scale-[2.5]" />
+                          {t('services.status.live')} — 0{4 + i}
+                        </span>
+                        <h2 className="text-3xl md:text-5xl font-black text-white mt-3 leading-tight break-words w-full">
+                          {s}
+                        </h2>
+                      </div>
                     </div>
-                    <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed italic">
-                      {t('services.electronics.rule')}
+                    <p className="text-base md:text-lg text-slate-400 mb-10 md:mb-12 leading-relaxed break-words w-full font-medium">
+                      {t('services.intro')}
                     </p>
                   </div>
-                </div>
-              </div>
-            </ScrollReveal>
+                </ScrollReveal>
 
-            <ScrollReveal 
-              direction="up"
-              delay={0.2}
-              className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
-            >
-              <div className="divide-y divide-white/5">
-                <CollapsibleModule
-                  icon={<Tv size={18} />}
-                  title={t('services.electronics.home-appliances.title')}
-                  description={t('services.electronics.home-appliances.desc')}
-                  items={t('services.electronics.home-appliances.items')}
-                  isOpen={openModule === 'appliances'}
-                  onToggle={() => setOpenModule(openModule === 'appliances' ? null : 'appliances')}
-                />
-              </div>
-
-              <div className="py-8 border-t border-white/5 text-center bg-white/[0.02]">
-                <a 
-                  href={getWhatsAppLink(t('services.electronics.whatsapp'))}
-                  onClick={() => trackRequestClick('Services - Electronics')}
-                  className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
+                <ScrollReveal 
+                  direction="up"
+                  delay={0.2}
+                  className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-10 text-center"
                 >
-                  <MessageSquare size={18} />
-                  {t('services.electronics.cta')}
-                </a>
+                  <div className="py-12">
+                    <Cog size={48} className="text-primary/20 mx-auto mb-6 animate-spin-slow" />
+                    <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">{s}</h3>
+                    <p className="text-slate-400 mb-10">{t('services.cta.body')}</p>
+                    <a 
+                      href={getWhatsAppLink(t('cta.whatsapp.general'))}
+                      className="px-10 py-5 bg-primary text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-2xl shadow-primary/20 inline-flex items-center gap-3"
+                    >
+                      <MessageSquare size={18} />
+                      {t('services.cta.button')}
+                    </a>
+                  </div>
+                </ScrollReveal>
               </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
+        ))}
 
       {/* Trust Banner / Bottom CTA */}
       <section className="section-spacing relative overflow-hidden bg-[#0a0a0b]">

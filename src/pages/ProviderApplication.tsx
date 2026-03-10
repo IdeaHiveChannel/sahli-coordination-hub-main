@@ -45,6 +45,13 @@ const ProviderApplication = () => {
     { value: '5_plus', label: t('provider.apply.form.yearsInOperation.5_plus') }
   ];
 
+  const serviceOptions = [
+    { value: 'AC Repair & Maintenance', label: 'AC Repair & Maintenance' },
+    { value: 'Deep Cleaning', label: 'Deep Cleaning' },
+    { value: 'Pest Control', label: 'Pest Control' },
+    { value: 'Other', label: 'Other' }
+  ];
+
   const [files, setFiles] = useState<{ [key: string]: File | null }>({
     cr: null,
     id: null,
@@ -477,15 +484,22 @@ const ProviderApplication = () => {
                     <div className="grid md:grid-cols-2 gap-10">
                       <div className="space-y-4">
                         <label htmlFor="services" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.services')}</label>
-                        <Textarea 
-                          id="services"
-                          name="services"
-                          required
-                          placeholder={dir === 'rtl' ? 'مثال: صيانة تكييف، كهرباء، سباكة' : 'e.g., AC maintenance, electrical, plumbing'}
-                          className="bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-[2rem] min-h-[160px] p-6 transition-all resize-none hover:bg-white/[0.08] text-white font-medium"
-                          value={formData.services}
-                          onChange={e => setFormData({...formData, services: e.target.value})}
-                        />
+                        <div className="relative group">
+                          <Briefcase className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors z-10" size={20} />
+                          <select 
+                            id="services"
+                            name="services"
+                            required
+                            className="w-full bg-white/5 border border-white/10 focus:border-primary/50 focus:ring-primary/20 rounded-2xl h-16 pl-14 pr-4 transition-all hover:bg-white/[0.08] appearance-none text-white font-medium text-sm"
+                            value={formData.services}
+                            onChange={e => setFormData({...formData, services: e.target.value})}
+                          >
+                            <option value="" className="bg-[#0a0a0b]">{dir === 'rtl' ? 'اختر الخدمة' : 'Select Service'}</option>
+                            {serviceOptions.map(opt => (
+                              <option key={opt.value} value={opt.value} className="bg-[#0a0a0b]">{opt.label}</option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
                       <div className="space-y-4">
                         <label htmlFor="areas" className="text-[10px] font-black uppercase tracking-[0.3em] text-primary ml-1">{t('provider.apply.form.areas')}</label>

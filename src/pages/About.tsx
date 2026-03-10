@@ -20,7 +20,10 @@ import {
   Sparkles,
   Shield,
   MousePointer2,
-  Compass
+  Compass,
+  Clock,
+  UserCheck,
+  Star
 } from 'lucide-react';
 import { trackRequestClick } from '@/lib/gtag';
 import { getWhatsAppLink } from '@/lib/constants';
@@ -87,6 +90,27 @@ export default function About() {
     t('about.benefits.companies.item3'),
     t('about.benefits.companies.item4'),
     t('about.benefits.companies.item5')
+  ];
+
+  const coreStats = [
+    {
+      label: t('about.stats.experience.label'),
+      value: t('about.stats.experience.value'),
+      icon: <Clock className="w-5 h-5" />,
+      desc: t('about.stats.experience.desc')
+    },
+    {
+      label: t('about.stats.partners.label'),
+      value: t('about.stats.partners.value'),
+      icon: <UserCheck className="w-5 h-5" />,
+      desc: t('about.stats.partners.desc')
+    },
+    {
+      label: t('about.stats.satisfaction.label'),
+      value: t('about.stats.satisfaction.value'),
+      icon: <Star className="w-5 h-5" />,
+      desc: t('about.stats.satisfaction.desc')
+    }
   ];
 
   return (
